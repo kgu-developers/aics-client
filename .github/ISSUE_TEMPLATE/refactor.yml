@@ -1,6 +1,7 @@
-name: "\U0001F528 Refactor"
+name: ':hammer: Refactor'
 description: '리팩터링을 해야할 부분이 있나요?'
-labels: "\U0001F528 Refactor"
+title: '[Refactor]: '
+labels: ':hammer: refactor'
 body:
   - type: textarea
     attributes:

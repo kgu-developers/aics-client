@@ -1,6 +1,7 @@
-name: "\U0001F41E Bug"
+name: ':beetle: Bug'
 description: '버그가 발생했나요?'
-labels: "\U0001F41E Bug"
+title: '[Bug]: '
+labels: ':beetle: bug'
 body:
   - type: textarea
     attributes:

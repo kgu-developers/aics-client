@@ -1,6 +1,7 @@
-name: '✨ Feature'
+name: ':sparkles: Feature'
 description: '새로운 기능 또는 명세가 있나요?'
-labels: '✨ Feature'
+title: '[Feature]: '
+labels: ':sparkles: feature'
 body:
   - type: textarea
     attributes:
