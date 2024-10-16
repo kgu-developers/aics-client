@@ -1,7 +1,7 @@
-name: ':hammer: Refactor'
+name: '🔨 Refactor'
 description: '리팩터링을 해야할 부분이 있나요?'
 title: '[Refactor]: '
-labels: ':hammer: refactor'
+labels: '🔨 refactor'
 body:
   - type: textarea
     attributes:

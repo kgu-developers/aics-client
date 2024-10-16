@@ -1,7 +1,7 @@
-name: ':beetle: Bug'
+name: '🐞 Bug'
 description: '버그가 발생했나요?'
 title: '[Bug]: '
-labels: ':beetle: bug'
+labels: '🐞 bug'
 body:
   - type: textarea
     attributes:
