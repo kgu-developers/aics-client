@@ -1,0 +1,29 @@
+{
+  "name": "@aics-client/community",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
+    "next": "15.0.0-rc.1",
+    "react": "19.0.0-rc-cd22717c-20241013",
+    "react-dom": "19.0.0-rc-cd22717c-20241013"
+  },
+  "devDependencies": {
+    "@aics-client/typescript": "workspace:^",
+    "@types/node": "^20",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.0-rc.1",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+  }
+}
