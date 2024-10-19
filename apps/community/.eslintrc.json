@@ -1,8 +1,0 @@
-{
-  "root": true,
-  "extends": ["@aics-client/eslint/next.js"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": true
-  }
-}
