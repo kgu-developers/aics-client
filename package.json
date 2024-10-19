@@ -4,7 +4,12 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "check": "turbo check",
+    "check:fix": "turbo check:fix",
+    "format": "turbo format",
+    "format:fix": "turbo format:fix",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
   },

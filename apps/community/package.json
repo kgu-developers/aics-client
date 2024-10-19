@@ -5,7 +5,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "check": "biome check",
+    "check:fix": "biome check --write",
+    "format": "biome format",
+    "format:fix": "biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write"
   },
   "dependencies": {
     "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
