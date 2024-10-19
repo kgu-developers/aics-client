@@ -2,18 +2,23 @@
   "name": "@aics-client/design-system",
   "private": true,
   "scripts": {
-    "lint": "eslint --max-warnings 0",
+    "check": "biome check",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check:fix": "biome check --write",
+    "format:fix": "biome format --write",
+    "lint:fix": "biome lint --write",
+    "check:fix:unsafe": "biome check --write --unsafe",
+    "format:fix:unsafe": "biome format --write --unsafe",
+    "lint:fix:unsafe": "biome lint --write --unsafe",
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
-    "@aics-client/eslint": "workspace:*",
     "@aics-client/typescript": "workspace:*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
-    "@types/eslint": "^8.56.5",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
-    "eslint": "^8.57.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {

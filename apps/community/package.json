@@ -5,7 +5,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "check": "biome check",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check:fix": "biome check --write",
+    "format:fix": "biome format --write",
+    "lint:fix": "biome lint --write",
+    "check:fix:unsafe": "biome check --write --unsafe",
+    "format:fix:unsafe": "biome format --write --unsafe",
+    "lint:fix:unsafe": "biome lint --write --unsafe"
   },
   "dependencies": {
     "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
@@ -14,12 +22,10 @@
     "react-dom": "19.0.0-rc-cd22717c-20241013"
   },
   "devDependencies": {
-    "@aics-client/typescript": "workspace:^",
+    "@aics-client/typescript": "workspace:*",
     "@types/node": "^20",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.0-rc.1",
     "typescript": "^5"
   },
   "overrides": {
