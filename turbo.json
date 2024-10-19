@@ -12,10 +12,13 @@
       "persistent": true
     },
     "check": {},
-    "check:fix": { "cache": false },
     "format": {},
-    "format:fix": { "cache": false },
     "lint": {},
-    "lint:fix": { "cache": false }
+    "check:fix": { "cache": false },
+    "format:fix": { "cache": false },
+    "lint:fix": { "cache": false },
+    "check:fix:unsafe": { "cache": false },
+    "format:fix:unsafe": { "cache": false },
+    "lint:fix:unsafe": { "cache": false }
   }
 }
