@@ -4,6 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  react19:
+    react:
+      specifier: 19.0.0-rc-02c0e824-20241028
+      version: 19.0.0-rc-02c0e824-20241028
+    react-dom:
+      specifier: 19.0.0-rc-02c0e824-20241028
+      version: 19.0.0-rc-02c0e824-20241028
+
 importers:
 
   .:
@@ -30,11 +39,11 @@ importers:
   apps/admin:
     dependencies:
       react:
-        specifier: 19.0.0-rc-77b637d6-20241016
-        version: 19.0.0-rc-77b637d6-20241016
+        specifier: catalog:react19
+        version: 19.0.0-rc-02c0e824-20241028
       react-dom:
-        specifier: 19.0.0-rc-77b637d6-20241016
-        version: 19.0.0-rc-77b637d6-20241016(react@19.0.0-rc-77b637d6-20241016)
+        specifier: catalog:react19
+        version: 19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028)
     devDependencies:
       '@aics-client/typescript':
         specifier: workspace:*
@@ -67,10 +76,10 @@ importers:
         specifier: 15.0.2
         version: 15.0.2(babel-plugin-react-compiler@0.0.0-experimental-fa06e2c-20241016)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)
       react:
-        specifier: 19.0.0-rc-02c0e824-20241028
+        specifier: catalog:react19
         version: 19.0.0-rc-02c0e824-20241028
       react-dom:
-        specifier: 19.0.0-rc-02c0e824-20241028
+        specifier: catalog:react19
         version: 19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028)
     devDependencies:
       '@aics-client/typescript':
@@ -94,8 +103,8 @@ importers:
   packages/design-system:
     dependencies:
       react:
-        specifier: ^18.2.0
-        version: 18.3.1
+        specifier: catalog:react19
+        version: 19.0.0-rc-02c0e824-20241028
     devDependencies:
       '@aics-client/typescript':
         specifier: workspace:*
@@ -107,11 +116,11 @@ importers:
         specifier: ^20.11.24
         version: 20.16.13
       '@types/react':
-        specifier: ^18.2.61
-        version: 18.3.11
+        specifier: npm:types-react@19.0.0-rc.1
+        version: types-react@19.0.0-rc.1
       '@types/react-dom':
-        specifier: ^18.2.19
-        version: 18.3.1
+        specifier: npm:types-react-dom@19.0.0-rc.1
+        version: types-react-dom@19.0.0-rc.1
       typescript:
         specifier: ^5.3.3
         version: 5.6.3
@@ -826,9 +835,6 @@ packages:
 
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
-
-  '@types/react-dom@18.3.1':
-    resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
 
   '@types/react@18.3.11':
     resolution: {integrity: sha512-r6QZ069rFTjrEYgFdOck1gK7FLVsgJE7tTz0pQBczlBNUhBNk0MQH4UbnFSwjpQLMkLzgqvBBa+qGpLje16eTQ==}
@@ -1751,11 +1757,6 @@ packages:
     peerDependencies:
       react: 19.0.0-rc-02c0e824-20241028
 
-  react-dom@19.0.0-rc-77b637d6-20241016:
-    resolution: {integrity: sha512-xp5LvY+O6uvg0fNbSMyMXe0kbgzw6qn0mbqrdXStm4LBpFeMswLZ+XSNr+eJ0HyIiWrCw0rrXaVdqOxc9wtdKA==}
-    peerDependencies:
-      react: 19.0.0-rc-77b637d6-20241016
-
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -1763,16 +1764,8 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
-    engines: {node: '>=0.10.0'}
-
   react@19.0.0-rc-02c0e824-20241028:
     resolution: {integrity: sha512-GbZ7hpPHQMiEu53BqEaPQVM/4GG4hARo+mqEEnx4rYporDvNvUjutiAFxYFSbu6sgHwcr7LeFv8htEOwALVA2A==}
-    engines: {node: '>=0.10.0'}
-
-  react@19.0.0-rc-77b637d6-20241016:
-    resolution: {integrity: sha512-9A+i+PGSH/P4MezU4w38K9cbJuy0pzsXoPjPWIv6TQGCFmc5qCzC+8yce8dzfSEF1KJgCF2CLc5qtq/ePfiVqg==}
     engines: {node: '>=0.10.0'}
 
   readable-stream@3.6.2:
@@ -1849,9 +1842,6 @@ packages:
 
   scheduler@0.25.0-rc-02c0e824-20241028:
     resolution: {integrity: sha512-GysnKjmMSaWcwsKTLzeJO0IhU3EyIiC0ivJKE6yDNLqt3IMxDByx8b6lSNXRNdN+ULUY0WLLjSPaZ0LuU/GnTg==}
-
-  scheduler@0.25.0-rc-77b637d6-20241016:
-    resolution: {integrity: sha512-R5NTrZXJaW4Dj2jHmad2MTehpFq4yUQOxRKDNV7clP1q4Pz6RtUIcofdPnGUWM0krlJAw8DHd/4jT41pFK4iEg==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -2865,10 +2855,6 @@ snapshots:
 
   '@types/prop-types@15.7.13': {}
 
-  '@types/react-dom@18.3.1':
-    dependencies:
-      '@types/react': 18.3.11
-
   '@types/react@18.3.11':
     dependencies:
       '@types/prop-types': 15.7.13
@@ -3864,22 +3850,11 @@ snapshots:
       react: 19.0.0-rc-02c0e824-20241028
       scheduler: 0.25.0-rc-02c0e824-20241028
 
-  react-dom@19.0.0-rc-77b637d6-20241016(react@19.0.0-rc-77b637d6-20241016):
-    dependencies:
-      react: 19.0.0-rc-77b637d6-20241016
-      scheduler: 0.25.0-rc-77b637d6-20241016
-
   react-is@16.13.1: {}
 
   react-refresh@0.14.2: {}
 
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
-
   react@19.0.0-rc-02c0e824-20241028: {}
-
-  react@19.0.0-rc-77b637d6-20241016: {}
 
   readable-stream@3.6.2:
     dependencies:
@@ -3964,8 +3939,6 @@ snapshots:
   safer-buffer@2.1.2: {}
 
   scheduler@0.25.0-rc-02c0e824-20241028: {}
-
-  scheduler@0.25.0-rc-77b637d6-20241016: {}
 
   semver@6.3.1: {}
 
