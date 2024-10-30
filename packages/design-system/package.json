@@ -13,6 +13,7 @@
     "lint:fix:unsafe": "biome lint --write --unsafe",
     "generate:component": "turbo gen react-component"
   },
+    "classnames": "^2.5.1"
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
     "@turbo/gen": "^1.12.4",
