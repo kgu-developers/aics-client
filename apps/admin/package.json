@@ -1,32 +1,32 @@
 {
-	"name": "@aics-client/admin",
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
-		"check": "biome check",
-		"format": "biome format",
-		"lint": "biome lint",
-		"check:fix": "biome check --write",
-		"format:fix": "biome format --write",
-		"lint:fix": "biome lint --write",
-		"check:fix:unsafe": "biome check --write --unsafe",
-		"format:fix:unsafe": "biome format --write --unsafe",
-		"lint:fix:unsafe": "biome lint --write --unsafe",
-		"preview": "vite preview"
-	},
-	"dependencies": {
-		"react": "19.0.0-rc-77b637d6-20241016",
-		"react-dom": "19.0.0-rc-77b637d6-20241016"
-	},
-	"devDependencies": {
-		"@aics-client/typescript": "workspace:*",
-		"@types/react": "npm:types-react@19.0.0-rc.1",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-		"@vitejs/plugin-react": "^4.3.2",
-		"globals": "^15.9.0",
-		"typescript": "^5.5.3",
-		"vite": "^5.4.8"
-	}
+  "name": "@aics-client/admin",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "check": "biome check",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check:fix": "biome check --write",
+    "format:fix": "biome format --write",
+    "lint:fix": "biome lint --write",
+    "check:fix:unsafe": "biome check --write --unsafe",
+    "format:fix:unsafe": "biome format --write --unsafe",
+    "lint:fix:unsafe": "biome lint --write --unsafe",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "19.0.0-rc-77b637d6-20241016",
+    "react-dom": "19.0.0-rc-77b637d6-20241016"
+  },
+  "devDependencies": {
+    "@aics-client/typescript": "workspace:*",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.8"
+  }
 }

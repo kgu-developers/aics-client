@@ -1,35 +1,35 @@
 {
-	"name": "@aics-client/community",
-	"version": "0.1.0",
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"check": "biome check",
-		"format": "biome format",
-		"lint": "biome lint",
-		"check:fix": "biome check --write",
-		"format:fix": "biome format --write",
-		"lint:fix": "biome lint --write",
-		"check:fix:unsafe": "biome check --write --unsafe",
-		"format:fix:unsafe": "biome format --write --unsafe",
-		"lint:fix:unsafe": "biome lint --write --unsafe"
-	},
-	"dependencies": {
-		"babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
-		"next": "15.0.2",
-		"react": "19.0.0-rc-02c0e824-20241028",
-		"react-dom": "19.0.0-rc-02c0e824-20241028"
-	},
-	"devDependencies": {
-		"@aics-client/typescript": "workspace:*",
-		"@types/node": "^20",
-		"@types/react": "npm:types-react@19.0.0-rc.1",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-		"typescript": "^5"
-	},
-	"overrides": {
-		"@types/react": "npm:types-react@19.0.0-rc.1",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
-	}
+  "name": "@aics-client/community",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "biome check",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check:fix": "biome check --write",
+    "format:fix": "biome format --write",
+    "lint:fix": "biome lint --write",
+    "check:fix:unsafe": "biome check --write --unsafe",
+    "format:fix:unsafe": "biome format --write --unsafe",
+    "lint:fix:unsafe": "biome lint --write --unsafe"
+  },
+  "dependencies": {
+    "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028"
+  },
+  "devDependencies": {
+    "@aics-client/typescript": "workspace:*",
+    "@types/node": "^20",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+  }
 }
