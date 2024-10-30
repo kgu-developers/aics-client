@@ -12,8 +12,5 @@
     "formatter": {
       "quoteStyle": "single"
     }
-  },
-  "linter": {
-    "ignore": ["**/node_modules/", "**/dist/"]
   }
 }
