@@ -11,6 +11,7 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single"
-    }
+    },
+    "globals": ["React", "JSX"]
   }
 }
