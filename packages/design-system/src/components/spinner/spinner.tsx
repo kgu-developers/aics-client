@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { spinnerVariants } from './spinner.css';
 import { opacity25, opacity75 } from '../../styles';
+import { spinnerVariants } from './spinner.css';
 
 interface Props {
   className?: string;
