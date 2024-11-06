@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { themeToken } from '../../styles';
+import { themeVars } from '../../styles';
 
 export const buttonVariants = recipe({
   base: {
@@ -9,27 +9,27 @@ export const buttonVariants = recipe({
   variants: {
     color: {
       primary: {
-        backgroundColor: themeToken.color.primary,
-        color: themeToken.color.white,
+        backgroundColor: themeVars.color.primary,
+        color: themeVars.color.white,
       },
       secondary: {
-        backgroundColor: themeToken.color.secondary,
-        color: themeToken.color.white,
+        backgroundColor: themeVars.color.secondary,
+        color: themeVars.color.white,
       },
       danger: {
-        backgroundColor: themeToken.color.danger,
-        color: themeToken.color.white,
+        backgroundColor: themeVars.color.danger,
+        color: themeVars.color.white,
       },
     },
     size: {
       sm: {
-        padding: `${themeToken.spacing.sm} ${themeToken.spacing.md}`,
+        padding: `${themeVars.spacing.sm} ${themeVars.spacing.md}`,
       },
       md: {
-        padding: `${themeToken.spacing.md} ${themeToken.spacing.lg}`,
+        padding: `${themeVars.spacing.md} ${themeVars.spacing.lg}`,
       },
       lg: {
-        padding: `${themeToken.spacing.lg} ${themeToken.spacing.lg}`,
+        padding: `${themeVars.spacing.lg} ${themeVars.spacing.lg}`,
       },
     },
     disabled: {
@@ -38,6 +38,14 @@ export const buttonVariants = recipe({
       },
       false: {
         cursor: 'pointer',
+      },
+    },
+    loading: {
+      true: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: themeVars.spacing.xs,
+        cursor: 'default',
       },
     },
   },

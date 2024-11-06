@@ -8,16 +8,22 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-
   args: {
     color: 'primary',
     size: 'md',
     disabled: false,
+    loading: false,
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    children: 'Button',
+  },
+};
 
 export const Primary: Story = {
   args: {
@@ -61,5 +67,14 @@ export const Large: Story = {
   args: {
     size: 'lg',
     children: 'Button',
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    color: 'primary',
+    size: 'md',
+    children: 'Button',
+    loading: true,
   },
 };
