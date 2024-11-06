@@ -1,8 +1,15 @@
-export const
-{{pascalCase name}}
-= ({ children }: { children: React.ReactNode }) => { return (
-<div>
-  <h1>{{pascalCase name}} Component</h1>
-  {children}
-</div>
-); };
+import classNames from 'classnames';
+import { {{camelCase name}}Variants } from './{{kebabCase name}}.css';
+
+interface Props {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function {{pascalCase name}}({ className, children, ...props}: Props) {
+  return (
+    <div className={classNames({{camelCase name}}Variants(), className)} {...props}>
+      {children}
+    </div>
+  );
+};
