@@ -33,14 +33,6 @@ export const Regular: Story = {
   },
 };
 
-export const Medium: Story = {
-  args: {
-    fontWeight: 'medium',
-    children:
-      '소프트웨어 개발 능력을 갖춘 수요 지향적 소프트웨어 엔지니어 양성',
-  },
-};
-
 export const Semibold: Story = {
   args: {
     fontWeight: 'semibold',
