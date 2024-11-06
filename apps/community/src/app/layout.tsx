@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { pretendardVariable } from './fonts/pretendard-variable';
-import '../styles/globals.css';
+import '../styles/normalize.css';
 
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
