@@ -3,5 +3,6 @@ export { default as Spacing } from './spacing/spacing';
 export { default as Spinner } from './spinner/spinner';
 export { default as Text } from './text/text';
 export { default as List } from './list/list';
+export { default as ListRow } from './list-row/list-row';
 export { default as Badge } from './badge/badge';
 export { default as Title } from './title/title';
