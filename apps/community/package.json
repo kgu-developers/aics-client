@@ -16,6 +16,7 @@
     "lint:fix:unsafe": "biome lint --write --unsafe"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.16.0",
     "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
     "next": "15.0.2",
     "react": "catalog:react19",
@@ -26,6 +27,7 @@
     "@types/node": "^20",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@vanilla-extract/next-plugin": "^2.4.6",
     "typescript": "^5"
   },
   "overrides": {
