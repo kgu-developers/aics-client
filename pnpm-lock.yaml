@@ -38,9 +38,6 @@ importers:
 
   apps/admin:
     dependencies:
-      '@vanilla-extract/css':
-        specifier: ^1.16.0
-        version: 1.16.0
       react:
         specifier: catalog:react19
         version: 19.0.0-rc-02c0e824-20241028
@@ -48,9 +45,6 @@ importers:
         specifier: catalog:react19
         version: 19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028)
     devDependencies:
-      '@aics-client/design-system':
-        specifier: workspace:*
-        version: link:../../packages/design-system
       '@aics-client/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
@@ -60,9 +54,6 @@ importers:
       '@types/react-dom':
         specifier: npm:types-react-dom@19.0.0-rc.1
         version: types-react-dom@19.0.0-rc.1
-      '@vanilla-extract/vite-plugin':
-        specifier: ^4.0.17
-        version: 4.0.17(@types/node@22.8.5)(vite@5.4.9(@types/node@22.8.5))
       '@vitejs/plugin-react':
         specifier: ^4.3.2
         version: 4.3.3(vite@5.4.9(@types/node@22.8.5))
@@ -3982,32 +3973,6 @@ snapshots:
       - supports-color
       - terser
 
-  '@vanilla-extract/integration@7.1.10(@types/node@22.8.5)':
-    dependencies:
-      '@babel/core': 7.25.8
-      '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.25.8)
-      '@vanilla-extract/babel-plugin-debug-ids': 1.1.0
-      '@vanilla-extract/css': 1.16.0
-      dedent: 1.5.3
-      esbuild: 0.21.5
-      eval: 0.1.8
-      find-up: 5.0.0
-      javascript-stringify: 2.1.0
-      mlly: 1.7.2
-      vite: 5.4.9(@types/node@22.8.5)
-      vite-node: 1.6.0(@types/node@22.8.5)
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
   '@vanilla-extract/private@1.0.6': {}
 
   '@vanilla-extract/recipes@0.5.5(@vanilla-extract/css@1.16.0)':
@@ -4018,22 +3983,6 @@ snapshots:
     dependencies:
       '@vanilla-extract/integration': 7.1.10(@types/node@20.16.13)
       vite: 5.4.9(@types/node@20.16.13)
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
-  '@vanilla-extract/vite-plugin@4.0.17(@types/node@22.8.5)(vite@5.4.9(@types/node@22.8.5))':
-    dependencies:
-      '@vanilla-extract/integration': 7.1.10(@types/node@22.8.5)
-      vite: 5.4.9(@types/node@22.8.5)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -5767,24 +5716,6 @@ snapshots:
       pathe: 1.1.2
       picocolors: 1.1.1
       vite: 5.4.9(@types/node@20.16.13)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
-  vite-node@1.6.0(@types/node@22.8.5):
-    dependencies:
-      cac: 6.7.14
-      debug: 4.3.7
-      pathe: 1.1.2
-      picocolors: 1.1.1
-      vite: 5.4.9(@types/node@22.8.5)
     transitivePeerDependencies:
       - '@types/node'
       - less
