@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import { modernNormalizeClass, themeClass } from '../src/styles';
+import { themeClass } from '../src/styles';
 
 const preview: Preview = {
   parameters: {
@@ -13,7 +13,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <div className={`${modernNormalizeClass} ${themeClass}`}>
+      <div className={themeClass}>
         <Story />
       </div>
     ),
