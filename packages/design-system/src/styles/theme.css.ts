@@ -15,17 +15,8 @@ export const [themeClass, themeVars] = createTheme({
     gray200: COLORS.GRAY200,
     gray400: COLORS.GRAY400,
   },
-  spacing: {
-    xs: spacing.xs,
-    sm: spacing.sm,
-    md: spacing.md,
-    lg: spacing.lg,
-    xl: spacing.xl,
-  },
-  typography: {
-    fontSize: typography.fontSize,
-    fontWeight: typography.fontWeight,
-  },
+  spacing: spacing,
+  typography: typography,
   opacity: {
     25: OPACITY[25],
     75: OPACITY[75],
