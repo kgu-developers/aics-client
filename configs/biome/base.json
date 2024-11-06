@@ -3,7 +3,7 @@
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["**/node_modules/", "**/dist/", "**/.next", "**/.turbo"]
+    "ignore": ["**/node_modules", "**/dist", "**/.next", "**/.turbo"]
   },
   "formatter": {
     "indentStyle": "space"

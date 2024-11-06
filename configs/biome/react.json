@@ -1,6 +1,5 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "extends": ["./base.json"],
   "linter": {
     "rules": {
       "correctness": {
@@ -12,7 +11,7 @@
         "noEmptyBlockStatements": "error"
       }
     },
-    "ignore": ["**/.*.js", "**/node_modules/", "**/dist/"]
+    "ignore": ["**/.*.js"]
   },
   "overrides": [{ "include": ["*.js?(x)", "*.ts?(x)"] }]
 }
