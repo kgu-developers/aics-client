@@ -1,17 +1,7 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import '../styles/globals.css';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
+import { pretendardVariable } from './fonts/pretendard-variable';
+import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
@@ -25,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <body className={pretendardVariable.className}>{children}</body>
     </html>
   );
 }
