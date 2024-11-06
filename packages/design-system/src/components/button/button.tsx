@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-import type { ButtonHTMLAttributes } from 'react';
 import Spinner from '../spinner/spinner';
 import { buttonVariants } from './button.css';
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'primary' | 'secondary' | 'danger';
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color?: 'primary' | 'secondary' | 'danger' | 'warning';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
 }

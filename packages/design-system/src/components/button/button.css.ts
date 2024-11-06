@@ -3,22 +3,23 @@ import { themeVars } from '../../styles';
 
 export const buttonVariants = recipe({
   base: {
-    borderRadius: '4px',
     border: 'none',
+    borderRadius: '4px',
+    color: themeVars.color.white,
   },
   variants: {
     color: {
       primary: {
         backgroundColor: themeVars.color.primary,
-        color: themeVars.color.white,
       },
       secondary: {
         backgroundColor: themeVars.color.secondary,
-        color: themeVars.color.white,
       },
       danger: {
         backgroundColor: themeVars.color.danger,
-        color: themeVars.color.white,
+      },
+      warning: {
+        backgroundColor: themeVars.color.warning,
       },
     },
     size: {

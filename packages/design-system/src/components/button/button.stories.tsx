@@ -49,6 +49,14 @@ export const Danger: Story = {
   },
 };
 
+export const Warning: Story = {
+  args: {
+    color: 'warning',
+    size: 'md',
+    children: 'Button',
+  },
+};
+
 export const Small: Story = {
   args: {
     size: 'sm',
