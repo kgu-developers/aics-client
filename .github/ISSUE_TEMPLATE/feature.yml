@@ -20,4 +20,4 @@ body:
   - type: textarea
     attributes:
       label: ETC
-      description: 더 전달할 내용이 있다면 여기에 작성해주세요.
+      description: 더 전달할 내용이 있다면 여기에 작성해주 세요.

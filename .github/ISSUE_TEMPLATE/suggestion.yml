@@ -6,7 +6,7 @@ body:
   - type: textarea
     attributes:
       label: Describe
-      description: 회의 주제에 대한 설명을 작성해주세요.
+      description: 회의 주제에 대한 설명을 작성해 주세요.
       placeholder: 자세히 적을수록 좋습니다.
     validations:
       required: true
@@ -20,4 +20,4 @@ body:
   - type: textarea
     attributes:
       label: ETC
-      description: 더 전달할 내용이 있다면 여기에 작성해주세요.
+      description: 더 전달할 내용이 있다면 여기에 작성해 주세요.
