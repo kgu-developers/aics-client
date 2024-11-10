@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@vanilla-extract/recipes": "^0.5.5",
-    "classnames": "^2.5.1"
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",

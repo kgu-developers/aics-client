@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { listVariants } from './list.css';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 export default function List({ className, children, ...props }: Props) {
   return (
-    <ul className={classNames(listVariants(), className)} {...props}>
+    <ul className={clsx(listVariants(), className)} {...props}>
       {children}
     </ul>
   );

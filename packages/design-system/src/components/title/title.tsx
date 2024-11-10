@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { titleVariants } from './title.css';
 
 interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -16,7 +16,7 @@ export default function Title({
 }: Props) {
   return (
     <Component
-      className={classNames(
+      className={clsx(
         titleVariants({ as: Component, borderBottom }),
         className,
       )}

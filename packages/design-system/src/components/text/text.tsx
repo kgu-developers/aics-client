@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { textVariants } from './text.css';
 
 interface BaseProps {
@@ -24,7 +24,7 @@ export default function Text<ElementType extends React.ElementType = 'span'>({
 
   return (
     <Component
-      className={classNames(textVariants({ size, fontWeight }), className)}
+      className={clsx(textVariants({ size, fontWeight }), className)}
       {...rest}
     >
       {children}

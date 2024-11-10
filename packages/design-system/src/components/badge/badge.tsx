@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { badgeVariants } from './badge.css';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
@@ -15,7 +15,7 @@ export default function Badge({
 }: Props) {
   return (
     <span
-      className={classNames(badgeVariants({ size, color }), className)}
+      className={clsx(badgeVariants({ size, color }), className)}
       {...props}
     >
       {children}

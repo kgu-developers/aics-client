@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Text from '../text/text';
 import { listRowVariants } from './list-row.css';
 
@@ -16,7 +16,7 @@ export default function ListRow({
   ...props
 }: Props) {
   return (
-    <li className={classNames(listRowVariants(), className)} {...props}>
+    <li className={clsx(listRowVariants(), className)} {...props}>
       <div style={{ flexShrink: 0 }}>{left}</div>
       <div style={{ width: '100%' }}>{contents}</div>
       <div style={{ flexShrink: 0 }}>{right}</div>

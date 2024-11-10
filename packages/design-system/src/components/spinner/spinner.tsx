@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { opacity25, opacity75 } from '../../styles';
 import { spinnerVariants } from './spinner.css';
 
@@ -11,7 +11,7 @@ export default function Spinner({ size = 'md', className }: Props) {
   return (
     // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
     <svg
-      className={classNames(spinnerVariants({ size }), className)}
+      className={clsx(spinnerVariants({ size }), className)}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

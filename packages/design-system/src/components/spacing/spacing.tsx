@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 import { spacingVariants } from './spacing.css';
 
@@ -9,9 +9,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default function Spacing({ size = 'md', className, ...props }: Props) {
   return (
-    <div
-      className={classNames(spacingVariants({ size }), className)}
-      {...props}
-    />
+    <div className={clsx(spacingVariants({ size }), className)} {...props} />
   );
 }

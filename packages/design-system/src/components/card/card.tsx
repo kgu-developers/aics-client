@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Spacing from '../spacing/spacing';
 import Text from '../text/text';
 import { cardDescriptionVariants, cardVariants } from './card.css';
@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Card({ className, children, ...props }: Props) {
   return (
-    <div className={classNames(cardVariants(), className)} {...props}>
+    <div className={clsx(cardVariants(), className)} {...props}>
       {children}
     </div>
   );
