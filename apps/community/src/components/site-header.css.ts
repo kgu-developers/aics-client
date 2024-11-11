@@ -8,7 +8,7 @@ const headerWrapper = style({
 });
 
 const headerWrapperScrolled = style({
-  padding: '1rem 0',
+  paddingTop: '1rem',
 });
 
 const header = style({
