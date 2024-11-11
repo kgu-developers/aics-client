@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 
-import { pretendardVariable } from '~/app/fonts/pretendard-variable';
 import '~/styles/normalize.css';
+import { pretendardVariable } from '~/app/fonts/pretendard-variable';
+import * as styles from '~/app/layout.css';
+import { SiteFooter } from '~/components/site-footer';
+import { SiteHeader } from '~/components/site-header';
 
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
@@ -15,7 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={pretendardVariable.className}>{children}</body>
+      <body className={pretendardVariable.className}>
+        <div className={styles.root}>
+          <SiteHeader />
+          <main className={styles.main}>{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }
