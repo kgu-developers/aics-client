@@ -18,8 +18,7 @@ const footerNav = style({
 
 const footerCopy = style({
   textAlign: 'center',
-  padding: '1rem 0',
-  fontSize: '1rem',
+  padding: '2rem 0',
   color: 'gray',
 });
 
