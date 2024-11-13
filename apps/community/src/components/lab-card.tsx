@@ -16,7 +16,8 @@ function LabCard({ lab }: { lab: Lab }) {
       />
       <div className={styles.divider} />
       <div className={styles.infoWrapper}>
-        <h3 className={styles.title}>{lab.name}</h3>
+        <h2 className={styles.title}>{lab.name}</h2>
+        <p>지도교수: {lab.professor}</p>
         <p>연구실 위치: {lab.location}</p>
         <Link href={lab.site} target="_blank" className={styles.link}>
           홈페이지

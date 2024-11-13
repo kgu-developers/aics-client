@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 const cardWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  padding: '1rem 2rem',
+  padding: '1rem 3rem',
   gap: '3rem',
   border: '1px solid rgba(0, 0, 0, 0.1)',
   borderRadius: '0.5rem',
@@ -30,6 +30,7 @@ const infoWrapper = style({
 });
 
 const title = style({
+  fontSize: '1.25rem',
   color: '#333D4B',
 });
 
