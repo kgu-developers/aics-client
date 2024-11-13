@@ -1,12 +1,12 @@
-import { ProfessorCard } from './components/ProfessorCard';
+import { ProfessorCard } from '~/components/professor-card';
 
-import { professorList } from './styles/page.css';
+import * as styles from '~/app/member/professor/page.css';
 
 import { PROFESSORS } from './mocks/professor';
 
 export default function Page(): JSX.Element {
   return (
-    <div className={professorList}>
+    <div className={styles.professorListWrapper}>
       {PROFESSORS.map((professor) => (
         <ProfessorCard
           key={`professor-${professor.id}`}

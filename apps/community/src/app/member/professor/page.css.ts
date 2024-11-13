@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-export const professorList = style({
+export const professorListWrapper = style({
   display: 'grid',
   gap: 16,
   gridTemplateColumns: '1fr',
