@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-const cardContainer = style({
+const cardWrapper = style({
   display: 'flex',
   alignItems: 'center',
   padding: '1rem 2rem',
@@ -22,7 +22,7 @@ const divider = style({
   opacity: 0.5,
 });
 
-const infoContainer = style({
+const infoWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -41,4 +41,4 @@ const link = style({
   },
 });
 
-export { cardContainer, image, divider, infoContainer, title, link };
+export { cardWrapper, image, divider, infoWrapper, title, link };

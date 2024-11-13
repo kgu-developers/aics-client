@@ -1,20 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Lab } from '../mocks/labs';
-import * as styles from './LabCard.css';
+
+import * as styles from '~/components/lab-card.css';
+import type { Lab } from '~/mocks/labs';
 
 function LabCard({ lab }: { lab: Lab }) {
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardWrapper}>
       <Image
-        src={lab.img || 'https://placehold.co/128'}
+        src={lab.img ?? 'https://placehold.co/128'}
         alt={`${lab.name} 이미지` || '연구실 이미지'}
         width={100}
         height={100}
         className={styles.image}
       />
       <div className={styles.divider} />
-      <div className={styles.infoContainer}>
+      <div className={styles.infoWrapper}>
         <h3 className={styles.title}>{lab.name}</h3>
         <p>연구실 위치: {lab.location}</p>
         <Link href={lab.site} target="_blank" className={styles.link}>
