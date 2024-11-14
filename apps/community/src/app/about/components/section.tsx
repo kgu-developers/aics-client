@@ -1,6 +1,6 @@
 import * as styles from '~/app/about/components/section.css';
 
-export function Section({ children }: { children: React.ReactNode }) {
+function Section({ children }: { children: React.ReactNode }) {
   return <section className={styles.section}>{children}</section>;
 }
 
@@ -9,3 +9,5 @@ function Title({ children }: { children: React.ReactNode }) {
 }
 
 Section.Title = Title;
+
+export { Section };
