@@ -15,23 +15,15 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.kyonggi.ac.kr',
       },
-    ],
-  },
-  experimental: {
-    reactCompiler: true,
-  },
-  images: {
-    remotePatterns: [
       {
         protocol: 'https',
         hostname: 'kutis.kyonggi.ac.kr',
         pathname: '/webkutis/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-      },
     ],
+  },
+  experimental: {
+    reactCompiler: true,
   },
 };
 
