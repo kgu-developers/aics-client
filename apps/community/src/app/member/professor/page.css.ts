@@ -2,9 +2,9 @@ import { style } from '@vanilla-extract/css';
 
 export const professorListWrapper = style({
   display: 'grid',
-  gap: 16,
+  gap: '1rem',
   gridTemplateColumns: '1fr',
-  marginTop: 42,
+  marginTop: '3rem',
 
   '@media': {
     'screen and (min-width: 640px)': {

@@ -5,14 +5,14 @@ export const card = style({
   backgroundColor: '#fff',
   border: '1px solid',
   borderColor: '#e5e7eb',
-  borderRadius: '0.75rem'
+  borderRadius: '0.75rem',
   boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
   alignItems: 'center',
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
-  gap: 24,
-  paddingTop: 12,
+  gap: '1.5rem',
+  paddingTop: '0.75rem',
 });
 
 export const avatarImage = style({
@@ -40,7 +40,7 @@ export const fallbackImage = style({
 export const cardContent = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: 4,
+  gap: '0.25rem',
 });
 
 export const professorName = style({
@@ -51,7 +51,7 @@ export const professorName = style({
 
 export const professorType = style({
   margin: 0,
-  fontSize: 14,
+  fontSize: '0.875rem',
   fontWeight: 400,
   lineHeight: '1.25rem',
   color: '#6b7280',
@@ -60,8 +60,8 @@ export const professorType = style({
 export const cardFooter = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: 8,
-  paddingBottom: 16,
+  gap: '0.5rem',
+  paddingBottom: '1rem',
 });
 
 export const professorContact = style({
