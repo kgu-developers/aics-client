@@ -27,7 +27,7 @@ const PROFESSORS: Professor[] = [
   {
     id: 3,
     name: '김인철',
-    img: 'https://kutis.kyonggi.ac.kr/webkutis/TransferImageStreamHJ.do?gyosu_no=',
+    img: 'https://kutis.kyonggi.ac.kr/webkutis/TransferImageStreamHJ.do?gyosu_no=tWJOq3%2Bjp4MtyPOJr3Julw%3D%3D',
     type: '교수',
     contact: '031-249-9669',
     email: 'kic@kyonggi.ac.kr',
@@ -139,7 +139,7 @@ const PROFESSORS: Professor[] = [
   {
     id: 17,
     name: '윤익준',
-    img: 'https://kutis.kyonggi.ac.kr/webkutis/TransferImageStreamHJ.do?gyosu_no=',
+    img: 'https://kutis.kyonggi.ac.kr/webkutis/TransferImageStreamHJ.do?gyosu_no=ue9aQU%2B0DUMtyPOJr3Julw%3D%3D',
     type: '조교수',
     contact: '031-249-9642',
     email: 'ijyoon@kyonggi.ac.kr',
