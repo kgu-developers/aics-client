@@ -1,11 +1,11 @@
 import { List } from '~/app/about/components/list';
 import { Section } from '~/app/about/components/section';
-import { Title } from '~/app/about/components/title';
+import { PageHeader } from '~/components/page-header';
 
 export default function Dept() {
   return (
     <>
-      <Title
+      <PageHeader
         title="학부 소개"
         description="경기대학교 AI컴퓨터공학부를 소개해요."
       />

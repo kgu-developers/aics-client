@@ -5,20 +5,18 @@ interface Props {
   children: React.ReactNode;
 }
 
-const List = ({ title, children }: Props) => {
+function List({ title, children }: Props) {
   return (
     <div>
       <h3 className={styles.listTitle}>{title}</h3>
       <ul className={styles.list}>{children}</ul>
     </div>
   );
-};
+}
 
-const Row = ({ children }: { children: React.ReactNode }) => {
+function Row({ children }: { children: React.ReactNode }) {
   return <li>{children}</li>;
-};
-
-Row.displayName = 'ListRow';
+}
 
 List.Row = Row;
 
