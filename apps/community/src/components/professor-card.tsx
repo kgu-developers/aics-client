@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 import * as styles from '~/components/professor-card.css';
@@ -10,7 +8,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
   return (
     <div className={styles.card}>
       <Image
-        src={professor.img || 'https://placehold.co/128'}
+        src={professor.img ?? 'https://placehold.co/128'}
         width={100}
         height={100}
         className={styles.avatarImage}
