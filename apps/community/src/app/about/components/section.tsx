@@ -1,4 +1,4 @@
-import * as styles from './section.css';
+import * as styles from '~/app/about/components/section.css';
 
 export const Section = ({ children }: { children: React.ReactNode }) => {
   return <section className={styles.section}>{children}</section>;

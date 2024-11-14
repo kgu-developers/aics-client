@@ -1,6 +1,6 @@
-import { List } from '../components/list';
-import { Section } from '../components/section';
-import { Title } from '../components/title';
+import { List } from '~/app/about/components/list';
+import { Section } from '~/app/about/components/section';
+import { Title } from '~/app/about/components/title';
 
 export default function Dept() {
   return (
