@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import * as styles from '~/components/professor-card.css';
 
-import type { Professor } from '../app/member/professor/mocks/professor';
+import type { Professor } from '~/app/member/professor/mocks/professor';
 
 function ProfessorCard({ professor }: { professor: Professor }) {
   const [imgError, setImgError] = useState(false);
@@ -14,7 +14,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
     <div className={styles.card}>
       {!imgError ? (
         <Image
-          src={professor.img ?? 'https://placehold.co/128'}
+          src={professor.img ?? ''}
           width={100}
           height={100}
           className={styles.avatarImage}
