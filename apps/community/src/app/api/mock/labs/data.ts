@@ -1,13 +1,4 @@
-interface Lab {
-  id: number;
-  name: string;
-  img?: string;
-  location: string;
-  site: string;
-  professor: string;
-}
-
-const LABS: Lab[] = [
+const labs = [
   {
     id: 1,
     name: '인공지능 연구실',
@@ -103,6 +94,6 @@ const LABS: Lab[] = [
     site: 'https://sites.google.com/kyonggi.ac.kr/cvpr/%ED%99%88',
     professor: '안준호',
   },
-] as const;
+];
 
-export { type Lab, LABS };
+export { labs };
