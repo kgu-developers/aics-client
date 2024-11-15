@@ -35,30 +35,30 @@ async function request<Response>({
 }
 
 const http = {
-  get: async function get<Response = unknown>(
+  get: async <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> {
+  ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'GET', url, options });
   },
-  post: async function post<Request, Response = unknown>(
+  post: async <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> {
+  ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'POST', url, options, data });
   },
-  put: async function put<Request = unknown, Response = unknown>(
+  put: async <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> {
+  ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'PUT', url, options, data });
   },
-  delete: async function deleteMethod<Response = unknown>(
+  delete: async <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> {
+  ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'DELETE', url, options });
   },
 };
