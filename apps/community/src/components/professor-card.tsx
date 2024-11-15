@@ -16,7 +16,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
       />
 
       <div className={styles.cardContent}>
-        <h3 className={styles.professorName}>{professor.name}</h3>
+        <h2 className={styles.professorName}>{professor.name}</h2>
         <p className={styles.professorType}>{professor.type}</p>
       </div>
 
