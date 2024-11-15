@@ -7,8 +7,8 @@ interface Props {
 
 function PageHeader({ title, description }: Props) {
   return (
-    <div>
-      <h2 className={styles.title}>{title}</h2>
+    <div className={styles.pageHeaderWrapper}>
+      <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{description}</p>
     </div>
   );
