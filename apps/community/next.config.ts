@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'kutis.kyonggi.ac.kr',
-        pathname: '/webkutis/**',
+        pathname: '/webkutis/TransferImageStreamHJ.do',
       },
     ],
   },
