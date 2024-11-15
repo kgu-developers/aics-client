@@ -3,6 +3,9 @@ import * as styles from '~/app/lab/page.css';
 import { getLabs } from '~/app/lab/remotes';
 import { PageHeader } from '~/components/page-header';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default async function LabPage() {
   const { data } = await getLabs();
 
