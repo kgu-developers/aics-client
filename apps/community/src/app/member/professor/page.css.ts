@@ -1,10 +1,11 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 export const professorListWrapper = style({
-  display: 'grid',
-  gap: '1rem',
+  display: themeVars.display.grid,
+  gap: themeVars.spacing.md,
   gridTemplateColumns: '1fr',
-  marginTop: '3rem',
+  marginTop: themeVars.spacing.xl,
 
   '@media': {
     'screen and (min-width: 640px)': {
