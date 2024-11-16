@@ -8,7 +8,7 @@ catalogs:
   react19:
     react:
       specifier: 19.0.0-rc-02c0e824-20241028
-      version: 19.0.0-rc-02c0e824-20241028
+      version: 18.3.1
     react-dom:
       specifier: 19.0.0-rc-02c0e824-20241028
       version: 19.0.0-rc-02c0e824-20241028
@@ -69,6 +69,9 @@ importers:
 
   apps/community:
     dependencies:
+      '@aics-client/design-system':
+        specifier: workspace:^
+        version: link:../../packages/design-system
       '@vanilla-extract/css':
         specifier: ^1.16.0
         version: 1.16.0
