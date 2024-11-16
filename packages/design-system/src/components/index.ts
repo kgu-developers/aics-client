@@ -7,3 +7,4 @@ export { default as ListRow } from './list-row/list-row';
 export { default as Card } from './card/card';
 export { default as Badge } from './badge/badge';
 export { default as Title } from './title/title';
+export { default as ThemeProvider } from './theme-provider';
