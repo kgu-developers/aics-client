@@ -1,4 +1,5 @@
-import clsx from 'clsx';
+import { sprinkles } from '../../styles/sprinkles.css';
+import { cn } from '../../utils';
 import Text from '../text/text';
 import { listRowVariants } from './list-row.css';
 
@@ -16,10 +17,10 @@ export default function ListRow({
   ...props
 }: Props) {
   return (
-    <li className={clsx(listRowVariants(), className)} {...props}>
-      <div style={{ flexShrink: 0 }}>{left}</div>
-      <div style={{ width: '100%' }}>{contents}</div>
-      <div style={{ flexShrink: 0 }}>{right}</div>
+    <li className={cn(listRowVariants(), className)} {...props}>
+      <div className={sprinkles({ flexShrink: '0' })}>{left}</div>
+      <div className={sprinkles({ width: 'full' })}>{contents}</div>
+      <div className={sprinkles({ flexShrink: '0' })}>{right}</div>
     </li>
   );
 }
@@ -29,9 +30,9 @@ interface Text1RowProps {
   topProps?: React.ComponentProps<typeof Text>;
 }
 
-ListRow.Text1Row = ({ top, topProps }: Text1RowProps) => {
+function Text1Row({ top, topProps }: Text1RowProps) {
   return <Text {...topProps}>{top}</Text>;
-};
+}
 
 interface Text2RowsProps {
   top: string;
@@ -40,16 +41,14 @@ interface Text2RowsProps {
   bottomProps?: React.ComponentProps<typeof Text>;
 }
 
-ListRow.Text2Rows = ({
-  top,
-  topProps,
-  bottom,
-  bottomProps,
-}: Text2RowsProps) => {
+function Text2Rows({ top, topProps, bottom, bottomProps }: Text2RowsProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className={sprinkles({ display: 'flex', flexDirection: 'column' })}>
       <Text {...topProps}>{top}</Text>
       <Text {...bottomProps}>{bottom}</Text>
     </div>
   );
-};
+}
+
+ListRow.Text1Row = Text1Row;
+ListRow.Text2Rows = Text2Rows;

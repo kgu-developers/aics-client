@@ -1,4 +1,4 @@
-import { keyframes, style } from '@vanilla-extract/css';
+import { keyframes } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../../styles';
 
@@ -8,7 +8,7 @@ const spin = keyframes({
   },
 });
 
-export const spinnerVariants = recipe({
+const spinnerVariants = recipe({
   base: {
     animation: `${spin} 1s linear infinite`,
   },
@@ -36,3 +36,5 @@ export const spinnerVariants = recipe({
     size: 'md',
   },
 });
+
+export { spinnerVariants };

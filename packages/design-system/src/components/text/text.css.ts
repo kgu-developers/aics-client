@@ -1,34 +1,34 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../../styles';
 
-export const textVariants = recipe({
+const textVariants = recipe({
   base: {
     lineHeight: '1.75rem',
   },
   variants: {
     size: {
       sm: {
-        fontSize: themeVars.typography.fontSize.sm,
+        fontSize: themeVars.fontSize.sm,
       },
       md: {
-        fontSize: themeVars.typography.fontSize.md,
+        fontSize: themeVars.fontSize.md,
       },
       lg: {
-        fontSize: themeVars.typography.fontSize.lg,
+        fontSize: themeVars.fontSize.lg,
       },
     },
     fontWeight: {
       regular: {
-        fontWeight: themeVars.typography.fontWeight.regular,
+        fontWeight: themeVars.fontWeight.regular,
       },
       medium: {
-        fontWeight: themeVars.typography.fontWeight.medium,
+        fontWeight: themeVars.fontWeight.medium,
       },
       semibold: {
-        fontWeight: themeVars.typography.fontWeight.semibold,
+        fontWeight: themeVars.fontWeight.semibold,
       },
       bold: {
-        fontWeight: themeVars.typography.fontWeight.bold,
+        fontWeight: themeVars.fontWeight.bold,
       },
     },
   },
@@ -37,3 +37,5 @@ export const textVariants = recipe({
     fontWeight: 'regular',
   },
 });
+
+export { textVariants };
