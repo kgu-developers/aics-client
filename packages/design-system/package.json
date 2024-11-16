@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./styles": "./src/styles/index.ts"
   },
   "scripts": {
     "check": "biome check",
@@ -21,7 +22,6 @@
   },
   "dependencies": {
     "@vanilla-extract/recipes": "^0.5.5",
-    "@vanilla-extract/sprinkles": "^1.6.3",
     "clsx": "^2.1.1"
   },
   "devDependencies": {
