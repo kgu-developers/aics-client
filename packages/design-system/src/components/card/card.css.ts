@@ -5,7 +5,7 @@ const cardVariants = recipe({
   base: {
     width: '100%',
     border: `1px solid ${themeVars.color.gray200}`,
-    borderRadius: themeVars.border.radius.xl,
+    borderRadius: themeVars.borderRadius.xl,
     padding: themeVars.spacing.md,
   },
 });

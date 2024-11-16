@@ -2,4 +2,8 @@ const width = {
   full: '100%',
 } as const;
 
-export { width };
+const minWidth = {
+  dvh: '100dvh',
+};
+
+export { width, minWidth };

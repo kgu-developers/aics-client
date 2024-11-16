@@ -1,4 +1,4 @@
-import { sprinkles } from '../../styles/sprinkles.css';
+import { sprinkles } from '../../styles';
 import { cn } from '../../utils';
 import { spinnerVariants } from './spinner.css';
 
