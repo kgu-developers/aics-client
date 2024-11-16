@@ -1,15 +1,14 @@
-import { createTheme } from '@vanilla-extract/css';
+import { createThemeContract } from '@vanilla-extract/css';
+import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import { border } from './border.css';
 import { color } from './color.css';
-import { container } from './container.css';
 import { display } from './display.css';
 import { flex } from './flex.css';
 import { opacity } from './opacity.css';
-import { spacing } from './spacing.css';
 import { typography } from './typography.css';
 import { width } from './width.css';
 
-const [themeClass, themeVars] = createTheme({
+const tokens = {
   ...typography,
   ...flex,
   color: color,
@@ -17,9 +16,14 @@ const [themeClass, themeVars] = createTheme({
   opacity: opacity,
   width: width,
   display: display,
-  // is not css property
-  container: container,
-  spacing: spacing,
+};
+
+const properties = defineProperties({
+  properties: tokens as Record<string, unknown>,
 });
 
-export { themeClass, themeVars };
+const sprinkles = createSprinkles(properties);
+
+const vars = createThemeContract(tokens);
+
+export { sprinkles, tokens, vars };

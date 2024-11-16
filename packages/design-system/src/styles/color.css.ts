@@ -1,4 +1,4 @@
-export const colors = {
+const color = {
   primary: '#3558d2',
   secondary: '#191d2b',
   warning: '#d8704a',
@@ -87,3 +87,5 @@ export const colors = {
   green800: '#007544',
   green900: '#005c36',
 } as const;
+
+export { color };
