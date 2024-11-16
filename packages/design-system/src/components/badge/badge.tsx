@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '../../utils';
 import { badgeVariants } from './badge.css';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
@@ -14,10 +14,7 @@ export default function Badge({
   ...props
 }: Props) {
   return (
-    <span
-      className={clsx(badgeVariants({ size, color }), className)}
-      {...props}
-    >
+    <span className={cn(badgeVariants({ size, color }), className)} {...props}>
       {children}
     </span>
   );

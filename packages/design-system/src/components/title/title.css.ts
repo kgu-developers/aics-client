@@ -5,15 +5,15 @@ export const titleVariants = recipe({
   base: {
     display: 'flex',
     padding: '8px 0px',
-    fontWeight: themeVars.typography.fontWeight.semibold,
+    fontWeight: themeVars.fontWeight.semibold,
   },
   variants: {
     as: {
       h1: {
-        fontSize: themeVars.typography.fontSize['2xl'],
+        fontSize: themeVars.fontSize['2xl'],
       },
       h2: {
-        fontSize: themeVars.typography.fontSize.xl,
+        fontSize: themeVars.fontSize.xl,
       },
     },
     borderBottom: {

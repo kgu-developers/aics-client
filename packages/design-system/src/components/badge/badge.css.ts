@@ -1,7 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../../styles';
 
-export const badgeVariants = recipe({
+const badgeVariants = recipe({
   base: {
     padding: '2px 6px',
     borderRadius: '4px',
@@ -10,13 +10,13 @@ export const badgeVariants = recipe({
   variants: {
     size: {
       sm: {
-        fontSize: themeVars.typography.fontSize.sm,
+        fontSize: themeVars.fontSize.sm,
       },
       md: {
-        fontSize: themeVars.typography.fontSize.md,
+        fontSize: themeVars.fontSize.md,
       },
       lg: {
-        fontSize: themeVars.typography.fontSize.lg,
+        fontSize: themeVars.fontSize.lg,
       },
     },
     color: {
@@ -36,3 +36,5 @@ export const badgeVariants = recipe({
     color: 'warning',
   },
 });
+
+export { badgeVariants };

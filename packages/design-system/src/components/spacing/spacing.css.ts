@@ -1,7 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../../styles';
 
-export const spacingVariants = recipe({
+const spacingVariants = recipe({
   base: {
     flex: 'none',
   },
@@ -17,3 +17,5 @@ export const spacingVariants = recipe({
     size: 'md',
   },
 });
+
+export { spacingVariants };

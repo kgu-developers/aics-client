@@ -1,7 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../../styles';
 
-export const buttonVariants = recipe({
+const buttonVariants = recipe({
   base: {
     border: 'none',
     borderRadius: '4px',
@@ -55,3 +55,5 @@ export const buttonVariants = recipe({
     size: 'md',
   },
 });
+
+export { buttonVariants };

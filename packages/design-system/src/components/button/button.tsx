@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '../../utils';
 import Spinner from '../spinner/spinner';
 import { buttonVariants } from './button.css';
 
@@ -19,7 +19,7 @@ export default function Button({
 }: Props) {
   return (
     <button
-      className={clsx(
+      className={cn(
         buttonVariants({ size, color, loading, disabled }),
         className,
       )}

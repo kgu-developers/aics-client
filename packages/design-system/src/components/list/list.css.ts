@@ -1,8 +1,10 @@
 import { recipe } from '@vanilla-extract/recipes';
 
-export const listVariants = recipe({
+const listVariants = recipe({
   base: {
     display: 'flex',
     flexDirection: 'column',
   },
 });
+
+export { listVariants };
