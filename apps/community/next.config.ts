@@ -6,7 +6,21 @@ const withVanillaExtract = createVanillaExtractPlugin({
 });
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [{ protocol: 'https', hostname: 'picsum.photos' }],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.kyonggi.ac.kr',
+      },
+      {
+        protocol: 'https',
+        hostname: 'kutis.kyonggi.ac.kr',
+        pathname: '/webkutis/TransferImageStreamHJ.do',
+      },
+    ],
   },
   experimental: {
     reactCompiler: true,
