@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 
 export const button = style({
   padding: '0.8rem',
-  borderRadius: 8,
+  borderRadius: themeVars.borderRadius.md,
   backgroundColor: themeVars.color.black,
   color: themeVars.color.white,
 

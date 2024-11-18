@@ -5,7 +5,7 @@ export const input = style({
   padding: '0.7rem',
   border: `1px solid ${themeVars.color.gray200}`,
 
-  borderRadius: 8,
+  borderRadius: themeVars.borderRadius.lg,
   boxShadow: '0 1px 1px rgba(0, 0, 0, 0.05)',
 
   '::placeholder': {
