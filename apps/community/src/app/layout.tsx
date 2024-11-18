@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import '~/styles/normalize.css';
+import { ThemeProvider } from '@aics-client/design-system';
 import { pretendardVariable } from '~/app/fonts/pretendard-variable';
 import * as styles from '~/app/layout.css';
 import { SiteFooter } from '~/components/site-footer';
@@ -19,11 +19,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendardVariable.className}>
-        <div className={styles.root}>
+        <ThemeProvider className={styles.root}>
           <SiteHeader />
           <main className={styles.main}>{children}</main>
           <SiteFooter />
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

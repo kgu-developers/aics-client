@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { sprinkles } from '@aics-client/design-system/styles';
 import { List } from '~/app/about/components/list';
 import { Section } from '~/app/about/components/section';
 import { getDepts } from '~/app/about/dept/remotes';
@@ -20,7 +21,7 @@ export default async function Dept() {
         {data.map((dept) => (
           <Fragment key={`dept-${dept.name}`}>
             <Section.Title>{dept.name}</Section.Title>
-            <p style={{ marginBottom: 0 }}>{dept.description}</p>
+            <p className={sprinkles({ marginBottom: 'none' })}>{dept.description}</p>
             <List title="교육 목표">
               {dept.educationGoals.map((goal) => (
                 <List.Row key={`dept-goal-${goal}`}>{goal}</List.Row>
