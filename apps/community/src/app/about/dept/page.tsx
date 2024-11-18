@@ -1,3 +1,4 @@
+import { sprinkles } from '@aics-client/design-system/styles';
 import { List } from '~/app/about/components/list';
 import { Section } from '~/app/about/components/section';
 import { PageHeader } from '~/components/page-header';
@@ -11,7 +12,7 @@ export default function Dept() {
       />
       <Section>
         <Section.Title>컴퓨터공학전공</Section.Title>
-        <p style={{ marginBottom: 0 }}>
+        <p className={sprinkles({ marginBottom: 'none' })}>
           컴퓨터공학전공에서는 수학적 기초와 논리적 사고를 바탕으로 한 전문
           소프트웨어 프로그래머 양성을 목표로 합니다. 특히 논리적 사고의 훈련과
           실습을 위해 프로그래밍 과목을 2, 3학년 과정에서 집중적으로 교육하고,

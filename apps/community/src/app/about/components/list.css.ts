@@ -1,3 +1,4 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 const list = style({
@@ -10,11 +11,12 @@ globalStyle(`${list} > * + *`, {
   marginTop: '0.5rem',
 });
 
-const listTitle = style({
-  fontWeight: 600,
-  fontSize: '1.25rem',
-  lineHeight: '1.75rem',
-  marginBottom: 0,
-});
+const listTitle = style([
+  themeVars.textSize.xl,
+  {
+    fontWeight: themeVars.fontWeight.bold,
+    marginBottom: 0,
+  },
+]);
 
 export { list, listTitle };

@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  transpilePackages: [
+    '@aics-client/design-system',
+    '@aics-client/design-system/styles',
+  ],
   experimental: {
     reactCompiler: true,
   },
