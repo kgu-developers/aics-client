@@ -1,9 +1,14 @@
+import { LabCard } from '~/app/lab/components/lab-card';
 import * as styles from '~/app/lab/page.css';
-import { LabCard } from '~/components/lab-card';
+import { getLabs } from '~/app/lab/remotes';
 import { PageHeader } from '~/components/page-header';
-import { LABS } from '~/mocks/labs';
 
-export default function LabPage() {
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
+export default async function LabPage() {
+  const { data } = await getLabs();
+
   return (
     <>
       <PageHeader
@@ -11,7 +16,7 @@ export default function LabPage() {
         description="경기대학교 AI컴퓨터공학부의 다양한 연구실을 소개해요."
       />
       <section className={styles.cardContainer}>
-        {LABS.map((lab) => (
+        {data.map((lab) => (
           <LabCard key={`lab-${lab.id}`} lab={lab} />
         ))}
       </section>
