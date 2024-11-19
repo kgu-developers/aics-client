@@ -1,13 +1,4 @@
-interface Professor {
-  id: number;
-  name: string;
-  img?: string;
-  type: string;
-  contact: string;
-  email: string;
-}
-
-const PROFESSORS: Professor[] = [
+const professors = [
   {
     id: 1,
     name: '권기현',
@@ -160,6 +151,6 @@ const PROFESSORS: Professor[] = [
     contact: '031-249-1306',
     email: 'ksna001@kyonggi.ac.kr',
   },
-] as const;
+];
 
-export { type Professor, PROFESSORS };
+export { professors };

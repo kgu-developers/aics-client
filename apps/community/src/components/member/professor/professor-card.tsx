@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import * as styles from '~/components/professor-card.css';
+import * as styles from '~/components/member/professor/professor-card.css';
 
 import type { Professor } from '~/app/member/professor/mocks/professor';
 
