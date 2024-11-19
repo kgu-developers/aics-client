@@ -1,17 +1,18 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 export const card = style({
-  width: '100%',
-  backgroundColor: '#fff',
+  width: themeVars.width.full,
+  backgroundColor: themeVars.color.white,
   border: '1px solid',
-  borderColor: '#e5e7eb',
-  borderRadius: '0.75rem',
+  borderColor: themeVars.color.gray200,
+  borderRadius: themeVars.borderRadius.xl,
   boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
   alignItems: 'center',
   textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.5rem',
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
+  gap: themeVars.spacing.lg,
   paddingTop: '0.75rem',
 });
 
@@ -19,7 +20,7 @@ export const avatarImage = style({
   marginTop: '0.375rem',
   width: '8rem',
   height: '8rem',
-  borderRadius: 9999,
+  borderRadius: themeVars.borderRadius.full,
   objectFit: 'cover',
 });
 
@@ -27,47 +28,47 @@ export const fallbackImage = style({
   marginTop: '0.375rem',
   width: '8rem',
   height: '8rem',
-  borderRadius: 9999,
-  backgroundColor: '#e5e7eb',
-  display: 'flex',
+  borderRadius: themeVars.borderRadius.full,
+  backgroundColor: themeVars.color.gray500,
+  display: themeVars.display.flex,
   justifyContent: 'center',
   alignItems: 'center',
   textAlign: 'center',
-  fontSize: '1rem',
-  color: '#000',
+  fontSize: themeVars.fontSize.md,
+  color: themeVars.color.black,
 });
 
 export const cardContent = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.25rem',
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
+  gap: themeVars.spacing.xs,
 });
 
 export const professorName = style({
-  fontWeight: 600,
+  fontWeight: themeVars.fontWeight.semibold,
   letterSpacing: '-0.025em',
-  margin: 0,
+  margin: themeVars.margin.none,
 });
 
 export const professorType = style({
-  margin: 0,
-  fontSize: '0.875rem',
+  margin: themeVars.margin.none,
+  fontSize: themeVars.fontSize.sm,
   fontWeight: 400,
-  lineHeight: '1.25rem',
-  color: '#6b7280',
+  lineHeight: themeVars.lineHeight.sm,
+  color: themeVars.color.gray600,
 });
 
 export const cardFooter = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.5rem',
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
+  gap: themeVars.spacing.sm,
   paddingBottom: '1rem',
 });
 
 export const professorContact = style({
-  margin: 0,
+  margin: themeVars.margin.none,
 });
 
 export const professorEmail = style({
-  margin: 0,
+  margin: themeVars.margin.none,
 });

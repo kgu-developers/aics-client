@@ -2,7 +2,7 @@ import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 export const professorListWrapper = style({
-  display: themeVars.display.grid,
+  display: 'grid',
   gap: themeVars.spacing.md,
   gridTemplateColumns: '1fr',
   marginTop: themeVars.spacing.xl,
