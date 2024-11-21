@@ -1,4 +1,4 @@
-export const opacity = {
+const opacity = {
   '0': '0',
   '5': '0.05',
   '10': '0.1',
@@ -21,3 +21,5 @@ export const opacity = {
   '95': '0.95',
   '100': '1',
 } as const;
+
+export default opacity;

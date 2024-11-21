@@ -1,4 +1,4 @@
-export const typography = {
+const typography = {
   fontSize: {
     xs: '0.75rem',
     sm: '0.875rem',
@@ -16,11 +16,16 @@ export const typography = {
     '2xl': '2rem',
   },
   fontWeight: {
+    /** 400 */
     regular: '400',
+    /** 500 */
     medium: '500',
+    /** 600 */
     semibold: '600',
+    /** 700 */
     bold: '700',
   },
+  // -- preset
   textSize: {
     xs: {
       fontSize: '0.75rem',
@@ -46,5 +51,11 @@ export const typography = {
       fontSize: '1.5rem',
       lineHeight: '2rem',
     },
+    '3xl': {
+      fontSize: '1.875rem' /* 30px */,
+      lineHeight: '2.25rem' /* 36px */,
+    },
   },
 } as const;
+
+export default typography;
