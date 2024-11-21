@@ -1,20 +1,23 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
-const pageHeaderWrapper = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem',
-});
+const pageHeaderWrapper = style([
+  themeVars.flexColumn,
+  {
+    gap: '0.75rem',
+    marginBottom: '3rem',
+  },
+]);
 
-const title = style({
-  margin: 0,
-  fontSize: '2rem',
-  fontWeight: 700,
-  color: '#333D4B',
-});
+const title = style([
+  themeVars.textSize['3xl'],
+  {
+    fontWeight: themeVars.fontWeight.bold,
+    color: '#333D4B',
+  },
+]);
 
 const description = style({
-  margin: 0,
   color: '#4E5968',
 });
 
