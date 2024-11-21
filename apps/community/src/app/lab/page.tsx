@@ -1,4 +1,4 @@
-import { LabCard } from '~/app/lab/components/lab-card';
+import { LabCard } from '~/components/lab/lab-card';
 import * as styles from '~/app/lab/page.css';
 import { getLabs } from '~/app/lab/remotes';
 import { PageHeader } from '~/components/page-header';
