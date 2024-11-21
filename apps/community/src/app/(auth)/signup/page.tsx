@@ -1,18 +1,16 @@
-import { AuthFooter } from '~/components/auth-footer';
-import { AuthHeader } from '~/components/auth-header';
-import { SignUpForm } from '~/components/sign-up-form';
-import * as styles from './page.css';
+import AuthLayout from '~/app/(auth)/layout';
+import { SignUpForm } from '~/components/(auth)/signup/sign-up-form';
 
-export default function SingUpPage() {
+export default function SignUpPage() {
   return (
-    <section className={styles.section}>
-      <AuthHeader title="회원가입" description="경기대학교 AI컴퓨터공학부" />
+    <AuthLayout
+      title="회원가입"
+      description="경기대학교 AI컴퓨터공학부"
+      footerDescription="이미 계정이 있으신가요?"
+      footerLink="로그인"
+      footerHref="/signin"
+    >
       <SignUpForm />
-      <AuthFooter
-        description="이미 계정이 있으신가요?"
-        link="로그인"
-        href="/signin"
-      />
-    </section>
+    </AuthLayout>
   );
 }

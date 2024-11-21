@@ -1,18 +1,16 @@
-import { AuthFooter } from '~/components/auth-footer';
-import { AuthHeader } from '~/components/auth-header';
-import { SignInForm } from '~/components/sign-in-form';
-import * as styles from './page.css';
+import AuthLayout from '~/app/(auth)/layout';
+import { SignInForm } from '~/components/(auth)/signin/sign-in-form';
 
 export default function SignInPage() {
   return (
-    <section className={styles.section}>
-      <AuthHeader title="로그인" description="경기대학교 AI컴퓨터공학부" />
+    <AuthLayout
+      title="로그인"
+      description="경기대학교 AI컴퓨터공학부"
+      footerDescription="계정이 없으신가요?"
+      footerLink="회원가입"
+      footerHref="/signup"
+    >
       <SignInForm />
-      <AuthFooter
-        description="계정이 없으신가요?"
-        link="회원가입"
-        href="/signup"
-      />
-    </section>
+    </AuthLayout>
   );
 }
