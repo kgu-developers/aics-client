@@ -5,6 +5,6 @@ export const section = style({
   display: themeVars.display.grid,
   gap: themeVars.spacing.lg,
   margin: '0 auto',
-  padding: '1rem',
+  padding: themeVars.spacing.md,
   width: '25rem',
 });

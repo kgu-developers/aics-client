@@ -2,7 +2,7 @@ import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 export const button = style({
-  padding: '0.8rem',
+  padding: themeVars.spacing.md,
   borderRadius: themeVars.borderRadius.md,
   backgroundColor: themeVars.color.black,
   color: themeVars.color.white,

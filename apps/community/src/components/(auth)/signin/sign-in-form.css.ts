@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 
 const formWrapper = style({
   display: themeVars.display.grid,
-  gap: '1rem',
+  gap: themeVars.spacing.md,
 });
 
 const errorMessage = style({

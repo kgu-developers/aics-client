@@ -5,8 +5,8 @@ const footerWrapper = style({
   display: themeVars.display.flex,
   justifyContent: 'center',
   alignItems: 'center',
-  gap: '0.5rem',
-  marginTop: '0.5rem',
+  gap: themeVars.spacing.sm,
+  marginTop: themeVars.spacing.sm,
 });
 
 const link = style({
