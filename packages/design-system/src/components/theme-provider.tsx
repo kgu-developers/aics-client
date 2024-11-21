@@ -1,5 +1,5 @@
-import '../styles/preflight.css';
-import '../styles/modern-normalize.css';
+import '../styles/reset/preflight.css';
+import '../styles/reset/modern-normalize.css';
 import { themeClass } from '../styles';
 
 export default function ThemeProvider({

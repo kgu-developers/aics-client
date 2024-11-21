@@ -1,27 +1,24 @@
 import { createTheme } from '@vanilla-extract/css';
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
-import { border } from './border.css';
-import { color } from './color.css';
-import { container } from './container.css';
-import { display } from './display.css';
-import { flex } from './flex.css';
-import { margin } from './margin.css';
-import { opacity } from './opacity.css';
-import { spacing } from './spacing.css';
-import { typography } from './typography.css';
-import { minWidth, width } from './width.css';
+import border from './tokens/border';
+import color from './tokens/color';
+import container from './tokens/container';
+import display from './tokens/display';
+import margin from './tokens/margin';
+import opacity from './tokens/opacity';
+import spacing from './tokens/spacing';
+import typography from './tokens/typography';
+import width from './tokens/width';
 
 const tokens = {
   ...typography,
-  ...flex,
   ...border,
   ...margin,
+  ...display,
+  ...width,
   color: color,
   opacity: opacity,
-  width: width,
-  minWidth: minWidth,
-  display: display,
-  // is not css property
+  // presets
   container: container,
   spacing: spacing,
 };
