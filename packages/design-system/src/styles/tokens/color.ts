@@ -88,4 +88,4 @@ const color = {
   green900: '#005c36',
 } as const;
 
-export { color };
+export default color;

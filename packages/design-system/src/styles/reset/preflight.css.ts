@@ -1,5 +1,7 @@
 import { globalStyle } from '@vanilla-extract/css';
 
+/*! tailwindcss preflight v3.4.15 | MIT License | https://unpkg.com/tailwindcss@3.4.15/src/css/preflight.css */
+
 /*
 1. Prevent padding and border from affecting element width.
 2. Allow adding a border to an element by just adding a border-width.
@@ -64,6 +66,14 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 globalStyle('abbr:where([title])', {
   textDecoration: 'underline dotted',
+});
+
+/*
+Default margins are removed
+Preflight removes all of the default margins from elements like headings, blockquotes, paragraphs, etc.
+ */
+globalStyle('blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre', {
+  margin: 0,
 });
 
 /*
