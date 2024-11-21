@@ -35,27 +35,27 @@ async function request<Response>({
 }
 
 const http = {
-  get: async <Response = unknown>(
+  get: <Response = unknown>(
     url: string,
     options?: RequestInit,
   ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'GET', url, options });
   },
-  post: async <Request, Response = unknown>(
+  post: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'POST', url, options, data });
   },
-  put: async <Request = unknown, Response = unknown>(
+  put: <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<BaseResponse<Response>> => {
     return request<Response>({ method: 'PUT', url, options, data });
   },
-  delete: async <Response = unknown>(
+  delete: <Response = unknown>(
     url: string,
     options?: RequestInit,
   ): Promise<BaseResponse<Response>> => {
