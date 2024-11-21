@@ -1,4 +1,4 @@
-export const border = {
+const border = {
   borderRadius: {
     sm: '0.25rem',
     md: '0.375rem',
@@ -6,3 +6,5 @@ export const border = {
     xl: '0.75rem',
   },
 } as const;
+
+export default border;

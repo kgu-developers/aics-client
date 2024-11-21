@@ -4,4 +4,4 @@ const margin = {
   },
 };
 
-export { margin };
+export default margin;
