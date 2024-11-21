@@ -3,13 +3,13 @@ import { style } from '@vanilla-extract/css';
 
 const formWrapper = style({
   display: themeVars.display.grid,
-  gap: '0.7rem',
+  gap: themeVars.spacing.md,
 });
 
 const formField = style({
   display: themeVars.display.flex,
   flexDirection: 'column',
-  gap: '0.3rem',
+  gap: themeVars.spacing.xs,
 });
 
 const errorMessage = style({

@@ -1,12 +1,12 @@
 'use client';
 
+import { Input } from '@aics-client/design-system';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { AuthButton } from '~/components/auth-button';
-import { AuthInput } from '~/components/auth-input';
-import * as styles from '~/components/sign-up-form.css';
+import { AuthButton } from '~/components/(auth)/auth-button';
+import * as styles from '~/components/(auth)/signup/sign-up-form.css';
 import { defaultValues, signUpFormSchema } from '~/schemas/sign-up-form-schema';
 
 function SignUpForm() {
@@ -42,82 +42,65 @@ function SignUpForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
       <div className={styles.formField}>
-        <label htmlFor="studentId">학번</label>
-        <AuthInput
+        <Input
           {...register('studentId')}
           id="studentId"
           type="text"
+          label="학번"
           placeholder="학번을 입력해주세요"
+          message={errors.studentId?.message}
         />
-        {errors.studentId && (
-          <span className={styles.errorMessage}>
-            {errors.studentId.message}
-          </span>
-        )}
       </div>
 
       <div className={styles.formField}>
-        <label htmlFor="password">비밀번호</label>
-        <AuthInput
+        <Input
           {...register('password')}
           id="password"
           type="password"
+          label="비밀번호"
           placeholder="영문자, 숫자, 특수문자 포함 8~15자"
+          message={errors.password?.message}
         />
-        {errors.password && (
-          <span className={styles.errorMessage}>{errors.password.message}</span>
-        )}
-
-        <AuthInput
+        <Input
           {...register('confirm_password')}
           id="confirm_password"
           type="password"
           placeholder="비밀번호를 확인해 주세요"
+          message={errors.confirm_password?.message}
         />
-        {errors.confirm_password && (
-          <span className={styles.errorMessage}>
-            {errors.confirm_password.message}
-          </span>
-        )}
       </div>
 
       <div className={styles.formField}>
-        <label htmlFor="name">이름</label>
-        <AuthInput
+        <Input
           {...register('name')}
           id="name"
           type="text"
+          label="이름"
           placeholder="이름을 입력해주세요"
+          message={errors.name?.message}
         />
-        {errors.name && (
-          <span className={styles.errorMessage}>{errors.name.message}</span>
-        )}
       </div>
 
       <div className={styles.formField}>
-        <label htmlFor="email">이메일</label>
-        <AuthInput
+        <Input
           {...register('email')}
           id="email"
           type="text"
+          label="이메일"
           placeholder="이메일을 입력해주세요"
+          message={errors.email?.message}
         />
-        {errors.email && (
-          <span className={styles.errorMessage}>{errors.email.message}</span>
-        )}
       </div>
 
       <div className={styles.formField}>
-        <label htmlFor="phone">연락처</label>
-        <AuthInput
+        <Input
           {...register('phone')}
           id="phone"
           type="text"
+          label="연락처"
           placeholder="연락처를 입력해주세요"
+          message={errors.phone?.message}
         />
-        {errors.phone && (
-          <span className={styles.errorMessage}>{errors.phone.message}</span>
-        )}
       </div>
 
       <AuthButton type="submit" disabled={!isFormValid}>

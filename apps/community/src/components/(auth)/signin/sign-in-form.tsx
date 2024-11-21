@@ -1,20 +1,19 @@
 'use client';
 
+import { Input } from '@aics-client/design-system';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { AuthButton } from '~/components/auth-button';
-import { AuthInput } from '~/components/auth-input';
-import * as styles from '~/components/sign-in-form.css';
+import { AuthButton } from '~/components/(auth)/auth-button';
+import * as styles from '~/components/(auth)/signin/sign-in-form.css';
 import { defaultValues, signInFormSchema } from '~/schemas/sign-in-form-schema';
 
 function SignInForm() {
   const {
     register,
     handleSubmit,
-    control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues,
@@ -24,31 +23,21 @@ function SignInForm() {
     console.log(data);
   };
 
-  const [studentId, password] = useWatch({
-    control,
-    name: ['studentId', 'password'],
-  });
-  const isFormValid = studentId && password;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
-      <AuthInput
+      <Input
         {...register('studentId')}
         type="text"
         placeholder="학번을 입력해주세요"
+        message={errors.studentId?.message}
       />
-      {errors.studentId && (
-        <span className={styles.errorMessage}>{errors.studentId.message}</span>
-      )}
-      <AuthInput
+      <Input
         {...register('password')}
         type="password"
         placeholder="비밀번호를 입력해주세요"
+        message={errors.password?.message}
       />
-      {errors.password && (
-        <span className={styles.errorMessage}>{errors.password.message}</span>
-      )}
-      <AuthButton type="submit" disabled={!isFormValid}>
+      <AuthButton type="submit" disabled={!isValid}>
         로그인
       </AuthButton>
     </form>
