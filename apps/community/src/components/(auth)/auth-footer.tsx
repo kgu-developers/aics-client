@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import * as styles from './auth-footer.css';
+import * as styles from '~/components/(auth)/auth-footer.css';
 
 interface Props {
   description: string;

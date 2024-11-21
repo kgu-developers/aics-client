@@ -9,6 +9,7 @@ const title = style([
   themeVars.textSize['2xl'],
   {
     fontWeight: themeVars.fontWeight.bold,
+    marginBottom: themeVars.spacing.sm,
   },
 ]);
 
