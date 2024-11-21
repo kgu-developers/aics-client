@@ -8,4 +8,4 @@ const container = {
   maxWidth: '1240px',
 } as const;
 
-export { container };
+export default container;
