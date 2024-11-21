@@ -16,7 +16,7 @@ globalStyle('::before, ::after', {
   borderWidth: '0' /*2 */,
   borderStyle: 'solid' /*2 */,
   borderColor: 'currentColor' /*2 */,
-  content: '""',
+  // content: '""',
 });
 
 /*
