@@ -4,7 +4,6 @@ import * as styles from './input.css';
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   message?: string;
-  className?: string;
 }
 
 export default function Input({ label, message, className, ...props }: Props) {
