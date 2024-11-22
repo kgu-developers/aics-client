@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
 import { sprinkles } from '@aics-client/design-system/styles';
+import { Fragment } from 'react';
+import { getDepts } from '~/app/about/dept/remotes';
 import { List } from '~/components/about/list';
 import { Section } from '~/components/about/section';
-import { getDepts } from '~/app/about/dept/remotes';
 import { PageHeader } from '~/components/page-header';
 
-//** TODO: for mocking */
+// TODO: for mocking but will be replaced with a proper solution later
 export const dynamic = 'force-dynamic';
 
 export default async function Dept() {
@@ -21,7 +21,9 @@ export default async function Dept() {
         {data.map((dept) => (
           <Fragment key={`dept-${dept.name}`}>
             <Section.Title>{dept.name}</Section.Title>
-            <p className={sprinkles({ marginBottom: 'none' })}>{dept.description}</p>
+            <p className={sprinkles({ marginBottom: 'none' })}>
+              {dept.description}
+            </p>
             <List title="교육 목표">
               {dept.educationGoals.map((goal) => (
                 <List.Row key={`dept-goal-${goal}`}>{goal}</List.Row>
