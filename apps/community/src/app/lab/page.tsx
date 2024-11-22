@@ -1,6 +1,6 @@
-import { LabCard } from '~/components/lab/lab-card';
 import * as styles from '~/app/lab/page.css';
 import { getLabs } from '~/app/lab/remotes';
+import { LabCard } from '~/components/lab/lab-card';
 import { PageHeader } from '~/components/page-header';
 
 //** TODO: for mocking */

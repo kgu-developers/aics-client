@@ -1,8 +1,8 @@
 import { sprinkles } from '@aics-client/design-system/styles';
 import { Fragment } from 'react';
+import { getDepts } from '~/app/about/dept/remotes';
 import { List } from '~/components/about/list';
 import { Section } from '~/components/about/section';
-import { getDepts } from '~/app/about/dept/remotes';
 import { PageHeader } from '~/components/page-header';
 
 // TODO: for mocking but will be replaced with a proper solution later
