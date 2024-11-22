@@ -20,7 +20,7 @@ function ClubCard({ image, name, description, link }: Props) {
         alt={`${name} 동아리 사진`}
       />
       <div className={style.cardBodyWrapper}>
-        <h3 className={style.cardTitle}>{name}</h3>
+        <h2 className={style.cardTitle}>{name}</h2>
         <p>{description}</p>
         {link && (
           <p className={style.cardLinkWrapper}>
