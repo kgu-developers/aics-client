@@ -1,5 +1,5 @@
+import { List } from '~/components/about/list';
 import { PageHeader } from '~/components/page-header';
-import { List } from '../components/list';
 import { getContacts } from './remotes';
 
 // TODO: for mocking but will be replaced with a proper solution later
