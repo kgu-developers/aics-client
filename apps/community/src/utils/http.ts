@@ -1,0 +1,66 @@
+import type { BaseResponse } from '~/types/api';
+
+interface RequestParams {
+  method: string;
+  url: string;
+  options?: RequestInit;
+  data?: unknown;
+}
+
+async function request<Response>({
+  method,
+  url,
+  options = {},
+  data,
+}: RequestParams): Promise<BaseResponse<Response>> {
+  const config: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+    },
+    ...options,
+  };
+
+  if (data) {
+    config.body = JSON.stringify(data);
+  }
+
+  const res = await fetch(url, config);
+  if (!res.ok) {
+    throw new Error(`Status: ${res.status}`);
+  }
+  const responseData = await res.json();
+  return responseData as BaseResponse<Response>;
+}
+
+const http = {
+  get: <Response = unknown>(
+    url: string,
+    options?: RequestInit,
+  ): Promise<BaseResponse<Response>> => {
+    return request<Response>({ method: 'GET', url, options });
+  },
+  post: <Request, Response = unknown>(
+    url: string,
+    data?: Request,
+    options?: RequestInit,
+  ): Promise<BaseResponse<Response>> => {
+    return request<Response>({ method: 'POST', url, options, data });
+  },
+  put: <Request = unknown, Response = unknown>(
+    url: string,
+    data?: Request,
+    options?: RequestInit,
+  ): Promise<BaseResponse<Response>> => {
+    return request<Response>({ method: 'PUT', url, options, data });
+  },
+  delete: <Response = unknown>(
+    url: string,
+    options?: RequestInit,
+  ): Promise<BaseResponse<Response>> => {
+    return request<Response>({ method: 'DELETE', url, options });
+  },
+};
+
+export { http };

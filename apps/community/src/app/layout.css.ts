@@ -1,5 +1,5 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { globalStyle, style } from '@vanilla-extract/css';
-import { container } from '~/styles/utility.css';
 
 globalStyle('html, body', {
   WebkitFontSmoothing: 'antialiased',
@@ -7,12 +7,12 @@ globalStyle('html, body', {
 });
 
 const root = style([
-  container,
+  themeVars.container,
   {
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100dvh',
+    display: themeVars.display.flex,
+    flexDirection: themeVars.flexDirection.column,
+    minHeight: themeVars.minWidth.dvh,
   },
 ]);
 
