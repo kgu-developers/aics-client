@@ -61,6 +61,7 @@ export default function BoardPage() {
       ...prev,
       activeValue: prev.inputValue,
     }));
+    setCurrentPage(0);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -69,6 +70,7 @@ export default function BoardPage() {
         ...prev,
         activeValue: prev.inputValue,
       }));
+      setCurrentPage(0);
     }
   };
 
