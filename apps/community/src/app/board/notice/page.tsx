@@ -37,6 +37,7 @@ export default function BoardPage() {
       const { contents, pagable } = response.data;
 
       if (contents) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setBoards(contents);
         setTotalElements(pagable.totalElements);
       }
