@@ -20,6 +20,11 @@ const row = style({
   borderBottom: '1px solid',
   borderColor: themeVars.color.gray300,
   textOverflow: 'ellipsis',
+  selectors: {
+    '&:hover': {
+      backgroundColor: themeVars.color.gray100,
+    },
+  },
   '@media': {
     'screen and (max-width: 1280px)': {
       maxHeight: '2rem',
