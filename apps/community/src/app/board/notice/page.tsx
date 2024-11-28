@@ -82,7 +82,6 @@ export default function BoardPage() {
       />
 
       <section className={styles.boardWrapper}>
-        {/* 검색 입력 필드 */}
         <SearchBar
           value={searchValue.inputValue}
           onChange={handleSearchChange}
@@ -90,7 +89,6 @@ export default function BoardPage() {
           onKeyUp={handleKeyPress}
         />
 
-        {/* 게시판 목록 또는 공지사항 없음 메시지 */}
         {boards.length > 0 ? (
           <BoardList>
             {boards.map((board) => (

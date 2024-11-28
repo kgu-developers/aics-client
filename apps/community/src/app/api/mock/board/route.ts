@@ -3,13 +3,12 @@ import { board } from './data';
 
 export function GET(request: Request) {
   const url = new URL(request.url);
-  const page = Number(url.searchParams.get('page')) || 0; // 기본값 0
-  const size = Number(url.searchParams.get('size')) || 10; // 기본값 10
+  const page = Number(url.searchParams.get('page')) || 0;
+  const size = Number(url.searchParams.get('size')) || 10;
   const keyword = url.searchParams.get('keyword') || '';
   const category =
     url.searchParams.get('category')?.toLowerCase().replace(/\s+/g, '') || '';
 
-  // 필터링 로직
   const filteredBoards = board.filter((board) => {
     const matchesKeyword = board.title
       .toLowerCase()
