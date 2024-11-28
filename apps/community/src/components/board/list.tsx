@@ -18,7 +18,7 @@ function Row({ board }: { board: Board }) {
       <li className={styles.row}>
         <div className={styles.pin}>
           {board.isPinned ? (
-            <Pin fill="black" size={20} />
+            <Pin fill="black" size={'1.25rem'} />
           ) : (
             <span>{board.postId}</span>
           )}
