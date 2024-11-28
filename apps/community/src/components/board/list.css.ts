@@ -52,6 +52,7 @@ const rowTitle = style({
   '@media': {
     'screen and (max-width: 640px)': {
       width: '90%',
+      justifyContent: themeVars.justifyContent.center,
     },
   },
 });
