@@ -14,7 +14,7 @@ import * as styles from '~/app/board/notice/page.css';
 
 export const dynamic = 'force-dynamic';
 
-const SIZE = 5; // 페이지 당 데이터 수
+const SIZE = 10; // 페이지 당 데이터 수
 const INITIAL_PAGE = 0; // 초기 페이지
 
 export default function BoardPage() {
