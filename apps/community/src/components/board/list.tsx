@@ -17,7 +17,11 @@ function Row({ board }: { board: Board }) {
     <Link href={`board/notice/${board.postId}`}>
       <li className={styles.row}>
         <div className={styles.pin}>
-          {board.isPinned ? <Pin fill="black" /> : <span>{board.postId}</span>}
+          {board.isPinned ? (
+            <Pin fill="black" size={20} />
+          ) : (
+            <span>{board.postId}</span>
+          )}
         </div>
 
         <div className={styles.rowTitle}>
