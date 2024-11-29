@@ -36,7 +36,11 @@ export default async function BoardPage(props: {
 
         <BoardList data={data.contents} />
 
-        <Pagination totalPage={data.pagable.totalPage} pageCount={5} />
+        <Pagination
+          totalPage={data.pagable.totalPage}
+          pageCount={5}
+          currentPage={currentPage}
+        />
       </section>
     </section>
   );

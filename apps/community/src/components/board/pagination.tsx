@@ -10,18 +10,17 @@ import * as styles from '~/components/board/pagination.css';
 interface Props {
   totalPage: number; // 총 페이지 수
   pageCount: number; // 보여줄 페이지 장 수
+  currentPage: number; // 현재 페이지
 }
 
-function Pagination({ totalPage, pageCount }: Props) {
+function Pagination({ totalPage, pageCount, currentPage }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 0;
-  const totalPages = totalPage;
 
   const [start, setStart] = useState(1);
   const noPrev = start === 1;
-  const noNext = start + pageCount - 1 >= totalPages;
+  const noNext = start + pageCount - 1 >= totalPage;
 
   const handleMovePage = (pageNum: number) => {
     const params = new URLSearchParams(searchParams);
@@ -48,7 +47,7 @@ function Pagination({ totalPage, pageCount }: Props) {
 
       {[...Array(pageCount)].map((_, i) => (
         <Fragment key={`page-${start + i}`}>
-          {start + i <= totalPages && (
+          {start + i <= totalPage && (
             <button
               type="button"
               className={`${styles.pageButton} ${currentPage + 1 === start + i && styles.active}`}
