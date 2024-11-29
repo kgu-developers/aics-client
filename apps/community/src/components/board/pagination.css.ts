@@ -7,6 +7,7 @@ const controllerWrapper = style({
   alignItems: themeVars.alignItems.center,
   minWidth: '30%',
   gap: '0.75rem',
+  userSelect: 'none',
 });
 
 const buttonList = style({

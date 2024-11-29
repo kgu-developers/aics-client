@@ -1,29 +1,8 @@
-import { MOCK_END_POINT } from '~/constants/api';
 import { http } from '~/utils/http';
 
-interface Board {
-  postId: number;
-  title: string;
-  author: string;
-  views: number;
-  category: string;
-  hasAttachment: boolean;
-  isPinned: boolean;
-  createAt: string;
-}
+import { MOCK_END_POINT } from '~/constants/api';
 
-interface Pagable {
-  page: number;
-  size: number;
-  totalPage: number;
-  totalElements: number;
-  isEnd: boolean;
-}
-
-interface ResponseData {
-  contents: Board[];
-  pagable: Pagable;
-}
+import type { BoardResponse } from '~/types/board';
 
 function getBoards(
   page: number,
@@ -31,8 +10,15 @@ function getBoards(
   keyword: string,
   category: string,
 ) {
-  const url = `${MOCK_END_POINT.BOARD}?page=${page}&size=${size}&keyword=${encodeURIComponent(keyword)}&category=${encodeURIComponent(category)}`;
-  return http.get<ResponseData>(url);
+  const params = new URLSearchParams({
+    page: page.toString(),
+    size: size.toString(),
+    keyword: keyword,
+    category: category,
+  });
+
+  const url = `${MOCK_END_POINT.BOARD}?${params.toString()}`;
+  return http.get<BoardResponse>(url);
 }
 
-export { type Board, type Pagable, type ResponseData, getBoards };
+export { getBoards };

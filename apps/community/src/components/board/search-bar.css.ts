@@ -12,6 +12,7 @@ const searchBarWrapper = style({
 });
 
 const input = style({
+  width: themeVars.width.full,
   outline: 'transparent',
   marginRight: '1rem',
 });

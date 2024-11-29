@@ -1,4 +1,4 @@
-import { themeVars } from '@aics-client/design-system/styles';
+import { screen, themeVars } from '@aics-client/design-system/styles';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 const boardListWrapper = style({
@@ -11,9 +11,9 @@ const boardListWrapper = style({
 
 const row = style({
   display: themeVars.display.flex,
-  minWidth: themeVars.width.full,
-  minHeight: '4rem',
   alignItems: themeVars.alignItems.center,
+  minWidth: themeVars.width.full,
+  maxHeight: '4rem',
   gap: '1rem',
   paddingTop: '1rem',
   paddingBottom: '1rem',
@@ -25,11 +25,10 @@ const row = style({
       backgroundColor: themeVars.color.gray100,
     },
   },
-  '@media': {
-    'screen and (max-width: 1280px)': {
-      maxHeight: '2rem',
-    },
-  },
+
+  ...screen.xl({
+    minHeight: '3.5rem',
+  }),
 });
 
 globalStyle(`${row} > * + *`, {
@@ -44,36 +43,32 @@ const pin = style({
 
 const rowTitle = style({
   display: themeVars.display.flex,
-  justifyContent: themeVars.justifyContent.start,
+  justifyContent: themeVars.justifyContent.center,
   alignItems: themeVars.alignItems.center,
+  width: '90%',
   gap: '0.5rem',
-  width: '75%',
   fontWeight: themeVars.fontWeight.semibold,
-  '@media': {
-    'screen and (max-width: 640px)': {
-      width: '90%',
-      justifyContent: themeVars.justifyContent.center,
-    },
-  },
+
+  ...screen.md({
+    width: '60%',
+    justifyContent: themeVars.justifyContent.start,
+  }),
 });
 
 const information = style({
-  display: themeVars.display.flex,
-  justifyContent: themeVars.justifyContent.center,
-  alignItems: themeVars.alignItems.center,
-  width: '20%',
-  gap: '1.75rem',
-  fontSize: themeVars.fontSize.sm,
+  width: '0%',
+  visibility: 'hidden',
 
-  '@media': {
-    'screen and (max-width: 640px)': {
-      visibility: 'hidden',
-      width: '0%',
-    },
-    'screen and (max-width: 1280px)': {
-      fontSize: themeVars.fontSize.xs,
-    },
-  },
+  ...screen.md({
+    display: themeVars.display.flex,
+    justifyContent: themeVars.justifyContent.end,
+    alignItems: themeVars.alignItems.center,
+    width: '35%',
+    visibility: 'visible',
+    fontSize: themeVars.fontSize.xs,
+    gap: '0.75rem',
+    paddingRight: '1.5rem',
+  }),
 });
 
 const view = style({
@@ -84,12 +79,13 @@ const view = style({
 });
 
 const author = style({
-  '@media': {
-    'screen and (max-width: 1280px)': {
-      visibility: 'hidden',
-      width: '0%',
-    },
-  },
+  width: '0%',
+  visibility: 'hidden',
+
+  ...screen.xl({
+    visibility: 'visible',
+    width: 'auto',
+  }),
 });
 
 export { boardListWrapper, row, pin, rowTitle, information, view, author };

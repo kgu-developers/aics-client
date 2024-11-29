@@ -1,26 +1,48 @@
+'use client';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+
 import { Search } from '@aics-client/design-system/icons';
 
 import * as styles from '~/components/board/search-bar.css';
 
-interface Props {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onClick: () => void;
-}
+function SearchBar({ placeholder }: { placeholder: string }) {
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const { replace } = useRouter();
 
-function SearchBar({ value, onChange, onKeyUp, onClick }: Props) {
+  const [keyword, setKeyword] = useState('');
+
+  const handleSearch = (keyword: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', '0');
+
+    if (keyword) {
+      params.set('keyword', keyword);
+    } else {
+      params.delete('keyword');
+    }
+
+    replace(`${pathName}?${params.toString()}`);
+  };
+
+  const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSearch(keyword);
+  };
+
   return (
     <div className={styles.searchBarWrapper}>
       <input
         type="text"
-        value={value}
-        onChange={onChange}
-        onKeyUp={onKeyUp}
-        placeholder="검색어를 입력하세요"
+        defaultValue={searchParams.get('keyword')?.toString()}
+        onChange={(e) => setKeyword(e.target.value)}
+        onKeyUp={handlePressEnter}
+        placeholder={placeholder}
         className={styles.input}
       />
-      <button type="button" onClick={onClick}>
+
+      <button type="button" onClick={() => handleSearch(keyword)}>
         <Search />
       </button>
     </div>
