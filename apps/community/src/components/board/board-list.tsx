@@ -4,35 +4,22 @@ import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
 import type { Board } from '~/types/board';
 
-import { getBoards } from '~/app/board/notice/remote';
-
 import { Pagination } from './pagination';
 
 import * as styles from '~/components/board/board-list.css';
 
-interface Props {
-  currentPage: number;
-  size: number;
-  category: string;
-  keyword: string;
-}
-
-async function BoardList({ currentPage, size, category, keyword }: Props) {
-  const { data } = await getBoards(currentPage, size, keyword, category);
-
+async function BoardList({ data }: { data: Board[] }) {
   return (
     <>
-      {data.contents.length > 0 ? (
+      {data.length > 0 ? (
         <ul className={styles.boardListWrapper}>
-          {data.contents.map((row) => (
+          {data.map((row) => (
             <Row key={row.postId} data={row} />
           ))}
         </ul>
       ) : (
         <p>게시물이 존재하지 않습니다.</p>
       )}
-
-      <Pagination totalPage={data.pagable.totalPage} pageCount={5} />
     </>
   );
 }

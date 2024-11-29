@@ -4,6 +4,8 @@ import { BoardList } from '~/components/board/board-list';
 import { SearchBar } from '~/components/board/search-bar';
 
 import * as styles from '~/app/board/notice/page.css';
+import { Pagination } from '~/components/board/pagination';
+import { getBoards } from './remote';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +22,8 @@ export default async function BoardPage(props: {
   const category = '공지사항';
   const size = 10;
 
+  const { data } = await getBoards(currentPage, size, keyword, category);
+
   return (
     <section>
       <PageHeader
@@ -30,12 +34,9 @@ export default async function BoardPage(props: {
       <section className={styles.boardWrapper}>
         <SearchBar placeholder="검색어를 입력하세요" />
 
-        <BoardList
-          currentPage={currentPage}
-          size={size}
-          category={category}
-          keyword={keyword}
-        />
+        <BoardList data={data.contents} />
+
+        <Pagination totalPage={data.pagable.totalPage} pageCount={5} />
       </section>
     </section>
   );
