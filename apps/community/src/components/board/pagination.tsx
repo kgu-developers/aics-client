@@ -8,8 +8,8 @@ import { ChevronLeft, ChevronRight } from '@aics-client/design-system/icons';
 import * as styles from '~/components/board/pagination.css';
 
 interface Props {
-  totalPage: number; // 데이터의 총 개수
-  pageCount: number; // 보여줄 페이지 개수
+  totalPage: number; // 총 페이지 수
+  pageCount: number; // 보여줄 페이지 장 수
 }
 
 function Pagination({ totalPage, pageCount }: Props) {
