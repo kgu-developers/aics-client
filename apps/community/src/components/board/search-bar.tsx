@@ -37,7 +37,7 @@ function SearchBar({ placeholder }: { placeholder: string }) {
   return (
     <div className={styles.searchBarWrapper}>
       <Input
-        border={false}
+        variant="ghost"
         type="text"
         defaultValue={searchParams.get('keyword')?.toString()}
         onChange={(e) => setKeyword(e.target.value)}

@@ -34,18 +34,18 @@ export const input = recipe({
     },
   },
   variants: {
-    border: {
-      true: {
+    variant: {
+      primary: {
         border: `1px solid ${themeVars.color.gray200}`,
         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
       },
-      false: {
+      ghost: {
         border: 'none',
       },
     },
   },
   defaultVariants: {
-    border: true,
+    variant: 'primary',
   },
 });
 

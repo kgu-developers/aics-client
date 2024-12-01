@@ -4,13 +4,13 @@ import * as styles from './input.css';
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   message?: string;
-  border?: boolean;
+  variant?: 'primary' | 'ghost';
 }
 
 export default function Input({
   label,
   message,
-  border = true,
+  variant = 'primary',
   className,
   ...props
 }: Props) {
@@ -21,7 +21,7 @@ export default function Input({
           {label}
         </label>
       )}
-      <input className={styles.input({ border: border })} {...props} />
+      <input className={styles.input({ variant: variant })} {...props} />
       {message && <span className={styles.message()}>{message}</span>}
     </div>
   );
