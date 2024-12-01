@@ -1,4 +1,3 @@
-import type { Boards } from '~/types/board';
 import { board } from './data';
 
 export function GET(request: Request) {
