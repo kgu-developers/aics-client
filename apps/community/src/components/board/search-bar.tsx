@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
+import { Input } from '@aics-client/design-system';
 import { Search } from '@aics-client/design-system/icons';
 
 import * as styles from '~/components/board/search-bar.css';
@@ -33,7 +34,8 @@ function SearchBar({ placeholder }: { placeholder: string }) {
 
   return (
     <div className={styles.searchBarWrapper}>
-      <input
+      <Input
+        border={false}
         type="text"
         defaultValue={searchParams.get('keyword')?.toString()}
         onChange={(e) => setKeyword(e.target.value)}
@@ -41,7 +43,11 @@ function SearchBar({ placeholder }: { placeholder: string }) {
         placeholder={placeholder}
         className={styles.input}
       />
-      <button type="button" onClick={() => handleSearch(keyword)}>
+      <button
+        type="button"
+        onClick={() => handleSearch(keyword)}
+        className={styles.button}
+      >
         <Search />
       </button>
     </div>
