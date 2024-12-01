@@ -29,7 +29,9 @@ function SearchBar({ placeholder }: { placeholder: string }) {
   };
 
   const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleSearch(keyword);
+    if (e.key === 'Enter') {
+      handleSearch(keyword);
+    }
   };
 
   return (
