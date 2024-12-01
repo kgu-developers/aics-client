@@ -6,6 +6,7 @@ import container from './tokens/container';
 import display from './tokens/display';
 import margin from './tokens/margin';
 import opacity from './tokens/opacity';
+import size from './tokens/size';
 import spacing from './tokens/spacing';
 import typography from './tokens/typography';
 import width from './tokens/width';
@@ -21,6 +22,7 @@ const tokens = {
   // presets
   container: container,
   spacing: spacing,
+  size: size,
 };
 
 const properties = defineProperties({

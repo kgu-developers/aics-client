@@ -2,13 +2,11 @@ import Link from 'next/link';
 
 import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
+import { MOCK_END_POINT } from '~/constants/api';
+
 import type { Board } from '~/types/board';
 
-import { Pagination } from './pagination';
-
-import { themeVars } from '@aics-client/design-system/styles';
 import * as styles from '~/components/board/board-list.css';
-import { MOCK_END_POINT } from '~/constants/api';
 
 async function BoardList({ data }: { data: Board[] }) {
   return (
