@@ -19,10 +19,8 @@ export default async function BoardPage(props: {
   const searchParams = await props.searchParams;
   const currentPage = Number(searchParams?.page) || 0;
   const keyword = searchParams?.keyword || '';
-  const category = '공지사항';
-  const size = 10;
 
-  const { data } = await getBoards(currentPage, size, keyword, category);
+  const { data } = await getBoards(currentPage, 10, keyword, '공지사항');
 
   return (
     <section>
