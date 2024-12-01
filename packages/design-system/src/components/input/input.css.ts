@@ -20,11 +20,9 @@ export const input = recipe({
   base: {
     width: '100%',
     padding: `${themeVars.spacing.md}`,
-    border: `1px solid ${themeVars.color.gray200}`,
     borderRadius: themeVars.borderRadius.lg,
     fontSize: themeVars.fontSize.md,
     outline: 'none',
-    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
 
     '::placeholder': {
       color: themeVars.color.gray400,
@@ -34,6 +32,20 @@ export const input = recipe({
       backgroundColor: themeVars.color.gray100,
       cursor: 'not-allowed',
     },
+  },
+  variants: {
+    border: {
+      true: {
+        border: `1px solid ${themeVars.color.gray200}`,
+        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+      },
+      false: {
+        border: 'none',
+      },
+    },
+  },
+  defaultVariants: {
+    border: true,
   },
 });
 
