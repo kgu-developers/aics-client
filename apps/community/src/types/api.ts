@@ -1,5 +1,12 @@
+import type { Board, Pagable } from './board';
+
 type BaseResponse<T> = {
   data: T;
 };
 
-export type { BaseResponse };
+interface PaginationResponse {
+  contents: Board[];
+  pagable: Pagable;
+}
+
+export type { BaseResponse, PaginationResponse };

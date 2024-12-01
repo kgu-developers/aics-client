@@ -2,7 +2,7 @@ import { http } from '~/utils/http';
 
 import { MOCK_END_POINT } from '~/constants/api';
 
-import type { Boards } from '~/types/board';
+import type { PaginationResponse } from '~/types/api';
 
 async function getBoards(
   page: number,
@@ -19,7 +19,7 @@ async function getBoards(
 
   const url = `${MOCK_END_POINT.BOARD}?${params.toString()}`;
 
-  return await http.get<Boards>(url);
+  return await http.get<PaginationResponse>(url);
 }
 
 export { getBoards };
