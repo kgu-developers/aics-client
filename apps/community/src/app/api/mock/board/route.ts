@@ -1,4 +1,4 @@
-import type { BoardResponse } from '~/types/board';
+import type { Boards } from '~/types/board';
 import { board } from './data';
 
 export function GET(request: Request) {
@@ -22,16 +22,18 @@ export function GET(request: Request) {
   const totalPage = Math.ceil(totalElements / size);
   const pagedBoards = filteredBoards.slice(page * size, (page + 1) * size);
 
-  const response: BoardResponse = {
-    contents: pagedBoards,
-    pagable: {
-      page,
-      size,
-      totalPage,
-      totalElements,
-      isEnd: page >= totalPage - 1,
-    },
+  const pageable = {
+    page,
+    size,
+    totalPage,
+    totalElements,
+    isEnd: page >= totalPage - 1,
   };
 
-  return Response.json({ data: response });
+  return Response.json({
+    data: {
+      contents: pagedBoards,
+      pagable: pageable,
+    },
+  });
 }

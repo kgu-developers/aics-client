@@ -2,9 +2,9 @@ import { http } from '~/utils/http';
 
 import { MOCK_END_POINT } from '~/constants/api';
 
-import type { BoardResponse } from '~/types/board';
+import type { Boards } from '~/types/board';
 
-function getBoards(
+async function getBoards(
   page: number,
   size: number,
   keyword: string,
@@ -18,7 +18,8 @@ function getBoards(
   });
 
   const url = `${MOCK_END_POINT.BOARD}?${params.toString()}`;
-  return http.get<BoardResponse>(url);
+
+  return await http.get<Boards>(url);
 }
 
 export { getBoards };

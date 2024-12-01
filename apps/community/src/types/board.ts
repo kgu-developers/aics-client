@@ -17,9 +17,9 @@ interface Pagable {
   isEnd: boolean;
 }
 
-interface BoardResponse {
+interface Boards {
   contents: Board[];
   pagable: Pagable;
 }
 
-export type { Board, Pagable, BoardResponse };
+export type { Board, Pagable, Boards };
