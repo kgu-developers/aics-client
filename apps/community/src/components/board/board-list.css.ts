@@ -14,7 +14,7 @@ const row = style({
   alignItems: themeVars.alignItems.center,
   minWidth: themeVars.width.full,
   maxHeight: '4rem',
-  gap: '1rem',
+  gap: themeVars.spacing.md,
   paddingTop: '1rem',
   paddingBottom: '1rem',
   borderBottom: '1px solid',
@@ -46,7 +46,7 @@ const rowTitle = style({
   justifyContent: themeVars.justifyContent.center,
   alignItems: themeVars.alignItems.center,
   width: '90%',
-  gap: '0.5rem',
+  gap: themeVars.spacing.sm,
   fontWeight: themeVars.fontWeight.semibold,
 
   ...screen.md({
@@ -75,7 +75,7 @@ const view = style({
   display: themeVars.display.flex,
   justifyContent: themeVars.justifyContent.center,
   alignItems: themeVars.alignItems.center,
-  gap: '0.25rem',
+  gap: themeVars.spacing.xs,
 });
 
 const author = style({

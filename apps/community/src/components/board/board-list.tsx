@@ -6,6 +6,7 @@ import type { Board } from '~/types/board';
 
 import { Pagination } from './pagination';
 
+import { themeVars } from '@aics-client/design-system/styles';
 import * as styles from '~/components/board/board-list.css';
 import { MOCK_END_POINT } from '~/constants/api';
 
@@ -38,7 +39,7 @@ function Row({ data }: { data: Board }) {
         </div>
         <div className={styles.rowTitle}>
           <h2>{data.title}</h2>
-          {data.hasAttachment && <Paperclip color="grey" size={'0.75rem'} />}
+          {data.hasAttachment && <Paperclip color="grey" size={'1rem'} />}
         </div>
         <div className={styles.information}>
           <div className={styles.view}>
