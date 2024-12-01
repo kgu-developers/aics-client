@@ -44,7 +44,6 @@ function Pagination({ totalPage, pageCount, currentPage }: Props) {
       >
         <ChevronLeft />
       </button>
-
       {[...Array(pageCount)].map((_, i) => (
         <Fragment key={`page-${start + i}`}>
           {start + i <= totalPage && (
@@ -58,7 +57,6 @@ function Pagination({ totalPage, pageCount, currentPage }: Props) {
           )}
         </Fragment>
       ))}
-
       <button
         type="button"
         onClick={() => handleMovePage(start + pageCount)}

@@ -30,12 +30,9 @@ export default async function BoardPage(props: {
         title="공지사항"
         description="학부와 관련된 중요한 공지사항을 안내해드려요."
       />
-
       <section className={styles.boardWrapper}>
         <SearchBar placeholder="검색어를 입력하세요" />
-
         <BoardList data={data.contents} />
-
         <Pagination
           totalPage={data.pagable.totalPage}
           pageCount={5}

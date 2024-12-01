@@ -41,7 +41,6 @@ function SearchBar({ placeholder }: { placeholder: string }) {
         placeholder={placeholder}
         className={styles.input}
       />
-
       <button type="button" onClick={() => handleSearch(keyword)}>
         <Search />
       </button>
