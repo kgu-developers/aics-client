@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 import { ChevronLeft, ChevronRight } from '@aics-client/design-system/icons';
 
@@ -18,48 +18,53 @@ function Pagination({ totalPage, pageCount, currentPage }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [start, setStart] = useState(1);
-  const noPrev = start === 1;
-  const noNext = start + pageCount - 1 >= totalPage;
+  const initialListStart = Math.floor(currentPage / pageCount) * pageCount + 1;
+  const [listStart, setListStart] = useState(initialListStart);
+
+  const noPrev = listStart === 1;
+  const noNext = listStart + pageCount - 1 >= totalPage;
 
   const handleMovePage = (pageNum: number) => {
+    const newListStart =
+      Math.ceil(pageNum / pageCount) * pageCount - (pageCount - 1);
+
+    if (newListStart !== listStart) {
+      setListStart(newListStart > 0 ? newListStart : 1);
+    }
+
     const params = new URLSearchParams(searchParams);
     params.set('page', (pageNum - 1).toString());
 
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  useEffect(() => {
-    if (currentPage + 1 === start + pageCount)
-      setStart((prev) => prev + pageCount);
-    if (currentPage + 1 < start) setStart((prev) => prev - pageCount);
-  }, [currentPage, pageCount, start]);
-
   return (
     <div className={styles.controllerWrapper}>
       <button
         type="button"
-        onClick={() => handleMovePage(start - pageCount)}
+        onClick={() => handleMovePage(listStart - 1)}
         className={`${noPrev && styles.hidden}`}
       >
         <ChevronLeft />
       </button>
       {[...Array(pageCount)].map((_, i) => (
-        <Fragment key={`page-${start + i}`}>
-          {start + i <= totalPage && (
+        <Fragment key={`page-${listStart + i}`}>
+          {listStart + i <= totalPage && (
             <button
               type="button"
-              className={`${styles.pageButton} ${currentPage + 1 === start + i && styles.active}`}
-              onClick={() => handleMovePage(start + i)}
+              className={`${styles.pageButton} ${
+                currentPage + 1 === listStart + i && styles.active
+              }`}
+              onClick={() => handleMovePage(listStart + i)}
             >
-              {start + i}
+              {listStart + i}
             </button>
           )}
         </Fragment>
       ))}
       <button
         type="button"
-        onClick={() => handleMovePage(start + pageCount)}
+        onClick={() => handleMovePage(listStart + pageCount)}
         className={`${noNext && styles.hidden}`}
       >
         <ChevronRight />
@@ -67,4 +72,5 @@ function Pagination({ totalPage, pageCount, currentPage }: Props) {
     </div>
   );
 }
+
 export { Pagination };
