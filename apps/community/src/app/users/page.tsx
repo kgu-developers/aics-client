@@ -1,13 +1,13 @@
 import { PageHeader } from '~/components/page-header';
 import { UserCard } from '~/components/users/user-card';
 import { UserList } from '~/components/users/user-list';
-import { getUsers } from './remotes';
+import { getUser } from './remotes';
 
 // TODO: for mocking but will be replaced with a proper solution later
 export const dynamic = 'force-dynamic';
 
 export default async function UserPage() {
-  const { data } = await getUsers();
+  const { data } = await getUser();
 
   const userDetails = [
     { title: '이름', value: data.name },

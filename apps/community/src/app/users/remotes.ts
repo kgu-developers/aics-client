@@ -10,8 +10,8 @@ interface User {
   major: string;
 }
 
-function getUsers() {
+function getUser() {
   return http.get<User>(MOCK_END_POINT.USERS);
 }
 
-export { type User, getUsers };
+export { type User, getUser };
