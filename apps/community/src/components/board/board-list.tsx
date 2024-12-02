@@ -4,7 +4,7 @@ import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
 import { MOCK_END_POINT } from '~/constants/api';
 
-import type { Board } from '~/app/board/notice/remote';
+import type { Board } from '~/app/board/remote';
 
 import * as styles from '~/components/board/board-list.css';
 
