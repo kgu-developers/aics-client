@@ -1,0 +1,27 @@
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
+
+const cardWrapper = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: themeVars.spacing.lg,
+  padding: themeVars.spacing.xl,
+  border: `1px solid ${themeVars.color.gray300}`,
+  borderRadius: themeVars.borderRadius.xl,
+  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
+});
+
+const cardTitle = style({
+  marginBottom: themeVars.spacing.lg,
+  fontSize: themeVars.fontSize['2xl'],
+  fontWeight: themeVars.fontWeight.bold,
+});
+
+const cardContent = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: themeVars.spacing.lg,
+  fontSize: themeVars.fontSize.lg,
+});
+
+export { cardWrapper, cardTitle, cardContent };
