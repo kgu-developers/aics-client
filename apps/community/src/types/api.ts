@@ -15,4 +15,4 @@ interface Pagable {
   isEnd: boolean;
 }
 
-export type { BaseResponse, PaginationResponse };
+export type { BaseResponse, PaginationResponse, Pagable };

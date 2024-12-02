@@ -3,7 +3,17 @@ import { http } from '~/utils/http';
 import { MOCK_END_POINT } from '~/constants/api';
 
 import type { PaginationResponse } from '~/types/api';
-import type { Board } from '~/types/board';
+
+interface Board {
+  postId: number;
+  title: string;
+  author: string;
+  views: number;
+  category: string;
+  hasAttachment: boolean;
+  isPinned: boolean;
+  createAt: string;
+}
 
 async function getBoards(
   page: number,
@@ -18,9 +28,11 @@ async function getBoards(
     category: category,
   });
 
-  return http.get<PaginationResponse<Board>>(
+  const response = await http.get(
     `${MOCK_END_POINT.BOARD}?${params.toString()}`,
   );
+
+  return response as PaginationResponse<Board>;
 }
 
-export { getBoards };
+export { getBoards, type Board };
