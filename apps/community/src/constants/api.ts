@@ -6,6 +6,7 @@ const MOCK_END_POINT = {
   PROFESSORS: `${MOCK_BASE_URL}/professors`,
   CLUB: `${MOCK_BASE_URL}/about/club`,
   CONTACT: `${MOCK_BASE_URL}/about/contact`,
+  USERS: `${MOCK_BASE_URL}/users`,
 } as const;
 
 export { MOCK_BASE_URL, MOCK_END_POINT };
