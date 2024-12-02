@@ -8,6 +8,11 @@ import { Search } from '@aics-client/design-system/icons';
 
 import * as styles from '~/components/board/search-bar.css';
 
+const SEARCH_PARAMS = {
+  PAGE: 'page',
+  KEYWORD: 'keyword',
+} as const;
+
 function SearchBar({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -17,12 +22,12 @@ function SearchBar({ placeholder }: { placeholder: string }) {
 
   const handleSearch = (keyword: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set('page', '0');
+    params.set(SEARCH_PARAMS.PAGE, '0');
 
     if (keyword) {
-      params.set('keyword', keyword);
+      params.set(SEARCH_PARAMS.KEYWORD, keyword);
     } else {
-      params.delete('keyword');
+      params.delete(SEARCH_PARAMS.KEYWORD);
     }
 
     replace(`${pathName}?${params.toString()}`);
@@ -39,7 +44,7 @@ function SearchBar({ placeholder }: { placeholder: string }) {
       <Input
         variant="ghost"
         type="text"
-        defaultValue={searchParams.get('keyword')?.toString()}
+        defaultValue={searchParams.get(SEARCH_PARAMS.KEYWORD)?.toString()}
         onChange={(e) => setKeyword(e.target.value)}
         onKeyUp={handlePressEnter}
         placeholder={placeholder}
