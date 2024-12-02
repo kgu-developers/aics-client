@@ -4,7 +4,8 @@
   "private": true,
   "exports": {
     ".": "./src/components/index.ts",
-    "./styles": "./src/styles/index.ts"
+    "./styles": "./src/styles/index.ts",
+    "./icons": "./src/icons/lucide.ts"
   },
   "scripts": {
     "check": "biome check",
@@ -22,7 +23,8 @@
   },
   "dependencies": {
     "@vanilla-extract/recipes": "^0.5.5",
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
