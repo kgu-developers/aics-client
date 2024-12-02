@@ -9,12 +9,4 @@ interface Board {
   createAt: string;
 }
 
-interface Pagable {
-  page: number;
-  size: number;
-  totalPage: number;
-  totalElements: number;
-  isEnd: boolean;
-}
-
-export type { Board, Pagable };
+export type { Board };
