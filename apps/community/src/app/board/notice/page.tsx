@@ -9,7 +9,7 @@ import { getBoards } from '../remote';
 
 export const dynamic = 'force-dynamic';
 
-export default async function BoardPage(props: {
+export default async function NoticePage(props: {
   searchParams?: Promise<{
     category?: string;
     page?: string;
@@ -20,7 +20,7 @@ export default async function BoardPage(props: {
   const currentPage = Number(searchParams?.page) || 0;
   const keyword = searchParams?.keyword || '';
 
-  const { data } = await getBoards(currentPage, 10, keyword, '공지사항');
+  const { data } = await getBoards(currentPage, 10, keyword, 'DEPT_INFO');
 
   return (
     <section>

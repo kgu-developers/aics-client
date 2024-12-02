@@ -20,7 +20,7 @@ export default async function NewsPage(props: {
   const currentPage = Number(searchParams?.page) || 0;
   const keyword = searchParams?.keyword || '';
 
-  const { data } = await getBoards(currentPage, 10, keyword, '학부소식');
+  const { data } = await getBoards(currentPage, 10, keyword, 'DEPT_NEWS');
 
   return (
     <section>
