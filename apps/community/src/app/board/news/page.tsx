@@ -33,7 +33,6 @@ export default async function NewsPage(props: {
         <BoardList data={data.contents} />
         <Pagination
           totalPage={data.pagable.totalPage}
-          pageCount={5}
           currentPage={currentPage}
         />
       </section>
