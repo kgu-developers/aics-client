@@ -20,7 +20,12 @@ export default async function NoticePage(props: {
   const currentPage = Number(searchParams?.page) || 0;
   const keyword = searchParams?.keyword || '';
 
-  const { data } = await getBoards(currentPage, 10, keyword, 'DEPT_INFO');
+  const { data } = await getBoards({
+    page: currentPage,
+    size: 10,
+    keyword,
+    category: 'DEPT_INFO',
+  });
 
   return (
     <section>
