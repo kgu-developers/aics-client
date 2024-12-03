@@ -15,12 +15,14 @@ interface Board {
   createAt: string;
 }
 
-async function getBoards(
-  page: number,
-  size: number,
-  keyword: string,
-  category: string,
-) {
+interface BoardParams {
+  page: number;
+  size: number;
+  keyword?: string;
+  category: string;
+}
+
+async function getBoards({ page, size, keyword = '', category }: BoardParams) {
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
