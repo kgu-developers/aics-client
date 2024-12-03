@@ -1,7 +1,7 @@
 import { MOCK_END_POINT } from '~/constants/api';
 import { http } from '~/utils/http';
 
-interface User {
+interface MyProfile {
   id: string;
   name: string;
   phone: string;
@@ -10,8 +10,8 @@ interface User {
   major: string;
 }
 
-function getUser() {
-  return http.get<User>(MOCK_END_POINT.USERS);
+function getMyProfile() {
+  return http.get<MyProfile>(MOCK_END_POINT.MY_PROFILE);
 }
 
-export { type User, getUser };
+export { type MyProfile, getMyProfile };

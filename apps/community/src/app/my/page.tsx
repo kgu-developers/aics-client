@@ -1,13 +1,14 @@
+import { MyInfoCard } from '~/components/my/my-info-card';
+import { MyInfoField } from '~/components/my/my-info-field';
 import { PageHeader } from '~/components/page-header';
-import { UserCard } from '~/components/users/user-card';
-import { UserList } from '~/components/users/user-list';
-import { getUser } from './remotes';
+import { getMyProfile } from './remotes';
 
 // TODO: for mocking but will be replaced with a proper solution later
 export const dynamic = 'force-dynamic';
 
-export default async function UserPage() {
-  const { data } = await getUser();
+export default async function MyPage() {
+  const { data } = await getMyProfile();
+  console.log(data);
 
   const userDetails = [
     { title: '이름', value: data.name },
@@ -24,13 +25,15 @@ export default async function UserPage() {
         title="회원 정보"
         description="등록한 회원 정보를 확인할 수 있어요."
       />
-      <UserCard>
+      <MyInfoCard>
         {userDetails.map((detail) => (
-          <UserList key={detail.title} title={detail.title}>
-            <UserList.Row>{detail.value}</UserList.Row>
-          </UserList>
+          <MyInfoField
+            key={detail.title}
+            title={detail.title}
+            value={detail.value}
+          />
         ))}
-      </UserCard>
+      </MyInfoCard>
     </>
   );
 }

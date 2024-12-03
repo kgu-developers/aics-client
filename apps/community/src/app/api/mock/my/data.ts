@@ -1,4 +1,4 @@
-const user = {
+const myProfile = {
   name: '강민하',
   phone: '010-0000-0000',
   email: 'aics1204@kyonggi.ac.kr',
@@ -7,4 +7,4 @@ const user = {
   id: '201912000',
 };
 
-export { user };
+export { myProfile };

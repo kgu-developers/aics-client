@@ -1,10 +1,10 @@
-import * as style from '~/components/users/user-card.css';
+import * as style from '~/components/my/my-info-card.css';
 
 interface Props {
   children: React.ReactNode;
 }
 
-function UserCard({ children }: Props) {
+function MyInfoCard({ children }: Props) {
   return (
     <div className={style.cardWrapper}>
       <h2 className={style.cardTitle}>내 프로필</h2>
@@ -13,4 +13,4 @@ function UserCard({ children }: Props) {
   );
 }
 
-export { UserCard };
+export { MyInfoCard };
