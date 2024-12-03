@@ -8,7 +8,7 @@ const cardWrapper = style({
   padding: themeVars.spacing.xl,
   border: `1px solid ${themeVars.color.gray300}`,
   borderRadius: themeVars.borderRadius.xl,
-  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
+  boxShadow: themeVars.boxShadow.md,
 });
 
 const cardTitle = style({
