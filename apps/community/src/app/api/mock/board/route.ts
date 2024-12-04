@@ -5,8 +5,7 @@ export function GET(request: Request) {
   const page = Number(url.searchParams.get('page')) || 0;
   const size = Number(url.searchParams.get('size')) || 10;
   const keyword = url.searchParams.get('keyword') || '';
-  const category =
-    url.searchParams.get('category')?.toLowerCase().replace(/\s+/g, '') || '';
+  const category = url.searchParams.get('category') || '';
 
   const filteredBoards = board.filter((board) => {
     const matchesKeyword = board.title
