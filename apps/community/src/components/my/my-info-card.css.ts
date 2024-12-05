@@ -1,4 +1,4 @@
-import { themeVars } from '@aics-client/design-system/styles';
+import { screen, themeVars } from '@aics-client/design-system/styles';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const cardWrapper = style({
@@ -23,26 +23,22 @@ const cardContent = styleVariants({
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gap: themeVars.spacing.lg,
-    fontSize: themeVars.fontSize.lg,
   },
   singleColumn: {
     display: 'grid',
     gridTemplateColumns: '1fr',
-    gap: themeVars.spacing.md,
-    fontSize: themeVars.fontSize.lg,
+    gap: themeVars.spacing.lg,
   },
 });
 
 const field = style({
   margin: '1.5rem 0',
-  padding: 0,
-  fontSize: themeVars.fontSize.md,
 });
 
 const fieldTitle = style({
   width: '6rem',
+  fontSize: themeVars.fontSize.lg,
   fontWeight: themeVars.fontWeight.semibold,
-  marginBottom: 0,
 });
 
 const editFieldWrapper = style({
@@ -53,18 +49,34 @@ const editFieldWrapper = style({
 
 const editFieldContent = style({
   display: 'flex',
-  alignItems: 'center',
-  gap: themeVars.spacing.md,
+  flexDirection: 'column',
+  gap: themeVars.spacing.lg,
+
+  ...screen.md({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }),
 });
 
 const editField = style({
-  width: '25rem',
-  fontSize: themeVars.fontSize.md,
+  width: '15rem',
+
+  ...screen.md({
+    width: '20rem',
+  }),
 });
 
 const buttonWrapper = style({
   display: 'flex',
   gap: themeVars.spacing.sm,
+  margin: '2rem 0',
+
+  ...screen.md({
+    display: 'flex',
+    gap: themeVars.spacing.sm,
+  }),
 });
 
 export {

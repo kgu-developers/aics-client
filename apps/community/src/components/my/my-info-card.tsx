@@ -45,9 +45,7 @@ function MyInfoEditableField({
   const [isEditing, setIsEditing] = useState(false);
   const [currentValue, setCurrentValue] = useState(value);
 
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
+  const handleEditToggle = () => setIsEditing((prev) => !prev);
 
   return (
     <div className={style.editFieldWrapper}>
@@ -70,7 +68,8 @@ function MyInfoEditableField({
       {isEditing ? (
         <div className={style.buttonWrapper}>
           <Button
-            color="secondary"
+            size="sm"
+            color="outline"
             onClick={() => {
               setIsEditing(false);
               onSave?.(currentValue);
@@ -78,14 +77,16 @@ function MyInfoEditableField({
           >
             저장
           </Button>
-          <Button color="secondary" onClick={handleEditToggle}>
+          <Button size="sm" color="outline" onClick={handleEditToggle}>
             취소
           </Button>
         </div>
       ) : (
-        <Button color="secondary" onClick={handleEditToggle}>
-          설정
-        </Button>
+        <div className={style.buttonWrapper}>
+          <Button size="sm" color="outline" onClick={handleEditToggle}>
+            변경
+          </Button>
+        </div>
       )}
     </div>
   );
