@@ -2,7 +2,7 @@
 
 import { Button, Input } from '@aics-client/design-system';
 import { useState } from 'react';
-import * as style from '~/components/my/my-info-card.css';
+import * as styles from '~/components/my/my-info-card.css';
 
 interface MyInfoCardProps {
   title: string;
@@ -21,9 +21,9 @@ interface MyInfoEditableFieldProps extends MyInfoFieldProps {
 
 function MyInfoCard({ title, children, layout = 'default' }: MyInfoCardProps) {
   return (
-    <div className={style.cardWrapper}>
-      <h2 className={style.cardTitle}>{title}</h2>
-      <div className={style.cardContent[layout]}>{children}</div>
+    <div className={styles.cardWrapper}>
+      <h2 className={styles.cardTitle}>{title}</h2>
+      <div className={styles.cardContent[layout]}>{children}</div>
     </div>
   );
 }
@@ -31,8 +31,8 @@ function MyInfoCard({ title, children, layout = 'default' }: MyInfoCardProps) {
 function MyInfoField({ title, value }: MyInfoFieldProps) {
   return (
     <div>
-      <h3 className={style.fieldTitle}>{title}</h3>
-      <p className={style.field}>{value}</p>
+      <h3 className={styles.fieldTitle}>{title}</h3>
+      <p className={styles.field}>{value}</p>
     </div>
   );
 }
@@ -46,48 +46,41 @@ function MyInfoEditableField({
   const [currentValue, setCurrentValue] = useState(value);
 
   const handleEditToggle = () => setIsEditing((prev) => !prev);
+  const handleSave = () => {
+    setIsEditing(false);
+    onSave?.(currentValue);
+  };
 
   return (
-    <div className={style.editFieldWrapper}>
-      <div className={style.editFieldContent}>
-        <h3 className={style.fieldTitle}>{title}</h3>
-        <div className={style.editField}>
-          {isEditing ? (
-            <Input
-              value={currentValue}
-              onChange={(e) => setCurrentValue(e.target.value)}
-              placeholder={value}
-              type="text"
-            />
-          ) : (
-            currentValue
-          )}
-        </div>
+    <div className={styles.editFieldWrapper}>
+      <div className={styles.editFieldContent}>
+        <h3 className={styles.fieldTitle}>{title}</h3>
+        <Input
+          className={styles.editField}
+          type="text"
+          value={currentValue}
+          placeholder={value}
+          onChange={(e) => setCurrentValue(e.target.value)}
+          disabled={!isEditing}
+        />
       </div>
 
-      {isEditing ? (
-        <div className={style.buttonWrapper}>
-          <Button
-            size="sm"
-            color="outline"
-            onClick={() => {
-              setIsEditing(false);
-              onSave?.(currentValue);
-            }}
-          >
-            저장
-          </Button>
-          <Button size="sm" color="outline" onClick={handleEditToggle}>
-            취소
-          </Button>
-        </div>
-      ) : (
-        <div className={style.buttonWrapper}>
+      <div className={styles.buttonWrapper}>
+        {isEditing ? (
+          <>
+            <Button size="sm" color="outline" onClick={handleSave}>
+              저장
+            </Button>
+            <Button size="sm" color="outline" onClick={handleEditToggle}>
+              취소
+            </Button>
+          </>
+        ) : (
           <Button size="sm" color="outline" onClick={handleEditToggle}>
             변경
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

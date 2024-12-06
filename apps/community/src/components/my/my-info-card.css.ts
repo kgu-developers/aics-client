@@ -70,13 +70,8 @@ const editField = style({
 
 const buttonWrapper = style({
   display: 'flex',
+  margin: '1rem 0',
   gap: themeVars.spacing.sm,
-  margin: '2rem 0',
-
-  ...screen.md({
-    display: 'flex',
-    gap: themeVars.spacing.sm,
-  }),
 });
 
 export {
