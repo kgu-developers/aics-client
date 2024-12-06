@@ -7,7 +7,7 @@ interface MyInfoCardListProps {
   userEditableDetails: { title: string; value: string }[];
 }
 
-export function MyInfoCardList({
+function MyInfoCardList({
   userDetails,
   userEditableDetails,
 }: MyInfoCardListProps) {
@@ -41,3 +41,5 @@ export function MyInfoCardList({
     </>
   );
 }
+
+export { MyInfoCardList };
