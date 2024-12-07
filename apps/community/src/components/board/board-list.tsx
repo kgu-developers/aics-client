@@ -26,7 +26,7 @@ async function BoardList({ data }: { data: Board[] }) {
 
 function Row({ data }: { data: Board }) {
   return (
-    <Link href={`${MOCK_END_POINT.BOARD_DETAIL}/${data.postId}`}>
+    <Link href={`/board/notice/${data.postId}`}>
       <li className={styles.row}>
         <div className={styles.pin}>
           {data.isPinned ? (
