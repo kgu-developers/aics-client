@@ -29,15 +29,20 @@ export const input = recipe({
     },
 
     ':disabled': {
-      backgroundColor: themeVars.color.gray100,
+      opacity: themeVars.opacity[80],
       cursor: 'not-allowed',
+    },
+
+    ':focus-visible': {
+      outline: 'none',
+      boxShadow: `0 0 0 2px ${themeVars.color.white}, 0 0 0 4px ${themeVars.color.gray400}`,
     },
   },
   variants: {
     variant: {
       primary: {
         border: `1px solid ${themeVars.color.gray200}`,
-        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+        boxShadow: themeVars.boxShadow.sm,
       },
       ghost: {
         border: 'none',

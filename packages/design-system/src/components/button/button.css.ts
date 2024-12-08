@@ -24,6 +24,14 @@ const buttonVariants = recipe({
       black: {
         backgroundColor: themeVars.color.black,
       },
+      outline: {
+        backgroundColor: themeVars.color.white,
+        color: themeVars.color.black,
+        border: `1px solid ${themeVars.color.gray300}`,
+        ':hover': {
+          backgroundColor: themeVars.color.gray50,
+        },
+      },
     },
     size: {
       sm: {

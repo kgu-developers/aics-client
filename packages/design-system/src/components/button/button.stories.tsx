@@ -57,6 +57,14 @@ export const Warning: Story = {
   },
 };
 
+export const Outline: Story = {
+  args: {
+    color: 'outline',
+    size: 'md',
+    children: 'Button',
+  },
+};
+
 export const Small: Story = {
   args: {
     size: 'sm',
