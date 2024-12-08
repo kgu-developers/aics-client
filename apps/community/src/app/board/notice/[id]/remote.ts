@@ -20,8 +20,7 @@ interface BoardDetail {
 }
 
 async function getBoardDetail(id: string) {
-  const response = await http.get(`${MOCK_END_POINT.NOTICE_DETAIL(id)}`);
-  return response as BaseResponse<BoardDetail>;
+  return await http.get<BoardDetail>(`${MOCK_END_POINT.NOTICE_DETAIL(id)}`);
 }
 
 export { getBoardDetail, type BoardDetail };
