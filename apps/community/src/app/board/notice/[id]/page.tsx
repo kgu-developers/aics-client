@@ -2,6 +2,7 @@ import { Board } from '~/components/board/board';
 
 import { getBoardDetail } from './remote';
 
+// TODO: for mocking but will be replaced with a proper solution later
 export const dynamic = 'force-dynamic';
 
 export default async function NoticeDetailPage({
