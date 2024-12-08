@@ -5,7 +5,7 @@ import { screen, themeVars } from '@aics-client/design-system/styles';
 const title = style({
   fontWeight: themeVars.fontWeight.semibold,
   fontSize: '2rem',
-  padding: '2rem 1rem',
+  padding: '2rem 1rem 1rem 1rem',
 });
 
 const informationWrapper = style({
