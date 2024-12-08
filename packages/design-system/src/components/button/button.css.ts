@@ -21,6 +21,9 @@ const buttonVariants = recipe({
       warning: {
         backgroundColor: themeVars.color.warning,
       },
+      black: {
+        backgroundColor: themeVars.color.black,
+      },
     },
     size: {
       sm: {
