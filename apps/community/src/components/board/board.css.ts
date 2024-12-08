@@ -12,7 +12,7 @@ const informationWrapper = style({
   display: themeVars.display.flex,
   justifyContent: themeVars.justifyContent.between,
   borderTop: `1px solid ${themeVars.color.gray200}`,
-  padding: '1rem 1rem',
+  padding: '1rem 1rem 0.5rem 1rem',
   color: themeVars.color.gray500,
   fontSize: themeVars.fontSize.sm,
 });
