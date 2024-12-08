@@ -20,7 +20,7 @@ function Board({ children }: { children: React.ReactNode }) {
 function Header({ title, author, views, createdAt, file }: HeaderProps) {
   return (
     <div>
-      <h3 className={styles.title}>{title}</h3>
+      <h1 className={styles.title}>{title}</h1>
       <div className={styles.informationWrapper}>
         <div>{author}</div>
         <div className={styles.flex}>
