@@ -20,13 +20,13 @@ const informationWrapper = style({
 const flex = style({
   display: themeVars.display.flex,
   alignItems: themeVars.alignItems.center,
-  gap: '2rem',
+  gap: themeVars.spacing.xl,
 });
 
 const views = style({
   display: themeVars.display.flex,
   alignItems: themeVars.alignItems.center,
-  gap: '0.25rem',
+  gap: themeVars.spacing.xs,
   visibility: 'hidden',
   ...screen.sm({
     visibility: 'visible',
@@ -36,7 +36,7 @@ const views = style({
 const createdAt = style({
   display: themeVars.display.flex,
   alignItems: themeVars.alignItems.center,
-  gap: '0.25rem',
+  gap: themeVars.spacing.xs,
 });
 
 const file = style({
@@ -46,7 +46,7 @@ const file = style({
   padding: '0.5rem 1rem',
   fontSize: themeVars.fontSize.sm,
   fontWeight: themeVars.fontWeight.semibold,
-  gap: '0.5rem',
+  gap: themeVars.spacing.xs,
 });
 
 const content = style({
