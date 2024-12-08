@@ -1,3 +1,6 @@
+import Link from 'next/link';
+
+import { Button } from '@aics-client/design-system';
 import { Calendar, Download, Eye } from '@aics-client/design-system/icons';
 
 import * as styles from '~/components/board/board.css';
@@ -48,7 +51,18 @@ function Content({ content }: { content: string }) {
   return <div className={styles.content}>{content}</div>;
 }
 
+function Footer({ to }: { to: string }) {
+  return (
+    <div className={styles.footer}>
+      <Button size="sm" color="black">
+        <Link href={to}>목록</Link>
+      </Button>
+    </div>
+  );
+}
+
 Board.Header = Header;
 Board.Content = Content;
+Board.Footer = Footer;
 
 export { Board };

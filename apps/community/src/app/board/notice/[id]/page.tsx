@@ -1,5 +1,7 @@
 import { Board } from '~/components/board/board';
 
+import { PATH } from '~/constants/path';
+
 import { getBoardDetail } from './remote';
 
 // TODO: for mocking but will be replaced with a proper solution later
@@ -22,6 +24,7 @@ export default async function NoticeDetailPage({
         file={data.file}
       />
       <Board.Content content={data.content} />
+      <Board.Footer to={PATH.NOTICE} />
     </Board>
   );
 }

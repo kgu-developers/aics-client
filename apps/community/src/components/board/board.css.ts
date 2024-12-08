@@ -50,8 +50,24 @@ const file = style({
 });
 
 const content = style({
-  padding: '3rem 1rem 0 1rem',
+  borderBottom: `1px solid ${themeVars.color.gray200}`,
+  padding: '3rem 1rem',
   whiteSpace: 'pre-line',
 });
 
-export { title, informationWrapper, flex, views, createdAt, file, content };
+const footer = style({
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.rowReverse,
+  padding: '1rem',
+});
+
+export {
+  title,
+  informationWrapper,
+  flex,
+  views,
+  createdAt,
+  file,
+  content,
+  footer,
+};
