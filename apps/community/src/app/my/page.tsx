@@ -1,7 +1,9 @@
-import { MyInfoCardList } from '~/components/my/my-info-card-list';
+import { MyInfoEditableProfileCard } from '~/components/my/my-info-editable-profile-card';
+import { MyInfoProfileCard } from '~/components/my/my-info-profile-card';
 import { PageHeader } from '~/components/page-header';
 import { getMyProfile } from './remotes';
 
+// TODO: for mocking but will be replaced with a proper solution later
 export const dynamic = 'force-dynamic';
 
 export default async function MyPage() {
@@ -25,10 +27,8 @@ export default async function MyPage() {
         title="회원 정보"
         description="등록한 회원 정보를 확인할 수 있어요."
       />
-      <MyInfoCardList
-        userDetails={userDetails}
-        userEditableDetails={userEditableDetails}
-      />
+      <MyInfoProfileCard data={userDetails} />
+      <MyInfoEditableProfileCard data={userEditableDetails} />
     </>
   );
 }
