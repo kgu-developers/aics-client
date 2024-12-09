@@ -47,6 +47,7 @@ const buttonVariants = recipe({
     disabled: {
       true: {
         cursor: 'default',
+        opacity: themeVars.opacity[75],
       },
       false: {
         cursor: 'pointer',
