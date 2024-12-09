@@ -5,7 +5,7 @@ const formWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   margin: '0 auto',
-  gap: '2rem',
+  gap: themeVars.spacing.xl,
   width: '60%',
 });
 
