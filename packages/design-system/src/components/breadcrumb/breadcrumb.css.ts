@@ -29,10 +29,6 @@ const breadcrumbLink = style({
   },
 });
 
-const breadcrumbLastLink = style({
-  color: themeVars.color.black,
-});
-
 const breadcrumbPage = style({
   color: 'var(--foreground-color)',
   fontWeight: themeVars.fontWeight.regular,
@@ -46,7 +42,6 @@ export {
   breadcrumbList,
   breadcrumbItem,
   breadcrumbLink,
-  breadcrumbLastLink,
   breadcrumbPage,
   breadcrumbSeperator,
 };
