@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
-import { MOCK_END_POINT } from '~/constants/api';
+import { PATH } from '~/constants/path';
 
 import type { Board } from '~/app/board/remote';
 
@@ -26,7 +26,7 @@ async function BoardList({ data }: { data: Board[] }) {
 
 function Row({ data }: { data: Board }) {
   return (
-    <Link href={`${MOCK_END_POINT.BOARD_DETAIL}/${data.postId}`}>
+    <Link href={PATH.NOTICE_DETAIL(data.postId)}>
       <li className={styles.row}>
         <div className={styles.pin}>
           {data.isPinned ? (
