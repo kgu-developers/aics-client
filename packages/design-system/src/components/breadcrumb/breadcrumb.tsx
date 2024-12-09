@@ -35,7 +35,6 @@ function Item({
 
 function Link({
   ref,
-  isLast = false,
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'a'> & {
@@ -43,14 +42,7 @@ function Link({
   isLast?: boolean;
 }) {
   return (
-    <a
-      ref={ref}
-      className={cn(
-        className,
-        isLast ? styles.breadcrumbLastLink : styles.breadcrumbLink,
-      )}
-      {...props}
-    />
+    <a ref={ref} className={cn(styles.breadcrumbLink, className)} {...props} />
   );
 }
 
