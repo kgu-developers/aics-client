@@ -5,61 +5,33 @@ import { cn } from '../../utils';
 import * as styles from './breadcrumb.css';
 
 export default function Breadcrumb({
-  ref,
   ...props
-}: React.ComponentPropsWithoutRef<'nav'> & { ref?: React.Ref<HTMLElement> }) {
-  return <nav ref={ref} aria-label="breadcrumb" {...props} />;
+}: React.ComponentPropsWithoutRef<'nav'>) {
+  return <nav aria-label="breadcrumb" {...props} />;
 }
 
-function List({
-  ref,
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'ol'> & {
-  ref?: React.Ref<HTMLOListElement>;
-}) {
-  return (
-    <ol ref={ref} className={cn(styles.breadcrumbList, className)} {...props} />
-  );
+function List({ className, ...props }: React.ComponentPropsWithoutRef<'ol'>) {
+  return <ol className={cn(styles.breadcrumbList, className)} {...props} />;
 }
 
-function Item({
-  ref,
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'li'> & { ref?: React.Ref<HTMLLIElement> }) {
-  return (
-    <li ref={ref} className={cn(styles.breadcrumbItem, className)} {...props} />
-  );
+function Item({ className, ...props }: React.ComponentPropsWithoutRef<'li'>) {
+  return <li className={cn(styles.breadcrumbItem, className)} {...props} />;
 }
 
 function Link({
-  ref,
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'a'> & {
-  ref?: React.Ref<HTMLAnchorElement>;
   isLast?: boolean;
 }) {
-  return (
-    <a ref={ref} className={cn(styles.breadcrumbLink, className)} {...props} />
-  );
+  return <a className={cn(styles.breadcrumbLink, className)} {...props} />;
 }
 
 function Page({
-  ref,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'span'> & {
-  ref?: React.Ref<HTMLSpanElement>;
-}) {
-  return (
-    <span
-      ref={ref}
-      className={cn(styles.breadcrumbPage, className)}
-      {...props}
-    />
-  );
+}: React.ComponentPropsWithoutRef<'span'> & {}) {
+  return <span className={cn(styles.breadcrumbPage, className)} {...props} />;
 }
 
 function Separator({
