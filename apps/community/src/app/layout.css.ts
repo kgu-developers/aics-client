@@ -18,6 +18,7 @@ const root = style([
 
 const main = style({
   flex: 1,
+  paddingBottom: '8rem',
 });
 
 export { root, main };
