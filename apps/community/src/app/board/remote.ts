@@ -22,6 +22,21 @@ interface BoardParams {
   category: string;
 }
 
+interface BoardDetail {
+  postId: number;
+  category: string;
+  title: string;
+  content: string;
+  author: string;
+  views: number;
+  isPinned: false;
+  file: {
+    logicalName: string;
+    physicalPath: string;
+  };
+  createdAt: string;
+}
+
 async function getBoards({ page, size, keyword = '', category }: BoardParams) {
   const params = new URLSearchParams({
     page: page.toString(),
@@ -37,4 +52,8 @@ async function getBoards({ page, size, keyword = '', category }: BoardParams) {
   return response as PaginationResponse<Board>;
 }
 
-export { getBoards, type Board };
+async function getBoardDetail(id: string) {
+  return await http.get<BoardDetail>(`${MOCK_END_POINT.BOARD_DETAIL(id)}`);
+}
+
+export { getBoards, getBoardDetail, type Board, type BoardDetail };
