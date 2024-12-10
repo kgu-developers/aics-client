@@ -8,6 +8,7 @@ const hero = style({
 const viewport = style({
   borderRadius: '1.5rem',
   overflow: 'hidden',
+  aspectRatio: '16 / 9',
 });
 
 const slides = style({
@@ -20,7 +21,6 @@ const slide = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '400px',
   userSelect: 'none',
 });
 
