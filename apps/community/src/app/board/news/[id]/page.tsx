@@ -29,6 +29,7 @@ export default async function NoticeDetailPage({
         nextPost={data.nextPost}
         to={PATH.NOTICE}
       />
+      <div>{data.prevPost.id}</div>
     </Board>
   );
 }
