@@ -5,15 +5,9 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 
 import { CarouselDots } from '~/components/carousel-dots';
-import * as styles from '~/components/hero-carousel.css';
+import * as styles from '~/components/main/hero-carousel.css';
 
-const slides = Array.from({ length: 5 }, (_, index) => ({
-  id: index,
-  image: 'https://picsum.photos/900/1600',
-  alt: 'picsum',
-}));
-
-function HeroCarousel() {
+function HeroCarousel({ heroes }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
       delay: 9000,
@@ -26,7 +20,7 @@ function HeroCarousel() {
     <section className={styles.hero}>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.slides}>
-          {slides.map((slide) => (
+          {heroes.map((slide) => (
             <div key={`hero-${slide.id}`} className={styles.slide}>
               <Image
                 src={slide.image}
