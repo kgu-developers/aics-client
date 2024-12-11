@@ -45,6 +45,7 @@ const goToListButton = style({
   display: themeVars.display.flex,
   alignItems: themeVars.alignItems.center,
   gap: themeVars.spacing.sm,
+  fontSize: themeVars.fontSize.sm,
 });
 
 const informationWrapper = style({

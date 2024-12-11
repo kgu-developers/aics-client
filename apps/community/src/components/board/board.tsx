@@ -91,7 +91,7 @@ function Footer({ prevPost, nextPost, to }: FooterProps) {
       </div>
 
       <Button size="sm" color="black" className={styles.goToListButton}>
-        <ArrowLeft />
+        <ArrowLeft size={'1rem'} />
         <Link href={to}>목록으로</Link>
       </Button>
     </div>
