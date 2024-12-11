@@ -1,3 +1,13 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
+
+import { Breadcrumb } from '@aics-client/design-system';
+
+import { PATHMAP, type pathmapKey } from '~/constants/path';
+
 import * as styles from '~/components/page-header.css';
 
 interface Props {
@@ -6,10 +16,48 @@ interface Props {
 }
 
 function PageHeader({ title, description }: Props) {
+  const pathname = usePathname();
+  const paths = pathname.split('/').filter((path) => path !== '');
+
   return (
     <div className={styles.pageHeaderWrapper}>
-      <h1 className={styles.title}>{title}</h1>
-      <p className={styles.description}>{description}</p>
+      <Breadcrumb>
+        <Breadcrumb.List>
+          <Breadcrumb.Item>
+            <Breadcrumb.Link>
+              <Link href="/">홈</Link>
+            </Breadcrumb.Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Separator />
+          {paths.map((path, index) =>
+            index !== paths.length - 1 ? (
+              <Fragment key={`subpath-${path}`}>
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link>
+                    <Link href={`/${paths.slice(0, index + 1).join('/')}`}>
+                      {PATHMAP[path as pathmapKey]}
+                    </Link>
+                  </Breadcrumb.Link>
+                </Breadcrumb.Item>
+              </Fragment>
+            ) : (
+              <Fragment key={`subpath-${path}`}>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.Page>
+                    {PATHMAP[path as pathmapKey]}
+                  </Breadcrumb.Page>
+                </Breadcrumb.Item>
+              </Fragment>
+            ),
+          )}
+        </Breadcrumb.List>
+      </Breadcrumb>
+
+      <div className={styles.pageHeaderTitle}>
+        <h1 className={styles.title}>{title}</h1>
+        <p className={styles.description}>{description}</p>
+      </div>
     </div>
   );
 }
