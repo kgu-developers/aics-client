@@ -1,6 +1,8 @@
 const PATH = {
   NOTICE: '/board/notice',
-  NOTICE_DETAIL: (id: number) => `/board/notice/${id}`,
+  NEWS: '/board/news',
+  NOTICE_DETAIL: (id: number) => `${PATH.NOTICE}/${id}`,
+  NEWS_DETAIL: (id: number) => `${PATH.NEWS}/${id}`,
 };
 
 type pathmapKey = keyof typeof PATHMAP;

@@ -1,7 +1,12 @@
 import Link from 'next/link';
 
 import { Button } from '@aics-client/design-system';
-import { Calendar, Download, Eye } from '@aics-client/design-system/icons';
+import {
+  ArrowLeft,
+  Calendar,
+  Download,
+  Eye,
+} from '@aics-client/design-system/icons';
 
 import * as styles from '~/components/board/board.css';
 
@@ -51,11 +56,43 @@ function Content({ content }: { content: string }) {
   return <div className={styles.content}>{content}</div>;
 }
 
-function Footer({ to }: { to: string }) {
+interface FooterProps {
+  prevPost: {
+    id: number;
+    title: string;
+  };
+  nextPost: {
+    id: number;
+    title: string;
+  };
+  to: string;
+}
+
+function Footer({ prevPost, nextPost, to }: FooterProps) {
   return (
     <div className={styles.footer}>
-      <Button size="sm" color="black">
-        <Link href={to}>목록</Link>
+      <div className={styles.postItems}>
+        {prevPost ? (
+          <Link href={`${to}/${prevPost.id}`} className={styles.prevPost}>
+            <span className={styles.border}>이전</span>
+            <h2> {prevPost.title}</h2>
+          </Link>
+        ) : (
+          <div className={styles.noPost}>이전 글이 없습니다</div>
+        )}
+        {nextPost ? (
+          <Link href={`${to}/${nextPost.id}`} className={styles.nextPost}>
+            <span className={styles.border}>다음</span>
+            <h2>{nextPost.title}</h2>
+          </Link>
+        ) : (
+          <div className={styles.noPost}>다음 글이 없습니다.</div>
+        )}
+      </div>
+
+      <Button size="sm" color="black" className={styles.goToListButton}>
+        <ArrowLeft size={'1rem'} />
+        <Link href={to}>목록으로</Link>
       </Button>
     </div>
   );
