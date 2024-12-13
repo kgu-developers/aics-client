@@ -6,7 +6,7 @@ interface Path {
 interface Page {
   id: string;
   base: string;
-  path: Path | Path[];
+  path: Path[];
 }
 
 const PAGES: Page[] = [
@@ -45,18 +45,22 @@ const PAGES: Page[] = [
   {
     id: 'lab',
     base: '/lab',
-    path: {
-      title: '연구실 소개',
-      url: '/',
-    },
+    path: [
+      {
+        title: '연구실 소개',
+        url: '/',
+      },
+    ],
   },
   {
     id: 'member',
     base: '/member',
-    path: {
-      title: '교수진 소개',
-      url: '/professor',
-    },
+    path: [
+      {
+        title: '교수진 소개',
+        url: '/professor',
+      },
+    ],
   },
   {
     id: 'my',
