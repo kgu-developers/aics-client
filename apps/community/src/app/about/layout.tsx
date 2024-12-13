@@ -8,9 +8,9 @@ export default function AboutLayout({
 }) {
   return (
     <div className={styles.layoutWrapper}>
-      <div className={styles.navigationContainer}>
+      <aside className={styles.navigationContainer}>
         <AsideNavigationMenu />
-      </div>
+      </aside>
       <div className={styles.content}>{children}</div>
     </div>
   );
