@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import * as styles from '~/components/member/professor/professor-card.css';
 
-import type { Professor } from '~/app/member/professor/remote';
+import type { Professor } from '~/types/professor';
 
 function ProfessorCard({ professor }: { professor: Professor }) {
   return (
