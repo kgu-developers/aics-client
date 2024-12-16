@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 
+import { professorQueryOptions } from '~/apis/member/professor/queries';
+import { Hydrate, getDehydratedQuery } from '~/utils/react-query';
+
 import { ProfessorCard } from '~/components/member/professor/professor-card';
 import { PageHeader } from '~/components/page-header';
-
-import { getProfessors } from './remote';
 
 import * as styles from '~/app/member/professor/page.css';
 
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ProfessorPage() {
-  const { data } = await getProfessors();
+  const { queryKey, queryFn } = professorQueryOptions.all();
+  const query = await getDehydratedQuery({ queryKey, queryFn });
+  const { data } = query.state.data ?? {};
 
   return (
     <section>
@@ -25,14 +28,16 @@ export default async function ProfessorPage() {
         description="경기대학교 AI컴퓨터공학부의 교수진을 소개해요"
       />
 
-      <div className={styles.professorListWrapper}>
-        {data.map((professor) => (
-          <ProfessorCard
-            key={`professor-${professor.id}`}
-            professor={professor}
-          />
-        ))}
-      </div>
+      <Hydrate state={{ query }}>
+        <div className={styles.professorListWrapper}>
+          {data?.map((professor) => (
+            <ProfessorCard
+              key={`professor-${professor.id}`}
+              professor={professor}
+            />
+          ))}
+        </div>
+      </Hydrate>
     </section>
   );
 }
