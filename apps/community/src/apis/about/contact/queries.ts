@@ -1,4 +1,4 @@
-import ContactService from './contact-service';
+import ContactService from './service';
 
 const queryKeys = {
   all: ['contacts'] as const,

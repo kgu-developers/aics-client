@@ -1,4 +1,4 @@
-import ClubService from './club-service';
+import ClubService from './service';
 
 const queryKeys = {
   all: ['clubs'] as const,

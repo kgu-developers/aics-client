@@ -1,4 +1,4 @@
-import LabService from './lab-service';
+import LabService from './service';
 
 const queryKeys = {
   all: ['labs'] as const,

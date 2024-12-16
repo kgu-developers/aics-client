@@ -1,4 +1,4 @@
-import ProfessorService from './professor-service';
+import ProfessorService from './service';
 
 const queryKeys = {
   all: ['contacts'] as const,

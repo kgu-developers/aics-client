@@ -1,4 +1,4 @@
-import DeptService from './dept-service';
+import DeptService from './service';
 
 const queryKeys = {
   all: ['depts'] as const,
