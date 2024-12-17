@@ -1,6 +1,6 @@
-import * as styles from '~/app/lab/page.css';
 import { getLabs } from '~/app/lab/remotes';
 import { LabCard } from '~/components/lab/lab-card';
+import { LabList } from '~/components/lab/lab-list';
 import { PageHeader } from '~/components/page-header';
 
 //** TODO: for mocking */
@@ -15,11 +15,11 @@ export default async function LabPage() {
         title="연구실 소개"
         description="경기대학교 AI컴퓨터공학부의 다양한 연구실을 소개해요."
       />
-      <section className={styles.cardContainer}>
+      <LabList>
         {data.map((lab) => (
           <LabCard key={`lab-${lab.id}`} lab={lab} />
         ))}
-      </section>
+      </LabList>
     </>
   );
 }

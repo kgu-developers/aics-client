@@ -1,13 +1,14 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const cardWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  padding: '1rem 3rem',
+  padding: '2rem 1rem 2rem 3rem',
   gap: '3rem',
-  border: '1px solid rgba(0, 0, 0, 0.1)',
-  borderRadius: '0.5rem',
-  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+  border: `1px solid ${themeVars.color.gray300}`,
+  borderRadius: themeVars.borderRadius.lg,
+  boxShadow: themeVars.boxShadow.md,
 });
 
 const image = style({
@@ -16,7 +17,7 @@ const image = style({
 
 const divider = style({
   width: 1,
-  height: '90%',
+  height: '100%',
   backgroundImage:
     'repeating-linear-gradient(#000, #000 1px, transparent 1px, transparent 3px)',
   opacity: 0.5,
@@ -26,18 +27,21 @@ const infoWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  paddingBottom: '1rem',
+  gap: themeVars.spacing.md,
 });
 
 const title = style({
-  fontSize: '1.25rem',
+  marginBottom: themeVars.spacing.lg,
+  fontSize: themeVars.fontSize.xl,
+  fontWeight: themeVars.fontWeight.semibold,
   color: '#333D4B',
 });
 
 const link = style({
-  color: 'black',
+  textDecoration: 'underline',
+
   ':hover': {
-    color: 'blue',
+    color: themeVars.color.primary,
     transition: 'color 0.3s',
   },
 });
