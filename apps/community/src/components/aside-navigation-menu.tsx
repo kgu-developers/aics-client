@@ -12,7 +12,7 @@ function AsideNavigationMenu() {
   const page = PAGES.find((page) => pathname.startsWith(page.base));
 
   return (
-    <div className={styles.navigationContainer}>
+    <aside className={styles.navigationContainer}>
       <h2 className={styles.navigationTitle}>
         {PATHMAP[page?.id as pathmapKey]}
       </h2>
@@ -26,7 +26,7 @@ function AsideNavigationMenu() {
           {path.title}
         </Link>
       ))}
-    </div>
+    </aside>
   );
 }
 
