@@ -6,6 +6,7 @@ import * as styles from '~/app/layout.css';
 import { SiteFooter } from '~/components/site-footer';
 import { SiteHeader } from '~/components/site-header';
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
             <main className={styles.main}>{children}</main>
             <SiteFooter />
           </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </Providers>
       </body>
     </html>
