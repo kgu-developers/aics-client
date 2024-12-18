@@ -1,14 +1,16 @@
-import ProfessorService from './service';
+import { queryOptions } from '@tanstack/react-query';
+import { getProfessors } from './remote';
 
 const queryKeys = {
   all: ['contacts'] as const,
 };
 
 const professorQueryOptions = {
-  all: () => ({
-    queryKey: queryKeys.all,
-    queryFn: () => ProfessorService.getProfessors(),
-  }),
+  all: () =>
+    queryOptions({
+      queryKey: queryKeys.all,
+      queryFn: () => getProfessors(),
+    }),
 };
 
 export { professorQueryOptions };
