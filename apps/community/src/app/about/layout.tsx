@@ -14,9 +14,7 @@ export default function AboutLayout({
 }) {
   return (
     <div className={styles.layoutWrapper}>
-      <div className={styles.navigationContainer}>
-        <AsideNavigationMenu base="about" paths={ABOUT_PATHS} />
-      </div>
+      <AsideNavigationMenu base="about" paths={ABOUT_PATHS} />
       <div className={styles.content}>{children}</div>
     </div>
   );

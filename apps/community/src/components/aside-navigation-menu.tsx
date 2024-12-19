@@ -13,13 +13,19 @@ interface Props {
 function AsideNavigationMenu({ paths, base }: Props) {
   return (
     <aside className={styles.navigationContainer}>
-      <h2 className={styles.navigationTitle}>{PATHMAP[base]}</h2>
-      <div className={styles.separator} />
-      {paths.map((path) => (
-        <Link className={styles.navigationLink} key={path.url} href={path.url}>
-          {path.title}
-        </Link>
-      ))}
+      <div className={styles.navigationWrapper}>
+        <h2 className={styles.navigationTitle}>{PATHMAP[base]}</h2>
+        <div className={styles.separator} />
+        {paths.map((path) => (
+          <Link
+            className={styles.navigationLink}
+            key={path.url}
+            href={path.url}
+          >
+            {path.title}
+          </Link>
+        ))}
+      </div>
     </aside>
   );
 }

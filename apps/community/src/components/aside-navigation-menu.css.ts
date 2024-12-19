@@ -1,7 +1,17 @@
-import { themeVars } from '@aics-client/design-system/styles';
+import { screen, themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
-const navigationContainer = style({
+const navigationContainer = style([
+  screen.lg({
+    display: 'block',
+  }),
+  {
+    width: '17rem',
+    display: 'none',
+  },
+]);
+
+const navigationWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   position: 'fixed',
@@ -28,4 +38,10 @@ const navigationLink = style({
   },
 });
 
-export { navigationContainer, separator, navigationTitle, navigationLink };
+export {
+  navigationWrapper,
+  navigationContainer,
+  separator,
+  navigationTitle,
+  navigationLink,
+};
