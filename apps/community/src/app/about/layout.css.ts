@@ -1,17 +1,19 @@
+import { screen } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const layoutWrapper = style({
   display: 'flex',
 });
 
-const navigationContainer = style({
-  width: '17rem',
-  '@media': {
-    'screen and (max-width: 1024px)': {
-      display: 'none',
-    },
+const navigationContainer = style([
+  screen.lg({
+    display: 'block',
+  }),
+  {
+    width: '17rem',
+    display: 'none',
   },
-});
+]);
 
 const content = style({
   flex: 1,
