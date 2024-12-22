@@ -11,8 +11,10 @@ interface PaginationOptions {
 
 const BOARD_QUERY_KEYS = {
   ALL: () => ['boards'],
-  PAGE: (options: PaginationOptions) => [...BOARD_QUERY_KEYS.ALL(), options],
-  DETAIL: (postId: string) => [...BOARD_QUERY_KEYS.ALL(), postId],
+  PAGES: () => [...BOARD_QUERY_KEYS.ALL(), 'pages'],
+  PAGE: (options: PaginationOptions) => [...BOARD_QUERY_KEYS.PAGES(), options],
+  DETAILS: () => [...BOARD_QUERY_KEYS.ALL(), 'details'],
+  DETAIL: (postId: string) => [...BOARD_QUERY_KEYS.DETAILS(), postId],
 };
 
 const BOARD_QUERY_OPTIONS = {
