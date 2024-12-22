@@ -4,7 +4,7 @@ import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
 import { PATH } from '~/constants/path';
 
-import type { Board } from '~/app/board/remote';
+import type { Board } from '~/apis/board/remote';
 
 import * as styles from '~/components/board/board-list.css';
 
