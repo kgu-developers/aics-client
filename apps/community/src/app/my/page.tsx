@@ -3,6 +3,9 @@ import { MyInfoProfileCard } from '~/components/my/my-info-profile-card';
 import { PageHeader } from '~/components/page-header';
 import { getMyProfile } from './remotes';
 
+// TODO: for mocking but will be replaced with a proper solution later
+export const dynamic = 'force-dynamic';
+
 export default async function MyPage() {
   const { data } = await getMyProfile();
 
