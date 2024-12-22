@@ -78,7 +78,7 @@ function Footer({ prevPost, nextPost, to }: FooterProps) {
             <h2> {prevPost.title}</h2>
           </Link>
         ) : (
-          <div className={styles.noPost}>이전 글이 없습니다</div>
+          <div className={styles.prevPost}>이전 글이 없습니다</div>
         )}
         {nextPost ? (
           <Link href={`${to}/${nextPost.id}`} className={styles.nextPost}>
@@ -86,7 +86,7 @@ function Footer({ prevPost, nextPost, to }: FooterProps) {
             <h2>{nextPost.title}</h2>
           </Link>
         ) : (
-          <div className={styles.noPost}>다음 글이 없습니다.</div>
+          <div className={styles.nextPost}>다음 글이 없습니다.</div>
         )}
       </div>
 

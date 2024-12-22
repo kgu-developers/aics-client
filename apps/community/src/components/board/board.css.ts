@@ -7,7 +7,6 @@ const border = style({
 });
 
 const content = style({
-  borderBottom: `1px solid ${themeVars.color.gray200}`,
   padding: '3rem 1rem',
   whiteSpace: 'pre-line',
 });
@@ -60,26 +59,22 @@ const informationWrapper = style({
 const nextPost = style({
   display: themeVars.display.flex,
   gap: themeVars.spacing.lg,
-  borderTop: `1px solid ${themeVars.color.gray200}`,
-  borderBottom: `1px solid ${themeVars.color.gray200}`,
   padding: '1.25rem',
-});
-
-const noPost = style({
-  padding: '1.25rem',
-  userSelect: 'none',
 });
 
 const postItems = style({
   width: themeVars.width.full,
   display: themeVars.display.flex,
   flexDirection: themeVars.flexDirection.column,
+  borderTop: `1px solid ${themeVars.color.gray200}`,
+  borderBottom: `1px solid ${themeVars.color.gray200}`,
 });
 
 const prevPost = style({
   display: themeVars.display.flex,
   gap: themeVars.spacing.lg,
   padding: '1.25rem',
+  borderBottom: `1px solid ${themeVars.color.gray200}`,
 });
 
 const title = style({
@@ -108,7 +103,6 @@ export {
   goToListButton,
   informationWrapper,
   nextPost,
-  noPost,
   postItems,
   prevPost,
   title,
