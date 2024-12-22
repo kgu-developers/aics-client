@@ -24,7 +24,7 @@
     "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
-    "next": "15.0.2",
+    "next": "15.1.2",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "react-hook-form": "^7.53.2",
