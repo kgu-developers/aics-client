@@ -7,9 +7,6 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ContactList } from '~/components/about/contact/contact-list';
 import { PageHeader } from '~/components/page-header';
 
-// TODO: for mocking but will be replaced with a proper solution later
-export const dynamic = 'force-dynamic';
-
 export default async function ContactPage() {
   const queryClient = getQueryClient();
 

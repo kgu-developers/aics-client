@@ -6,9 +6,6 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { DeptInfoSection } from '~/components/about/dept/dept-info-section';
 import { PageHeader } from '~/components/page-header';
 
-// TODO: for mocking but will be replaced with a proper solution later
-export const dynamic = 'force-dynamic';
-
 export default async function Dept() {
   const queryClient = getQueryClient();
 

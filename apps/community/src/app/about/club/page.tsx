@@ -6,9 +6,6 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ClubList } from '~/components/about/club/club-list';
 import { PageHeader } from '~/components/page-header';
 
-// TODO: for mocking but will be replaced with a proper solution later
-export const dynamic = 'force-dynamic';
-
 export default async function ClubPage() {
   const queryClient = getQueryClient();
 

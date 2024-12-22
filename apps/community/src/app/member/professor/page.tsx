@@ -14,9 +14,6 @@ export const metadata: Metadata = {
   description: '경기대학교 소프트웨어경영대학 AI컴퓨터공학부 공식 홈페이지',
 };
 
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic';
-
 export default async function ProfessorPage() {
   const queryClient = getQueryClient();
 
