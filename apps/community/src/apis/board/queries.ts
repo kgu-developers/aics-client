@@ -15,7 +15,7 @@ const BOARD_QUERY_KEYS = {
   PAGE: (options: PaginationOptions) => [...BOARD_QUERY_KEYS.PAGES(), options],
   DETAILS: () => [...BOARD_QUERY_KEYS.ALL(), 'details'],
   DETAIL: (postId: string) => [...BOARD_QUERY_KEYS.DETAILS(), postId],
-};
+} as const;
 
 const BOARD_QUERY_OPTIONS = {
   ALL: ({

@@ -2,8 +2,8 @@ import { queryOptions } from '@tanstack/react-query';
 import { getContacts } from './remote';
 
 const CONTACT_QUERY_KEYS = {
-  ALL: ['contacts'] as const,
-};
+  ALL: ['contacts'],
+} as const;
 
 const CONTACT_QUERY_OPTIONS = {
   ALL: () =>

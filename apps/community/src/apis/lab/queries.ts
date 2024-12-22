@@ -3,8 +3,8 @@ import { queryOptions } from '@tanstack/react-query';
 import { getLabs } from './remote';
 
 const LABS_QUERY_KEYS = {
-  ALL: ['labs'] as const,
-};
+  ALL: ['labs'],
+} as const;
 
 const LABS_QUERY_OPTIONS = {
   ALL: () =>
