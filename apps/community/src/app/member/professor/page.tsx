@@ -9,11 +9,6 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ProfessorList } from '~/components/member/professor/professor-list';
 import { PageHeader } from '~/components/page-header';
 
-export const metadata: Metadata = {
-  title: '교수진 소개 - 경기대학교 AI컴퓨터공학부',
-  description: '경기대학교 소프트웨어경영대학 AI컴퓨터공학부 공식 홈페이지',
-};
-
 export default async function ProfessorPage() {
   const queryClient = getQueryClient();
 
