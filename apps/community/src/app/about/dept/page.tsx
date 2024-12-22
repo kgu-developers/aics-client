@@ -6,7 +6,7 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { DeptInfoSection } from '~/components/about/dept/dept-info-section';
 import { PageHeader } from '~/components/page-header';
 
-export default async function Dept() {
+export default function Dept() {
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(DEPT_QUERY_OPTIONS.ALL());

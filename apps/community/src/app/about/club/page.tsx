@@ -6,7 +6,7 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ClubList } from '~/components/about/club/club-list';
 import { PageHeader } from '~/components/page-header';
 
-export default async function ClubPage() {
+export default function ClubPage() {
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(CLUB_QUERY_OPTIONS.ALL());

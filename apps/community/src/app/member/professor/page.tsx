@@ -9,7 +9,7 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ProfessorList } from '~/components/member/professor/professor-list';
 import { PageHeader } from '~/components/page-header';
 
-export default async function ProfessorPage() {
+export default function ProfessorPage() {
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL());

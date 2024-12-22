@@ -7,7 +7,7 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ContactList } from '~/components/about/contact/contact-list';
 import { PageHeader } from '~/components/page-header';
 
-export default async function ContactPage() {
+export default function ContactPage() {
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(CONTACT_QUERY_OPTIONS.ALL());

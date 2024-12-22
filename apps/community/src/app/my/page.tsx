@@ -7,7 +7,7 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { MyInformation } from '~/components/my/my-information';
 import { PageHeader } from '~/components/page-header';
 
-export default async function MyPage() {
+export default function MyPage() {
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(MY_PROFILE_QUERY_OPTIONS.ALL());
