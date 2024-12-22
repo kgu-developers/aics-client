@@ -1,5 +1,5 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { deptQueryOptions } from '~/apis/about/dept/queries';
+import { DEPT_QUERY_OPTIONS } from '~/apis/about/dept/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 export default async function Dept() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(deptQueryOptions.all());
+  void queryClient.prefetchQuery(DEPT_QUERY_OPTIONS.ALL());
 
   return (
     <>

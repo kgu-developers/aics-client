@@ -9,28 +9,28 @@ interface PaginationOptions {
   category: string;
 }
 
-const queryKeys = {
-  all: () => ['boards'],
-  PAGE: (options: PaginationOptions) => [...queryKeys.all(), options],
-  DETAIL: (postId: string) => [...queryKeys.all(), postId],
+const BOARD_QUERY_KEYS = {
+  ALL: () => ['boards'],
+  PAGE: (options: PaginationOptions) => [...BOARD_QUERY_KEYS.ALL(), options],
+  DETAIL: (postId: string) => [...BOARD_QUERY_KEYS.ALL(), postId],
 };
 
-const boardQueryOptions = {
-  all: ({
+const BOARD_QUERY_OPTIONS = {
+  ALL: ({
     page,
     size,
     keyword,
     category,
   }: { page: number; size: number; keyword: string; category: string }) =>
     queryOptions({
-      queryKey: queryKeys.PAGE({ page, size, keyword, category }),
+      queryKey: BOARD_QUERY_KEYS.PAGE({ page, size, keyword, category }),
       queryFn: () => getBoards({ page, size, keyword, category }),
     }),
-  detail: (postId: string) =>
+  DETAIL: (postId: string) =>
     queryOptions({
-      queryKey: queryKeys.DETAIL(postId),
+      queryKey: BOARD_QUERY_KEYS.DETAIL(postId),
       queryFn: () => getBoardDetail(postId),
     }),
 };
 
-export { boardQueryOptions };
+export { BOARD_QUERY_KEYS, BOARD_QUERY_OPTIONS };

@@ -1,16 +1,16 @@
 import { queryOptions } from '@tanstack/react-query';
 import { getDepts } from './remote';
 
-const queryKeys = {
-  all: ['depts'] as const,
+const DEPT_QUERY_KEYS = {
+  ALL: ['depts'] as const,
 };
 
-const deptQueryOptions = {
-  all: () =>
+const DEPT_QUERY_OPTIONS = {
+  ALL: () =>
     queryOptions({
-      queryKey: queryKeys.all,
+      queryKey: DEPT_QUERY_KEYS.ALL,
       queryFn: () => getDepts(),
     }),
 };
 
-export { deptQueryOptions };
+export { DEPT_QUERY_KEYS, DEPT_QUERY_OPTIONS };

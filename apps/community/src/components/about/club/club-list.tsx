@@ -2,14 +2,14 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { clubQueryOptions } from '~/apis/about/club/queries';
+import { CLUB_QUERY_OPTIONS } from '~/apis/about/club/queries';
 
 import { ClubCard } from './club-card';
 
 import * as style from './club-list.css';
 
 function ClubList() {
-  const { data } = useSuspenseQuery(clubQueryOptions.all());
+  const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL());
 
   return (
     <div className={style.clubList}>

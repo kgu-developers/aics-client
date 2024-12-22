@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { professorQueryOptions } from '~/apis/member/professor/queries';
+import { PROFESSORS_QUERY_OPTIONS } from '~/apis/member/professor/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
@@ -20,7 +20,7 @@ export const dynamic = 'force-dynamic';
 export default async function ProfessorPage() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(professorQueryOptions.all());
+  void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL());
 
   return (
     <section>

@@ -2,12 +2,12 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { contactQueryOptions } from '~/apis/about/contact/queries';
+import { CONTACT_QUERY_OPTIONS } from '~/apis/about/contact/queries';
 
 import { List } from '~/components/about/list';
 
 function ContactList() {
-  const { data } = useSuspenseQuery(contactQueryOptions.all());
+  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL());
   return (
     <>
       {data.data.map((contact) => (

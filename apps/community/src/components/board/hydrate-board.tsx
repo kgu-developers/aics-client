@@ -1,12 +1,12 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { boardQueryOptions } from '~/apis/board/queries';
+import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 import { PATH } from '~/constants/path';
 import { Board } from './board';
 
 function HydrateBoard({ postId }: { postId: string }) {
-  const { data } = useSuspenseQuery(boardQueryOptions.detail(postId));
+  const { data } = useSuspenseQuery(BOARD_QUERY_OPTIONS.DETAIL(postId));
   return (
     <Board>
       <Board.Header

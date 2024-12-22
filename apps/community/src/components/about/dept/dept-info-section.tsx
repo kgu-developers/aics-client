@@ -5,13 +5,13 @@ import { Fragment } from 'react';
 
 import { sprinkles } from '@aics-client/design-system/styles';
 
-import { deptQueryOptions } from '~/apis/about/dept/queries';
+import { DEPT_QUERY_OPTIONS } from '~/apis/about/dept/queries';
 
 import { List } from '~/components/about/list';
 import { Section } from '~/components/about/section';
 
 function DeptInfoSection() {
-  const { data } = useSuspenseQuery(deptQueryOptions.all());
+  const { data } = useSuspenseQuery(DEPT_QUERY_OPTIONS.ALL());
 
   return (
     <Section>

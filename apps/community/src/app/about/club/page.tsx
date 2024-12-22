@@ -1,5 +1,5 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { clubQueryOptions } from '~/apis/about/club/queries';
+import { CLUB_QUERY_OPTIONS } from '~/apis/about/club/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 export default async function ClubPage() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(clubQueryOptions.all());
+  void queryClient.prefetchQuery(CLUB_QUERY_OPTIONS.ALL());
 
   return (
     <>

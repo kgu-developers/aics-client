@@ -2,12 +2,13 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { boardQueryOptions } from '~/apis/board/queries';
+import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 
 import { PaginatedBoardList } from '~/components/board/paginated-board-list';
 import { PageHeader } from '~/components/page-header';
 
 import * as styles from '~/app/board/notice/page.css';
+import { SearchBar } from '~/components/board/search-bar';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +27,7 @@ export default async function NewsPage(props: {
   const keyword = searchParams?.keyword || '';
   const queryClient = getQueryClient();
   void queryClient.prefetchQuery(
-    boardQueryOptions.all({
+    BOARD_QUERY_OPTIONS.ALL({
       page: currentPage,
       size: 10,
       keyword: keyword,
@@ -42,6 +43,7 @@ export default async function NewsPage(props: {
       />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <section className={styles.boardWrapper}>
+          <SearchBar placeholder="검색어를 입력하세요" />
           <PaginatedBoardList
             page={currentPage}
             size={SIZE}

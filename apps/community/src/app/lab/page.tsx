@@ -2,7 +2,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { labsQueryOptions } from '~/apis/lab/queries';
+import { LABS_QUERY_OPTIONS } from '~/apis/lab/queries';
 
 import { PageHeader } from '~/components/page-header';
 
@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 export default function LabPage() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(labsQueryOptions.all());
+  void queryClient.prefetchQuery(LABS_QUERY_OPTIONS.ALL());
 
   return (
     <>

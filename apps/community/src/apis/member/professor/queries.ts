@@ -1,16 +1,16 @@
 import { queryOptions } from '@tanstack/react-query';
 import { getProfessors } from './remote';
 
-const queryKeys = {
-  all: ['contacts'] as const,
+const PROFESSORS_QUERY_KEYS = {
+  ALL: ['contacts'] as const,
 };
 
-const professorQueryOptions = {
-  all: () =>
+const PROFESSORS_QUERY_OPTIONS = {
+  ALL: () =>
     queryOptions({
-      queryKey: queryKeys.all,
+      queryKey: PROFESSORS_QUERY_KEYS.ALL,
       queryFn: () => getProfessors(),
     }),
 };
 
-export { professorQueryOptions };
+export { PROFESSORS_QUERY_KEYS, PROFESSORS_QUERY_OPTIONS };
