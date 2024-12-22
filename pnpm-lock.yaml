@@ -91,10 +91,10 @@ importers:
         specifier: 15.1.2
         version: 15.1.2(babel-plugin-react-compiler@0.0.0-experimental-fa06e2c-20241016)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0
       react-dom:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0(react@19.0.0)
       react-hook-form:
         specifier: ^7.53.2
