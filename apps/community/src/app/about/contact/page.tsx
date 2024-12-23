@@ -7,6 +7,9 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ContactList } from '~/components/about/contact/contact-list';
 import { PageHeader } from '~/components/page-header';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default function ContactPage() {
   const queryClient = getQueryClient();
 

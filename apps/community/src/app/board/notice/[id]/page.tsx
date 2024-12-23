@@ -6,6 +6,9 @@ import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 
 import { HydrateBoard } from '~/components/board/hydrate-board';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default async function NoticeDetailPage({
   params,
 }: {

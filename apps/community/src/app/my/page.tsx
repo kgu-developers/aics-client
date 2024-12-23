@@ -7,6 +7,9 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { MyInformation } from '~/components/my/my-information';
 import { PageHeader } from '~/components/page-header';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default function MyPage() {
   const queryClient = getQueryClient();
 

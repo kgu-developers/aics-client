@@ -10,6 +10,9 @@ import { PageHeader } from '~/components/page-header';
 import * as styles from '~/app/board/notice/page.css';
 import { SearchBar } from '~/components/board/search-bar';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 const SIZE = 10;
 const CATEGORY = 'DEPT_INFO';
 

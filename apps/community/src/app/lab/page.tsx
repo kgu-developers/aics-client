@@ -8,6 +8,9 @@ import { PageHeader } from '~/components/page-header';
 
 import { LabList } from '~/components/lab/lab-list';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default function LabPage() {
   const queryClient = getQueryClient();
 

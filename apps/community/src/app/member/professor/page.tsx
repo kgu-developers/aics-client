@@ -9,6 +9,9 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { ProfessorList } from '~/components/member/professor/professor-list';
 import { PageHeader } from '~/components/page-header';
 
+//** TODO: for mocking */
+export const dynamic = 'force-dynamic';
+
 export default function ProfessorPage() {
   const queryClient = getQueryClient();
 
