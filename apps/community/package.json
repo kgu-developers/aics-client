@@ -18,6 +18,8 @@
   "dependencies": {
     "@aics-client/design-system": "workspace:^",
     "@hookform/resolvers": "^3.9.1",
+    "@tanstack/react-query": "^5.62.7",
+    "@tanstack/react-query-devtools": "^5.62.7",
     "@vanilla-extract/css": "^1.16.0",
     "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
     "clsx": "^2.1.1",

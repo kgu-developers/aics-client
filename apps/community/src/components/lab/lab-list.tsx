@@ -1,11 +1,23 @@
+'use client';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { LABS_QUERY_OPTIONS } from '~/apis/lab/queries';
+
+import { LabCard } from './lab-card';
+
 import * as styles from '~/components/lab/lab-list.css';
 
-interface Props {
-  children: React.ReactNode;
-}
+function LabList() {
+  const { data } = useSuspenseQuery(LABS_QUERY_OPTIONS.ALL());
 
-function LabList({ children }: Props) {
-  return <div className={styles.labList}>{children}</div>;
+  return (
+    <div className={styles.labList}>
+      {data.data.map((lab) => (
+        <LabCard key={`lab-${lab.id}`} lab={lab} />
+      ))}
+    </div>
+  );
 }
 
 export { LabList };

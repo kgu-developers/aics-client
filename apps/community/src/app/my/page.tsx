@@ -1,25 +1,19 @@
-import { MyInfoEditableProfileCard } from '~/components/my/my-info-editable-profile-card';
-import { MyInfoProfileCard } from '~/components/my/my-info-profile-card';
-import { PageHeader } from '~/components/page-header';
-import { getMyProfile } from './remotes';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-// TODO: for mocking but will be replaced with a proper solution later
+import { MY_PROFILE_QUERY_OPTIONS } from '~/apis/my/queries';
+
+import { getQueryClient } from '~/utils/get-query-client';
+
+import { MyInformation } from '~/components/my/my-information';
+import { PageHeader } from '~/components/page-header';
+
+//** TODO: for mocking */
 export const dynamic = 'force-dynamic';
 
-export default async function MyPage() {
-  const { data } = await getMyProfile();
+export default function MyPage() {
+  const queryClient = getQueryClient();
 
-  const userDetails = [
-    { title: '이름', value: data.name },
-    { title: '학번', value: data.id },
-    { title: '구분', value: data.role },
-    { title: '전공', value: data.major },
-  ];
-
-  const userEditableDetails = [
-    { title: '전화번호', value: data.phone },
-    { title: '이메일', value: data.email },
-  ];
+  void queryClient.prefetchQuery(MY_PROFILE_QUERY_OPTIONS.ALL());
 
   return (
     <>
@@ -27,8 +21,9 @@ export default async function MyPage() {
         title="회원 정보"
         description="등록한 회원 정보를 확인할 수 있어요."
       />
-      <MyInfoProfileCard data={userDetails} />
-      <MyInfoEditableProfileCard data={userEditableDetails} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <MyInformation />
+      </HydrationBoundary>
     </>
   );
 }

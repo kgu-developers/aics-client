@@ -1,13 +1,20 @@
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+
+import { getQueryClient } from '~/utils/get-query-client';
+
+import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
+
+import { PaginatedBoardList } from '~/components/board/paginated-board-list';
 import { PageHeader } from '~/components/page-header';
 
-import { BoardList } from '~/components/board/board-list';
+import * as styles from '~/app/board/notice/page.css';
 import { SearchBar } from '~/components/board/search-bar';
 
-import * as styles from '~/app/board/notice/page.css';
-import { Pagination } from '~/components/board/pagination';
-import { getBoards } from '../remote';
-
+//** TODO: for mocking */
 export const dynamic = 'force-dynamic';
+
+const SIZE = 10;
+const CATEGORY = 'DEPT_INFO';
 
 export default async function NoticePage(props: {
   searchParams?: Promise<{
@@ -19,13 +26,15 @@ export default async function NoticePage(props: {
   const searchParams = await props.searchParams;
   const currentPage = Number(searchParams?.page) || 0;
   const keyword = searchParams?.keyword || '';
-
-  const { data } = await getBoards({
-    page: currentPage,
-    size: 10,
-    keyword,
-    category: 'DEPT_INFO',
-  });
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(
+    BOARD_QUERY_OPTIONS.ALL({
+      page: currentPage,
+      size: 10,
+      keyword: keyword,
+      category: 'DEPT_INFO',
+    }),
+  );
 
   return (
     <section>
@@ -33,14 +42,17 @@ export default async function NoticePage(props: {
         title="공지사항"
         description="학부와 관련된 중요한 공지사항을 안내해드려요."
       />
-      <section className={styles.boardWrapper}>
-        <SearchBar placeholder="검색어를 입력하세요" />
-        <BoardList data={data.contents} />
-        <Pagination
-          totalPage={data.pagable.totalPage}
-          currentPage={currentPage}
-        />
-      </section>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <section className={styles.boardWrapper}>
+          <SearchBar placeholder="검색어를 입력하세요" />
+          <PaginatedBoardList
+            page={currentPage}
+            size={SIZE}
+            keyword={keyword}
+            category={CATEGORY}
+          />
+        </section>
+      </HydrationBoundary>
     </section>
   );
 }

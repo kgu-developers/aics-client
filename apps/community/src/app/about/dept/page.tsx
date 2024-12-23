@@ -1,15 +1,18 @@
-import { sprinkles } from '@aics-client/design-system/styles';
-import { Fragment } from 'react';
-import { getDepts } from '~/app/about/dept/remotes';
-import { List } from '~/components/about/list';
-import { Section } from '~/components/about/section';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { DEPT_QUERY_OPTIONS } from '~/apis/about/dept/queries';
+
+import { getQueryClient } from '~/utils/get-query-client';
+
+import { DeptInfoSection } from '~/components/about/dept/dept-info-section';
 import { PageHeader } from '~/components/page-header';
 
-// TODO: for mocking but will be replaced with a proper solution later
+//** TODO: for mocking */
 export const dynamic = 'force-dynamic';
 
-export default async function Dept() {
-  const { data } = await getDepts();
+export default function Dept() {
+  const queryClient = getQueryClient();
+
+  void queryClient.prefetchQuery(DEPT_QUERY_OPTIONS.ALL());
 
   return (
     <>
@@ -17,21 +20,9 @@ export default async function Dept() {
         title="학부 소개"
         description="경기대학교 AI컴퓨터공학부를 소개해요."
       />
-      <Section>
-        {data.map((dept) => (
-          <Fragment key={`dept-${dept.name}`}>
-            <Section.Title>{dept.name}</Section.Title>
-            <p className={sprinkles({ marginBottom: 'none' })}>
-              {dept.description}
-            </p>
-            <List title="교육 목표">
-              {dept.educationGoals.map((goal) => (
-                <List.Row key={`dept-goal-${goal}`}>{goal}</List.Row>
-              ))}
-            </List>
-          </Fragment>
-        ))}
-      </Section>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <DeptInfoSection />
+      </HydrationBoundary>
     </>
   );
 }
