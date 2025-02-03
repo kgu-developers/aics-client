@@ -12,7 +12,7 @@ function ProfessorList() {
   const { data } = useSuspenseQuery(PROFESSORS_QUERY_OPTIONS.ALL());
   return (
     <div className={styles.professorListWrapper}>
-      {data.data.map((professor) => (
+      {data.contents.map((professor) => (
         <ProfessorCard
           key={`professor-${professor.id}`}
           professor={professor}

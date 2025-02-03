@@ -1,5 +1,5 @@
-import { MOCK_END_POINT } from '~/constants/api';
-import { http } from '~/utils/http';
+import { END_POINT } from '~/constants/api';
+import type { BaseResponse } from '~/types/api';
 
 interface Professor {
   id: number;
@@ -8,10 +8,12 @@ interface Professor {
   type: string;
   contact: string;
   email: string;
+  officeLoc: string;
 }
 
-function getProfessors() {
-  return http.get<Professor[]>(MOCK_END_POINT.PROFESSORS);
+async function getProfessors(): Promise<BaseResponse<Professor[]>> {
+  const res = await fetch(END_POINT.PROFESSORS);
+  return res.json();
 }
 
 export { type Professor, getProfessors };
