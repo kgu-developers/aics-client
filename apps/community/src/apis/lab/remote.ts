@@ -1,5 +1,5 @@
 import { END_POINT } from '~/constants/api';
-import type { BaseResponse } from '~/types/api';
+import { http } from '~/utils/http';
 
 interface Lab {
   id: number;
@@ -13,9 +13,8 @@ interface Lab {
   };
 }
 
-async function getLabs(): Promise<BaseResponse<Lab[]>> {
-  const res = await fetch(END_POINT.LABS);
-  return res.json();
+async function getLabs() {
+  return http.get<Lab[]>(END_POINT.LABS);
 }
 
 export { type Lab, getLabs };

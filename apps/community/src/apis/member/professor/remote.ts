@@ -1,5 +1,5 @@
 import { END_POINT } from '~/constants/api';
-import type { BaseResponse } from '~/types/api';
+import { http } from '~/utils/http';
 
 interface Professor {
   id: number;
@@ -11,9 +11,8 @@ interface Professor {
   officeLoc: string;
 }
 
-async function getProfessors(): Promise<BaseResponse<Professor[]>> {
-  const res = await fetch(END_POINT.PROFESSORS);
-  return res.json();
+function getProfessors() {
+  return http.get<Professor[]>(END_POINT.PROFESSORS);
 }
 
 export { type Professor, getProfessors };

@@ -1,5 +1,5 @@
-import { END_POINT, MOCK_END_POINT } from '~/constants/api';
-import type { BaseResponse } from '~/types/api';
+import { END_POINT } from '~/constants/api';
+import { http } from '~/utils/http';
 
 interface Club {
   name: string;
@@ -8,9 +8,8 @@ interface Club {
   image?: string;
 }
 
-async function getClubs(): Promise<BaseResponse<Club[]>> {
-  const res = await fetch(END_POINT.CLUBS);
-  return res.json();
+async function getClubs() {
+  return http.get<Club[]>(END_POINT.CLUBS);
 }
 
 export { type Club, getClubs };
