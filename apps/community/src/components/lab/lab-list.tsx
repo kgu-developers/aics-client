@@ -13,7 +13,7 @@ function LabList() {
 
   return (
     <div className={styles.labList}>
-      {data.data.map((lab) => (
+      {data.contents.map((lab) => (
         <LabCard key={`lab-${lab.id}`} lab={lab} />
       ))}
     </div>

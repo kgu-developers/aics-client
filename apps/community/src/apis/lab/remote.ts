@@ -1,17 +1,21 @@
-import { MOCK_END_POINT } from '~/constants/api';
-import { http } from '~/utils/http';
+import { END_POINT } from '~/constants/api';
+import type { BaseResponse } from '~/types/api';
 
 interface Lab {
   id: number;
   name: string;
-  location: string;
+  loc: string;
   site: string;
-  professor: string;
-  img?: string;
+  advisor: string;
+  file?: {
+    id: number;
+    physicalPath?: string;
+  };
 }
 
-function getLabs() {
-  return http.get<Lab[]>(MOCK_END_POINT.LABS);
+async function getLabs(): Promise<BaseResponse<Lab[]>> {
+  const res = await fetch(END_POINT.LABS);
+  return res.json();
 }
 
 export { type Lab, getLabs };

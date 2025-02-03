@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         hostname: 'kutis.kyonggi.ac.kr',
         pathname: '/webkutis/TransferImageStreamHJ.do',
       },
+      {
+        protocol: 'https', //더미 데이터 허용을 위한 임시방편
+        hostname: 'image.com',
+      },
     ],
   },
   transpilePackages: [
