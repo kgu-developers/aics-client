@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { Provider as JotaiProvider } from 'jotai';
+
 import { ThemeProvider } from '@aics-client/design-system';
 import { pretendardVariable } from '~/app/fonts/pretendard-variable';
 import * as styles from '~/app/layout.css';
@@ -23,11 +25,13 @@ export default function RootLayout({
     <html lang="ko">
       <body className={pretendardVariable.className}>
         <Providers>
-          <ThemeProvider className={styles.root}>
-            <SiteHeader />
-            <main className={styles.main}>{children}</main>
-            <SiteFooter />
-          </ThemeProvider>
+          <JotaiProvider>
+            <ThemeProvider className={styles.root}>
+              <SiteHeader />
+              <main className={styles.main}>{children}</main>
+              <SiteFooter />
+            </ThemeProvider>
+          </JotaiProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </Providers>
       </body>
