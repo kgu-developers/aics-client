@@ -1,6 +1,7 @@
 import { createTheme } from '@vanilla-extract/css';
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import border from './tokens/border';
+import boxShadow from './tokens/box-shadow';
 import color from './tokens/color';
 import container from './tokens/container';
 import display from './tokens/display';
@@ -21,6 +22,7 @@ const tokens = {
   // presets
   container: container,
   spacing: spacing,
+  boxShadow: boxShadow,
 };
 
 const properties = defineProperties({

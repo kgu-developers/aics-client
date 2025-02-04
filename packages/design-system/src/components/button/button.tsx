@@ -3,7 +3,7 @@ import Spinner from '../spinner/spinner';
 import { buttonVariants } from './button.css';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'primary' | 'secondary' | 'danger' | 'warning';
+  color?: 'primary' | 'secondary' | 'danger' | 'warning' | 'outline' | 'black';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
 }

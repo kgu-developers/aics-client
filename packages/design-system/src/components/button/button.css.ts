@@ -21,6 +21,17 @@ const buttonVariants = recipe({
       warning: {
         backgroundColor: themeVars.color.warning,
       },
+      black: {
+        backgroundColor: themeVars.color.black,
+      },
+      outline: {
+        backgroundColor: themeVars.color.white,
+        color: themeVars.color.black,
+        border: `1px solid ${themeVars.color.gray300}`,
+        ':hover': {
+          backgroundColor: themeVars.color.gray50,
+        },
+      },
     },
     size: {
       sm: {
@@ -36,6 +47,7 @@ const buttonVariants = recipe({
     disabled: {
       true: {
         cursor: 'default',
+        opacity: themeVars.opacity[75],
       },
       false: {
         cursor: 'pointer',

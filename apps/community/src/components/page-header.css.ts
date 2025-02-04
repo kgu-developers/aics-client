@@ -1,7 +1,15 @@
 import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
+import { PageHeader } from '~/components/page-header';
 
-const pageHeaderWrapper = style([
+const pageHeaderWrapper = style({
+  marginBottom: '3rem',
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
+  gap: themeVars.spacing.xl,
+});
+
+const pageHeaderTitle = style([
   themeVars.flexColumn,
   {
     gap: '0.75rem',
@@ -21,4 +29,4 @@ const description = style({
   color: '#4E5968',
 });
 
-export { pageHeaderWrapper, title, description };
+export { pageHeaderWrapper, pageHeaderTitle, title, description };
