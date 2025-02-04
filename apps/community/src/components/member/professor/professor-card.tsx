@@ -23,6 +23,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
       <div className={styles.cardFooter}>
         <p className={styles.professorContact}>{professor.contact}</p>
         <p className={styles.professorEmail}>{professor.email}</p>
+        <p>{professor.officeLoc}</p>
       </div>
     </div>
   );

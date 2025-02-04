@@ -13,7 +13,7 @@ function ClubList() {
 
   return (
     <div className={style.clubList}>
-      {data.data.map((club) => (
+      {data.contents.map((club) => (
         <ClubCard key={`club-${club.name}`} {...club} />
       ))}
     </div>

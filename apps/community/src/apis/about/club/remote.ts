@@ -1,15 +1,15 @@
-import { MOCK_END_POINT } from '~/constants/api';
+import { END_POINT } from '~/constants/api';
 import { http } from '~/utils/http';
 
 interface Club {
   name: string;
   description: string;
-  link?: string;
+  site?: string;
   image?: string;
 }
 
-function getClubs() {
-  return http.get<Club[]>(MOCK_END_POINT.CLUB);
+async function getClubs() {
+  return http.get<Club[]>(END_POINT.CLUBS);
 }
 
 export { type Club, getClubs };

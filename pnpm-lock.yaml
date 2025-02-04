@@ -99,6 +99,9 @@ importers:
       embla-carousel-react:
         specifier: ^8.5.1
         version: 8.5.1(react@19.0.0)
+      jotai:
+        specifier: ^2.11.0
+        version: 2.11.0(@types/react@19.0.0)(react@19.0.0)
       lucide-react:
         specifier: ^0.462.0
         version: 0.462.0(react@19.0.0)
@@ -2207,6 +2210,18 @@ packages:
   jiti@1.21.6:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
+
+  jotai@2.11.0:
+    resolution: {integrity: sha512-zKfoBBD1uDw3rljwHkt0fWuja1B76R7CjznuBO+mSX6jpsO1EBeWNRKpeaQho9yPI/pvCv4recGfgOXGxwPZvQ==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -5473,6 +5488,11 @@ snapshots:
       supports-color: 8.1.1
 
   jiti@1.21.6: {}
+
+  jotai@2.11.0(@types/react@19.0.0)(react@19.0.0):
+    optionalDependencies:
+      '@types/react': 19.0.0
+      react: 19.0.0
 
   js-tokens@4.0.0: {}
 

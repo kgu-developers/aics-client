@@ -1,5 +1,5 @@
 type BaseResponse<T> = {
-  data: T;
+  contents: T;
 };
 
 type PaginationResponse<T> = BaseResponse<{
