@@ -13,12 +13,19 @@ const MOCK_END_POINT = {
 } as const;
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
 
 const END_POINT = {
   LABS: `${API_BASE_URL}/labs`,
-  SIGN_IN: `${API_BASE_URL}/auth/login`,
+  SIGN_IN: `${AUTH_BASE_URL}/login`,
   PROFESSORS: `${API_BASE_URL}/professors`,
   CLUBS: `${API_BASE_URL}/clubs`,
 };
 
-export { MOCK_BASE_URL, MOCK_END_POINT, API_BASE_URL, END_POINT };
+export {
+  MOCK_BASE_URL,
+  MOCK_END_POINT,
+  API_BASE_URL,
+  AUTH_BASE_URL,
+  END_POINT,
+};

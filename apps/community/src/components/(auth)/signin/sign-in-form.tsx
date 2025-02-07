@@ -3,24 +3,15 @@
 import { Input } from '@aics-client/design-system';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import type { z } from 'zod';
 
 import { AuthButton } from '~/components/(auth)/auth-button';
 import * as styles from '~/components/(auth)/signin/sign-in-form.css';
-
-const signInFormSchema = z.object({
-  studentId: z.string().min(1, { message: '학번을 입력해주세요.' }),
-  password: z
-    .string()
-    .min(1, { message: '비밀번호를 입력해주세요.' })
-    .regex(
-      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,15}$/,
-      { message: '올바른 비밀번호 형식이 아닙니다.' },
-    ),
-});
+import { useSignIn } from '~/hooks/use-sign-in';
+import { signInFormSchema } from '~/schemas/sign-in-form-schema';
 
 const defaultValues = {
-  studentId: '',
+  userId: '',
   password: '',
 };
 
@@ -34,22 +25,31 @@ function SignInForm() {
     defaultValues,
   });
 
-  const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
-    console.log(data);
+  const mutation = useSignIn();
+
+  const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit((data) => mutation.mutate(data));
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+    <form
+      onSubmit={handleSubmit((data) => mutation.mutate(data))}
+      className={styles.formWrapper}
+    >
       <Input
-        {...register('studentId')}
+        {...register('userId')}
         type="text"
         placeholder="학번을 입력해주세요"
-        message={errors.studentId?.message}
+        onKeyUp={handlePressEnter}
+        message={errors.userId?.message}
       />
       <Input
         {...register('password')}
         type="password"
         placeholder="비밀번호를 입력해주세요"
+        onKeyUp={handlePressEnter}
         message={errors.password?.message}
       />
       <AuthButton type="submit" disabled={!isValid}>
