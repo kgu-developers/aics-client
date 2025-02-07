@@ -5,11 +5,11 @@ import * as style from './club-card.css';
 interface Props {
   name: string;
   description: string;
-  link?: string;
+  site?: string;
   image?: string;
 }
 
-function ClubCard({ image, name, description, link }: Props) {
+function ClubCard({ image, name, description, site }: Props) {
   return (
     <div className={style.cardWrapper}>
       <Image
@@ -22,10 +22,10 @@ function ClubCard({ image, name, description, link }: Props) {
       <div className={style.cardBodyWrapper}>
         <h2 className={style.cardTitle}>{name}</h2>
         <p>{description}</p>
-        {link && (
+        {site && (
           <p className={style.cardLinkWrapper}>
             홈페이지 -
-            <Link href={link} target="_blank" className={style.cardHomeLink}>
+            <Link href={site} target="_blank" className={style.cardHomeLink}>
               바로가기
             </Link>
           </p>
