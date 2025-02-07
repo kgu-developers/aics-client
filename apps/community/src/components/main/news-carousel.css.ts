@@ -54,7 +54,7 @@ const image = style({
 
 const controls = style({
   display: 'flex',
-  justifyContent: 'end',
+  justifyContent: 'flex-end',
 });
 
 const slideTitle = style({
