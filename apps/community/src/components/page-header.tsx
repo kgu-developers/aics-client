@@ -24,19 +24,17 @@ function PageHeader({ title, description }: Props) {
       <Breadcrumb>
         <Breadcrumb.List>
           <Breadcrumb.Item>
-            <Breadcrumb.Link>
-              <Link href="/">홈</Link>
-            </Breadcrumb.Link>
+            <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           {paths.map((path, index) =>
             index !== paths.length - 1 ? (
               <Fragment key={`subpath-${path}`}>
                 <Breadcrumb.Item>
-                  <Breadcrumb.Link>
-                    <Link href={`/${paths.slice(0, index + 1).join('/')}`}>
-                      {PATHMAP[path as pathmapKey]}
-                    </Link>
+                  <Breadcrumb.Link
+                    href={`/${paths.slice(0, index + 1).join('/')}`}
+                  >
+                    {PATHMAP[path as pathmapKey]}
                   </Breadcrumb.Link>
                 </Breadcrumb.Item>
               </Fragment>

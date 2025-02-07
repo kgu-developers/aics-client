@@ -20,11 +20,18 @@ function Item({ className, ...props }: React.ComponentPropsWithoutRef<'li'>) {
 
 function Link({
   className,
+  href,
   ...props
 }: React.ComponentPropsWithoutRef<'a'> & {
-  isLast?: boolean;
+  href: string;
 }) {
-  return <a className={cn(styles.breadcrumbLink, className)} {...props} />;
+  return (
+    <a
+      className={cn(styles.breadcrumbLink, className)}
+      href={href}
+      {...props}
+    />
+  );
 }
 
 function Page({
