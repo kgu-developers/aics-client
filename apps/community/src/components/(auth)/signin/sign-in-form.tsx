@@ -33,25 +33,40 @@ function SignInForm() {
     }
   };
 
+  const resetErrorMessage = () => {
+    if (mutation.isError) {
+      mutation.reset();
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit((data) => mutation.mutate(data))}
       className={styles.formWrapper}
     >
       <Input
-        {...register('userId')}
+        {...register('userId', {
+          onChange: resetErrorMessage,
+        })}
         type="text"
         placeholder="학번을 입력해주세요"
         onKeyUp={handlePressEnter}
         message={errors.userId?.message}
       />
       <Input
-        {...register('password')}
+        {...register('password', {
+          onChange: resetErrorMessage,
+        })}
         type="password"
         placeholder="비밀번호를 입력해주세요"
         onKeyUp={handlePressEnter}
         message={errors.password?.message}
       />
+      {mutation.isError && (
+        <span className={styles.errorMessage}>
+          학번 혹은 비밀번호를 확인하여주세요.
+        </span>
+      )}
       <AuthButton type="submit" disabled={!isValid}>
         로그인
       </AuthButton>

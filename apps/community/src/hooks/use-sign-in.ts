@@ -16,9 +16,6 @@ export function useSignIn() {
       const res = await http.post<typeof data, Tokens>(END_POINT.SIGN_IN, data);
       return res;
     },
-    onError: () => {
-      alert('학번 또는 비밀번호를 확인해주세요.');
-    },
     onSuccess: (token) => {
       console.log(token);
     },

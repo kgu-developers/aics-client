@@ -1,7 +1,7 @@
 // 추후 삭제 예정
 const MOCK_BASE_URL = 'http://58.238.255.245:8080/api/v1';
 
-const MOCK_END_POINT = {
+const _MOCK_END_POINT = {
   HEROES: `${MOCK_BASE_URL}/main/hero-images`,
   RECENT_NEWS: `${MOCK_BASE_URL}/main/recent-news`,
   RECENT_NOTICES: `${MOCK_BASE_URL}/main/recent-notices`,
