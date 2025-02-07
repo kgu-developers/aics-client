@@ -1,13 +1,18 @@
 'use client';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
+import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
 import { CarouselDots } from '~/components/carousel-dots';
 import * as styles from '~/components/main/hero-carousel.css';
 
-function HeroCarousel({ heroes }) {
+function HeroCarousel() {
+  const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL());
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
       delay: 9000,
@@ -21,15 +26,21 @@ function HeroCarousel({ heroes }) {
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.slides}>
           {heroes.map((slide) => (
-            <div key={`hero-${slide.id}`} className={styles.slide}>
+            <Link
+              key={`hero-${slide.id}`}
+              href={slide.link}
+              className={styles.slide}
+            >
               <Image
-                src={slide.image}
-                alt={slide.alt}
+                src={
+                  slide.file.physicalPath ?? 'https://picsum.photos/1600/900'
+                }
+                alt={`slide-${slide.file.id}`}
                 width={1600}
                 height={900}
                 className={styles.image}
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
