@@ -1,4 +1,5 @@
 import { END_POINT } from '~/constants/api';
+import type { BaseResponse } from '~/types/api';
 import { http } from '~/utils/http';
 
 export interface Carousel {
@@ -24,7 +25,9 @@ export interface Post {
 }
 
 const getHero = async () => {
-  const { contents } = await http.get<Carousel[]>(END_POINT.CAROUSEL);
+  const { contents } = await http.get<BaseResponse<Carousel[]>>(
+    END_POINT.CAROUSEL,
+  );
 
   return contents;
 };
@@ -36,7 +39,7 @@ const getRecentNews = async (): Promise<Post[]> => {
     category: 'NEWS',
   });
 
-  const { contents } = await http.get<Post[]>(
+  const { contents } = await http.get<BaseResponse<Post[]>>(
     `${END_POINT.POST}?${params.toString()}`,
   );
 
@@ -50,7 +53,7 @@ const getRecentNotices = async () => {
     category: 'NOTIFICATION',
   });
 
-  const { contents } = await http.get<Post[]>(
+  const { contents } = await http.get<BaseResponse<Post[]>>(
     `${END_POINT.POST}?${params.toString()}`,
   );
 

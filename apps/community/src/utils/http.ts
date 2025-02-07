@@ -12,7 +12,7 @@ async function request<Response>({
   url,
   options = {},
   data,
-}: RequestParams): Promise<BaseResponse<Response>> {
+}: RequestParams): Promise<Response> {
   const config: RequestInit = {
     method,
     headers: {
@@ -31,34 +31,39 @@ async function request<Response>({
     throw new Error(`Status: ${res.status}`);
   }
   const responseData = await res.json();
-  return responseData as BaseResponse<Response>;
+
+  if (method === 'POST') {
+    return responseData;
+  }
+
+  return responseData as Response;
 }
 
 const http = {
   get: <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'GET', url, options });
   },
   post: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'POST', url, options, data });
   },
   put: <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'PUT', url, options, data });
   },
   delete: <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'DELETE', url, options });
   },
 };
