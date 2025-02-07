@@ -7,6 +7,9 @@
         "useHookAtTopLevel": "error",
         "useJsxKeyInIterable": "error"
       },
+      "suspicious": {
+        "noArrayIndexKey": "warn"
+      },
       "style": { "noNamespace": "error" }
     }
   },
@@ -26,6 +29,7 @@
             "noUnreachableSuper": "off"
           },
           "suspicious": {
+            "noArrayIndexKey": "warn",
             "noDuplicateClassMembers": "off",
             "noDuplicateObjectKeys": "off",
             "noDuplicateParameters": "off",

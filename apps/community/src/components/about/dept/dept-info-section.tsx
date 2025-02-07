@@ -15,7 +15,7 @@ function DeptInfoSection() {
 
   return (
     <Section>
-      {data.data.map((dept) => (
+      {data.contents.map((dept) => (
         <Fragment key={`dept-${dept.name}`}>
           <Section.Title>{dept.name}</Section.Title>
           <p className={sprinkles({ marginBottom: 'none' })}>

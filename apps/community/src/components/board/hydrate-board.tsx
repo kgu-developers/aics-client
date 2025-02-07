@@ -10,16 +10,16 @@ function HydrateBoard({ postId }: { postId: string }) {
   return (
     <Board>
       <Board.Header
-        title={data.data.title}
-        author={data.data.author}
-        views={data.data.views}
-        createdAt={data.data.createdAt}
-        file={data.data.file}
+        title={data.contents.title}
+        author={data.contents.author}
+        views={data.contents.views}
+        createdAt={data.contents.createdAt}
+        file={data.contents.file}
       />
-      <Board.Content content={data.data.content} />
+      <Board.Content content={data.contents.content} />
       <Board.Footer
-        prevPost={data.data.prevPost}
-        nextPost={data.data.nextPost}
+        prevPost={data.contents.prevPost}
+        nextPost={data.contents.nextPost}
         to={PATH.NOTICE}
       />
     </Board>
