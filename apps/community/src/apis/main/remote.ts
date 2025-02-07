@@ -1,5 +1,5 @@
-import { http } from '~/utils/http';
 import { END_POINT } from '~/constants/api';
+import { http } from '~/utils/http';
 
 export interface Carousel {
   id: number;
