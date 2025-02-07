@@ -10,7 +10,7 @@ function ContactList() {
   const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL());
   return (
     <>
-      {data.data.map((contact) => (
+      {data.contents.map((contact) => (
         <List key={`contact-${contact.title}`} title={contact.title}>
           {contact.description.map((desc, index) => (
             <List.Row key={`${contact.title}-${index}`}>{desc}</List.Row>
