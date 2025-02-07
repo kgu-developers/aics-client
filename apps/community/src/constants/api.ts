@@ -1,5 +1,4 @@
-// 추후 삭제 예정
-const MOCK_BASE_URL = 'http://58.238.255.245:8080/api/v1';
+const MOCK_BASE_URL = 'http://localhost:3000/api/mock';
 
 const MOCK_END_POINT = {
   HEROES: `${MOCK_BASE_URL}/main/hero-images`,
@@ -18,6 +17,8 @@ const MOCK_END_POINT = {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const END_POINT = {
+  POST: `${API_BASE_URL}/posts`,
+  CAROUSEL: `${API_BASE_URL}/carousels`,
   LABS: `${API_BASE_URL}/labs`,
   SIGN_IN: `${API_BASE_URL}/auth/login`,
   PROFESSORS: `${API_BASE_URL}/professors`,
