@@ -1,6 +1,6 @@
 import { END_POINT } from '~/constants/api';
-import { http } from '~/utils/http';
 import type { BaseResponse } from '~/types/api';
+import { http } from '~/utils/http';
 
 interface Professor {
   id: number;
