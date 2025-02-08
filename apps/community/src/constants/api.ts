@@ -20,6 +20,7 @@ const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
 
 const END_POINT = {
   POST: `${API_BASE_URL}/posts`,
+  POST_DETAIL: (id: string) => `${API_BASE_URL}/posts/${id}`,
   CAROUSEL: `${API_BASE_URL}/carousels`,
   LABS: `${API_BASE_URL}/labs`,
   SIGN_IN: `${AUTH_BASE_URL}/login`,

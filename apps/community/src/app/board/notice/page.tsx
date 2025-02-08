@@ -14,7 +14,7 @@ import { SearchBar } from '~/components/board/search-bar';
 export const dynamic = 'force-dynamic';
 
 const SIZE = 10;
-const CATEGORY = 'DEPT_INFO';
+const CATEGORY = 'NOTIFICATION';
 
 export default async function NoticePage(props: {
   searchParams?: Promise<{
@@ -32,7 +32,7 @@ export default async function NoticePage(props: {
       page: currentPage,
       size: 10,
       keyword: keyword,
-      category: 'DEPT_INFO',
+      category: CATEGORY,
     }),
   );
 
