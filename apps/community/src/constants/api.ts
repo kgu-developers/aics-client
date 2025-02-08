@@ -23,6 +23,7 @@ const END_POINT = {
   CAROUSEL: `${API_BASE_URL}/carousels`,
   LABS: `${API_BASE_URL}/labs`,
   SIGN_IN: `${AUTH_BASE_URL}/login`,
+  REISSUE: `${AUTH_BASE_URL}/reissue`,
   PROFESSORS: `${API_BASE_URL}/professors`,
   CLUBS: `${API_BASE_URL}/clubs`,
 };
