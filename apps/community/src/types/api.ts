@@ -2,15 +2,15 @@ type BaseResponse<T> = {
   contents: T;
 };
 
-type PaginationResponse<T> = BaseResponse<{
+type PaginationResponse<T> = {
   contents: T[];
-  pagable: Pagable;
-}>;
+  pageable: Pagable;
+};
 
 interface Pagable {
   page: number;
   size: number;
-  totalPage: number;
+  totalPages: number;
   totalElements: number;
   isEnd: boolean;
 }

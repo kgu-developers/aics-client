@@ -1,5 +1,3 @@
-import type { BaseResponse } from '~/types/api';
-
 interface RequestParams {
   method: string;
   url: string;

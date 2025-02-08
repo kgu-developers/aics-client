@@ -1,15 +1,17 @@
 import { http } from '~/utils/http';
 
-import { MOCK_END_POINT } from '~/constants/api';
+import { END_POINT, MOCK_END_POINT } from '~/constants/api';
 
+import type { Post } from '~/apis/main/remote';
 import type { PaginationResponse } from '~/types/api';
 
 interface Board {
   postId: number;
+  category: string;
   title: string;
   author: string;
+  description: string;
   views: number;
-  category: string;
   hasAttachment: boolean;
   isPinned: boolean;
   createAt: string;
@@ -54,7 +56,7 @@ interface BoardDetail {
  * @param {string} [params.category] - 게시판을 필터링할 카테고리입니다.
  * @returns {Promise<PaginationResponse<Board>>} - 게시판 리스트 포함된 페이지네이션을 반환합니다.
  */
-async function getBoards({ page, size, keyword = '', category }: BoardParams) {
+async function getPosts({ page, size, keyword = '', category }: BoardParams) {
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
@@ -62,11 +64,9 @@ async function getBoards({ page, size, keyword = '', category }: BoardParams) {
     category: category,
   });
 
-  const response = await http.get(
-    `${MOCK_END_POINT.BOARD}?${params.toString()}`,
-  );
+  const response = await http.get(`${END_POINT.POST}?${params.toString()}`);
 
-  return response as PaginationResponse<Board>;
+  return response as PaginationResponse<Post>;
 }
 
 /**
@@ -79,4 +79,4 @@ async function getBoardDetail(id: string) {
   return await http.get<BoardDetail>(`${MOCK_END_POINT.BOARD_DETAIL(id)}`);
 }
 
-export { getBoards, getBoardDetail, type Board, type BoardDetail };
+export { getPosts, getBoardDetail, type Board, type BoardDetail };

@@ -21,7 +21,7 @@ export interface Post {
   views: number;
   hasAttachment: boolean;
   isPinned: boolean;
-  createAt: string;
+  createdAt: string;
 }
 
 const getHero = async () => {
