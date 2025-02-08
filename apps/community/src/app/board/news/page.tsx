@@ -6,9 +6,9 @@ import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 
 import { PaginatedBoardList } from '~/components/board/paginated-board-list';
 import { PageHeader } from '~/components/page-header';
+import { SearchBar } from '~/components/board/search-bar';
 
 import * as styles from '~/app/board/notice/page.css';
-import { SearchBar } from '~/components/board/search-bar';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';
