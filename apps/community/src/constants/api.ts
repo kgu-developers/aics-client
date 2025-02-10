@@ -28,6 +28,7 @@ const END_POINT = {
   PROFESSORS: `${API_BASE_URL}/professors`,
   CLUBS: `${API_BASE_URL}/clubs`,
   MY_PROFILE: `${API_BASE_URL}/users/my`,
+  EDIT_MY_PROFILE: `${API_BASE_URL}/users`,
 };
 
 const ACCESS_TOKEN_KEY = 'accessToken';

@@ -10,8 +10,14 @@ interface MyProfile {
   major: string;
 }
 
+type MyProfileUpdate = Pick<MyProfile, 'phone' | 'email'>;
+
 function getMyProfile() {
   return http.get<MyProfile>(END_POINT.MY_PROFILE);
 }
 
-export { type MyProfile, getMyProfile };
+function patchMyProfile(data: MyProfileUpdate) {
+  return http.patch<MyProfileUpdate>(END_POINT.EDIT_MY_PROFILE, data);
+}
+
+export { type MyProfile, type MyProfileUpdate, getMyProfile, patchMyProfile };
