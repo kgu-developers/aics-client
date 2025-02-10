@@ -1,6 +1,7 @@
 'use client';
 
 import { MyInfoCard } from '~/components/my/my-info-card';
+import { useEditProfileMutation } from '~/hooks/use-edit-profile-mutation';
 
 interface Props {
   data: {
@@ -10,9 +11,21 @@ interface Props {
 }
 
 function MyInfoEditableProfileCard({ data }: Props) {
+  const { mutate: editProfile } = useEditProfileMutation();
+
+  const updatedData = {
+    phone: data.find((item) => item.title === '전화번호')?.value ?? '',
+    email: data.find((item) => item.title === '이메일')?.value ?? '',
+  };
+
   const handleSave = (field: string, value: string) => {
-    // TODO: 필요한 서버 API 호출 로직 추가
-    console.log(`${field} 저장: ${value}`);
+    if (field === '전화번호') {
+      updatedData.phone = value;
+    } else if (field === '이메일') {
+      updatedData.email = value;
+    }
+
+    editProfile(updatedData);
   };
 
   return (
