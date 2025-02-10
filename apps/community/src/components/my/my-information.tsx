@@ -8,7 +8,8 @@ import { MyInfoEditableProfileCard } from './my-info-editable-profile-card';
 import { MyInfoProfileCard } from './my-info-profile-card';
 
 function MyInformation() {
-  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE());
+
   const userDetails = [
     { title: '이름', value: data.name },
     { title: '학번', value: data.id },
@@ -20,6 +21,7 @@ function MyInformation() {
     { title: '전화번호', value: data.phone },
     { title: '이메일', value: data.email },
   ];
+
   return (
     <>
       <MyInfoProfileCard data={userDetails} />

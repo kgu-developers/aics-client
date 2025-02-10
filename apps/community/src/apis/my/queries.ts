@@ -2,13 +2,14 @@ import { queryOptions } from '@tanstack/react-query';
 import { getMyProfile } from './remotes';
 
 const MY_PROFILE_QUERY_KEYS = {
-  ALL: ['my'],
+  ALL: () => ['my'],
+  PROFILE: () => [...MY_PROFILE_QUERY_KEYS.ALL(), 'profile'],
 } as const;
 
 const MY_PROFILE_QUERY_OPTIONS = {
-  ALL: () =>
+  PROFILE: () =>
     queryOptions({
-      queryKey: MY_PROFILE_QUERY_KEYS.ALL,
+      queryKey: MY_PROFILE_QUERY_KEYS.PROFILE(),
       queryFn: () => getMyProfile(),
     }),
 };

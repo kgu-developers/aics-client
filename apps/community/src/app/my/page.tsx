@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export default function MyPage() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(MY_PROFILE_QUERY_OPTIONS.ALL());
+  void queryClient.prefetchQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE());
 
   return (
     <>
