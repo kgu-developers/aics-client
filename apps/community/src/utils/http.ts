@@ -69,6 +69,13 @@ const http = {
   ): Promise<Response> => {
     return request<Response>({ method: 'DELETE', url, options });
   },
+  patch: <Request, Response = unknown>(
+    url: string,
+    data?: Request,
+    options?: RequestInit,
+  ): Promise<Response> => {
+    return request<Response>({ method: 'PATCH', url, options, data });
+  },
 };
 
 export { http };
