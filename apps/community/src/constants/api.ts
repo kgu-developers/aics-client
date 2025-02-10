@@ -29,10 +29,15 @@ const END_POINT = {
   CLUBS: `${API_BASE_URL}/clubs`,
 };
 
+const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
+
 export {
   MOCK_BASE_URL,
   API_BASE_URL,
   AUTH_BASE_URL,
   MOCK_END_POINT,
   END_POINT,
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
 };

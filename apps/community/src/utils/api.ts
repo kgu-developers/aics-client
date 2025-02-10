@@ -1,0 +1,16 @@
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/constants/api';
+
+function getAccessToken(): string | null {
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+
+function getRefreshToken(): string | null {
+  return localStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
+function removeTokens() {
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
+}
+
+export { getAccessToken, getRefreshToken, removeTokens };
