@@ -1,3 +1,5 @@
+import { getAccessToken } from './api';
+
 interface RequestParams {
   method: string;
   url: string;
@@ -11,10 +13,13 @@ async function request<Response>({
   options = {},
   data,
 }: RequestParams): Promise<Response> {
+  const accessToken = getAccessToken();
+
   const config: RequestInit = {
     method,
     headers: {
       'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       ...(options.headers || {}),
     },
     ...options,

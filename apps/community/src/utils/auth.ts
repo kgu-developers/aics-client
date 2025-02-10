@@ -1,23 +1,27 @@
 import { useMutation } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
-import { accessTokenAtom } from '~/atoms/tokenAtom';
-import { END_POINT } from '~/constants/api';
+import {
+  ACCESS_TOKEN_KEY,
+  END_POINT,
+  REFRESH_TOKEN_KEY,
+} from '~/constants/api';
 import type { Tokens } from '~/hooks/use-sign-in';
+import { useToken } from '~/hooks/use-token';
 import { http } from '~/utils/http';
+import { removeTokens } from './api';
 
 const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000; // 29분
 
-interface RefreshToken {
-  refreshToken: string | null;
-}
-
 const useAuth = () => {
-  const setAccessToken = useSetAtom(accessTokenAtom);
+  const [accessToken, refreshToken] = useToken();
 
   const silentRefresh = useMutation({
     mutationFn: async () => {
-      const refreshToken = localStorage.getItem('refreshToken');
-      return await http.post<RefreshToken, Tokens>(END_POINT.REISSUE, {
+      if (!accessToken || !refreshToken) {
+        throw new Error('Tokens are missing');
+      }
+
+      return await http.post<Tokens, Tokens>(END_POINT.REISSUE, {
+        accessToken,
         refreshToken,
       });
     },
@@ -31,8 +35,8 @@ const useAuth = () => {
   });
 
   const setTokens = (tokens: Tokens) => {
-    setAccessToken(tokens.accessToken);
-    localStorage.setItem('refreshToken', tokens.refreshToken);
+    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
 
     setTimeout(() => {
       silentRefresh.mutate();
@@ -40,11 +44,10 @@ const useAuth = () => {
   };
 
   const logout = () => {
-    setAccessToken(null);
-    localStorage.removeItem('refreshToken');
+    removeTokens();
   };
 
-  return { setTokens, logout };
+  return { setTokens, logout, accessToken, refreshToken };
 };
 
 export { useAuth };
