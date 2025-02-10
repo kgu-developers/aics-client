@@ -27,6 +27,7 @@ const END_POINT = {
   REISSUE: `${AUTH_BASE_URL}/reissue`,
   PROFESSORS: `${API_BASE_URL}/professors`,
   CLUBS: `${API_BASE_URL}/clubs`,
+  MY_PROFILE: `${API_BASE_URL}/users/my`,
 };
 
 const ACCESS_TOKEN_KEY = 'accessToken';
