@@ -1,10 +1,16 @@
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/constants/api';
 
 function getAccessToken(): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
 function getRefreshToken(): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return localStorage.getItem(REFRESH_TOKEN_KEY);
 }
 
