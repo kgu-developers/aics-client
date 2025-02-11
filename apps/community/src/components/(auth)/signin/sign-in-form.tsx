@@ -64,7 +64,7 @@ function SignInForm() {
       />
       {mutation.isError && (
         <span className={styles.errorMessage}>
-          학번 혹은 비밀번호를 확인하여주세요.
+          학번 혹은 비밀번호를 확인해주세요.
         </span>
       )}
       <AuthButton type="submit" disabled={!isValid}>
