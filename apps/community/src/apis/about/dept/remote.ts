@@ -1,5 +1,5 @@
 import { MOCK_END_POINT } from '~/constants/api';
-import type { BaseResponse } from '~/types/api';
+import type { ContentsResponse } from '~/types/api';
 import { http } from '~/utils/http';
 
 interface Dept {
@@ -9,7 +9,7 @@ interface Dept {
 }
 
 function getDepts() {
-  return http.get<BaseResponse<Dept[]>>(MOCK_END_POINT.DEPT);
+  return http.get<ContentsResponse<Dept[]>>(MOCK_END_POINT.DEPT);
 }
 
 export { type Dept, getDepts };

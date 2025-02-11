@@ -1,4 +1,4 @@
-type BaseResponse<T> = {
+type ContentsResponse<T> = {
   contents: T;
 };
 
@@ -15,4 +15,4 @@ interface Pagable {
   isEnd: boolean;
 }
 
-export type { BaseResponse, PaginationResponse, Pagable };
+export type { ContentsResponse, PaginationResponse, Pagable };
