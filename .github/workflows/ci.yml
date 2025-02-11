@@ -46,6 +46,6 @@ jobs:
 
       - name: create dotenv
         run: |
-          touch ../../apps/community/src/.env
-          echo "NEXT_PUBLIC_API_URL={{ secrets.NEXT_PUBLIC_API_URL }}" >> ../../apps/community/src/.env
-          echo "NEXT_PUBLIC_AUTH_API_URL={{ secrets.NEXT_PUBLIC_AUTH_API_URL }}" >> ../apps/community/src/.env
+          touch ../../apps/community/.env
+          echo "NEXT_PUBLIC_API_URL={{ secrets.NEXT_PUBLIC_API_URL }}" >> ../../apps/community/.env
+          echo "NEXT_PUBLIC_AUTH_API_URL={{ secrets.NEXT_PUBLIC_AUTH_API_URL }}" >> ../apps/community/.env
