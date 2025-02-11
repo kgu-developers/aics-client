@@ -3,9 +3,11 @@ import { useRouter } from 'next/navigation';
 import type { z } from 'zod';
 
 import { END_POINT } from '~/constants/api';
+
 import type { signInFormSchema } from '~/schemas/sign-in-form-schema';
-import { useAuth } from '~/utils/auth';
+
 import { http } from '~/utils/http';
+import { useAuth } from './use-auth';
 
 interface Tokens {
   accessToken: string;
