@@ -1,18 +1,18 @@
-type BaseResponse<T> = {
+type ContentsResponse<T> = {
   contents: T;
 };
 
-type PaginationResponse<T> = BaseResponse<{
+type PaginationResponse<T> = {
   contents: T[];
-  pagable: Pagable;
-}>;
+  pageable: Pagable;
+};
 
 interface Pagable {
   page: number;
   size: number;
-  totalPage: number;
+  totalPages: number;
   totalElements: number;
   isEnd: boolean;
 }
 
-export type { BaseResponse, PaginationResponse, Pagable };
+export type { ContentsResponse, PaginationResponse, Pagable };

@@ -5,16 +5,16 @@ import { getQueryClient } from '~/utils/get-query-client';
 import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 
 import { PaginatedBoardList } from '~/components/board/paginated-board-list';
+import { SearchBar } from '~/components/board/search-bar';
 import { PageHeader } from '~/components/page-header';
 
 import * as styles from '~/app/board/notice/page.css';
-import { SearchBar } from '~/components/board/search-bar';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';
 
 const SIZE = 10;
-const CATEGORY = 'DEPT_NEWS';
+const CATEGORY = 'NEWS';
 
 export default async function NewsPage(props: {
   searchParams?: Promise<{
@@ -32,7 +32,7 @@ export default async function NewsPage(props: {
       page: currentPage,
       size: 10,
       keyword: keyword,
-      category: 'DEPT_INFO',
+      category: CATEGORY,
     }),
   );
 

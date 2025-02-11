@@ -8,18 +8,20 @@ import { MyInfoEditableProfileCard } from './my-info-editable-profile-card';
 import { MyInfoProfileCard } from './my-info-profile-card';
 
 function MyInformation() {
-  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE());
+
   const userDetails = [
-    { title: '이름', value: data.contents.name },
-    { title: '학번', value: data.contents.id },
-    { title: '구분', value: data.contents.role },
-    { title: '전공', value: data.contents.major },
+    { title: '이름', value: data.name },
+    { title: '학번', value: data.id },
+    { title: '구분', value: data.role },
+    { title: '전공', value: data.major },
   ];
 
   const userEditableDetails = [
-    { title: '전화번호', value: data.contents.phone },
-    { title: '이메일', value: data.contents.email },
+    { title: '전화번호', value: data.phone },
+    { title: '이메일', value: data.email },
   ];
+
   return (
     <>
       <MyInfoProfileCard data={userDetails} />

@@ -1,8 +1,10 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
 import { PATH } from '~/constants/path';
+
 import { Board } from './board';
 
 function HydrateBoard({ postId }: { postId: string }) {
@@ -10,16 +12,16 @@ function HydrateBoard({ postId }: { postId: string }) {
   return (
     <Board>
       <Board.Header
-        title={data.contents.title}
-        author={data.contents.author}
-        views={data.contents.views}
-        createdAt={data.contents.createdAt}
-        file={data.contents.file}
+        title={data.title}
+        author={data.author}
+        views={data.views}
+        createdAt={data.createdAt}
+        file={data.file}
       />
-      <Board.Content content={data.contents.content} />
+      <Board.Content content={data.content} />
       <Board.Footer
-        prevPost={data.contents.prevPost}
-        nextPost={data.contents.nextPost}
+        prevPost={data.prevPost}
+        nextPost={data.nextPost}
         to={PATH.NOTICE}
       />
     </Board>

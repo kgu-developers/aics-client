@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { PROFESSORS_QUERY_OPTIONS } from '~/apis/member/professor/queries';

@@ -1,4 +1,5 @@
 import { END_POINT } from '~/constants/api';
+import type { ContentsResponse } from '~/types/api';
 import { http } from '~/utils/http';
 
 export interface Carousel {
@@ -20,11 +21,13 @@ export interface Post {
   views: number;
   hasAttachment: boolean;
   isPinned: boolean;
-  createAt: string;
+  createdAt: string;
 }
 
 const getHero = async () => {
-  const { contents } = await http.get<Carousel[]>(END_POINT.CAROUSEL);
+  const { contents } = await http.get<ContentsResponse<Carousel[]>>(
+    END_POINT.CAROUSEL,
+  );
 
   return contents;
 };
@@ -36,7 +39,7 @@ const getRecentNews = async (): Promise<Post[]> => {
     category: 'NEWS',
   });
 
-  const { contents } = await http.get<Post[]>(
+  const { contents } = await http.get<ContentsResponse<Post[]>>(
     `${END_POINT.POST}?${params.toString()}`,
   );
 
@@ -50,7 +53,7 @@ const getRecentNotices = async () => {
     category: 'NOTIFICATION',
   });
 
-  const { contents } = await http.get<Post[]>(
+  const { contents } = await http.get<ContentsResponse<Post[]>>(
     `${END_POINT.POST}?${params.toString()}`,
   );
 

@@ -21,6 +21,7 @@ const PATHMAP = {
   board: '게시판',
   notice: '공지 사항',
   news: '학부 소식',
+  my: '마이페이지',
 } as const;
 
 export { PATH, PATHMAP, type pathmapKey };

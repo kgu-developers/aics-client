@@ -25,11 +25,8 @@ function PaginatedBoardList({ page, size, keyword, category }: Props) {
 
   return (
     <Suspense>
-      <BoardList data={data.contents.contents} />
-      <Pagination
-        totalPage={data.contents.pagable.totalPage}
-        currentPage={page}
-      />
+      <BoardList data={data.contents} />
+      <Pagination totalPage={data.pageable.totalPages} currentPage={page} />
     </Suspense>
   );
 }

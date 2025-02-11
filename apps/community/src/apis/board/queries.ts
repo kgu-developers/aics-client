@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 
-import { getBoardDetail, getBoards } from './remote';
+import { getPostDetail, getPosts } from './remote';
 
 interface PaginationOptions {
   page: number;
@@ -26,12 +26,12 @@ const BOARD_QUERY_OPTIONS = {
   }: { page: number; size: number; keyword: string; category: string }) =>
     queryOptions({
       queryKey: BOARD_QUERY_KEYS.PAGE({ page, size, keyword, category }),
-      queryFn: () => getBoards({ page, size, keyword, category }),
+      queryFn: () => getPosts({ page, size, keyword, category }),
     }),
   DETAIL: (postId: string) =>
     queryOptions({
       queryKey: BOARD_QUERY_KEYS.DETAIL(postId),
-      queryFn: () => getBoardDetail(postId),
+      queryFn: () => getPostDetail(postId),
     }),
 };
 

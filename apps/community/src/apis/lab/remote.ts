@@ -1,4 +1,5 @@
 import { END_POINT } from '~/constants/api';
+import type { ContentsResponse } from '~/types/api';
 import { http } from '~/utils/http';
 
 interface Lab {
@@ -14,7 +15,7 @@ interface Lab {
 }
 
 async function getLabs() {
-  return http.get<Lab[]>(END_POINT.LABS);
+  return http.get<ContentsResponse<Lab[]>>(END_POINT.LABS);
 }
 
 export { type Lab, getLabs };

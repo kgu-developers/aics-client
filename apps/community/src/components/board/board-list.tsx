@@ -4,11 +4,11 @@ import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
 import { PATH } from '~/constants/path';
 
-import type { Board } from '~/apis/board/remote';
+import type { Post } from '~/apis/main/remote';
 
 import * as styles from '~/components/board/board-list.css';
 
-async function BoardList({ data }: { data: Board[] }) {
+async function BoardList({ data }: { data: Post[] }) {
   return (
     <>
       {data.length > 0 ? (
@@ -24,7 +24,7 @@ async function BoardList({ data }: { data: Board[] }) {
   );
 }
 
-function Row({ data }: { data: Board }) {
+function Row({ data }: { data: Post }) {
   return (
     <Link href={PATH.NOTICE_DETAIL(data.postId)}>
       <li className={styles.row}>
@@ -45,7 +45,7 @@ function Row({ data }: { data: Board }) {
             <span>{data.views}</span>
           </div>
           <div className={styles.author}>{data.author}</div>
-          <div>{data.createAt}</div>
+          <div>{data.createdAt}</div>
         </div>
       </li>
     </Link>

@@ -1,4 +1,4 @@
-import type { BaseResponse } from '~/types/api';
+import { getAccessToken } from './api';
 
 interface RequestParams {
   method: string;
@@ -12,11 +12,14 @@ async function request<Response>({
   url,
   options = {},
   data,
-}: RequestParams): Promise<BaseResponse<Response>> {
+}: RequestParams): Promise<Response> {
+  const accessToken = getAccessToken();
+
   const config: RequestInit = {
     method,
     headers: {
       'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       ...(options.headers || {}),
     },
     ...options,
@@ -31,35 +34,47 @@ async function request<Response>({
     throw new Error(`Status: ${res.status}`);
   }
   const responseData = await res.json();
-  return responseData as BaseResponse<Response>;
+
+  if (method === 'POST') {
+    return responseData;
+  }
+
+  return responseData as Response;
 }
 
 const http = {
   get: <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'GET', url, options });
   },
   post: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'POST', url, options, data });
   },
   put: <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'PUT', url, options, data });
   },
   delete: <Response = unknown>(
     url: string,
     options?: RequestInit,
-  ): Promise<BaseResponse<Response>> => {
+  ): Promise<Response> => {
     return request<Response>({ method: 'DELETE', url, options });
+  },
+  patch: <Request, Response = unknown>(
+    url: string,
+    data?: Request,
+    options?: RequestInit,
+  ): Promise<Response> => {
+    return request<Response>({ method: 'PATCH', url, options, data });
   },
 };
 
