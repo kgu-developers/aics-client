@@ -41,11 +41,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run commands
-        run: pnpm ${{ matrix.command }}
-
       - name: create dotenv
         run: |
           touch ./apps/community/.env
           echo "NEXT_PUBLIC_API_URL={{ secrets.NEXT_PUBLIC_API_URL }}" >> ./apps/community/.env
           echo "NEXT_PUBLIC_AUTH_API_URL={{ secrets.NEXT_PUBLIC_AUTH_API_URL }}" >> ./apps/community/.env
+          
+      - name: Run commands
+        run: pnpm ${{ matrix.command }}
+
+      
