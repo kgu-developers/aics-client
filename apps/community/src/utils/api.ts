@@ -15,6 +15,9 @@ function getRefreshToken(): string | null {
 }
 
 function removeTokens() {
+  if (typeof window === 'undefined') {
+    return;
+  }
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
