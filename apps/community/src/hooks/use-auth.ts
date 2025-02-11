@@ -6,8 +6,8 @@ import {
 } from '~/constants/api';
 import type { Tokens } from '~/hooks/use-sign-in';
 import { useToken } from '~/hooks/use-token';
+import { removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
-import { removeTokens } from './api';
 
 const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000; // 29분
 
