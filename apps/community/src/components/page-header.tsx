@@ -26,10 +26,10 @@ function PageHeader({ title, description }: Props) {
           <Breadcrumb.Item>
             <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
-          <Breadcrumb.Separator />
           {paths.map((path, index) =>
             index !== paths.length - 1 ? (
               <Fragment key={`subpath-${path}`}>
+                <Breadcrumb.Separator />
                 <Breadcrumb.Item>
                   <Breadcrumb.Link
                     href={`/${paths.slice(0, index + 1).join('/')}`}
