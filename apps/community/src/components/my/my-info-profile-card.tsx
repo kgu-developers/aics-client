@@ -11,7 +11,7 @@ interface Props {
 
 function MyInfoProfileCard({ data }: Props) {
   return (
-    <MyInfoCard title="내 프로필" layout="default">
+    <MyInfoCard title="내 프로필">
       {data.map((detail) => (
         <MyInfoCard.Field
           key={detail.title}
