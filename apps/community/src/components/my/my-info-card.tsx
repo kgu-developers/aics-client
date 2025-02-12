@@ -1,12 +1,11 @@
 'use client';
 
-import { Button, Input } from '@aics-client/design-system';
-import { useState } from 'react';
+import { Input } from '@aics-client/design-system';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 import * as styles from '~/components/my/my-info-card.css';
 
 interface MyInfoCardProps {
   title: string;
-  layout?: 'default' | 'singleColumn';
   children: React.ReactNode;
 }
 
@@ -16,14 +15,15 @@ interface MyInfoFieldProps {
 }
 
 interface MyInfoEditableFieldProps extends MyInfoFieldProps {
-  onSave?: (value: string) => void;
+  register?: UseFormRegisterReturn;
+  error?: string;
 }
 
-function MyInfoCard({ title, children, layout = 'default' }: MyInfoCardProps) {
+function MyInfoCard({ title, children }: MyInfoCardProps) {
   return (
     <div className={styles.cardWrapper}>
       <h2 className={styles.cardTitle}>{title}</h2>
-      <div className={styles.cardContent[layout]}>{children}</div>
+      <div className={styles.cardContent}>{children}</div>
     </div>
   );
 }
@@ -40,46 +40,20 @@ function MyInfoField({ title, value }: MyInfoFieldProps) {
 function MyInfoEditableField({
   title,
   value,
-  onSave,
+  register,
+  error,
 }: MyInfoEditableFieldProps) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [currentValue, setCurrentValue] = useState(value);
-
-  const handleEditToggle = () => setIsEditing((prev) => !prev);
-  const handleSave = () => {
-    setIsEditing(false);
-    onSave?.(currentValue);
-  };
-
   return (
     <div className={styles.editFieldWrapper}>
-      <div className={styles.editFieldContent}>
+      <div>
         <h3 className={styles.fieldTitle}>{title}</h3>
         <Input
           className={styles.editField}
           type="text"
-          value={currentValue}
-          placeholder={value}
-          onChange={(e) => setCurrentValue(e.target.value)}
-          disabled={!isEditing}
+          defaultValue={value}
+          message={error}
+          {...register}
         />
-      </div>
-
-      <div className={styles.buttonWrapper}>
-        {isEditing ? (
-          <>
-            <Button size="sm" color="outline" onClick={handleSave}>
-              저장
-            </Button>
-            <Button size="sm" color="outline" onClick={handleEditToggle}>
-              취소
-            </Button>
-          </>
-        ) : (
-          <Button size="sm" color="outline" onClick={handleEditToggle}>
-            변경
-          </Button>
-        )}
       </div>
     </div>
   );
