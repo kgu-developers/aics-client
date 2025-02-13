@@ -1,5 +1,5 @@
 function App() {
-  return <div>admin</div>;
+  return <div className="text-lg font-bold">admin</div>;
 }
 
 export default App;
