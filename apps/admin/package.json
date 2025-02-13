@@ -14,8 +14,7 @@
     "check:fix:unsafe": "biome check --write --unsafe",
     "format:fix:unsafe": "biome format --write --unsafe",
     "lint:fix:unsafe": "biome lint --write --unsafe",
-    "preview": "vite preview",
-    "codegen": "openapi-rq -i ./petstore.yaml"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
@@ -30,7 +29,6 @@
     "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
-    "@7nohe/openapi-react-query-codegen": "^1.6.2",
     "@aics-client/typescript": "workspace:*",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.1",
