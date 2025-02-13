@@ -6,12 +6,17 @@ import { z } from 'zod';
 
 import { Button, Input } from '@aics-client/design-system';
 import * as styles from '~/components/my/change-password/change-password-form.css';
+import { useChangePasswordMutation } from '~/hooks/use-change-password-mutation';
 
 const changePasswordSchema = z
   .object({
-    currentPassword: z
+    originalPassword: z
       .string()
-      .min(1, { message: '현재 비밀번호를 입력해주세요.' }),
+      .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' })
+      .regex(
+        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,15}$/,
+        { message: '비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.' },
+      ),
     newPassword: z
       .string()
       .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' })
@@ -29,12 +34,14 @@ const changePasswordSchema = z
   });
 
 const defaultValues = {
-  currentPassword: '',
+  originalPassword: '',
   newPassword: '',
   confirmNewPassword: '',
 };
 
 const ChangePasswordForm = () => {
+  const mutation = useChangePasswordMutation();
+
   const {
     register,
     handleSubmit,
@@ -46,18 +53,24 @@ const ChangePasswordForm = () => {
   });
 
   const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
-    // TODO: 비밀번호 변경 API 호출
-    console.log(data);
+    mutation.mutate(data, {
+      onSuccess: () => {
+        alert('비밀번호 변경이 완료되었습니다.');
+      },
+      onError: () => {
+        alert('현재 비밀번호를 다시 확인해주세요.');
+      },
+    });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
       <Input
-        {...register('currentPassword')}
+        {...register('originalPassword')}
         type="password"
         label="현재 비밀번호"
         placeholder="현재 비밀번호를 입력해주세요"
-        message={errors.currentPassword?.message}
+        message={errors.originalPassword?.message}
       />
 
       <div className={styles.newPasswordWrapper}>
