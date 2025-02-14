@@ -41,9 +41,6 @@ importers:
       '@ant-design/v5-patch-for-react-19':
         specifier: ^1.0.3
         version: 1.0.3(antd@5.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tailwindcss/vite':
-        specifier: ^4.0.6
-        version: 4.0.6(vite@5.4.9(@types/node@22.8.5)(lightningcss@1.29.1)(terser@5.36.0))
       '@tanstack/react-query':
         specifier: ^5.62.7
         version: 5.62.7(react@19.0.0)
@@ -72,6 +69,9 @@ importers:
       '@aics-client/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
+      '@tailwindcss/vite':
+        specifier: ^4.0.6
+        version: 4.0.6(vite@5.4.9(@types/node@22.8.5)(lightningcss@1.29.1)(terser@5.36.0))
       '@types/react':
         specifier: 19.0.0
         version: 19.0.0
