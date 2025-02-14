@@ -5,7 +5,15 @@ const PATH = {
   NEWS_DETAIL: (id: number) => `${PATH.NEWS}/${id}`,
 };
 
-type pathmapKey = keyof typeof PATHMAP;
+export type pathmapKey = keyof typeof PATHMAP;
+
+export interface TPathMap {
+  [key: string]: {
+    title: string;
+    path: string;
+    children?: TPathMap;
+  };
+}
 
 const PATHMAP = {
   about: {
@@ -29,6 +37,6 @@ const PATHMAP = {
     },
   },
   my: { title: '마이페이지', path: '/my' },
-} as const;
+} as const satisfies TPathMap;
 
-export { PATH, PATHMAP, type pathmapKey };
+export { PATH, PATHMAP };

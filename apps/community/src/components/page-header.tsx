@@ -4,19 +4,10 @@ import { usePathname } from 'next/navigation';
 
 import { Breadcrumb } from '@aics-client/design-system';
 import * as styles from '~/components/page-header.css';
-import { PATHMAP } from '~/constants/path';
+import { PATHMAP, type TPathMap, type pathmapKey } from '~/constants/path';
 
 interface TreeProps {
-  pathmap: {
-    title: string;
-    path: string;
-    children?: {
-      [key: string]: {
-        title: string;
-        path: string;
-      };
-    };
-  };
+  pathmap: TPathMap[keyof TPathMap];
   paths: string[];
   level: number;
 }
@@ -66,7 +57,7 @@ function PageHeader({ title, description }: PageHeaderProps) {
             <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
           <Tree
-            pathmap={PATHMAP[paths[0] as keyof typeof PATHMAP]}
+            pathmap={PATHMAP[paths[0] as pathmapKey]}
             paths={paths}
             level={0}
           />
