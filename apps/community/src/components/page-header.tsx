@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 
 import { Breadcrumb } from '@aics-client/design-system';
-import { PATHMAP } from '~/constants/path';
 import * as styles from '~/components/page-header.css';
+import { PATHMAP } from '~/constants/path';
 
 interface TreeProps {
   pathmap: {
