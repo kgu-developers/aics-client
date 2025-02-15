@@ -19,8 +19,8 @@ function MyInformation() {
   ];
 
   const userEditableDetails = [
-    { title: '전화번호', value: data.phone, field: 'phone' },
-    { title: '이메일', value: data.email, field: 'email' },
+    { title: '전화번호', value: data.phone, field: 'phone' as const },
+    { title: '이메일', value: data.email, field: 'email' as const },
   ];
 
   return (

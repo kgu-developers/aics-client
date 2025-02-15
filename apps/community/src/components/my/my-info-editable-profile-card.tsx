@@ -11,7 +11,7 @@ import { useEditProfileMutation } from '~/hooks/use-edit-profile-mutation';
 interface EditableDetail {
   title: string;
   value: string;
-  field: string;
+  field: keyof FormValues;
 }
 
 interface Props {
@@ -64,12 +64,8 @@ function MyInfoEditableProfileCard({ data }: Props) {
             key={detail.field}
             title={detail.title}
             value={detail.value}
-            register={register(detail.field as keyof FormValues)}
-            error={
-              isSubmitted
-                ? errors[detail.field as keyof FormValues]?.message
-                : ''
-            }
+            register={register(detail.field)}
+            error={isSubmitted ? errors[detail.field]?.message : ''}
           />
         ))}
         <Button size="sm" color="black" disabled={!isDirty} type="submit">
