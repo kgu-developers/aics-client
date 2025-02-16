@@ -22,6 +22,7 @@ const PATHMAP = {
   notice: '공지 사항',
   news: '학부 소식',
   my: '마이페이지',
+  'change-password': '비밀번호 변경',
 } as const;
 
 export { PATH, PATHMAP, type pathmapKey };

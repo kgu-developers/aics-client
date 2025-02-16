@@ -6,6 +6,7 @@ import { MY_PROFILE_QUERY_OPTIONS } from '~/apis/my/queries';
 
 import { MyInfoEditableProfileCard } from './my-info-editable-profile-card';
 import { MyInfoProfileCard } from './my-info-profile-card';
+import * as styles from './my-information.css';
 
 function MyInformation() {
   const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE());
@@ -18,15 +19,15 @@ function MyInformation() {
   ];
 
   const userEditableDetails = [
-    { title: '전화번호', value: data.phone },
-    { title: '이메일', value: data.email },
+    { title: '전화번호', value: data.phone, field: 'phone' as const },
+    { title: '이메일', value: data.email, field: 'email' as const },
   ];
 
   return (
-    <>
+    <div className={styles.cardWrapper}>
       <MyInfoProfileCard data={userDetails} />
       <MyInfoEditableProfileCard data={userEditableDetails} />
-    </>
+    </div>
   );
 }
 
