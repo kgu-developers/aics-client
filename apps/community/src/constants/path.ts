@@ -41,6 +41,13 @@ const PATHMAP = {
       news: { title: '학부 소식', path: '/news' },
     },
   },
+  my: {
+    title: '마이페이지',
+    path: '/my',
+    children: {
+      'change-password': { title: '비밀번호 변경', path: '/change-password' },
+    },
+  },
 } as const satisfies TPathMap;
 
 export { PATH, PATHMAP };

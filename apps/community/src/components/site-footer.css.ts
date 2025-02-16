@@ -8,7 +8,7 @@ const footer = style({
 const footerNav = style({
   display: 'flex',
   justifyContent: 'space-between',
-  padding: '2.5rem',
+  padding: '2.5rem 5rem',
   borderRadius: '1rem',
   backgroundColor: 'black',
   color: 'white',
@@ -16,7 +16,7 @@ const footerNav = style({
 
 const navLinks = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
   gap: '2rem',
 });
 
