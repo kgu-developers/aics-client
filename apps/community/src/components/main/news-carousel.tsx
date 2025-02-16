@@ -16,7 +16,13 @@ function NewsCarousel() {
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, slidesToScroll: 'auto' },
-    [Autoplay({ stopOnInteraction: false, stopOnMouseEnter: true })],
+    [
+      Autoplay({
+        delay: 5000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ],
   );
 
   return (
