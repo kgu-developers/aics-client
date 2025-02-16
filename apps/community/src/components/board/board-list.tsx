@@ -8,7 +8,7 @@ import type { Post } from '~/apis/main/remote';
 
 import * as styles from '~/components/board/board-list.css';
 
-async function BoardList({ data }: { data: Post[] }) {
+function BoardList({ data }: { data: Post[] }) {
   return (
     <>
       {data.length > 0 ? (
