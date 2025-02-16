@@ -7,8 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
-import { CarouselDots } from '~/components/carousel-dots';
 import AltImage from '~/assets/images/alt.png';
+import { CarouselDots } from '~/components/carousel-dots';
 import * as styles from '~/components/main/hero-carousel.css';
 
 function HeroCarousel() {
