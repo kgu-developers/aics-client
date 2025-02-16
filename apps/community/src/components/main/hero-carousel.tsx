@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
 import { CarouselDots } from '~/components/carousel-dots';
+import AltImage from '~/assets/images/alt.png';
 import * as styles from '~/components/main/hero-carousel.css';
 
 function HeroCarousel() {
@@ -32,9 +33,7 @@ function HeroCarousel() {
               className={styles.slide}
             >
               <Image
-                src={
-                  slide.file.physicalPath ?? 'https://picsum.photos/1600/900'
-                }
+                src={slide.file.physicalPath ?? AltImage}
                 alt={`slide-${slide.file.id}`}
                 width={1600}
                 height={900}
