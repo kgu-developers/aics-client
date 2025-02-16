@@ -20,13 +20,18 @@ const PATHMAP = {
     title: '소개',
     path: '/about',
     children: {
+      dept: { title: '학부 소개', path: '/dept' },
       club: { title: '동아리 소개', path: '/club' },
       contact: { title: '찾아오시는 길', path: '/contact' },
-      dept: { title: '학부 소개', path: '/dept' },
     },
   },
-  member: { title: '구성원', path: '/member' },
-  professor: { title: '교수진 소개', path: '/professor' },
+  member: {
+    title: '구성원',
+    path: '/member',
+    children: {
+      professor: { title: '교수진 소개', path: '/professor' },
+    },
+  },
   lab: { title: '연구실 소개', path: '/lab' },
   board: {
     title: '게시판',
@@ -36,7 +41,6 @@ const PATHMAP = {
       news: { title: '학부 소식', path: '/news' },
     },
   },
-  my: { title: '마이페이지', path: '/my' },
 } as const satisfies TPathMap;
 
 export { PATH, PATHMAP };
