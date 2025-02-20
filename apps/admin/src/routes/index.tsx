@@ -7,18 +7,19 @@ export const Route = createFileRoute('/')({
 });
 
 interface FormValues {
-  ID: string;
+  username: string;
   password: string;
 }
 
 function SignInPage() {
   const onFinish = (values: FormValues) => {
-    console.log('로그인 정보:', values);
+    //Todo: 로그인 API 연동
+    console.log('Received values:', values);
   };
 
   const [form] = Form.useForm();
 
-  const removeSpace = (fieldName: 'id' | 'password') => {
+  const removeSpace = (fieldName: keyof FormValues) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value.replace(/\s/g, '');
       form.setFieldsValue({ [fieldName]: newValue });
@@ -36,17 +37,17 @@ function SignInPage() {
           name="login"
           onFinish={onFinish}
           layout="vertical"
-          initialValues={{ id: '', password: '' }}
+          initialValues={{ username: '', password: '' }}
         >
           <Form.Item
             label="아이디"
-            name="id"
+            name="username"
             rules={[{ required: true, message: '아이디를 입력하세요!' }]}
           >
             <Input
               prefix={<UserOutlined />}
               placeholder="아이디 입력"
-              onChange={removeSpace('id')}
+              onChange={removeSpace('username')}
             />
           </Form.Item>
 
