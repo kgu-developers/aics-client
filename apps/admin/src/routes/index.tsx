@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { createFileRoute } from '@tanstack/react-router';
 import { Button, Card, Form, Input, Typography } from 'antd';
 
-export const Route = createFileRoute('/auth/sign-in')({
+export const Route = createFileRoute('/')({
   component: SignInPage,
 });
 
@@ -12,16 +12,15 @@ interface FormValues {
 }
 
 function SignInPage() {
-  
   const onFinish = (values: FormValues) => {
     console.log('로그인 정보:', values);
   };
 
-  const [form] = Form.useForm(); 
-  
-  const removeSpace = (fieldName: "id" | "password") => {
+  const [form] = Form.useForm();
+
+  const removeSpace = (fieldName: 'id' | 'password') => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value.replace(/\s/g, "");
+      const newValue = e.target.value.replace(/\s/g, '');
       form.setFieldsValue({ [fieldName]: newValue });
     };
   };
@@ -33,7 +32,7 @@ function SignInPage() {
           로그인
         </Typography.Title>
         <Form
-          form={form}               
+          form={form}
           name="login"
           onFinish={onFinish}
           layout="vertical"
@@ -44,7 +43,11 @@ function SignInPage() {
             name="id"
             rules={[{ required: true, message: '아이디를 입력하세요!' }]}
           >
-            <Input prefix={<UserOutlined />} placeholder="아이디 입력" onChange={removeSpace('id')}/>
+            <Input
+              prefix={<UserOutlined />}
+              placeholder="아이디 입력"
+              onChange={removeSpace('id')}
+            />
           </Form.Item>
 
           <Form.Item
