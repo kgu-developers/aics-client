@@ -23,7 +23,7 @@ interface LabData {
   };
 }
 
-const originData: LabData[] = [
+const labData: LabData[] = [
   {
     key: '1',
     name: '인공지능연구실',
@@ -213,7 +213,7 @@ function LabTable() {
       <Table<LabData>
         components={{ body: { cell: EditableCell } }}
         bordered
-        dataSource={originData}
+        dataSource={labData}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{ onChange: cancel }}
