@@ -1,0 +1,49 @@
+{
+  "name": "@aics-client/tiptap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/components/index.ts",
+    "./styles": "./src/styles/index.ts",
+    "./icons": "./src/icons/lucide.ts"
+  },
+  "scripts": {
+    "check": "biome check",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check:fix": "biome check --write",
+    "format:fix": "biome format --write",
+    "lint:fix": "biome lint --write",
+    "check:fix:unsafe": "biome check --write --unsafe",
+    "format:fix:unsafe": "biome format --write --unsafe",
+    "lint:fix:unsafe": "biome lint --write --unsafe",
+    "generate:component": "turbo gen react-component"
+  },
+  "dependencies": {
+    "@tiptap/extension-color": "^2.11.5",
+    "@tiptap/extension-list-item": "^2.11.5",
+    "@tiptap/extension-text-style": "^2.11.5",
+    "@tiptap/pm": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0"
+  },
+  "devDependencies": {
+    "@aics-client/typescript": "workspace:*",
+    "@turbo/gen": "^1.12.4",
+    "@types/node": "^20.11.24",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.1",
+    "@vanilla-extract/vite-plugin": "^4.0.17",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.16.0",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "react": "catalog:react19"
+  }
+}
