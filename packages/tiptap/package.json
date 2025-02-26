@@ -21,15 +21,16 @@
     "generate:component": "turbo gen react-component"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.6",
     "@tiptap/extension-color": "^2.11.5",
     "@tiptap/extension-list-item": "^2.11.5",
     "@tiptap/extension-text-style": "^2.11.5",
     "@tiptap/pm": "^2.11.5",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
-    "@vanilla-extract/recipes": "^0.5.5",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.462.0"
+    "lucide-react": "^0.462.0",
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
@@ -37,13 +38,10 @@
     "@types/node": "^20.11.24",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.1",
-    "@vanilla-extract/vite-plugin": "^4.0.17",
     "@vitejs/plugin-react": "^4.3.2",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@vanilla-extract/css": "^1.16.0",
-    "@vanilla-extract/sprinkles": "^1.6.3",
     "react": "catalog:react19"
   }
 }
