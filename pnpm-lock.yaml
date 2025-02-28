@@ -56,6 +56,15 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.104.1
         version: 1.104.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tiptap/extension-color':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/extension-text-style@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5)))
+      '@tiptap/extension-list-item':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-text-style':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
       antd:
         specifier: ^5.24.1
         version: 5.24.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -5656,9 +5665,9 @@ snapshots:
   '@storybook/addon-docs@8.4.2(@types/react@19.0.0)(storybook@8.4.2(prettier@3.5.1))(webpack-sources@3.2.3)':
     dependencies:
       '@mdx-js/react': 3.1.0(@types/react@19.0.0)(react@18.3.1)
-      '@storybook/blocks': 8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
+      '@storybook/blocks': 8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
       '@storybook/csf-plugin': 8.4.2(storybook@8.4.2(prettier@3.5.1))(webpack-sources@3.2.3)
-      '@storybook/react-dom-shim': 8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
+      '@storybook/react-dom-shim': 8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.2(prettier@3.5.1)
@@ -5728,16 +5737,6 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.4.2(prettier@3.5.1)
 
-  '@storybook/blocks@8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
-    dependencies:
-      '@storybook/csf': 0.1.11
-      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      storybook: 8.4.2(prettier@3.5.1)
-      ts-dedent: 2.2.0
-    optionalDependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
   '@storybook/blocks@8.4.2(react-dom@18.3.1(react@18.3.1))(react@19.0.0)(storybook@8.4.2(prettier@3.5.1))':
     dependencies:
       '@storybook/csf': 0.1.11
@@ -5746,6 +5745,16 @@ snapshots:
       ts-dedent: 2.2.0
     optionalDependencies:
       react: 19.0.0
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@storybook/blocks@8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
+    dependencies:
+      '@storybook/csf': 0.1.11
+      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@19.0.0))(react@18.3.1)
+      storybook: 8.4.2(prettier@3.5.1)
+      ts-dedent: 2.2.0
+    optionalDependencies:
+      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/builder-vite@8.4.2(storybook@8.4.2(prettier@3.5.1))(vite@5.4.9(@types/node@20.16.13)(lightningcss@1.29.1)(terser@5.36.0))(webpack-sources@3.2.3)':
@@ -5795,14 +5804,14 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/icons@1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
   '@storybook/icons@1.2.12(react-dom@18.3.1(react@18.3.1))(react@19.0.0)':
     dependencies:
       react: 19.0.0
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@storybook/icons@1.2.12(react-dom@18.3.1(react@19.0.0))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/instrumenter@8.4.2(storybook@8.4.2(prettier@3.5.1))':
@@ -5819,15 +5828,15 @@ snapshots:
     dependencies:
       storybook: 8.4.2(prettier@3.5.1)
 
-  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.4.2(prettier@3.5.1)
-
   '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@18.3.1))(react@19.0.0)(storybook@8.4.2(prettier@3.5.1))':
     dependencies:
       react: 19.0.0
+      react-dom: 18.3.1(react@18.3.1)
+      storybook: 8.4.2(prettier@3.5.1)
+
+  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
+    dependencies:
+      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.2(prettier@3.5.1)
 
