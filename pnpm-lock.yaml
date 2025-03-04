@@ -274,10 +274,46 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.6
         version: 4.0.7(vite@5.4.9(@types/node@20.16.13)(lightningcss@1.29.1)(terser@5.36.0))
+      '@tiptap/core':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/extension-bullet-list':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
       '@tiptap/extension-color':
         specifier: ^2.11.5
         version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/extension-text-style@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5)))
+      '@tiptap/extension-heading':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-image':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-link':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
       '@tiptap/extension-list-item':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-ordered-list':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-placeholder':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
+      '@tiptap/extension-table':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
+      '@tiptap/extension-table-cell':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-table-header':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-table-row':
+        specifier: ^2.11.5
+        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/extension-text-align':
         specifier: ^2.11.5
         version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
       '@tiptap/extension-text-style':
@@ -304,6 +340,9 @@ importers:
       tailwindcss:
         specifier: ^4.0.6
         version: 4.0.7
+      tiptap-extension-resize-image:
+        specifier: ^1.2.1
+        version: 1.2.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/extension-image@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5)))(@tiptap/pm@2.11.5)
     devDependencies:
       '@aics-client/typescript':
         specifier: workspace:*
@@ -1818,10 +1857,21 @@ packages:
       '@tiptap/core': ^2.7.0
       '@tiptap/pm': ^2.7.0
 
+  '@tiptap/extension-image@2.11.5':
+    resolution: {integrity: sha512-HbUq9AL8gb8eSuQfY/QKkvMc66ZFN/b6jvQAILGArNOgalUfGizoC6baKTJShaExMSPjBZlaAHtJiQKPaGRHaA==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
   '@tiptap/extension-italic@2.11.5':
     resolution: {integrity: sha512-9VGfb2/LfPhQ6TjzDwuYLRvw0A6VGbaIp3F+5Mql8XVdTBHb2+rhELbyhNGiGVR78CaB/EiKb6dO9xu/tBWSYA==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-link@2.11.5':
+    resolution: {integrity: sha512-4Iu/aPzevbYpe50xDI0ZkqRa6nkZ9eF270Ue2qaF3Ab47nehj+9Jl78XXzo8+LTyFMnrETI73TAs1aC/IGySeQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+      '@tiptap/pm': ^2.7.0
 
   '@tiptap/extension-list-item@2.11.5':
     resolution: {integrity: sha512-Mp5RD/pbkfW1vdc6xMVxXYcta73FOwLmblQlFNn/l/E5/X1DUSA4iGhgDDH4EWO3swbs03x2f7Zka/Xoj3+WLg==}
@@ -1838,8 +1888,40 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
+  '@tiptap/extension-placeholder@2.11.5':
+    resolution: {integrity: sha512-Pr+0Ju/l2ZvXMd9VQxtaoSZbs0BBp1jbBDqwms88ctpyvQFRfLSfSkqudQcSHyw2ROOz2E31p/7I7fpI8Y0CLA==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+      '@tiptap/pm': ^2.7.0
+
   '@tiptap/extension-strike@2.11.5':
     resolution: {integrity: sha512-PVfUiCqrjvsLpbIoVlegSY8RlkR64F1Rr2RYmiybQfGbg+AkSZXDeO0eIrc03//4gua7D9DfIozHmAKv1KN3ow==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table-cell@2.11.5':
+    resolution: {integrity: sha512-S967Au0pgeULstP3FaasOf/LEh72p61Ooh1PcUMF/az4x8EeGgpcEUARpVUxsGxLFvogv6LmhPHZdtcGgdHcBw==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table-header@2.11.5':
+    resolution: {integrity: sha512-O1iBtzZP1XZDi4h1Xmgq1T63il+fpKPvBIMZ0JJH9TyCw5i5rcrMLL2dyy5zaWK3BFRJuYBNSke4c+VWnr/g6w==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table-row@2.11.5':
+    resolution: {integrity: sha512-+/VWhCuW24BcM5aaIc/f0bC6ZR1Q5gnuqw13MIo7gyPx7iIY6BXK8roGiZSs8wYAN4uBEf3EKFm0bSZwQuAeyg==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table@2.11.5':
+    resolution: {integrity: sha512-NKXLhKWdAdURklm98YkCd2ai4fh8jY8HS/+X2s/2QiQt8Z98CU1keCm35fJEEExM234iB/hCqG5vY4JgTc0Tvw==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+      '@tiptap/pm': ^2.7.0
+
+  '@tiptap/extension-text-align@2.11.5':
+    resolution: {integrity: sha512-Ei0zDpH5N9EV59ogydK4HTKa4lCPicCsQllM5n/Nf2tUJPir3aiYxzJ73FzhComD4Hpo1ANYnmssBhy8QeoPZA==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
@@ -3240,6 +3322,9 @@ packages:
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
+  linkifyjs@4.2.0:
+    resolution: {integrity: sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==}
+
   loader-runner@4.3.0:
     resolution: {integrity: sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg==}
     engines: {node: '>=6.11.5'}
@@ -4372,6 +4457,13 @@ packages:
 
   tippy.js@6.3.7:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+
+  tiptap-extension-resize-image@1.2.1:
+    resolution: {integrity: sha512-SLMAujDa+0LN/6Iv2HtU4Uk0BL6LMh4b/r85frpdnjFDW2i6pIOfTVG8jzJQ8T1EgYHNn2YG1U2HoVAGuwLc3Q==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/extension-image': ^2.0.0
+      '@tiptap/pm': ^2.0.0
 
   title-case@2.1.1:
     resolution: {integrity: sha512-EkJoZ2O3zdCz3zJsYCsxyq2OC5hrxR9mfdd5I+w8h/tmFfeOxJ+vvkxsKxdmN0WtS9zLdHEgfgVOiMVgv+Po4Q==}
@@ -5665,9 +5757,9 @@ snapshots:
   '@storybook/addon-docs@8.4.2(@types/react@19.0.0)(storybook@8.4.2(prettier@3.5.1))(webpack-sources@3.2.3)':
     dependencies:
       '@mdx-js/react': 3.1.0(@types/react@19.0.0)(react@18.3.1)
-      '@storybook/blocks': 8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
+      '@storybook/blocks': 8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
       '@storybook/csf-plugin': 8.4.2(storybook@8.4.2(prettier@3.5.1))(webpack-sources@3.2.3)
-      '@storybook/react-dom-shim': 8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
+      '@storybook/react-dom-shim': 8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.2(prettier@3.5.1)
@@ -5737,6 +5829,16 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.4.2(prettier@3.5.1)
 
+  '@storybook/blocks@8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
+    dependencies:
+      '@storybook/csf': 0.1.11
+      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      storybook: 8.4.2(prettier@3.5.1)
+      ts-dedent: 2.2.0
+    optionalDependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   '@storybook/blocks@8.4.2(react-dom@18.3.1(react@18.3.1))(react@19.0.0)(storybook@8.4.2(prettier@3.5.1))':
     dependencies:
       '@storybook/csf': 0.1.11
@@ -5745,16 +5847,6 @@ snapshots:
       ts-dedent: 2.2.0
     optionalDependencies:
       react: 19.0.0
-      react-dom: 18.3.1(react@18.3.1)
-
-  '@storybook/blocks@8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
-    dependencies:
-      '@storybook/csf': 0.1.11
-      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@19.0.0))(react@18.3.1)
-      storybook: 8.4.2(prettier@3.5.1)
-      ts-dedent: 2.2.0
-    optionalDependencies:
-      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/builder-vite@8.4.2(storybook@8.4.2(prettier@3.5.1))(vite@5.4.9(@types/node@20.16.13)(lightningcss@1.29.1)(terser@5.36.0))(webpack-sources@3.2.3)':
@@ -5804,14 +5896,14 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
+  '@storybook/icons@1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   '@storybook/icons@1.2.12(react-dom@18.3.1(react@18.3.1))(react@19.0.0)':
     dependencies:
       react: 19.0.0
-      react-dom: 18.3.1(react@18.3.1)
-
-  '@storybook/icons@1.2.12(react-dom@18.3.1(react@19.0.0))(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/instrumenter@8.4.2(storybook@8.4.2(prettier@3.5.1))':
@@ -5828,15 +5920,15 @@ snapshots:
     dependencies:
       storybook: 8.4.2(prettier@3.5.1)
 
-  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@18.3.1))(react@19.0.0)(storybook@8.4.2(prettier@3.5.1))':
+  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
     dependencies:
-      react: 19.0.0
+      react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.2(prettier@3.5.1)
 
-  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@19.0.0))(react@18.3.1)(storybook@8.4.2(prettier@3.5.1))':
+  '@storybook/react-dom-shim@8.4.2(react-dom@18.3.1(react@18.3.1))(react@19.0.0)(storybook@8.4.2(prettier@3.5.1))':
     dependencies:
-      react: 18.3.1
+      react: 19.0.0
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.2(prettier@3.5.1)
 
@@ -6178,9 +6270,19 @@ snapshots:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
       '@tiptap/pm': 2.11.5
 
+  '@tiptap/extension-image@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
   '@tiptap/extension-italic@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
+  '@tiptap/extension-link@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/pm': 2.11.5
+      linkifyjs: 4.2.0
 
   '@tiptap/extension-list-item@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
     dependencies:
@@ -6194,7 +6296,33 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
 
+  '@tiptap/extension-placeholder@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/pm': 2.11.5
+
   '@tiptap/extension-strike@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
+  '@tiptap/extension-table-cell@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
+  '@tiptap/extension-table-header@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
+  '@tiptap/extension-table-row@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+
+  '@tiptap/extension-table@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/pm': 2.11.5
+
+  '@tiptap/extension-text-align@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
 
@@ -7883,6 +8011,8 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
+  linkifyjs@4.2.0: {}
+
   loader-runner@4.3.0: {}
 
   loader-utils@2.0.4:
@@ -9168,6 +9298,12 @@ snapshots:
   tippy.js@6.3.7:
     dependencies:
       '@popperjs/core': 2.11.8
+
+  tiptap-extension-resize-image@1.2.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/extension-image@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5)))(@tiptap/pm@2.11.5):
+    dependencies:
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/extension-image': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
+      '@tiptap/pm': 2.11.5
 
   title-case@2.1.1:
     dependencies:
