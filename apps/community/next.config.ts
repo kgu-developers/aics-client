@@ -34,6 +34,20 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/board',
+        destination: '/board/notice',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/about/club',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withVanillaExtract(nextConfig);
