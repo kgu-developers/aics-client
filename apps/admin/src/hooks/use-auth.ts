@@ -17,12 +17,12 @@ const useAuth = () => {
   const [accessToken, refreshToken] = useToken();
 
   const silentRefresh = useMutation({
-    mutationFn: async () => {
+    mutationFn: () => {
       if (!accessToken || !refreshToken) {
         throw new Error('Tokens are missing');
       }
 
-      return await http
+      return http
         .post(END_POINT.REISSUE, { json: { accessToken, refreshToken } })
         .json<Tokens>();
     },
