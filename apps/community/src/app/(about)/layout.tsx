@@ -2,9 +2,9 @@ import * as styles from '~/app/(about)/layout.css';
 import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
 
 const ABOUT_PATHS = [
+  { title: '학부 소개', url: '/about/dept' },
   { title: '동아리 소개', url: '/about/club' },
   { title: '찾아오시는 길', url: '/about/contact' },
-  { title: '학부 소개', url: '/about/dept' },
 ];
 
 export default function AboutLayout({
