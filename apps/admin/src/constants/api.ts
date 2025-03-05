@@ -1,4 +1,6 @@
-// 추후 삭제 예정
+/**
+ * 추후 삭제 예정
+ */
 const MOCK_BASE_URL = 'http://58.238.255.245:8080/api/v1';
 
 const MOCK_END_POINT = {
