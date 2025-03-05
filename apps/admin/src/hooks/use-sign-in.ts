@@ -17,8 +17,8 @@ const useSignIn = () => {
   const { setTokens } = useAuth();
 
   return useMutation({
-    mutationFn: async (data: SignInData) => {
-      return await http.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
+    mutationFn: (data: SignInData) => {
+      return http.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
     },
     onSuccess: (token) => {
       console.log('success: ', token);
