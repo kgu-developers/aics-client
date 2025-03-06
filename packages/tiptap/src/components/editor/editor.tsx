@@ -19,6 +19,7 @@ import {
   CustomLinkExtend,
   CustomOrderedListConfigure,
   CustomTextAlignConfigure,
+  TabIndentExtension,
 } from '../../utils/custom-extensions.ts';
 
 import MenuBar from '../../components/menu-bar/menu-bar.tsx';
@@ -45,6 +46,7 @@ export default function Editor({ editorContent, onChange }: EditorProps) {
       CustomBulletListConfigure,
       CustomBulletListExtend,
       CustomOrderedListConfigure,
+      TabIndentExtension,
       CustomImageConfigure,
       CustomTextAlignConfigure,
       CustomLinkConfigure,

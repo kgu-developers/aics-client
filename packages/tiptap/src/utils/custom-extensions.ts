@@ -1,3 +1,4 @@
+import { Extension } from '@tiptap/core';
 import BulletList from '@tiptap/extension-bullet-list';
 import Heading from '@tiptap/extension-heading';
 import Image from '@tiptap/extension-image';
@@ -35,7 +36,7 @@ const CustomBulletListExtend = BulletList.extend({
   addAttributes() {
     return {
       class: {
-        default: 'list-disc py-2',
+        default: 'list-disc',
         parseHTML: (element) => element.getAttribute('class'),
       },
     };
@@ -51,7 +52,7 @@ const CustomOrderedListConfigure = OrderedList.extend({
   addAttributes() {
     return {
       class: {
-        default: 'list-decimal py-2',
+        default: 'list-decimal',
         parseHTML: (element) => element.getAttribute('class'),
       },
     };
@@ -115,6 +116,29 @@ const CustomLinkExtend = Link.extend({
   },
 });
 
+const TabIndentExtension = Extension.create({
+  name: 'tabIndent',
+
+  addKeyboardShortcuts() {
+    return {
+      Tab: ({ editor }) => {
+        if (editor.isActive('bulletList') || editor.isActive('orderedList')) {
+          return editor.chain().focus().sinkListItem('listItem').run();
+        }
+
+        return false;
+      },
+      'Shift-Tab': ({ editor }) => {
+        if (editor.isActive('bulletList') || editor.isActive('orderedList')) {
+          return editor.chain().focus().liftListItem('listItem').run();
+        }
+
+        return false;
+      },
+    };
+  },
+});
+
 export {
   CustomHeading,
   CustomBulletListConfigure,
@@ -124,4 +148,5 @@ export {
   CustomImageConfigure,
   CustomLinkConfigure,
   CustomLinkExtend,
+  TabIndentExtension,
 };
