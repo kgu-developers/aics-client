@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+.ProseMirror ul ul,
+.ProseMirror ol ol,
+.ProseMirror ul ol,
+.ProseMirror ol ul {
+  @apply ml-6;
+}
+
+.ProseMirror ul li,
+.ProseMirror ol li {
+  @apply relative;
+}
+
+.ProseMirror ul li::before,
+.ProseMirror ol li::before {
+  @apply absolute;
+  @apply left-6;
+}
+
+.ProseMirror ul li ul li {
+  @apply list-[circle];
+}
+
+.ProseMirror ul li ul li ul li {
+  @apply list-[square];
+}
