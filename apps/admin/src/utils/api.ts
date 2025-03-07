@@ -22,4 +22,15 @@ function removeTokens() {
   localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
-export { getAccessToken, getRefreshToken, removeTokens };
+function getToken() {
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+
+  if (!accessToken || !refreshToken) {
+    removeTokens();
+  }
+
+  return [accessToken, refreshToken] as const;
+}
+
+export { getAccessToken, getRefreshToken, removeTokens, getToken };

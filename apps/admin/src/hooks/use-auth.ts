@@ -6,9 +6,8 @@ import {
 } from '~/constants/api';
 
 import type { Tokens } from '~/hooks/use-sign-in';
-import { getToken } from '~/utils/get-tokens';
 
-import { removeTokens } from '~/utils/api';
+import { removeTokens, getToken } from '~/utils/api';
 import { http } from '~/utils/http';
 
 const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000;
