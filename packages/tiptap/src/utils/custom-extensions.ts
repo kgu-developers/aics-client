@@ -21,7 +21,7 @@ const CustomHeading = Heading.extend({
     };
   },
   renderHTML({ node, HTMLAttributes }) {
-    const level = node.attrs.level as number;
+    const level = Number.parseInt(node.attrs.level);
     const sizeClass = {
       1: 'text-2xl font-bold',
       2: 'text-xl font-bold',
