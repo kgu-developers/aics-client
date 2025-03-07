@@ -1,5 +1,5 @@
 import { Form } from 'antd';
-import { useState } from 'react';
+import useEditTable from '~/hooks/useEditTable';
 import ProfessorTableView from './professor-table-view';
 
 export interface ProfessorData {
@@ -35,26 +35,7 @@ const professorData: ProfessorData[] = [
 
 function ProfessorTable() {
   const [form] = Form.useForm();
-  const [editingKey, setEditingKey] = useState('');
-
-  const isEditing = (record: ProfessorData) => record.key === editingKey;
-
-  const handleEdit = (record: Partial<ProfessorData> & { key: React.Key }) => {
-    form.setFieldsValue({
-      name: '',
-      role: '',
-      contact: '',
-      email: '',
-      officeLoc: '',
-      img: record.img || '',
-      ...record,
-    });
-    setEditingKey(record.key);
-  };
-
-  const cancel = () => {
-    setEditingKey('');
-  };
+  const { isEditing, handleEdit, cancel } = useEditTable(form);
 
   const handleSave = () => {
     // TODO: 교수 수정 PATCH API 연동

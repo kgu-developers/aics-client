@@ -1,5 +1,5 @@
 import { Form } from 'antd';
-import { useState } from 'react';
+import useEditTable from '~/hooks/useEditTable';
 import LabTableView from './lab-table-view';
 
 export interface LabData {
@@ -42,24 +42,7 @@ const labData: LabData[] = [
 
 function LabTable() {
   const [form] = Form.useForm();
-  const [editingKey, setEditingKey] = useState('');
-
-  const isEditing = (record: LabData) => record.key === editingKey;
-
-  const handleEdit = (record: Partial<LabData> & { key: React.Key }) => {
-    form.setFieldsValue({
-      name: '',
-      loc: '',
-      site: '',
-      advisor: '',
-      ...record,
-    });
-    setEditingKey(record.key);
-  };
-
-  const cancel = () => {
-    setEditingKey('');
-  };
+  const { isEditing, handleEdit, cancel } = useEditTable(form);
 
   const handleSave = () => {
     // TODO: 연구실 수정 PATCH API 연동
