@@ -5,6 +5,9 @@ interface MenuButtonProps {
   disabled?: boolean;
 }
 
+const NORMAL = 'p-2 rounded-lg hover:bg-gray-300';
+const ACTIVE = 'p-2 rounded-lg bg-black text-white';
+
 function MenuButton({
   onClick,
   isActive,
@@ -12,15 +15,12 @@ function MenuButton({
   disabled = false,
   ...rest
 }: MenuButtonProps) {
-  const normal = 'p-2 rounded-lg hover:bg-gray-300';
-  const active = 'p-2 rounded-lg bg-black text-white';
-
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={isActive ? active : normal}
+      className={isActive ? ACTIVE : NORMAL}
       {...rest}
     >
       {icon}
