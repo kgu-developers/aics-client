@@ -1,6 +1,6 @@
 import { getAccessToken, getRefreshToken, removeTokens } from '~/utils/api';
 
-const useToken = () => {
+const getToken = () => {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
@@ -11,4 +11,4 @@ const useToken = () => {
   return [accessToken, refreshToken] as const;
 };
 
-export { useToken };
+export { getToken };
