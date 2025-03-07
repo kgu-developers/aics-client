@@ -6,7 +6,7 @@ const navigationContainer = style([
     display: 'block',
   }),
   {
-    width: '17rem',
+    width: '15rem',
     display: 'none',
   },
 ]);
@@ -25,12 +25,12 @@ const separator = style({
 });
 
 const navigationTitle = style({
-  fontSize: themeVars.fontSize['2xl'],
+  fontSize: themeVars.fontSize.xl,
   fontWeight: themeVars.fontWeight.bold,
 });
 
 const navigationLink = style({
-  fontSize: themeVars.fontSize.lg,
+  fontSize: themeVars.fontSize.md,
 
   ':hover': {
     textDecoration: 'underline',
