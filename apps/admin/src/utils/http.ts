@@ -1,7 +1,9 @@
 import ky from 'ky';
 import { getAccessToken } from './api';
+import { AUTH_BASE_URL, API_BASE_URL } from '~/constants/api';
 
 export const http = ky.create({
+  prefixUrl: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -17,6 +19,15 @@ export const http = ky.create({
       },
     ],
   },
+});
+
+export const authHttp = ky.create({
+  prefixUrl: AUTH_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include',
+  timeout: 10000,
 });
 
 export const request = async <T>(

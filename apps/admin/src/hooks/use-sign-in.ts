@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { END_POINT } from '~/constants/api';
-import { http } from '~/utils/http';
+import { authHttp } from '~/utils/http';
 import { useAuth } from './use-auth';
 
 interface SignInData {
@@ -18,10 +18,10 @@ const useSignIn = () => {
 
   return useMutation({
     mutationFn: (data: SignInData) => {
-      return http.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
+      return authHttp.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
     },
     onSuccess: (token) => {
-      console.log('success: ', token);
+      console.log('success : ', token);
       setTokens(token);
     },
   });

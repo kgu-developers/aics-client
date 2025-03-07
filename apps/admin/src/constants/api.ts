@@ -21,17 +21,17 @@ const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_URL;
 const AUTH_BASE_URL = import.meta.env.VITE_PUBLIC_AUTH_API_URL;
 
 const END_POINT = {
-  POST: `${API_BASE_URL}/posts`,
-  POST_DETAIL: (id: string) => `${API_BASE_URL}/posts/${id}`,
-  CAROUSEL: `${API_BASE_URL}/carousels`,
-  LABS: `${API_BASE_URL}/labs`,
-  SIGN_IN: `${AUTH_BASE_URL}/login`,
-  REISSUE: `${AUTH_BASE_URL}/reissue`,
-  PROFESSORS: `${API_BASE_URL}/professors`,
-  CLUBS: `${API_BASE_URL}/clubs`,
-  MY_PROFILE: `${API_BASE_URL}/users/my`,
-  EDIT_MY_PROFILE: `${API_BASE_URL}/users`,
-  CHANGE_PASSWORD: `${API_BASE_URL}/users/password`,
+  POST: 'posts',
+  POST_DETAIL: (id: string) => `posts/${id}`,
+  CAROUSEL: 'carousels',
+  LABS: 'labs',
+  SIGN_IN: 'login',
+  REISSUE: 'reissue',
+  PROFESSORS: 'professors',
+  CLUBS: 'clubs',
+  MY_PROFILE: 'users/my',
+  EDIT_MY_PROFILE: 'users',
+  CHANGE_PASSWORD: 'users/password',
 };
 
 const ACCESS_TOKEN_KEY = 'accessToken';
