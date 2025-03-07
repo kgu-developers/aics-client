@@ -8,15 +8,15 @@ import { PaginatedBoardList } from '~/components/board/paginated-board-list';
 import { SearchBar } from '~/components/board/search-bar';
 import { PageHeader } from '~/components/page-header';
 
-import * as styles from '~/app/board/notice/page.css';
+import * as styles from '~/app/(board)/notice/page.css';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';
 
 const SIZE = 10;
-const CATEGORY = 'NOTIFICATION';
+const CATEGORY = 'NEWS';
 
-export default async function NoticePage(props: {
+export default async function NewsPage(props: {
   searchParams?: Promise<{
     category?: string;
     page?: string;
@@ -39,8 +39,8 @@ export default async function NoticePage(props: {
   return (
     <section>
       <PageHeader
-        title="공지사항"
-        description="학부와 관련된 중요한 공지사항을 안내해드려요."
+        title="학부소식"
+        description="기사, 활동 및 수상 소식 등을 소개해요."
       />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <section className={styles.boardWrapper}>

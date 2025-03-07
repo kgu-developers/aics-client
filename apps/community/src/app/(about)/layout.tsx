@@ -1,4 +1,4 @@
-import * as styles from '~/app/about/layout.css';
+import * as styles from '~/app/(about)/layout.css';
 import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
 
 const ABOUT_PATHS = [
