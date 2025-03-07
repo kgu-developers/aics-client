@@ -341,9 +341,6 @@ importers:
       '@aics-client/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
-      '@turbo/gen':
-        specifier: ^1.12.4
-        version: 1.13.4(@types/node@20.16.13)(typescript@5.6.3)
       '@types/node':
         specifier: ^20.11.24
         version: 20.16.13
