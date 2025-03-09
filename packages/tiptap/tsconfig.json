@@ -1,0 +1,10 @@
+{
+  "extends": "@aics-client/typescript/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

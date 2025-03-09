@@ -1,9 +1,7 @@
 import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
-import { PageHeader } from '~/components/page-header';
 
 const pageHeaderWrapper = style({
-  marginBottom: '3rem',
   display: themeVars.display.flex,
   flexDirection: themeVars.flexDirection.column,
   gap: themeVars.spacing.xl,
