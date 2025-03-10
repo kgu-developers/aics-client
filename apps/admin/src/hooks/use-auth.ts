@@ -11,6 +11,11 @@ import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
   const setTokens = (tokens: Tokens) => {
+    if (!tokens.accessToken || !tokens.refreshToken) {
+      console.log('토큰이 존재하지 않음');
+      return;
+    }
+
     localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
 
