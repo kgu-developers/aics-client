@@ -7,7 +7,7 @@ import {
 } from '~/constants/api';
 
 import type { Tokens } from '~/hooks/use-sign-in';
-import { useToken } from '~/hooks/use-token';
+import { getToken } from '~/utils/api';
 
 import { removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
@@ -15,7 +15,7 @@ import { http } from '~/utils/http';
 const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000; // 29분
 
 const useAuth = () => {
-  const [accessToken, refreshToken] = useToken();
+  const [accessToken, refreshToken] = getToken();
 
   const silentRefresh = useMutation({
     mutationFn: async () => {
@@ -50,7 +50,7 @@ const useAuth = () => {
     removeTokens();
   };
 
-  return { setTokens, logout, accessToken, refreshToken };
+  return { setTokens, logout };
 };
 
 export { useAuth };

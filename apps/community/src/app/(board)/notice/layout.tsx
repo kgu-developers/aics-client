@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
 import * as styles from '~/app/(board)/notice/layout.css';
+import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
 
 export const metadata: Metadata = {
   title: '공지사항- 경기대학교 AI컴퓨터공학부',
