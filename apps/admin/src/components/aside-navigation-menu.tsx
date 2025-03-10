@@ -52,7 +52,7 @@ const items: MenuItem[] = [
 
 function AsideHeader() {
   return (
-    <div className="flex items-center justify-center h-20 gap-2 font-bold border-r border-gray-300">
+    <div className="flex items-center justify-center h-20 gap-2 font-bold border-r border-gray-200">
       <img src={LOGO} alt="logo" />
       <div className="leading-4.5">
         <p>AI컴퓨터공학부</p>
@@ -65,7 +65,7 @@ function AsideHeader() {
 function AsideFooter() {
   //TODO: 로그아웃 기능 적용
   return (
-    <div className="flex items-center p-2 border-r border-gray-300 place-self-end">
+    <div className="flex items-center p-2 border-r border-gray-200 place-self-end">
       <button
         type="button"
         className="p-2 text-xs transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
@@ -78,7 +78,7 @@ function AsideFooter() {
 
 export default function AsideNavigationMenu() {
   return (
-    <aside className="flex flex-col h-full select-none bg-slate-200 w-80">
+    <aside className="flex flex-col h-full select-none bg-slate-100 w-80">
       <AsideHeader />
       <Menu mode="inline" items={items} className="flex-grow" />
       <AsideFooter />

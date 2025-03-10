@@ -17,7 +17,7 @@ function App() {
       theme={{
         components: {
           Menu: {
-            itemBg: '#e2e8f0',
+            itemBg: '#f1f5f9',
           },
         },
       }}
