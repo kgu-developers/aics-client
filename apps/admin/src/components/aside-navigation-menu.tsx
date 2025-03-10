@@ -52,7 +52,7 @@ const items: MenuItem[] = [
 
 function AsideHeader() {
   return (
-    <div className="flex items-center justify-center h-20 gap-2 font-bold border-r border-gray-200">
+    <div className="flex items-center justify-center gap-2 font-bold border-r border-gray-200 h-22">
       <img src={LOGO} alt="logo" />
       <div className="leading-4.5">
         <p>AI컴퓨터공학부</p>
