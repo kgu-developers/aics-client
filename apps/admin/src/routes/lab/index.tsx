@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Button } from 'antd';
-import LabTable from '~/components/lab/lab-table';
+import LabTable from '~/routes/lab/components/lab-table';
 
 export const Route = createFileRoute('/lab/')({
   component: LabPage,

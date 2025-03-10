@@ -21,6 +21,14 @@ interface LabTableViewProps {
   cancel: () => void;
 }
 
+interface EditableCellProps {
+  editing: boolean;
+  dataIndex: string;
+  title: string;
+  record: LabData;
+  children: React.ReactNode;
+}
+
 function LabTableView({
   form,
   data,
@@ -37,13 +45,7 @@ function LabTableView({
     record,
     children,
     ...restProps
-  }: {
-    editing: boolean;
-    dataIndex: string;
-    title: string;
-    record: LabData;
-    children: React.ReactNode;
-  }) => {
+  }: EditableCellProps) => {
     return (
       <td {...restProps}>
         {editing ? (

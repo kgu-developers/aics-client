@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Button } from 'antd';
-import ProfessorTable from '~/components/professor/professor-table';
+import ProfessorTable from '~/routes/professor/components/professor-table';
 
 export const Route = createFileRoute('/professor/')({
   component: ProfessorPage,

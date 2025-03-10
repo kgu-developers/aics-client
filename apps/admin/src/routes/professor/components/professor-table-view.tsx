@@ -12,6 +12,14 @@ interface ProfessorTableViewProps {
   cancel: () => void;
 }
 
+interface EditableCellProps {
+  editing: boolean;
+  dataIndex: string;
+  title: string;
+  record: ProfessorData;
+  children: React.ReactNode;
+}
+
 function ProfessorTableView({
   form,
   data,
@@ -28,13 +36,7 @@ function ProfessorTableView({
     record,
     children,
     ...restProps
-  }: {
-    editing: boolean;
-    dataIndex: string;
-    title: string;
-    record: ProfessorData;
-    children: React.ReactNode;
-  }) => {
+  }: EditableCellProps) => {
     return (
       <td {...restProps}>
         {editing ? (
