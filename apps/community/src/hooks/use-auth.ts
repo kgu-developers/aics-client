@@ -50,7 +50,6 @@ const useAuth = () => {
     }, expiresIn);
   };
 
-
   const logout = () => {
     removeTokens();
   };
