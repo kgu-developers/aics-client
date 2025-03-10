@@ -27,8 +27,8 @@ function SignInPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <Card className="w-96 shadow-lg">
+    <div className="flex items-center justify-center w-full h-full bg-gray-100">
+      <Card className="shadow-lg w-96">
         <Typography.Title level={3} className="text-center">
           로그인
         </Typography.Title>
