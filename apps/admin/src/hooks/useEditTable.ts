@@ -2,7 +2,7 @@ import type { FormInstance } from 'antd';
 import { useState } from 'react';
 
 const useEditTable = <T extends { key: string }>(form: FormInstance) => {
-  const [editingKey, setEditingKey] = useState<string>('');
+  const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record: T) => record.key === editingKey;
 
