@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import {
   ACCESS_TOKEN_KEY,
   END_POINT,
@@ -6,48 +5,58 @@ import {
 } from '~/constants/api';
 
 import type { Tokens } from '~/hooks/use-sign-in';
-
-import { removeTokens, getToken } from '~/utils/api';
+import { getToken, removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
-
-const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000;
+import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
-  const [accessToken, refreshToken] = getToken();
-
-  const silentRefresh = useMutation({
-    mutationFn: () => {
-      if (!accessToken || !refreshToken) {
-        throw new Error('Tokens are missing');
-      }
-
-      return http
-        .post(END_POINT.REISSUE, { json: { accessToken, refreshToken } })
-        .json<Tokens>();
-    },
-    onSuccess: (tokens) => {
-      setTokens(tokens);
-    },
-    onError: () => {
-      alert('세션이 만료되어 로그아웃합니다.');
-      logout();
-    },
-  });
-
   const setTokens = (tokens: Tokens) => {
     localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
 
+    const decoded = decodeJwt(tokens.accessToken);
+
+    if (!decoded || !decoded.exp) {
+      console.log('잘못된 jwt 토큰');
+      return;
+    }
+
+    const expiresIn = decoded.exp * 1000 - Date.now();
+
+    if (expiresIn <= 0) {
+      logout();
+      return;
+    }
+
     setTimeout(() => {
-      silentRefresh.mutate();
-    }, JWT_EXPIRY_TIME);
+      logout();
+    }, expiresIn);
+  };
+
+  const refreshTokens = async () => {
+    const [accessToken, refreshToken] = getToken();
+
+    if (!accessToken || !refreshToken) {
+      logout();
+      return;
+    }
+
+    try {
+      const newTokens = await http
+        .post(END_POINT.REISSUE, { json: { accessToken, refreshToken } })
+        .json<Tokens>();
+      setTokens(newTokens);
+    } catch (error) {
+      console.log(error);
+      logout();
+    }
   };
 
   const logout = () => {
     removeTokens();
   };
 
-  return { setTokens, logout, accessToken, refreshToken };
+  return { setTokens, logout, refreshTokens };
 };
 
 export { useAuth };
