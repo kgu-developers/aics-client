@@ -12,10 +12,14 @@ import { getToken } from '~/utils/api';
 import { removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
 
-const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000; // 29분
+import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
   const [accessToken, refreshToken] = getToken();
+
+  const decoded = decodeJwt(accessToken ?? '');
+
+  const expiresIn = decoded.exp * 1000 - Date.now();
 
   const silentRefresh = useMutation({
     mutationFn: () => {
@@ -43,8 +47,9 @@ const useAuth = () => {
 
     setTimeout(() => {
       silentRefresh.mutate();
-    }, JWT_EXPIRY_TIME);
+    }, expiresIn);
   };
+
 
   const logout = () => {
     removeTokens();
