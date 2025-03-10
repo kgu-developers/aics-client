@@ -44,9 +44,9 @@ function CarouselDots({
 
   return (
     <div className={styles.dots}>
-      {scrollSnaps.map((_, index) => (
+      {scrollSnaps.map((scrollSnap, index) => (
         <DotButton
-          key={`carousel-dots-${carouselDotsId}-${index}`}
+          key={`carousel-dots-${carouselDotsId}-${scrollSnap}}`}
           onClick={() => onDotButtonClick(index)}
           active={index === selectedIndex}
         />
