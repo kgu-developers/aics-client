@@ -1,0 +1,911 @@
+openapi: 3.1.0
+info:
+  title: AICS-HOME ADMIN
+  description: "AI 컴퓨터공학부 커뮤니티 관리자, AICS-HOME ADMIN 입니다.\n\n로그인 API를 통해 액세스 토큰을 발급 받고 헤더에 값을 넣어주세요.\n\n별다른 절차 없이 API를 사용하실 수 있습니다.\n\n<ul>\n\t<li>사용자 API 문서: <a href=\"https://aics-api.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-api.ummdev.com/swagger-ui/index.html</a></li><br>\n\t<li>관리자 API 문서: <a href=\"https://aics-admin.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-admin.ummdev.com/swagger-ui/index.html</a></li><br>\n\t<li>인증/인가 API 문서: <a href=\"https://aics-auth.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-auth.ummdev.com/swagger-ui/index.html</a></li>\n        \t</ul>\n"
+servers:
+  - url: 'https://aics-admin.ummdev.com'
+    description: AICS-HOME ADMIN (dev)
+security:
+  - bearer: []
+tags:
+  - name: About
+    description: 소개글 관리자 API
+  - name: Club
+    description: 동아리 관리자 API
+  - name: File
+    description: 파일 업로드 관리 API
+  - name: Professor
+    description: 교수 관리자 API
+  - name: Lab
+    description: 연구실 관리자 API
+  - name: Carousel
+    description: 캐러셀 관리자 API
+  - name: User
+    description: 회원 관리자 API
+  - name: Post
+    description: 게시글 관리자 API
+paths:
+  /api/v1/professors:
+    post:
+      tags:
+        - Professor
+      summary: 교수 생성 API
+      description: |2
+            - Description : 이 API는 교수를 생성합니다.
+            - Assignee : 이신행
+      operationId: createProfessor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorPersistResponse'
+  /api/v1/posts:
+    post:
+      tags:
+        - Post
+      summary: 게시글 생성 API
+      description: "\t- Description : 이 API는 게시글을 생성합니다.\n\t- Assignee : 박민준\n"
+      operationId: createPost
+      parameters:
+        - name: fileId
+          in: query
+          description: 게시글에 저장할 파일의 ID 입니다.
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostPersistResponse'
+  /api/v1/labs:
+    post:
+      tags:
+        - Lab
+      summary: 연구실 생성 API
+      description: "\t- Description : 이 API는 연구실을 생성합니다.\n\t- Assignee : 박민준\n"
+      operationId: createLab
+      parameters:
+        - name: fileId
+          in: query
+          description: 이미지 파일 ID는 URL 쿼리 파라미터 입니다.
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabPersistResponse'
+  /api/v1/files/post:
+    post:
+      tags:
+        - File
+      summary: 게시글 파일 업로드 API
+      description: "\t- Description : 이 API는 게시글 첨부 파일을 업로드합니다. 한 게시글에 한 개의 파일만 업로드 가능합니다.\n\t- Assignee : 이한음\n"
+      operationId: postFileUpload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 게시글 첨부 파일
+              required:
+                - file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePathResponse'
+  /api/v1/files/lab:
+    post:
+      tags:
+        - File
+      summary: 연구실 로고 이미지 업로드 API
+      description: "\t- Description : 이 API는 연구실 로고 이미지를 업로드합니다. 한 로고 이미지에 한 개의 이미지만 업로드 가능합니다.\n\t- Assignee : 박민준\n"
+      operationId: labFileUpload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 연구실 로고 이미지
+              required:
+                - file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePathResponse'
+  /api/v1/files/carousel:
+    post:
+      tags:
+        - File
+      summary: 캐러셀 이미지 업로드 API
+      description: "\t- Description : 이 API는 캐러셀 이미지를 업로드합니다. 한 캐러셀에 한 개의 이미지만 업로드 가능합니다.\n\t- Assignee : 이한음\n"
+      operationId: carouselFileUpload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 캐러셀 이미지
+              required:
+                - file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePathResponse'
+  /api/v1/files/about:
+    post:
+      tags:
+        - File
+      summary: 소개글 이미지 업로드 API
+      description: "\t- Description : 이 API는 소개글 이미지를 업로드 합니다. 리스폰스의 physicalPath를 받아서 사용하면 됩니다.\n\t- Assignee : 이한음\n"
+      operationId: aboutFileUpload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 소개글 첨부 이미지
+              required:
+                - file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePathResponse'
+  /api/v1/clubs:
+    post:
+      tags:
+        - Club
+      summary: 동아리 생성 API
+      description: "\t- Description : 이 API는 동아리를 생성합니다.\n\t- Assignee : 박민준\n"
+      operationId: createClub
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClubRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClubPersistResponse'
+  /api/v1/carousels:
+    post:
+      tags:
+        - Carousel
+      summary: 캐러셀 저장 API
+      description: "\t- Description : 이 API는 캐러셀 이미지와 기타 정보를 저장합니다.\n\t- Assignee : 이한음\n"
+      operationId: createCarousel
+      parameters:
+        - name: fileId
+          in: query
+          description: 캐러셀에 개시할 이미지의 ID 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarouselRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarouselPersistResponse'
+  /api/v1/abouts:
+    post:
+      tags:
+        - About
+      summary: 소개글 생성 API
+      description: "\t- Description : 이 API는 소개글을 생성합니다.\n\t- Assignee : 이신행\n"
+      operationId: createAbout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AboutCreateRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AboutPersistResponse'
+  '/api/v1/professors/{id}':
+    delete:
+      tags:
+        - Professor
+      summary: 교수 삭제 API
+      description: |2
+            - Description : 이 API는 교수를 삭제합니다.
+            - Assignee : 이신행
+      operationId: deleteProfessor
+      parameters:
+        - name: id
+          in: path
+          description: 교수 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+    patch:
+      tags:
+        - Professor
+      summary: 교수 수정 API
+      description: |2
+            - Description : 이 API는 교수를 수정합니다.
+            - Assignee : 이신행
+      operationId: updateProfessor
+      parameters:
+        - name: id
+          in: path
+          description: 교수 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/posts/{postId}':
+    patch:
+      tags:
+        - Post
+      summary: 게시글 수정 API
+      description: |2
+            - Description : 이 API는 게시글을 수정합니다.
+            - Assignee : 박민준
+      operationId: updatePost
+      parameters:
+        - name: postId
+          in: path
+          description: 게시글 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/posts/{postId}/pin':
+    patch:
+      tags:
+        - Post
+      summary: 게시글 상단 고정 상태 토글 API
+      description: |2
+            - Description : 이 API는 지정된 게시글의 고정 여부를 토글하여 고정 또는 해제합니다.
+            - Assignee : 박민준
+      operationId: togglePostPinStatus
+      parameters:
+        - name: postId
+          in: path
+          description: 고정 상태를 변경할 게시글의 ID 입니다. URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/posts/{postId}/delete':
+    patch:
+      tags:
+        - Post
+      summary: 게시글 삭제 API
+      description: |2
+            - Description : 이 API는 게시글을 삭제합니다.
+            - Assignee : 이신행
+      operationId: deletePostById
+      parameters:
+        - name: postId
+          in: path
+          description: 게시글 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/labs/{id}':
+    delete:
+      tags:
+        - Lab
+      summary: 연구실 삭제 API
+      description: "\t- Description : 이 API는 해당 연구실을 삭제합니다.\n\t- Assignee : 박민준\n"
+      operationId: deleteLab
+      parameters:
+        - name: id
+          in: path
+          description: 연구실 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+    patch:
+      tags:
+        - Lab
+      summary: 연구실 수정 API
+      description: "\t- Description : 이 API는 연구실 정보를 수정합니다.\n\t- Assignee : 박민준\n"
+      operationId: updateLab
+      parameters:
+        - name: id
+          in: path
+          description: 연구실 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/clubs/{id}':
+    delete:
+      tags:
+        - Club
+      summary: 동아리 삭제 API
+      description: "\t- Description : 이 API는 해당 동아리를 삭제합니다.\n\t- Assignee : 박민준\n"
+      operationId: deleteClub
+      parameters:
+        - name: id
+          in: path
+          description: 동아리 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+    patch:
+      tags:
+        - Club
+      summary: 동아리 수정 API
+      description: "\t- Description : 이 API는 동아리 정보를 수정합니다.\n\t- Assignee : 박민준\n"
+      operationId: updateClub
+      parameters:
+        - name: id
+          in: path
+          description: 동아리 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClubRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  '/api/v1/abouts/{id}':
+    patch:
+      tags:
+        - About
+      summary: 소개글 수정 API
+      description: |2
+            - Description : 이 API는 소개글을 수정합니다.
+            - Assignee : 이신행
+      operationId: updateAbout
+      parameters:
+        - name: id
+          in: path
+          description: 소개글 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AboutUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  /api/v1/users:
+    get:
+      tags:
+        - User
+      summary: 유저 페이징 조회 API
+      description: |2
+            - Description : 이 API는 유저를 페이징 조회합니다.
+            - Assignee : 박민준
+      operationId: getUsers
+      parameters:
+        - name: page
+          in: query
+          description: 페이지 인덱스
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            minimum: 0
+          example: 0
+        - name: size
+          in: query
+          description: 응답 개수
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 10
+          example: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailPageResponse'
+  '/api/v1/carousels/{id}':
+    delete:
+      tags:
+        - Carousel
+      summary: 캐러셀 삭제 API
+      description: "\t- Description : 이 API는 캐러셀을 삭제합니다.\n\t- Assignee : 이한음\n"
+      operationId: deleteCarousel
+      parameters:
+        - name: id
+          in: path
+          description: 캐러셀 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    ProfessorRequest:
+      type: object
+      description: 교수 수정 request 객체 입니다.
+      properties:
+        name:
+          type: string
+          description: 교수 이름
+          example: 이은정
+        role:
+          type: string
+          description: 직위
+          enum:
+            - PROFESSOR
+            - ASSISTANT
+          example: ASSISTANT
+        contact:
+          type: string
+          description: 연락처
+          example: 031-249-9671
+          pattern: '^\d{2,4}-\d{3,4}-\d{4}$'
+        email:
+          type: string
+          description: 이메일
+          example: ejlee@kyonggi.ac.kr
+          pattern: '^[A-Za-z0-9._%+-]+@(kyonggi|kgu)\.ac\.kr$'
+        img:
+          type: string
+          description: 이미지 URL
+          example: 'https://image.com/professor/profile/image'
+          pattern: '^https?://.*$'
+        officeLoc:
+          type: string
+          description: 연구실 위치
+          example: 8213호
+      required:
+        - contact
+        - email
+        - img
+        - name
+        - officeLoc
+        - role
+    ProfessorPersistResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 교수 id
+          example: 1
+      required:
+        - id
+    PostRequest:
+      type: object
+      description: 게시글 수정 request 객체 입니다.
+      properties:
+        title:
+          type: string
+          description: 게시물 제목
+          example: SW 부트캠프 4기 교육생 모집
+          maxLength: 100
+          minLength: 0
+        content:
+          type: string
+          description: 게시물 내용
+          example: |
+            SW 부트캠프 4기 교육생 모집
+            SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집합니다.
+            관심있는 학생들의 많은 신청 바랍니다.
+            - 모집기간 : 2024.10.07(월)~10.15(화)
+            - 신청방법 :https://kebkyonggi.quv.kr/68
+        category:
+          type: string
+          description: 게시물 카테고리
+          enum:
+            - NOTIFICATION
+            - NEWS
+          example: NOTIFICATION
+      required:
+        - content
+        - title
+    PostPersistResponse:
+      type: object
+      properties:
+        postId:
+          type: integer
+          format: int64
+          description: 게시글 id
+          example: 1
+      required:
+        - postId
+    LabRequest:
+      type: object
+      description: 연구실 수정 request 객체 입니다.
+      properties:
+        name:
+          type: string
+          description: 연구실 이름
+          example: 인공지능연구실
+          maxLength: 15
+          minLength: 0
+        loc:
+          type: string
+          description: 연구실 위치
+          example: '8502, 8503'
+          maxLength: 10
+          minLength: 0
+        site:
+          type: string
+          description: 연구실 홈페이지
+          example: 'http://ailab.kyonggi.ac.kr'
+          pattern: '^(http|https)://[a-zA-Z0-9.-]+\.kyonggi\.ac\.kr$'
+        advisor:
+          type: string
+          description: 연구실 담당교수
+          example: 박민준
+          maxLength: 15
+          minLength: 0
+      required:
+        - advisor
+        - loc
+        - name
+        - site
+    LabPersistResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 연구실 id
+          example: 1
+      required:
+        - id
+    FilePathResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 파일 id
+          example: 1
+        physicalPath:
+          type: string
+          description: 파일 경로
+          example: /files/2025-curriculum
+      required:
+        - id
+        - physicalPath
+    ClubRequest:
+      type: object
+      description: 동아리 수정 request 객체 입니다.
+      properties:
+        name:
+          type: string
+          description: 동아리 이름
+          example: C-Lab
+          maxLength: 15
+          minLength: 0
+        description:
+          type: string
+          description: 동아리 설명
+          example: 경기대학교 AI컴퓨터공학부 개발동아리입니다.
+          maxLength: 50
+          minLength: 0
+        site:
+          type: string
+          description: 동아리 홈페이지
+          example: 'https://www.clab.page/'
+          pattern: '^(http|https)://.*$'
+      required:
+        - description
+        - name
+    ClubPersistResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 동아리 id
+          example: 1
+      required:
+        - id
+    CarouselRequest:
+      type: object
+      description: 캐러셀 생성 request 객체 입니다.
+      properties:
+        text:
+          type: string
+          description: 캐러셀 설명
+          example: 경기대학교 AI컴퓨터공학부 메인 이미지
+          maxLength: 255
+          minLength: 0
+        link:
+          type: string
+          description: 캐러셀 이미지 링크
+          example: 'https://www.kgu.ac.kr/'
+    CarouselPersistResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 캐러셀 ID
+          example: 1
+      required:
+        - id
+    AboutCreateRequest:
+      type: object
+      description: 소개글 생성 request 객체 입니다.
+      properties:
+        category:
+          type: string
+          description: 카테고리
+          enum:
+            - DEPT_INTRO
+            - DIRECTIONS
+          example: DEPT_INTRO
+        content:
+          type: string
+          description: 페이지 내용(JSON 형식)
+          example: '{key:value}'
+      required:
+        - category
+        - content
+    AboutPersistResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 소개글 id
+          example: 1
+      required:
+        - id
+    AboutUpdateRequest:
+      type: object
+      description: 소개글 수정 request 객체 입니다.
+      properties:
+        content:
+          type: string
+          description: 페이지 내용(JSON 형식)
+          example: '{key:value}'
+      required:
+        - content
+    PageableResponseObject:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          default: '0'
+          description: '페이지 인덱스로, 0부터 시작합니다. 별도의 값 없이 요청 시, 0으로 설정됩니다.'
+        size:
+          type: integer
+          format: int32
+          default: '10'
+          description: '페이지 내 최대 응답 개수입니다. 별도의 값 없이 요청 시, 10으로 설정됩니다.'
+        totalPages:
+          type: integer
+          format: int32
+          default: '3'
+          description: 전체 페이지 수 입니다.
+        totalElements:
+          type: integer
+          format: int32
+          default: '30'
+          description: 전체 요소 개수 입니다.
+        isEnd:
+          type: boolean
+          default: 'false'
+          description: '현재 응답하는 페이지가 마지막 일 시, true로 설정됩니다.'
+      required:
+        - isEnd
+        - page
+        - size
+        - totalElements
+        - totalPages
+    UserDetailPageResponse:
+      type: object
+      properties:
+        contents:
+          type: array
+          description: 유저 정보 리스트
+          example:
+            - name: 박민준
+              phone: 010-1234-5678
+              email: qkralswnsWkd@kyonggi.ac.kr
+              role: 학부생
+              major: 컴퓨터공학부
+              id: '202412345'
+          items:
+            $ref: '#/components/schemas/UserDetailResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableResponseObject'
+          description: 페이징 정보
+      required:
+        - contents
+        - pageable
+    UserDetailResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 이름
+          example: 박민준
+        phone:
+          type: string
+          description: 전화번호
+          example: 010-1234-5678
+        email:
+          type: string
+          description: 이메일
+          example: qkralswnsWkd@kyonggi.ac.kr
+        role:
+          type: string
+          description: 구분
+          enum:
+            - USER
+            - ADMIN
+            - SUPER
+          example: 학부생
+        major:
+          type: string
+          description: 학과
+          enum:
+            - CSE
+            - AIT
+            - SSS
+          example: 컴퓨터공학과
+        id:
+          type: string
+          description: 학번(교번)
+          example: 202412345
+      required:
+        - email
+        - id
+        - major
+        - name
+        - phone
+        - role
+  securitySchemes:
+    bearer:
+      type: http
+      name: bearer
+      scheme: bearer
+      bearerFormat: JWT
