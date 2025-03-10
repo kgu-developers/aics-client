@@ -32,7 +32,7 @@ const END_POINT = {
   MY_PROFILE: 'users/my',
   EDIT_MY_PROFILE: 'users',
   CHANGE_PASSWORD: 'users/password',
-};
+} as const;
 
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
