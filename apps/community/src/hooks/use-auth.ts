@@ -17,9 +17,28 @@ import { decodeJwt } from '~/utils/jwt';
 const useAuth = () => {
   const [accessToken, refreshToken] = getToken();
 
-  const decoded = decodeJwt(accessToken ?? '');
+  const setTokens = (tokens: Tokens) => {
+    if (!tokens.accessToken || !tokens.refreshToken) {
+      console.log('토큰이 존재하지 않음');
+      return;
+    }
 
-  const expiresIn = decoded.exp * 1000 - Date.now();
+    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
+
+    const decoded = decodeJwt(tokens.accessToken);
+
+    if (!decoded || !decoded.exp) {
+      console.log('잘못된 jwt 토큰');
+      return;
+    }
+
+    const expiresIn = decoded.exp * 1000 - Date.now();
+
+    setTimeout(() => {
+      silentRefresh.mutate();
+    }, expiresIn);
+  };
 
   const silentRefresh = useMutation({
     mutationFn: () => {
@@ -40,15 +59,6 @@ const useAuth = () => {
       logout();
     },
   });
-
-  const setTokens = (tokens: Tokens) => {
-    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
-    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
-
-    setTimeout(() => {
-      silentRefresh.mutate();
-    }, expiresIn);
-  };
 
   const logout = () => {
     removeTokens();
