@@ -14,11 +14,13 @@ import type { LabData } from './lab-table';
 interface LabTableViewProps {
   form: FormInstance;
   data: LabData[];
-  isEditing: (record: LabData) => boolean;
-  handleEdit: (record: Partial<LabData> & { key: React.Key }) => void;
+  register: {
+    isEditing: (record: LabData) => boolean;
+    handleEdit: (record: Partial<LabData> & { key: React.Key }) => void;
+    cancel: () => void;
+  };
   handleSave: () => void;
   handleDelete: () => void;
-  cancel: () => void;
 }
 
 interface EditableCellProps {
@@ -32,11 +34,9 @@ interface EditableCellProps {
 function LabTableView({
   form,
   data,
-  isEditing,
-  handleEdit,
+  register,
   handleSave,
   handleDelete,
-  cancel,
 }: LabTableViewProps) {
   const EditableCell = ({
     editing,
@@ -90,13 +90,16 @@ function LabTableView({
       dataIndex: 'operation',
       width: '10%',
       render: (_: unknown, record: LabData) => {
-        const editable = isEditing(record);
+        const editable = register.isEditing(record);
         return editable ? (
           <span>
             <Typography.Link onClick={handleSave} className="mr-4">
               저장
             </Typography.Link>
-            <Popconfirm title="정말 취소하시겠습니까?" onConfirm={cancel}>
+            <Popconfirm
+              title="정말 취소하시겠습니까?"
+              onConfirm={register.cancel}
+            >
               <button
                 type="button"
                 className="text-red-500 hover:cursor-pointer"
@@ -108,8 +111,8 @@ function LabTableView({
         ) : (
           <span>
             <Typography.Link
-              disabled={isEditing(record)}
-              onClick={() => handleEdit(record)}
+              disabled={register.isEditing(record)}
+              onClick={() => register.handleEdit(record)}
             >
               수정
             </Typography.Link>
@@ -163,7 +166,7 @@ function LabTableView({
         record,
         dataIndex: col.dataIndex,
         title: col.title,
-        editing: isEditing(record),
+        editing: register.isEditing(record),
       }),
     };
   });
@@ -176,7 +179,7 @@ function LabTableView({
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
-        pagination={{ onChange: cancel }}
+        pagination={{ onChange: register.cancel }}
         className="break-keep whitespace-nowrap"
       />
     </Form>

@@ -42,7 +42,7 @@ const labData: LabData[] = [
 
 function LabTable() {
   const [form] = Form.useForm();
-  const { isEditing, handleEdit, cancel } = useEditTable(form);
+  const { register } = useEditTable<LabData>(form);
 
   const handleSave = () => {
     // TODO: 연구실 수정 PATCH API 연동
@@ -56,11 +56,9 @@ function LabTable() {
     <LabTableView
       form={form}
       data={labData}
-      isEditing={isEditing}
-      handleEdit={handleEdit}
+      register={register}
       handleSave={handleSave}
       handleDelete={handleDelete}
-      cancel={cancel}
     />
   );
 }

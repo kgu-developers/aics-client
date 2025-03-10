@@ -35,7 +35,7 @@ const professorData: ProfessorData[] = [
 
 function ProfessorTable() {
   const [form] = Form.useForm();
-  const { isEditing, handleEdit, cancel } = useEditTable(form);
+  const { register } = useEditTable<ProfessorData>(form);
 
   const handleSave = () => {
     // TODO: 교수 수정 PATCH API 연동
@@ -49,11 +49,9 @@ function ProfessorTable() {
     <ProfessorTableView
       form={form}
       data={professorData}
-      isEditing={isEditing}
-      handleEdit={handleEdit}
+      register={register}
       handleSave={handleSave}
       handleDelete={handleDelete}
-      cancel={cancel}
     />
   );
 }

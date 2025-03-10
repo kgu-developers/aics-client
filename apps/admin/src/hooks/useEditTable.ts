@@ -17,11 +17,14 @@ const useEditTable = <T extends { key: string }>(form: FormInstance) => {
     setEditingKey('');
   };
 
-  return {
-    editingKey,
+  const register = {
     isEditing,
     handleEdit,
     cancel,
+  };
+
+  return {
+    register,
   };
 };
 

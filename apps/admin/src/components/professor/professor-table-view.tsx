@@ -5,11 +5,13 @@ import type { ProfessorData } from './professor-table';
 interface ProfessorTableViewProps {
   form: FormInstance;
   data: ProfessorData[];
-  isEditing: (record: ProfessorData) => boolean;
-  handleEdit: (record: Partial<ProfessorData> & { key: React.Key }) => void;
+  register: {
+    isEditing: (record: ProfessorData) => boolean;
+    handleEdit: (record: Partial<ProfessorData> & { key: React.Key }) => void;
+    cancel: () => void;
+  };
   handleSave: () => void;
   handleDelete: () => void;
-  cancel: () => void;
 }
 
 interface EditableCellProps {
@@ -23,11 +25,9 @@ interface EditableCellProps {
 function ProfessorTableView({
   form,
   data,
-  isEditing,
-  handleEdit,
+  register,
   handleSave,
   handleDelete,
-  cancel,
 }: ProfessorTableViewProps) {
   const EditableCell = ({
     editing,
@@ -86,11 +86,14 @@ function ProfessorTableView({
       dataIndex: 'operation',
       width: '10%',
       render: (_: unknown, record: ProfessorData) => {
-        const editable = isEditing(record);
+        const editable = register.isEditing(record);
         return editable ? (
           <span className="flex gap-3">
             <Typography.Link onClick={handleSave}>저장</Typography.Link>
-            <Popconfirm title="정말 취소하시겠습니까?" onConfirm={cancel}>
+            <Popconfirm
+              title="정말 취소하시겠습니까?"
+              onConfirm={register.cancel}
+            >
               <button
                 type="button"
                 className="text-red-500 hover:cursor-pointer"
@@ -102,8 +105,8 @@ function ProfessorTableView({
         ) : (
           <span className="flex gap-3">
             <Typography.Link
-              disabled={isEditing(record)}
-              onClick={() => handleEdit(record)}
+              disabled={register.isEditing(record)}
+              onClick={() => register.handleEdit(record)}
             >
               수정
             </Typography.Link>
@@ -131,7 +134,7 @@ function ProfessorTableView({
           record,
           dataIndex: col.dataIndex,
           title: col.title,
-          editing: isEditing(record),
+          editing: register.isEditing(record),
         }),
       };
     },
@@ -145,7 +148,7 @@ function ProfessorTableView({
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
-        pagination={{ onChange: cancel }}
+        pagination={{ onChange: register.cancel }}
       />
     </Form>
   );
