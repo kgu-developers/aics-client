@@ -7,10 +7,10 @@ import {
 } from '~/constants/api';
 
 import type { Tokens } from '~/hooks/use-sign-in';
-import { getToken } from '~/utils/api';
+import { getToken } from '~/utils/token';
 
-import { removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
+import { removeTokens } from '~/utils/token';
 
 import { decodeJwt } from '~/utils/jwt';
 

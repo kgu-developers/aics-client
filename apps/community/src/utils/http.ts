@@ -1,4 +1,4 @@
-import { getAccessToken } from './api';
+import { getAccessToken } from './token';
 
 interface RequestParams {
   method: string;
