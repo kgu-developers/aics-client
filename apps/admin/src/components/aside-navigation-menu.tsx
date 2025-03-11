@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Menu, type MenuProps } from 'antd';
 import {
   Clipboard,
+  Clock,
   FlaskConical,
   GraduationCap,
   Speech,
@@ -9,6 +10,10 @@ import {
 } from 'lucide-react';
 
 import LOGO from '~/assets/logo.svg';
+import { useRefreshTokens } from '~/hooks/use-refresh-token';
+import { useTokenExpiration } from '~/hooks/use-token-experation';
+import { authServices } from '~/utils/auth';
+import { formatExpireTime } from '~/utils/utils';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -63,15 +68,36 @@ function AsideHeader() {
 }
 
 function AsideFooter() {
-  //TODO: 로그아웃 기능 적용
+  const { expireTime } = useTokenExpiration();
+  const refreshMutation = useRefreshTokens();
+  const { logout } = authServices();
+
+  const handleRefreshToken = () => {
+    refreshMutation.mutate();
+  };
+
   return (
-    <div className="flex items-center p-2 border-r border-gray-200 place-self-end">
-      <button
-        type="button"
-        className="p-2 text-xs transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
-      >
-        로그아웃
-      </button>
+    <div className="flex items-center text-sm p-2 border-r border-gray-200 justify-between">
+      <div className="flex gap-1.5 items-center">
+        <Clock size={16} />
+        <span>{formatExpireTime(expireTime)}</span>
+      </div>
+      <div>
+        <button
+          type="button"
+          className="p-2  transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          onClick={handleRefreshToken}
+        >
+          시간연장
+        </button>
+        <button
+          type="button"
+          className="p-2  transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          onClick={logout}
+        >
+          로그아웃
+        </button>
+      </div>
     </div>
   );
 }
