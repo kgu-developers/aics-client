@@ -11,7 +11,7 @@ import {
 
 import LOGO from '~/assets/logo.svg';
 import { useRefreshTokens } from '~/hooks/use-refresh-token';
-import { useTokenExpiration } from '~/hooks/use-token-experation';
+import { useTokenExpiration } from '~/hooks/use-token-expiration';
 import { authServices } from '~/utils/auth';
 import { formatExpireTime } from '~/utils/utils';
 
