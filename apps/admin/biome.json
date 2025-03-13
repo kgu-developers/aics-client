@@ -5,6 +5,6 @@
     "../../configs/biome/react.json"
   ],
   "linter": {
-    "ignore": ["src/routeTree.gen.ts", "src/openapi"]
+    "ignore": ["src/routeTree.gen.ts", "src/apis"]
   }
 }
