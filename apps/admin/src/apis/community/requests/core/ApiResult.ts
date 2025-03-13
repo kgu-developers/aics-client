@@ -1,4 +1,4 @@
-export type ApiResult<TData = any> = {
+export type ApiResult<TData = unknown> = {
   readonly body: TData;
   readonly ok: boolean;
   readonly status: number;
