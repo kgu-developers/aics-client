@@ -394,7 +394,11 @@ export const request = <T>(
 
         catchErrorCodes(options, result);
 
-        resolve(result.body);
+        if (result.body instanceof Object) {
+          resolve(result.body as T);
+        } else {
+          reject(new Error('적절하지 않은 response입니다.'));
+        }
       }
     } catch (error) {
       reject(error);
