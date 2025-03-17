@@ -71,7 +71,7 @@ export const usePostServiceGetApiV1PostsSuspense = <
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string[];
+    keywords?: string;
     page: number;
     size: number;
   },

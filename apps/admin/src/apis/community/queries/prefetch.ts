@@ -47,7 +47,7 @@ export const prefetchUsePostServiceGetApiV1Posts = (
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string[];
+    keywords?: string;
     page: number;
     size: number;
   },
