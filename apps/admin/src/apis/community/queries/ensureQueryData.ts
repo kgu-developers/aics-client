@@ -47,7 +47,7 @@ export const ensureUsePostServiceGetApiV1PostsData = (
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string[];
+    keywords?: string;
     page: number;
     size: number;
   },
