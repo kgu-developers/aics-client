@@ -69,7 +69,7 @@ export type PostServicePatchApiV1PostsByPostIdPinMutationResult = Awaited<
   ReturnType<typeof PostService.patchApiV1PostsByPostIdPin>
 >;
 export type PostServicePatchApiV1PostsByPostIdDeleteMutationResult = Awaited<
-  ReturnType<typeof PostService.patchApiV1PostsByPostIdDelete>
+  ReturnType<typeof PostService.deleteApiV1PostsByPostIdDelete>
 >;
 export type LabServicePatchApiV1LabsByIdMutationResult = Awaited<
   ReturnType<typeof LabService.patchApiV1LabsById>
