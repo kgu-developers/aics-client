@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router';
+import { Suspense } from 'react';
 
-import { usePostServiceGetApiV1Posts } from '~/apis/community/queries';
+import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense';
 
 import PostsList from '~/components/posts/posts-list';
 import { SearchBar } from '~/components/posts/search-bar';
@@ -22,7 +23,7 @@ function NewsListPage() {
     from: '/notice/',
   });
 
-  const { data: postList } = usePostServiceGetApiV1Posts({
+  const { data: postList } = usePostServiceGetApiV1PostsSuspense({
     category: CATEGORY,
     size: LIST_SIZE,
     keywords: keywords,
@@ -31,16 +32,18 @@ function NewsListPage() {
 
   return (
     <section className="flex flex-col gap-3 px-16">
-      <SearchBar defaultValue={keywords} />
-      {postList?.contents && (
-        <PostsList
-          title="공지사항"
-          to={PATH.NOTICE}
-          currentPage={currentPage}
-          data={postList.contents}
-          total={postList.pageable.totalElements}
-        />
-      )}
+      <Suspense fallback={<div>loading...</div>}>
+        <SearchBar defaultValue={keywords} />
+        {postList?.contents && (
+          <PostsList
+            title="공지사항"
+            to={PATH.NOTICE}
+            currentPage={currentPage}
+            data={postList.contents}
+            total={postList.pageable.totalElements}
+          />
+        )}
+      </Suspense>
     </section>
   );
 }
