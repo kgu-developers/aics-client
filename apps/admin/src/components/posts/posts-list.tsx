@@ -2,10 +2,10 @@ import { Link, useNavigate } from '@tanstack/react-router';
 import {
   Button,
   List,
-  message,
   Modal,
   Pagination,
   type PaginationProps,
+  message,
 } from 'antd';
 import { Pin, Trash2Icon } from 'lucide-react';
 import { useDeletePost } from '~/apis/admin/queries';
