@@ -31,7 +31,7 @@ const items: MenuItem[] = [
     icon: <GraduationCap size={20} />,
     children: [
       { key: 'dept', label: <Link to="/">학부 소개</Link> },
-      { key: 'club', label: <Link to="/club">동아리 소개</Link> },
+      { key: 'club', label: <Link to={PATH.CLUB}>동아리 소개</Link> },
       { key: 'contact', label: <Link to="/">찾아오시는 길</Link> },
     ],
   },
@@ -51,7 +51,7 @@ const items: MenuItem[] = [
     icon: <Clipboard size={20} />,
     children: [
       { key: 'notice', label: <Link to={PATH.NOTICE}>공지사항</Link> },
-      { key: 'news', label: <Link to="/">학부 소식</Link> },
+      { key: 'news', label: <Link to={PATH.NEWS}>학부 소식</Link> },
     ],
   },
 ];
@@ -79,7 +79,7 @@ function AsideFooter() {
 
   return (
     <div className="flex items-center justify-between p-2 text-sm border-r border-gray-200">
-      <div className="flex gap-1.5 items-center">
+      <div className="flex p-2 gap-1.5 items-center">
         <Clock size={16} />
         <span>{formatExpireTime(expireTime)}</span>
       </div>
