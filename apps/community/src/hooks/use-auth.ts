@@ -12,7 +12,7 @@ import { getToken } from '~/utils/token';
 import { http } from '~/utils/http';
 import { removeTokens } from '~/utils/token';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
