@@ -31,7 +31,7 @@ const items: MenuItem[] = [
     icon: <GraduationCap size={20} />,
     children: [
       { key: 'dept', label: <Link to="/">학부 소개</Link> },
-      { key: 'club', label: <Link to="/club">동아리 소개</Link> },
+      { key: 'club', label: <Link to={PATH.CLUB}>동아리 소개</Link> },
       { key: 'contact', label: <Link to="/">찾아오시는 길</Link> },
     ],
   },
