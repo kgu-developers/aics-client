@@ -11,7 +11,7 @@ export const Route = createFileRoute('/notice/')({
   component: NewsListPage,
   validateSearch: (search: { page?: string; query?: string }) => ({
     page: Number(search.page) || 0,
-    query: typeof search.query === 'string' ? search.query : '', // 기본값 ''
+    query: typeof search.query === 'string' ? search.query : '',
   }),
 });
 
