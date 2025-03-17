@@ -1,5 +1,12 @@
 import { Link, useNavigate } from '@tanstack/react-router';
-import { Button, List, Modal, Pagination, type PaginationProps } from 'antd';
+import {
+  Button,
+  List,
+  message,
+  Modal,
+  Pagination,
+  type PaginationProps,
+} from 'antd';
 import { Pin, Trash2Icon } from 'lucide-react';
 import { useDeletePost } from '~/apis/admin/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
@@ -8,6 +15,7 @@ import useModal from '~/hooks/use-modal';
 function DeleteButton({ selected }: { selected: number }) {
   const { isOpen, openModal, closeModal } = useModal();
   const { mutate } = useDeletePost();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleDelete = () => {
     mutate(
@@ -15,6 +23,17 @@ function DeleteButton({ selected }: { selected: number }) {
       {
         onSuccess: () => {
           closeModal();
+          messageApi.open({
+            type: 'success',
+            content: '게시글이 성공적으로 삭제되었습니다.',
+          });
+        },
+        onError: () => {
+          closeModal();
+          messageApi.open({
+            type: 'error',
+            content: '게시글 삭제에 실패했습니다.',
+          });
         },
       },
     );
@@ -22,6 +41,7 @@ function DeleteButton({ selected }: { selected: number }) {
 
   return (
     <>
+      {contextHolder}
       <button
         type="button"
         className="p-1 transition-colors duration-150 rounded-lg cursor-pointer hover:bg-red-300"
