@@ -79,7 +79,7 @@ function AsideFooter() {
 
   return (
     <div className="flex items-center justify-between p-2 text-sm border-r border-gray-200">
-      <div className="flex gap-1.5 items-center">
+      <div className="flex p-2 gap-1.5 items-center">
         <Clock size={16} />
         <span>{formatExpireTime(expireTime)}</span>
       </div>
