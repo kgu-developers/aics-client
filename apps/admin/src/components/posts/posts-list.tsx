@@ -12,14 +12,14 @@ import { useDeletePost } from '~/apis/admin/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
 import useModal from '~/hooks/use-modal';
 
-function DeleteButton({ selected }: { selected: number }) {
+function DeleteButton({ postId }: { postId: number }) {
   const { isOpen, openModal, closeModal } = useModal();
   const { mutate } = useDeletePost();
   const [messageApi, contextHolder] = message.useMessage();
 
   const handleDelete = () => {
     mutate(
-      { postId: selected },
+      { postId: postId },
       {
         onSuccess: () => {
           closeModal();
@@ -92,7 +92,7 @@ function PostListItem({ post, to }: PostListItemProps) {
         <span className="text-black">{post.title}</span>
         <span className="text-black">{post.createdAt}</span>
       </Link>
-      <DeleteButton selected={post.postId} />
+      <DeleteButton postId={post.postId} />
     </List.Item>
   );
 }
