@@ -32,6 +32,7 @@ function DeleteButton({ selected }: { selected: number }) {
       <Modal
         open={isOpen}
         onCancel={closeModal}
+        title="게시글 삭제"
         footer={
           <>
             <Button color="danger" variant="solid" onClick={handleDelete}>
