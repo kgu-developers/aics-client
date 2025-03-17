@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 
 import LOGO from '~/assets/logo.svg';
+import { PATH } from '~/constants/path';
 import { useRefreshTokens } from '~/hooks/use-refresh-token';
 import { useTokenExpiration } from '~/hooks/use-token-expiration';
 import { authServices } from '~/utils/auth';
@@ -49,7 +50,7 @@ const items: MenuItem[] = [
     label: '게시판',
     icon: <Clipboard size={20} />,
     children: [
-      { key: 'notice', label: <Link to="/">공지사항</Link> },
+      { key: 'notice', label: <Link to={PATH.NOTICE}>공지사항</Link> },
       { key: 'news', label: <Link to="/">학부 소식</Link> },
     ],
   },
@@ -77,7 +78,7 @@ function AsideFooter() {
   };
 
   return (
-    <div className="flex items-center text-sm p-2 border-r border-gray-200 justify-between">
+    <div className="flex items-center justify-between p-2 text-sm border-r border-gray-200">
       <div className="flex gap-1.5 items-center">
         <Clock size={16} />
         <span>{formatExpireTime(expireTime)}</span>
@@ -85,14 +86,14 @@ function AsideFooter() {
       <div>
         <button
           type="button"
-          className="p-2  transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          className="p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
           onClick={handleRefreshToken}
         >
           시간연장
         </button>
         <button
           type="button"
-          className="p-2  transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          className="p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
           onClick={logout}
         >
           로그아웃
