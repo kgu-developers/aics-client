@@ -30,18 +30,18 @@ const items: MenuItem[] = [
     icon: <GraduationCap size={20} />,
     children: [
       { key: 'dept', label: <Link to="/">학부 소개</Link> },
-      { key: 'club', label: <Link to="/">동아리 소개</Link> },
+      { key: 'club', label: <Link to="/club">동아리 소개</Link> },
       { key: 'contact', label: <Link to="/">찾아오시는 길</Link> },
     ],
   },
   {
     key: 'professor',
-    label: <Link to="/">교수진 소개</Link>,
+    label: <Link to="/professor">교수진 소개</Link>,
     icon: <Speech size={20} />,
   },
   {
     key: 'lab',
-    label: <Link to="/">연구실 소개</Link>,
+    label: <Link to="/lab">연구실 소개</Link>,
     icon: <FlaskConical size={20} />,
   },
   {
