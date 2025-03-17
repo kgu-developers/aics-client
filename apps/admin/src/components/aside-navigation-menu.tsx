@@ -51,7 +51,7 @@ const items: MenuItem[] = [
     icon: <Clipboard size={20} />,
     children: [
       { key: 'notice', label: <Link to={PATH.NOTICE}>공지사항</Link> },
-      { key: 'news', label: <Link to="/">학부 소식</Link> },
+      { key: 'news', label: <Link to={PATH.NEWS}>학부 소식</Link> },
     ],
   },
 ];
