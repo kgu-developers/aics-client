@@ -7,23 +7,48 @@ import {
 } from '~/constants/api';
 
 import type { Tokens } from '~/hooks/use-sign-in';
-import { useToken } from '~/hooks/use-token';
+import { getToken } from '~/utils/token';
 
-import { removeTokens } from '~/utils/api';
 import { http } from '~/utils/http';
+import { removeTokens } from '~/utils/token';
 
-const JWT_EXPIRY_TIME = 1800 * 1000 - 60 * 1000; // 29분
+import { useRouter } from 'next/navigation';
+import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
-  const [accessToken, refreshToken] = useToken();
+  const router = useRouter();
+  const [accessToken, refreshToken] = getToken();
+
+  const setTokens = (tokens: Tokens) => {
+    if (!tokens.accessToken || !tokens.refreshToken) {
+      console.log('토큰이 존재하지 않음');
+      return;
+    }
+
+    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
+
+    const decoded = decodeJwt(tokens.accessToken);
+
+    if (!decoded || !decoded.exp) {
+      console.log('잘못된 jwt 토큰');
+      return;
+    }
+
+    const expiresIn = decoded.exp * 1000 - Date.now();
+
+    setTimeout(() => {
+      silentRefresh.mutate();
+    }, expiresIn);
+  };
 
   const silentRefresh = useMutation({
-    mutationFn: async () => {
+    mutationFn: () => {
       if (!accessToken || !refreshToken) {
         throw new Error('Tokens are missing');
       }
 
-      return await http.post<Tokens, Tokens>(END_POINT.REISSUE, {
+      return http.post<Tokens, Tokens>(END_POINT.REISSUE, {
         accessToken,
         refreshToken,
       });
@@ -37,20 +62,12 @@ const useAuth = () => {
     },
   });
 
-  const setTokens = (tokens: Tokens) => {
-    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
-    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
-
-    setTimeout(() => {
-      silentRefresh.mutate();
-    }, JWT_EXPIRY_TIME);
-  };
-
   const logout = () => {
+    router.push('/');
     removeTokens();
   };
 
-  return { setTokens, logout, accessToken, refreshToken };
+  return { setTokens, logout };
 };
 
 export { useAuth };
