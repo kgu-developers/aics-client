@@ -12,9 +12,11 @@ import { getToken } from '~/utils/token';
 import { http } from '~/utils/http';
 import { removeTokens } from '~/utils/token';
 
+import { useRouter } from 'next/router';
 import { decodeJwt } from '~/utils/jwt';
 
 const useAuth = () => {
+  const router = useRouter();
   const [accessToken, refreshToken] = getToken();
 
   const setTokens = (tokens: Tokens) => {
@@ -61,6 +63,7 @@ const useAuth = () => {
   });
 
   const logout = () => {
+    router.push('/');
     removeTokens();
   };
 
