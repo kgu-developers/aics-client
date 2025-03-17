@@ -203,11 +203,11 @@ export class PostService {
    * @returns void No Content
    * @throws ApiError
    */
-  public static patchApiV1PostsByPostIdDelete(
+  public static deleteApiV1PostsByPostIdDelete(
     data: PatchApiV1PostsByPostIdDeleteData,
   ): CancelablePromise<PatchApiV1PostsByPostIdDeleteResponse> {
     return __request(OpenAPI, {
-      method: 'PATCH',
+      method: 'DELETE',
       url: '/api/v1/posts/{postId}/delete',
       path: {
         postId: data.postId,
