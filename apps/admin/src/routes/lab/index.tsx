@@ -8,7 +8,7 @@ export const Route = createFileRoute('/lab/')({
 
 function LabPage() {
   return (
-    <section className="py-10 px-16">
+    <section>
       <Button type="primary" className="mb-4">
         연구실 추가하기
       </Button>

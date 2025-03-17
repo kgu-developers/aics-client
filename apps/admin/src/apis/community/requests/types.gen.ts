@@ -491,7 +491,7 @@ export type GetApiV1PostsData = {
   /**
    * 검색 키워드 입니다. 미 입력 시 전체 게시글을 조회합니다.
    */
-  keywords?: Array<string>;
+  keywords?: string;
   /**
    * 페이지 인덱스
    */

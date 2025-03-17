@@ -22,9 +22,9 @@ function App() {
         },
       }}
     >
-      <main className="relative flex h-dvh">
+      <main className="relative flex w-dvw h-dvh">
         {!isSigninPage && <AsideNavigationMenu />}
-        <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="flex flex-col justify-center w-full h-full">
           <Outlet />
         </div>
         <TanStackRouterDevtools position="top-right" />

@@ -67,7 +67,7 @@ export const UsePostServiceGetApiV1PostsKeyFn = (
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string[];
+    keywords?: string;
     page: number;
     size: number;
   },
