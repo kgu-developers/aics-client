@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { END_POINT } from '~/constants/api';
-import { useAuth } from '~/hooks/use-auth';
+import { authServices } from '~/utils/auth';
 import { authHttp } from '~/utils/http';
 
 interface SignInData {
@@ -14,15 +15,16 @@ interface Tokens {
 }
 
 const useSignIn = () => {
-  const { setTokens } = useAuth();
+  const { setTokens } = authServices();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: (data: SignInData) => {
       return authHttp.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
     },
     onSuccess: (token) => {
-      console.log('success : ', token);
       setTokens(token);
+      navigate({ to: '/main' });
     },
   });
 };
