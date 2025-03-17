@@ -1,4 +1,5 @@
 import { Form } from 'antd';
+import { useState } from 'react';
 import useEditTable from '~/hooks/useEditTable';
 import ClubTableView from './club-table-view';
 
@@ -40,13 +41,30 @@ const ClubData: ClubData[] = [
 function ClubTable() {
   const [form] = Form.useForm();
   const { register } = useEditTable<ClubData>(form);
+  const [dataSource, setDataSource] = useState<ClubData[]>(ClubData);
 
-  const handleSave = () => {
-    // TODO: 연구실 수정 PATCH API 연동
+  const handleSave = async (record: ClubData) => {
+    try {
+      const row = await form.validateFields();
+      const updatedRecord = { ...record, ...row };
+
+      const newData = dataSource.map((item) =>
+        item.key === record.key ? updatedRecord : item,
+      );
+
+      setDataSource(newData);
+      console.log('수정된 데이터:', updatedRecord);
+      // TODO: 동아리 수정 API 연동
+    } catch (error) {
+      console.log('Validation Failed:', error);
+    }
   };
 
-  const handleDelete = () => {
-    // TODO: 연구실 삭제 DELETE API 연동
+  const handleDelete = (record: ClubData) => {
+    const filteredData = dataSource.filter((item) => item.key !== record.key);
+    setDataSource(filteredData);
+    //TODO: 동아리 삭제 API 연동
+    console.log('삭제된 데이터:', record);
   };
 
   return (

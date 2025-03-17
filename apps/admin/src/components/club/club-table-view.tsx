@@ -19,8 +19,8 @@ interface ClubTableViewProps {
     handleEdit: (record: Partial<ClubData> & { key: React.Key }) => void;
     cancel: () => void;
   };
-  handleSave: () => void;
-  handleDelete: () => void;
+  handleSave: (record: ClubData) => void;
+  handleDelete: (record: ClubData) => void;
 }
 
 interface EditableCellProps {
@@ -92,7 +92,10 @@ function ClubTableView({
         const editable = register.isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link onClick={handleSave} className="mr-4">
+            <Typography.Link
+              onClick={() => handleSave(record)}
+              className="mr-4"
+            >
               저장
             </Typography.Link>
             <Popconfirm
@@ -115,7 +118,10 @@ function ClubTableView({
             >
               수정
             </Typography.Link>
-            <Popconfirm title="정말 삭제하시겠습니까?" onConfirm={handleDelete}>
+            <Popconfirm
+              title="정말 삭제하시겠습니까?"
+              onConfirm={() => handleDelete(record)}
+            >
               <button
                 type="button"
                 className="ml-4 text-red-500 hover:cursor-pointer"
