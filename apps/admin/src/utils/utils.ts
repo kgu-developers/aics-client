@@ -7,3 +7,7 @@ export const formatExpireTime = (times: number | null) => {
 
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
+
+export const extractFileName = (path: string) => {
+  return path.split('/').pop();
+};
