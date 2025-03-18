@@ -37,7 +37,7 @@ function NewsListPage() {
         {postList?.contents && (
           <PostsList
             title="학부소식"
-            to={PATH.NOTICE}
+            to={PATH.NEWS}
             currentPage={currentPage}
             data={postList.contents}
             total={postList.pageable.totalElements}
