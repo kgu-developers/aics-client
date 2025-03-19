@@ -32,7 +32,7 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
     <div>
       <h1 className="font-semibold text-4xl p-8 pb-4">{title}</h1>
       <div className="flex justify-between border-t border-gray-200 px-8 pt-4 text-gray-500 text-sm">
-        <div>{author}</div>
+        <p>{author}</p>
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2 sm:visible invisible">
             <Eye size={'0.875rem'} />
