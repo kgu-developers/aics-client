@@ -1,23 +1,28 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { createFileRoute } from '@tanstack/react-router';
 import { Button, Card, Form, Input, Typography } from 'antd';
+import { useSignIn } from '~/hooks/use-sign-in';
 
 export const Route = createFileRoute('/')({
   component: SignInPage,
 });
 
 interface FormValues {
-  username: string;
+  userId: string;
   password: string;
 }
 
 function SignInPage() {
-  const onFinish = (values: FormValues) => {
-    //Todo: 로그인 API 연동
-    console.log('Received values:', values);
-  };
-
   const [form] = Form.useForm();
+  const signInMutation = useSignIn();
+
+  const onFinish = (values: FormValues) => {
+    signInMutation.mutate(values, {
+      onError: (error) => {
+        console.error('로그인 실패:', error);
+      },
+    });
+  };
 
   const removeSpace = (fieldName: keyof FormValues) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +32,8 @@ function SignInPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <Card className="w-96 shadow-lg">
+    <div className="flex items-center justify-center w-full h-full bg-gray-100">
+      <Card className="shadow-lg w-96">
         <Typography.Title level={3} className="text-center">
           로그인
         </Typography.Title>
@@ -37,17 +42,17 @@ function SignInPage() {
           name="login"
           onFinish={onFinish}
           layout="vertical"
-          initialValues={{ username: '', password: '' }}
+          initialValues={{ userId: '', password: '' }}
         >
           <Form.Item
             label="아이디"
-            name="username"
+            name="userId"
             rules={[{ required: true, message: '아이디를 입력하세요!' }]}
           >
             <Input
               prefix={<UserOutlined />}
               placeholder="아이디 입력"
-              onChange={removeSpace('username')}
+              onChange={removeSpace('userId')}
             />
           </Form.Item>
 
@@ -63,6 +68,12 @@ function SignInPage() {
             />
           </Form.Item>
 
+          {signInMutation.isError && (
+            <p className="text-red-500 text-center">
+              아이디 또는 비밀번호를 확인하세요.
+            </p>
+          )}
+
           <Form.Item>
             <Button type="primary" htmlType="submit" className="w-full">
               로그인
@@ -73,3 +84,5 @@ function SignInPage() {
     </div>
   );
 }
+
+export default SignInPage;

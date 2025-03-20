@@ -458,7 +458,7 @@ export const usePostServicePatchApiV1PostsByPostIdPin = <
       }) as unknown as Promise<TData>,
     ...options,
   });
-export const usePostServicePatchApiV1PostsByPostIdDelete = <
+export const useDeletePost = <
   TData = Common.PostServicePatchApiV1PostsByPostIdDeleteMutationResult,
   TError = unknown,
   TContext = unknown,
@@ -484,7 +484,7 @@ export const usePostServicePatchApiV1PostsByPostIdDelete = <
     TContext
   >({
     mutationFn: ({ postId }) =>
-      PostService.patchApiV1PostsByPostIdDelete({
+      PostService.deleteApiV1PostsByPostIdDelete({
         postId,
       }) as unknown as Promise<TData>,
     ...options,
