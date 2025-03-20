@@ -9,6 +9,7 @@ import {
   Trash2Icon,
 } from 'lucide-react';
 import { useDeletePost } from '~/apis/admin/queries';
+import { PATH } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
 import { extractFileName } from '~/utils/utils';
 
@@ -140,6 +141,8 @@ interface FooterProps {
 }
 
 function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
+  const editURL = to === PATH.NEWS ? PATH.EDIT_NEWS : PATH.EDIT_NOTICE;
+
   return (
     <div className="flex flex-col gap-6 items-start">
       <div className="w-full flex flex-col border-t border-b border-gray-200">
@@ -180,7 +183,7 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
             className="flex items-center gap-2 text-sm"
           >
             <PencilIcon size={'1rem'} />
-            <Link to={to}>수정하기</Link>
+            <Link to={`${editURL}${postId.toString()}`}>수정하기</Link>
           </Button>
           <DeleteButton postId={postId} />
         </div>

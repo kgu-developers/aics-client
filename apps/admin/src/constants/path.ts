@@ -4,4 +4,6 @@ export const PATH = {
   NEWS: '/news/',
   NOTICE: '/notice/',
   CLUB: '/club',
+  EDIT_NEWS: '/news/edit/',
+  EDIT_NOTICE: '/notice/edit/',
 };
