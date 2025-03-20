@@ -57,13 +57,19 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
       className="flex flex-col gap-5"
     >
       <FormItemWrapper label="제목">
-        <Form.Item name="title">
+        <Form.Item
+          name="title"
+          rules={[{ required: true, message: '제목을 입력하세요' }]}
+        >
           <Input placeholder="제목을 입력하세요" size="large" />
         </Form.Item>
       </FormItemWrapper>
 
       <FormItemWrapper label="카테고리">
-        <Form.Item name="category">
+        <Form.Item
+          name="category"
+          rules={[{ required: true, message: '카테고리를 선택하세요' }]}
+        >
           <Radio.Group>
             <Radio value="공지사항">공지사항</Radio>
             <Radio value="학과 소식">학부소식</Radio>
