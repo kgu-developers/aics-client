@@ -1,10 +1,8 @@
-import type { ReactNode } from 'react';
+import { Editor } from '@aics-client/tiptap';
 import { Button, Checkbox, Form, Input, Radio, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
-
 import { UploadIcon } from 'lucide-react';
-
-import { Editor } from '@aics-client/tiptap';
+import type { ReactNode } from 'react';
 
 import type { PostDetailResponse } from '~/apis/community/requests';
 
@@ -21,14 +19,14 @@ function FormItemWrapper({
 }
 
 interface EditPostFieldProps {
-  post: PostDetailResponse;
+  post?: PostDetailResponse;
   editMode?: boolean;
 }
 
 function EditPostField({ post, editMode = false }: EditPostFieldProps) {
   const [form] = Form.useForm();
-
-  const initialValues = editMode
+  const isEditMode = editMode && post;
+  const initialValues = isEditMode
     ? {
         title: post.title,
         category: post.category,
@@ -110,7 +108,7 @@ function EditPostField({ post, editMode = false }: EditPostFieldProps) {
       <FormItemWrapper label="본문">
         <Form.Item name="content">
           <Editor
-            editorContent={editMode ? post.content : ''}
+            editorContent={isEditMode ? post.content : ''}
             onChange={(value) => form.setFieldsValue({ content: value })}
           />
         </Form.Item>
