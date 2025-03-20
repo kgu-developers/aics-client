@@ -10,5 +10,5 @@ function PostEditPage() {
   const { params } = useMatch({ from: '/news/edit/$postId' });
   const { data: post } = useGetPostById({ postId: Number(params.postId) });
 
-  return <EditPostField post={post} editMode />;
+  return <EditPostField post={post} />;
 }

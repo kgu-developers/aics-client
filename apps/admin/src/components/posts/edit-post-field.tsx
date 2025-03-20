@@ -18,15 +18,9 @@ function FormItemWrapper({
   );
 }
 
-interface EditPostFieldProps {
-  post?: PostDetailResponse;
-  editMode?: boolean;
-}
-
-function EditPostField({ post, editMode = false }: EditPostFieldProps) {
+function EditPostField({ post }: { post?: PostDetailResponse }) {
   const [form] = Form.useForm();
-  const isEditMode = editMode && post;
-  const initialValues = isEditMode
+  const initialValues = post
     ? {
         title: post.title,
         category: post.category,
@@ -108,7 +102,7 @@ function EditPostField({ post, editMode = false }: EditPostFieldProps) {
       <FormItemWrapper label="본문">
         <Form.Item name="content">
           <Editor
-            editorContent={isEditMode ? post.content : ''}
+            editorContent={post ? post.content : ''}
             onChange={(value) => form.setFieldsValue({ content: value })}
           />
         </Form.Item>
