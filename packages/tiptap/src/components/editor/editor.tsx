@@ -58,7 +58,7 @@ export default function Editor({ editorContent, onChange }: EditorProps) {
     editorProps: {
       attributes: {
         class:
-          'appearance-none min-h-[300px] p-6 rounded w-full text-sm leading-tight focus:outline-none focus:shadow-outline',
+          'appearance-none h-[500px] overflow-auto p-6 rounded w-full text-sm leading-tight focus:outline-none focus:shadow-outline',
       },
     },
 
