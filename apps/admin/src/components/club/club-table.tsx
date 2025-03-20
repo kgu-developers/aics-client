@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import { useState } from 'react';
-import useEditTable from '~/hooks/useEditTable';
+import useEditTable from '~/hooks/use-edit-table';
 import ClubTableView from './club-table-view';
 
 export interface ClubData {

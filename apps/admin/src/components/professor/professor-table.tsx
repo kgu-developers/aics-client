@@ -1,5 +1,5 @@
 import { Form } from 'antd';
-import useEditTable from '~/hooks/useEditTable';
+import useEditTable from '~/hooks/use-edit-table';
 import ProfessorTableView from './professor-table-view';
 
 export interface ProfessorData {
