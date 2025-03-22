@@ -1,3 +1,4 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const hero = style({
@@ -9,6 +10,7 @@ const viewport = style({
   borderRadius: '1.5rem',
   overflow: 'hidden',
   aspectRatio: '16 / 9',
+  border: `1px solid ${themeVars.color.gray200}`,
 });
 
 const slides = style({
