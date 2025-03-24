@@ -1,9 +1,11 @@
 const PATH = {
+  MAIN: '/',
   NOTICE: '/notice',
   NEWS: '/news',
   NOTICE_DETAIL: (id: number) => `${PATH.NOTICE}/${id}`,
   NEWS_DETAIL: (id: number) => `${PATH.NEWS}/${id}`,
   SIGN_IN: '/signin',
+  MY: '/my',
 };
 
 export type pathmapKey = keyof typeof PATHMAP;
@@ -47,7 +49,11 @@ const PATHMAP = {
     title: '마이페이지',
     path: '/my',
     children: {
-      'change-password': { title: '비밀번호 변경', path: '/change-password' },
+      my: { title: '마이페이지', path: '/my' },
+      'change-password': {
+        title: '비밀번호 변경',
+        path: '/my/change-password',
+      },
     },
   },
 } as const satisfies TPathMap;
