@@ -8,7 +8,7 @@ import {
   REFRESH_TOKEN_KEY,
 } from '~/constants/api';
 import type { Tokens } from '~/hooks/use-sign-in';
-import { isLoginAtom } from '~/store/auth';
+import { isLoggedInAtom } from '~/store/auth';
 import { http } from '~/utils/http';
 import { decodeJwt } from '~/utils/jwt';
 import { getToken, removeTokens } from '~/utils/token';
@@ -16,7 +16,7 @@ import { getToken, removeTokens } from '~/utils/token';
 const useAuth = () => {
   const router = useRouter();
   const [accessToken, refreshToken] = getToken();
-  const setLoginAtom = useSetAtom(isLoginAtom);
+  const setLoginAtom = useSetAtom(isLoggedInAtom);
 
   const setTokens = (tokens: Tokens) => {
     if (!tokens.accessToken || !tokens.refreshToken) {

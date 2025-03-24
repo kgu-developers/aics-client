@@ -3,12 +3,13 @@ import { style } from '@vanilla-extract/css';
 
 const footer = style({
   display: 'flex',
+  width: '100%',
   flexDirection: 'column',
 });
 
 const footerNav = style({
-  display: 'flex',
-  justifyContent: themeVars.justifyContent.center,
+  display: 'grid',
+  gap: '2rem',
   padding: '1.25rem 2.5rem',
   borderRadius: '1rem',
   backgroundColor: 'black',
@@ -16,6 +17,7 @@ const footerNav = style({
 
   '@media': {
     'screen and (min-width: 1280px)': {
+      display: 'flex',
       justifyContent: themeVars.justifyContent.between,
       padding: '2.5rem 5rem',
     },
@@ -31,12 +33,17 @@ const logo = style({
 });
 
 const navLinks = style({
-  display: 'none',
+  width: '70%',
+  display: 'grid',
+  gap: '2rem',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
 
   '@media': {
-    'screen and (min-width: 1280px)': {
-      display: 'flex',
-      gap: '2rem',
+    'screen and (max-width: 1280px)': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(88px, 1fr))',
+    },
+    'screen and (max-width: 768px)': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))',
     },
   },
 });
