@@ -7,12 +7,12 @@ import Link from 'next/link';
 
 import LOGO from '~/assets/svgs/kgu-logo-white.svg';
 import { PATH, PATHMAP } from '~/constants/path';
-import { isLoginAtom } from '~/store/auth';
+import { isLoggedInAtom } from '~/store/auth';
 
 import * as styles from '~/components/site-footer.css';
 
 function SiteFooter() {
-  const isLogin = useAtomValue(isLoginAtom);
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
 
   return (
     <footer className={styles.footer}>
@@ -23,7 +23,7 @@ function SiteFooter() {
         </Link>
         <div className={styles.navLinks}>
           {Object.values(PATHMAP).map((path) => {
-            if (path.path === PATH.MY && !isLogin) {
+            if (path.path === PATH.MY && !isLoggedIn) {
               return null;
             }
             return (
@@ -31,7 +31,7 @@ function SiteFooter() {
                 key={path.path}
                 className={clsx(
                   styles.navGroup,
-                  !isLogin && path.path === PATH.MY && styles.hideMyPage,
+                  !isLoggedIn && path.path === PATH.MY && styles.hideMyPage,
                 )}
               >
                 <a href={path.path} className={styles.navGroupTitle}>

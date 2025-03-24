@@ -7,7 +7,7 @@ import { PATH, PATHMAP } from '~/constants/path';
 
 import * as styles from '~/components/shared/site-header/mobile-nav.css';
 
-function MobileNav({ isLogin }: { isLogin: boolean }) {
+function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>({});
 
@@ -47,7 +47,7 @@ function MobileNav({ isLogin }: { isLogin: boolean }) {
         </button>
         <nav>
           {Object.entries(PATHMAP).map(([key, path]) => {
-            if (path.path === PATH.MY && !isLogin) {
+            if (path.path === PATH.MY && !isLoggedIn) {
               return null;
             }
             return (

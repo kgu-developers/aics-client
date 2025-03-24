@@ -6,7 +6,7 @@ import { PATH, PATHMAP } from '~/constants/path';
 
 import * as styles from '~/components/shared/site-header/main-nav.css';
 
-function MainNav({ isLogin }: { isLogin: boolean }) {
+function MainNav({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <div className={styles.leftSide}>
       <Link href={PATH.MAIN} className={styles.logo}>
@@ -15,7 +15,7 @@ function MainNav({ isLogin }: { isLogin: boolean }) {
       </Link>
       <nav className={styles.nav}>
         {Object.values(PATHMAP).map((path) => {
-          if (path.path === PATH.MY && !isLogin) {
+          if (path.path === PATH.MY && !isLoggedIn) {
             return null;
           }
           return (
