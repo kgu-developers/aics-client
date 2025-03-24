@@ -22,7 +22,7 @@ const main = style({
 
   '@media': {
     'screen and (min-width: 1280px)': {
-      padding: '2rem 1rem 4rem 1rem',
+      padding: '2rem 0 4rem 0',
     },
   },
 });
