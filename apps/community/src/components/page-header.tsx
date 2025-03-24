@@ -1,51 +1,20 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
 
 import { Breadcrumb } from '@aics-client/design-system';
+
+import { PATH_TITLES, type pathmapKey } from '~/constants/path';
+
 import * as styles from '~/components/page-header.css';
-import { PATHMAP, type TPathMap, type pathmapKey } from '~/constants/path';
 
-interface TreeProps {
-  pathmap: TPathMap[keyof TPathMap];
-  paths: string[];
-  level: number;
-}
-
-function Tree({ pathmap, paths, level }: TreeProps) {
-  const newPathmap = pathmap.children?.[
-    paths[level + 1] as keyof typeof pathmap.children
-  ] ?? {
-    title: '',
-    path: '',
-  };
-
-  return level !== paths.length - 1 ? (
-    <>
-      <Breadcrumb.Separator />
-      <Breadcrumb.Item>
-        <Breadcrumb.Link href={`/${paths.slice(0, level + 1).join('/')}`}>
-          {pathmap.title}
-        </Breadcrumb.Link>
-      </Breadcrumb.Item>
-      <Tree pathmap={newPathmap} paths={paths} level={level + 1} />
-    </>
-  ) : (
-    <>
-      <Breadcrumb.Separator />
-      <Breadcrumb.Item>
-        <Breadcrumb.Page>{pathmap.title}</Breadcrumb.Page>
-      </Breadcrumb.Item>
-    </>
-  );
-}
-
-interface PageHeaderProps {
+interface Props {
   title: string;
   description: string;
 }
 
-function PageHeader({ title, description }: PageHeaderProps) {
+function PageHeader({ title, description }: Props) {
   const pathname = usePathname();
   const paths = pathname.split('/').filter((path) => path !== '');
 
@@ -56,11 +25,29 @@ function PageHeader({ title, description }: PageHeaderProps) {
           <Breadcrumb.Item>
             <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
-          <Tree
-            pathmap={PATHMAP[paths[0] as pathmapKey]}
-            paths={paths}
-            level={0}
-          />
+          {paths.map((path, index) =>
+            index !== paths.length - 1 ? (
+              <Fragment key={`subpath-${path}`}>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link
+                    href={`/${paths.slice(0, index + 1).join('/')}`}
+                  >
+                    {PATH_TITLES[path as pathmapKey]}
+                  </Breadcrumb.Link>
+                </Breadcrumb.Item>
+              </Fragment>
+            ) : (
+              <Fragment key={`subpath-${path}`}>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.Page>
+                    {PATH_TITLES[path as pathmapKey]}
+                  </Breadcrumb.Page>
+                </Breadcrumb.Item>
+              </Fragment>
+            ),
+          )}
         </Breadcrumb.List>
       </Breadcrumb>
 
