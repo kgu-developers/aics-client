@@ -37,6 +37,7 @@ const navGroupTitle = style({
   fontSize: themeVars.fontSize.sm,
   fontWeight: themeVars.fontWeight.semibold,
   color: themeVars.color.gray700,
+  cursor: 'pointer',
   selectors: {
     [`${navGroup}:hover &`]: {
       color: themeVars.color.black,

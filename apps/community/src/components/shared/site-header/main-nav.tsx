@@ -21,25 +21,24 @@ function MainNav({ isLogin }: { isLogin: boolean }) {
           return (
             <div key={path.path} className={styles.navGroup}>
               {'children' in path ? (
-                <div className={styles.navGroupTitle}>{path.title}</div>
+                <>
+                  <div className={styles.navGroupTitle}>{path.title}</div>
+                  <div className={styles.navGroupLinks}>
+                    {Object.values(path.children).map((child) => (
+                      <Link
+                        key={child.path}
+                        href={child.path}
+                        className={styles.navGroupLink}
+                      >
+                        {child.title}
+                      </Link>
+                    ))}
+                  </div>
+                </>
               ) : (
                 <Link href={path.path} className={styles.navGroupTitle}>
                   {path.title}
                 </Link>
-              )}
-
-              {'children' in path && (
-                <div className={styles.navGroupLinks}>
-                  {Object.values(path.children).map((child) => (
-                    <Link
-                      key={child.path}
-                      href={child.path}
-                      className={styles.navGroupLink}
-                    >
-                      {child.title}
-                    </Link>
-                  ))}
-                </div>
               )}
             </div>
           );
