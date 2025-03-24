@@ -53,42 +53,42 @@ function MobileNav({ isLogin }: { isLogin: boolean }) {
             return (
               <div key={key} className={styles.navGroup}>
                 {'children' in path ? (
-                  <button
-                    type="button"
-                    className={styles.navGroupTitle}
-                    onClick={() => toggleGroup(key)}
-                  >
-                    {path.title}
-                    <ChevronDown
-                      size={16}
+                  <>
+                    <button
+                      type="button"
+                      className={styles.navGroupTitle}
+                      onClick={() => toggleGroup(key)}
+                    >
+                      {path.title}
+                      <ChevronDown
+                        size={16}
+                        className={clsx(
+                          styles.chevron,
+                          openGroups[key] && styles.chevronOpen,
+                        )}
+                      />
+                    </button>
+                    <div
                       className={clsx(
-                        styles.chevron,
-                        openGroups[key] && styles.chevronOpen,
+                        styles.navGroupLinks,
+                        openGroups[key] && styles.navGroupLinksOpen,
                       )}
-                    />
-                  </button>
+                    >
+                      {Object.values(path.children).map((child) => (
+                        <Link
+                          key={child.path}
+                          href={child.path}
+                          className={styles.navGroupLink}
+                        >
+                          {child.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <Link href={path.path} className={styles.navGroupTitle}>
                     {path.title}
                   </Link>
-                )}
-                {'children' in path && (
-                  <div
-                    className={clsx(
-                      styles.navGroupLinks,
-                      openGroups[key] && styles.navGroupLinksOpen,
-                    )}
-                  >
-                    {Object.values(path.children).map((child) => (
-                      <Link
-                        key={child.path}
-                        href={child.path}
-                        className={styles.navGroupLink}
-                      >
-                        {child.title}
-                      </Link>
-                    ))}
-                  </div>
                 )}
               </div>
             );
