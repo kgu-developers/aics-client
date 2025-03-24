@@ -1,3 +1,4 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const footer = style({
@@ -7,23 +8,47 @@ const footer = style({
 
 const footerNav = style({
   display: 'flex',
-  justifyContent: 'space-between',
-  padding: '2.5rem 5rem',
+  justifyContent: themeVars.justifyContent.center,
+  padding: '1.25rem 2.5rem',
   borderRadius: '1rem',
   backgroundColor: 'black',
   color: 'white',
+
+  '@media': {
+    'screen and (min-width: 1280px)': {
+      justifyContent: themeVars.justifyContent.between,
+      padding: '2.5rem 5rem',
+    },
+  },
+});
+
+const logo = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: themeVars.spacing.md,
+  fontSize: themeVars.fontSize.xl,
+  fontWeight: themeVars.fontWeight.bold,
 });
 
 const navLinks = style({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
-  gap: '2rem',
+  display: 'none',
+
+  '@media': {
+    'screen and (min-width: 1280px)': {
+      display: 'flex',
+      gap: '2rem',
+    },
+  },
 });
 
 const navGroup = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.75rem',
+});
+
+const hideMyPage = style({
+  display: 'none',
 });
 
 const navGroupTitle = style({
@@ -54,8 +79,10 @@ const footerCopy = style({
 export {
   footer,
   footerNav,
+  logo,
   navLinks,
   navGroup,
+  hideMyPage,
   navGroupLinks,
   navGroupTitle,
   navGroupLink,
