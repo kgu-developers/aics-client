@@ -16,7 +16,7 @@ import { getToken, removeTokens } from '~/utils/token';
 const useAuth = () => {
   const router = useRouter();
   const [accessToken, refreshToken] = getToken();
-  const setLoginAtom = useSetAtom(isLoggedInAtom);
+  const setLoggedInAtom = useSetAtom(isLoggedInAtom);
 
   const setTokens = (tokens: Tokens) => {
     if (!tokens.accessToken || !tokens.refreshToken) {
@@ -24,7 +24,7 @@ const useAuth = () => {
       return;
     }
 
-    setLoginAtom(true);
+    setLoggedInAtom(true);
     localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
 
@@ -64,7 +64,7 @@ const useAuth = () => {
 
   const logout = () => {
     removeTokens();
-    setLoginAtom(false);
+    setLoggedInAtom(false);
     router.push('/');
   };
 
