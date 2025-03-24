@@ -174,7 +174,7 @@ export default function MenuBar({ editor }: { editor: Editor }) {
           type="file"
           accept="image/*"
           id="image-upload"
-          className="hidden"
+          className="size-0"
           onChange={handleImageUpload}
         />
         <MenuButton

@@ -24,7 +24,9 @@ function App() {
     >
       <main className="relative flex w-dvw h-dvh">
         {!isSigninPage && <AsideNavigationMenu />}
-        <div className="flex flex-col justify-center w-full h-full">
+        <div
+          className={`flex flex-col overflow-auto w-full h-dvh ${!isSigninPage && 'p-24'}`}
+        >
           <Outlet />
         </div>
         <TanStackRouterDevtools position="top-right" />
