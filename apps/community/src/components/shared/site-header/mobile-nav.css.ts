@@ -67,6 +67,13 @@ const navGroupTitle = style({
 
 const navGroupLinks = style({
   paddingLeft: '1rem',
+  maxHeight: 0,
+  overflow: 'hidden',
+  transition: 'max-height 0.5s ease-in-out',
+});
+
+const navGroupLinksOpen = style({
+  maxHeight: '300px',
 });
 
 const navGroupLink = style({
@@ -95,6 +102,7 @@ export {
   navGroup,
   navGroupLink,
   navGroupLinks,
+  navGroupLinksOpen,
   navGroupTitle,
   chevron,
   chevronOpen,

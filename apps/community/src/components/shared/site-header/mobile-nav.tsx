@@ -72,8 +72,13 @@ function MobileNav({ isLogin }: { isLogin: boolean }) {
                     {path.title}
                   </Link>
                 )}
-                {'children' in path && openGroups[key] && (
-                  <div className={styles.navGroupLinks}>
+                {'children' in path && (
+                  <div
+                    className={clsx(
+                      styles.navGroupLinks,
+                      openGroups[key] && styles.navGroupLinksOpen,
+                    )}
+                  >
                     {Object.values(path.children).map((child) => (
                       <Link
                         key={child.path}
