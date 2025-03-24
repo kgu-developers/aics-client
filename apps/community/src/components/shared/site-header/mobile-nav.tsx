@@ -21,7 +21,7 @@ function MobileNav({ isLogin }: { isLogin: boolean }) {
   return (
     <>
       <Menu
-        size={32}
+        size={24}
         className={styles.menuButton}
         onClick={() => setIsOpen(true)}
       />

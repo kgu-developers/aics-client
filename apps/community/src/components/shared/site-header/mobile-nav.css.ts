@@ -39,7 +39,7 @@ const drawerOpen = style({
 
 const menuButton = style({
   visibility: 'visible',
-
+  cursor: 'pointer',
   '@media': {
     'screen and (min-width: 1280px)': {
       visibility: 'hidden',
