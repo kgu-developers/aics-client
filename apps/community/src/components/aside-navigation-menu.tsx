@@ -3,28 +3,37 @@
 import Link from 'next/link';
 
 import * as styles from '~/components/aside-navigation-menu.css';
-import { PATH_TITLES, type pathTitleKey } from '~/constants/path';
+import type { TPathMap } from '~/constants/path';
 
 interface Props {
-  paths: { title: string; url: string }[];
-  base: pathTitleKey;
+  base: {
+    title: string;
+    path: string;
+    children?: TPathMap;
+  };
 }
 
-function AsideNavigationMenu({ paths, base }: Props) {
+function AsideNavigationMenu({ base }: Props) {
   return (
     <aside className={styles.navigationContainer}>
       <div className={styles.navigationWrapper}>
-        <h2 className={styles.navigationTitle}>{PATH_TITLES[base]}</h2>
+        <h2 className={styles.navigationTitle}>{base.title}</h2>
         <div className={styles.separator} />
-        {paths.map((path) => (
-          <Link
-            className={styles.navigationLink}
-            key={path.url}
-            href={path.url}
-          >
-            {path.title}
+        {base.children ? (
+          Object.values(base.children).map((path) => (
+            <Link
+              className={styles.navigationLink}
+              key={path.path}
+              href={path.path}
+            >
+              {path.title}
+            </Link>
+          ))
+        ) : (
+          <Link className={styles.navigationLink} href={base.path}>
+            {base.title}
           </Link>
-        ))}
+        )}
       </div>
     </aside>
   );
