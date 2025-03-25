@@ -3,7 +3,7 @@ info:
   title: AICS-HOME ADMIN
   description: "AI 컴퓨터공학부 커뮤니티 관리자, AICS-HOME ADMIN 입니다.\n\n로그인 API를 통해 액세스 토큰을 발급 받고 헤더에 값을 넣어주세요.\n\n별다른 절차 없이 API를 사용하실 수 있습니다.\n\n<ul>\n\t<li>사용자 API 문서: <a href=\"https://aics-api.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-api.ummdev.com/swagger-ui/index.html</a></li><br>\n\t<li>관리자 API 문서: <a href=\"https://aics-admin.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-admin.ummdev.com/swagger-ui/index.html</a></li><br>\n\t<li>인증/인가 API 문서: <a href=\"https://aics-auth.ummdev.com/swagger-ui/index.html\" target=\"_blank\">https://aics-auth.ummdev.com/swagger-ui/index.html</a></li>\n        \t</ul>\n"
 servers:
-  - url: 'https://aics-admin.ummdev.com'
+  - url: https://aics-admin.ummdev.com
     description: AICS-HOME ADMIN (dev)
 security:
   - bearer: []
@@ -25,6 +25,24 @@ tags:
   - name: Post
     description: 게시글 관리자 API
 paths:
+  /api/v1/users/delete:
+    post:
+      tags:
+        - User
+      summary: 유저 삭제 API
+      description: |2
+            - Description : 이 API는 유저를 삭제합니다.
+            - Assignee : 이신행
+      operationId: kickOutUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserKickOutListRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
   /api/v1/professors:
     post:
       tags:
@@ -67,7 +85,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostRequest'
+              $ref: '#/components/schemas/PostCreateRequest'
         required: true
       responses:
         '201':
@@ -96,7 +114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LabRequest'
+              $ref: '#/components/schemas/LabCreateRequest'
         required: true
       responses:
         '201':
@@ -148,6 +166,32 @@ paths:
                   type: string
                   format: binary
                   description: 연구실 로고 이미지
+              required:
+                - file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePathResponse'
+  /api/v1/files/club:
+    post:
+      tags:
+        - File
+      summary: 동아리 로고 이미지 업로드 API
+      description: "\t- Description : 이 API는 동아리 로고 이미지를 업로드합니다. 한 로고 이미지에 한 개의 이미지만 업로드 가능합니다.\n\t- Assignee : 박민준\n"
+      operationId: clubFileUpload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 동아리 로고 이미지
               required:
                 - file
       responses:
@@ -216,11 +260,20 @@ paths:
       summary: 동아리 생성 API
       description: "\t- Description : 이 API는 동아리를 생성합니다.\n\t- Assignee : 박민준\n"
       operationId: createClub
+      parameters:
+        - name: fileId
+          in: query
+          description: 동아리 이미지에 저장할 파일의 ID 입니다.
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClubRequest'
+              $ref: '#/components/schemas/ClubCreateRequest'
         required: true
       responses:
         '201':
@@ -278,7 +331,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AboutPersistResponse'
-  '/api/v1/professors/{id}':
+  /api/v1/professors/{id}:
     delete:
       tags:
         - Professor
@@ -325,7 +378,7 @@ paths:
       responses:
         '204':
           description: No Content
-  '/api/v1/posts/{postId}':
+  /api/v1/posts/{postId}:
     patch:
       tags:
         - Post
@@ -347,12 +400,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostRequest'
+              $ref: '#/components/schemas/PostUpdateRequest'
         required: true
       responses:
         '204':
           description: No Content
-  '/api/v1/posts/{postId}/pin':
+  /api/v1/posts/{postId}/pin:
     patch:
       tags:
         - Post
@@ -373,7 +426,7 @@ paths:
       responses:
         '204':
           description: No Content
-  '/api/v1/posts/{postId}/delete':
+  /api/v1/posts/{postId}/delete:
     patch:
       tags:
         - Post
@@ -394,7 +447,7 @@ paths:
       responses:
         '204':
           description: No Content
-  '/api/v1/labs/{id}':
+  /api/v1/labs/{id}:
     delete:
       tags:
         - Lab
@@ -432,12 +485,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LabRequest'
+              $ref: '#/components/schemas/LabUpdateRequest'
         required: true
       responses:
         '204':
           description: No Content
-  '/api/v1/clubs/{id}':
+  /api/v1/clubs/{id}:
     delete:
       tags:
         - Club
@@ -475,12 +528,55 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClubRequest'
+              $ref: '#/components/schemas/ClubUpdateRequest'
         required: true
       responses:
         '204':
           description: No Content
-  '/api/v1/abouts/{id}':
+  /api/v1/carousels/{id}:
+    delete:
+      tags:
+        - Carousel
+      summary: 캐러셀 삭제 API
+      description: "\t- Description : 이 API는 캐러셀을 삭제합니다.\n\t- Assignee : 이한음\n"
+      operationId: deleteCarousel
+      parameters:
+        - name: id
+          in: path
+          description: 캐러셀 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '204':
+          description: No Content
+    patch:
+      tags:
+        - Carousel
+      summary: 캐러셀 수정 API
+      description: "\t- Description : 이 API는 캐러셀을 수정합니다.\n\t- Assignee : 박민준\n"
+      operationId: updateCarousel
+      parameters:
+        - name: id
+          in: path
+          description: 캐러셀 ID는 URL 경로 변수 입니다.
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarouselUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+  /api/v1/abouts/{id}:
     patch:
       tags:
         - About
@@ -513,9 +609,9 @@ paths:
         - User
       summary: 유저 페이징 조회 API
       description: |2
-            - Description : 이 API는 유저를 페이징 조회합니다.
+            - Description : 이 API는 유저를 페이징 조회하며, 선택적으로 이름으로 필터링할 수 있습니다.
             - Assignee : 박민준
-      operationId: getUsers
+      operationId: getUsersByName
       parameters:
         - name: page
           in: query
@@ -536,6 +632,13 @@ paths:
             format: int32
             default: 10
           example: 10
+        - name: name
+          in: query
+          description: 유저 이름
+          required: false
+          schema:
+            type: string
+          example: 박민준
       responses:
         '200':
           description: OK
@@ -543,27 +646,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDetailPageResponse'
-  '/api/v1/carousels/{id}':
-    delete:
-      tags:
-        - Carousel
-      summary: 캐러셀 삭제 API
-      description: "\t- Description : 이 API는 캐러셀을 삭제합니다.\n\t- Assignee : 이한음\n"
-      operationId: deleteCarousel
-      parameters:
-        - name: id
-          in: path
-          description: 캐러셀 ID는 URL 경로 변수 입니다.
-          required: true
-          schema:
-            type: integer
-            format: int64
-          example: 1
-      responses:
-        '204':
-          description: No Content
 components:
   schemas:
+    UserKickOutListRequest:
+      type: object
+      properties:
+        userIds:
+          type: array
+          description: 학번 리스트
+          example:
+            - '202412347'
+            - '202412349'
+          items:
+            type: string
+            pattern: \d{9}
+      required:
+        - userIds
     ProfessorRequest:
       type: object
       description: 교수 수정 request 객체 입니다.
@@ -575,25 +673,22 @@ components:
         role:
           type: string
           description: 직위
-          enum:
-            - PROFESSOR
-            - ASSISTANT
-          example: ASSISTANT
+          example: 조교수
         contact:
           type: string
           description: 연락처
           example: 031-249-9671
-          pattern: '^\d{2,4}-\d{3,4}-\d{4}$'
+          pattern: ^\d{2,4}-\d{3,4}-\d{4}$
         email:
           type: string
           description: 이메일
           example: ejlee@kyonggi.ac.kr
-          pattern: '^[A-Za-z0-9._%+-]+@(kyonggi|kgu)\.ac\.kr$'
+          pattern: ^[A-Za-z0-9._%+-]+@(kyonggi|kgu)\.ac\.kr$
         img:
           type: string
           description: 이미지 URL
-          example: 'https://image.com/professor/profile/image'
-          pattern: '^https?://.*$'
+          example: https://image.com/professor/profile/image
+          pattern: ^https?://.*$
         officeLoc:
           type: string
           description: 연구실 위치
@@ -615,9 +710,9 @@ components:
           example: 1
       required:
         - id
-    PostRequest:
+    PostCreateRequest:
       type: object
-      description: 게시글 수정 request 객체 입니다.
+      description: 게시글 생성 request 객체 입니다.
       properties:
         title:
           type: string
@@ -654,9 +749,9 @@ components:
           example: 1
       required:
         - postId
-    LabRequest:
+    LabCreateRequest:
       type: object
-      description: 연구실 수정 request 객체 입니다.
+      description: 연구실 생성 request 객체 입니다.
       properties:
         name:
           type: string
@@ -667,14 +762,14 @@ components:
         loc:
           type: string
           description: 연구실 위치
-          example: '8502, 8503'
+          example: 8502, 8503
           maxLength: 10
           minLength: 0
         site:
           type: string
           description: 연구실 홈페이지
-          example: 'http://ailab.kyonggi.ac.kr'
-          pattern: '^(http|https)://[a-zA-Z0-9.-]+\.kyonggi\.ac\.kr$'
+          example: http://ailab.kyonggi.ac.kr
+          pattern: ^(http|https)://[a-zA-Z0-9.-]+\.kyonggi\.ac\.kr$
         advisor:
           type: string
           description: 연구실 담당교수
@@ -711,9 +806,9 @@ components:
       required:
         - id
         - physicalPath
-    ClubRequest:
+    ClubCreateRequest:
       type: object
-      description: 동아리 수정 request 객체 입니다.
+      description: 동아리 생성 request 객체 입니다.
       properties:
         name:
           type: string
@@ -730,13 +825,8 @@ components:
         site:
           type: string
           description: 동아리 홈페이지
-          example: 'https://www.clab.page/'
-          pattern: '^(http|https)://.*$'
-        file:
-          type: integer
-          format: int64
-          description: 업로드된 동아리 이미지 파일 ID
-          example: 1
+          example: https://www.clab.page/
+          pattern: ^(http|https)://.*$
       required:
         - description
         - name
@@ -763,7 +853,7 @@ components:
         link:
           type: string
           description: 캐러셀 이미지 링크
-          example: 'https://www.kgu.ac.kr/'
+          example: https://www.kgu.ac.kr/
     CarouselPersistResponse:
       type: object
       properties:
@@ -802,6 +892,125 @@ components:
           example: 1
       required:
         - id
+    PostUpdateRequest:
+      type: object
+      description: 게시글 수정 request 객체 입니다.
+      properties:
+        title:
+          type: string
+          description: 게시물 제목
+          example: SW 부트캠프 4기 교육생 모집
+          maxLength: 100
+          minLength: 0
+        content:
+          type: string
+          description: 게시물 내용
+          example: |
+            SW 부트캠프 4기 교육생 모집
+            SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집합니다.
+            관심있는 학생들의 많은 신청 바랍니다.
+            - 모집기간 : 2024.10.07(월)~10.15(화)
+            - 신청방법 :https://kebkyonggi.quv.kr/68
+        category:
+          type: string
+          description: 게시물 카테고리
+          enum:
+            - NOTIFICATION
+            - NEWS
+          example: NOTIFICATION
+        fileId:
+          type: integer
+          format: int64
+          description: 파일 ID
+          example: 1
+      required:
+        - content
+        - title
+    LabUpdateRequest:
+      type: object
+      description: 연구실 수정 request 객체 입니다.
+      properties:
+        name:
+          type: string
+          description: 연구실 이름
+          example: 인공지능연구실
+          maxLength: 15
+          minLength: 0
+        loc:
+          type: string
+          description: 연구실 위치
+          example: 8502, 8503
+          maxLength: 10
+          minLength: 0
+        site:
+          type: string
+          description: 연구실 홈페이지
+          example: http://ailab.kyonggi.ac.kr
+          pattern: ^(http|https)://[a-zA-Z0-9.-]+\.kyonggi\.ac\.kr$
+        advisor:
+          type: string
+          description: 연구실 담당교수
+          example: 박민준
+          maxLength: 15
+          minLength: 0
+        fileId:
+          type: integer
+          format: int64
+          description: 파일 ID
+          example: 1
+      required:
+        - advisor
+        - loc
+        - name
+        - site
+    ClubUpdateRequest:
+      type: object
+      description: 동아리 수정 request 객체 입니다.
+      properties:
+        name:
+          type: string
+          description: 동아리 이름
+          example: C-Lab
+          maxLength: 15
+          minLength: 0
+        description:
+          type: string
+          description: 동아리 설명
+          example: 경기대학교 AI컴퓨터공학부 개발동아리입니다.
+          maxLength: 50
+          minLength: 0
+        site:
+          type: string
+          description: 동아리 홈페이지
+          example: https://www.clab.page/
+          pattern: ^(http|https)://.*$
+        fileId:
+          type: integer
+          format: int64
+          description: 파일 ID
+          example: 1
+      required:
+        - description
+        - name
+    CarouselUpdateRequest:
+      type: object
+      description: 캐러셀 생성 request 객체 입니다.
+      properties:
+        text:
+          type: string
+          description: 캐러셀 설명
+          example: 경기대학교 AI컴퓨터공학부 메인 이미지
+          maxLength: 255
+          minLength: 0
+        link:
+          type: string
+          description: 캐러셀 이미지 링크
+          example: https://www.kgu.ac.kr/
+        fileId:
+          type: integer
+          format: int64
+          description: 캐러셀 이미지 ID
+          example: 1
     AboutUpdateRequest:
       type: object
       description: 소개글 수정 request 객체 입니다.
@@ -819,12 +1028,12 @@ components:
           type: integer
           format: int32
           default: '0'
-          description: '페이지 인덱스로, 0부터 시작합니다. 별도의 값 없이 요청 시, 0으로 설정됩니다.'
+          description: 페이지 인덱스로, 0부터 시작합니다. 별도의 값 없이 요청 시, 0으로 설정됩니다.
         size:
           type: integer
           format: int32
           default: '10'
-          description: '페이지 내 최대 응답 개수입니다. 별도의 값 없이 요청 시, 10으로 설정됩니다.'
+          description: 페이지 내 최대 응답 개수입니다. 별도의 값 없이 요청 시, 10으로 설정됩니다.
         totalPages:
           type: integer
           format: int32
@@ -838,7 +1047,7 @@ components:
         isEnd:
           type: boolean
           default: 'false'
-          description: '현재 응답하는 페이지가 마지막 일 시, true로 설정됩니다.'
+          description: 현재 응답하는 페이지가 마지막 일 시, true로 설정됩니다.
       required:
         - isEnd
         - page
