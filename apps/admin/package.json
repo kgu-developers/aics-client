@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm generate-routes && vite",
-    "codegen": "openapi-rq -i ./kgu-devs_admin.yaml",
+    "codegen": "pnpm codegen:admin && pnpm codegen:community",
+    "codegen:admin": "openapi-rq -i ./kgu-devs_admin.yaml -o ./src/apis/admin",
+    "codegen:community": "openapi-rq -i ./kgu-devs_community.yaml -o ./src/apis/community",
     "generate-routes": "tsr generate",
     "watch-routes": "tsr watch",
     "build": "pnpm generate-routes && tsc -b && vite build",
