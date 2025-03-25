@@ -86,26 +86,50 @@ function ClubTableView({
     onError: () => messageApi.error('파일 업로드에 실패했습니다.'),
   });
 
+  const updateClubImage = (record: ClubDetailResponse, fileId: number) => {
+    updateClub.mutate({
+      id: record.id,
+      requestBody: {
+        name: record.name,
+        description: record.description,
+        fileId,
+      },
+    });
+  };
+
   const handleImageUpload = (record: ClubDetailResponse) => (file: File) => {
     uploadClubImage.mutate(
       { formData: { file } },
       {
         onSuccess: (res) => {
           if (res?.id) {
-            updateClub.mutate({
-              id: record.id,
-              requestBody: {
-                name: record.name,
-                description: record.description,
-                fileId: res.id,
-              },
-            });
+            updateClubImage(record, res.id);
           }
         },
       },
     );
     return false;
   };
+
+  const renderImageUpload = (record: ClubDetailResponse) => (
+    <div>
+      {record.file?.physicalPath && (
+        <img
+          src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
+          alt={`${record.name} 이미지`}
+          className="w-24 h-24"
+        />
+      )}
+      <Upload
+        showUploadList={false}
+        beforeUpload={(file) => handleImageUpload(record)(file)}
+      >
+        <Button icon={<UploadOutlined />} className="mt-2">
+          업로드
+        </Button>
+      </Upload>
+    </div>
+  );
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
@@ -174,25 +198,8 @@ function ClubTableView({
       title: '동아리 이미지',
       dataIndex: 'file',
       width: '20%',
-      render: (_: unknown, record: ClubDetailResponse) => (
-        <div>
-          {record.file?.physicalPath && (
-            <img
-              src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
-              alt={`${record.name} 이미지`}
-              className="w-24 h-24"
-            />
-          )}
-          <Upload
-            showUploadList={false}
-            beforeUpload={(file) => handleImageUpload(record)(file)}
-          >
-            <Button icon={<UploadOutlined />} className="mt-2">
-              업로드
-            </Button>
-          </Upload>
-        </div>
-      ),
+      render: (_: unknown, record: ClubDetailResponse) =>
+        renderImageUpload(record),
     },
   ];
 
