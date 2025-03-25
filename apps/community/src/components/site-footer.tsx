@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { cn } from '@aics-client/design-system/utils';
 
 import LOGO from '~/assets/svgs/kgu-logo-white.svg';
 import { PATH, PATHMAP } from '~/constants/path';
@@ -29,7 +30,7 @@ function SiteFooter() {
             return (
               <div
                 key={path.path}
-                className={clsx(
+                className={cn(
                   styles.navGroup,
                   !isLoggedIn && path.path === PATH.MY && styles.hideMyPage,
                 )}

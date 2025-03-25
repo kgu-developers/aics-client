@@ -1,7 +1,8 @@
-import clsx from 'clsx';
 import { ChevronDown, Menu, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import { cn } from '@aics-client/design-system/utils';
 
 import { PATH, PATHMAP } from '~/constants/path';
 
@@ -27,7 +28,7 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
       />
 
       <div
-        className={clsx(styles.overlay, isOpen && styles.overlayVisible)}
+        className={cn(styles.overlay, isOpen && styles.overlayVisible)}
         onClick={() => setIsOpen(false)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -37,7 +38,7 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
         tabIndex={0}
         role="button"
       />
-      <div className={clsx(styles.drawer, isOpen && styles.drawerOpen)}>
+      <div className={cn(styles.drawer, isOpen && styles.drawerOpen)}>
         <button
           type="button"
           className={styles.closeButton}
@@ -62,14 +63,14 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
                       {path.title}
                       <ChevronDown
                         size={16}
-                        className={clsx(
+                        className={cn(
                           styles.chevron,
                           openGroups[key] && styles.chevronOpen,
                         )}
                       />
                     </button>
                     <div
-                      className={clsx(
+                      className={cn(
                         styles.navGroupLinks,
                         openGroups[key] && styles.navGroupLinksOpen,
                       )}

@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx/lite';
 import { useAtomValue } from 'jotai';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+import { cn } from '@aics-client/design-system/utils';
 
 import { PATH } from '~/constants/path';
 import { useAuth } from '~/hooks/use-auth';
@@ -43,13 +44,13 @@ function SiteHeader() {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         styles.headerWrapper,
         isScrolled && styles.headerWrapperScrolled,
       )}
     >
       <header
-        className={clsx(styles.header, isScrolled && styles.headerScrolled)}
+        className={cn(styles.header, isScrolled && styles.headerScrolled)}
       >
         <MainNav isLoggedIn={isLoggedIn} />
         <MobileNav isLoggedIn={isLoggedIn} />

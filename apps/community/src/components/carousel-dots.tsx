@@ -1,6 +1,7 @@
-import clsx from 'clsx/lite';
 import type { EmblaCarouselType } from 'embla-carousel';
 import { useCallback, useId } from 'react';
+
+import { cn } from '@aics-client/design-system/utils';
 
 import * as styles from '~/components/carousel-dots.css';
 import { useDotButton } from '~/hooks/use-dot-button';
@@ -13,7 +14,7 @@ function DotButton({ children, active, ...props }: DotButtonProps) {
   return (
     <button
       type="button"
-      className={clsx(styles.dot, active && styles.dotActive)}
+      className={cn(styles.dot, active && styles.dotActive)}
       {...props}
     >
       {children}
