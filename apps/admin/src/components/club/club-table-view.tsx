@@ -9,28 +9,28 @@ import {
   Upload,
 } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import type { ClubDetailResponse } from '~/apis/community/requests';
-
-type ClubTableRow = ClubDetailResponse & { key: string };
 
 interface ClubTableViewProps {
   form: FormInstance;
-  data: ClubTableRow[];
+  data: ClubDetailResponse[];
   register: {
-    isEditing: (record: ClubTableRow) => boolean;
-    handleEdit: (record: Partial<ClubTableRow> & { key: React.Key }) => void;
+    isEditing: (record: ClubDetailResponse) => boolean;
+    handleEdit: (
+      record: Partial<ClubDetailResponse> & { key: React.Key },
+    ) => void;
     cancel: () => void;
   };
-  handleSave: (record: ClubTableRow) => void;
-  handleDelete: (record: ClubTableRow) => void;
+  handleSave: (record: ClubDetailResponse) => void;
+  handleDelete: (record: ClubDetailResponse) => void;
 }
 
 interface EditableCellProps {
   editing: boolean;
   dataIndex: string;
   title: string;
-  record: ClubTableRow;
+  record: ClubDetailResponse;
   children: React.ReactNode;
 }
 
@@ -68,13 +68,13 @@ function ClubTableView({
     );
   };
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    } else {
-      console.log('data가 비어있습니다', data);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //   } else {
+  //     console.log('data가 비어있습니다', data);
+  //   }
+  // }, [data]);
 
   const handleImageUpload = (file: File) => {
     const reader = new FileReader();
@@ -99,7 +99,7 @@ function ClubTableView({
       title: '관리',
       dataIndex: 'operation',
       width: '10%',
-      render: (_: unknown, record: ClubTableRow) => {
+      render: (_: unknown, record: ClubDetailResponse) => {
         const editable = register.isEditing(record);
         return editable ? (
           <span>
@@ -126,7 +126,7 @@ function ClubTableView({
             <Typography.Link
               disabled={register.isEditing(record)}
               onClick={() =>
-                register.handleEdit({ ...record, key: record.name })
+                register.handleEdit({ ...record, key: record.id.toString() })
               }
             >
               수정
@@ -150,7 +150,7 @@ function ClubTableView({
       title: '동아리 이미지',
       dataIndex: 'file',
       width: '20%',
-      render: (_: unknown, record: ClubTableRow) => (
+      render: (_: unknown, record: ClubDetailResponse) => (
         <div>
           {record.file?.physicalPath && (
             <img
@@ -175,13 +175,13 @@ function ClubTableView({
     },
   ];
 
-  const mergedColumns: TableProps<ClubTableRow>['columns'] = columns.map(
+  const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
     (col) => {
       if (!col.editable) return col;
 
       return {
         ...col,
-        onCell: (record: ClubTableRow) => ({
+        onCell: (record: ClubDetailResponse) => ({
           record,
           dataIndex: col.dataIndex,
           title: col.title,
@@ -193,13 +193,14 @@ function ClubTableView({
 
   return (
     <Form form={form} component={false}>
-      <Table<ClubTableRow>
+      <Table<ClubDetailResponse>
         components={{ body: { cell: EditableCell } }}
         bordered
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{ onChange: register.cancel }}
+        rowKey="key"
         className="break-keep whitespace-nowrap"
       />
     </Form>

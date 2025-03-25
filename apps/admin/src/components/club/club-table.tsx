@@ -1,4 +1,9 @@
-import { Form } from 'antd';
+import { useQueryClient } from '@tanstack/react-query';
+import { Form, message } from 'antd';
+import {
+  useClubServiceDeleteApiV1ClubsById,
+  useClubServicePatchApiV1ClubsById,
+} from '~/apis/admin/queries';
 import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
 import useEditTable from '~/hooks/useEditTable';
@@ -11,37 +16,81 @@ function ClubTable() {
   const { register } = useEditTable<ClubTableRow>(form);
   const { data } = useClubServiceGetApiV1Clubs();
 
-  const dataSource: ClubTableRow[] = (data?.contents || []).map(
-    (item, index) => ({
-      ...item,
-      key: index.toString(),
-    }),
-  );
+  const queryClient = useQueryClient();
+  const updateMutation = useClubServicePatchApiV1ClubsById();
+  const deleteMutation = useClubServiceDeleteApiV1ClubsById();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const dataSource: ClubTableRow[] = (data?.contents || []).map((item) => ({
+    ...item,
+    key: item.id.toString(),
+  }));
 
   const handleSave = async (record: ClubTableRow) => {
     try {
-      const row = await form.validateFields();
-      const updatedRecord = { ...record, ...row };
-      console.log('수정된 데이터:', updatedRecord);
-      // TODO: 동아리 수정 API 연동
+      const rowData = await form.validateFields();
+      updateMutation.mutate(
+        { id: record.id, requestBody: rowData },
+        {
+          onSuccess: () => {
+            register.cancel();
+            messageApi.open({
+              type: 'success',
+              content: '동아리 정보가 성공적으로 수정되었습니다.',
+            });
+            queryClient.invalidateQueries({
+              queryKey: ['ClubServiceGetApiV1Clubs'],
+            });
+          },
+          onError: (e) => {
+            console.error('수정 실패:', e);
+            messageApi.open({
+              type: 'error',
+              content: '동아리 수정에 실패했습니다.',
+            });
+          },
+        },
+      );
     } catch (error) {
-      console.log('Validation Failed:', error);
+      console.error('Validation Failed:', error);
     }
   };
 
   const handleDelete = (record: ClubTableRow) => {
-    console.log('삭제된 데이터:', record);
-    // TODO: 삭제 API 연동
+    deleteMutation.mutate(
+      { id: record.id },
+      {
+        onSuccess: () => {
+          messageApi.open({
+            type: 'success',
+            content: '동아리가 성공적으로 삭제되었습니다.',
+          });
+          queryClient.invalidateQueries({
+            queryKey: ['ClubServiceGetApiV1Clubs'],
+          });
+        },
+        onError: (e) => {
+          console.error('삭제 실패:', e);
+          messageApi.open({
+            type: 'error',
+            content: '동아리 삭제에 실패했습니다.',
+          });
+        },
+      },
+    );
   };
 
   return (
-    <ClubTableView
-      form={form}
-      data={dataSource}
-      register={register}
-      handleSave={handleSave}
-      handleDelete={handleDelete}
-    />
+    <>
+      {contextHolder}
+      <ClubTableView
+        form={form}
+        data={dataSource}
+        register={register}
+        handleSave={handleSave}
+        handleDelete={handleDelete}
+      />
+    </>
   );
 }
 
