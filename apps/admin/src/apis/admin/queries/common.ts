@@ -21,14 +21,19 @@ export type UserServiceGetApiV1UsersQueryResult<
 export const useUserServiceGetApiV1UsersKey = 'UserServiceGetApiV1Users';
 export const UseUserServiceGetApiV1UsersKeyFn = (
   {
+    name,
     page,
     size,
   }: {
+    name?: string;
     page: number;
     size: number;
   },
   queryKey?: Array<unknown>,
-) => [useUserServiceGetApiV1UsersKey, ...(queryKey ?? [{ page, size }])];
+) => [useUserServiceGetApiV1UsersKey, ...(queryKey ?? [{ name, page, size }])];
+export type UserServicePostApiV1UsersDeleteMutationResult = Awaited<
+  ReturnType<typeof UserService.postApiV1UsersDelete>
+>;
 export type ProfessorServicePostApiV1ProfessorsMutationResult = Awaited<
   ReturnType<typeof ProfessorService.postApiV1Professors>
 >;
@@ -43,6 +48,9 @@ export type FileServicePostApiV1FilesPostMutationResult = Awaited<
 >;
 export type FileServicePostApiV1FilesLabMutationResult = Awaited<
   ReturnType<typeof FileService.postApiV1FilesLab>
+>;
+export type FileServicePostApiV1FilesClubMutationResult = Awaited<
+  ReturnType<typeof FileService.postApiV1FilesClub>
 >;
 export type FileServicePostApiV1FilesCarouselMutationResult = Awaited<
   ReturnType<typeof FileService.postApiV1FilesCarousel>
@@ -76,6 +84,9 @@ export type LabServicePatchApiV1LabsByIdMutationResult = Awaited<
 >;
 export type ClubServicePatchApiV1ClubsByIdMutationResult = Awaited<
   ReturnType<typeof ClubService.patchApiV1ClubsById>
+>;
+export type CarouselServicePatchApiV1CarouselsByIdMutationResult = Awaited<
+  ReturnType<typeof CarouselService.patchApiV1CarouselsById>
 >;
 export type AboutServicePatchApiV1AboutsByIdMutationResult = Awaited<
   ReturnType<typeof AboutService.patchApiV1AboutsById>

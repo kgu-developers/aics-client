@@ -20,10 +20,15 @@ import {
   AboutCreateRequest,
   AboutUpdateRequest,
   CarouselRequest,
-  ClubRequest,
-  LabRequest,
-  PostRequest,
+  CarouselUpdateRequest,
+  ClubCreateRequest,
+  ClubUpdateRequest,
+  LabCreateRequest,
+  LabUpdateRequest,
+  PostCreateRequest,
+  PostUpdateRequest,
   ProfessorRequest,
+  UserKickOutListRequest,
 } from '../requests/types.gen';
 import * as Common from './common';
 export const useUserServiceGetApiV1Users = <
@@ -32,9 +37,11 @@ export const useUserServiceGetApiV1Users = <
   TQueryKey extends Array<unknown> = unknown[],
 >(
   {
+    name,
     page,
     size,
   }: {
+    name?: string;
     page: number;
     size: number;
   },
@@ -42,8 +49,42 @@ export const useUserServiceGetApiV1Users = <
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
 ) =>
   useQuery<TData, TError>({
-    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ page, size }, queryKey),
-    queryFn: () => UserService.getApiV1Users({ page, size }) as TData,
+    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn(
+      { name, page, size },
+      queryKey,
+    ),
+    queryFn: () => UserService.getApiV1Users({ name, page, size }) as TData,
+    ...options,
+  });
+export const useUserServicePostApiV1UsersDelete = <
+  TData = Common.UserServicePostApiV1UsersDeleteMutationResult,
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: Omit<
+    UseMutationOptions<
+      TData,
+      TError,
+      {
+        requestBody: UserKickOutListRequest;
+      },
+      TContext
+    >,
+    'mutationFn'
+  >,
+) =>
+  useMutation<
+    TData,
+    TError,
+    {
+      requestBody: UserKickOutListRequest;
+    },
+    TContext
+  >({
+    mutationFn: ({ requestBody }) =>
+      UserService.postApiV1UsersDelete({
+        requestBody,
+      }) as unknown as Promise<TData>,
     ...options,
   });
 export const useProfessorServicePostApiV1Professors = <
@@ -88,7 +129,7 @@ export const usePostServicePostApiV1Posts = <
       TError,
       {
         fileId?: number;
-        requestBody: PostRequest;
+        requestBody: PostCreateRequest;
       },
       TContext
     >,
@@ -100,7 +141,7 @@ export const usePostServicePostApiV1Posts = <
     TError,
     {
       fileId?: number;
-      requestBody: PostRequest;
+      requestBody: PostCreateRequest;
     },
     TContext
   >({
@@ -122,7 +163,7 @@ export const useLabServicePostApiV1Labs = <
       TError,
       {
         fileId?: number;
-        requestBody: LabRequest;
+        requestBody: LabCreateRequest;
       },
       TContext
     >,
@@ -134,7 +175,7 @@ export const useLabServicePostApiV1Labs = <
     TError,
     {
       fileId?: number;
-      requestBody: LabRequest;
+      requestBody: LabCreateRequest;
     },
     TContext
   >({
@@ -201,6 +242,35 @@ export const useFileServicePostApiV1FilesLab = <
   >({
     mutationFn: ({ formData }) =>
       FileService.postApiV1FilesLab({ formData }) as unknown as Promise<TData>,
+    ...options,
+  });
+export const useFileServicePostApiV1FilesClub = <
+  TData = Common.FileServicePostApiV1FilesClubMutationResult,
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: Omit<
+    UseMutationOptions<
+      TData,
+      TError,
+      {
+        formData?: { file: Blob | File };
+      },
+      TContext
+    >,
+    'mutationFn'
+  >,
+) =>
+  useMutation<
+    TData,
+    TError,
+    {
+      formData?: { file: Blob | File };
+    },
+    TContext
+  >({
+    mutationFn: ({ formData }) =>
+      FileService.postApiV1FilesClub({ formData }) as unknown as Promise<TData>,
     ...options,
   });
 export const useFileServicePostApiV1FilesCarousel = <
@@ -275,7 +345,8 @@ export const useClubServicePostApiV1Clubs = <
       TData,
       TError,
       {
-        requestBody: ClubRequest;
+        fileId?: number;
+        requestBody: ClubCreateRequest;
       },
       TContext
     >,
@@ -286,12 +357,16 @@ export const useClubServicePostApiV1Clubs = <
     TData,
     TError,
     {
-      requestBody: ClubRequest;
+      fileId?: number;
+      requestBody: ClubCreateRequest;
     },
     TContext
   >({
-    mutationFn: ({ requestBody }) =>
-      ClubService.postApiV1Clubs({ requestBody }) as unknown as Promise<TData>,
+    mutationFn: ({ fileId, requestBody }) =>
+      ClubService.postApiV1Clubs({
+        fileId,
+        requestBody,
+      }) as unknown as Promise<TData>,
     ...options,
   });
 export const useCarouselServicePostApiV1Carousels = <
@@ -404,7 +479,7 @@ export const usePostServicePatchApiV1PostsByPostId = <
       TError,
       {
         postId: number;
-        requestBody: PostRequest;
+        requestBody: PostUpdateRequest;
       },
       TContext
     >,
@@ -416,7 +491,7 @@ export const usePostServicePatchApiV1PostsByPostId = <
     TError,
     {
       postId: number;
-      requestBody: PostRequest;
+      requestBody: PostUpdateRequest;
     },
     TContext
   >({
@@ -500,7 +575,7 @@ export const useLabServicePatchApiV1LabsById = <
       TError,
       {
         id: number;
-        requestBody: LabRequest;
+        requestBody: LabUpdateRequest;
       },
       TContext
     >,
@@ -512,7 +587,7 @@ export const useLabServicePatchApiV1LabsById = <
     TError,
     {
       id: number;
-      requestBody: LabRequest;
+      requestBody: LabUpdateRequest;
     },
     TContext
   >({
@@ -534,7 +609,7 @@ export const useClubServicePatchApiV1ClubsById = <
       TError,
       {
         id: number;
-        requestBody: ClubRequest;
+        requestBody: ClubUpdateRequest;
       },
       TContext
     >,
@@ -546,12 +621,46 @@ export const useClubServicePatchApiV1ClubsById = <
     TError,
     {
       id: number;
-      requestBody: ClubRequest;
+      requestBody: ClubUpdateRequest;
     },
     TContext
   >({
     mutationFn: ({ id, requestBody }) =>
       ClubService.patchApiV1ClubsById({
+        id,
+        requestBody,
+      }) as unknown as Promise<TData>,
+    ...options,
+  });
+export const useCarouselServicePatchApiV1CarouselsById = <
+  TData = Common.CarouselServicePatchApiV1CarouselsByIdMutationResult,
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: Omit<
+    UseMutationOptions<
+      TData,
+      TError,
+      {
+        id: number;
+        requestBody: CarouselUpdateRequest;
+      },
+      TContext
+    >,
+    'mutationFn'
+  >,
+) =>
+  useMutation<
+    TData,
+    TError,
+    {
+      id: number;
+      requestBody: CarouselUpdateRequest;
+    },
+    TContext
+  >({
+    mutationFn: ({ id, requestBody }) =>
+      CarouselService.patchApiV1CarouselsById({
         id,
         requestBody,
       }) as unknown as Promise<TData>,

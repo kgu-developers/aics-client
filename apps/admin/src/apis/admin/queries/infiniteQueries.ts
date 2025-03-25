@@ -13,8 +13,10 @@ export const useUserServiceGetApiV1UsersInfinite = <
   TQueryKey extends Array<unknown> = unknown[],
 >(
   {
+    name,
     size,
   }: {
+    name?: string;
     size: number;
   },
   queryKey?: TQueryKey,
@@ -24,9 +26,13 @@ export const useUserServiceGetApiV1UsersInfinite = <
   >,
 ) =>
   useInfiniteQuery({
-    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ size }, queryKey),
+    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ name, size }, queryKey),
     queryFn: ({ pageParam }) =>
-      UserService.getApiV1Users({ page: pageParam as number, size }) as TData,
+      UserService.getApiV1Users({
+        name,
+        page: pageParam as number,
+        size,
+      }) as TData,
     initialPageParam: '1',
     getNextPageParam: (response) =>
       (

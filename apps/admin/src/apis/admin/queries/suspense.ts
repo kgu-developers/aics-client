@@ -9,9 +9,11 @@ export const useUserServiceGetApiV1UsersSuspense = <
   TQueryKey extends Array<unknown> = unknown[],
 >(
   {
+    name,
     page,
     size,
   }: {
+    name?: string;
     page: number;
     size: number;
   },
@@ -19,7 +21,10 @@ export const useUserServiceGetApiV1UsersSuspense = <
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
 ) =>
   useSuspenseQuery<TData, TError>({
-    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ page, size }, queryKey),
-    queryFn: () => UserService.getApiV1Users({ page, size }) as TData,
+    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn(
+      { name, page, size },
+      queryKey,
+    ),
+    queryFn: () => UserService.getApiV1Users({ name, page, size }) as TData,
     ...options,
   });

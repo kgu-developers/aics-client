@@ -4,51 +4,106 @@ import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
 import type {
-  DeleteApiV1CarouselsByIdData,
-  DeleteApiV1CarouselsByIdResponse,
-  DeleteApiV1ClubsByIdData,
-  DeleteApiV1ClubsByIdResponse,
-  DeleteApiV1LabsByIdData,
-  DeleteApiV1LabsByIdResponse,
-  DeleteApiV1ProfessorsByIdData,
-  DeleteApiV1ProfessorsByIdResponse,
+  PostApiV1UsersDeleteData,
+  PostApiV1UsersDeleteResponse,
   GetApiV1UsersData,
   GetApiV1UsersResponse,
-  PatchApiV1AboutsByIdData,
-  PatchApiV1AboutsByIdResponse,
-  PatchApiV1ClubsByIdData,
-  PatchApiV1ClubsByIdResponse,
-  PatchApiV1LabsByIdData,
-  PatchApiV1LabsByIdResponse,
-  PatchApiV1PostsByPostIdData,
-  PatchApiV1PostsByPostIdDeleteData,
-  PatchApiV1PostsByPostIdDeleteResponse,
-  PatchApiV1PostsByPostIdPinData,
-  PatchApiV1PostsByPostIdPinResponse,
-  PatchApiV1PostsByPostIdResponse,
-  PatchApiV1ProfessorsByIdData,
-  PatchApiV1ProfessorsByIdResponse,
-  PostApiV1AboutsData,
-  PostApiV1AboutsResponse,
-  PostApiV1CarouselsData,
-  PostApiV1CarouselsResponse,
-  PostApiV1ClubsData,
-  PostApiV1ClubsResponse,
-  PostApiV1FilesAboutData,
-  PostApiV1FilesAboutResponse,
-  PostApiV1FilesCarouselData,
-  PostApiV1FilesCarouselResponse,
-  PostApiV1FilesLabData,
-  PostApiV1FilesLabResponse,
-  PostApiV1FilesPostData,
-  PostApiV1FilesPostResponse,
-  PostApiV1LabsData,
-  PostApiV1LabsResponse,
-  PostApiV1PostsData,
-  PostApiV1PostsResponse,
   PostApiV1ProfessorsData,
   PostApiV1ProfessorsResponse,
+  DeleteApiV1ProfessorsByIdData,
+  DeleteApiV1ProfessorsByIdResponse,
+  PatchApiV1ProfessorsByIdData,
+  PatchApiV1ProfessorsByIdResponse,
+  PostApiV1PostsData,
+  PostApiV1PostsResponse,
+  PatchApiV1PostsByPostIdData,
+  PatchApiV1PostsByPostIdResponse,
+  PatchApiV1PostsByPostIdPinData,
+  PatchApiV1PostsByPostIdPinResponse,
+  PatchApiV1PostsByPostIdDeleteData,
+  PatchApiV1PostsByPostIdDeleteResponse,
+  PostApiV1LabsData,
+  PostApiV1LabsResponse,
+  DeleteApiV1LabsByIdData,
+  DeleteApiV1LabsByIdResponse,
+  PatchApiV1LabsByIdData,
+  PatchApiV1LabsByIdResponse,
+  PostApiV1FilesPostData,
+  PostApiV1FilesPostResponse,
+  PostApiV1FilesLabData,
+  PostApiV1FilesLabResponse,
+  PostApiV1FilesClubData,
+  PostApiV1FilesClubResponse,
+  PostApiV1FilesCarouselData,
+  PostApiV1FilesCarouselResponse,
+  PostApiV1FilesAboutData,
+  PostApiV1FilesAboutResponse,
+  PostApiV1ClubsData,
+  PostApiV1ClubsResponse,
+  DeleteApiV1ClubsByIdData,
+  DeleteApiV1ClubsByIdResponse,
+  PatchApiV1ClubsByIdData,
+  PatchApiV1ClubsByIdResponse,
+  PostApiV1CarouselsData,
+  PostApiV1CarouselsResponse,
+  DeleteApiV1CarouselsByIdData,
+  DeleteApiV1CarouselsByIdResponse,
+  PatchApiV1CarouselsByIdData,
+  PatchApiV1CarouselsByIdResponse,
+  PostApiV1AboutsData,
+  PostApiV1AboutsResponse,
+  PatchApiV1AboutsByIdData,
+  PatchApiV1AboutsByIdResponse,
 } from './types.gen';
+
+export class UserService {
+  /**
+   * 유저 삭제 API
+   *     - Description : 이 API는 유저를 삭제합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static postApiV1UsersDelete(
+    data: PostApiV1UsersDeleteData,
+  ): CancelablePromise<PostApiV1UsersDeleteResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/api/v1/users/delete',
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 유저 페이징 조회 API
+   *     - Description : 이 API는 유저를 페이징 조회하며, 선택적으로 이름으로 필터링할 수 있습니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.page 페이지 인덱스
+   * @param data.size 응답 개수
+   * @param data.name 유저 이름
+   * @returns UserDetailPageResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Users(
+    data: GetApiV1UsersData,
+  ): CancelablePromise<GetApiV1UsersResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/users',
+      query: {
+        page: data.page,
+        size: data.size,
+        name: data.name,
+      },
+    });
+  }
+}
 
 export class ProfessorService {
   /**
@@ -334,6 +389,27 @@ export class FileService {
   }
 
   /**
+   * 동아리 로고 이미지 업로드 API
+   * 	- Description : 이 API는 동아리 로고 이미지를 업로드합니다. 한 로고 이미지에 한 개의 이미지만 업로드 가능합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.formData
+   * @returns FilePathResponse Created
+   * @throws ApiError
+   */
+  public static postApiV1FilesClub(
+    data: PostApiV1FilesClubData = {},
+  ): CancelablePromise<PostApiV1FilesClubResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/api/v1/files/club',
+      formData: data.formData,
+      mediaType: 'multipart/form-data',
+    });
+  }
+
+  /**
    * 캐러셀 이미지 업로드 API
    * 	- Description : 이 API는 캐러셀 이미지를 업로드합니다. 한 캐러셀에 한 개의 이미지만 업로드 가능합니다.
    * - Assignee : 이한음
@@ -384,6 +460,7 @@ export class ClubService {
    *
    * @param data The data for the request.
    * @param data.requestBody
+   * @param data.fileId 동아리 이미지에 저장할 파일의 ID 입니다.
    * @returns ClubPersistResponse Created
    * @throws ApiError
    */
@@ -393,6 +470,9 @@ export class ClubService {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/api/v1/clubs',
+      query: {
+        fileId: data.fileId,
+      },
       body: data.requestBody,
       mediaType: 'application/json',
     });
@@ -493,6 +573,31 @@ export class CarouselService {
       },
     });
   }
+
+  /**
+   * 캐러셀 수정 API
+   * 	- Description : 이 API는 캐러셀을 수정합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.id 캐러셀 ID는 URL 경로 변수 입니다.
+   * @param data.requestBody
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static patchApiV1CarouselsById(
+    data: PatchApiV1CarouselsByIdData,
+  ): CancelablePromise<PatchApiV1CarouselsByIdResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/carousels/{id}',
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
 }
 
 export class AboutService {
@@ -539,32 +644,6 @@ export class AboutService {
       },
       body: data.requestBody,
       mediaType: 'application/json',
-    });
-  }
-}
-
-export class UserService {
-  /**
-   * 유저 페이징 조회 API
-   *     - Description : 이 API는 유저를 페이징 조회합니다.
-   * - Assignee : 박민준
-   *
-   * @param data The data for the request.
-   * @param data.page 페이지 인덱스
-   * @param data.size 응답 개수
-   * @returns UserDetailPageResponse OK
-   * @throws ApiError
-   */
-  public static getApiV1Users(
-    data: GetApiV1UsersData,
-  ): CancelablePromise<GetApiV1UsersResponse> {
-    return __request(OpenAPI, {
-      method: 'GET',
-      url: '/api/v1/users',
-      query: {
-        page: data.page,
-        size: data.size,
-      },
     });
   }
 }
