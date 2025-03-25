@@ -189,6 +189,12 @@ export const $ClubRequest = {
       example: 'https://www.clab.page/',
       pattern: '^(http|https)://.*$',
     },
+    file: {
+      type: 'integer',
+      format: 'int64',
+      description: '업로드된 동아리 이미지 파일 ID',
+      example: 1,
+    },
   },
   required: ['description', 'name'],
 } as const;

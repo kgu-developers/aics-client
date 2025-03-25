@@ -128,6 +128,10 @@ export type ClubRequest = {
    * 동아리 홈페이지
    */
   site?: string;
+  /**
+   * 업로드된 동아리 이미지 파일 ID
+   */
+  file?: number;
 };
 
 export type ClubPersistResponse = {
