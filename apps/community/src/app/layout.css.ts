@@ -18,7 +18,13 @@ const root = style([
 
 const main = style({
   flex: 1,
-  paddingBottom: '8rem',
+  padding: '1rem 0.5rem 2rem 0.5rem',
+
+  '@media': {
+    'screen and (min-width: 1280px)': {
+      padding: '2rem 0 4rem 0',
+    },
+  },
 });
 
 export { root, main };

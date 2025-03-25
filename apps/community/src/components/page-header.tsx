@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 
 import { Breadcrumb } from '@aics-client/design-system';
 
-import { PATHMAP, type pathmapKey } from '~/constants/path';
+import { PATH_TITLES, type pathmapKey } from '~/constants/path';
 
 import * as styles from '~/components/page-header.css';
 
@@ -33,7 +33,7 @@ function PageHeader({ title, description }: Props) {
                   <Breadcrumb.Link
                     href={`/${paths.slice(0, index + 1).join('/')}`}
                   >
-                    {PATHMAP[path as pathmapKey]}
+                    {PATH_TITLES[path as pathmapKey]}
                   </Breadcrumb.Link>
                 </Breadcrumb.Item>
               </Fragment>
@@ -42,7 +42,7 @@ function PageHeader({ title, description }: Props) {
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
                   <Breadcrumb.Page>
-                    {PATHMAP[path as pathmapKey]}
+                    {PATH_TITLES[path as pathmapKey]}
                   </Breadcrumb.Page>
                 </Breadcrumb.Item>
               </Fragment>

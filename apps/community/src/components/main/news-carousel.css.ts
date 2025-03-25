@@ -1,3 +1,4 @@
+import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const news = style({
@@ -50,6 +51,7 @@ const image = style({
   borderRadius: '1rem',
   overflow: 'hidden',
   userSelect: 'none',
+  border: `1px solid ${themeVars.color.gray200}`,
 });
 
 const controls = style({

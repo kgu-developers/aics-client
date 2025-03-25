@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
+import AltImage from '~/assets/images/alt.png';
 import { CarouselDots } from '~/components/carousel-dots';
 import * as styles from '~/components/main/news-carousel.css';
 
@@ -15,7 +16,13 @@ function NewsCarousel() {
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, slidesToScroll: 'auto' },
-    [Autoplay({ stopOnInteraction: false, stopOnMouseEnter: true })],
+    [
+      Autoplay({
+        delay: 5000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ],
   );
 
   return (
@@ -38,11 +45,7 @@ function NewsCarousel() {
             >
               <div className={styles.slide}>
                 <div className={styles.image}>
-                  <Image
-                    src={'https://picsum.photos/1600/900'}
-                    alt="preview-image"
-                    fill
-                  />
+                  <Image src={AltImage} alt="preview-image" fill />
                 </div>
                 <h3 className={styles.slideTitle}>{post.title}</h3>
                 <p className={styles.slideDescription}>{post.description}</p>

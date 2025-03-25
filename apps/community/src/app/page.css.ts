@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 const wrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2.5rem',
+  gap: '5rem',
 });
 
 const section2 = style({

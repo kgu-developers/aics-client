@@ -1,23 +1,22 @@
 import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 
 import {
   ACCESS_TOKEN_KEY,
   END_POINT,
   REFRESH_TOKEN_KEY,
 } from '~/constants/api';
-
 import type { Tokens } from '~/hooks/use-sign-in';
-import { getToken } from '~/utils/token';
-
+import { isLoggedInAtom } from '~/store/auth';
 import { http } from '~/utils/http';
-import { removeTokens } from '~/utils/token';
-
-import { useRouter } from 'next/navigation';
 import { decodeJwt } from '~/utils/jwt';
+import { getToken, removeTokens } from '~/utils/token';
 
 const useAuth = () => {
   const router = useRouter();
   const [accessToken, refreshToken] = getToken();
+  const setLoggedInAtom = useSetAtom(isLoggedInAtom);
 
   const setTokens = (tokens: Tokens) => {
     if (!tokens.accessToken || !tokens.refreshToken) {
@@ -25,6 +24,7 @@ const useAuth = () => {
       return;
     }
 
+    setLoggedInAtom(true);
     localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
 
@@ -63,8 +63,9 @@ const useAuth = () => {
   });
 
   const logout = () => {
-    router.push('/');
     removeTokens();
+    setLoggedInAtom(false);
+    router.push('/');
   };
 
   return { setTokens, logout };

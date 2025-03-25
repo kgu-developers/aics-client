@@ -1,7 +1,8 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
-import '@ant-design/v5-patch-for-react-19';
 import ReactDOM from 'react-dom/client';
+
+import '@ant-design/v5-patch-for-react-19';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { routeTree } from './routeTree.gen';
