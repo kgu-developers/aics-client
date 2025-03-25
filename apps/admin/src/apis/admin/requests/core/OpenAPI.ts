@@ -45,10 +45,10 @@ export const OpenAPI: OpenAPIConfig = {
   ENCODE_PATH: undefined,
   HEADERS: undefined,
   PASSWORD: undefined,
-  TOKEN: undefined,
+  TOKEN: () => Promise.resolve(localStorage.getItem('accessToken') ?? ''),
   USERNAME: undefined,
   VERSION: '1.0',
-  WITH_CREDENTIALS: false,
+  WITH_CREDENTIALS: true,
   interceptors: {
     request: new Interceptors(),
     response: new Interceptors(),
