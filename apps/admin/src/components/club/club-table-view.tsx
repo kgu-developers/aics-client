@@ -7,9 +7,9 @@ import {
   Table,
   Typography,
   Upload,
+  message,
 } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-// import { useEffect } from 'react';
 import type { ClubDetailResponse } from '~/apis/community/requests';
 
 interface ClubTableViewProps {
@@ -41,6 +41,8 @@ function ClubTableView({
   handleSave,
   handleDelete,
 }: ClubTableViewProps) {
+  const [_, contextHolder] = message.useMessage();
+
   const EditableCell = ({
     editing,
     dataIndex,
@@ -68,18 +70,9 @@ function ClubTableView({
     );
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data);
-  //   } else {
-  //     console.log('data가 비어있습니다', data);
-  //   }
-  // }, [data]);
-
-  const handleImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+  // const handleImageUpload = (record: ClubDetailResponse) => (file: File) => {
+  //Todo: 이미지 업로드 기능 구현
+  // };
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
@@ -159,10 +152,7 @@ function ClubTableView({
           )}
           <Upload
             showUploadList={false}
-            beforeUpload={(file) => {
-              handleImageUpload(file);
-              return false;
-            }}
+            // beforeUpload={(file) => handleImageUpload(record)(file)}
           >
             <Button icon={<UploadOutlined />} className="mt-2">
               업로드
@@ -190,18 +180,21 @@ function ClubTableView({
   );
 
   return (
-    <Form form={form} component={false}>
-      <Table<ClubDetailResponse>
-        components={{ body: { cell: EditableCell } }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
-        rowClassName="editable-row"
-        pagination={{ onChange: register.cancel }}
-        rowKey="id"
-        className="break-keep whitespace-nowrap"
-      />
-    </Form>
+    <>
+      {contextHolder}
+      <Form form={form} component={false}>
+        <Table<ClubDetailResponse>
+          components={{ body: { cell: EditableCell } }}
+          bordered
+          dataSource={data}
+          columns={mergedColumns}
+          rowClassName="editable-row"
+          pagination={{ onChange: register.cancel }}
+          rowKey="id"
+          className="break-keep whitespace-nowrap"
+        />
+      </Form>
+    </>
   );
 }
 

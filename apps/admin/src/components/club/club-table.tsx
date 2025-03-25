@@ -7,6 +7,7 @@ import {
 import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
 import useEditTable from '~/hooks/useEditTable';
+import ClubCreate from './club-create';
 import ClubTableView from './club-table-view';
 
 function ClubTable() {
@@ -78,6 +79,7 @@ function ClubTable() {
   return (
     <>
       {contextHolder}
+      <ClubCreate />
       <ClubTableView
         form={form}
         data={dataSource}
