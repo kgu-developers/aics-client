@@ -1,30 +1,26 @@
 import type { FormInstance } from 'antd';
 import { useState } from 'react';
 
-const useEditTable = <T extends { key: string }>(form: FormInstance) => {
-  const [editingKey, setEditingKey] = useState('');
+const useEditTable = <T extends { id: React.Key }>(form: FormInstance) => {
+  const [editingKey, setEditingKey] = useState<React.Key | null>(null);
 
-  const isEditing = (record: T) => record.key === editingKey;
+  const isEditing = (record: T) => record.id === editingKey;
 
-  const handleEdit = (record: Partial<T> & { key: string }) => {
-    form.setFieldsValue({
-      ...record,
-    });
-    setEditingKey(record.key);
+  const handleEdit = (record: Partial<T> & { id: React.Key }) => {
+    form.setFieldsValue({ ...record });
+    setEditingKey(record.id);
   };
 
   const cancel = () => {
-    setEditingKey('');
-  };
-
-  const register = {
-    isEditing,
-    handleEdit,
-    cancel,
+    setEditingKey(null);
   };
 
   return {
-    register,
+    register: {
+      isEditing,
+      handleEdit,
+      cancel,
+    },
   };
 };
 

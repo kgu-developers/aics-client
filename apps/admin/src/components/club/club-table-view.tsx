@@ -18,7 +18,7 @@ interface ClubTableViewProps {
   register: {
     isEditing: (record: ClubDetailResponse) => boolean;
     handleEdit: (
-      record: Partial<ClubDetailResponse> & { key: React.Key },
+      record: Partial<ClubDetailResponse> & { id: React.Key },
     ) => void;
     cancel: () => void;
   };
@@ -125,9 +125,7 @@ function ClubTableView({
           <span>
             <Typography.Link
               disabled={register.isEditing(record)}
-              onClick={() =>
-                register.handleEdit({ ...record, key: record.id.toString() })
-              }
+              onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
             </Typography.Link>
@@ -200,7 +198,7 @@ function ClubTableView({
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{ onChange: register.cancel }}
-        rowKey="key"
+        rowKey="id"
         className="break-keep whitespace-nowrap"
       />
     </Form>

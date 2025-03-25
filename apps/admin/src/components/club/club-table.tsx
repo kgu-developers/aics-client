@@ -9,11 +9,9 @@ import type { ClubDetailResponse } from '~/apis/community/requests';
 import useEditTable from '~/hooks/useEditTable';
 import ClubTableView from './club-table-view';
 
-type ClubTableRow = ClubDetailResponse & { key: string };
-
 function ClubTable() {
   const [form] = Form.useForm();
-  const { register } = useEditTable<ClubTableRow>(form);
+  const { register } = useEditTable<ClubDetailResponse>(form);
   const { data } = useClubServiceGetApiV1Clubs();
 
   const queryClient = useQueryClient();
@@ -21,12 +19,9 @@ function ClubTable() {
   const deleteMutation = useClubServiceDeleteApiV1ClubsById();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const dataSource: ClubTableRow[] = (data?.contents || []).map((item) => ({
-    ...item,
-    key: item.id.toString(),
-  }));
+  const dataSource: ClubDetailResponse[] = data?.contents ?? [];
 
-  const handleSave = async (record: ClubTableRow) => {
+  const handleSave = async (record: ClubDetailResponse) => {
     try {
       const rowData = await form.validateFields();
       updateMutation.mutate(
@@ -56,7 +51,7 @@ function ClubTable() {
     }
   };
 
-  const handleDelete = (record: ClubTableRow) => {
+  const handleDelete = (record: ClubDetailResponse) => {
     deleteMutation.mutate(
       { id: record.id },
       {
