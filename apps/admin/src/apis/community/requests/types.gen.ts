@@ -368,6 +368,10 @@ export type CommentResponse = {
 
 export type ClubDetailResponse = {
   /**
+   * 동아리 id
+   */
+  id: number;
+  /**
    * 동아리 이름
    */
   name: string;
@@ -441,9 +445,9 @@ export type PatchApiV1UsersPasswordData = {
   requestBody: UserPasswordUpdateRequest;
 };
 
-export type PatchApiV1UsersPasswordResponse = undefined;
+export type PatchApiV1UsersPasswordResponse = void;
 
-export type PatchApiV1UsersDeleteResponse = undefined;
+export type PatchApiV1UsersDeleteResponse = void;
 
 export type GetApiV1UsersMyResponse = UserDetailResponse;
 
@@ -470,7 +474,7 @@ export type PatchApiV1CommentsByCommentIdData = {
   requestBody: CommentUpdateRequest;
 };
 
-export type PatchApiV1CommentsByCommentIdResponse = undefined;
+export type PatchApiV1CommentsByCommentIdResponse = void;
 
 export type PatchApiV1CommentsByCommentIdDeleteData = {
   /**
@@ -479,7 +483,7 @@ export type PatchApiV1CommentsByCommentIdDeleteData = {
   commentId: number;
 };
 
-export type PatchApiV1CommentsByCommentIdDeleteResponse = undefined;
+export type PatchApiV1CommentsByCommentIdDeleteResponse = void;
 
 export type GetApiV1ProfessorsResponse = ProfessorListResponse;
 
@@ -491,7 +495,7 @@ export type GetApiV1PostsData = {
   /**
    * 검색 키워드 입니다. 미 입력 시 전체 게시글을 조회합니다.
    */
-  keywords?: string;
+  keywords?: Array<string>;
   /**
    * 페이지 인덱스
    */
@@ -558,7 +562,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -568,7 +572,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -609,7 +613,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -620,7 +624,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };

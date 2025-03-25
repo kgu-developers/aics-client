@@ -1,8 +1,8 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
 import {
-  type UseMutationOptions,
-  type UseQueryOptions,
+  UseMutationOptions,
+  UseQueryOptions,
   useMutation,
   useQuery,
 } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ import {
   ProfessorService,
   UserService,
 } from '../requests/services.gen';
-import type {
+import {
   CommentRequest,
   CommentUpdateRequest,
   UserCreateRequest,
@@ -83,7 +83,7 @@ export const usePostServiceGetApiV1Posts = <
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string;
+    keywords?: string[];
     page: number;
     size: number;
   },

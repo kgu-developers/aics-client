@@ -1,8 +1,8 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
 import {
-  type UseMutationOptions,
-  type UseQueryOptions,
+  UseMutationOptions,
+  UseQueryOptions,
   useMutation,
   useQuery,
 } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ import {
   ProfessorService,
   UserService,
 } from '../requests/services.gen';
-import type {
+import {
   AboutCreateRequest,
   AboutUpdateRequest,
   CarouselRequest,
@@ -458,7 +458,7 @@ export const usePostServicePatchApiV1PostsByPostIdPin = <
       }) as unknown as Promise<TData>,
     ...options,
   });
-export const useDeletePost = <
+export const usePostServicePatchApiV1PostsByPostIdDelete = <
   TData = Common.PostServicePatchApiV1PostsByPostIdDeleteMutationResult,
   TError = unknown,
   TContext = unknown,
@@ -484,7 +484,7 @@ export const useDeletePost = <
     TContext
   >({
     mutationFn: ({ postId }) =>
-      PostService.deleteApiV1PostsByPostIdDelete({
+      PostService.patchApiV1PostsByPostIdDelete({
         postId,
       }) as unknown as Promise<TData>,
     ...options,

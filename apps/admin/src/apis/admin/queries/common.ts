@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import type { UseQueryResult } from '@tanstack/react-query';
-import type {
+import { UseQueryResult } from '@tanstack/react-query';
+import {
   AboutService,
   CarouselService,
   ClubService,
@@ -69,7 +69,7 @@ export type PostServicePatchApiV1PostsByPostIdPinMutationResult = Awaited<
   ReturnType<typeof PostService.patchApiV1PostsByPostIdPin>
 >;
 export type PostServicePatchApiV1PostsByPostIdDeleteMutationResult = Awaited<
-  ReturnType<typeof PostService.deleteApiV1PostsByPostIdDelete>
+  ReturnType<typeof PostService.patchApiV1PostsByPostIdDelete>
 >;
 export type LabServicePatchApiV1LabsByIdMutationResult = Awaited<
   ReturnType<typeof LabService.patchApiV1LabsById>

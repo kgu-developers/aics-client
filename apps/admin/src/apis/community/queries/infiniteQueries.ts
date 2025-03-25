@@ -5,16 +5,20 @@ import {
   UseInfiniteQueryOptions,
   useInfiniteQuery,
 } from '@tanstack/react-query';
-import { UserService } from '../requests/services.gen';
+import { PostService } from '../requests/services.gen';
 import * as Common from './common';
-export const useUserServiceGetApiV1UsersInfinite = <
-  TData = InfiniteData<Common.UserServiceGetApiV1UsersDefaultResponse>,
+export const usePostServiceGetApiV1PostsInfinite = <
+  TData = InfiniteData<Common.PostServiceGetApiV1PostsDefaultResponse>,
   TError = unknown,
   TQueryKey extends Array<unknown> = unknown[],
 >(
   {
+    category,
+    keywords,
     size,
   }: {
+    category?: 'NOTIFICATION' | 'NEWS';
+    keywords?: string[];
     size: number;
   },
   queryKey?: TQueryKey,
@@ -24,9 +28,17 @@ export const useUserServiceGetApiV1UsersInfinite = <
   >,
 ) =>
   useInfiniteQuery({
-    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ size }, queryKey),
+    queryKey: Common.UsePostServiceGetApiV1PostsKeyFn(
+      { category, keywords, size },
+      queryKey,
+    ),
     queryFn: ({ pageParam }) =>
-      UserService.getApiV1Users({ page: pageParam as number, size }) as TData,
+      PostService.getApiV1Posts({
+        category,
+        keywords,
+        page: pageParam as number,
+        size,
+      }) as TData,
     initialPageParam: '1',
     getNextPageParam: (response) =>
       (

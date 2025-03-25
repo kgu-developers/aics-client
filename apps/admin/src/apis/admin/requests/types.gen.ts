@@ -278,7 +278,7 @@ export type DeleteApiV1ProfessorsByIdData = {
   id: number;
 };
 
-export type DeleteApiV1ProfessorsByIdResponse = undefined;
+export type DeleteApiV1ProfessorsByIdResponse = void;
 
 export type PatchApiV1ProfessorsByIdData = {
   /**
@@ -288,7 +288,7 @@ export type PatchApiV1ProfessorsByIdData = {
   requestBody: ProfessorRequest;
 };
 
-export type PatchApiV1ProfessorsByIdResponse = undefined;
+export type PatchApiV1ProfessorsByIdResponse = void;
 
 export type PostApiV1PostsData = {
   /**
@@ -308,7 +308,7 @@ export type PatchApiV1PostsByPostIdData = {
   requestBody: PostRequest;
 };
 
-export type PatchApiV1PostsByPostIdResponse = undefined;
+export type PatchApiV1PostsByPostIdResponse = void;
 
 export type PatchApiV1PostsByPostIdPinData = {
   /**
@@ -317,7 +317,7 @@ export type PatchApiV1PostsByPostIdPinData = {
   postId: number;
 };
 
-export type PatchApiV1PostsByPostIdPinResponse = undefined;
+export type PatchApiV1PostsByPostIdPinResponse = void;
 
 export type PatchApiV1PostsByPostIdDeleteData = {
   /**
@@ -326,7 +326,7 @@ export type PatchApiV1PostsByPostIdDeleteData = {
   postId: number;
 };
 
-export type PatchApiV1PostsByPostIdDeleteResponse = undefined;
+export type PatchApiV1PostsByPostIdDeleteResponse = void;
 
 export type PostApiV1LabsData = {
   /**
@@ -345,7 +345,7 @@ export type DeleteApiV1LabsByIdData = {
   id: number;
 };
 
-export type DeleteApiV1LabsByIdResponse = undefined;
+export type DeleteApiV1LabsByIdResponse = void;
 
 export type PatchApiV1LabsByIdData = {
   /**
@@ -355,7 +355,7 @@ export type PatchApiV1LabsByIdData = {
   requestBody: LabRequest;
 };
 
-export type PatchApiV1LabsByIdResponse = undefined;
+export type PatchApiV1LabsByIdResponse = void;
 
 export type PostApiV1FilesPostData = {
   formData?: {
@@ -414,7 +414,7 @@ export type DeleteApiV1ClubsByIdData = {
   id: number;
 };
 
-export type DeleteApiV1ClubsByIdResponse = undefined;
+export type DeleteApiV1ClubsByIdResponse = void;
 
 export type PatchApiV1ClubsByIdData = {
   /**
@@ -424,7 +424,7 @@ export type PatchApiV1ClubsByIdData = {
   requestBody: ClubRequest;
 };
 
-export type PatchApiV1ClubsByIdResponse = undefined;
+export type PatchApiV1ClubsByIdResponse = void;
 
 export type PostApiV1CarouselsData = {
   /**
@@ -443,7 +443,7 @@ export type DeleteApiV1CarouselsByIdData = {
   id: number;
 };
 
-export type DeleteApiV1CarouselsByIdResponse = undefined;
+export type DeleteApiV1CarouselsByIdResponse = void;
 
 export type PostApiV1AboutsData = {
   requestBody: AboutCreateRequest;
@@ -459,7 +459,7 @@ export type PatchApiV1AboutsByIdData = {
   requestBody: AboutUpdateRequest;
 };
 
-export type PatchApiV1AboutsByIdResponse = undefined;
+export type PatchApiV1AboutsByIdResponse = void;
 
 export type GetApiV1UsersData = {
   /**
@@ -493,7 +493,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
     patch: {
@@ -502,7 +502,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -524,7 +524,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -535,7 +535,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -546,7 +546,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -568,7 +568,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
     patch: {
@@ -577,7 +577,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -643,7 +643,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
     patch: {
@@ -652,7 +652,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -674,7 +674,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };
@@ -696,7 +696,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: undefined;
+        204: void;
       };
     };
   };

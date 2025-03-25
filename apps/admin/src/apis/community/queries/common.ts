@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import type { UseQueryResult } from '@tanstack/react-query';
-import type {
+import { UseQueryResult } from '@tanstack/react-query';
+import {
   AboutService,
   CarouselService,
   ClubService,
@@ -67,7 +67,7 @@ export const UsePostServiceGetApiV1PostsKeyFn = (
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string;
+    keywords?: string[];
     page: number;
     size: number;
   },

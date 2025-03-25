@@ -618,6 +618,12 @@ export const $CommentResponse = {
 export const $ClubDetailResponse = {
   type: 'object',
   properties: {
+    id: {
+      type: 'integer',
+      format: 'int64',
+      description: '동아리 id',
+      example: 1,
+    },
     name: {
       type: 'string',
       description: '동아리 이름',
@@ -641,7 +647,7 @@ export const $ClubDetailResponse = {
       },
     },
   },
-  required: ['description', 'name'],
+  required: ['description', 'id', 'name'],
 } as const;
 
 export const $ClubListResponse = {

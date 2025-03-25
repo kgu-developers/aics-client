@@ -1,6 +1,6 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import type { QueryClient } from '@tanstack/react-query';
+import { type QueryClient } from '@tanstack/react-query';
 import {
   AboutService,
   CarouselService,
@@ -47,7 +47,7 @@ export const ensureUsePostServiceGetApiV1PostsData = (
     size,
   }: {
     category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string;
+    keywords?: string[];
     page: number;
     size: number;
   },
