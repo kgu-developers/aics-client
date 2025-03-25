@@ -8,7 +8,7 @@ import {
   message,
 } from 'antd';
 import { Pin, Trash2Icon } from 'lucide-react';
-import { useDeletePost } from '~/apis/admin/queries';
+import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/apis/admin/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
 import useModal from '~/hooks/use-modal';
 
