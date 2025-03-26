@@ -3,6 +3,7 @@ import { Form, message } from 'antd';
 import {
   useClubServiceDeleteApiV1ClubsById,
   useClubServicePatchApiV1ClubsById,
+  useFileServicePostApiV1FilesClub,
 } from '~/apis/admin/queries';
 import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
@@ -21,6 +22,29 @@ function ClubTable() {
   const [messageApi, contextHolder] = message.useMessage();
 
   const dataSource: ClubDetailResponse[] = data?.contents ?? [];
+
+  const uploadClubImage = useFileServicePostApiV1FilesClub();
+
+  const handleImageUpload = (record: ClubDetailResponse) => (file: File) => {
+    uploadClubImage.mutate(
+      { formData: { file } },
+      {
+        onSuccess: (res) => {
+          if (res?.id) {
+            updateMutation.mutate({
+              id: record.id,
+              requestBody: {
+                name: record.name,
+                description: record.description,
+                fileId: res.id,
+              },
+            });
+          }
+        },
+      },
+    );
+    return false;
+  };
 
   const handleSave = async (record: ClubDetailResponse) => {
     try {
@@ -86,6 +110,7 @@ function ClubTable() {
         register={register}
         handleSave={handleSave}
         handleDelete={handleDelete}
+        handleImageUpload={handleImageUpload}
       />
     </>
   );

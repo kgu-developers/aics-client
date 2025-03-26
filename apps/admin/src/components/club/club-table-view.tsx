@@ -11,8 +11,6 @@ import {
   message,
 } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-import { useFileServicePostApiV1FilesClub } from '~/apis/admin/queries';
-import { useClubServicePatchApiV1ClubsById } from '~/apis/admin/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
 
 const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL;
@@ -29,6 +27,7 @@ interface ClubTableViewProps {
   };
   handleSave: (record: ClubDetailResponse) => void;
   handleDelete: (record: ClubDetailResponse) => void;
+  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean;
 }
 
 interface EditableCellProps {
@@ -70,66 +69,9 @@ function ClubTableView({
   register,
   handleSave,
   handleDelete,
+  handleImageUpload,
 }: ClubTableViewProps) {
-  const [messageApi, contextHolder] = message.useMessage();
-  const queryClient = useQueryClient();
-
-  const updateClub = useClubServicePatchApiV1ClubsById({
-    onSuccess: () => {
-      messageApi.success('동아리 이미지가 업데이트되었습니다.');
-      queryClient.refetchQueries({ queryKey: ['ClubServiceGetApiV1Clubs'] });
-    },
-    onError: () => messageApi.error('동아리 이미지 업데이트에 실패했습니다.'),
-  });
-
-  const uploadClubImage = useFileServicePostApiV1FilesClub({
-    onError: () => messageApi.error('파일 업로드에 실패했습니다.'),
-  });
-
-  const updateClubImage = (record: ClubDetailResponse, fileId: number) => {
-    updateClub.mutate({
-      id: record.id,
-      requestBody: {
-        name: record.name,
-        description: record.description,
-        fileId,
-      },
-    });
-  };
-
-  const handleImageUpload = (record: ClubDetailResponse) => (file: File) => {
-    uploadClubImage.mutate(
-      { formData: { file } },
-      {
-        onSuccess: (res) => {
-          if (res?.id) {
-            updateClubImage(record, res.id);
-          }
-        },
-      },
-    );
-    return false;
-  };
-
-  const renderImageUpload = (record: ClubDetailResponse) => (
-    <div>
-      {record.file?.physicalPath && (
-        <img
-          src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
-          alt={`${record.name} 이미지`}
-          className="w-24 h-24"
-        />
-      )}
-      <Upload
-        showUploadList={false}
-        beforeUpload={(file) => handleImageUpload(record)(file)}
-      >
-        <Button icon={<UploadOutlined />} className="mt-2">
-          업로드
-        </Button>
-      </Upload>
-    </div>
-  );
+  const [_messageApi, contextHolder] = message.useMessage();
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
@@ -202,6 +144,26 @@ function ClubTableView({
         renderImageUpload(record),
     },
   ];
+
+  const renderImageUpload = (record: ClubDetailResponse) => (
+    <div>
+      {record.file?.physicalPath && (
+        <img
+          src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
+          alt={`${record.name} 이미지`}
+          className="w-24 h-24"
+        />
+      )}
+      <Upload
+        showUploadList={false}
+        beforeUpload={(file) => handleImageUpload(record)(file)}
+      >
+        <Button icon={<UploadOutlined />} className="mt-2">
+          업로드
+        </Button>
+      </Upload>
+    </div>
+  );
 
   const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
     (col) => {
