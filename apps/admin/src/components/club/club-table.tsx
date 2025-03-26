@@ -31,14 +31,23 @@ function ClubTable() {
       {
         onSuccess: (res) => {
           if (res?.id) {
-            updateMutation.mutate({
-              id: record.id,
-              requestBody: {
-                name: record.name,
-                description: record.description,
-                fileId: res.id,
+            updateMutation.mutate(
+              {
+                id: record.id,
+                requestBody: {
+                  name: record.name,
+                  description: record.description,
+                  fileId: res.id,
+                },
               },
-            });
+              {
+                onSuccess: () => {
+                  queryClient.invalidateQueries({
+                    queryKey: ['ClubServiceGetApiV1Clubs'],
+                  });
+                },
+              },
+            );
           }
         },
       },
