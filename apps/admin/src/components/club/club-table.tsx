@@ -7,8 +7,9 @@ import {
 } from '~/apis/admin/queries';
 import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
-import useEditTable from '~/hooks/useEditTable';
+import useEditTable from '~/hooks/use-edit-table';
 import ClubCreate from './club-create';
+
 import ClubTableView from './club-table-view';
 
 function ClubTable() {

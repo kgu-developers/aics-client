@@ -14,8 +14,6 @@ const navigationContainer = style([
 const navigationWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  position: 'fixed',
-  top: '5rem',
   gap: themeVars.spacing.lg,
 });
 

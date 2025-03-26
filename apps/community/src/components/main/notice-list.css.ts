@@ -1,6 +1,8 @@
 import { style } from '@vanilla-extract/css';
 
 const notice = style({
+  display: 'flex',
+  flexDirection: 'column',
   width: '40%',
   '@media': {
     'screen and (max-width: 1240px)': {
@@ -10,9 +12,6 @@ const notice = style({
 });
 
 const noticeHeader = style({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
   marginBottom: '1rem',
 });
 
@@ -25,6 +24,8 @@ const title = style({
 const list = style({
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '100%',
   gap: '2rem',
 });
 

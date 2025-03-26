@@ -5,8 +5,8 @@ import { Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from '@aics-client/design-system';
 import { pretendardVariable } from '~/app/fonts/pretendard-variable';
 import * as styles from '~/app/layout.css';
+import { SiteHeader } from '~/components/shared/site-header/site-header';
 import { SiteFooter } from '~/components/site-footer';
-import { SiteHeader } from '~/components/site-header';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Providers from './providers';
