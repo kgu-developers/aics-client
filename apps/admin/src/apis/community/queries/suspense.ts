@@ -87,7 +87,7 @@ export const usePostServiceGetApiV1PostsSuspense = <
       PostService.getApiV1Posts({ category, keywords, page, size }) as TData,
     ...options,
   });
-export const useGetPostById = <
+export const usePostServiceGetApiV1PostsByPostIdSuspense = <
   TData = Common.PostServiceGetApiV1PostsByPostIdDefaultResponse,
   TError = unknown,
   TQueryKey extends Array<unknown> = unknown[],
