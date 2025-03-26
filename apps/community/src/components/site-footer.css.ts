@@ -43,7 +43,8 @@ const navLinks = style({
       gridTemplateColumns: 'repeat(auto-fit, minmax(88px, 1fr))',
     },
     'screen and (max-width: 768px)': {
-      gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))',
+      gap: '1.5rem',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(76px, 1fr))',
     },
   },
 });

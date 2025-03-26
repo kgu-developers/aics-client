@@ -2,8 +2,11 @@ import { themeVars } from '@aics-client/design-system/styles';
 import { style } from '@vanilla-extract/css';
 
 const formWrapper = style({
-  display: themeVars.display.grid,
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
   gap: themeVars.spacing.md,
+  width: themeVars.width.full,
+  maxWidth: '32rem',
 });
 
 const errorMessage = style({
