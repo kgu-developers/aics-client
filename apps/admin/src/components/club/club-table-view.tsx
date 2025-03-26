@@ -1,5 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
-import { useQueryClient } from '@tanstack/react-query';
+
 import {
   Button,
   Form,
