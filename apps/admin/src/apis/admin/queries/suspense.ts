@@ -1,6 +1,6 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { type UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { UserService } from '../requests/services.gen';
 import * as Common from './common';
 export const useUserServiceGetApiV1UsersSuspense = <
