@@ -1,24 +1,25 @@
 import { Form, Input, Popconfirm, Table, Typography } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-import type { ProfessorData } from './professor-table';
-
+import type { ProfessorResponse } from '~/apis/community/requests';
 interface ProfessorTableViewProps {
   form: FormInstance;
-  data: ProfessorData[];
+  data: ProfessorResponse[];
   register: {
-    isEditing: (record: ProfessorData) => boolean;
-    handleEdit: (record: Partial<ProfessorData> & { key: React.Key }) => void;
+    isEditing: (record: ProfessorResponse) => boolean;
+    handleEdit: (
+      record: Partial<ProfessorResponse> & { id: React.Key },
+    ) => void;
     cancel: () => void;
   };
-  handleSave: () => void;
-  handleDelete: () => void;
+  handleSave: (record: ProfessorResponse) => void;
+  handleDelete: (record: ProfessorResponse) => void;
 }
 
 interface EditableCellProps {
   editing: boolean;
   dataIndex: string;
   title: string;
-  record: ProfessorData;
+  record: ProfessorResponse;
   children: React.ReactNode;
 }
 
@@ -69,7 +70,7 @@ function ProfessorTableView({
       title: '교수 이미지',
       dataIndex: 'img',
       width: '15%',
-      render: (text: string, record: ProfessorData) =>
+      render: (text: string, record: ProfessorResponse) =>
         text ? (
           <img
             src={text}
@@ -85,11 +86,13 @@ function ProfessorTableView({
       title: '관리',
       dataIndex: 'operation',
       width: '10%',
-      render: (_: unknown, record: ProfessorData) => {
+      render: (_: unknown, record: ProfessorResponse) => {
         const editable = register.isEditing(record);
         return editable ? (
           <span className="flex gap-3">
-            <Typography.Link onClick={handleSave}>저장</Typography.Link>
+            <Typography.Link onClick={() => handleSave(record)}>
+              저장
+            </Typography.Link>
             <Popconfirm
               title="정말 취소하시겠습니까?"
               onConfirm={register.cancel}
@@ -106,11 +109,14 @@ function ProfessorTableView({
           <span className="flex gap-3">
             <Typography.Link
               disabled={register.isEditing(record)}
-              onClick={() => register.handleEdit(record)}
+              onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
             </Typography.Link>
-            <Popconfirm title="정말 삭제하시겠습니까?" onConfirm={handleDelete}>
+            <Popconfirm
+              title="정말 삭제하시겠습니까?"
+              onConfirm={() => handleDelete(record)}
+            >
               <button
                 type="button"
                 className="text-red-500 hover:cursor-pointer"
@@ -124,13 +130,13 @@ function ProfessorTableView({
     },
   ];
 
-  const mergedColumns: TableProps<ProfessorData>['columns'] = columns.map(
+  const mergedColumns: TableProps<ProfessorResponse>['columns'] = columns.map(
     (col) => {
       if (!col.editable) return col;
 
       return {
         ...col,
-        onCell: (record: ProfessorData) => ({
+        onCell: (record: ProfessorResponse) => ({
           record,
           dataIndex: col.dataIndex,
           title: col.title,
@@ -142,7 +148,7 @@ function ProfessorTableView({
 
   return (
     <Form form={form} component={false}>
-      <Table<ProfessorData>
+      <Table<ProfessorResponse>
         components={{ body: { cell: EditableCell } }}
         bordered
         dataSource={data}

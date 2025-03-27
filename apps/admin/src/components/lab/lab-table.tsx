@@ -1,20 +1,20 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { Form, message, Spin } from 'antd';
+import { Form, Spin, message } from 'antd';
 
-import {
-  useLabServiceGetApiV1Labs,
-  useLabServiceGetApiV1LabsKey,
-} from '~/apis/community/queries';
-import type { LabDetailResponse } from '~/apis/community/requests';
 import {
   useFileServicePostApiV1FilesLab,
   useLabServiceDeleteApiV1LabsById,
   useLabServicePatchApiV1LabsById,
 } from '~/apis/admin/queries';
+import {
+  useLabServiceGetApiV1Labs,
+  useLabServiceGetApiV1LabsKey,
+} from '~/apis/community/queries';
+import type { LabDetailResponse } from '~/apis/community/requests';
 
+import { Suspense } from 'react';
 import useEditTable from '~/hooks/use-edit-table';
 import LabTableView from './lab-table-view';
-import { Suspense } from 'react';
 
 function LabTable() {
   const queryClient = useQueryClient();

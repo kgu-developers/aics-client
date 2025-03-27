@@ -1,58 +1,95 @@
-import { Form } from 'antd';
+import { useQueryClient } from '@tanstack/react-query';
+import { Form, Spin, message } from 'antd';
+import { Suspense } from 'react';
+
+import {
+  useProfessorServiceDeleteApiV1ProfessorsById,
+  useProfessorServicePatchApiV1ProfessorsById,
+} from '~/apis/admin/queries';
+import {
+  useProfessorServiceGetApiV1Professors,
+  useProfessorServiceGetApiV1ProfessorsKey,
+} from '~/apis/community/queries';
+import type { ProfessorResponse } from '~/apis/community/requests';
 import useEditTable from '~/hooks/use-edit-table';
 import ProfessorTableView from './professor-table-view';
 
-export interface ProfessorData {
-  key: string;
-  name: string;
-  role: string;
-  contact: string;
-  email: string;
-  img?: string;
-  officeLoc: string;
-}
-
-const professorData: ProfessorData[] = [
-  {
-    key: '1',
-    name: '이은정',
-    role: '교수',
-    contact: '031-249-9671',
-    email: 'ejlee@kyonggi.ac.kr',
-    img: 'https://i.namu.wiki/i/JRDRUJDo0B40h2vkSMTBsTc-AUCgXb9_CR__E4Kp2nwm5gALZWXhDMXHMuEgHxzmB6hRCkzWpUnEcJe3iBgPjQ.webp',
-    officeLoc: '8213호',
-  },
-  {
-    key: '2',
-    name: '박민준',
-    role: '조교수',
-    contact: '031-249-9672',
-    email: 'pmj@kyonggi.ac.kr',
-    img: 'https://i.namu.wiki/i/JRDRUJDo0B40h2vkSMTBsTc-AUCgXb9_CR__E4Kp2nwm5gALZWXhDMXHMuEgHxzmB6hRCkzWpUnEcJe3iBgPjQ.webp',
-    officeLoc: '8502호',
-  },
-];
-
 function ProfessorTable() {
   const [form] = Form.useForm();
-  const { register } = useEditTable<ProfessorData>(form);
+  const { data } = useProfessorServiceGetApiV1Professors();
+  const professorList: ProfessorResponse[] = data?.contents ?? [];
+  const queryClient = useQueryClient();
+  const updateMutation = useProfessorServicePatchApiV1ProfessorsById();
+  const deleteMutation = useProfessorServiceDeleteApiV1ProfessorsById();
+  const { register } = useEditTable<ProfessorResponse>(form);
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const handleSave = () => {
-    // TODO: 교수 수정 PATCH API 연동
+  const handleSave = async (record: ProfessorResponse) => {
+    try {
+      const rowData = await form.validateFields();
+      updateMutation.mutate(
+        { id: record.id, requestBody: rowData },
+        {
+          onSuccess: () => {
+            register.cancel();
+            messageApi.open({
+              type: 'success',
+              content: '교수 정보가 성공적으로 수정되었습니다.',
+            });
+            queryClient.invalidateQueries({
+              queryKey: ['ProfessorServiceGetApiV1Professors'],
+            });
+          },
+          onError: (e) => {
+            console.error('수정 실패:', e);
+            messageApi.open({
+              type: 'error',
+              content: '교수 정보 수정에 실패했습니다.',
+            });
+          },
+        },
+      );
+    } catch (error) {
+      console.error('Validation Failed:', error);
+    }
   };
 
-  const handleDelete = () => {
-    // TODO: 교수 삭제 DELETE API 연동
+  const handleDelete = (record: ProfessorResponse) => {
+    deleteMutation.mutate(
+      { id: record.id },
+      {
+        onSuccess: () => {
+          messageApi.open({
+            type: 'success',
+            content: '교수수가 성공적으로 삭제되었습니다.',
+          });
+          queryClient.invalidateQueries({
+            queryKey: [useProfessorServiceGetApiV1ProfessorsKey],
+          });
+        },
+        onError: (e) => {
+          console.error('삭제 실패:', e);
+          messageApi.open({
+            type: 'error',
+            content: '교수 삭제에 실패했습니다.',
+          });
+        },
+      },
+    );
   };
 
   return (
-    <ProfessorTableView
-      form={form}
-      data={professorData}
-      register={register}
-      handleSave={handleSave}
-      handleDelete={handleDelete}
-    />
+    <Suspense fallback={<Spin />}>
+      {contextHolder}
+      {/* 교수 추가 로직 필요 */}
+      <ProfessorTableView
+        form={form}
+        data={professorList}
+        register={register}
+        handleSave={handleSave}
+        handleDelete={handleDelete}
+      />
+    </Suspense>
   );
 }
 
