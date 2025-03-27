@@ -311,6 +311,10 @@ export type PostTitleResponse = {
 };
 
 export type LabDetailResponse = {
+  /*
+   * 연구실 id
+   */
+  id: number;
   /**
    * 연구실 이름
    */
