@@ -9,25 +9,28 @@ import {
   Upload,
 } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-import type { LabData } from './lab-table';
+import type { LabDetailResponse } from '~/apis/community/requests';
 
 interface LabTableViewProps {
   form: FormInstance;
-  data: LabData[];
+  data: LabDetailResponse[];
   register: {
-    isEditing: (record: LabData) => boolean;
-    handleEdit: (record: Partial<LabData> & { key: React.Key }) => void;
+    isEditing: (record: LabDetailResponse) => boolean;
+    handleEdit: (
+      record: Partial<LabDetailResponse> & { id: React.Key },
+    ) => void;
     cancel: () => void;
   };
-  handleSave: () => void;
-  handleDelete: () => void;
+  handleSave: (record: LabDetailResponse) => void;
+  handleDelete: (record: LabDetailResponse) => void;
+  handleImageUpload: (record: LabDetailResponse) => (file: File) => boolean;
 }
 
 interface EditableCellProps {
   editing: boolean;
   dataIndex: string;
   title: string;
-  record: LabData;
+  record: LabDetailResponse;
   children: React.ReactNode;
 }
 
@@ -37,6 +40,7 @@ function LabTableView({
   register,
   handleSave,
   handleDelete,
+  handleImageUpload,
 }: LabTableViewProps) {
   const EditableCell = ({
     editing,
@@ -65,11 +69,6 @@ function LabTableView({
     );
   };
 
-  const handleImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
-
   const columns = [
     { title: '연구실명', dataIndex: 'name', width: '15%', editable: true },
     { title: '위치', dataIndex: 'loc', width: '15%', editable: true },
@@ -89,11 +88,14 @@ function LabTableView({
       title: '관리',
       dataIndex: 'operation',
       width: '10%',
-      render: (_: unknown, record: LabData) => {
+      render: (_: unknown, record: LabDetailResponse) => {
         const editable = register.isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link onClick={handleSave} className="mr-4">
+            <Typography.Link
+              onClick={() => handleSave(record)}
+              className="mr-4"
+            >
               저장
             </Typography.Link>
             <Popconfirm
@@ -112,11 +114,14 @@ function LabTableView({
           <span>
             <Typography.Link
               disabled={register.isEditing(record)}
-              onClick={() => register.handleEdit(record)}
+              onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
             </Typography.Link>
-            <Popconfirm title="정말 삭제하시겠습니까?" onConfirm={handleDelete}>
+            <Popconfirm
+              title="정말 삭제하시겠습니까?"
+              onConfirm={() => handleDelete(record)}
+            >
               <button
                 type="button"
                 className="ml-4 text-red-500 hover:cursor-pointer"
@@ -132,7 +137,7 @@ function LabTableView({
       title: '연구실 이미지',
       dataIndex: 'img',
       width: '20%',
-      render: (_: unknown, record: LabData) => (
+      render: (_: unknown, record: LabDetailResponse) => (
         <div>
           {record.img?.physicalPath && (
             <img
@@ -143,10 +148,7 @@ function LabTableView({
           )}
           <Upload
             showUploadList={false}
-            beforeUpload={(file) => {
-              handleImageUpload(file);
-              return false;
-            }}
+            beforeUpload={(file) => handleImageUpload(record)(file)}
           >
             <Button icon={<UploadOutlined />} className="mt-2">
               업로드
@@ -157,23 +159,25 @@ function LabTableView({
     },
   ];
 
-  const mergedColumns: TableProps<LabData>['columns'] = columns.map((col) => {
-    if (!col.editable) return col;
+  const mergedColumns: TableProps<LabDetailResponse>['columns'] = columns.map(
+    (col) => {
+      if (!col.editable) return col;
 
-    return {
-      ...col,
-      onCell: (record: LabData) => ({
-        record,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: register.isEditing(record),
-      }),
-    };
-  });
+      return {
+        ...col,
+        onCell: (record: LabDetailResponse) => ({
+          record,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: register.isEditing(record),
+        }),
+      };
+    },
+  );
 
   return (
     <Form form={form} component={false}>
-      <Table<LabData>
+      <Table<LabDetailResponse>
         components={{ body: { cell: EditableCell } }}
         bordered
         dataSource={data}

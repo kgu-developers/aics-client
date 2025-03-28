@@ -1,4 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
+
 import {
   Button,
   Form,
@@ -7,29 +8,60 @@ import {
   Table,
   Typography,
   Upload,
+  message,
 } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
-import type { ClubData } from './club-table';
+import type { ClubDetailResponse } from '~/apis/community/requests';
+
+const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL;
 
 interface ClubTableViewProps {
   form: FormInstance;
-  data: ClubData[];
+  data: ClubDetailResponse[];
   register: {
-    isEditing: (record: ClubData) => boolean;
-    handleEdit: (record: Partial<ClubData> & { key: React.Key }) => void;
+    isEditing: (record: ClubDetailResponse) => boolean;
+    handleEdit: (
+      record: Partial<ClubDetailResponse> & { id: React.Key },
+    ) => void;
     cancel: () => void;
   };
-  handleSave: (record: ClubData) => void;
-  handleDelete: (record: ClubData) => void;
+  handleSave: (record: ClubDetailResponse) => void;
+  handleDelete: (record: ClubDetailResponse) => void;
+  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean;
 }
 
 interface EditableCellProps {
   editing: boolean;
   dataIndex: string;
   title: string;
-  record: ClubData;
+  record: ClubDetailResponse;
   children: React.ReactNode;
 }
+
+const EditableCell = ({
+  editing,
+  dataIndex,
+  title,
+  record,
+  children,
+  ...restProps
+}: EditableCellProps) => {
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{ margin: 0 }}
+          rules={[{ required: true, message: `${title}을(를) 입력해주세요!` }]}
+        >
+          <Input />
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
 
 function ClubTableView({
   form,
@@ -37,42 +69,13 @@ function ClubTableView({
   register,
   handleSave,
   handleDelete,
+  handleImageUpload,
 }: ClubTableViewProps) {
-  const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    record,
-    children,
-    ...restProps
-  }: EditableCellProps) => {
-    return (
-      <td {...restProps}>
-        {editing ? (
-          <Form.Item
-            name={dataIndex}
-            style={{ margin: 0 }}
-            rules={[
-              { required: true, message: `${title}을(를) 입력해주세요!` },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        ) : (
-          children
-        )}
-      </td>
-    );
-  };
-
-  const handleImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+  const [_messageApi, contextHolder] = message.useMessage();
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
-    { title: '소개', dataIndex: 'info', width: '15%', editable: true },
+    { title: '소개', dataIndex: 'description', width: '15%', editable: true },
     {
       title: '웹사이트',
       dataIndex: 'site',
@@ -88,7 +91,7 @@ function ClubTableView({
       title: '관리',
       dataIndex: 'operation',
       width: '10%',
-      render: (_: unknown, record: ClubData) => {
+      render: (_: unknown, record: ClubDetailResponse) => {
         const editable = register.isEditing(record);
         return editable ? (
           <span>
@@ -114,7 +117,7 @@ function ClubTableView({
           <span>
             <Typography.Link
               disabled={register.isEditing(record)}
-              onClick={() => register.handleEdit(record)}
+              onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
             </Typography.Link>
@@ -135,59 +138,65 @@ function ClubTableView({
     },
     {
       title: '동아리 이미지',
-      dataIndex: 'img',
+      dataIndex: 'file',
       width: '20%',
-      render: (_: unknown, record: ClubData) => (
-        <div>
-          {record.img?.physicalPath && (
-            <img
-              src={record.img.physicalPath}
-              alt={`${record.name} 이미지`}
-              className="w-24 h-24"
-            />
-          )}
-          <Upload
-            showUploadList={false}
-            beforeUpload={(file) => {
-              handleImageUpload(file);
-              return false;
-            }}
-          >
-            <Button icon={<UploadOutlined />} className="mt-2">
-              업로드
-            </Button>
-          </Upload>
-        </div>
-      ),
+      render: (_: unknown, record: ClubDetailResponse) =>
+        renderImageUpload(record),
     },
   ];
 
-  const mergedColumns: TableProps<ClubData>['columns'] = columns.map((col) => {
-    if (!col.editable) return col;
+  const renderImageUpload = (record: ClubDetailResponse) => (
+    <div>
+      {record.file?.physicalPath && (
+        <img
+          src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
+          alt={`${record.name} 이미지`}
+          className="w-24 h-24"
+        />
+      )}
+      <Upload
+        showUploadList={false}
+        beforeUpload={(file) => handleImageUpload(record)(file)}
+      >
+        <Button icon={<UploadOutlined />} className="mt-2">
+          업로드
+        </Button>
+      </Upload>
+    </div>
+  );
 
-    return {
-      ...col,
-      onCell: (record: ClubData) => ({
-        record,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: register.isEditing(record),
-      }),
-    };
-  });
+  const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
+    (col) => {
+      if (!col.editable) return col;
+
+      return {
+        ...col,
+        onCell: (record: ClubDetailResponse) => ({
+          record,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: register.isEditing(record),
+        }),
+      };
+    },
+  );
 
   return (
-    <Form form={form} component={false}>
-      <Table<ClubData>
-        components={{ body: { cell: EditableCell } }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
-        rowClassName="editable-row"
-        pagination={{ onChange: register.cancel }}
-        className="break-keep whitespace-nowrap"
-      />
-    </Form>
+    <>
+      {contextHolder}
+      <Form form={form} component={false}>
+        <Table<ClubDetailResponse>
+          components={{ body: { cell: EditableCell } }}
+          bordered
+          dataSource={data}
+          columns={mergedColumns}
+          rowClassName="editable-row"
+          pagination={{ onChange: register.cancel }}
+          rowKey="id"
+          className="break-keep whitespace-nowrap"
+        />
+      </Form>
+    </>
   );
 }
 

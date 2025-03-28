@@ -24,7 +24,7 @@ export const isFormData = (value: unknown): value is FormData => {
 export const base64 = (str: string): string => {
   try {
     return btoa(str);
-  } catch (_err) {
+  } catch (err) {
     // @ts-ignore
     return Buffer.from(str).toString('base64');
   }
@@ -145,12 +145,12 @@ export const getHeaders = async <T>(
     );
 
   if (isStringWithValue(token)) {
-    headers.Authorization = `Bearer ${token}`;
+    headers['Authorization'] = `Bearer ${token}`;
   }
 
   if (isStringWithValue(username) && isStringWithValue(password)) {
     const credentials = base64(`${username}:${password}`);
-    headers.Authorization = `Basic ${credentials}`;
+    headers['Authorization'] = `Basic ${credentials}`;
   }
 
   if (options.body !== undefined) {
@@ -175,15 +175,15 @@ export const getRequestBody = (options: ApiRequestOptions): unknown => {
       options.mediaType?.includes('+json')
     ) {
       return JSON.stringify(options.body);
-    }
-    if (
+    } else if (
       isString(options.body) ||
       isBlob(options.body) ||
       isFormData(options.body)
     ) {
       return options.body;
+    } else {
+      return JSON.stringify(options.body);
     }
-    return JSON.stringify(options.body);
   }
   return undefined;
 };
@@ -250,14 +250,11 @@ export const getResponseBody = async (response: Response): Promise<unknown> => {
           contentType.includes('+json')
         ) {
           return await response.json();
-        }
-        if (binaryTypes.some((type) => contentType.includes(type))) {
+        } else if (binaryTypes.some((type) => contentType.includes(type))) {
           return await response.blob();
-        }
-        if (contentType.includes('multipart/form-data')) {
+        } else if (contentType.includes('multipart/form-data')) {
           return await response.formData();
-        }
-        if (contentType.includes('text/')) {
+        } else if (contentType.includes('text/')) {
           return await response.text();
         }
       }
@@ -327,7 +324,7 @@ export const catchErrorCodes = (
     const errorBody = (() => {
       try {
         return JSON.stringify(result.body, null, 2);
-      } catch (_e) {
+      } catch (e) {
         return undefined;
       }
     })();
@@ -394,11 +391,7 @@ export const request = <T>(
 
         catchErrorCodes(options, result);
 
-        if (result.body instanceof Object) {
-          resolve(result.body as T);
-        } else {
-          reject(new Error('적절하지 않은 response입니다.'));
-        }
+        resolve(result.body);
       }
     } catch (error) {
       reject(error);

@@ -8,7 +8,7 @@ import {
   PencilIcon,
   Trash2Icon,
 } from 'lucide-react';
-import { useDeletePost } from '~/apis/admin/queries';
+import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
 import { PATH } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
 import { extractFileName } from '~/utils/utils';
@@ -63,7 +63,7 @@ function Content({ content }: { content: string }) {
 }
 
 function DeleteButton({ postId }: { postId: number }) {
-  const { mutate } = useDeletePost();
+  const { mutate } = usePostServicePatchApiV1PostsByPostIdDelete();
   const { isOpen, openModal, closeModal } = useModal();
   const [messageApi, contextHolder] = message.useMessage();
 

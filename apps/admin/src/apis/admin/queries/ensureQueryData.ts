@@ -6,14 +6,16 @@ import * as Common from './common';
 export const ensureUseUserServiceGetApiV1UsersData = (
   queryClient: QueryClient,
   {
+    name,
     page,
     size,
   }: {
+    name?: string;
     page: number;
     size: number;
   },
 ) =>
   queryClient.ensureQueryData({
-    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ page, size }),
-    queryFn: () => UserService.getApiV1Users({ page, size }),
+    queryKey: Common.UseUserServiceGetApiV1UsersKeyFn({ name, page, size }),
+    queryFn: () => UserService.getApiV1Users({ name, page, size }),
   });
