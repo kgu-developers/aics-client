@@ -7,8 +7,8 @@ import {
 } from '~/apis/admin/queries';
 import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
 import type { ClubDetailResponse } from '~/apis/community/requests';
-import useEditTable from '~/hooks/use-edit-table';
 import ClubCreate from '~/components/club/club-creator';
+import useEditTable from '~/hooks/use-edit-table';
 
 import ClubTableView from './club-table-view';
 
@@ -38,6 +38,7 @@ function ClubTable() {
                 requestBody: {
                   name: record.name,
                   description: record.description,
+                  site: record.site,
                   fileId: res.id,
                 },
               },
@@ -59,8 +60,13 @@ function ClubTable() {
   const handleSave = async (record: ClubDetailResponse) => {
     try {
       const rowData = await form.validateFields();
+      const updatedData = {
+        ...rowData,
+        fileId: record.file?.id,
+      };
+
       updateMutation.mutate(
-        { id: record.id, requestBody: rowData },
+        { id: record.id, requestBody: updatedData },
         {
           onSuccess: () => {
             register.cancel();
