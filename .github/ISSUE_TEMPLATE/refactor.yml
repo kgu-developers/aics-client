@@ -1,7 +1,7 @@
 name: '🔨 Refactor'
 description: '리팩터링을 해야할 부분이 있나요?'
 title: '[Refactor]: '
-labels: '🔨 refactor'
+labels: 'refactor'
 body:
   - type: dropdown
     id: package
