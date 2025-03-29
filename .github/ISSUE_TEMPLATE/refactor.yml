@@ -3,6 +3,20 @@ description: '리팩터링을 해야할 부분이 있나요?'
 title: '[Refactor]: '
 labels: '🔨 refactor'
 body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package Scope
+      description: 패키지 범위를 선택해 주세요. (여러 개 선택 가능)
+      multiple: true
+      options:
+        - '@aics-client/admin'
+        - '@aics-client/community'
+        - '@aics-client/design-system'
+        - '@aics-client/tiptap'
+        - '@aics-client/typescript'
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Describe
