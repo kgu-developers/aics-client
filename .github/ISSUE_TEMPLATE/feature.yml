@@ -1,8 +1,22 @@
 name: '✨ Feature'
 description: '새로운 기능 또는 명세가 있나요?'
 title: '[Feature]: '
-labels: '✨ feature'
+labels: 'feature'
 body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package Scope
+      description: 패키지 범위를 선택해 주세요. (여러 개 선택 가능)
+      multiple: true
+      options:
+        - '@aics-client/admin'
+        - '@aics-client/community'
+        - '@aics-client/design-system'
+        - '@aics-client/tiptap'
+        - '@aics-client/typescript'
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Describe
