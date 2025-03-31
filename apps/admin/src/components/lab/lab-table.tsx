@@ -63,7 +63,7 @@ function LabTable() {
     try {
       const rowData = await form.validateFields();
       updateMutation.mutate(
-        { id: record.id, requestBody: rowData },
+        { id: record.id, requestBody: { ...rowData, fileId: record.img?.id } },
         {
           onSuccess: () => {
             register.cancel();
