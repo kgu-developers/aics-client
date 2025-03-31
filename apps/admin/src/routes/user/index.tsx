@@ -28,8 +28,8 @@ function UserPage() {
 
   return (
     <section className="flex flex-col gap-3 px-16">
+      <SearchBar defaultValue={name} />
       <Suspense fallback={<Spin />}>
-        <SearchBar defaultValue={name} />
         {userList?.contents && (
           <UserList
             data={userList.contents}
