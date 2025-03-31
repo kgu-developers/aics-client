@@ -6,4 +6,5 @@ export const PATH = {
   CLUB: '/club',
   EDIT_NEWS: '/news/edit/',
   EDIT_NOTICE: '/notice/edit/',
+  USER: '/user',
 };

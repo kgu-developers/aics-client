@@ -1,4 +1,5 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router';
+import { Spin } from 'antd';
 import { Suspense } from 'react';
 
 import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense';
@@ -32,7 +33,7 @@ function NewsListPage() {
 
   return (
     <section className="flex flex-col gap-3 px-16">
-      <Suspense fallback={<div>loading...</div>}>
+      <Suspense fallback={<Spin />}>
         <SearchBar defaultValue={keywords} />
         {postList?.contents && (
           <PostsList

@@ -22,7 +22,7 @@ const items: MenuItem[] = [
   //TODO: Link 내부 url 변경
   {
     key: 'user',
-    label: '회원 관리',
+    label: <Link to={PATH.USER}>사용자 관리</Link>,
     icon: <Users size={20} />,
   },
   {
