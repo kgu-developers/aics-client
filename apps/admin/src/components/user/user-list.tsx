@@ -1,16 +1,8 @@
-import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import {
-  Button,
-  Checkbox,
-  List,
-  Pagination,
-  message,
-  type PaginationProps,
-} from 'antd';
+import { Button, Checkbox, List, Pagination, type PaginationProps } from 'antd';
 import { CircleUserRoundIcon, Trash2Icon } from 'lucide-react';
+import { useState } from 'react';
 
-import { useUserServicePostApiV1UsersDelete } from '~/apis/admin/queries';
 import type { UserDetailResponse } from '~/apis/admin/requests';
 
 import { useDeleteUsers } from '~/hooks/user/use-delete-users';
