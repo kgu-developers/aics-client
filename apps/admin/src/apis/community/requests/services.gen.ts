@@ -3,323 +3,362 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { PostApiV1UsersSignupData, PostApiV1UsersSignupResponse, PatchApiV1UsersData, PatchApiV1UsersResponse, PatchApiV1UsersPasswordData, PatchApiV1UsersPasswordResponse, PatchApiV1UsersDeleteResponse, GetApiV1UsersMyResponse, GetApiV1CommentsData, GetApiV1CommentsResponse, PostApiV1CommentsData, PostApiV1CommentsResponse, PatchApiV1CommentsByCommentIdData, PatchApiV1CommentsByCommentIdResponse, PatchApiV1CommentsByCommentIdDeleteData, PatchApiV1CommentsByCommentIdDeleteResponse, GetApiV1ProfessorsResponse, GetApiV1PostsData, GetApiV1PostsResponse, GetApiV1PostsByPostIdData, GetApiV1PostsByPostIdResponse, GetApiV1LabsResponse, GetApiV1ClubsResponse, GetApiV1CarouselsResponse, GetApiV1AboutsData, GetApiV1AboutsResponse } from './types.gen';
+import type {
+  GetApiV1AboutsData,
+  GetApiV1AboutsResponse,
+  GetApiV1CarouselsResponse,
+  GetApiV1ClubsResponse,
+  GetApiV1CommentsData,
+  GetApiV1CommentsResponse,
+  GetApiV1LabsResponse,
+  GetApiV1PostsByPostIdData,
+  GetApiV1PostsByPostIdResponse,
+  GetApiV1PostsData,
+  GetApiV1PostsResponse,
+  GetApiV1ProfessorsResponse,
+  GetApiV1UsersMyResponse,
+  PatchApiV1CommentsByCommentIdData,
+  PatchApiV1CommentsByCommentIdDeleteData,
+  PatchApiV1CommentsByCommentIdDeleteResponse,
+  PatchApiV1CommentsByCommentIdResponse,
+  PatchApiV1UsersData,
+  PatchApiV1UsersDeleteResponse,
+  PatchApiV1UsersPasswordData,
+  PatchApiV1UsersPasswordResponse,
+  PatchApiV1UsersResponse,
+  PostApiV1CommentsData,
+  PostApiV1CommentsResponse,
+  PostApiV1UsersSignupData,
+  PostApiV1UsersSignupResponse,
+} from './types.gen';
 
 export class UserService {
-    /**
-     * 회원 가입 API
-     * 	- Description : 이 API는 유저를 생성하고 회원 가입 처리를 합니다.
-     * - Assignee : 박민준
-     *
-     * @param data The data for the request.
-     * @param data.requestBody
-     * @returns UserPersistResponse Created
-     * @throws ApiError
-     */
-    public static postApiV1UsersSignup(data: PostApiV1UsersSignupData): CancelablePromise<PostApiV1UsersSignupResponse> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/v1/users/signup',
-            body: data.requestBody,
-            mediaType: 'application/json'
-        });
-    }
-    
-    /**
-     * 회원 정보 수정 API
-     * 	- Description : 이 API는 회원의 전화번호, 생년월일, 이메일 정보를 수정 합니다.
-     * - Assignee : 박민준
-     *
-     * @param data The data for the request.
-     * @param data.requestBody
-     * @returns UserUpdateRequest No Content
-     * @throws ApiError
-     */
-    public static patchApiV1Users(data: PatchApiV1UsersData): CancelablePromise<PatchApiV1UsersResponse> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/api/v1/users',
-            body: data.requestBody,
-            mediaType: 'application/json'
-        });
-    }
-    
-    /**
-     * 회원 비밀번호 수정 API
-     * 	- Description : 이 API는 회원의 비밀번호를 수정 합니다.
-     * - Assignee : 이신행
-     *
-     * @param data The data for the request.
-     * @param data.requestBody
-     * @returns void No Content
-     * @throws ApiError
-     */
-    public static patchApiV1UsersPassword(data: PatchApiV1UsersPasswordData): CancelablePromise<PatchApiV1UsersPasswordResponse> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/api/v1/users/password',
-            body: data.requestBody,
-            mediaType: 'application/json'
-        });
-    }
-    
-    /**
-     * 회원 탈퇴 API
-     * 	- Description : 이 API는 회원을 탈퇴 시킵니다.
-     * - Assignee : 이신행
-     *
-     * @returns void No Content
-     * @throws ApiError
-     */
-    public static patchApiV1UsersDelete(): CancelablePromise<PatchApiV1UsersDeleteResponse> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/api/v1/users/delete'
-        });
-    }
-    
-    /**
-     * 마이페이지 조회 API
-     * 	- Description : 이 API는 회원의 정보를 출력합니다.
-     * - Assignee : 이신행
-     *
-     * @returns UserDetailResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1UsersMy(): CancelablePromise<GetApiV1UsersMyResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/users/my'
-        });
-    }
-    
+  /**
+   * 회원 가입 API
+   * 	- Description : 이 API는 유저를 생성하고 회원 가입 처리를 합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns UserPersistResponse Created
+   * @throws ApiError
+   */
+  public static postApiV1UsersSignup(
+    data: PostApiV1UsersSignupData,
+  ): CancelablePromise<PostApiV1UsersSignupResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/api/v1/users/signup',
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 회원 정보 수정 API
+   * 	- Description : 이 API는 회원의 전화번호, 생년월일, 이메일 정보를 수정 합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns UserUpdateRequest No Content
+   * @throws ApiError
+   */
+  public static patchApiV1Users(
+    data: PatchApiV1UsersData,
+  ): CancelablePromise<PatchApiV1UsersResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/users',
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 회원 비밀번호 수정 API
+   * 	- Description : 이 API는 회원의 비밀번호를 수정 합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static patchApiV1UsersPassword(
+    data: PatchApiV1UsersPasswordData,
+  ): CancelablePromise<PatchApiV1UsersPasswordResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/users/password',
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 회원 탈퇴 API
+   * 	- Description : 이 API는 회원을 탈퇴 시킵니다.
+   * - Assignee : 이신행
+   *
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static patchApiV1UsersDelete(): CancelablePromise<PatchApiV1UsersDeleteResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/users/delete',
+    });
+  }
+
+  /**
+   * 마이페이지 조회 API
+   * 	- Description : 이 API는 회원의 정보를 출력합니다.
+   * - Assignee : 이신행
+   *
+   * @returns UserDetailResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1UsersMy(): CancelablePromise<GetApiV1UsersMyResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/users/my',
+    });
+  }
 }
 
 export class CommentService {
-    /**
-     * 댓글 조회 API
-     * 	- Description : 이 API는 해당 게시글의 댓글을 조회합니다.
-     * - Assignee : 박민준
-     *
-     * @param data The data for the request.
-     * @param data.postId 해당 게시글 ID의 댓글을 조회합니다. 쿼리 파라미터 입니다.
-     * @returns CommentListResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Comments(data: GetApiV1CommentsData): CancelablePromise<GetApiV1CommentsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/comments',
-            query: {
-                postId: data.postId
-            }
-        });
-    }
-    
-    /**
-     * 댓글 생성 API
-     * 	- Description : 이 API는 댓글을 생성합니다.
-     * - Assignee : 이신행
-     *
-     * @param data The data for the request.
-     * @param data.requestBody
-     * @returns CommentPersistResponse Created
-     * @throws ApiError
-     */
-    public static postApiV1Comments(data: PostApiV1CommentsData): CancelablePromise<PostApiV1CommentsResponse> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/v1/comments',
-            body: data.requestBody,
-            mediaType: 'application/json'
-        });
-    }
-    
-    /**
-     * 댓글 수정 API
-     * 	- Description : 이 API는 댓글을 수정합니다.
-     * - Assignee : 이신행
-     *
-     * @param data The data for the request.
-     * @param data.commentId 댓글 ID는 URL 경로 변수 입니다.
-     * @param data.requestBody
-     * @returns void No Content
-     * @throws ApiError
-     */
-    public static patchApiV1CommentsByCommentId(data: PatchApiV1CommentsByCommentIdData): CancelablePromise<PatchApiV1CommentsByCommentIdResponse> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/api/v1/comments/{commentId}',
-            path: {
-                commentId: data.commentId
-            },
-            body: data.requestBody,
-            mediaType: 'application/json'
-        });
-    }
-    
-    /**
-     * 댓글 삭제 API
-     * 	- Description : 이 API는 해당 댓글을 삭제합니다.
-     * - Assignee : 박민준
-     *
-     * @param data The data for the request.
-     * @param data.commentId 댓글 ID는 URL 경로 변수 입니다.
-     * @returns void No Content
-     * @throws ApiError
-     */
-    public static patchApiV1CommentsByCommentIdDelete(data: PatchApiV1CommentsByCommentIdDeleteData): CancelablePromise<PatchApiV1CommentsByCommentIdDeleteResponse> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/api/v1/comments/{commentId}/delete',
-            path: {
-                commentId: data.commentId
-            }
-        });
-    }
-    
+  /**
+   * 댓글 조회 API
+   * 	- Description : 이 API는 해당 게시글의 댓글을 조회합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.postId 해당 게시글 ID의 댓글을 조회합니다. 쿼리 파라미터 입니다.
+   * @returns CommentListResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Comments(
+    data: GetApiV1CommentsData,
+  ): CancelablePromise<GetApiV1CommentsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/comments',
+      query: {
+        postId: data.postId,
+      },
+    });
+  }
+
+  /**
+   * 댓글 생성 API
+   * 	- Description : 이 API는 댓글을 생성합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns CommentPersistResponse Created
+   * @throws ApiError
+   */
+  public static postApiV1Comments(
+    data: PostApiV1CommentsData,
+  ): CancelablePromise<PostApiV1CommentsResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/api/v1/comments',
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 댓글 수정 API
+   * 	- Description : 이 API는 댓글을 수정합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.commentId 댓글 ID는 URL 경로 변수 입니다.
+   * @param data.requestBody
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static patchApiV1CommentsByCommentId(
+    data: PatchApiV1CommentsByCommentIdData,
+  ): CancelablePromise<PatchApiV1CommentsByCommentIdResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/comments/{commentId}',
+      path: {
+        commentId: data.commentId,
+      },
+      body: data.requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * 댓글 삭제 API
+   * 	- Description : 이 API는 해당 댓글을 삭제합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.commentId 댓글 ID는 URL 경로 변수 입니다.
+   * @returns void No Content
+   * @throws ApiError
+   */
+  public static patchApiV1CommentsByCommentIdDelete(
+    data: PatchApiV1CommentsByCommentIdDeleteData,
+  ): CancelablePromise<PatchApiV1CommentsByCommentIdDeleteResponse> {
+    return __request(OpenAPI, {
+      method: 'PATCH',
+      url: '/api/v1/comments/{commentId}/delete',
+      path: {
+        commentId: data.commentId,
+      },
+    });
+  }
 }
 
 export class ProfessorService {
-    /**
-     * 교수 조회 API
-     *     - Description : 이 API는 교수를 모두 조회합니다.
-     * - Assignee : 이신행
-     *
-     * @returns ProfessorListResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Professors(): CancelablePromise<GetApiV1ProfessorsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/professors'
-        });
-    }
-    
+  /**
+   * 교수 조회 API
+   *     - Description : 이 API는 교수를 모두 조회합니다.
+   * - Assignee : 이신행
+   *
+   * @returns ProfessorListResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Professors(): CancelablePromise<GetApiV1ProfessorsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/professors',
+    });
+  }
 }
 
 export class PostService {
-    /**
-     * 게시글 페이징 조회 API
-     *     - Description : 이 API는 키워드를 이용하여 게시글을 페이징 조회합니다.
-     * - Assignee : 박민준
-     *
-     * @param data The data for the request.
-     * @param data.page 페이지 인덱스
-     * @param data.size 응답 개수
-     * @param data.keywords 검색 키워드 입니다. 미 입력 시 전체 게시글을 조회합니다.
-     * @param data.category 게시글 카테고리 입니다. 미 지정 시 전체 게시글을 조회합니다.
-     * @returns PostSummaryPageResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Posts(data: GetApiV1PostsData): CancelablePromise<GetApiV1PostsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/posts',
-            query: {
-                page: data.page,
-                size: data.size,
-                keywords: data.keywords,
-                category: data.category
-            }
-        });
-    }
-    
-    /**
-     * 게시글 상세 조회 API
-     *     - Description : 이 API는 게시글의 상세 정보를 조회합니다.
-     * - Assignee : 이신행
-     *
-     * @param data The data for the request.
-     * @param data.postId 게시글 ID는 URL 경로 변수 입니다.
-     * @returns PostDetailResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1PostsByPostId(data: GetApiV1PostsByPostIdData): CancelablePromise<GetApiV1PostsByPostIdResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/posts/{postId}',
-            path: {
-                postId: data.postId
-            }
-        });
-    }
-    
+  /**
+   * 게시글 페이징 조회 API
+   *     - Description : 이 API는 키워드를 이용하여 게시글을 페이징 조회합니다.
+   * - Assignee : 박민준
+   *
+   * @param data The data for the request.
+   * @param data.page 페이지 인덱스
+   * @param data.size 응답 개수
+   * @param data.keywords 검색 키워드 입니다. 미 입력 시 전체 게시글을 조회합니다.
+   * @param data.category 게시글 카테고리 입니다. 미 지정 시 전체 게시글을 조회합니다.
+   * @returns PostSummaryPageResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Posts(
+    data: GetApiV1PostsData,
+  ): CancelablePromise<GetApiV1PostsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/posts',
+      query: {
+        page: data.page,
+        size: data.size,
+        keywords: data.keywords,
+        category: data.category,
+      },
+    });
+  }
+
+  /**
+   * 게시글 상세 조회 API
+   *     - Description : 이 API는 게시글의 상세 정보를 조회합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.postId 게시글 ID는 URL 경로 변수 입니다.
+   * @returns PostDetailResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1PostsByPostId(
+    data: GetApiV1PostsByPostIdData,
+  ): CancelablePromise<GetApiV1PostsByPostIdResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/posts/{postId}',
+      path: {
+        postId: data.postId,
+      },
+    });
+  }
 }
 
 export class LabService {
-    /**
-     * 연구실 조회 API
-     * 	- Description : 이 API는 연구실을 조회합니다.
-     * - Assignee : 박민준
-     *
-     * @returns LabListResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Labs(): CancelablePromise<GetApiV1LabsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/labs'
-        });
-    }
-    
+  /**
+   * 연구실 조회 API
+   * 	- Description : 이 API는 연구실을 조회합니다.
+   * - Assignee : 박민준
+   *
+   * @returns LabListResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Labs(): CancelablePromise<GetApiV1LabsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/labs',
+    });
+  }
 }
 
 export class ClubService {
-    /**
-     * 동아리 조회 API
-     * 	- Description : 이 API는 동아리를 조회합니다.
-     * - Assignee : 박민준
-     *
-     * @returns ClubListResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Clubs(): CancelablePromise<GetApiV1ClubsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/clubs'
-        });
-    }
-    
+  /**
+   * 동아리 조회 API
+   * 	- Description : 이 API는 동아리를 조회합니다.
+   * - Assignee : 박민준
+   *
+   * @returns ClubListResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Clubs(): CancelablePromise<GetApiV1ClubsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/clubs',
+    });
+  }
 }
 
 export class CarouselService {
-    /**
-     * 캐러셀 리스트 조회 API
-     * 	- Description : 이 API는 모든 캐러셀 이미지와 기타 정보를 리스트로 조회합니다.
-     * - Assignee : 이한음
-     *
-     * @returns CarouselListResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Carousels(): CancelablePromise<GetApiV1CarouselsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/carousels'
-        });
-    }
-    
+  /**
+   * 캐러셀 리스트 조회 API
+   * 	- Description : 이 API는 모든 캐러셀 이미지와 기타 정보를 리스트로 조회합니다.
+   * - Assignee : 이한음
+   *
+   * @returns CarouselListResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Carousels(): CancelablePromise<GetApiV1CarouselsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/carousels',
+    });
+  }
 }
 
 export class AboutService {
-    /**
-     * 소개글 조회 API
-     *     - Description : 이 API는 소개글을 조회합니다.
-     * - Assignee : 이신행
-     *
-     * @param data The data for the request.
-     * @param data.category 카테고리 ENUM 타입 입니다.
-     * @returns AboutResponse OK
-     * @throws ApiError
-     */
-    public static getApiV1Abouts(data: GetApiV1AboutsData): CancelablePromise<GetApiV1AboutsResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/abouts',
-            query: {
-                category: data.category
-            }
-        });
-    }
-    
+  /**
+   * 소개글 조회 API
+   *     - Description : 이 API는 소개글을 조회합니다.
+   * - Assignee : 이신행
+   *
+   * @param data The data for the request.
+   * @param data.category 카테고리 ENUM 타입 입니다.
+   * @returns AboutResponse OK
+   * @throws ApiError
+   */
+  public static getApiV1Abouts(
+    data: GetApiV1AboutsData,
+  ): CancelablePromise<GetApiV1AboutsResponse> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/api/v1/abouts',
+      query: {
+        category: data.category,
+      },
+    });
+  }
 }
