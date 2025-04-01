@@ -97,8 +97,13 @@ SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집�
       enum: ['NOTIFICATION', 'NEWS'],
       example: 'NOTIFICATION',
     },
+    isPinned: {
+      type: 'boolean',
+      description: '게시글 고정 여부',
+      example: 'FALSE',
+    },
   },
-  required: ['content', 'title'],
+  required: ['content', 'isPinned', 'title'],
 } as const;
 
 export const $PostPersistResponse = {
@@ -318,8 +323,13 @@ SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집�
       description: '파일 ID',
       example: 1,
     },
+    isPinned: {
+      type: 'boolean',
+      description: '게시글 고정 여부',
+      example: 'FALSE',
+    },
   },
-  required: ['content', 'title'],
+  required: ['content', 'isPinned', 'title'],
 } as const;
 
 export const $LabUpdateRequest = {
