@@ -23,6 +23,10 @@ function DeleteButton({ postId, title }: { postId: number; title: string }) {
       type: 'success',
       content: '게시글이 성공적으로 삭제되었습니다.',
     });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
   };
 
   const handleError = () => {
