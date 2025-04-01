@@ -736,8 +736,13 @@ components:
             - NOTIFICATION
             - NEWS
           example: NOTIFICATION
+        isPinned:
+          type: boolean
+          description: 게시글 고정 여부
+          example: 'FALSE'
       required:
         - content
+        - isPinned
         - title
     PostPersistResponse:
       type: object
@@ -923,8 +928,13 @@ components:
           format: int64
           description: 파일 ID
           example: 1
+        isPinned:
+          type: boolean
+          description: 게시글 고정 여부
+          example: 'FALSE'
       required:
         - content
+        - isPinned
         - title
     LabUpdateRequest:
       type: object
