@@ -24,6 +24,7 @@ import type { PostDetailResponse } from '~/apis/community/requests';
 import useModal from '~/hooks/use-modal';
 
 import { convertCategory, extractFileName } from '~/utils/utils';
+import { useRouter } from '@tanstack/react-router';
 
 function FormItemWrapper({
   label,
@@ -39,6 +40,7 @@ function FormItemWrapper({
 
 function BottomButtons() {
   const { isOpen, openModal, closeModal } = useModal();
+  const router = useRouter();
 
   return (
     <div className="flex items-center self-end gap-3">
@@ -51,7 +53,7 @@ function BottomButtons() {
             <Button
               color="primary"
               variant="solid"
-              onClick={() => window.history.back()}
+              onClick={() => router.history.back()}
             >
               돌아가기
             </Button>
