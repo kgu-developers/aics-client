@@ -8,16 +8,23 @@ import {
   message,
 } from 'antd';
 import { Pin, Trash2Icon } from 'lucide-react';
+
 import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/apis/admin/queries';
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
+
 import useModal from '~/hooks/use-modal';
+import { queryClient } from '~/utils/get-query-client';
 
 function DeleteButton({ postId, title }: { postId: number; title: string }) {
-  const { isOpen, openModal, closeModal } = useModal();
   const { mutate } = useDeletePost();
+  const { isOpen, openModal, closeModal } = useModal();
   const [messageApi, contextHolder] = message.useMessage();
 
   const handleSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: [usePostServiceGetApiV1PostsKey],
+    });
     closeModal();
     messageApi.open({
       type: 'success',
