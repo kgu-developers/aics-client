@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useRouter } from '@tanstack/react-router';
 import { Button, Modal, message } from 'antd';
 import {
   ArrowLeft,
@@ -8,9 +8,13 @@ import {
   PencilIcon,
   Trash2Icon,
 } from 'lucide-react';
+
 import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
+
 import { PATH } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
+import { queryClient } from '~/utils/get-query-client';
 import { extractFileName } from '~/utils/utils';
 
 interface HeaderProps {
@@ -66,20 +70,21 @@ function DeleteButton({ postId }: { postId: number }) {
   const { mutate } = usePostServicePatchApiV1PostsByPostIdDelete();
   const { isOpen, openModal, closeModal } = useModal();
   const [messageApi, contextHolder] = message.useMessage();
+  const router = useRouter();
 
-  const handleSuccess = () => {
+  const handleSuccess = async () => {
     closeModal();
-    messageApi.open({
+    await messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 삭제되었습니다.',
+      duration: 0.7,
     });
 
-    setTimeout(() => {
-      window.history.back();
-      setTimeout(() => {
-        window.location.reload();
-      }, 50);
-    }, 300);
+    queryClient.invalidateQueries({
+      queryKey: [usePostServiceGetApiV1PostsKey],
+    });
+
+    router.history.back();
   };
 
   const handleError = () => {

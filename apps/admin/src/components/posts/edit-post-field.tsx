@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import { useRouter } from '@tanstack/react-router';
 import {
   Button,
   Checkbox,
@@ -10,7 +12,6 @@ import {
 } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import { UploadIcon } from 'lucide-react';
-import type { ReactNode } from 'react';
 
 import { Editor } from '@aics-client/tiptap';
 
@@ -24,7 +25,8 @@ import type { PostDetailResponse } from '~/apis/community/requests';
 import useModal from '~/hooks/use-modal';
 
 import { convertCategory, extractFileName } from '~/utils/utils';
-import { useRouter } from '@tanstack/react-router';
+import { queryClient } from '~/utils/get-query-client';
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 
 function FormItemWrapper({
   label,
@@ -114,17 +116,14 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
   };
 
   const handleSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: [usePostServiceGetApiV1PostsKey],
+    });
+
     messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 수정되었습니다.',
     });
-
-    setTimeout(() => {
-      window.history.back();
-      setTimeout(() => {
-        window.location.reload();
-      }, 50);
-    }, 700);
   };
 
   const handleError = () => {
