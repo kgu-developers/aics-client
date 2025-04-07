@@ -13,8 +13,8 @@ import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
 
-import { queryClient } from '~/utils/get-query-client';
 import useModal from '~/hooks/use-modal';
+import { queryClient } from '~/utils/get-query-client';
 
 function DeleteButton({ postId, title }: { postId: number; title: string }) {
   const { mutate } = useDeletePost();

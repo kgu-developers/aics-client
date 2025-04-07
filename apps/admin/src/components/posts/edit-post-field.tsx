@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { useRouter } from '@tanstack/react-router';
 import {
   Button,
@@ -12,6 +11,7 @@ import {
 } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import { UploadIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 import { Editor } from '@aics-client/tiptap';
 
@@ -24,9 +24,9 @@ import type { PostDetailResponse } from '~/apis/community/requests';
 
 import useModal from '~/hooks/use-modal';
 
-import { convertCategory, extractFileName } from '~/utils/utils';
-import { queryClient } from '~/utils/get-query-client';
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
+import { queryClient } from '~/utils/get-query-client';
+import { convertCategory, extractFileName } from '~/utils/utils';
 
 function FormItemWrapper({
   label,
