@@ -7,11 +7,16 @@ import {
   type PaginationProps,
   message,
 } from 'antd';
-import { Pin, Trash2Icon } from 'lucide-react';
+import { Pin, PlusIcon, Trash2Icon } from 'lucide-react';
 
 import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/apis/admin/queries';
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import type { PostSummaryResponse } from '~/apis/community/requests';
+import {
+  NEW_POST_PATH_MAP,
+  POST_DETAIL_PATH_MAP,
+  type PostCategory,
+} from '~/constants/path';
 
 import useModal from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
@@ -84,14 +89,15 @@ function DeleteButton({ postId, title }: { postId: number; title: string }) {
 
 interface PostListItemProps {
   post: PostSummaryResponse;
-  to: string;
+  to: PostCategory;
 }
 
 function PostListItem({ post, to }: PostListItemProps) {
   return (
     <List.Item className="flex items-center gap-3 transition-colors duration-100 hover:bg-gray-50">
       <Link
-        to={`${to}${post.postId.toString()}`}
+        to={`${POST_DETAIL_PATH_MAP[to]}`}
+        params={{ postId: post.postId.toString() }}
         className="flex justify-between w-full p-1"
       >
         <div className="flex items-center">
@@ -111,14 +117,14 @@ function PostListItem({ post, to }: PostListItemProps) {
 
 interface PostListProps {
   title: string;
-  to: string;
+  to: PostCategory;
   currentPage: number;
   data: PostSummaryResponse[];
   total: number;
 }
 
 function PostsList({ title, to, currentPage, data, total }: PostListProps) {
-  const navigate = useNavigate({ from: '/notice' });
+  const navigate = useNavigate({ from: to });
 
   const handlePageChange: PaginationProps['onChange'] = (currentPage) => {
     navigate({
@@ -129,7 +135,21 @@ function PostsList({ title, to, currentPage, data, total }: PostListProps) {
   return (
     <>
       <List
-        header={<div className="text-lg font-semibold">{title}</div>}
+        header={
+          <div className="flex items-center justify-between p-2">
+            <div className="text-lg font-semibold">{title}</div>
+            <Link to={NEW_POST_PATH_MAP[to]}>
+              <Button
+                color="primary"
+                variant="solid"
+                icon={<PlusIcon size={'1rem'} />}
+                className="flex items-center gap-1"
+              >
+                작성하기
+              </Button>
+            </Link>
+          </div>
+        }
         itemLayout="horizontal"
         bordered
         size="large"

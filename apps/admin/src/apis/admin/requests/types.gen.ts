@@ -63,7 +63,7 @@ export type PostCreateRequest = {
   /**
    * 게시글 고정 여부
    */
-  isPinned: boolean;
+  isPinned: string;
 };
 
 /**
@@ -213,7 +213,7 @@ export type PostUpdateRequest = {
   /**
    * 게시글 고정 여부
    */
-  isPinned: boolean;
+  isPinned: string;
 };
 
 /**
