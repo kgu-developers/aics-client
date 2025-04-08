@@ -73,11 +73,10 @@ function BottomButtons() {
         variant="outlined"
         size="large"
         onClick={openModal}
-        className="self-end"
       >
         취소하기
       </Button>
-      <Button color="primary" variant="solid" size="large" className="self-end">
+      <Button htmlType="submit" color="primary" variant="solid" size="large">
         저장하기
       </Button>
     </div>
@@ -85,6 +84,7 @@ function BottomButtons() {
 }
 
 function EditPostField({ post }: { post?: PostDetailResponse }) {
+  const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
   const fileUploadMutation = useFileServicePostApiV1FilesPost();
@@ -115,15 +115,16 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
     reader.readAsDataURL(file);
   };
 
-  const handleSuccess = () => {
+  const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [usePostServiceGetApiV1PostsKey],
     });
-
-    messageApi.open({
+    await messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 수정되었습니다.',
+      duration: 0.7,
     });
+    router.history.back();
   };
 
   const handleError = () => {
@@ -158,7 +159,7 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
           requestBody: {
             title: values.title,
             category: values.category,
-            isPinned: values.isPinned,
+            isPinned: values.isPinned ? 'TRUE' : 'FALSE',
             fileId,
             content: values.content,
           },
@@ -183,9 +184,6 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
       <Form
         form={form}
         initialValues={initialValues}
-        onValuesChange={(value) => {
-          console.log(value);
-        }}
         onFinish={handleSubmit}
         className="flex flex-col gap-5"
       >
