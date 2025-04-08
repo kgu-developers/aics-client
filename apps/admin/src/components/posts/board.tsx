@@ -35,12 +35,12 @@ function Board({ children }: { children: React.ReactNode }) {
 
 function Header({ title, author, views, createdAt, file }: HeaderProps) {
   return (
-    <div>
-      <h1 className="font-semibold text-4xl p-8 pb-4">{title}</h1>
-      <div className="flex justify-between border-t border-gray-200 px-8 pt-4 text-gray-500 text-sm">
+    <div className="flex flex-col">
+      <h1 className="p-8 pb-4 text-4xl font-semibold">{title}</h1>
+      <div className="flex justify-between px-8 pt-4 text-sm text-gray-500 border-t border-gray-200">
         <p>{author}</p>
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 sm:visible invisible">
+          <div className="flex items-center invisible gap-2 sm:visible">
             <Eye size={'0.875rem'} />
             <span>{views}</span>
           </div>
@@ -53,7 +53,7 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
       {file && (
         <button
           type="button"
-          className="flex items-center self-end px-4 py-2 text-sm font-semibold gap-2"
+          className="flex items-center self-end gap-2 px-4 py-2 mr-4 text-sm font-semibold cursor-pointer"
         >
           <Download size={'0.875rem'} />
           <span>{extractFileName(file.physicalPath)}</span>
@@ -163,8 +163,8 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
   const editURL = to === PATH.NEWS ? PATH.EDIT_NEWS : PATH.EDIT_NOTICE;
 
   return (
-    <div className="flex flex-col gap-6 items-start">
-      <div className="w-full flex flex-col border-t border-b border-gray-200">
+    <div className="flex flex-col items-start gap-6">
+      <div className="flex flex-col w-full border-t border-b border-gray-200">
         {prevPost ? (
           <Link
             to={`${EDIT_POST_PATH_MAP[to]}`}
