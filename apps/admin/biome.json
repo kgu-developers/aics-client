@@ -5,6 +5,11 @@
     "../../configs/biome/react.json"
   ],
   "linter": {
+    "rules": {
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      }
+    },
     "ignore": ["src/routeTree.gen.ts", "src/apis"]
   }
 }

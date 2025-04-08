@@ -1,5 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router';
 import { Button, Modal, message } from 'antd';
+import DOMPurify from 'dompurify';
 import {
   ArrowLeft,
   Calendar,
@@ -63,7 +64,13 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
 }
 
 function Content({ content }: { content: string }) {
-  return <div className="px-10 py-8 whitespace-pre-line">{content}</div>;
+  return (
+    <div
+      className="px-10 py-8 whitespace-pre-line"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+    />
+  );
 }
 
 function DeleteButton({ postId }: { postId: number }) {

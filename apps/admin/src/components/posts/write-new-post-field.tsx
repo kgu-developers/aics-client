@@ -17,17 +17,14 @@ import { Editor } from '@aics-client/tiptap';
 
 import {
   useFileServicePostApiV1FilesPost,
-  usePostServicePatchApiV1PostsByPostId,
   usePostServicePostApiV1Posts,
 } from '~/apis/admin/queries';
 import type { PostUpdateRequest } from '~/apis/admin/requests';
-import type { PostDetailResponse } from '~/apis/community/requests';
 
 import useModal from '~/hooks/use-modal';
 
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import { queryClient } from '~/utils/get-query-client';
-import { convertCategory, extractFileName } from '~/utils/utils';
 
 function FormItemWrapper({
   label,
