@@ -12,7 +12,7 @@ import {
 import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 
-import { PATH } from '~/constants/path';
+import { EDIT_POST_PATH_MAP, PATH, type PostCategory } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
 import { extractFileName } from '~/utils/utils';
@@ -148,7 +148,7 @@ interface FooterProps {
     postId: number;
     title: string;
   };
-  to: string;
+  to: PostCategory;
   postId: number;
 }
 
@@ -160,7 +160,8 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
       <div className="w-full flex flex-col border-t border-b border-gray-200">
         {prevPost ? (
           <Link
-            to={`${to}${prevPost.postId.toString()}`}
+            to={`${EDIT_POST_PATH_MAP[to]}`}
+            params={{ postId: prevPost.postId.toString() }}
             className="flex gap-4 p-5 border-b border-gray-200"
           >
             <span className="font-semibold">이전</span>
@@ -171,7 +172,8 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
         )}
         {nextPost ? (
           <Link
-            to={`${to}${nextPost.postId.toString()}`}
+            to={`${EDIT_POST_PATH_MAP[to]}`}
+            params={{ postId: prevPost?.postId.toString() }}
             className="flex gap-4 p-5"
           >
             <span className="font-semibold">다음</span>
@@ -185,7 +187,9 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
       <div className="flex items-center justify-between w-full">
         <Button className="flex items-center gap-2 text-sm">
           <ArrowLeft size={'1rem'} />
-          <Link to={to}>목록으로</Link>
+          <Link to={to} search={{ page: 0, query: '' }}>
+            목록으로
+          </Link>
         </Button>
 
         <div className="flex items-center gap-3">
