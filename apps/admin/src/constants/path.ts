@@ -7,7 +7,7 @@ export const PATH = {
   EDIT_NEWS: '/news/edit/',
   EDIT_NOTICE: '/notice/edit/',
   USER: '/user',
-};
+} as const;
 
 export type PostCategory = '/notice' | '/news';
 

@@ -160,8 +160,6 @@ interface FooterProps {
 }
 
 function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
-  const editURL = to === PATH.NEWS ? PATH.EDIT_NEWS : PATH.EDIT_NOTICE;
-
   return (
     <div className="flex flex-col items-start gap-6">
       <div className="flex flex-col w-full border-t border-b border-gray-200">
@@ -206,7 +204,12 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
             className="flex items-center gap-2 text-sm"
           >
             <PencilIcon size={'1rem'} />
-            <Link to={`${editURL}${postId.toString()}`}>수정하기</Link>
+            <Link
+              to={EDIT_POST_PATH_MAP[to]}
+              params={{ postId: postId.toString() }}
+            >
+              수정하기
+            </Link>
           </Button>
           <DeleteButton postId={postId} />
         </div>
