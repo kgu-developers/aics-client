@@ -13,7 +13,7 @@ import {
 import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 
-import { EDIT_POST_PATH_MAP, PATH, type PostCategory } from '~/constants/path';
+import { EDIT_POST_PATH_MAP, type PostCategory } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
 import { extractFileName } from '~/utils/utils';
