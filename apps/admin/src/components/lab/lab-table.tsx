@@ -79,7 +79,7 @@ function LabTable() {
             console.error('수정 실패:', e);
             messageApi.open({
               type: 'error',
-              content: '연구실실 수정에 실패했습니다.',
+              content: '연구실 수정에 실패했습니다.',
             });
           },
         },

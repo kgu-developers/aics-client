@@ -84,6 +84,36 @@ function LabTableView({
       ),
     },
     { title: '담당교수', dataIndex: 'advisor', width: '10%', editable: true },
+
+    {
+      title: '연구실 이미지',
+      dataIndex: 'img',
+      width: '20%',
+      render: (_: unknown, record: LabDetailResponse) => {
+        const editable = register.isEditing(record);
+        return (
+          <div>
+            {record.img?.physicalPath && (
+              <img
+                src={record.img.physicalPath}
+                alt={`${record.name} 이미지`}
+                className="w-24 h-24"
+              />
+            )}
+            <Upload
+              showUploadList={false}
+              beforeUpload={(file) => handleImageUpload(record)(file)}
+            >
+              {editable && (
+                <Button icon={<UploadOutlined />} className="mt-2">
+                  업로드
+                </Button>
+              )}
+            </Upload>
+          </div>
+        );
+      },
+    },
     {
       title: '관리',
       dataIndex: 'operation',
@@ -92,70 +122,52 @@ function LabTableView({
         const editable = register.isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link
+            <Button
+              color="primary"
+              variant="solid"
               onClick={() => handleSave(record)}
               className="mr-4"
             >
               저장
-            </Typography.Link>
+            </Button>
             <Popconfirm
               title="정말 취소하시겠습니까?"
               onConfirm={register.cancel}
             >
-              <button
-                type="button"
+              <Button
+                color="danger"
+                variant="solid"
                 className="text-red-500 hover:cursor-pointer"
               >
                 취소
-              </button>
+              </Button>
             </Popconfirm>
           </span>
         ) : (
           <span>
-            <Typography.Link
+            <Button
+              color="primary"
+              variant="solid"
               disabled={register.isEditing(record)}
               onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
-            </Typography.Link>
+            </Button>
             <Popconfirm
               title="정말 삭제하시겠습니까?"
               onConfirm={() => handleDelete(record)}
             >
-              <button
-                type="button"
+              <Button
+                color="danger"
+                variant="solid"
                 className="ml-4 text-red-500 hover:cursor-pointer"
               >
                 삭제
-              </button>
+              </Button>
             </Popconfirm>
           </span>
         );
       },
-    },
-    {
-      title: '연구실 이미지',
-      dataIndex: 'img',
-      width: '20%',
-      render: (_: unknown, record: LabDetailResponse) => (
-        <div>
-          {record.img?.physicalPath && (
-            <img
-              src={record.img.physicalPath}
-              alt={`${record.name} 이미지`}
-              className="w-24 h-24"
-            />
-          )}
-          <Upload
-            showUploadList={false}
-            beforeUpload={(file) => handleImageUpload(record)(file)}
-          >
-            <Button icon={<UploadOutlined />} className="mt-2">
-              업로드
-            </Button>
-          </Upload>
-        </div>
-      ),
     },
   ];
 
