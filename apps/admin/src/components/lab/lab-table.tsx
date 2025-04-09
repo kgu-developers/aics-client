@@ -6,20 +6,18 @@ import {
   useLabServiceDeleteApiV1LabsById,
   useLabServicePatchApiV1LabsById,
 } from '~/apis/admin/queries';
-import {
-  useLabServiceGetApiV1Labs,
-  useLabServiceGetApiV1LabsKey,
-} from '~/apis/community/queries';
+import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries';
 import type { LabDetailResponse } from '~/apis/community/requests';
 
 import { Suspense } from 'react';
+import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense';
 import useEditTable from '~/hooks/use-edit-table';
 import LabTableView from './lab-table-view';
 
 function LabTable() {
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
-  const { data } = useLabServiceGetApiV1Labs();
+  const { data } = useLabServiceGetApiV1LabsSuspense();
   const LabList: LabDetailResponse[] = data?.contents ?? [];
   const { register } = useEditTable<LabDetailResponse>(form);
   const uploadLabImage = useFileServicePostApiV1FilesLab();
