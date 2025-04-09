@@ -17,16 +17,14 @@ import { Editor } from '@aics-client/tiptap';
 
 import {
   useFileServicePostApiV1FilesPost,
-  usePostServicePatchApiV1PostsByPostId,
+  usePostServicePostApiV1Posts,
 } from '~/apis/admin/queries';
 import type { PostUpdateRequest } from '~/apis/admin/requests';
-import type { PostDetailResponse } from '~/apis/community/requests';
 
 import useModal from '~/hooks/use-modal';
 
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import { queryClient } from '~/utils/get-query-client';
-import { convertCategory, extractFileName } from '~/utils/utils';
 
 function FormItemWrapper({
   label,
@@ -49,7 +47,7 @@ function BottomButtons() {
       <Modal
         open={isOpen}
         onCancel={closeModal}
-        title="게시글 삭제"
+        title="게시글 작성 취소"
         footer={
           <>
             <Button
@@ -66,7 +64,7 @@ function BottomButtons() {
         }
         width={500}
       >
-        정말 삭제하시겠습니까?
+        게시글 작성을 취소하시겠습니까? 작성 중인 내용은 저장되지 않습니다.
       </Modal>
       <Button
         color="default"
@@ -83,32 +81,12 @@ function BottomButtons() {
   );
 }
 
-function EditPostField({ post }: { post?: PostDetailResponse }) {
+function WriteNewPostField() {
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
   const fileUploadMutation = useFileServicePostApiV1FilesPost();
-  const patchPostsMutation = usePostServicePatchApiV1PostsByPostId();
-  const initialValues = post
-    ? {
-        title: post.title,
-        category: convertCategory(post.category),
-        isPinned: post.isPinned || false,
-        file: post.file
-          ? [
-              {
-                uid: post.file.id.toString(),
-                name: extractFileName(post.file.physicalPath) || 'Unnamed File',
-                status: 'done',
-                url: post.file.physicalPath,
-                originFileObj: post.file,
-              },
-            ]
-          : [],
-        fileId: post.file ? post.file.id : null,
-        content: post.content,
-      }
-    : {};
+  const postsMutation = usePostServicePostApiV1Posts();
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
@@ -121,7 +99,7 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
     });
     await messageApi.open({
       type: 'success',
-      content: '게시글이 성공적으로 수정되었습니다.',
+      content: '게시글이 성공적으로 등록되었습니다.',
       duration: 0.7,
     });
     router.history.back();
@@ -130,7 +108,7 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
   const handleError = () => {
     messageApi.open({
       type: 'error',
-      content: '게시글 수정에 실패했습니다.',
+      content: '게시글 등록에 실패했습니다.',
     });
   };
 
@@ -148,19 +126,18 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
             formData: { file: originFileObj },
           });
           fileId = uploadRes.id;
-        } else if (post?.file?.id === originFileObj?.id) {
-          fileId = post?.file?.id;
+        } else if (originFileObj?.id) {
+          fileId = originFileObj.id;
         }
       }
 
-      patchPostsMutation.mutate(
+      postsMutation.mutate(
         {
-          postId: post?.postId || 0,
+          fileId: fileId,
           requestBody: {
             title: values.title,
             category: values.category,
             isPinned: values.isPinned ? 'TRUE' : 'FALSE',
-            fileId,
             content: values.content,
           },
         },
@@ -181,12 +158,7 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
   return (
     <>
       {contextHolder}
-      <Form
-        form={form}
-        initialValues={initialValues}
-        onFinish={handleSubmit}
-        className="flex flex-col gap-5"
-      >
+      <Form form={form} onFinish={handleSubmit} className="flex flex-col gap-5">
         <FormItemWrapper label="제목">
           <Form.Item
             name="title"
@@ -240,7 +212,7 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
         <FormItemWrapper label="본문">
           <Form.Item name="content">
             <Editor
-              editorContent={post ? post.content : ''}
+              editorContent={''}
               onChange={(value) => form.setFieldsValue({ content: value })}
             />
           </Form.Item>
@@ -252,4 +224,4 @@ function EditPostField({ post }: { post?: PostDetailResponse }) {
   );
 }
 
-export { EditPostField };
+export { WriteNewPostField };

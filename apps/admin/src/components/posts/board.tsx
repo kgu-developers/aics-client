@@ -1,5 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router';
 import { Button, Modal, message } from 'antd';
+import DOMPurify from 'dompurify';
 import {
   ArrowLeft,
   Calendar,
@@ -12,7 +13,7 @@ import {
 import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 
-import { PATH } from '~/constants/path';
+import { EDIT_POST_PATH_MAP, type PostCategory } from '~/constants/path';
 import useModal from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
 import { extractFileName } from '~/utils/utils';
@@ -34,12 +35,12 @@ function Board({ children }: { children: React.ReactNode }) {
 
 function Header({ title, author, views, createdAt, file }: HeaderProps) {
   return (
-    <div>
-      <h1 className="font-semibold text-4xl p-8 pb-4">{title}</h1>
-      <div className="flex justify-between border-t border-gray-200 px-8 pt-4 text-gray-500 text-sm">
+    <div className="flex flex-col">
+      <h1 className="p-8 pb-4 text-4xl font-semibold">{title}</h1>
+      <div className="flex justify-between px-8 pt-4 text-sm text-gray-500 border-t border-gray-200">
         <p>{author}</p>
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 sm:visible invisible">
+          <div className="flex items-center invisible gap-2 sm:visible">
             <Eye size={'0.875rem'} />
             <span>{views}</span>
           </div>
@@ -52,7 +53,7 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
       {file && (
         <button
           type="button"
-          className="flex items-center self-end px-4 py-2 text-sm font-semibold gap-2"
+          className="flex items-center self-end gap-2 px-4 py-2 mr-4 text-sm font-semibold cursor-pointer"
         >
           <Download size={'0.875rem'} />
           <span>{extractFileName(file.physicalPath)}</span>
@@ -63,7 +64,13 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
 }
 
 function Content({ content }: { content: string }) {
-  return <div className="px-10 py-8 whitespace-pre-line">{content}</div>;
+  return (
+    <div
+      className="px-10 py-8 whitespace-pre-line"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+    />
+  );
 }
 
 function DeleteButton({ postId }: { postId: number }) {
@@ -148,19 +155,18 @@ interface FooterProps {
     postId: number;
     title: string;
   };
-  to: string;
+  to: PostCategory;
   postId: number;
 }
 
 function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
-  const editURL = to === PATH.NEWS ? PATH.EDIT_NEWS : PATH.EDIT_NOTICE;
-
   return (
-    <div className="flex flex-col gap-6 items-start">
-      <div className="w-full flex flex-col border-t border-b border-gray-200">
+    <div className="flex flex-col items-start gap-6">
+      <div className="flex flex-col w-full border-t border-b border-gray-200">
         {prevPost ? (
           <Link
-            to={`${to}${prevPost.postId.toString()}`}
+            to={`${EDIT_POST_PATH_MAP[to]}`}
+            params={{ postId: prevPost.postId.toString() }}
             className="flex gap-4 p-5 border-b border-gray-200"
           >
             <span className="font-semibold">이전</span>
@@ -171,7 +177,8 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
         )}
         {nextPost ? (
           <Link
-            to={`${to}${nextPost.postId.toString()}`}
+            to={`${EDIT_POST_PATH_MAP[to]}`}
+            params={{ postId: prevPost?.postId.toString() }}
             className="flex gap-4 p-5"
           >
             <span className="font-semibold">다음</span>
@@ -185,7 +192,9 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
       <div className="flex items-center justify-between w-full">
         <Button className="flex items-center gap-2 text-sm">
           <ArrowLeft size={'1rem'} />
-          <Link to={to}>목록으로</Link>
+          <Link to={to} search={{ page: 0, query: '' }}>
+            목록으로
+          </Link>
         </Button>
 
         <div className="flex items-center gap-3">
@@ -195,7 +204,12 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
             className="flex items-center gap-2 text-sm"
           >
             <PencilIcon size={'1rem'} />
-            <Link to={`${editURL}${postId.toString()}`}>수정하기</Link>
+            <Link
+              to={EDIT_POST_PATH_MAP[to]}
+              params={{ postId: postId.toString() }}
+            >
+              수정하기
+            </Link>
           </Button>
           <DeleteButton postId={postId} />
         </div>
