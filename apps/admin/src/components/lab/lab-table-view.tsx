@@ -1,13 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
-import {
-  Button,
-  Form,
-  Input,
-  Popconfirm,
-  Table,
-  Typography,
-  Upload,
-} from 'antd';
+import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
 import type { LabDetailResponse } from '~/apis/community/requests';
 
