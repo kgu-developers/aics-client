@@ -17,28 +17,28 @@
   },
   "dependencies": {
     "@aics-client/design-system": "workspace:^",
-    "@hookform/resolvers": "^3.9.1",
-    "@tanstack/react-query": "^5.62.7",
-    "@tanstack/react-query-devtools": "^5.62.7",
-    "@vanilla-extract/css": "^1.16.0",
-    "babel-plugin-react-compiler": "0.0.0-experimental-fa06e2c-20241016",
-    "embla-carousel": "^8.5.1",
-    "embla-carousel-autoplay": "^8.5.1",
-    "embla-carousel-react": "^8.5.1",
-    "jotai": "^2.11.0",
-    "lucide-react": "^0.462.0",
-    "next": "15.1.2",
+    "@hookform/resolvers": "^5.0.1",
+    "@tanstack/react-query": "^5.72.1",
+    "@tanstack/react-query-devtools": "^5.72.1",
+    "@vanilla-extract/css": "^1.17.1",
+    "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250405",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "jotai": "^2.12.2",
+    "lucide-react": "^0.487.0",
+    "next": "^15.2.5",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-hook-form": "^7.53.2",
-    "zod": "^3.23.8"
+    "react-hook-form": "^7.55.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
-    "@types/node": "^20",
-    "@types/react": "19.0.0",
-    "@types/react-dom": "19.0.1",
-    "@vanilla-extract/next-plugin": "^2.4.6",
-    "typescript": "^5"
+    "@types/node": "^22.14.0",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "@vanilla-extract/next-plugin": "^2.4.10",
+    "typescript": "^5.8.3"
   }
 }
