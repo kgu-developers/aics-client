@@ -507,6 +507,12 @@ export const $PostTitleResponse = {
 export const $LabDetailResponse = {
   type: 'object',
   properties: {
+    id: {
+      type: 'integer',
+      format: 'int64',
+      description: '연구실 id',
+      example: 1,
+    },
     name: {
       type: 'string',
       description: '연구실 이름',
@@ -536,7 +542,7 @@ export const $LabDetailResponse = {
       },
     },
   },
-  required: ['advisor', 'loc', 'name', 'site'],
+  required: ['advisor', 'id', 'loc', 'name', 'site'],
 } as const;
 
 export const $LabListResponse = {
@@ -547,6 +553,7 @@ export const $LabListResponse = {
       description: '등록된 연구실 리스트',
       example: [
         {
+          id: 1,
           name: '인공지능연구실',
           loc: '8502, 8503',
           site: 'http://ailab.kyonggi.ac.kr',
@@ -656,8 +663,14 @@ export const $ClubListResponse = {
     contents: {
       type: 'array',
       description: '등록된 동아리 리스트',
-      example:
-        '[{"name": C-Lab, "description": "경기대학교 AI컴퓨터공학부 개발동아리입니다.", "site": "https://www.clab.page/"}]',
+      example: [
+        {
+          id: 1,
+          name: 'C-Lab',
+          description: '경기대학교 AI컴퓨터공학부 개발동아리입니다.',
+          site: 'https://www.clab.page/',
+        },
+      ],
       items: {
         $ref: '#/components/schemas/ClubDetailResponse',
       },

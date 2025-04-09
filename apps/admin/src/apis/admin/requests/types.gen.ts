@@ -60,6 +60,10 @@ export type PostCreateRequest = {
    * 게시물 카테고리
    */
   category?: 'NOTIFICATION' | 'NEWS';
+  /**
+   * 게시글 고정 여부
+   */
+  isPinned: string;
 };
 
 /**
@@ -206,6 +210,10 @@ export type PostUpdateRequest = {
    * 파일 ID
    */
   fileId?: number;
+  /**
+   * 게시글 고정 여부
+   */
+  isPinned: string;
 };
 
 /**

@@ -11,3 +11,12 @@ export const formatExpireTime = (times: number | null) => {
 export const extractFileName = (path: string) => {
   return path.split('/').pop();
 };
+
+export const convertCategory = (category: string) => {
+  const categoryMap: Record<string, 'NEWS' | 'NOTIFICATION'> = {
+    공지사항: 'NEWS',
+    '학과 소식': 'NOTIFICATION',
+  };
+
+  return categoryMap[category];
+};

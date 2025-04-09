@@ -6,7 +6,7 @@ interface SearchBarProps {
 }
 
 function SearchBar({ defaultValue }: SearchBarProps) {
-  const navigate = useNavigate({ from: '/notice' });
+  const navigate = useNavigate({ from: '/user' });
   const { Search } = Input;
 
   const handleSearch = (keyword: string) => {

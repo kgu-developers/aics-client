@@ -311,7 +311,7 @@ export type PostTitleResponse = {
 };
 
 export type LabDetailResponse = {
-  /*
+  /**
    * 연구실 id
    */
   id: number;

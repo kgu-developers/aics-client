@@ -22,7 +22,11 @@ const items: MenuItem[] = [
   //TODO: Link 내부 url 변경
   {
     key: 'user',
-    label: '회원 관리',
+    label: (
+      <Link to={PATH.USER} search={{ page: 0, query: '' }}>
+        사용자 관리
+      </Link>
+    ),
     icon: <Users size={20} />,
   },
   {
@@ -50,8 +54,22 @@ const items: MenuItem[] = [
     label: '게시판',
     icon: <Clipboard size={20} />,
     children: [
-      { key: 'notice', label: <Link to={PATH.NOTICE}>공지사항</Link> },
-      { key: 'news', label: <Link to={PATH.NEWS}>학부 소식</Link> },
+      {
+        key: 'notice',
+        label: (
+          <Link to={PATH.NOTICE} search={{ page: 0, query: '' }}>
+            공지사항
+          </Link>
+        ),
+      },
+      {
+        key: 'news',
+        label: (
+          <Link to={PATH.NEWS} search={{ page: 0, query: '' }}>
+            학부 소식
+          </Link>
+        ),
+      },
     ],
   },
 ];
