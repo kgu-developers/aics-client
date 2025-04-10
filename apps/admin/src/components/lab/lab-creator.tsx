@@ -15,7 +15,7 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const postLabMutation = useLabServicePostApiV1Labs();
-  const imageUploadMutation = useFileServicePostApiV1FilesLab();
+  const uploadImageMutation = useFileServicePostApiV1FilesLab();
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
@@ -24,7 +24,7 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
     await messageApi.open({
       type: 'success',
       content: '연구실이 성공적으로 추가가되었습니다.',
-      duration: 0.7,
+      duration: 0.8,
     });
     onClose();
   };
@@ -41,48 +41,41 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = async (values: LabCreateRequest) => {
-    try {
-      const fileList = form.getFieldValue('file');
-
-      let fileId: number | undefined = undefined;
-
-      if (fileList && fileList.length > 0) {
-        const originFileObj = fileList[0]?.originFileObj;
-
-        if (originFileObj instanceof File) {
-          const uploadRes = await imageUploadMutation.mutateAsync({
-            formData: { file: originFileObj },
-          });
-          fileId = uploadRes.id;
-        } else if (originFileObj?.id) {
-          fileId = originFileObj.id;
-        }
-      }
-
-      postLabMutation.mutate(
-        {
-          fileId: fileId,
-          requestBody: {
-            name: values.name,
-            loc: values.loc,
-            site: values.site,
-            advisor: values.advisor,
-          },
+  const handleSubmit = (values: LabCreateRequest) => {
+    const file = form.getFieldValue('file')?.[0]?.originFileObj;
+    uploadImageMutation.mutate(
+      { formData: { file } },
+      {
+        onSuccess: (res) => {
+          if (res?.id) {
+            postLabMutation.mutate(
+              {
+                fileId: res.id,
+                requestBody: {
+                  name: values.name,
+                  loc: values.loc,
+                  site: values.site,
+                  advisor: values.advisor,
+                },
+              },
+              {
+                onSuccess: () => {
+                  handleSuccess();
+                },
+                onError: () => {
+                  handleError();
+                },
+              },
+            );
+          }
         },
-        {
-          onSuccess: () => {
-            handleSuccess();
-          },
-          onError: () => {
-            handleError();
-          },
+        onError: () => {
+          handleError();
         },
-      );
-    } catch (_error) {
-      handleError();
-    }
+      },
+    );
   };
+
   return (
     <Form
       form={form}
