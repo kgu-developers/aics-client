@@ -70,7 +70,7 @@ function LabTable() {
               content: '연구실 정보가 성공적으로 수정되었습니다.',
             });
             queryClient.invalidateQueries({
-              queryKey: ['LabServiceGetApiV1Labs'],
+              queryKey: [useLabServiceGetApiV1LabsKey],
             });
           },
           onError: (e) => {
