@@ -99,7 +99,7 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
           { required: true, message: '이메일을 입력하세요.' },
           {
             pattern: /^[a-zA-Z0-9._%+-]+@kyonggi\.ac\.kr$/,
-            message: 'kyonggi.ac.kr 도메인의 이메일만 입력 가능합니다.',
+            message: '@kyonggi.ac.kr 형식의 경기대 메일만 입력 가능합니다.',
           },
         ]}
       >
