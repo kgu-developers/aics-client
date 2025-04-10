@@ -6,20 +6,18 @@ import {
   useLabServiceDeleteApiV1LabsById,
   useLabServicePatchApiV1LabsById,
 } from '~/apis/admin/queries';
-import {
-  useLabServiceGetApiV1Labs,
-  useLabServiceGetApiV1LabsKey,
-} from '~/apis/community/queries';
+import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries';
 import type { LabDetailResponse } from '~/apis/community/requests';
 
 import { Suspense } from 'react';
+import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense';
 import useEditTable from '~/hooks/use-edit-table';
 import LabTableView from './lab-table-view';
 
 function LabTable() {
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
-  const { data } = useLabServiceGetApiV1Labs();
+  const { data } = useLabServiceGetApiV1LabsSuspense();
   const LabList: LabDetailResponse[] = data?.contents ?? [];
   const { register } = useEditTable<LabDetailResponse>(form);
   const uploadLabImage = useFileServicePostApiV1FilesLab();
@@ -63,7 +61,7 @@ function LabTable() {
     try {
       const rowData = await form.validateFields();
       updateMutation.mutate(
-        { id: record.id, requestBody: rowData },
+        { id: record.id, requestBody: { ...rowData, fileId: record.img?.id } },
         {
           onSuccess: () => {
             register.cancel();
@@ -72,14 +70,14 @@ function LabTable() {
               content: '연구실 정보가 성공적으로 수정되었습니다.',
             });
             queryClient.invalidateQueries({
-              queryKey: ['ClubServiceGetApiV1Clubs'],
+              queryKey: ['LabServiceGetApiV1Labs'],
             });
           },
           onError: (e) => {
             console.error('수정 실패:', e);
             messageApi.open({
               type: 'error',
-              content: '연구실실 수정에 실패했습니다.',
+              content: '연구실 수정에 실패했습니다.',
             });
           },
         },
@@ -99,7 +97,7 @@ function LabTable() {
             content: '연구실이 성공적으로 삭제되었습니다.',
           });
           queryClient.invalidateQueries({
-            queryKey: ['ClubServiceGetApiV1Clubs'],
+            queryKey: ['LabServiceGetApiV1Labs'],
           });
         },
         onError: (e) => {
