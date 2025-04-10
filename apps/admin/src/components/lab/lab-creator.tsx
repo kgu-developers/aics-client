@@ -61,6 +61,7 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
               {
                 onSuccess: () => {
                   handleSuccess();
+                  form.resetFields();
                 },
                 onError: () => {
                   handleError();
