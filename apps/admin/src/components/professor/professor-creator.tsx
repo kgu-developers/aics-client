@@ -87,6 +87,7 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
         label="연락처"
         name="contact"
         rules={[{ required: true, message: '연락처를 입력하세요.' }]}
+        extra={'연락처는 010-0000-0000 형식으로 입력해주세요. (하이픈 포함)'}
       >
         <Input type="text" placeholder="연락처를 입력하세요." />
       </Form.Item>
