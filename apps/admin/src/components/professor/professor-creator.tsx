@@ -21,6 +21,7 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
       content: '교수진 정보가 성공적으로 추가 되었습니다.',
       duration: 0.8,
     });
+    form.resetFields();
     onClose();
   };
 
@@ -39,7 +40,6 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
       {
         onSuccess: () => {
           handleSuccess();
-          form.resetFields();
         },
         onError: () => {
           handleError();
