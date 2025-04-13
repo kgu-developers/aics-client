@@ -74,7 +74,7 @@ export default function Editor({ editorContent, onChange }: EditorProps) {
   }
 
   return (
-    <div className="w-full border border-gray-300 overflow-hidden rounded-lg">
+    <div className="w-full border border-gray-300 rounded-lg">
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>

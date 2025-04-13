@@ -22,7 +22,7 @@ import { MenuButton } from './menu-button.tsx';
 
 function MenuBarWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center justify-start py-3 border-b border-gray-300">
+    <div className="flex items-center justify-start py-3 w-full overflow-x-auto border-b border-gray-300">
       {children}
     </div>
   );
