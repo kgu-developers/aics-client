@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal, message } from 'antd';
+import { Button, Form, Input, Modal, Select, message } from 'antd';
 
 import { useProfessorServicePostApiV1Professors } from '~/apis/admin/queries';
 import type { ProfessorRequest } from '~/apis/admin/requests';
@@ -53,7 +53,7 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
       form={form}
       layout="vertical"
       onFinish={handleSubmit}
-      className="flex flex-col gap-4"
+      className="flex flex-col"
     >
       {contextHolder}
       <Form.Item
@@ -69,13 +69,18 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
         rules={[
           {
             required: true,
-            message: '교수님의 직급울 입력하세요.',
+            message: '직급울 선택하세요.',
           },
         ]}
       >
-        <Input
-          type="text"
-          placeholder="교수님의 직급(예: 교수, 조교수)울 입력하세요."
+        <Select
+          placeholder="교수님의 직급을 선택하세요."
+          options={[
+            { label: '교수', value: '교수' },
+            { label: '조교수', value: '조교수' },
+          ]}
+          className="w-full"
+          defaultValue={'교수'}
         />
       </Form.Item>
       <Form.Item
@@ -98,21 +103,23 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
       >
         <Input type="text" placeholder="이메일을 입력하세요." />
       </Form.Item>
-      <Form.Item
-        label="프로필 이미지 주소"
-        name="img"
-        rules={[
-          { required: true, message: '이미지 주소(쿠티스)를 입력하세요.' },
-        ]}
-      >
-        <Input type="text" placeholder="이미지 주소(쿠티스)를 입력하세요." />
-      </Form.Item>
+
       <Form.Item
         label="사무실 위치"
         name="officeLoc"
         rules={[{ required: true, message: '사무실의 위치를 입력하세요.' }]}
       >
         <Input type="text" placeholder="사무실의 위치를 입력하세요." />
+      </Form.Item>
+      <Form.Item
+        label="프로필 이미지 주소"
+        name="img"
+        rules={[
+          { required: true, message: '이미지 주소(쿠티스)를 입력하세요.' },
+        ]}
+        extra={'이미지 주소는 쿠티스에서 복사한 주소를 붙여넣기 해주세요.'}
+      >
+        <Input type="text" placeholder="이미지 주소(쿠티스)를 입력하세요." />
       </Form.Item>
       <Button htmlType="submit" color="primary" variant="solid">
         추가하기
