@@ -65,6 +65,7 @@ const CustomTextAlignConfigure = TextAlign.configure({
 
 const CustomImageConfigure = Image.configure({
   allowBase64: true,
+  inline: true,
 });
 
 const CustomLinkConfigure = Link.configure({

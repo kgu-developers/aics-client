@@ -40,20 +40,24 @@ export default function MenuBar({ editor }: { editor: Editor }) {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
     try {
-      const base64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = () => reject(new Error('업로드에 실패하였습니다.'));
-        reader.readAsDataURL(file);
-      });
+      for (const file of Array.from(files)) {
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = () => reject(new Error('이미지 업로드 실패'));
+          reader.readAsDataURL(file);
+        });
 
-      editor.chain().focus().setImage({ src: base64 }).run();
+        editor.chain().focus().setImage({ src: base64 }).run();
+      }
     } catch (e) {
       console.error(e);
+    } finally {
+      event.target.value = '';
     }
   };
 
@@ -173,6 +177,7 @@ export default function MenuBar({ editor }: { editor: Editor }) {
         <input
           type="file"
           accept="image/*"
+          multiple
           id="image-upload"
           className="size-0"
           onChange={handleImageUpload}
