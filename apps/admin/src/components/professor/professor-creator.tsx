@@ -18,7 +18,7 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
     });
     await messageApi.open({
       type: 'success',
-      content: '연구실이 성공적으로 추가가되었습니다.',
+      content: '교수진 정보가 성공적으로 추가 되었습니다.',
       duration: 0.8,
     });
     onClose();
@@ -27,21 +27,14 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
   const handleError = () => {
     messageApi.open({
       type: 'error',
-      content: '연구실 추가에 실패했습니다.',
+      content: '교수진 정보 추가에 실패했습니다.',
     });
   };
 
   const handleSubmit = (values: ProfessorRequest) => {
     postProfessorMutation.mutate(
       {
-        requestBody: {
-          name: values.name,
-          role: values.role,
-          contact: values.contact,
-          email: values.email,
-          img: values.img,
-          officeLoc: values.officeLoc,
-        },
+        requestBody: values,
       },
       {
         onSuccess: () => {
