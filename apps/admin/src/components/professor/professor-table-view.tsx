@@ -1,4 +1,4 @@
-import { Form, Input, Popconfirm, Table, Typography } from 'antd';
+import { Button, Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance, TableProps } from 'antd';
 import type { ProfessorResponse } from '~/apis/community/requests';
 interface ProfessorTableViewProps {
@@ -59,7 +59,7 @@ function ProfessorTableView({
     { title: '교수명', dataIndex: 'name', width: '15%', editable: true },
     { title: '직책', dataIndex: 'role', width: '10%', editable: true },
     { title: '연락처', dataIndex: 'contact', width: '15%', editable: true },
-    { title: '이메일', dataIndex: 'email', width: '20%', editable: true },
+    { title: '이메일', dataIndex: 'email', width: '15%', editable: true },
     {
       title: '사무실 위치',
       dataIndex: 'officeLoc',
@@ -85,44 +85,53 @@ function ProfessorTableView({
     {
       title: '관리',
       dataIndex: 'operation',
-      width: '10%',
+      width: '15%',
       render: (_: unknown, record: ProfessorResponse) => {
         const editable = register.isEditing(record);
         return editable ? (
-          <span className="flex gap-3">
-            <Typography.Link onClick={() => handleSave(record)}>
+          <span>
+            <Button
+              color="primary"
+              variant="solid"
+              onClick={() => handleSave(record)}
+              className="mr-4"
+            >
               저장
-            </Typography.Link>
+            </Button>
             <Popconfirm
               title="정말 취소하시겠습니까?"
               onConfirm={register.cancel}
             >
-              <button
-                type="button"
+              <Button
+                color="danger"
+                variant="solid"
                 className="text-red-500 hover:cursor-pointer"
               >
                 취소
-              </button>
+              </Button>
             </Popconfirm>
           </span>
         ) : (
-          <span className="flex gap-3">
-            <Typography.Link
+          <span>
+            <Button
+              color="primary"
+              variant="solid"
               disabled={register.isEditing(record)}
               onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
               수정
-            </Typography.Link>
+            </Button>
             <Popconfirm
               title="정말 삭제하시겠습니까?"
               onConfirm={() => handleDelete(record)}
             >
-              <button
-                type="button"
-                className="text-red-500 hover:cursor-pointer"
+              <Button
+                color="danger"
+                variant="solid"
+                className="ml-4 text-red-500 hover:cursor-pointer"
               >
                 삭제
-              </button>
+              </Button>
             </Popconfirm>
           </span>
         );

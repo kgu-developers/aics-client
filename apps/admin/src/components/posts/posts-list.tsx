@@ -18,7 +18,7 @@ import {
   type PostCategory,
 } from '~/constants/path';
 
-import useModal from '~/hooks/use-modal';
+import { useModal } from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
 
 function DeleteButton({ postId, title }: { postId: number; title: string }) {

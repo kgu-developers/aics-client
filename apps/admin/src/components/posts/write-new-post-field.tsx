@@ -21,7 +21,7 @@ import {
 } from '~/apis/admin/queries';
 import type { PostUpdateRequest } from '~/apis/admin/requests';
 
-import useModal from '~/hooks/use-modal';
+import { useModal } from '~/hooks/use-modal';
 
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import { queryClient } from '~/utils/get-query-client';
