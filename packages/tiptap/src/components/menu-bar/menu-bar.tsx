@@ -22,7 +22,7 @@ import { MenuButton } from './menu-button.tsx';
 
 function MenuBarWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center justify-start py-3 border-b border-gray-300">
+    <div className="flex items-center justify-start py-3 w-full overflow-x-auto border-b border-gray-300">
       {children}
     </div>
   );
@@ -40,20 +40,32 @@ export default function MenuBar({ editor }: { editor: Editor }) {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
     try {
-      const base64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = () => reject(new Error('업로드에 실패하였습니다.'));
-        reader.readAsDataURL(file);
-      });
+      for (const file of Array.from(files)) {
+        if (!file.type.startsWith('image/')) {
+          alert('이미지 파일만 업로드할 수 있습니다');
+          continue;
+        }
 
-      editor.chain().focus().setImage({ src: base64 }).run();
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = () => {
+            alert('이미지 업로드 중 오류가 발생했습니다.');
+            reject(new Error('이미지 업로드 실패'));
+          };
+          reader.readAsDataURL(file);
+        });
+
+        editor.chain().focus().setImage({ src: base64 }).run();
+      }
     } catch (e) {
       console.error(e);
+    } finally {
+      event.target.value = '';
     }
   };
 
@@ -173,6 +185,7 @@ export default function MenuBar({ editor }: { editor: Editor }) {
         <input
           type="file"
           accept="image/*"
+          multiple
           id="image-upload"
           className="size-0"
           onChange={handleImageUpload}
