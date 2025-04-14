@@ -22,7 +22,7 @@ import {
 import type { PostUpdateRequest } from '~/apis/admin/requests';
 import type { PostDetailResponse } from '~/apis/community/requests';
 
-import useModal from '~/hooks/use-modal';
+import { useModal } from '~/hooks/use-modal';
 
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
 import { queryClient } from '~/utils/get-query-client';

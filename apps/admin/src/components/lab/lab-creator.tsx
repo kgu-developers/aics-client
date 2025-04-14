@@ -8,7 +8,7 @@ import {
 } from '~/apis/admin/queries';
 import type { LabCreateRequest } from '~/apis/admin/requests';
 import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries';
-import useModal from '~/hooks/use-modal';
+import { useModal } from '~/hooks/use-modal';
 import { queryClient } from '~/utils/get-query-client';
 
 function CreateLabForm({ onClose }: { onClose: () => void }) {
@@ -61,6 +61,7 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
               {
                 onSuccess: () => {
                   handleSuccess();
+                  form.resetFields();
                 },
                 onError: () => {
                   handleError();

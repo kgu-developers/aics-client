@@ -6,17 +6,15 @@ import {
   useProfessorServiceDeleteApiV1ProfessorsById,
   useProfessorServicePatchApiV1ProfessorsById,
 } from '~/apis/admin/queries';
-import {
-  useProfessorServiceGetApiV1Professors,
-  useProfessorServiceGetApiV1ProfessorsKey,
-} from '~/apis/community/queries';
+import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries';
+import { useProfessorServiceGetApiV1ProfessorsSuspense } from '~/apis/community/queries/suspense';
 import type { ProfessorResponse } from '~/apis/community/requests';
 import useEditTable from '~/hooks/use-edit-table';
 import ProfessorTableView from './professor-table-view';
 
 function ProfessorTable() {
   const [form] = Form.useForm();
-  const { data } = useProfessorServiceGetApiV1Professors();
+  const { data } = useProfessorServiceGetApiV1ProfessorsSuspense();
   const professorList: ProfessorResponse[] = data?.contents ?? [];
   const queryClient = useQueryClient();
   const updateMutation = useProfessorServicePatchApiV1ProfessorsById();
@@ -61,7 +59,7 @@ function ProfessorTable() {
         onSuccess: () => {
           messageApi.open({
             type: 'success',
-            content: '교수수가 성공적으로 삭제되었습니다.',
+            content: '교수가 성공적으로 삭제되었습니다.',
           });
           queryClient.invalidateQueries({
             queryKey: [useProfessorServiceGetApiV1ProfessorsKey],
