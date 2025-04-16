@@ -5,6 +5,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import DOMPurify from 'dompurify';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
 import AltImage from '~/assets/images/alt.png';
@@ -40,7 +41,7 @@ function NewsCarousel() {
           {recentNews.map((post) => (
             <Link
               key={`news-${post.postId}`}
-              href={`/board/news/${post.postId}`}
+              href={`/news/${post.postId}`}
               className={styles.link}
             >
               <div className={styles.slide}>
@@ -48,7 +49,13 @@ function NewsCarousel() {
                   <Image src={AltImage} alt="preview-image" fill />
                 </div>
                 <h3 className={styles.slideTitle}>{post.title}</h3>
-                <p className={styles.slideDescription}>{post.description}</p>
+                <p
+                  className={styles.slideDescription}
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(post.description),
+                  }}
+                />
               </div>
             </Link>
           ))}
