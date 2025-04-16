@@ -22,7 +22,7 @@ function DirectionsPage() {
     <section className="flex flex-col w-full gap-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold ">찾아오시는 길</h1>
-        <Link to={PATH.EDIT_DEPT} className="self-end">
+        <Link to={PATH.EDIT_DIRECTIONS} className="self-end">
           {isDirectionsEmpty ? (
             <Button type="primary">작성하기</Button>
           ) : (
@@ -41,14 +41,6 @@ function DirectionsPage() {
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.content) }}
         />
       )}
-
-      <Link to={PATH.EDIT_DIRECTIONS} className="self-end">
-        {isDirectionsEmpty ? (
-          <Button type="primary">작성하기</Button>
-        ) : (
-          <Button type="primary">수정하기</Button>
-        )}
-      </Link>
     </section>
   );
 }
