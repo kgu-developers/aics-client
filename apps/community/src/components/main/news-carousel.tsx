@@ -1,11 +1,11 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
+import DOMPurify from 'dompurify';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import DOMPurify from 'dompurify';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
 import AltImage from '~/assets/images/alt.png';
@@ -49,7 +49,7 @@ function NewsCarousel() {
                   <Image src={AltImage} alt="preview-image" fill />
                 </div>
                 <h3 className={styles.slideTitle}>{post.title}</h3>
-                <p
+                <div
                   className={styles.slideDescription}
                   // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
                   dangerouslySetInnerHTML={{
