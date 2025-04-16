@@ -19,7 +19,6 @@ import { formatExpireTime } from '~/utils/utils';
 type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
-  //TODO: Link 내부 url 변경
   {
     key: 'user',
     label: (
@@ -34,19 +33,22 @@ const items: MenuItem[] = [
     label: '소개',
     icon: <GraduationCap size={20} />,
     children: [
-      { key: 'dept', label: <Link to="/">학부 소개</Link> },
+      { key: 'dept', label: <Link to={PATH.DEPT}>학부 소개</Link> },
       { key: 'club', label: <Link to={PATH.CLUB}>동아리 소개</Link> },
-      { key: 'contact', label: <Link to="/">찾아오시는 길</Link> },
+      {
+        key: 'contact',
+        label: <Link to={PATH.DIRECTIONS}>찾아오시는 길</Link>,
+      },
     ],
   },
   {
     key: 'professor',
-    label: <Link to="/professor">교수진 소개</Link>,
+    label: <Link to={PATH.PROFESSOR}>교수진 소개</Link>,
     icon: <Speech size={20} />,
   },
   {
     key: 'lab',
-    label: <Link to="/lab">연구실 소개</Link>,
+    label: <Link to={PATH.LAB}>연구실 소개</Link>,
     icon: <FlaskConical size={20} />,
   },
   {
