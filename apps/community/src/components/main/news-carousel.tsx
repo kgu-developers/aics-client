@@ -65,4 +65,4 @@ function NewsCarousel() {
   );
 }
 
-export { NewsCarousel };
+export default NewsCarousel;

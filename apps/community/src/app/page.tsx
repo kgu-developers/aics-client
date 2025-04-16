@@ -1,7 +1,7 @@
 import * as styles from '~/app/page.css';
 import { HeroCarousel } from '~/components/main/hero-carousel';
-import { NewsCarousel } from '~/components/main/news-carousel';
-import { NoticeList } from '~/components/main/notice-list';
+import NewsCarousel from '~/components/main/news-carousel.client';
+import NoticeList from '~/components/main/notice-list.client';
 
 export default async function Home() {
   return (
