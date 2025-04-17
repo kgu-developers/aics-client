@@ -7,6 +7,7 @@ import {
   Download,
   Eye,
 } from '@aics-client/design-system/icons';
+import DOMPurify from 'dompurify';
 
 import * as styles from '~/components/board/board.css';
 
@@ -53,7 +54,13 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
 }
 
 function Content({ content }: { content: string }) {
-  return <div className={styles.content}>{content}</div>;
+  return (
+    <div
+      className={styles.content}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+    />
+  );
 }
 
 interface FooterProps {

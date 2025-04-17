@@ -1,6 +1,7 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
+import DOMPurify from 'dompurify';
 import Link from 'next/link';
 
 import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
@@ -23,7 +24,13 @@ function NoticeList() {
           <li key={`notice-${post.postId}`}>
             <Link href={`/board/notice/${post.postId}`} className={styles.post}>
               <h2 className={styles.postTitle}>{post.title}</h2>
-              <p className={styles.postDescription}>{post.description}</p>
+              <div
+                className={styles.postDescription}
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.description),
+                }}
+              />
             </Link>
           </li>
         ))}
@@ -32,4 +39,4 @@ function NoticeList() {
   );
 }
 
-export { NoticeList };
+export default NoticeList;
