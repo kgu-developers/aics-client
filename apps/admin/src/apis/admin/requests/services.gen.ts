@@ -628,7 +628,7 @@ export class AboutService {
    * - Assignee : 이신행
    *
    * @param data The data for the request.
-   * @param data.id 소개글 ID는 URL 경로 변수 입니다.
+   * @param data.category 카테고리는 ENUM 타입입니다.
    * @param data.requestBody
    * @returns void No Content
    * @throws ApiError
@@ -638,9 +638,9 @@ export class AboutService {
   ): CancelablePromise<PatchApiV1AboutsByIdResponse> {
     return __request(OpenAPI, {
       method: 'PATCH',
-      url: '/api/v1/abouts/{id}',
-      path: {
-        id: data.id,
+      url: '/api/v1/abouts',
+      query: {
+        category: data.category,
       },
       body: data.requestBody,
       mediaType: 'application/json',

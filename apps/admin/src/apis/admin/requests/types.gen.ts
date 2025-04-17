@@ -601,7 +601,7 @@ export type PatchApiV1AboutsByIdData = {
   /**
    * 소개글 ID는 URL 경로 변수 입니다.
    */
-  id: number;
+  category: 'DEPT_INTRO' | 'DIRECTIONS';
   requestBody: AboutUpdateRequest;
 };
 
