@@ -1,6 +1,12 @@
 export const PATH = {
   SIGNIN: '/',
   MAIN: '/main',
+  DEPT: '/dept',
+  EDIT_DEPT: '/dept/edit',
+  DIRECTIONS: '/directions',
+  EDIT_DIRECTIONS: '/directions/edit',
+  LAB: '/lab',
+  PROFESSOR: '/professor',
   NEWS: '/news',
   NOTICE: '/notice',
   CLUB: '/club',

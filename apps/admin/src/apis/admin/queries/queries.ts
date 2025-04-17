@@ -666,7 +666,7 @@ export const useCarouselServicePatchApiV1CarouselsById = <
       }) as unknown as Promise<TData>,
     ...options,
   });
-export const useAboutServicePatchApiV1AboutsById = <
+export const useAboutServicePatchApiV1Abouts = <
   TData = Common.AboutServicePatchApiV1AboutsByIdMutationResult,
   TError = unknown,
   TContext = unknown,
@@ -676,7 +676,7 @@ export const useAboutServicePatchApiV1AboutsById = <
       TData,
       TError,
       {
-        id: number;
+        category: 'DEPT_INTRO' | 'DIRECTIONS';
         requestBody: AboutUpdateRequest;
       },
       TContext
@@ -688,14 +688,14 @@ export const useAboutServicePatchApiV1AboutsById = <
     TData,
     TError,
     {
-      id: number;
+      category: 'DEPT_INTRO' | 'DIRECTIONS';
       requestBody: AboutUpdateRequest;
     },
     TContext
   >({
-    mutationFn: ({ id, requestBody }) =>
+    mutationFn: ({ category, requestBody }) =>
       AboutService.patchApiV1AboutsById({
-        id,
+        category,
         requestBody,
       }) as unknown as Promise<TData>,
     ...options,
