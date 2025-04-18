@@ -13,6 +13,8 @@ export const PATH = {
   EDIT_NEWS: '/news/edit/',
   EDIT_NOTICE: '/notice/edit/',
   USER: '/user',
+  HERO_IMAGES: '/hero-images',
+  EDIT_HERO_IMAGES: '/hero-images/edit',
 } as const;
 
 export type PostCategory = '/notice' | '/news';

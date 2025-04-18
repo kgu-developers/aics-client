@@ -5,6 +5,7 @@ import {
   Clock,
   FlaskConical,
   GraduationCap,
+  ImagesIcon,
   Speech,
   Users,
 } from 'lucide-react';
@@ -73,6 +74,11 @@ const items: MenuItem[] = [
         ),
       },
     ],
+  },
+  {
+    key: 'carousel',
+    label: <Link to={PATH.HERO_IMAGES}>대표 이미지</Link>,
+    icon: <ImagesIcon size={20} />,
   },
 ];
 
