@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { Button } from 'antd';
 import { useCarouselServiceGetApiV1CarouselsSuspense } from '~/apis/community/queries/suspense';
-import { HeroCarousel } from '~/components/hero-carousel';
+import { HeroCarousel } from '~/components/hero-images/hero-carousel';
 import { PATH } from '~/constants/path';
 
 export const Route = createFileRoute('/hero-images/')({

@@ -5,15 +5,16 @@ import AltImage from '~/assets/images/alt.png';
 
 interface HeroCarouselProps {
   images: CarouselResponse[];
+  autoplay?: boolean;
 }
 
-function HeroCarousel(images: HeroCarouselProps) {
+function HeroCarousel({ images, autoplay = true }: HeroCarouselProps) {
   return (
     <Carousel
-      autoplay
+      autoplay={autoplay}
       className="custom-carousel border border-gray-200 aspect-[16/9] rounded-sm"
     >
-      {images.images.map((image) => (
+      {images.map((image) => (
         <div key={image.id} className="rounded-lg">
           <img
             src={image.file?.physicalPath ?? AltImage}
