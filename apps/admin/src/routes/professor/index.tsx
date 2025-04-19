@@ -8,7 +8,7 @@ export const Route = createFileRoute('/professor/')({
 
 function ProfessorPage() {
   return (
-    <section className="py-10 px-16">
+    <section>
       <ProfessorCreator />
       <ProfessorTable />
     </section>

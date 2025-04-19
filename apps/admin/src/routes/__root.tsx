@@ -19,13 +19,17 @@ function App() {
           Menu: {
             itemBg: '#f1f5f9',
           },
+          Carousel: {
+            colorBgContainer: '#000',
+            colorText: '#000',
+          },
         },
       }}
     >
       <main className="relative flex w-dvw h-dvh">
         {!isSigninPage && <AsideNavigationMenu />}
         <div
-          className={`flex flex-col overflow-auto w-full h-dvh ${!isSigninPage && 'p-24'}`}
+          className={`flex flex-col overflow-auto w-full h-dvh ${!isSigninPage && 'px-48 py-12'}`}
         >
           <Outlet />
         </div>

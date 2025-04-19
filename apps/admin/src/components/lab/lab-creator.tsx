@@ -23,7 +23,7 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
     });
     await messageApi.open({
       type: 'success',
-      content: '연구실이 성공적으로 추가가되었습니다.',
+      content: '연구실이 성공적으로 추가되었습니다.',
       duration: 0.8,
     });
     onClose();
