@@ -12,7 +12,7 @@ function HeroCarousel({ images, autoplay = true }: HeroCarouselProps) {
   return (
     <Carousel
       autoplay={autoplay}
-      className="custom-carousel border border-gray-200 aspect-[16/9] rounded-sm"
+      className="custom-carousel border border-gray-200 aspect-[16/9] rounded-lg"
     >
       {images.map((image) => (
         <div key={image.id} className="rounded-lg">
