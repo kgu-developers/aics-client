@@ -1,4 +1,4 @@
-import * as styles from '~/components/about/list.css';
+import * as styles from '~/features/contact/components/list.css';
 
 interface Props {
   title: string;
