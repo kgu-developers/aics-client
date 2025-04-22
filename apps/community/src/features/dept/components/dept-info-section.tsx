@@ -7,8 +7,8 @@ import { sprinkles } from '@aics-client/design-system/styles';
 
 import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
 
-import { List } from '~/components/about/list';
-import { Section } from '~/components/about/section';
+import { List } from '~/features/contact/components/list';
+import { Section } from '~/features/contact/components/section';
 
 function DeptInfoSection() {
   const { data } = useSuspenseQuery(DEPT_QUERY_OPTIONS.ALL());
