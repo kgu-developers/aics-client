@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 
 import { sprinkles } from '@aics-client/design-system/styles';
 
-import { DEPT_QUERY_OPTIONS } from '~/apis/about/dept/queries';
+import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
 
 import { List } from '~/components/about/list';
 import { Section } from '~/components/about/section';

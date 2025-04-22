@@ -6,10 +6,10 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
 import AltImage from '~/assets/images/alt.png';
 import { CarouselDots } from '~/components/carousel-dots';
-import * as styles from '~/components/main/hero-carousel.css';
+import * as styles from '~/features/main/components/hero-carousel.css';
 
 function HeroCarousel() {
   const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL());

@@ -2,7 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { CLUB_QUERY_OPTIONS } from '~/apis/about/club/queries';
+import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
 
 import { ClubCard } from './club-card';
 

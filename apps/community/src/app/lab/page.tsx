@@ -2,11 +2,11 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { LABS_QUERY_OPTIONS } from '~/apis/lab/queries';
+import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries';
 
 import { PageHeader } from '~/components/page-header';
 
-import { LabList } from '~/components/lab/lab-list';
+import { LabList } from '~/features/lab/components/lab-list';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';

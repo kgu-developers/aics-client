@@ -2,7 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
 import { BoardList } from './board-list';
 import { Pagination } from './pagination';
 

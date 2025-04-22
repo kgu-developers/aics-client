@@ -2,7 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { CONTACT_QUERY_OPTIONS } from '~/apis/about/contact/queries';
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries';
 
 import { List } from '~/components/about/list';
 

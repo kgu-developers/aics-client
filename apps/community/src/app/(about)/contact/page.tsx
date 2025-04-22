@@ -1,10 +1,10 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { CONTACT_QUERY_OPTIONS } from '~/apis/about/contact/queries';
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { ContactList } from '~/components/about/contact/contact-list';
+import { ContactList } from '~/features/contact/components/contact-list';
 import { PageHeader } from '~/components/page-header';
 
 //** TODO: for mocking */

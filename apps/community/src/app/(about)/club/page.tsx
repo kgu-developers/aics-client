@@ -1,9 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { CLUB_QUERY_OPTIONS } from '~/apis/about/club/queries';
+import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { ClubList } from '~/components/about/club/club-list';
+import { ClubList } from '~/features/club/components/club-list';
 import { PageHeader } from '~/components/page-header';
 
 //** TODO: for mocking */

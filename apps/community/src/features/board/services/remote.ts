@@ -2,7 +2,7 @@ import { http } from '~/utils/http';
 
 import { END_POINT } from '~/constants/api';
 
-import type { Post } from '~/apis/main/remote';
+import type { Post } from '~/features/main/services/remote';
 import type { PaginationResponse } from '~/types/api';
 
 interface PostParams {

@@ -5,7 +5,7 @@ import { Fragment, useMemo, useState } from 'react';
 
 import { ChevronLeft, ChevronRight } from '@aics-client/design-system/icons';
 
-import * as styles from '~/components/board/pagination.css';
+import * as styles from '~/features/board/components/pagination.css';
 
 interface Props {
   totalPage: number; // 총 페이지 수

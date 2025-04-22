@@ -4,9 +4,9 @@ import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
 import { PATH } from '~/constants/path';
 
-import type { Post } from '~/apis/main/remote';
+import type { Post } from '~/features/main/services/remote';
 
-import * as styles from '~/components/board/board-list.css';
+import * as styles from '~/features/board/components/board-list.css';
 
 function BoardList({ data }: { data: Post[] }) {
   return (

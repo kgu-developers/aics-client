@@ -4,8 +4,8 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
 import Link from 'next/link';
 
-import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
-import * as styles from '~/components/main/notice-list.css';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
+import * as styles from '~/features/main/components/notice-list.css';
 
 function NoticeList() {
   const { data: recentNotices } = useSuspenseQuery(

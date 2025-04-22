@@ -2,9 +2,9 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
 
-import { HydrateBoard } from '~/components/board/hydrate-board';
+import { HydrateBoard } from '~/features/board/components/hydrate-board';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';

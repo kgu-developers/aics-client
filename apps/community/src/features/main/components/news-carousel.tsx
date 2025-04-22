@@ -7,10 +7,10 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MAIN_QUERY_OPTIONS } from '~/apis/main/queries';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
 import AltImage from '~/assets/images/alt.png';
 import { CarouselDots } from '~/components/carousel-dots';
-import * as styles from '~/components/main/news-carousel.css';
+import * as styles from '~/features/main/components/news-carousel.css';
 
 function NewsCarousel() {
   const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS());

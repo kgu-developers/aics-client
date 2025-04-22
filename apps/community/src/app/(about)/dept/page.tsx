@@ -1,9 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { DEPT_QUERY_OPTIONS } from '~/apis/about/dept/queries';
+import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { DeptInfoSection } from '~/components/about/dept/dept-info-section';
+import { DeptInfoSection } from '~/features/dept/components/dept-info-section';
 import { PageHeader } from '~/components/page-header';
 
 //** TODO: for mocking */

@@ -2,11 +2,11 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { LABS_QUERY_OPTIONS } from '~/apis/lab/queries';
+import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries';
 
 import { LabCard } from './lab-card';
 
-import * as styles from '~/components/lab/lab-list.css';
+import * as styles from '~/features/lab/components/lab-list.css';
 
 function LabList() {
   const { data } = useSuspenseQuery(LABS_QUERY_OPTIONS.ALL());

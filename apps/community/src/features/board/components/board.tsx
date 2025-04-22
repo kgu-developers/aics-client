@@ -9,7 +9,7 @@ import {
 } from '@aics-client/design-system/icons';
 import DOMPurify from 'dompurify';
 
-import * as styles from '~/components/board/board.css';
+import * as styles from '~/features/board/components/board.css';
 
 interface HeaderProps {
   title: string;

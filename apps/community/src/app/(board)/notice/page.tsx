@@ -2,10 +2,10 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { BOARD_QUERY_OPTIONS } from '~/apis/board/queries';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
 
-import { PaginatedBoardList } from '~/components/board/paginated-board-list';
-import { SearchBar } from '~/components/board/search-bar';
+import { PaginatedBoardList } from '~/features/board/components/paginated-board-list';
+import { SearchBar } from '~/features/board/components/search-bar';
 import { PageHeader } from '~/components/page-header';
 
 import * as styles from '~/app/(board)/notice/page.css';

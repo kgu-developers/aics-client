@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Input } from '@aics-client/design-system';
 import { Search } from '@aics-client/design-system/icons';
 
-import * as styles from '~/components/board/search-bar.css';
+import * as styles from '~/features/board/components/search-bar.css';
 
 const PARAMS = {
   PAGE: 'page',
