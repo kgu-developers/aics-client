@@ -11,14 +11,8 @@
       "cache": false,
       "persistent": true
     },
-    "check": {},
-    "format": {},
-    "lint": {},
-    "check:fix": { "cache": false },
-    "format:fix": { "cache": false },
-    "lint:fix": { "cache": false },
-    "check:fix:unsafe": { "cache": false },
-    "format:fix:unsafe": { "cache": false },
-    "lint:fix:unsafe": { "cache": false }
+    "//#check": {},
+    "//#check:write": { "cache": false },
+    "//#check:write:unsafe": { "cache": false }
   }
 }

@@ -9,15 +9,6 @@
     "./utils": "./src/utils/index.ts"
   },
   "scripts": {
-    "check": "biome check",
-    "format": "biome format",
-    "lint": "biome lint",
-    "check:fix": "biome check --write",
-    "format:fix": "biome format --write",
-    "lint:fix": "biome lint --write",
-    "check:fix:unsafe": "biome check --write --unsafe",
-    "format:fix:unsafe": "biome format --write --unsafe",
-    "lint:fix:unsafe": "biome lint --write --unsafe",
     "generate:component": "turbo gen react-component",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

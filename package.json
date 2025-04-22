@@ -4,15 +4,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "check": "turbo check",
-    "format": "turbo format",
-    "lint": "turbo lint",
-    "check:fix": "turbo check:fix",
-    "format:fix": "turbo format:fix",
-    "lint:fix": "turbo lint:fix",
-    "check:fix:unsafe": "turbo check:fix:unsafe",
-    "format:fix:unsafe": "turbo format:fix:unsafe",
-    "lint:fix:unsafe": "turbo lint:fix:unsafe",
+    "check": "biome check",
+    "check:write": "biome check --write",
+    "check:write:unsafe": "biome check --write --unsafe",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
   },

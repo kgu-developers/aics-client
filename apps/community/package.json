@@ -4,16 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "check": "biome check",
-    "format": "biome format",
-    "lint": "biome lint",
-    "check:fix": "biome check --write",
-    "format:fix": "biome format --write",
-    "lint:fix": "biome lint --write",
-    "check:fix:unsafe": "biome check --write --unsafe",
-    "format:fix:unsafe": "biome format --write --unsafe",
-    "lint:fix:unsafe": "biome lint --write --unsafe"
+    "start": "next start"
   },
   "dependencies": {
     "@aics-client/design-system": "workspace:^",
