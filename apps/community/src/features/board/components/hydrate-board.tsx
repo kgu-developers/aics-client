@@ -2,8 +2,8 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { PATH } from '~/constants/path';
 import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
+import { PATH } from '~/shared/constants/path';
 
 import { Board } from './board';
 

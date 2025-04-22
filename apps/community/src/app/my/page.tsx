@@ -1,8 +1,8 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { MY_PROFILE_QUERY_OPTIONS } from '~/apis/my/queries';
+import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries';
 
-import { getQueryClient } from '~/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client';
 
 import { MyInformation } from '~/components/my/my-information';
 import { PageHeader } from '~/components/page-header';

@@ -1,0 +1,36 @@
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import type { z } from 'zod';
+
+import { END_POINT } from '~/shared/constants/api';
+
+import type { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema';
+
+import { http } from '~/shared/utils/http';
+import { useAuth } from '../../../shared/hooks/use-auth';
+
+interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
+const useSignIn = () => {
+  const { setTokens } = useAuth();
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: async (data: z.infer<typeof signInFormSchema>) => {
+      const res = await http.post<typeof data, Tokens>(END_POINT.SIGN_IN, data);
+      return res;
+    },
+    onError: (e) => {
+      console.log(e);
+    },
+    onSuccess: (token) => {
+      setTokens(token);
+      router.push('/');
+    },
+  });
+};
+
+export { type Tokens, useSignIn };

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
 
-import { PATH } from '~/constants/path';
+import { PATH } from '~/shared/constants/path';
 
 import type { Post } from '~/features/main/services/remote';
 

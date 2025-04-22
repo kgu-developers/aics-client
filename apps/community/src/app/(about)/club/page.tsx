@@ -1,7 +1,7 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
 
-import { getQueryClient } from '~/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client';
 
 import { PageHeader } from '~/components/page-header';
 import { ClubList } from '~/features/club/components/club-list';

@@ -1,8 +1,8 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { PROFESSORS_QUERY_OPTIONS } from '~/apis/member/professor/queries';
+import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries';
 
-import { getQueryClient } from '~/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client';
 
 import { ProfessorList } from '~/components/member/professor/professor-list';
 import { PageHeader } from '~/components/page-header';

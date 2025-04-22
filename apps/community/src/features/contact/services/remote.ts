@@ -1,6 +1,6 @@
-import { MOCK_END_POINT } from '~/constants/api';
-import type { ContentsResponse } from '~/types/api';
-import { http } from '~/utils/http';
+import { MOCK_END_POINT } from '~/shared/constants/api';
+import type { ContentsResponse } from '~/shared/types/api';
+import { http } from '~/shared/utils/http';
 
 interface Contact {
   title: string;

@@ -1,9 +1,9 @@
-import { http } from '~/utils/http';
+import { http } from '~/shared/utils/http';
 
-import { END_POINT } from '~/constants/api';
+import { END_POINT } from '~/shared/constants/api';
 
 import type { Post } from '~/features/main/services/remote';
-import type { PaginationResponse } from '~/types/api';
+import type { PaginationResponse } from '~/shared/types/api';
 
 interface PostParams {
   page: number;

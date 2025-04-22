@@ -1,6 +1,6 @@
 import * as styles from '~/app/(about)/layout.css';
 import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
-import { PATHMAP } from '~/constants/path';
+import { PATHMAP } from '~/shared/constants/path';
 
 export default function AboutLayout({
   children,
