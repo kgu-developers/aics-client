@@ -4,8 +4,8 @@ import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { ContactList } from '~/features/contact/components/contact-list';
 import { PageHeader } from '~/components/page-header';
+import { ContactList } from '~/features/contact/components/contact-list';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';

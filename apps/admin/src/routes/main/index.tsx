@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Spin } from 'antd';
+import { Suspense } from 'react';
 
 import {
   useCarouselServiceGetApiV1CarouselsSuspense,

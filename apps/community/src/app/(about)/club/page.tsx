@@ -3,8 +3,8 @@ import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { ClubList } from '~/features/club/components/club-list';
 import { PageHeader } from '~/components/page-header';
+import { ClubList } from '~/features/club/components/club-list';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';

@@ -3,8 +3,8 @@ import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
 
 import { getQueryClient } from '~/utils/get-query-client';
 
-import { DeptInfoSection } from '~/features/dept/components/dept-info-section';
 import { PageHeader } from '~/components/page-header';
+import { DeptInfoSection } from '~/features/dept/components/dept-info-section';
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic';
