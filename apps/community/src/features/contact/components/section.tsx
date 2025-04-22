@@ -1,4 +1,6 @@
-import * as styles from '~/components/about/section.css';
+import * as styles from '~/features/contact/components/section.css';
+
+/* 추후 삭제되어야 할 컴포넌트입니다 */
 
 function Section({ children }: { children: React.ReactNode }) {
   return <section className={styles.section}>{children}</section>;

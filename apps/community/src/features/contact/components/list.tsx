@@ -5,6 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
+/* 추후 삭제되어야 할 컴포넌트입니다 */
 function List({ title, children }: Props) {
   return (
     <div>
