@@ -11,6 +11,13 @@
       "cache": false,
       "persistent": true
     },
+    "//#format": {},
+    "//#format:write": { "cache": false },
+    "//#lint": {},
+    "//#lint:write": { "cache": false },
+    "//#lint:write:unsafe": { "cache": false },
+    "//#assist": {},
+    "//#assist:write": { "cache": false },
     "//#check": {},
     "//#check:write": { "cache": false },
     "//#check:write:unsafe": { "cache": false }
