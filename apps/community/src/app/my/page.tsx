@@ -1,11 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
+import { MyInformation } from '~/features/profile/components/my-information'
 import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
-
+import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
-
-import { MyInformation } from '~/components/my/my-information'
-import { PageHeader } from '~/components/page-header'
 
 //** TODO: for mocking */
 export const dynamic = 'force-dynamic'

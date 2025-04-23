@@ -1,14 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
-
-import { getQueryClient } from '~/shared/utils/get-query-client'
-
-import { PageHeader } from '~/components/page-header'
 import { ContactList } from '~/features/contact/components/contact-list'
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic'
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
+import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 export default function ContactPage() {
   const queryClient = getQueryClient()

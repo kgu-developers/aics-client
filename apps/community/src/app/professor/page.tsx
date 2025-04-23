@@ -1,14 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
+import { ProfessorList } from '~/features/member/components/professor-list'
 import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
-
+import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
-
-import { ProfessorList } from '~/components/member/professor/professor-list'
-import { PageHeader } from '~/components/page-header'
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic'
 
 export default function ProfessorPage() {
   const queryClient = getQueryClient()

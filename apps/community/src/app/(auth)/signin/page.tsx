@@ -1,6 +1,6 @@
-import { AuthFooter } from '~/components/(auth)/auth-footer'
-import { AuthHeader } from '~/components/(auth)/auth-header'
-import { SignInForm } from '~/components/(auth)/signin/sign-in-form'
+import { AuthFooter } from '~/features/auth/components/auth-footer'
+import { AuthHeader } from '~/features/auth/components/auth-header'
+import { SignInForm } from '~/features/auth/components/sign-in-form'
 
 export default function SignInPage() {
   return (

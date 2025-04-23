@@ -145,12 +145,12 @@ export const getHeaders = async <T>(
     )
 
   if (isStringWithValue(token)) {
-    headers['Authorization'] = `Bearer ${token}`
+    headers.Authorization = `Bearer ${token}`
   }
 
   if (isStringWithValue(username) && isStringWithValue(password)) {
     const credentials = base64(`${username}:${password}`)
-    headers['Authorization'] = `Basic ${credentials}`
+    headers.Authorization = `Basic ${credentials}`
   }
 
   if (options.body !== undefined) {
@@ -175,15 +175,15 @@ export const getRequestBody = (options: ApiRequestOptions): unknown => {
       options.mediaType?.includes('+json')
     ) {
       return JSON.stringify(options.body)
-    } else if (
+    }
+    if (
       isString(options.body) ||
       isBlob(options.body) ||
       isFormData(options.body)
     ) {
       return options.body
-    } else {
-      return JSON.stringify(options.body)
     }
+    return JSON.stringify(options.body)
   }
   return undefined
 }
@@ -250,11 +250,14 @@ export const getResponseBody = async (response: Response): Promise<unknown> => {
           contentType.includes('+json')
         ) {
           return await response.json()
-        } else if (binaryTypes.some((type) => contentType.includes(type))) {
+        }
+        if (binaryTypes.some((type) => contentType.includes(type))) {
           return await response.blob()
-        } else if (contentType.includes('multipart/form-data')) {
+        }
+        if (contentType.includes('multipart/form-data')) {
           return await response.formData()
-        } else if (contentType.includes('text/')) {
+        }
+        if (contentType.includes('text/')) {
           return await response.text()
         }
       }

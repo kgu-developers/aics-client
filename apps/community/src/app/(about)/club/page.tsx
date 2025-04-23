@@ -1,13 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
 
-import { getQueryClient } from '~/shared/utils/get-query-client'
-
-import { PageHeader } from '~/components/page-header'
 import { ClubList } from '~/features/club/components/club-list'
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic'
+import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
+import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 export default function ClubPage() {
   const queryClient = getQueryClient()

@@ -1,5 +1,5 @@
-import ChangePasswordForm from '~/components/my/change-password/change-password-form'
-import { PageHeader } from '~/components/page-header'
+import ChangePasswordForm from '~/features/change-password/components/change-password-form'
+import { PageHeader } from '~/shared/components/page-header/page-header'
 
 const ChangePasswordPage = () => {
   return (
