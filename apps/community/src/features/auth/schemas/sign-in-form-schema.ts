@@ -11,4 +11,9 @@ const signInFormSchema = z.object({
     ),
 })
 
-export { signInFormSchema }
+const defaultValues = {
+  userId: '',
+  password: '',
+}
+
+export { signInFormSchema, defaultValues }

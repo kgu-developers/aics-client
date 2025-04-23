@@ -19,8 +19,7 @@ const useSignIn = () => {
 
   return useMutation({
     mutationFn: async (data: z.infer<typeof signInFormSchema>) => {
-      const res = await http.post<typeof data, Tokens>(END_POINT.SIGN_IN, data)
-      return res
+      return await http.post<typeof data, Tokens>(END_POINT.SIGN_IN, data)
     },
     onError: (e) => {
       console.log(e)
