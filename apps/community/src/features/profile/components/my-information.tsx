@@ -2,11 +2,10 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
-
 import { MyInfoEditableProfileCard } from '~/features/profile/components/my-info-editable-profile-card'
 import { MyInfoProfileCard } from '~/features/profile/components/my-info-profile-card'
 import * as styles from '~/features/profile/components/my-information.css'
+import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
 
 function MyInformation() {
   const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE())

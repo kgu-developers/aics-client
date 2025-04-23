@@ -1,5 +1,6 @@
-import { screen, themeVars } from '@aics-client/design-system/styles'
 import { globalStyle, style } from '@vanilla-extract/css'
+
+import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const boardListWrapper = style({
   display: themeVars.display.flex,

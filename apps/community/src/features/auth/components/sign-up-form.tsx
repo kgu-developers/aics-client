@@ -1,10 +1,10 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Input } from '@aics-client/design-system'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 import { AuthButton } from '~/features/auth/components/auth-button'
 import * as styles from '~/features/auth/components/sign-up-form.css'

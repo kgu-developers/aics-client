@@ -1,5 +1,6 @@
-import { themeVars } from '@aics-client/design-system/styles'
 import { globalStyle, style } from '@vanilla-extract/css'
+
+import { themeVars } from '@aics-client/design-system/styles'
 
 const section = style({
   lineHeight: '1.75rem',

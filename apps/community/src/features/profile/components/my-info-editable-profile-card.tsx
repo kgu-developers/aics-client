@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@aics-client/design-system'
+
 import { MyInfoCard } from '~/features/profile/components/my-info-card'
 import { useEditProfile } from '~/features/profile/services/use-edit-profile.mutation'
 
