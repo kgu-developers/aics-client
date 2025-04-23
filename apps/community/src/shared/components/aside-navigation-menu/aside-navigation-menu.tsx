@@ -16,7 +16,7 @@ interface AsideNavigationMenuProps {
 function AsideNavigationMenu({ base }: AsideNavigationMenuProps) {
   return (
     <aside className={styles.navigationContainer}>
-      <div className={styles.navigationWrapper}>
+      <nav className={styles.navigationWrapper}>
         <h2 className={styles.navigationTitle}>{base.title}</h2>
         <div className={styles.separator} />
         {base.children ? (
@@ -30,7 +30,7 @@ function AsideNavigationMenu({ base }: AsideNavigationMenuProps) {
             {base.title}
           </Link>
         )}
-      </div>
+      </nav>
     </aside>
   )
 }
