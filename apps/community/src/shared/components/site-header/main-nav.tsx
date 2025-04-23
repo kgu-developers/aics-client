@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import LOGO from '~/shared/assets/svgs/kgu-logo-white.svg'
+import LOGO from '~/shared/assets/svgs/kgu-logo.svg'
 import * as styles from '~/shared/components/site-header/main-nav.css'
 import { PATH, PATHMAP } from '~/shared/constants/path'
 
