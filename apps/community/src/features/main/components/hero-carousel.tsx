@@ -1,15 +1,16 @@
 'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
-import Autoplay from 'embla-carousel-autoplay'
-import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AltImage from '~/assets/images/alt.png'
-import { CarouselDots } from '~/components/carousel-dots'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import Autoplay from 'embla-carousel-autoplay'
+import useEmblaCarousel from 'embla-carousel-react'
+
+import AltImage from '~/shared/assets/images/alt.png'
 import * as styles from '~/features/main/components/hero-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
+import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
 
 function HeroCarousel() {
   const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL())

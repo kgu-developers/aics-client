@@ -1,6 +1,10 @@
 import { queryOptions } from '@tanstack/react-query'
 
-import { getHero, getRecentNews, getRecentNotices } from './remote'
+import {
+  getHero,
+  getRecentNews,
+  getRecentNotices,
+} from '~/features/main/services/remote'
 
 const MAIN_QUERY_KEYS = {
   ALL: () => ['main'],
