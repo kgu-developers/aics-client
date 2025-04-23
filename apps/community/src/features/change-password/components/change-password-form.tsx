@@ -1,7 +1,11 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import {
+  useForm,
+  type UseFormRegister,
+  type FieldErrors,
+} from 'react-hook-form'
 import type { z } from 'zod'
 
 import { Button, Input } from '@aics-client/design-system'
@@ -13,9 +17,7 @@ import {
   defaultValues,
 } from '~/features/change-password/schemas/change-password-form-schema'
 
-const ChangePasswordForm = () => {
-  const mutation = useChangePasswordMutation()
-
+const useChangePasswordForm = () => {
   const {
     register,
     handleSubmit,
@@ -26,19 +28,23 @@ const ChangePasswordForm = () => {
     defaultValues,
   })
 
-  const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        alert('비밀번호 변경이 완료되었습니다.')
-      },
-      onError: () => {
-        alert('현재 비밀번호를 다시 확인해주세요.')
-      },
-    })
+  return {
+    register,
+    handleSubmit,
+    errors,
+    isValid,
   }
+}
 
+function ChangePasswordFormFields({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<z.infer<typeof changePasswordSchema>>
+  errors: FieldErrors<z.infer<typeof changePasswordSchema>>
+}) {
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+    <>
       <Input
         {...register('originalPassword')}
         type="password"
@@ -65,10 +71,42 @@ const ChangePasswordForm = () => {
           message={errors.confirmNewPassword?.message}
         />
       </div>
+    </>
+  )
+}
 
+function ChangePasswordErrorMessage({ isError }: { isError: boolean }) {
+  if (!isError) return null
+
+  return (
+    <span className={styles.errorMessage}>
+      현재 비밀번호를 다시 확인해주세요.
+    </span>
+  )
+}
+
+function ChangePasswordForm() {
+  const { register, handleSubmit, errors, isValid } = useChangePasswordForm()
+  const mutation = useChangePasswordMutation()
+
+  const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
+    mutation.mutate(data, {
+      onSuccess: () => {
+        alert('비밀번호 변경이 완료되었습니다.')
+      },
+      onError: () => {
+        alert('현재 비밀번호를 다시 확인해주세요.')
+      },
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+      <ChangePasswordFormFields register={register} errors={errors} />
       <Button type="submit" color="black" disabled={!isValid}>
         비밀번호 변경
       </Button>
+      <ChangePasswordErrorMessage isError={mutation.isError} />
     </form>
   )
 }
