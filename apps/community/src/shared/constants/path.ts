@@ -70,8 +70,8 @@ const PATH_TITLES = {
   research: '연구',
   lab: '연구실 소개',
   board: '게시판',
-  notice: '공지 사항',
-  news: '학부 소식',
+  notice: '공지사항',
+  news: '학부소식',
   my: '마이페이지',
   'change-password': '비밀번호 변경',
 }
