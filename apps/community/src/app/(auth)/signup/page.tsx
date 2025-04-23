@@ -1,6 +1,6 @@
-import { AuthFooter } from '~/components/(auth)/auth-footer';
-import { AuthHeader } from '~/components/(auth)/auth-header';
-import { SignUpForm } from '~/components/(auth)/signup/sign-up-form';
+import { AuthFooter } from '~/features/auth/components/auth-footer'
+import { AuthHeader } from '~/features/auth/components/auth-header'
+import { SignUpForm } from '~/features/auth/components/sign-up-form'
 
 export default function SignUpPage() {
   return (
@@ -13,5 +13,5 @@ export default function SignUpPage() {
         href="/signin"
       />
     </>
-  );
+  )
 }

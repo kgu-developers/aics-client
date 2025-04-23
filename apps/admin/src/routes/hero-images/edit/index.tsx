@@ -1,16 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { useCarouselServiceGetApiV1CarouselsSuspense } from '~/apis/community/queries/suspense';
-import { EditableImageCard } from '~/components/hero-images/editable-image-card/editable-image-card';
-import { HeroCarousel } from '~/components/hero-images/hero-carousel';
-import { HeroImageCreator } from '~/components/hero-images/hero-image-creator';
+import { useCarouselServiceGetApiV1CarouselsSuspense } from '~/apis/community/queries/suspense'
+import { EditableImageCard } from '~/components/hero-images/editable-image-card/editable-image-card'
+import { HeroCarousel } from '~/components/hero-images/hero-carousel'
+import { HeroImageCreator } from '~/components/hero-images/hero-image-creator'
 
 export const Route = createFileRoute('/hero-images/edit/')({
   component: EditHeroImagesPage,
-});
+})
 
 function EditHeroImagesPage() {
-  const { data: images } = useCarouselServiceGetApiV1CarouselsSuspense();
+  const { data: images } = useCarouselServiceGetApiV1CarouselsSuspense()
 
   return (
     <section className="flex flex-col gap-4">
@@ -32,7 +32,7 @@ function EditHeroImagesPage() {
         ))}
       </div>
     </section>
-  );
+  )
 }
 
-export default EditHeroImagesPage;
+export default EditHeroImagesPage

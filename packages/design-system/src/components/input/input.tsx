@@ -1,10 +1,10 @@
-import { cn } from '../../utils';
-import * as styles from './input.css';
+import { cn } from '../../utils'
+import * as styles from './input.css'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  message?: string;
-  variant?: 'primary' | 'ghost';
+  label?: string
+  message?: string
+  variant?: 'primary' | 'ghost'
 }
 
 export default function Input({
@@ -24,5 +24,5 @@ export default function Input({
       <input className={styles.input({ variant: variant })} {...props} />
       {message && <span className={styles.message()}>{message}</span>}
     </div>
-  );
+  )
 }

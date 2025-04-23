@@ -1,22 +1,22 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
-import { Button } from 'antd';
-import DOMPurify from 'dompurify';
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { Button } from 'antd'
+import DOMPurify from 'dompurify'
 
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/apis/community/queries/suspense';
-import { PATH } from '~/constants/path';
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/apis/community/queries/suspense'
+import { PATH } from '~/constants/path'
 
 export const Route = createFileRoute('/dept/')({
   component: DeptPage,
-});
+})
 
-const CATEGORY = 'DEPT_INTRO';
+const CATEGORY = 'DEPT_INTRO'
 
 function DeptPage() {
   const { data } = useAboutServiceGetApiV1AboutsSuspense({
     category: CATEGORY,
-  });
+  })
 
-  const isDeptIntroEmpty = data.content === '' || data.content === '<p></p>';
+  const isDeptIntroEmpty = data.content === '' || data.content === '<p></p>'
 
   return (
     <section className="flex flex-col w-full gap-8">
@@ -42,7 +42,7 @@ function DeptPage() {
         />
       )}
     </section>
-  );
+  )
 }
 
-export default DeptPage;
+export default DeptPage

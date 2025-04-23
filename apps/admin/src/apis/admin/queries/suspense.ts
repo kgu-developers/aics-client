@@ -1,8 +1,8 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import { type UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
-import { UserService } from '../requests/services.gen';
-import * as Common from './common';
+import { type UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query'
+import { UserService } from '../requests/services.gen'
+import * as Common from './common'
 export const useUserServiceGetApiV1UsersSuspense = <
   TData = Common.UserServiceGetApiV1UsersDefaultResponse,
   TError = unknown,
@@ -13,9 +13,9 @@ export const useUserServiceGetApiV1UsersSuspense = <
     page,
     size,
   }: {
-    name?: string;
-    page: number;
-    size: number;
+    name?: string
+    page: number
+    size: number
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -27,4 +27,4 @@ export const useUserServiceGetApiV1UsersSuspense = <
     ),
     queryFn: () => UserService.getApiV1Users({ name, page, size }) as TData,
     ...options,
-  });
+  })

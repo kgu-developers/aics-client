@@ -1,26 +1,26 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { Button, Form, Input, Modal, message } from 'antd';
-import { useState } from 'react';
-import { useClubServicePostApiV1Clubs } from '~/apis/admin/queries';
+import { useQueryClient } from '@tanstack/react-query'
+import { Button, Form, Input, Modal, message } from 'antd'
+import { useState } from 'react'
+import { useClubServicePostApiV1Clubs } from '~/apis/admin/queries'
 
 const ClubCreate: React.FC = () => {
-  const [form] = Form.useForm();
-  const [open, setOpen] = useState(false);
-  const queryClient = useQueryClient();
+  const [form] = Form.useForm()
+  const [open, setOpen] = useState(false)
+  const queryClient = useQueryClient()
 
   const createMutation = useClubServicePostApiV1Clubs({
     onSuccess: () => {
-      message.success('동아리 추가 완료');
-      setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ['ClubServiceGetApiV1Clubs'] });
+      message.success('동아리 추가 완료')
+      setOpen(false)
+      queryClient.invalidateQueries({ queryKey: ['ClubServiceGetApiV1Clubs'] })
     },
     onError: () => message.error('동아리 추가 실패'),
-  });
+  })
 
   const handleCreate = async () => {
-    const values = await form.validateFields();
-    createMutation.mutate({ requestBody: values });
-  };
+    const values = await form.validateFields()
+    createMutation.mutate({ requestBody: values })
+  }
 
   return (
     <>
@@ -54,7 +54,7 @@ const ClubCreate: React.FC = () => {
         </Form>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ClubCreate;
+export default ClubCreate

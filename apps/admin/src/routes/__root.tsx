@@ -1,16 +1,16 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Outlet, createRootRoute, useLocation } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
-import { ConfigProvider } from 'antd';
-import AsideNavigationMenu from '~/components/aside-navigation-menu';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Outlet, createRootRoute, useLocation } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { ConfigProvider } from 'antd'
+import AsideNavigationMenu from '~/components/aside-navigation-menu'
 
 export const Route = createRootRoute({
   component: App,
-});
+})
 
 function App() {
-  const location = useLocation();
-  const isSigninPage = location.pathname === '/';
+  const location = useLocation()
+  const isSigninPage = location.pathname === '/'
 
   return (
     <ConfigProvider
@@ -37,5 +37,5 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
       </main>
     </ConfigProvider>
-  );
+  )
 }

@@ -1,22 +1,22 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
-import { Button } from 'antd';
-import DOMPurify from 'dompurify';
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { Button } from 'antd'
+import DOMPurify from 'dompurify'
 
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/apis/community/queries/suspense';
-import { PATH } from '~/constants/path';
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/apis/community/queries/suspense'
+import { PATH } from '~/constants/path'
 
 export const Route = createFileRoute('/directions/')({
   component: DirectionsPage,
-});
+})
 
-const CATEGORY = 'DIRECTIONS';
+const CATEGORY = 'DIRECTIONS'
 
 function DirectionsPage() {
   const { data } = useAboutServiceGetApiV1AboutsSuspense({
     category: CATEGORY,
-  });
+  })
 
-  const isDirectionsEmpty = data.content === '' || data.content === '<p></p>';
+  const isDirectionsEmpty = data.content === '' || data.content === '<p></p>'
 
   return (
     <section className="flex flex-col w-full gap-8">
@@ -42,7 +42,7 @@ function DirectionsPage() {
         />
       )}
     </section>
-  );
+  )
 }
 
-export default DirectionsPage;
+export default DirectionsPage

@@ -1,14 +1,14 @@
-import Bold from '@tiptap/extension-bold';
-import Document from '@tiptap/extension-document';
-import HorizontalRule from '@tiptap/extension-horizontal-rule';
-import Italic from '@tiptap/extension-italic';
-import ListItem from '@tiptap/extension-list-item';
-import ListKeyMap from '@tiptap/extension-list-keymap';
-import Paragraph from '@tiptap/extension-paragraph';
-import Strike from '@tiptap/extension-strike';
-import Text from '@tiptap/extension-text';
-import { EditorContent, useEditor } from '@tiptap/react';
-import ImageResize from 'tiptap-extension-resize-image';
+import Bold from '@tiptap/extension-bold'
+import Document from '@tiptap/extension-document'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import Italic from '@tiptap/extension-italic'
+import ListItem from '@tiptap/extension-list-item'
+import ListKeyMap from '@tiptap/extension-list-keymap'
+import Paragraph from '@tiptap/extension-paragraph'
+import Strike from '@tiptap/extension-strike'
+import Text from '@tiptap/extension-text'
+import { EditorContent, useEditor } from '@tiptap/react'
+import ImageResize from 'tiptap-extension-resize-image'
 
 import {
   CustomBulletListConfigure,
@@ -20,13 +20,13 @@ import {
   CustomOrderedListConfigure,
   CustomTextAlignConfigure,
   TabIndentExtension,
-} from '../../utils/custom-extensions.ts';
+} from '../../utils/custom-extensions.ts'
 
-import MenuBar from '../../components/menu-bar/menu-bar.tsx';
+import MenuBar from '../../components/menu-bar/menu-bar.tsx'
 
 interface EditorProps {
-  editorContent: string;
-  onChange: (content: string) => void;
+  editorContent: string
+  onChange: (content: string) => void
 }
 
 export default function Editor({ editorContent, onChange }: EditorProps) {
@@ -65,12 +65,12 @@ export default function Editor({ editorContent, onChange }: EditorProps) {
     content: editorContent,
 
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      onChange(editor.getHTML())
     },
-  });
+  })
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -78,5 +78,5 @@ export default function Editor({ editorContent, onChange }: EditorProps) {
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
-  );
+  )
 }

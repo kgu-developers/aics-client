@@ -1,9 +1,10 @@
-import { screen } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css'
+
+import { screen } from '@aics-client/design-system/styles'
 
 const layoutWrapper = style({
   display: 'flex',
-});
+})
 
 const navigationContainer = style([
   screen.lg({
@@ -13,10 +14,10 @@ const navigationContainer = style([
     width: '15rem',
     display: 'none',
   },
-]);
+])
 
 const content = style({
   flex: 1,
-});
+})
 
-export { layoutWrapper, navigationContainer, content };
+export { layoutWrapper, navigationContainer, content }

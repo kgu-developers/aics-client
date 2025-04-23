@@ -1,19 +1,14 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { CONTACT_QUERY_OPTIONS } from '~/apis/about/contact/queries';
-
-import { getQueryClient } from '~/utils/get-query-client';
-
-import { ContactList } from '~/components/about/contact/contact-list';
-import { PageHeader } from '~/components/page-header';
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic';
+import { ContactList } from '~/features/contact/components/contact-list'
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
+import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 export default function ContactPage() {
-  const queryClient = getQueryClient();
+  const queryClient = getQueryClient()
 
-  void queryClient.prefetchQuery(CONTACT_QUERY_OPTIONS.ALL());
+  void queryClient.prefetchQuery(CONTACT_QUERY_OPTIONS.ALL())
 
   return (
     <>
@@ -25,5 +20,5 @@ export default function ContactPage() {
         <ContactList />
       </HydrationBoundary>
     </>
-  );
+  )
 }

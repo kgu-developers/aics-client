@@ -1,10 +1,11 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css'
+
+import { themeVars } from '@aics-client/design-system/styles'
 
 globalStyle('html, body', {
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
-});
+})
 
 const root = style([
   themeVars.container,
@@ -14,7 +15,7 @@ const root = style([
     flexDirection: themeVars.flexDirection.column,
     minHeight: themeVars.minWidth.dvh,
   },
-]);
+])
 
 const main = style({
   flex: 1,
@@ -25,6 +26,6 @@ const main = style({
       padding: '2rem 0 4rem 0',
     },
   },
-});
+})
 
-export { root, main };
+export { root, main }

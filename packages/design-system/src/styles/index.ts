@@ -1,3 +1,3 @@
-export * from './theme.css';
+export * from './theme.css'
 // tokens
-export { default as screen } from './tokens/screen';
+export { default as screen } from './tokens/screen'

@@ -1,6 +1,6 @@
 // generated with @7nohe/openapi-react-query-codegen@1.6.2
 
-import { type UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { type UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query'
 import {
   AboutService,
   CarouselService,
@@ -10,8 +10,8 @@ import {
   PostService,
   ProfessorService,
   UserService,
-} from '../requests/services.gen';
-import * as Common from './common';
+} from '../requests/services.gen'
+import * as Common from './common'
 export const useUserServiceGetApiV1UsersMySuspense = <
   TData = Common.UserServiceGetApiV1UsersMyDefaultResponse,
   TError = unknown,
@@ -24,7 +24,7 @@ export const useUserServiceGetApiV1UsersMySuspense = <
     queryKey: Common.UseUserServiceGetApiV1UsersMyKeyFn(queryKey),
     queryFn: () => UserService.getApiV1UsersMy() as TData,
     ...options,
-  });
+  })
 export const useCommentServiceGetApiV1CommentsSuspense = <
   TData = Common.CommentServiceGetApiV1CommentsDefaultResponse,
   TError = unknown,
@@ -33,7 +33,7 @@ export const useCommentServiceGetApiV1CommentsSuspense = <
   {
     postId,
   }: {
-    postId: number;
+    postId: number
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -45,7 +45,7 @@ export const useCommentServiceGetApiV1CommentsSuspense = <
     ),
     queryFn: () => CommentService.getApiV1Comments({ postId }) as TData,
     ...options,
-  });
+  })
 export const useProfessorServiceGetApiV1ProfessorsSuspense = <
   TData = Common.ProfessorServiceGetApiV1ProfessorsDefaultResponse,
   TError = unknown,
@@ -58,7 +58,7 @@ export const useProfessorServiceGetApiV1ProfessorsSuspense = <
     queryKey: Common.UseProfessorServiceGetApiV1ProfessorsKeyFn(queryKey),
     queryFn: () => ProfessorService.getApiV1Professors() as TData,
     ...options,
-  });
+  })
 export const usePostServiceGetApiV1PostsSuspense = <
   TData = Common.PostServiceGetApiV1PostsDefaultResponse,
   TError = unknown,
@@ -70,10 +70,10 @@ export const usePostServiceGetApiV1PostsSuspense = <
     page,
     size,
   }: {
-    category?: 'NOTIFICATION' | 'NEWS';
-    keywords?: string;
-    page: number;
-    size: number;
+    category?: 'NOTIFICATION' | 'NEWS'
+    keywords?: string
+    page: number
+    size: number
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -86,7 +86,7 @@ export const usePostServiceGetApiV1PostsSuspense = <
     queryFn: () =>
       PostService.getApiV1Posts({ category, keywords, page, size }) as TData,
     ...options,
-  });
+  })
 export const usePostServiceGetApiV1PostsByPostIdSuspense = <
   TData = Common.PostServiceGetApiV1PostsByPostIdDefaultResponse,
   TError = unknown,
@@ -95,7 +95,7 @@ export const usePostServiceGetApiV1PostsByPostIdSuspense = <
   {
     postId,
   }: {
-    postId: number;
+    postId: number
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -107,7 +107,7 @@ export const usePostServiceGetApiV1PostsByPostIdSuspense = <
     ),
     queryFn: () => PostService.getApiV1PostsByPostId({ postId }) as TData,
     ...options,
-  });
+  })
 export const useLabServiceGetApiV1LabsSuspense = <
   TData = Common.LabServiceGetApiV1LabsDefaultResponse,
   TError = unknown,
@@ -120,7 +120,7 @@ export const useLabServiceGetApiV1LabsSuspense = <
     queryKey: Common.UseLabServiceGetApiV1LabsKeyFn(queryKey),
     queryFn: () => LabService.getApiV1Labs() as TData,
     ...options,
-  });
+  })
 export const useClubServiceGetApiV1ClubsSuspense = <
   TData = Common.ClubServiceGetApiV1ClubsDefaultResponse,
   TError = unknown,
@@ -133,7 +133,7 @@ export const useClubServiceGetApiV1ClubsSuspense = <
     queryKey: Common.UseClubServiceGetApiV1ClubsKeyFn(queryKey),
     queryFn: () => ClubService.getApiV1Clubs() as TData,
     ...options,
-  });
+  })
 export const useCarouselServiceGetApiV1CarouselsSuspense = <
   TData = Common.CarouselServiceGetApiV1CarouselsDefaultResponse,
   TError = unknown,
@@ -146,7 +146,7 @@ export const useCarouselServiceGetApiV1CarouselsSuspense = <
     queryKey: Common.UseCarouselServiceGetApiV1CarouselsKeyFn(queryKey),
     queryFn: () => CarouselService.getApiV1Carousels() as TData,
     ...options,
-  });
+  })
 export const useAboutServiceGetApiV1AboutsSuspense = <
   TData = Common.AboutServiceGetApiV1AboutsDefaultResponse,
   TError = unknown,
@@ -155,7 +155,7 @@ export const useAboutServiceGetApiV1AboutsSuspense = <
   {
     category,
   }: {
-    category: 'DEPT_INTRO' | 'DIRECTIONS';
+    category: 'DEPT_INTRO' | 'DIRECTIONS'
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -164,4 +164,4 @@ export const useAboutServiceGetApiV1AboutsSuspense = <
     queryKey: Common.UseAboutServiceGetApiV1AboutsKeyFn({ category }, queryKey),
     queryFn: () => AboutService.getApiV1Abouts({ category }) as TData,
     ...options,
-  });
+  })

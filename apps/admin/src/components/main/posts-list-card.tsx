@@ -1,15 +1,15 @@
-import { Link } from '@tanstack/react-router';
-import { Card } from 'antd';
-import { ArrowRightIcon } from 'lucide-react';
+import { Link } from '@tanstack/react-router'
+import { Card } from 'antd'
+import { ArrowRightIcon } from 'lucide-react'
 
-import type { PostSummaryResponse } from '~/apis/community/requests';
+import type { PostSummaryResponse } from '~/apis/community/requests'
 
-import { POST_DETAIL_PATH_MAP, type PostCategory } from '~/constants/path';
+import { POST_DETAIL_PATH_MAP, type PostCategory } from '~/constants/path'
 
 interface PostListCardProps {
-  title: string;
-  to: PostCategory;
-  posts: PostSummaryResponse[];
+  title: string
+  to: PostCategory
+  posts: PostSummaryResponse[]
 }
 
 function PostListCard({ title, to, posts }: PostListCardProps) {
@@ -30,7 +30,7 @@ function PostListCard({ title, to, posts }: PostListCardProps) {
       className="w-full flex flex-col"
     >
       {posts?.map((post, index) => {
-        const isLast = index === posts.length - 1;
+        const isLast = index === posts.length - 1
         return (
           <div
             key={post.postId}
@@ -43,10 +43,10 @@ function PostListCard({ title, to, posts }: PostListCardProps) {
               <span className="text-black">{post.title}</span>
             </Link>
           </div>
-        );
+        )
       })}
     </Card>
-  );
+  )
 }
 
-export { PostListCard };
+export { PostListCard }

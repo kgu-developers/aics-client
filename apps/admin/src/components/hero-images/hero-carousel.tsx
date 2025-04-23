@@ -1,11 +1,11 @@
-import { Carousel } from 'antd';
-import type { CarouselResponse } from '~/apis/community/requests';
+import { Carousel } from 'antd'
+import type { CarouselResponse } from '~/apis/community/requests'
 
-import AltImage from '~/assets/images/alt.png';
+import AltImage from '~/assets/images/alt.png'
 
 interface HeroCarouselProps {
-  images: CarouselResponse[];
-  autoplay?: boolean;
+  images: CarouselResponse[]
+  autoplay?: boolean
 }
 
 function HeroCarousel({ images, autoplay = true }: HeroCarouselProps) {
@@ -24,7 +24,7 @@ function HeroCarousel({ images, autoplay = true }: HeroCarouselProps) {
         </div>
       ))}
     </Carousel>
-  );
+  )
 }
 
-export { HeroCarousel };
+export { HeroCarousel }

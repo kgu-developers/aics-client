@@ -1,40 +1,40 @@
-import { useMutation } from '@tanstack/react-query';
-import { END_POINT } from '~/constants/api';
-import { getToken } from '~/utils/api';
-import { authServices } from '~/utils/auth';
-import { authHttp } from '~/utils/http';
-import type { Tokens } from './use-sign-in';
+import { useMutation } from '@tanstack/react-query'
+import { END_POINT } from '~/constants/api'
+import { getToken } from '~/utils/api'
+import { authServices } from '~/utils/auth'
+import { authHttp } from '~/utils/http'
+import type { Tokens } from './use-sign-in'
 
 interface RefreshToken {
-  refreshToken: string;
+  refreshToken: string
 }
 
 const useRefreshTokens = () => {
-  const { setTokens, logout } = authServices();
+  const { setTokens, logout } = authServices()
 
   const refreshMutation = useMutation({
     mutationFn: () => {
-      const [accessToken, refreshToken] = getToken();
+      const [accessToken, refreshToken] = getToken()
 
       if (!accessToken || !refreshToken) {
-        throw new Error('토큰이 존재하지 않습니다');
+        throw new Error('토큰이 존재하지 않습니다')
       }
 
       const response = authHttp.post<RefreshToken>(END_POINT.REISSUE, {
         json: { refreshToken },
-      });
-      return response.json<Tokens>();
+      })
+      return response.json<Tokens>()
     },
     onSuccess: (newTokens) => {
-      setTokens(newTokens);
+      setTokens(newTokens)
     },
     onError: () => {
-      alert('오류가 발생하여 로그아웃합니다.');
-      logout();
+      alert('오류가 발생하여 로그아웃합니다.')
+      logout()
     },
-  });
+  })
 
-  return refreshMutation;
-};
+  return refreshMutation
+}
 
-export { type RefreshToken, useRefreshTokens };
+export { type RefreshToken, useRefreshTokens }

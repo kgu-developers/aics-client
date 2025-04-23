@@ -1,48 +1,48 @@
-import { Button, Form, Input, Modal, Upload, message } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import { UploadIcon } from 'lucide-react';
+import { Button, Form, Input, Modal, Upload, message } from 'antd'
+import type { UploadChangeParam } from 'antd/es/upload'
+import { UploadIcon } from 'lucide-react'
 
 import {
   useFileServicePostApiV1FilesLab,
   useLabServicePostApiV1Labs,
-} from '~/apis/admin/queries';
-import type { LabCreateRequest } from '~/apis/admin/requests';
-import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries';
-import { useModal } from '~/hooks/use-modal';
-import { queryClient } from '~/utils/get-query-client';
+} from '~/apis/admin/queries'
+import type { LabCreateRequest } from '~/apis/admin/requests'
+import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries'
+import { useModal } from '~/hooks/use-modal'
+import { queryClient } from '~/utils/get-query-client'
 
 function CreateLabForm({ onClose }: { onClose: () => void }) {
-  const [form] = Form.useForm();
-  const [messageApi, contextHolder] = message.useMessage();
-  const postLabMutation = useLabServicePostApiV1Labs();
-  const uploadImageMutation = useFileServicePostApiV1FilesLab();
+  const [form] = Form.useForm()
+  const [messageApi, contextHolder] = message.useMessage()
+  const postLabMutation = useLabServicePostApiV1Labs()
+  const uploadImageMutation = useFileServicePostApiV1FilesLab()
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [useLabServiceGetApiV1LabsKey],
-    });
+    })
     await messageApi.open({
       type: 'success',
       content: '연구실이 성공적으로 추가되었습니다.',
       duration: 0.8,
-    });
-    onClose();
-  };
+    })
+    onClose()
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '연구실 추가에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleFileUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+  }
 
   const handleSubmit = (values: LabCreateRequest) => {
-    const file = form.getFieldValue('file')?.[0]?.originFileObj;
+    const file = form.getFieldValue('file')?.[0]?.originFileObj
     uploadImageMutation.mutate(
       { formData: { file } },
       {
@@ -60,22 +60,22 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
               },
               {
                 onSuccess: () => {
-                  handleSuccess();
-                  form.resetFields();
+                  handleSuccess()
+                  form.resetFields()
                 },
                 onError: () => {
-                  handleError();
+                  handleError()
                 },
               },
-            );
+            )
           }
         },
         onError: () => {
-          handleError();
+          handleError()
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <Form
@@ -105,8 +105,8 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
       >
         <Upload
           beforeUpload={(file) => {
-            handleFileUpload(file);
-            return false;
+            handleFileUpload(file)
+            return false
           }}
           maxCount={1}
           listType="picture"
@@ -148,11 +148,11 @@ function CreateLabForm({ onClose }: { onClose: () => void }) {
         추가하기
       </Button>
     </Form>
-  );
+  )
 }
 
 function LabCreator() {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <>
@@ -174,7 +174,7 @@ function LabCreator() {
         연구실 추가하기
       </Button>
     </>
-  );
+  )
 }
 
-export { LabCreator };
+export { LabCreator }

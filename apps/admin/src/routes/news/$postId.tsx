@@ -1,17 +1,17 @@
-import { createFileRoute, useMatch } from '@tanstack/react-router';
-import { usePostServiceGetApiV1PostsByPostIdSuspense } from '~/apis/community/queries/suspense';
-import { Board } from '~/components/posts/board';
-import { PATH } from '~/constants/path';
+import { createFileRoute, useMatch } from '@tanstack/react-router'
+import { usePostServiceGetApiV1PostsByPostIdSuspense } from '~/apis/community/queries/suspense'
+import { Board } from '~/components/posts/board'
+import { PATH } from '~/constants/path'
 
 export const Route = createFileRoute('/news/$postId')({
   component: PostDetailPage,
-});
+})
 
 function PostDetailPage() {
-  const { params } = useMatch({ from: '/news/$postId' });
+  const { params } = useMatch({ from: '/news/$postId' })
   const { data } = usePostServiceGetApiV1PostsByPostIdSuspense({
     postId: Number(params.postId),
-  });
+  })
 
   return (
     <section className="px-16">
@@ -32,5 +32,5 @@ function PostDetailPage() {
         />
       </Board>
     </section>
-  );
+  )
 }

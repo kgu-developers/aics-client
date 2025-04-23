@@ -1,16 +1,16 @@
-import { cn } from '../../utils';
-import { textVariants } from './text.css';
+import { cn } from '../../utils'
+import { textVariants } from './text.css'
 
 interface BaseProps {
-  size?: 'sm' | 'md' | 'lg';
-  fontWeight?: 'regular' | 'semibold' | 'bold';
-  children?: string;
-  className?: string;
+  size?: 'sm' | 'md' | 'lg'
+  fontWeight?: 'regular' | 'semibold' | 'bold'
+  children?: string
+  className?: string
 }
 
 type TextProps<ElementType extends React.ElementType = 'span'> = BaseProps & {
-  as?: ElementType;
-} & Omit<React.ComponentProps<ElementType>, 'as' | 'children' | 'className'>;
+  as?: ElementType
+} & Omit<React.ComponentProps<ElementType>, 'as' | 'children' | 'className'>
 
 export default function Text<ElementType extends React.ElementType = 'span'>({
   as,
@@ -20,7 +20,7 @@ export default function Text<ElementType extends React.ElementType = 'span'>({
   children,
   ...rest
 }: TextProps<ElementType>) {
-  const Component = as ?? 'span';
+  const Component = as ?? 'span'
 
   return (
     <Component
@@ -29,5 +29,5 @@ export default function Text<ElementType extends React.ElementType = 'span'>({
     >
       {children}
     </Component>
-  );
+  )
 }

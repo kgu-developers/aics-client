@@ -1,20 +1,14 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { getQueryClient } from '~/utils/get-query-client';
-
-import { LABS_QUERY_OPTIONS } from '~/apis/lab/queries';
-
-import { PageHeader } from '~/components/page-header';
-
-import { LabList } from '~/components/lab/lab-list';
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic';
+import { LabList } from '~/features/lab/components/lab-list'
+import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries'
+import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 export default function LabPage() {
-  const queryClient = getQueryClient();
+  const queryClient = getQueryClient()
 
-  void queryClient.prefetchQuery(LABS_QUERY_OPTIONS.ALL());
+  void queryClient.prefetchQuery(LABS_QUERY_OPTIONS.ALL())
 
   return (
     <>
@@ -26,5 +20,5 @@ export default function LabPage() {
         <LabList />
       </HydrationBoundary>
     </>
-  );
+  )
 }

@@ -1,29 +1,29 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { Form, Spin, message } from 'antd';
+import { useQueryClient } from '@tanstack/react-query'
+import { Form, Spin, message } from 'antd'
 
 import {
   useFileServicePostApiV1FilesLab,
   useLabServiceDeleteApiV1LabsById,
   useLabServicePatchApiV1LabsById,
-} from '~/apis/admin/queries';
-import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries';
-import type { LabDetailResponse } from '~/apis/community/requests';
+} from '~/apis/admin/queries'
+import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries'
+import type { LabDetailResponse } from '~/apis/community/requests'
 
-import { Suspense } from 'react';
-import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense';
-import useEditTable from '~/hooks/use-edit-table';
-import LabTableView from './lab-table-view';
+import { Suspense } from 'react'
+import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense'
+import useEditTable from '~/hooks/use-edit-table'
+import LabTableView from './lab-table-view'
 
 function LabTable() {
-  const queryClient = useQueryClient();
-  const [form] = Form.useForm();
-  const { data } = useLabServiceGetApiV1LabsSuspense();
-  const LabList: LabDetailResponse[] = data?.contents ?? [];
-  const { register } = useEditTable<LabDetailResponse>(form);
-  const uploadLabImage = useFileServicePostApiV1FilesLab();
-  const updateMutation = useLabServicePatchApiV1LabsById();
-  const deleteMutation = useLabServiceDeleteApiV1LabsById();
-  const [messageApi, contextHolder] = message.useMessage();
+  const queryClient = useQueryClient()
+  const [form] = Form.useForm()
+  const { data } = useLabServiceGetApiV1LabsSuspense()
+  const LabList: LabDetailResponse[] = data?.contents ?? []
+  const { register } = useEditTable<LabDetailResponse>(form)
+  const uploadLabImage = useFileServicePostApiV1FilesLab()
+  const updateMutation = useLabServicePatchApiV1LabsById()
+  const deleteMutation = useLabServiceDeleteApiV1LabsById()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const handleImageUpload = (record: LabDetailResponse) => (file: File) => {
     uploadLabImage.mutate(
@@ -46,46 +46,46 @@ function LabTable() {
                 onSuccess: () => {
                   queryClient.invalidateQueries({
                     queryKey: [useLabServiceGetApiV1LabsKey],
-                  });
+                  })
                 },
               },
-            );
+            )
           }
         },
       },
-    );
-    return false;
-  };
+    )
+    return false
+  }
 
   const handleSave = async (record: LabDetailResponse) => {
     try {
-      const rowData = await form.validateFields();
+      const rowData = await form.validateFields()
       updateMutation.mutate(
         { id: record.id, requestBody: { ...rowData, fileId: record.img?.id } },
         {
           onSuccess: () => {
-            register.cancel();
+            register.cancel()
             messageApi.open({
               type: 'success',
               content: '연구실 정보가 성공적으로 수정되었습니다.',
-            });
+            })
             queryClient.invalidateQueries({
               queryKey: [useLabServiceGetApiV1LabsKey],
-            });
+            })
           },
           onError: (e) => {
-            console.error('수정 실패:', e);
+            console.error('수정 실패:', e)
             messageApi.open({
               type: 'error',
               content: '연구실 수정에 실패했습니다.',
-            });
+            })
           },
         },
-      );
+      )
     } catch (error) {
-      console.error('Validation Failed:', error);
+      console.error('Validation Failed:', error)
     }
-  };
+  }
 
   const handleDelete = (record: LabDetailResponse) => {
     deleteMutation.mutate(
@@ -95,21 +95,21 @@ function LabTable() {
           messageApi.open({
             type: 'success',
             content: '연구실이 성공적으로 삭제되었습니다.',
-          });
+          })
           queryClient.invalidateQueries({
             queryKey: ['LabServiceGetApiV1Labs'],
-          });
+          })
         },
         onError: (e) => {
-          console.error('삭제 실패:', e);
+          console.error('삭제 실패:', e)
           messageApi.open({
             type: 'error',
             content: '연구실 삭제에 실패했습니다.',
-          });
+          })
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <Suspense fallback={<Spin />}>
@@ -124,7 +124,7 @@ function LabTable() {
         handleImageUpload={handleImageUpload}
       />
     </Suspense>
-  );
+  )
 }
 
-export default LabTable;
+export default LabTable

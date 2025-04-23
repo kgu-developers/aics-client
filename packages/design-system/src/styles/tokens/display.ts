@@ -43,6 +43,6 @@ const display = {
     display: 'flex',
     flexDirection: 'column',
   },
-} as const;
+} as const
 
-export default display;
+export default display

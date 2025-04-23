@@ -1,26 +1,24 @@
-import { Button, Form, Input, Popconfirm, Table } from 'antd';
-import type { FormInstance, TableProps } from 'antd';
-import type { ProfessorResponse } from '~/apis/community/requests';
+import { Button, Form, Input, Popconfirm, Table } from 'antd'
+import type { FormInstance, TableProps } from 'antd'
+import type { ProfessorResponse } from '~/apis/community/requests'
 interface ProfessorTableViewProps {
-  form: FormInstance;
-  data: ProfessorResponse[];
+  form: FormInstance
+  data: ProfessorResponse[]
   register: {
-    isEditing: (record: ProfessorResponse) => boolean;
-    handleEdit: (
-      record: Partial<ProfessorResponse> & { id: React.Key },
-    ) => void;
-    cancel: () => void;
-  };
-  handleSave: (record: ProfessorResponse) => void;
-  handleDelete: (record: ProfessorResponse) => void;
+    isEditing: (record: ProfessorResponse) => boolean
+    handleEdit: (record: Partial<ProfessorResponse> & { id: React.Key }) => void
+    cancel: () => void
+  }
+  handleSave: (record: ProfessorResponse) => void
+  handleDelete: (record: ProfessorResponse) => void
 }
 
 interface EditableCellProps {
-  editing: boolean;
-  dataIndex: string;
-  title: string;
-  record: ProfessorResponse;
-  children: React.ReactNode;
+  editing: boolean
+  dataIndex: string
+  title: string
+  record: ProfessorResponse
+  children: React.ReactNode
 }
 
 function ProfessorTableView({
@@ -52,8 +50,8 @@ function ProfessorTableView({
           children
         )}
       </td>
-    );
-  };
+    )
+  }
 
   const columns = [
     { title: '교수명', dataIndex: 'name', width: '15%', editable: true },
@@ -87,7 +85,7 @@ function ProfessorTableView({
       dataIndex: 'operation',
       width: '15%',
       render: (_: unknown, record: ProfessorResponse) => {
-        const editable = register.isEditing(record);
+        const editable = register.isEditing(record)
         return editable ? (
           <span>
             <Button
@@ -134,14 +132,14 @@ function ProfessorTableView({
               </Button>
             </Popconfirm>
           </span>
-        );
+        )
       },
     },
-  ];
+  ]
 
   const mergedColumns: TableProps<ProfessorResponse>['columns'] = columns.map(
     (col) => {
-      if (!col.editable) return col;
+      if (!col.editable) return col
 
       return {
         ...col,
@@ -151,9 +149,9 @@ function ProfessorTableView({
           title: col.title,
           editing: register.isEditing(record),
         }),
-      };
+      }
     },
-  );
+  )
 
   return (
     <Form form={form} component={false}>
@@ -166,7 +164,7 @@ function ProfessorTableView({
         pagination={{ onChange: register.cancel }}
       />
     </Form>
-  );
+  )
 }
 
-export default ProfessorTableView;
+export default ProfessorTableView

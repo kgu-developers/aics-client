@@ -1,16 +1,16 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
-import { Button } from 'antd';
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { Button } from 'antd'
 
-import { useCarouselServiceGetApiV1CarouselsSuspense } from '~/apis/community/queries/suspense';
-import { HeroCarousel } from '~/components/hero-images/hero-carousel';
-import { PATH } from '~/constants/path';
+import { useCarouselServiceGetApiV1CarouselsSuspense } from '~/apis/community/queries/suspense'
+import { HeroCarousel } from '~/components/hero-images/hero-carousel'
+import { PATH } from '~/constants/path'
 
 export const Route = createFileRoute('/hero-images/')({
   component: HeroImagesPage,
-});
+})
 
 function HeroImagesPage() {
-  const { data: images } = useCarouselServiceGetApiV1CarouselsSuspense();
+  const { data: images } = useCarouselServiceGetApiV1CarouselsSuspense()
   return (
     <section className="flex flex-col gap-4">
       <div className="pb-4">
@@ -24,7 +24,7 @@ function HeroImagesPage() {
         <Link to={PATH.EDIT_HERO_IMAGES}>편집하기</Link>
       </Button>
     </section>
-  );
+  )
 }
 
-export default HeroImagesPage;
+export default HeroImagesPage

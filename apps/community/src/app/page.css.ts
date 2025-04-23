@@ -1,10 +1,10 @@
-import { style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css'
 
 const wrapper = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '5rem',
-});
+})
 
 const section2 = style({
   display: 'flex',
@@ -14,6 +14,6 @@ const section2 = style({
       flexDirection: 'column',
     },
   },
-});
+})
 
-export { wrapper, section2 };
+export { wrapper, section2 }

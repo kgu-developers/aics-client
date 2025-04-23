@@ -1,30 +1,30 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { Form, message } from 'antd';
+import { useQueryClient } from '@tanstack/react-query'
+import { Form, message } from 'antd'
 import {
   useClubServiceDeleteApiV1ClubsById,
   useClubServicePatchApiV1ClubsById,
   useFileServicePostApiV1FilesClub,
-} from '~/apis/admin/queries';
-import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';
-import type { ClubDetailResponse } from '~/apis/community/requests';
-import ClubCreate from '~/components/club/club-creator';
-import useEditTable from '~/hooks/use-edit-table';
+} from '~/apis/admin/queries'
+import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries'
+import type { ClubDetailResponse } from '~/apis/community/requests'
+import ClubCreate from '~/components/club/club-creator'
+import useEditTable from '~/hooks/use-edit-table'
 
-import ClubTableView from './club-table-view';
+import ClubTableView from './club-table-view'
 
 function ClubTable() {
-  const [form] = Form.useForm();
-  const { register } = useEditTable<ClubDetailResponse>(form);
-  const { data } = useClubServiceGetApiV1Clubs();
+  const [form] = Form.useForm()
+  const { register } = useEditTable<ClubDetailResponse>(form)
+  const { data } = useClubServiceGetApiV1Clubs()
 
-  const queryClient = useQueryClient();
-  const updateMutation = useClubServicePatchApiV1ClubsById();
-  const deleteMutation = useClubServiceDeleteApiV1ClubsById();
-  const [messageApi, contextHolder] = message.useMessage();
+  const queryClient = useQueryClient()
+  const updateMutation = useClubServicePatchApiV1ClubsById()
+  const deleteMutation = useClubServiceDeleteApiV1ClubsById()
+  const [messageApi, contextHolder] = message.useMessage()
 
-  const dataSource: ClubDetailResponse[] = data?.contents ?? [];
+  const dataSource: ClubDetailResponse[] = data?.contents ?? []
 
-  const uploadClubImage = useFileServicePostApiV1FilesClub();
+  const uploadClubImage = useFileServicePostApiV1FilesClub()
 
   const handleImageUpload = (record: ClubDetailResponse) => (file: File) => {
     uploadClubImage.mutate(
@@ -46,51 +46,51 @@ function ClubTable() {
                 onSuccess: () => {
                   queryClient.invalidateQueries({
                     queryKey: ['ClubServiceGetApiV1Clubs'],
-                  });
+                  })
                 },
               },
-            );
+            )
           }
         },
       },
-    );
-    return false;
-  };
+    )
+    return false
+  }
 
   const handleSave = async (record: ClubDetailResponse) => {
     try {
-      const rowData = await form.validateFields();
+      const rowData = await form.validateFields()
       const updatedData = {
         ...rowData,
         fileId: record.file?.id,
-      };
+      }
 
       updateMutation.mutate(
         { id: record.id, requestBody: updatedData },
         {
           onSuccess: () => {
-            register.cancel();
+            register.cancel()
             messageApi.open({
               type: 'success',
               content: '동아리 정보가 성공적으로 수정되었습니다.',
-            });
+            })
             queryClient.invalidateQueries({
               queryKey: ['ClubServiceGetApiV1Clubs'],
-            });
+            })
           },
           onError: (e) => {
-            console.error('수정 실패:', e);
+            console.error('수정 실패:', e)
             messageApi.open({
               type: 'error',
               content: '동아리 수정에 실패했습니다.',
-            });
+            })
           },
         },
-      );
+      )
     } catch (error) {
-      console.error('Validation Failed:', error);
+      console.error('Validation Failed:', error)
     }
-  };
+  }
 
   const handleDelete = (record: ClubDetailResponse) => {
     deleteMutation.mutate(
@@ -100,21 +100,21 @@ function ClubTable() {
           messageApi.open({
             type: 'success',
             content: '동아리가 성공적으로 삭제되었습니다.',
-          });
+          })
           queryClient.invalidateQueries({
             queryKey: ['ClubServiceGetApiV1Clubs'],
-          });
+          })
         },
         onError: (e) => {
-          console.error('삭제 실패:', e);
+          console.error('삭제 실패:', e)
           messageApi.open({
             type: 'error',
             content: '동아리 삭제에 실패했습니다.',
-          });
+          })
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -129,7 +129,7 @@ function ClubTable() {
         handleImageUpload={handleImageUpload}
       />
     </>
-  );
+  )
 }
 
-export default ClubTable;
+export default ClubTable

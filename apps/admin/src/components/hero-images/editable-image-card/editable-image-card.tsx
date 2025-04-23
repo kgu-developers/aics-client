@@ -1,12 +1,12 @@
-import type { CarouselResponse } from '~/apis/community/requests';
-import AltImage from '~/assets/images/alt.png';
+import type { CarouselResponse } from '~/apis/community/requests'
+import AltImage from '~/assets/images/alt.png'
 import {
   DeleteHeroImageButton,
   EditHeroImageButton,
-} from '../editable-image-card/hero-image-manager';
+} from '../editable-image-card/hero-image-manager'
 
 interface EditableImageCardProps {
-  image: CarouselResponse;
+  image: CarouselResponse
 }
 
 function EditableImageCard({ image }: EditableImageCardProps) {
@@ -22,7 +22,7 @@ function EditableImageCard({ image }: EditableImageCardProps) {
         <DeleteHeroImageButton id={image.id} />
       </div>
     </div>
-  );
+  )
 }
 
-export { EditableImageCard };
+export { EditableImageCard }

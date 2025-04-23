@@ -1,16 +1,16 @@
-import { useNavigate } from '@tanstack/react-router';
-import { Button, Checkbox, List, Pagination, type PaginationProps } from 'antd';
-import { CircleUserRoundIcon, Trash2Icon } from 'lucide-react';
-import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router'
+import { Button, Checkbox, List, Pagination, type PaginationProps } from 'antd'
+import { CircleUserRoundIcon, Trash2Icon } from 'lucide-react'
+import { useState } from 'react'
 
-import type { UserDetailResponse } from '~/apis/admin/requests';
+import type { UserDetailResponse } from '~/apis/admin/requests'
 
-import { useDeleteUsers } from '~/hooks/user/use-delete-users';
+import { useDeleteUsers } from '~/hooks/user/use-delete-users'
 
 interface UserListHeaderProps {
-  isDeleteMode: boolean;
-  setIsDeleteMode: (isDeleteMode: boolean) => void;
-  handleDeleteUsers: () => void;
+  isDeleteMode: boolean
+  setIsDeleteMode: (isDeleteMode: boolean) => void
+  handleDeleteUsers: () => void
 }
 
 function UserListHeader({
@@ -46,14 +46,14 @@ function UserListHeader({
         </Button>
       )}
     </div>
-  );
+  )
 }
 
 interface UserListItemProps {
-  user: UserDetailResponse;
-  isDeleteMode: boolean;
-  selectedUsers: string[];
-  setSelectedUsers: (users: string[]) => void;
+  user: UserDetailResponse
+  isDeleteMode: boolean
+  selectedUsers: string[]
+  setSelectedUsers: (users: string[]) => void
 }
 
 function UserListItem({
@@ -64,11 +64,11 @@ function UserListItem({
 }: UserListItemProps) {
   const handleCheckboxChange = (checked: boolean) => {
     if (checked) {
-      setSelectedUsers([...selectedUsers, user.id]);
+      setSelectedUsers([...selectedUsers, user.id])
     } else {
-      setSelectedUsers(selectedUsers.filter((id) => id !== user.id));
+      setSelectedUsers(selectedUsers.filter((id) => id !== user.id))
     }
-  };
+  }
 
   return (
     <List.Item>
@@ -95,26 +95,26 @@ function UserListItem({
         />
       )}
     </List.Item>
-  );
+  )
 }
 
 interface UserListProps {
-  data: UserDetailResponse[];
-  currentPage: number;
-  total: number;
+  data: UserDetailResponse[]
+  currentPage: number
+  total: number
 }
 
 function UserList({ data, currentPage, total }: UserListProps) {
-  const navigate = useNavigate({ from: '/user' });
-  const [isDeleteMode, setIsDeleteMode] = useState(false);
+  const navigate = useNavigate({ from: '/user' })
+  const [isDeleteMode, setIsDeleteMode] = useState(false)
   const { contextHolder, selectedUsers, setSelectedUsers, handleDeleteUsers } =
-    useDeleteUsers();
+    useDeleteUsers()
 
   const handlePageChange: PaginationProps['onChange'] = (currentPage) => {
     navigate({
       search: (prev) => ({ ...prev, page: currentPage - 1 }),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -149,7 +149,7 @@ function UserList({ data, currentPage, total }: UserListProps) {
         onChange={handlePageChange}
       />
     </>
-  );
+  )
 }
 
-export { UserList };
+export { UserList }
