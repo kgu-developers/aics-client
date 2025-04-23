@@ -1,8 +1,10 @@
 'use client'
 
-import { Input } from '@aics-client/design-system'
 import type { UseFormRegisterReturn } from 'react-hook-form'
-import * as styles from '~/components/my/my-info-card.css'
+
+import { Input } from '@aics-client/design-system'
+
+import * as styles from '~/features/profile/components/my-info-card.css'
 
 interface MyInfoCardProps {
   title: string

@@ -2,11 +2,9 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query'
 
+import { ProfessorCard } from '~/features/member/components/professor-card'
+import * as styles from '~/features/member/components/professor-list.css'
 import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
-
-import { ProfessorCard } from './professor-card'
-
-import * as styles from './professor-list.css'
 
 function ProfessorList() {
   const { data } = useSuspenseQuery(PROFESSORS_QUERY_OPTIONS.ALL())

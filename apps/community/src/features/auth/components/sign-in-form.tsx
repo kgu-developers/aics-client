@@ -1,13 +1,13 @@
 'use client'
 
-import { Input } from '@aics-client/design-system'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
 
-import { AuthButton } from '~/components/(auth)/auth-button'
-import * as styles from '~/components/(auth)/signin/sign-in-form.css'
+import { Input } from '@aics-client/design-system'
 
+import { AuthButton } from '~/features/auth/components/auth-button'
+import * as styles from '~/features/auth/components/sign-in-form.css'
 import { useSignIn } from '~/features/auth/hooks/use-sign-in'
 import { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema'
 

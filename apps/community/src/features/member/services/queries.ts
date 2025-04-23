@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
-import { getProfessors } from './remote'
+
+import { getProfessors } from '~/features/member/services/remote'
 
 const PROFESSORS_QUERY_KEYS = {
   ALL: ['contacts'],

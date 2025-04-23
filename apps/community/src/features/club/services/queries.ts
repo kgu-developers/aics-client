@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
-import { getClubs } from './remote'
+
+import { getClubs } from '~/features/club/services/remote'
 
 const CLUB_QUERY_KEY = {
   ALL: ['clubs'],

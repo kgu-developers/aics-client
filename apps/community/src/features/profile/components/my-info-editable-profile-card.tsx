@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@aics-client/design-system'
-import { MyInfoCard } from '~/components/my/my-info-card'
-import { useEditProfileMutation } from '~/features/profile/services/use-edit-profile.mutation'
+import { MyInfoCard } from '~/features/profile/components/my-info-card'
+import { useEditProfile } from '~/features/profile/services/use-edit-profile.mutation'
 
 interface EditableDetail {
   title: string
@@ -31,7 +31,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 function MyInfoEditableProfileCard({ data }: Props) {
-  const mutation = useEditProfileMutation()
+  const mutation = useEditProfile()
 
   const defaultValues = data.reduce(
     (acc, { field, value }) => {

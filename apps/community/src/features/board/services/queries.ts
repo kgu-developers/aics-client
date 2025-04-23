@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 
-import { getPostDetail, getPosts } from './remote'
+import { getPostDetail, getPosts } from '~/features/board/services/remote'
 
 interface PaginationOptions {
   page: number

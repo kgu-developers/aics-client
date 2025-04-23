@@ -1,10 +1,11 @@
-import type { EmblaCarouselType } from 'embla-carousel'
 import { useCallback, useId } from 'react'
+
+import type { EmblaCarouselType } from 'embla-carousel'
 
 import { cn } from '@aics-client/design-system/utils'
 
-import * as styles from '~/components/carousel-dots.css'
-import { useDotButton } from '~/components/shared/components/carousel/hooks/use-dot-button'
+import * as styles from '~/shared/components/carousel/carousel-dots.css'
+import { useDotButton } from '~/shared/hooks/use-dot-button'
 
 interface DotButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active: boolean

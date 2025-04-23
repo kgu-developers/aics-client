@@ -2,9 +2,8 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
-
 import { List } from '~/features/contact/components/list'
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
 
 function ContactList() {
   const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL())

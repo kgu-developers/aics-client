@@ -1,6 +1,6 @@
 'use client'
 
-import { MyInfoCard } from '~/components/my/my-info-card'
+import { MyInfoCard } from '~/features/profile/components/my-info-card'
 
 interface Props {
   data: {

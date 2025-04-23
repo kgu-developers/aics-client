@@ -1,8 +1,7 @@
 import Image from 'next/image'
 
+import * as styles from '~/features/member/components/professor-card.css'
 import type { Professor } from '~/features/member/services/remote'
-
-import * as styles from '~/components/member/professor/professor-card.css'
 
 function ProfessorCard({ professor }: { professor: Professor }) {
   return (

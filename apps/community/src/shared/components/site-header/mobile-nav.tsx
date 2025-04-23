@@ -1,12 +1,12 @@
-import { ChevronDown, Menu, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { ChevronDown, Menu, XIcon } from 'lucide-react'
+
 import { cn } from '@aics-client/design-system/utils'
 
+import * as styles from '~/shared/components/site-header/mobile-nav.css'
 import { PATH, PATHMAP } from '~/shared/constants/path'
-
-import * as styles from '~/components/shared/site-header/mobile-nav.css'
 
 function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
-import { getMyProfile } from '../../../apis/my/remotes'
+
+import { getMyProfile } from '~/features/profile/services/remotes'
 
 const MY_PROFILE_QUERY_KEYS = {
   ALL: () => ['my'],

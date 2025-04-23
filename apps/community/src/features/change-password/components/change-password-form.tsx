@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button, Input } from '@aics-client/design-system'
-import * as styles from '~/components/my/change-password/change-password-form.css'
+
+import * as styles from '~/features/change-password/components/change-password-form.css'
 import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password-mutation'
 
 const changePasswordSchema = z

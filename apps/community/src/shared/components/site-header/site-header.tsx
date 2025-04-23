@@ -1,18 +1,18 @@
 'use client'
 
-import { useAtomValue } from 'jotai'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { useAtomValue } from 'jotai'
+
 import { cn } from '@aics-client/design-system/utils'
 
+import { MainNav } from '~/shared/components/site-header/main-nav'
+import { MobileNav } from '~/shared/components/site-header/mobile-nav'
+import * as styles from '~/shared/components/site-header/site-header.css'
 import { PATH } from '~/shared/constants/path'
 import { useAuth } from '~/shared/hooks/use-auth'
 import { isLoggedInAtom } from '~/shared/stores/auth'
-import { MainNav } from './main-nav'
-import { MobileNav } from './mobile-nav'
-
-import * as styles from '~/components/shared/site-header/site-header.css'
 
 function SignInButton({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { logout } = useAuth()

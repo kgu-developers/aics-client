@@ -5,9 +5,8 @@ import { Fragment } from 'react'
 
 import { Breadcrumb } from '@aics-client/design-system'
 
+import * as styles from '~/shared/components/page-header/page-header.css'
 import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path'
-
-import * as styles from '~/components/page-header.css'
 
 interface Props {
   title: string

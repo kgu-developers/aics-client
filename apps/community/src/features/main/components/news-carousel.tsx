@@ -8,9 +8,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import AltImage from '~/assets/images/alt.png'
-import { CarouselDots } from '~/components/carousel-dots'
 import * as styles from '~/features/main/components/news-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
+import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
 
 function NewsCarousel() {
   const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS())

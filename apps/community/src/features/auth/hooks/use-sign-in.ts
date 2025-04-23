@@ -1,13 +1,12 @@
-import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+
+import { useMutation } from '@tanstack/react-query'
 import type { z } from 'zod'
 
-import { END_POINT } from '~/shared/constants/api'
-
 import type { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema'
-
+import { END_POINT } from '~/shared/constants/api'
+import { useAuth } from '~/shared/hooks/use-auth'
 import { http } from '~/shared/utils/http'
-import { useAuth } from '../../../shared/hooks/use-auth'
 
 interface Tokens {
   accessToken: string

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import DOMPurify from 'dompurify'
+
 import { Button } from '@aics-client/design-system'
 import {
   ArrowLeft,
@@ -7,7 +9,6 @@ import {
   Download,
   Eye,
 } from '@aics-client/design-system/icons'
-import DOMPurify from 'dompurify'
 
 import * as styles from '~/features/board/components/board.css'
 

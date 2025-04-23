@@ -4,9 +4,8 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
 
-import { ClubCard } from './club-card'
-
-import * as style from './club-list.css'
+import { ClubCard } from '~/features/club/components/club-card'
+import * as style from '~/features/club/components/club-list.css'
 
 function ClubList() {
   const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL())

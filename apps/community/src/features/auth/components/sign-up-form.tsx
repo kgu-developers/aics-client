@@ -1,12 +1,13 @@
 'use client'
 
-import { Input } from '@aics-client/design-system'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 
-import { AuthButton } from '~/components/(auth)/auth-button'
-import * as styles from '~/components/(auth)/signup/sign-up-form.css'
+import { Input } from '@aics-client/design-system'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { AuthButton } from '~/features/auth/components/auth-button'
+import * as styles from '~/features/auth/components/sign-up-form.css'
 
 const signUpFormSchema = z
   .object({

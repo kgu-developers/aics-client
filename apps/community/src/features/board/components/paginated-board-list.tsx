@@ -1,10 +1,12 @@
 'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { Suspense } from 'react'
+
+import { useSuspenseQuery } from '@tanstack/react-query'
+
+import { BoardList } from '~/features/board/components/board-list'
+import { Pagination } from '~/features/board/components/pagination'
 import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
-import { BoardList } from './board-list'
-import { Pagination } from './pagination'
 
 interface Props {
   page: number

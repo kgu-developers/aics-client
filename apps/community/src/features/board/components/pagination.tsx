@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Fragment, useMemo, useState } from 'react'
+import { Fragment, useState } from 'react'
 
 import { ChevronLeft, ChevronRight } from '@aics-client/design-system/icons'
 

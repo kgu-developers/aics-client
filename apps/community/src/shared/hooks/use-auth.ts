@@ -1,6 +1,7 @@
+import { useRouter } from 'next/navigation'
+
 import { useMutation } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
-import { useRouter } from 'next/navigation'
 
 import type { Tokens } from '~/features/auth/hooks/use-sign-in'
 import {

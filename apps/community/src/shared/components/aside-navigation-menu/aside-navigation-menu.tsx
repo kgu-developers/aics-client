@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import * as styles from '~/components/aside-navigation-menu.css'
+import * as styles from '~/shared/components/aside-navigation-menu/aside-navigation-menu.css'
 import type { TPathMap } from '~/shared/constants/path'
 
 interface Props {

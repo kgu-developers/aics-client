@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 
-import { getLabs } from './remote'
+import { getLabs } from '~/features/lab/services/remote'
 
 const LABS_QUERY_KEYS = {
   ALL: ['labs'],

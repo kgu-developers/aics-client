@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { Lab } from '~/features/lab/services/remote'
-
 import * as styles from '~/features/lab/components/lab-card.css'
+import type { Lab } from '~/features/lab/services/remote'
 
 function LabCard({ lab }: { lab: Lab }) {
   return (

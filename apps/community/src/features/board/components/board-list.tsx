@@ -2,11 +2,9 @@ import Link from 'next/link'
 
 import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons'
 
-import { PATH } from '~/shared/constants/path'
-
-import type { Post } from '~/features/main/services/remote'
-
 import * as styles from '~/features/board/components/board-list.css'
+import type { Post } from '~/features/main/services/remote'
+import { PATH } from '~/shared/constants/path'
 
 function BoardList({ data }: { data: Post[] }) {
   return (

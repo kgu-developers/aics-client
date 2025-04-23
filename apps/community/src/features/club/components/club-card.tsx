@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import * as style from './club-card.css'
+
+import * as style from '~/features/club/components/club-card.css'
 
 interface Props {
   name: string

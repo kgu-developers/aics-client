@@ -1,4 +1,4 @@
-import * as styles from '~/components/(auth)/auth-button.css'
+import * as styles from '~/features/auth/components/auth-button.css'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
