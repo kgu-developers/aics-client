@@ -5,7 +5,7 @@ import Link from 'next/link'
 import * as styles from '~/shared/components/aside-navigation-menu/aside-navigation-menu.css'
 import type { TPathMap } from '~/shared/constants/path'
 
-interface Props {
+interface AsideNavigationMenuProps {
   base: {
     title: string
     path: string
@@ -13,20 +13,16 @@ interface Props {
   }
 }
 
-function AsideNavigationMenu({ base }: Props) {
+function AsideNavigationMenu({ base }: AsideNavigationMenuProps) {
   return (
     <aside className={styles.navigationContainer}>
       <div className={styles.navigationWrapper}>
         <h2 className={styles.navigationTitle}>{base.title}</h2>
         <div className={styles.separator} />
         {base.children ? (
-          Object.values(base.children).map((path) => (
-            <Link
-              className={styles.navigationLink}
-              key={path.path}
-              href={path.path}
-            >
-              {path.title}
+          Object.values(base.children).map(({ path, title }) => (
+            <Link className={styles.navigationLink} key={path} href={path}>
+              {title}
             </Link>
           ))
         ) : (
