@@ -8,6 +8,7 @@ import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
 
 function ProfessorList() {
   const { data } = useSuspenseQuery(PROFESSORS_QUERY_OPTIONS.ALL())
+
   return (
     <div className={styles.professorListWrapper}>
       {data.contents.map((professor) => (

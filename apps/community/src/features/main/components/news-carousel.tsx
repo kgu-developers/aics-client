@@ -12,6 +12,7 @@ import * as styles from '~/features/main/components/news-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
 import AltImage from '~/shared/assets/images/alt.png'
 import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
+import { PATH } from '~/shared/constants/path'
 
 function NewsCarousel() {
   const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS())
@@ -31,7 +32,7 @@ function NewsCarousel() {
     <section className={styles.news}>
       <div className={styles.newsHeader}>
         <div className={styles.title}>
-          <Link href="/">학부 소식</Link>
+          <Link href={PATH.NEWS}>학부 소식</Link>
         </div>
         <div className={styles.controls}>
           <CarouselDots emblaApi={emblaApi} />
@@ -42,7 +43,7 @@ function NewsCarousel() {
           {recentNews.map((post) => (
             <Link
               key={`news-${post.postId}`}
-              href={`/news/${post.postId}`}
+              href={PATH.NEWS_DETAIL(post.postId)}
               className={styles.link}
             >
               <div className={styles.slide}>

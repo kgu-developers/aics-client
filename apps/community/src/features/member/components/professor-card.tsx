@@ -13,12 +13,10 @@ function ProfessorCard({ professor }: { professor: Professor }) {
         className={styles.avatarImage}
         alt={professor.name}
       />
-
       <div className={styles.cardContent}>
         <h2 className={styles.professorName}>{professor.name}</h2>
         <p className={styles.professorType}>{professor.type}</p>
       </div>
-
       <div className={styles.cardFooter}>
         <p className={styles.professorContact}>{professor.contact}</p>
         <p className={styles.professorEmail}>{professor.email}</p>
