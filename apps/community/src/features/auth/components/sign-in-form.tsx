@@ -38,26 +38,20 @@ const useSignInForm = () => {
 function SignInFormFields({
   register,
   errors,
-  onFieldChange,
 }: {
   register: UseFormRegister<z.infer<typeof signInFormSchema>>
   errors: FieldErrors<z.infer<typeof signInFormSchema>>
-  onFieldChange: () => void
 }) {
   return (
     <>
       <Input
-        {...register('userId', {
-          onChange: onFieldChange,
-        })}
+        {...register('userId')}
         type="text"
         placeholder="학번을 입력해주세요"
         message={errors.userId?.message}
       />
       <Input
-        {...register('password', {
-          onChange: onFieldChange,
-        })}
+        {...register('password')}
         type="password"
         placeholder="비밀번호를 입력해주세요"
         message={errors.password?.message}
@@ -78,28 +72,15 @@ function SignInErrorMessage({ isError }: { isError: boolean }) {
 
 function SignInForm() {
   const { register, handleSubmit, errors, isValid } = useSignInForm()
-  const { mutate, reset, isError } = useSignIn()
+  const { mutate, isError } = useSignIn()
 
-  const handleFormSubmit = (data: z.infer<typeof signInFormSchema>) => {
+  const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
     mutate(data)
   }
 
-  const resetErrorMessage = () => {
-    if (isError) {
-      reset()
-    }
-  }
-
   return (
-    <form
-      onSubmit={handleSubmit(handleFormSubmit)}
-      className={styles.formWrapper}
-    >
-      <SignInFormFields
-        register={register}
-        errors={errors}
-        onFieldChange={resetErrorMessage}
-      />
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+      <SignInFormFields register={register} errors={errors} />
       <SignInErrorMessage isError={isError} />
       <Button type="submit" disabled={!isValid}>
         로그인
