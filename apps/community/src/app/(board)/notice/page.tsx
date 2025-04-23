@@ -1,7 +1,7 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
 import * as styles from '~/app/(board)/notice/page.css'
-import { PaginatedBoardList } from '~/features/board/components/paginated-board-list'
+import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list'
 import { SearchBar } from '~/features/board/components/search-bar'
 import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
