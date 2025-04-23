@@ -8,16 +8,9 @@ import { Button } from '@aics-client/design-system'
 
 import { MyInfoCard } from '~/features/profile/components/my-info-card'
 import { useEditProfile } from '~/features/profile/services/use-edit-profile.mutation'
+import type { UserEditableDetail } from '~/features/profile/types/profile'
 
-interface EditableDetail {
-  title: string
-  value: string
-  field: keyof FormValues
-}
-
-interface Props {
-  data: EditableDetail[]
-}
+type FormValues = z.infer<typeof schema>
 
 const schema = z.object({
   phone: z
@@ -29,12 +22,12 @@ const schema = z.object({
   email: z.string().email({ message: '올바른 이메일 형식이 아닙니다.' }),
 })
 
-type FormValues = z.infer<typeof schema>
-
-function MyInfoEditableProfileCard({ data }: Props) {
+function EditableMyProfileCard({
+  initialData,
+}: { initialData: UserEditableDetail[] }) {
   const mutation = useEditProfile()
 
-  const defaultValues = data.reduce(
+  const defaultValues = initialData.reduce(
     (acc, { field, value }) => {
       acc[field] = value
       return acc
@@ -60,7 +53,7 @@ function MyInfoEditableProfileCard({ data }: Props) {
   return (
     <MyInfoCard title="기본 정보">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        {data.map((detail) => (
+        {initialData.map((detail) => (
           <MyInfoCard.EditableField
             key={detail.field}
             title={detail.title}
@@ -77,4 +70,4 @@ function MyInfoEditableProfileCard({ data }: Props) {
   )
 }
 
-export { MyInfoEditableProfileCard }
+export { EditableMyProfileCard }
