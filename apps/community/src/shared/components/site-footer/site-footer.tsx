@@ -7,7 +7,7 @@ import { useAtomValue } from 'jotai'
 
 import { cn } from '@aics-client/design-system/utils'
 
-import LOGO from '~/shared/assets/svgs/kgu-logo-white.svg'
+import LOGO from '~/shared/assets/svgs/kgu-logo.svg'
 import * as styles from '~/shared/components/site-footer/site-footer.css'
 import { PATH, PATHMAP } from '~/shared/constants/path'
 import { isLoggedInAtom } from '~/shared/stores/auth'
