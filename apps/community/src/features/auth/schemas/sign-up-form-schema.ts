@@ -8,7 +8,9 @@ const signUpFormSchema = z
       .min(1, { message: '비밀번호를 입력해주세요.' })
       .regex(
         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,15}$/,
-        { message: '올바른 비밀번호 형식이 아닙니다.' },
+        {
+          message: '비밀번호는 8~15자 영문, 숫자, 특수문자를 포함해야 합니다.',
+        },
       ),
     confirm_password: z
       .string()
