@@ -102,15 +102,15 @@ function SignUpForm() {
   const { register, handleSubmit, errors, isValid } = useSignUpForm()
 
   const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
-    console.log(data)
+    if (isValid) {
+      console.log(data)
+    }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
       <SignUpFormFields register={register} errors={errors} />
-      <Button type="submit" disabled={!isValid}>
-        회원가입
-      </Button>
+      <Button type="submit">회원가입</Button>
     </form>
   )
 }

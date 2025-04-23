@@ -75,14 +75,16 @@ function SignInForm() {
   const { mutate, isError } = useSignIn()
 
   const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
-    mutate(data)
+    if (isValid) {
+      mutate(data)
+    }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
       <SignInFormFields register={register} errors={errors} />
-      <SignInErrorMessage isError={isError} />
       <Button type="submit">로그인</Button>
+      <SignInErrorMessage isError={isError} />
     </form>
   )
 }
