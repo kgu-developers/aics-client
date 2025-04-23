@@ -9,27 +9,27 @@
   "dependencies": {
     "@aics-client/design-system": "workspace:^",
     "@hookform/resolvers": "^5.0.1",
-    "@tanstack/react-query": "^5.72.1",
-    "@tanstack/react-query-devtools": "^5.72.1",
+    "@tanstack/react-query": "^5.74.4",
+    "@tanstack/react-query-devtools": "^5.74.6",
     "@vanilla-extract/css": "^1.17.1",
-    "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250405",
+    "babel-plugin-react-compiler": "19.1.0-rc.1",
     "dompurify": "^3.2.5",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "jotai": "^2.12.2",
-    "lucide-react": "^0.487.0",
-    "next": "^15.2.5",
+    "jotai": "^2.12.3",
+    "lucide-react": "^0.503.0",
+    "next": "^15.3.1",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-hook-form": "^7.55.0",
-    "zod": "^3.24.2"
+    "react-hook-form": "^7.56.1",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
-    "@types/node": "^22.14.0",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/node": "^22.14.1",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
     "@vanilla-extract/next-plugin": "^2.4.10",
     "typescript": "^5.8.3"
   }

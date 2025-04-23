@@ -16,7 +16,7 @@
   "dependencies": {
     "@vanilla-extract/recipes": "^0.5.5",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.487.0"
+    "lucide-react": "^0.503.0"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
@@ -29,11 +29,11 @@
     "@storybook/react-vite": "^8.6.12",
     "@storybook/test": "^8.6.12",
     "@turbo/gen": "^2.5.0",
-    "@types/node": "^22.14.0",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/node": "^22.14.1",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
     "@vanilla-extract/vite-plugin": "^5.0.1",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "storybook": "^8.6.12",
     "typescript": "^5.8.3"
   },
