@@ -6,8 +6,9 @@ import { Board } from '~/features/board/components/board'
 import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
 import { PATH } from '~/shared/constants/path'
 
-function HydrateBoard({ postId }: { postId: string }) {
+function HydratedBoard({ postId }: { postId: string }) {
   const { data } = useSuspenseQuery(BOARD_QUERY_OPTIONS.DETAIL(postId))
+
   return (
     <Board>
       <Board.Header
@@ -27,4 +28,4 @@ function HydrateBoard({ postId }: { postId: string }) {
   )
 }
 
-export { HydrateBoard }
+export { HydratedBoard }
