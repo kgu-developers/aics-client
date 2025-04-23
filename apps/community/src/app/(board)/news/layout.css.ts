@@ -1,5 +1,6 @@
-import { screen } from '@aics-client/design-system/styles'
 import { style } from '@vanilla-extract/css'
+
+import { screen } from '@aics-client/design-system/styles'
 
 const layoutWrapper = style({
   display: 'flex',

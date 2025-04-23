@@ -1,15 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
 import { getQueryClient } from '~/shared/utils/get-query-client'
-
 import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries'
-
-import { PageHeader } from '~/components/page-header'
-
 import { LabList } from '~/features/lab/components/lab-list'
-
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic'
+import { PageHeader } from '~/shared/components/page-header/page-header'
 
 export default function LabPage() {
   const queryClient = getQueryClient()

@@ -1,4 +1,4 @@
-import * as styles from './layout.css'
+import * as styles from '~/app/(auth)/layout.css'
 
 export default function AuthLayout({
   children,

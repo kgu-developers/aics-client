@@ -449,9 +449,9 @@ export type PatchApiV1UsersPasswordData = {
   requestBody: UserPasswordUpdateRequest
 }
 
-export type PatchApiV1UsersPasswordResponse = void
+export type PatchApiV1UsersPasswordResponse = undefined
 
-export type PatchApiV1UsersDeleteResponse = void
+export type PatchApiV1UsersDeleteResponse = undefined
 
 export type GetApiV1UsersMyResponse = UserDetailResponse
 
@@ -478,7 +478,7 @@ export type PatchApiV1CommentsByCommentIdData = {
   requestBody: CommentUpdateRequest
 }
 
-export type PatchApiV1CommentsByCommentIdResponse = void
+export type PatchApiV1CommentsByCommentIdResponse = undefined
 
 export type PatchApiV1CommentsByCommentIdDeleteData = {
   /**
@@ -487,7 +487,7 @@ export type PatchApiV1CommentsByCommentIdDeleteData = {
   commentId: number
 }
 
-export type PatchApiV1CommentsByCommentIdDeleteResponse = void
+export type PatchApiV1CommentsByCommentIdDeleteResponse = undefined
 
 export type GetApiV1ProfessorsResponse = ProfessorListResponse
 
@@ -566,7 +566,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: void
+        204: undefined
       }
     }
   }
@@ -576,7 +576,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: void
+        204: undefined
       }
     }
   }
@@ -617,7 +617,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: void
+        204: undefined
       }
     }
   }
@@ -628,7 +628,7 @@ export type $OpenApiTs = {
         /**
          * No Content
          */
-        204: void
+        204: undefined
       }
     }
   }

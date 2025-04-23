@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import * as styles from '~/app/(board)/notice/layout.css'
-import { AsideNavigationMenu } from '~/components/aside-navigation-menu'
+import { AsideNavigationMenu } from '~/shared/components/aside-navigation-menu/aside-navigation-menu'
 import { PATHMAP } from '~/shared/constants/path'
 
 export const metadata: Metadata = {

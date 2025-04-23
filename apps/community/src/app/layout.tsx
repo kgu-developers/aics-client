@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
 import { Provider as JotaiProvider } from 'jotai'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { ThemeProvider } from '@aics-client/design-system'
+
 import { pretendardVariable } from '~/app/fonts/pretendard-variable'
 import * as styles from '~/app/layout.css'
-import { SiteHeader } from '~/components/shared/site-header/site-header'
-import { SiteFooter } from '~/components/site-footer'
-
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Providers from './providers'
+import Providers from '~/app/providers'
+import { SiteHeader } from '~/shared/components/site-header/site-header'
+import { SiteFooter } from '~/shared/components/site-footer/site-footer'
 
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
