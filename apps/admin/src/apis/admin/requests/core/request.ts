@@ -175,14 +175,15 @@ export const getRequestBody = (options: ApiRequestOptions): unknown => {
       options.mediaType?.includes('+json')
     ) {
       return JSON.stringify(options.body)
-    }if (
+    }
+    if (
       isString(options.body) ||
       isBlob(options.body) ||
       isFormData(options.body)
     ) {
       return options.body
     }
-      return JSON.stringify(options.body)
+    return JSON.stringify(options.body)
   }
   return undefined
 }
@@ -249,11 +250,14 @@ export const getResponseBody = async (response: Response): Promise<unknown> => {
           contentType.includes('+json')
         ) {
           return await response.json()
-        }if (binaryTypes.some((type) => contentType.includes(type))) {
+        }
+        if (binaryTypes.some((type) => contentType.includes(type))) {
           return await response.blob()
-        }if (contentType.includes('multipart/form-data')) {
+        }
+        if (contentType.includes('multipart/form-data')) {
           return await response.formData()
-        }if (contentType.includes('text/')) {
+        }
+        if (contentType.includes('text/')) {
           return await response.text()
         }
       }
