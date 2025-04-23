@@ -7,46 +7,80 @@ import type { Post } from '~/features/main/services/remote'
 import { PATH } from '~/shared/constants/path'
 
 function BoardList({ data }: { data: Post[] }) {
+  if (data.length === 0) {
+    return <EmptyBoardList />
+  }
+
   return (
-    <>
-      {data.length > 0 ? (
-        <ul className={styles.boardListWrapper}>
-          {data.map((row) => (
-            <Row key={row.postId} data={row} />
-          ))}
-        </ul>
-      ) : (
-        <p>게시물이 존재하지 않습니다.</p>
-      )}
-    </>
+    <ul className={styles.boardListWrapper}>
+      {data.map((post) => (
+        <BoardListItem key={post.postId} post={post} />
+      ))}
+    </ul>
   )
 }
 
-function Row({ data }: { data: Post }) {
+function EmptyBoardList() {
+  return <p>게시물이 존재하지 않습니다.</p>
+}
+
+function BoardListItem({ post }: { post: Post }) {
   return (
-    <Link href={PATH.NOTICE_DETAIL(data.postId)}>
+    <Link href={PATH.NOTICE_DETAIL(post.postId)}>
       <li className={styles.row}>
-        <div className={styles.pin}>
-          {data.isPinned ? (
-            <Pin fill="black" size={'1.25rem'} />
-          ) : (
-            <span>{data.postId}</span>
-          )}
-        </div>
-        <div className={styles.rowTitle}>
-          <h2>{data.title}</h2>
-          {data.hasAttachment && <Paperclip color="grey" size={'1rem'} />}
-        </div>
-        <div className={styles.information}>
-          <div className={styles.view}>
-            <Eye size={'1rem'} />
-            <span>{data.views}</span>
-          </div>
-          <div className={styles.author}>{data.author}</div>
-          <div>{data.createdAt}</div>
-        </div>
+        <PostIdentifier isPinned={post.isPinned} postId={post.postId} />
+        <PostTitle title={post.title} hasAttachment={post.hasAttachment} />
+        <PostInformation
+          views={post.views}
+          author={post.author}
+          createdAt={post.createdAt}
+        />
       </li>
     </Link>
+  )
+}
+
+function PostIdentifier({
+  isPinned,
+  postId,
+}: { isPinned: boolean; postId: number }) {
+  return (
+    <div className={styles.pin}>
+      {isPinned ? <Pin fill="black" size={'1.25rem'} /> : <span>{postId}</span>}
+    </div>
+  )
+}
+
+function PostTitle({
+  title,
+  hasAttachment,
+}: { title: string; hasAttachment: boolean }) {
+  return (
+    <div className={styles.rowTitle}>
+      <h2>{title}</h2>
+      {hasAttachment && <Paperclip color="grey" size={'1rem'} />}
+    </div>
+  )
+}
+
+function PostInformation({
+  views,
+  author,
+  createdAt,
+}: {
+  views: number
+  author: string
+  createdAt: string
+}) {
+  return (
+    <div className={styles.information}>
+      <div className={styles.view}>
+        <Eye size={'1rem'} />
+        <span>{views}</span>
+      </div>
+      <div className={styles.author}>{author}</div>
+      <div>{createdAt}</div>
+    </div>
   )
 }
 
