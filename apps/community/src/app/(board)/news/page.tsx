@@ -1,11 +1,11 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { getQueryClient } from '~/shared/utils/get-query-client'
-import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
+import * as styles from '~/app/(board)/notice/page.css'
 import { PaginatedBoardList } from '~/features/board/components/paginated-board-list'
 import { SearchBar } from '~/features/board/components/search-bar'
-import * as styles from '~/app/(board)/notice/page.css'
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 const SIZE = 10
 const CATEGORY = 'NEWS'

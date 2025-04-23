@@ -1,9 +1,9 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { getQueryClient } from '~/shared/utils/get-query-client'
-import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries'
 import { LabList } from '~/features/lab/components/lab-list'
+import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
 export default function LabPage() {
   const queryClient = getQueryClient()
