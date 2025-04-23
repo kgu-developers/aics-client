@@ -28,6 +28,6 @@ const contacts = [
       '용서고속도로: 광교상현 IC에서 수원방면으로 진출 후 1km 직진 후 우회전',
     ],
   },
-];
+]
 
-export { contacts };
+export { contacts }

@@ -1262,6 +1262,6 @@ const boardDetail = [
       title: '다음 게시글 제목',
     },
   },
-];
+]
 
-export { boardDetail };
+export { boardDetail }

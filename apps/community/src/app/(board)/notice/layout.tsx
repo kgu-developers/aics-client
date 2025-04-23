@@ -1,23 +1,23 @@
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'
 
-import * as styles from '~/app/(board)/notice/layout.css';
-import { AsideNavigationMenu } from '~/components/aside-navigation-menu';
-import { PATHMAP } from '~/shared/constants/path';
+import * as styles from '~/app/(board)/notice/layout.css'
+import { AsideNavigationMenu } from '~/components/aside-navigation-menu'
+import { PATHMAP } from '~/shared/constants/path'
 
 export const metadata: Metadata = {
   title: '공지사항- 경기대학교 AI컴퓨터공학부',
   description: '경기대학교 AI컴퓨터공학부의 공지사항을 소개해요.',
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <div className={styles.layoutWrapper}>
       <AsideNavigationMenu base={PATHMAP.board} />
       <div className={styles.content}>{children}</div>
     </div>
-  );
+  )
 }

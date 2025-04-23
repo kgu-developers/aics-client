@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import type { Professor } from '~/features/member/services/remote';
+import type { Professor } from '~/features/member/services/remote'
 
-import * as styles from '~/components/member/professor/professor-card.css';
+import * as styles from '~/components/member/professor/professor-card.css'
 
 function ProfessorCard({ professor }: { professor: Professor }) {
   return (
@@ -26,7 +26,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
         <p>{professor.officeLoc}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export { ProfessorCard };
+export { ProfessorCard }

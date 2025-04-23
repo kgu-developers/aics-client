@@ -1,7 +1,7 @@
-import * as styles from '~/components/(auth)/auth-button.css';
+import * as styles from '~/components/(auth)/auth-button.css'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 function AuthButton({ children, ...props }: ButtonProps) {
@@ -9,7 +9,7 @@ function AuthButton({ children, ...props }: ButtonProps) {
     <button className={styles.button} {...props}>
       {children}
     </button>
-  );
+  )
 }
 
-export { AuthButton };
+export { AuthButton }

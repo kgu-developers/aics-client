@@ -6,6 +6,6 @@ const border = {
     xl: '0.75rem',
     full: '9999px',
   },
-} as const;
+} as const
 
-export default border;
+export default border

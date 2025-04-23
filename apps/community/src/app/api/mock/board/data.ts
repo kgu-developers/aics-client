@@ -599,6 +599,6 @@ const board = [
     isPinned: false,
     createAt: '2024-10-27',
   },
-];
+]
 
-export { board };
+export { board }

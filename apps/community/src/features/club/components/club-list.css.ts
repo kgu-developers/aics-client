@@ -1,5 +1,5 @@
-import { screen, themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { screen, themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 const clubList = style([
   screen.xl({
@@ -9,6 +9,6 @@ const clubList = style([
     display: 'grid',
     gap: themeVars.spacing.md,
   },
-]);
+])
 
-export { clubList };
+export { clubList }

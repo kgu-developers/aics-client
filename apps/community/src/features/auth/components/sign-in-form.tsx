@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { Input } from '@aics-client/design-system';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import type { z } from 'zod';
+import { Input } from '@aics-client/design-system'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import type { z } from 'zod'
 
-import { AuthButton } from '~/components/(auth)/auth-button';
-import * as styles from '~/components/(auth)/signin/sign-in-form.css';
+import { AuthButton } from '~/components/(auth)/auth-button'
+import * as styles from '~/components/(auth)/signin/sign-in-form.css'
 
-import { useSignIn } from '~/features/auth/hooks/use-sign-in';
-import { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema';
+import { useSignIn } from '~/features/auth/hooks/use-sign-in'
+import { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema'
 
 const defaultValues = {
   userId: '',
   password: '',
-};
+}
 
 function SignInForm() {
   const {
@@ -24,21 +24,21 @@ function SignInForm() {
   } = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues,
-  });
+  })
 
-  const mutation = useSignIn();
+  const mutation = useSignIn()
 
   const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSubmit((data) => mutation.mutate(data));
+      handleSubmit((data) => mutation.mutate(data))
     }
-  };
+  }
 
   const resetErrorMessage = () => {
     if (mutation.isError) {
-      mutation.reset();
+      mutation.reset()
     }
-  };
+  }
 
   return (
     <form
@@ -72,7 +72,7 @@ function SignInForm() {
         로그인
       </AuthButton>
     </form>
-  );
+  )
 }
 
-export { SignInForm };
+export { SignInForm }

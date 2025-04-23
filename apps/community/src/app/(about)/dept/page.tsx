@@ -1,18 +1,18 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries'
 
-import { getQueryClient } from '~/shared/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
-import { PageHeader } from '~/components/page-header';
-import { DeptInfoSection } from '~/features/dept/components/dept-info-section';
+import { PageHeader } from '~/components/page-header'
+import { DeptInfoSection } from '~/features/dept/components/dept-info-section'
 
 //** TODO: for mocking */
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 
 export default function Dept() {
-  const queryClient = getQueryClient();
+  const queryClient = getQueryClient()
 
-  void queryClient.prefetchQuery(DEPT_QUERY_OPTIONS.ALL());
+  void queryClient.prefetchQuery(DEPT_QUERY_OPTIONS.ALL())
 
   return (
     <>
@@ -24,5 +24,5 @@ export default function Dept() {
         <DeptInfoSection />
       </HydrationBoundary>
     </>
-  );
+  )
 }

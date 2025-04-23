@@ -1,4 +1,4 @@
-import { globalStyle } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css'
 
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -13,14 +13,14 @@ Use a better box model (opinionated).
 
 globalStyle('*, ::before, ::after', {
   boxSizing: 'border-box',
-});
+})
 
 globalStyle('html', {
   fontFamily: `system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'`,
   lineHeight: '1.15',
   WebkitTextSizeAdjust: '100%',
   tabSize: '4',
-});
+})
 
 /*
 Sections
@@ -29,7 +29,7 @@ Sections
 
 globalStyle('body', {
   margin: '0',
-});
+})
 
 /*
 Text-level semantics
@@ -42,7 +42,7 @@ Add the correct font weight in Chrome and Safari.
 
 globalStyle('b, strong', {
   fontWeight: 'bolder',
-});
+})
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
@@ -52,7 +52,7 @@ globalStyle('b, strong', {
 globalStyle('code, kbd, samp, pre', {
   fontFamily: `ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace`,
   fontSize: '1em',
-});
+})
 
 /**
 Add the correct font size in all browsers.
@@ -60,7 +60,7 @@ Add the correct font size in all browsers.
 
 globalStyle('small', {
   fontSize: '80%',
-});
+})
 
 /**
 Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
@@ -71,15 +71,15 @@ globalStyle('sub, sup', {
   lineHeight: '0',
   position: 'relative',
   verticalAlign: 'baseline',
-});
+})
 
 globalStyle('sub', {
   bottom: '-0.25em',
-});
+})
 
 globalStyle('sup', {
   top: '-0.5em',
-});
+})
 
 /*
 Tabular data
@@ -92,7 +92,7 @@ Correct table border color inheritance in Chrome and Safari. (https://issues.chr
 
 globalStyle('table', {
   borderColor: 'currentcolor',
-});
+})
 
 /*
 Forms
@@ -109,7 +109,7 @@ globalStyle('button, input, optgroup, select, textarea', {
   fontSize: '100%',
   lineHeight: '1.15',
   margin: '0',
-});
+})
 
 /**
 Correct the inability to style clickable types in iOS and Safari.
@@ -117,7 +117,7 @@ Correct the inability to style clickable types in iOS and Safari.
 
 globalStyle("button, [type='button'], [type='reset'], [type='submit']", {
   WebkitAppearance: 'button',
-});
+})
 
 /**
 Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
@@ -125,7 +125,7 @@ Remove the padding so developers are not caught out when they zero out 'fieldset
 
 globalStyle('legend', {
   padding: '0',
-});
+})
 
 /**
 Add the correct vertical alignment in Chrome and Firefox.
@@ -133,7 +133,7 @@ Add the correct vertical alignment in Chrome and Firefox.
 
 globalStyle('progress', {
   verticalAlign: 'baseline',
-});
+})
 
 /**
 Correct the cursor style of increment and decrement buttons in Safari.
@@ -141,7 +141,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 globalStyle('::-webkit-inner-spin-button, ::-webkit-outer-spin-button', {
   height: 'auto',
-});
+})
 
 /**
 1. Correct the odd appearance in Chrome and Safari.
@@ -151,7 +151,7 @@ globalStyle('::-webkit-inner-spin-button, ::-webkit-outer-spin-button', {
 globalStyle('[type="search"]', {
   WebkitAppearance: 'textfield',
   outlineOffset: '-2px',
-});
+})
 
 /**
 Remove the inner padding in Chrome and Safari on macOS.
@@ -159,7 +159,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 
 globalStyle('::-webkit-search-decoration', {
   WebkitAppearance: 'none',
-});
+})
 
 /**
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -169,7 +169,7 @@ globalStyle('::-webkit-search-decoration', {
 globalStyle('::-webkit-file-upload-button', {
   WebkitAppearance: 'button',
   font: 'inherit',
-});
+})
 
 /*
 Interactive
@@ -182,4 +182,4 @@ Add the correct display in Chrome and Safari.
 
 globalStyle('summary', {
   display: 'list-item',
-});
+})

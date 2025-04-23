@@ -1,11 +1,11 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 const footer = style({
   display: 'flex',
   width: '100%',
   flexDirection: 'column',
-});
+})
 
 const footerNav = style({
   display: 'grid',
@@ -22,7 +22,7 @@ const footerNav = style({
       padding: '2.5rem 5rem',
     },
   },
-});
+})
 
 const logo = style({
   display: 'flex',
@@ -30,7 +30,7 @@ const logo = style({
   gap: themeVars.spacing.md,
   fontSize: themeVars.fontSize.xl,
   fontWeight: themeVars.fontWeight.bold,
-});
+})
 
 const navLinks = style({
   width: '70%',
@@ -47,27 +47,27 @@ const navLinks = style({
       gridTemplateColumns: 'repeat(auto-fit, minmax(76px, 1fr))',
     },
   },
-});
+})
 
 const navGroup = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.75rem',
-});
+})
 
 const hideMyPage = style({
   display: 'none',
-});
+})
 
 const navGroupTitle = style({
   fontWeight: 'bold',
-});
+})
 
 const navGroupLinks = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
-});
+})
 
 const navGroupLink = style({
   color: 'lightgray',
@@ -76,13 +76,13 @@ const navGroupLink = style({
   ':hover': {
     color: 'white',
   },
-});
+})
 
 const footerCopy = style({
   textAlign: 'center',
   padding: '2rem 0',
   color: 'gray',
-});
+})
 
 export {
   footer,
@@ -95,4 +95,4 @@ export {
   navGroupTitle,
   navGroupLink,
   footerCopy,
-};
+}

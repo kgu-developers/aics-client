@@ -1,10 +1,10 @@
-import { getAccessToken } from './token';
+import { getAccessToken } from './token'
 
 interface RequestParams {
-  method: string;
-  url: string;
-  options?: RequestInit;
-  data?: unknown;
+  method: string
+  url: string
+  options?: RequestInit
+  data?: unknown
 }
 
 async function request<Response>({
@@ -13,7 +13,7 @@ async function request<Response>({
   options = {},
   data,
 }: RequestParams): Promise<Response> {
-  const accessToken = getAccessToken();
+  const accessToken = getAccessToken()
 
   const config: RequestInit = {
     method,
@@ -23,23 +23,23 @@ async function request<Response>({
       ...(options.headers || {}),
     },
     ...options,
-  };
+  }
 
   if (data) {
-    config.body = JSON.stringify(data);
+    config.body = JSON.stringify(data)
   }
 
-  const res = await fetch(url, config);
+  const res = await fetch(url, config)
   if (!res.ok) {
-    throw new Error(`Status: ${res.status}`);
+    throw new Error(`Status: ${res.status}`)
   }
-  const responseData = await res.json();
+  const responseData = await res.json()
 
   if (method === 'POST') {
-    return responseData;
+    return responseData
   }
 
-  return responseData as Response;
+  return responseData as Response
 }
 
 const http = {
@@ -47,35 +47,35 @@ const http = {
     url: string,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'GET', url, options });
+    return request<Response>({ method: 'GET', url, options })
   },
   post: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'POST', url, options, data });
+    return request<Response>({ method: 'POST', url, options, data })
   },
   put: <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'PUT', url, options, data });
+    return request<Response>({ method: 'PUT', url, options, data })
   },
   delete: <Response = unknown>(
     url: string,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'DELETE', url, options });
+    return request<Response>({ method: 'DELETE', url, options })
   },
   patch: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'PATCH', url, options, data });
+    return request<Response>({ method: 'PATCH', url, options, data })
   },
-};
+}
 
-export { http };
+export { http }

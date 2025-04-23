@@ -1,4 +1,4 @@
-import { useRouter } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router'
 import {
   Button,
   Checkbox,
@@ -8,23 +8,23 @@ import {
   Radio,
   Upload,
   message,
-} from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import { UploadIcon } from 'lucide-react';
-import type { ReactNode } from 'react';
+} from 'antd'
+import type { UploadChangeParam } from 'antd/es/upload'
+import { UploadIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
 
-import { Editor } from '@aics-client/tiptap';
+import { Editor } from '@aics-client/tiptap'
 
 import {
   useFileServicePostApiV1FilesPost,
   usePostServicePostApiV1Posts,
-} from '~/apis/admin/queries';
-import type { PostUpdateRequest } from '~/apis/admin/requests';
+} from '~/apis/admin/queries'
+import type { PostUpdateRequest } from '~/apis/admin/requests'
 
-import { useModal } from '~/hooks/use-modal';
+import { useModal } from '~/hooks/use-modal'
 
-import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
-import { queryClient } from '~/utils/get-query-client';
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
+import { queryClient } from '~/utils/get-query-client'
 
 function FormItemWrapper({
   label,
@@ -35,12 +35,12 @@ function FormItemWrapper({
       <span className="text-xl font-semibold">{label}</span>
       {children}
     </div>
-  );
+  )
 }
 
 function BottomButtons() {
-  const { isOpen, openModal, closeModal } = useModal();
-  const router = useRouter();
+  const { isOpen, openModal, closeModal } = useModal()
+  const router = useRouter()
 
   return (
     <div className="flex items-center self-end gap-3">
@@ -78,56 +78,56 @@ function BottomButtons() {
         저장하기
       </Button>
     </div>
-  );
+  )
 }
 
 function WriteNewPostField() {
-  const router = useRouter();
-  const [messageApi, contextHolder] = message.useMessage();
-  const [form] = Form.useForm();
-  const fileUploadMutation = useFileServicePostApiV1FilesPost();
-  const postsMutation = usePostServicePostApiV1Posts();
+  const router = useRouter()
+  const [messageApi, contextHolder] = message.useMessage()
+  const [form] = Form.useForm()
+  const fileUploadMutation = useFileServicePostApiV1FilesPost()
+  const postsMutation = usePostServicePostApiV1Posts()
 
   const handleFileUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+  }
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [usePostServiceGetApiV1PostsKey],
-    });
+    })
     await messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 등록되었습니다.',
       duration: 0.7,
-    });
-    router.history.back();
-  };
+    })
+    router.history.back()
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '게시글 등록에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (values: PostUpdateRequest) => {
     try {
-      const fileList = form.getFieldValue('file');
+      const fileList = form.getFieldValue('file')
 
-      let fileId: number | undefined = undefined;
+      let fileId: number | undefined = undefined
 
       if (fileList && fileList.length > 0) {
-        const originFileObj = fileList[0]?.originFileObj;
+        const originFileObj = fileList[0]?.originFileObj
 
         if (originFileObj instanceof File) {
           const uploadRes = await fileUploadMutation.mutateAsync({
             formData: { file: originFileObj },
-          });
-          fileId = uploadRes.id;
+          })
+          fileId = uploadRes.id
         } else if (originFileObj?.id) {
-          fileId = originFileObj.id;
+          fileId = originFileObj.id
         }
       }
 
@@ -143,17 +143,17 @@ function WriteNewPostField() {
         },
         {
           onSuccess: () => {
-            handleSuccess();
+            handleSuccess()
           },
           onError: () => {
-            handleError();
+            handleError()
           },
         },
-      );
+      )
     } catch (_error) {
-      handleError();
+      handleError()
     }
-  };
+  }
 
   return (
     <>
@@ -196,8 +196,8 @@ function WriteNewPostField() {
           >
             <Upload
               beforeUpload={(file) => {
-                handleFileUpload(file);
-                return false;
+                handleFileUpload(file)
+                return false
               }}
               maxCount={1}
             >
@@ -221,7 +221,7 @@ function WriteNewPostField() {
         <BottomButtons />
       </Form>
     </>
-  );
+  )
 }
 
-export { WriteNewPostField };
+export { WriteNewPostField }

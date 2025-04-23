@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import * as styles from '~/components/(auth)/auth-footer.css';
+import Link from 'next/link'
+import * as styles from '~/components/(auth)/auth-footer.css'
 
 interface Props {
-  description: string;
-  link: string;
-  href: string;
+  description: string
+  link: string
+  href: string
 }
 
 function AuthFooter({ description, link, href }: Props) {
@@ -15,7 +15,7 @@ function AuthFooter({ description, link, href }: Props) {
         {link}
       </Link>
     </div>
-  );
+  )
 }
 
-export { AuthFooter };
+export { AuthFooter }

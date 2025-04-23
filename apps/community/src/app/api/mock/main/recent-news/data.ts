@@ -63,6 +63,6 @@ const news = [
     description:
       '게시글 8입니다. 게시글 8입니다. 게시글 8입니다. 게시글 8입니다. 게시글 8입니다. 게시글 8입니다. 게시글 8입니다. 게시글 8입니다.',
   },
-] as const;
+] as const
 
-export { news };
+export { news }

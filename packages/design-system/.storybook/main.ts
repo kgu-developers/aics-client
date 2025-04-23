@@ -1,9 +1,9 @@
-import { dirname, join } from 'node:path';
-import type { StorybookConfig } from '@storybook/react-vite';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { dirname, join } from 'node:path'
+import type { StorybookConfig } from '@storybook/react-vite'
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 
 function getAbsolutePath(value: string) {
-  return dirname(require.resolve(join(value, 'package.json')));
+  return dirname(require.resolve(join(value, 'package.json')))
 }
 const config: StorybookConfig = {
   stories: [
@@ -23,13 +23,13 @@ const config: StorybookConfig = {
     builder: getAbsolutePath('@storybook/builder-vite'),
   },
   async viteFinal(config) {
-    config.plugins = config.plugins || [];
+    config.plugins = config.plugins || []
     config.plugins.push(
       vanillaExtractPlugin({
         identifiers: ({ hash }) => `_${hash}`,
       }),
-    );
-    return config;
+    )
+    return config
   },
-};
-export default config;
+}
+export default config

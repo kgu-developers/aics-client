@@ -24,6 +24,6 @@ const heroes = [
     image: 'https://picsum.photos/900/1600',
     alt: 'picsum',
   },
-] as const;
+] as const
 
-export { heroes };
+export { heroes }

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router'
 import {
   Button,
   List,
@@ -6,44 +6,44 @@ import {
   Pagination,
   type PaginationProps,
   message,
-} from 'antd';
-import { Pin, PlusIcon, Trash2Icon } from 'lucide-react';
+} from 'antd'
+import { Pin, PlusIcon, Trash2Icon } from 'lucide-react'
 
-import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/apis/admin/queries';
-import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
-import type { PostSummaryResponse } from '~/apis/community/requests';
+import { usePostServicePatchApiV1PostsByPostIdDelete as useDeletePost } from '~/apis/admin/queries'
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
+import type { PostSummaryResponse } from '~/apis/community/requests'
 import {
   NEW_POST_PATH_MAP,
   POST_DETAIL_PATH_MAP,
   type PostCategory,
-} from '~/constants/path';
+} from '~/constants/path'
 
-import { useModal } from '~/hooks/use-modal';
-import { queryClient } from '~/utils/get-query-client';
+import { useModal } from '~/hooks/use-modal'
+import { queryClient } from '~/utils/get-query-client'
 
 function DeleteButton({ postId, title }: { postId: number; title: string }) {
-  const { mutate } = useDeletePost();
-  const { isOpen, openModal, closeModal } = useModal();
-  const [messageApi, contextHolder] = message.useMessage();
+  const { mutate } = useDeletePost()
+  const { isOpen, openModal, closeModal } = useModal()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const handleSuccess = () => {
     queryClient.invalidateQueries({
       queryKey: [usePostServiceGetApiV1PostsKey],
-    });
-    closeModal();
+    })
+    closeModal()
     messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 삭제되었습니다.',
-    });
-  };
+    })
+  }
 
   const handleError = () => {
-    closeModal();
+    closeModal()
     messageApi.open({
       type: 'error',
       content: '게시글 삭제에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleDelete = () => {
     mutate(
@@ -52,8 +52,8 @@ function DeleteButton({ postId, title }: { postId: number; title: string }) {
         onSuccess: handleSuccess,
         onError: handleError,
       },
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -84,12 +84,12 @@ function DeleteButton({ postId, title }: { postId: number; title: string }) {
         정말 삭제하시겠습니까?
       </Modal>
     </>
-  );
+  )
 }
 
 interface PostListItemProps {
-  post: PostSummaryResponse;
-  to: PostCategory;
+  post: PostSummaryResponse
+  to: PostCategory
 }
 
 function PostListItem({ post, to }: PostListItemProps) {
@@ -112,25 +112,25 @@ function PostListItem({ post, to }: PostListItemProps) {
       </Link>
       <DeleteButton postId={post.postId} title={post.title} />
     </List.Item>
-  );
+  )
 }
 
 interface PostListProps {
-  title: string;
-  to: PostCategory;
-  currentPage: number;
-  data: PostSummaryResponse[];
-  total: number;
+  title: string
+  to: PostCategory
+  currentPage: number
+  data: PostSummaryResponse[]
+  total: number
 }
 
 function PostsList({ title, to, currentPage, data, total }: PostListProps) {
-  const navigate = useNavigate({ from: to });
+  const navigate = useNavigate({ from: to })
 
   const handlePageChange: PaginationProps['onChange'] = (currentPage) => {
     navigate({
       search: (prev) => ({ ...prev, page: currentPage - 1 }),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -165,7 +165,7 @@ function PostsList({ title, to, currentPage, data, total }: PostListProps) {
         onChange={handlePageChange}
       />
     </>
-  );
+  )
 }
 
-export default PostsList;
+export default PostsList

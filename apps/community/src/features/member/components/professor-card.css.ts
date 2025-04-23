@@ -1,5 +1,5 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 export const card = style({
   width: themeVars.width.full,
@@ -14,7 +14,7 @@ export const card = style({
   flexDirection: themeVars.flexDirection.column,
   gap: themeVars.spacing.lg,
   paddingTop: '0.75rem',
-});
+})
 
 export const avatarImage = style({
   marginTop: '0.375rem',
@@ -22,7 +22,7 @@ export const avatarImage = style({
   height: '8rem',
   borderRadius: themeVars.borderRadius.full,
   objectFit: 'cover',
-});
+})
 
 export const fallbackImage = style({
   marginTop: '0.375rem',
@@ -36,19 +36,19 @@ export const fallbackImage = style({
   textAlign: 'center',
   fontSize: themeVars.fontSize.md,
   color: themeVars.color.black,
-});
+})
 
 export const cardContent = style({
   display: themeVars.display.flex,
   flexDirection: themeVars.flexDirection.column,
   gap: themeVars.spacing.xs,
-});
+})
 
 export const professorName = style({
   fontWeight: themeVars.fontWeight.semibold,
   letterSpacing: '-0.025em',
   margin: themeVars.margin.none,
-});
+})
 
 export const professorType = style({
   margin: themeVars.margin.none,
@@ -56,19 +56,19 @@ export const professorType = style({
   fontWeight: 400,
   lineHeight: themeVars.lineHeight.sm,
   color: themeVars.color.gray600,
-});
+})
 
 export const cardFooter = style({
   display: themeVars.display.flex,
   flexDirection: themeVars.flexDirection.column,
   gap: themeVars.spacing.sm,
   paddingBottom: '1rem',
-});
+})
 
 export const professorContact = style({
   margin: themeVars.margin.none,
-});
+})
 
 export const professorEmail = style({
   margin: themeVars.margin.none,
-});
+})

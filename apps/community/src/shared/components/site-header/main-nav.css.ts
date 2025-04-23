@@ -1,5 +1,5 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 const leftSide = style({
   display: 'none',
@@ -13,24 +13,24 @@ const leftSide = style({
       visibility: 'visible',
     },
   },
-});
+})
 
 const logo = style({
   display: 'flex',
   gap: themeVars.spacing.sm,
   alignItems: 'center',
   fontWeight: themeVars.fontWeight.bold,
-});
+})
 
 const nav = style({
   display: 'flex',
   gap: themeVars.spacing.xl,
-});
+})
 
 const navGroup = style({
   position: 'relative',
   padding: '1rem 0',
-});
+})
 
 const navGroupTitle = style({
   textDecoration: 'none',
@@ -46,7 +46,7 @@ const navGroupTitle = style({
   ':hover': {
     color: themeVars.color.black,
   },
-});
+})
 
 const navGroupLinks = style({
   position: 'absolute',
@@ -69,7 +69,7 @@ const navGroupLinks = style({
       transform: 'translateY(0)',
     },
   },
-});
+})
 
 const navGroupLink = style({
   padding: '1rem',
@@ -80,7 +80,7 @@ const navGroupLink = style({
   ':hover': {
     background: themeVars.color.gray100,
   },
-});
+})
 
 export {
   leftSide,
@@ -90,4 +90,4 @@ export {
   navGroupLink,
   navGroupLinks,
   navGroupTitle,
-};
+}

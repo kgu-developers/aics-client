@@ -17,6 +17,6 @@ const clubs = [
     name: 'InQ',
     description: '개발자 플랫폼 동아리 InQ입니다.',
   },
-];
+]
 
-export { clubs };
+export { clubs }

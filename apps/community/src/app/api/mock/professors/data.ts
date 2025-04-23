@@ -151,6 +151,6 @@ const professors = [
     contact: '031-249-1306',
     email: 'ksna001@kyonggi.ac.kr',
   },
-];
+]
 
-export { professors };
+export { professors }

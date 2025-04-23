@@ -1,23 +1,23 @@
-import { ChevronDown, Menu, XIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
+import { ChevronDown, Menu, XIcon } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
-import { cn } from '@aics-client/design-system/utils';
+import { cn } from '@aics-client/design-system/utils'
 
-import { PATH, PATHMAP } from '~/shared/constants/path';
+import { PATH, PATHMAP } from '~/shared/constants/path'
 
-import * as styles from '~/components/shared/site-header/mobile-nav.css';
+import * as styles from '~/components/shared/site-header/mobile-nav.css'
 
 function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>({});
+  const [isOpen, setIsOpen] = useState(false)
+  const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>({})
 
   const toggleGroup = (key: string) => {
     setOpenGroups((prev) => ({
       ...prev,
       [key]: !prev[key],
-    }));
-  };
+    }))
+  }
 
   return (
     <>
@@ -32,7 +32,7 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
         onClick={() => setIsOpen(false)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            setIsOpen(false);
+            setIsOpen(false)
           }
         }}
         tabIndex={0}
@@ -49,7 +49,7 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
         <nav>
           {Object.entries(PATHMAP).map(([key, path]) => {
             if (path.path === PATH.MY && !isLoggedIn) {
-              return null;
+              return null
             }
             return (
               <div key={key} className={styles.navGroup}>
@@ -92,12 +92,12 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
                   </Link>
                 )}
               </div>
-            );
+            )
           })}
         </nav>
       </div>
     </>
-  );
+  )
 }
 
-export { MobileNav };
+export { MobileNav }

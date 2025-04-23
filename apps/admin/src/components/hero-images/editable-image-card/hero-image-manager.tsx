@@ -1,74 +1,74 @@
-import { Button, Form, Input, Modal, Upload, message } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import { PencilIcon, Trash2Icon, UploadIcon } from 'lucide-react';
+import { Button, Form, Input, Modal, Upload, message } from 'antd'
+import type { UploadChangeParam } from 'antd/es/upload'
+import { PencilIcon, Trash2Icon, UploadIcon } from 'lucide-react'
 
 import {
   useCarouselServiceDeleteApiV1CarouselsById,
   useCarouselServicePatchApiV1CarouselsById,
   useFileServicePostApiV1FilesCarousel,
-} from '~/apis/admin/queries';
-import type { CarouselUpdateRequest } from '~/apis/admin/requests';
-import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries';
+} from '~/apis/admin/queries'
+import type { CarouselUpdateRequest } from '~/apis/admin/requests'
+import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries'
 
-import type { CarouselResponse } from '~/apis/community/requests';
-import { useModal } from '~/hooks/use-modal';
+import type { CarouselResponse } from '~/apis/community/requests'
+import { useModal } from '~/hooks/use-modal'
 
-import { queryClient } from '~/utils/get-query-client';
-import { extractFileName } from '~/utils/utils';
+import { queryClient } from '~/utils/get-query-client'
+import { extractFileName } from '~/utils/utils'
 
 interface CraeteImageFormProps {
-  onClose: () => void;
-  image: CarouselResponse;
+  onClose: () => void
+  image: CarouselResponse
 }
 
 function EditImageForm({ onClose, image }: CraeteImageFormProps) {
-  const [form] = Form.useForm();
-  const [messageApi, contextHolder] = message.useMessage();
-  const { mutateAsync: uploadImage } = useFileServicePostApiV1FilesCarousel();
-  const { mutate: saveImage } = useCarouselServicePatchApiV1CarouselsById();
+  const [form] = Form.useForm()
+  const [messageApi, contextHolder] = message.useMessage()
+  const { mutateAsync: uploadImage } = useFileServicePostApiV1FilesCarousel()
+  const { mutate: saveImage } = useCarouselServicePatchApiV1CarouselsById()
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [useCarouselServiceGetApiV1CarouselsKey],
-    });
+    })
     await messageApi.open({
       type: 'success',
       content: '이미지가 성공적으로 수정되었습니다.',
       duration: 0.8,
-    });
-    onClose();
-  };
+    })
+    onClose()
+  }
 
   const handleFileUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '이미지 수정에 실패했습니다.',
-    });
-    form.resetFields();
-    onClose();
-  };
+    })
+    form.resetFields()
+    onClose()
+  }
 
   const handleSubmit = async (values: CarouselUpdateRequest) => {
     try {
-      const fileList = form.getFieldValue('file');
+      const fileList = form.getFieldValue('file')
 
-      let fileId: number | undefined = undefined;
+      let fileId: number | undefined = undefined
 
       if (fileList && fileList.length > 0) {
-        const originFileObj = fileList[0]?.originFileObj;
+        const originFileObj = fileList[0]?.originFileObj
 
         if (originFileObj instanceof File) {
           const uploadRes = await uploadImage({
             formData: { file: originFileObj },
-          });
-          fileId = uploadRes.id;
+          })
+          fileId = uploadRes.id
         } else if (values?.fileId === originFileObj?.id) {
-          fileId = image?.file?.id;
+          fileId = image?.file?.id
         }
       }
 
@@ -83,17 +83,17 @@ function EditImageForm({ onClose, image }: CraeteImageFormProps) {
         },
         {
           onSuccess: () => {
-            handleSuccess();
+            handleSuccess()
           },
           onError: () => {
-            handleError();
+            handleError()
           },
         },
-      );
+      )
     } catch (_error) {
-      handleError();
+      handleError()
     }
-  };
+  }
 
   return (
     <>
@@ -126,8 +126,8 @@ function EditImageForm({ onClose, image }: CraeteImageFormProps) {
         >
           <Upload
             beforeUpload={(file) => {
-              handleFileUpload(file);
-              return false;
+              handleFileUpload(file)
+              return false
             }}
             maxCount={1}
             listType="picture"
@@ -152,11 +152,11 @@ function EditImageForm({ onClose, image }: CraeteImageFormProps) {
         </Button>
       </Form>
     </>
-  );
+  )
 }
 
 function EditHeroImageButton({ image }: { image: CarouselResponse }) {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <>
@@ -178,48 +178,48 @@ function EditHeroImageButton({ image }: { image: CarouselResponse }) {
         수정
       </Button>
     </>
-  );
+  )
 }
 
 function DeleteHeroImageButton({
   id,
 }: {
-  id: number;
+  id: number
 }) {
-  const [messageApi, contextHolder] = message.useMessage();
-  const { mutate: deleteImage } = useCarouselServiceDeleteApiV1CarouselsById();
+  const [messageApi, contextHolder] = message.useMessage()
+  const { mutate: deleteImage } = useCarouselServiceDeleteApiV1CarouselsById()
 
   const handleSuccess = async () => {
     await messageApi.open({
       type: 'success',
       content: '이미지가 성공적으로 삭제되었습니다.',
       duration: 0.7,
-    });
+    })
     queryClient.invalidateQueries({
       queryKey: [useCarouselServiceGetApiV1CarouselsKey],
-    });
-  };
+    })
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '이미지 삭제에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleDeleteImage = () => {
     deleteImage(
       { id },
       {
         onSuccess: () => {
-          handleSuccess();
+          handleSuccess()
         },
         onError: () => {
-          handleError();
+          handleError()
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -233,7 +233,7 @@ function DeleteHeroImageButton({
         삭제
       </Button>
     </>
-  );
+  )
 }
 
-export { EditHeroImageButton, DeleteHeroImageButton };
+export { EditHeroImageButton, DeleteHeroImageButton }

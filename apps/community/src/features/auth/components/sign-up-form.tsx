@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { Input } from '@aics-client/design-system';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch } from 'react-hook-form';
-import { z } from 'zod';
+import { Input } from '@aics-client/design-system'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, useWatch } from 'react-hook-form'
+import { z } from 'zod'
 
-import { AuthButton } from '~/components/(auth)/auth-button';
-import * as styles from '~/components/(auth)/signup/sign-up-form.css';
+import { AuthButton } from '~/components/(auth)/auth-button'
+import * as styles from '~/components/(auth)/signup/sign-up-form.css'
 
 const signUpFormSchema = z
   .object({
@@ -31,7 +31,7 @@ const signUpFormSchema = z
   .refine((data) => data.password === data.confirm_password, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['confirm_password'],
-  });
+  })
 
 const defaultValues = {
   studentId: '',
@@ -40,7 +40,7 @@ const defaultValues = {
   name: '',
   email: '',
   phone: '',
-};
+}
 
 function SignUpForm() {
   const {
@@ -51,7 +51,7 @@ function SignUpForm() {
   } = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues,
-  });
+  })
 
   const [studentId, password, confirmPassword, name, email, phone] = useWatch({
     control,
@@ -63,14 +63,14 @@ function SignUpForm() {
       'email',
       'phone',
     ],
-  });
+  })
 
   const isFormValid =
-    studentId && password && confirmPassword && name && email && phone;
+    studentId && password && confirmPassword && name && email && phone
 
   const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
@@ -134,7 +134,7 @@ function SignUpForm() {
         회원가입
       </AuthButton>
     </form>
-  );
+  )
 }
 
-export { SignUpForm };
+export { SignUpForm }

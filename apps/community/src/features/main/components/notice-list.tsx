@@ -1,16 +1,14 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
-import DOMPurify from 'dompurify';
-import Link from 'next/link';
+import { useSuspenseQuery } from '@tanstack/react-query'
+import DOMPurify from 'dompurify'
+import Link from 'next/link'
 
-import * as styles from '~/features/main/components/notice-list.css';
-import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
+import * as styles from '~/features/main/components/notice-list.css'
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
 
 function NoticeList() {
-  const { data: recentNotices } = useSuspenseQuery(
-    MAIN_QUERY_OPTIONS.NOTICES(),
-  );
+  const { data: recentNotices } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NOTICES())
 
   return (
     <section className={styles.notice}>
@@ -36,7 +34,7 @@ function NoticeList() {
         ))}
       </ul>
     </section>
-  );
+  )
 }
 
-export default NoticeList;
+export default NoticeList

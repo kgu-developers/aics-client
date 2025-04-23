@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons'
 
 import {
   Button,
@@ -9,33 +9,33 @@ import {
   Typography,
   Upload,
   message,
-} from 'antd';
-import type { FormInstance, TableProps } from 'antd';
-import type { ClubDetailResponse } from '~/apis/community/requests';
+} from 'antd'
+import type { FormInstance, TableProps } from 'antd'
+import type { ClubDetailResponse } from '~/apis/community/requests'
 
-const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL
 
 interface ClubTableViewProps {
-  form: FormInstance;
-  data: ClubDetailResponse[];
+  form: FormInstance
+  data: ClubDetailResponse[]
   register: {
-    isEditing: (record: ClubDetailResponse) => boolean;
+    isEditing: (record: ClubDetailResponse) => boolean
     handleEdit: (
       record: Partial<ClubDetailResponse> & { id: React.Key },
-    ) => void;
-    cancel: () => void;
-  };
-  handleSave: (record: ClubDetailResponse) => void;
-  handleDelete: (record: ClubDetailResponse) => void;
-  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean;
+    ) => void
+    cancel: () => void
+  }
+  handleSave: (record: ClubDetailResponse) => void
+  handleDelete: (record: ClubDetailResponse) => void
+  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean
 }
 
 interface EditableCellProps {
-  editing: boolean;
-  dataIndex: string;
-  title: string;
-  record: ClubDetailResponse;
-  children: React.ReactNode;
+  editing: boolean
+  dataIndex: string
+  title: string
+  record: ClubDetailResponse
+  children: React.ReactNode
 }
 
 const EditableCell = ({
@@ -60,8 +60,8 @@ const EditableCell = ({
         children
       )}
     </td>
-  );
-};
+  )
+}
 
 function ClubTableView({
   form,
@@ -71,7 +71,7 @@ function ClubTableView({
   handleDelete,
   handleImageUpload,
 }: ClubTableViewProps) {
-  const [_messageApi, contextHolder] = message.useMessage();
+  const [_messageApi, contextHolder] = message.useMessage()
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
@@ -92,7 +92,7 @@ function ClubTableView({
       dataIndex: 'operation',
       width: '10%',
       render: (_: unknown, record: ClubDetailResponse) => {
-        const editable = register.isEditing(record);
+        const editable = register.isEditing(record)
         return editable ? (
           <span>
             <Typography.Link
@@ -133,7 +133,7 @@ function ClubTableView({
               </button>
             </Popconfirm>
           </span>
-        );
+        )
       },
     },
     {
@@ -143,7 +143,7 @@ function ClubTableView({
       render: (_: unknown, record: ClubDetailResponse) =>
         renderImageUpload(record),
     },
-  ];
+  ]
 
   const renderImageUpload = (record: ClubDetailResponse) => (
     <div>
@@ -163,11 +163,11 @@ function ClubTableView({
         </Button>
       </Upload>
     </div>
-  );
+  )
 
   const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
     (col) => {
-      if (!col.editable) return col;
+      if (!col.editable) return col
 
       return {
         ...col,
@@ -177,9 +177,9 @@ function ClubTableView({
           title: col.title,
           editing: register.isEditing(record),
         }),
-      };
+      }
     },
-  );
+  )
 
   return (
     <>
@@ -197,7 +197,7 @@ function ClubTableView({
         />
       </Form>
     </>
-  );
+  )
 }
 
-export default ClubTableView;
+export default ClubTableView

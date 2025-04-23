@@ -48,6 +48,6 @@ const dept = [
       '소통과 문제해결 능력을 갖춘 실무형 SW안전보안 전문인력 양성',
     ],
   },
-];
+]
 
-export { dept };
+export { dept }

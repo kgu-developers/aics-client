@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { useAtomValue } from 'jotai';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useAtomValue } from 'jotai'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { cn } from '@aics-client/design-system/utils';
+import { cn } from '@aics-client/design-system/utils'
 
-import LOGO from '~/assets/svgs/kgu-logo-white.svg';
-import { PATH, PATHMAP } from '~/shared/constants/path';
-import { isLoggedInAtom } from '~/shared/stores/auth';
+import LOGO from '~/assets/svgs/kgu-logo-white.svg'
+import { PATH, PATHMAP } from '~/shared/constants/path'
+import { isLoggedInAtom } from '~/shared/stores/auth'
 
-import * as styles from '~/components/site-footer.css';
+import * as styles from '~/components/site-footer.css'
 
 function SiteFooter() {
-  const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const isLoggedIn = useAtomValue(isLoggedInAtom)
 
   return (
     <footer className={styles.footer}>
@@ -25,7 +25,7 @@ function SiteFooter() {
         <div className={styles.navLinks}>
           {Object.values(PATHMAP).map((path) => {
             if (path.path === PATH.MY && !isLoggedIn) {
-              return null;
+              return null
             }
             return (
               <div
@@ -52,7 +52,7 @@ function SiteFooter() {
                   </div>
                 )}
               </div>
-            );
+            )
           })}
         </div>
       </div>
@@ -66,7 +66,7 @@ function SiteFooter() {
         </small>
       </div>
     </footer>
-  );
+  )
 }
 
-export { SiteFooter };
+export { SiteFooter }

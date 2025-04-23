@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { Fragment } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Fragment } from 'react'
 
-import { sprinkles } from '@aics-client/design-system/styles';
+import { sprinkles } from '@aics-client/design-system/styles'
 
-import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries';
+import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries'
 
-import { List } from '~/features/contact/components/list';
-import { Section } from '~/features/contact/components/section';
+import { List } from '~/features/contact/components/list'
+import { Section } from '~/features/contact/components/section'
 
 function DeptInfoSection() {
-  const { data } = useSuspenseQuery(DEPT_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(DEPT_QUERY_OPTIONS.ALL())
 
   return (
     <Section>
@@ -29,7 +29,7 @@ function DeptInfoSection() {
         </Fragment>
       ))}
     </Section>
-  );
+  )
 }
 
-export { DeptInfoSection };
+export { DeptInfoSection }

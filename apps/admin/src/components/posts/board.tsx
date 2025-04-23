@@ -1,6 +1,6 @@
-import { Link, useRouter } from '@tanstack/react-router';
-import { Button, Modal, message } from 'antd';
-import DOMPurify from 'dompurify';
+import { Link, useRouter } from '@tanstack/react-router'
+import { Button, Modal, message } from 'antd'
+import DOMPurify from 'dompurify'
 import {
   ArrowLeft,
   Calendar,
@@ -8,29 +8,29 @@ import {
   Eye,
   PencilIcon,
   Trash2Icon,
-} from 'lucide-react';
+} from 'lucide-react'
 
-import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
-import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
+import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries'
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
 
-import { EDIT_POST_PATH_MAP, type PostCategory } from '~/constants/path';
-import { useModal } from '~/hooks/use-modal';
-import { queryClient } from '~/utils/get-query-client';
-import { extractFileName } from '~/utils/utils';
+import { EDIT_POST_PATH_MAP, type PostCategory } from '~/constants/path'
+import { useModal } from '~/hooks/use-modal'
+import { queryClient } from '~/utils/get-query-client'
+import { extractFileName } from '~/utils/utils'
 
 interface HeaderProps {
-  title: string;
-  author: string;
-  views: number;
-  createdAt: string;
+  title: string
+  author: string
+  views: number
+  createdAt: string
   file?: {
-    id: number;
-    physicalPath: string;
-  };
+    id: number
+    physicalPath: string
+  }
 }
 
 function Board({ children }: { children: React.ReactNode }) {
-  return <article>{children}</article>;
+  return <article>{children}</article>
 }
 
 function Header({ title, author, views, createdAt, file }: HeaderProps) {
@@ -60,7 +60,7 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
         </button>
       )}
     </div>
-  );
+  )
 }
 
 function Content({ content }: { content: string }) {
@@ -70,37 +70,37 @@ function Content({ content }: { content: string }) {
       // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />
-  );
+  )
 }
 
 function DeleteButton({ postId }: { postId: number }) {
-  const { mutate } = usePostServicePatchApiV1PostsByPostIdDelete();
-  const { isOpen, openModal, closeModal } = useModal();
-  const [messageApi, contextHolder] = message.useMessage();
-  const router = useRouter();
+  const { mutate } = usePostServicePatchApiV1PostsByPostIdDelete()
+  const { isOpen, openModal, closeModal } = useModal()
+  const [messageApi, contextHolder] = message.useMessage()
+  const router = useRouter()
 
   const handleSuccess = async () => {
-    closeModal();
+    closeModal()
     await messageApi.open({
       type: 'success',
       content: '게시글이 성공적으로 삭제되었습니다.',
       duration: 0.7,
-    });
+    })
 
     queryClient.invalidateQueries({
       queryKey: [usePostServiceGetApiV1PostsKey],
-    });
+    })
 
-    router.history.back();
-  };
+    router.history.back()
+  }
 
   const handleError = () => {
-    closeModal();
+    closeModal()
     messageApi.open({
       type: 'error',
       content: '게시글 삭제에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleDelete = () => {
     mutate(
@@ -109,8 +109,8 @@ function DeleteButton({ postId }: { postId: number }) {
         onSuccess: handleSuccess,
         onError: handleError,
       },
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -143,20 +143,20 @@ function DeleteButton({ postId }: { postId: number }) {
         정말 삭제하시겠습니까?
       </Modal>
     </>
-  );
+  )
 }
 
 interface FooterProps {
   prevPost?: {
-    postId: number;
-    title: string;
-  };
+    postId: number
+    title: string
+  }
   nextPost?: {
-    postId: number;
-    title: string;
-  };
-  to: PostCategory;
-  postId: number;
+    postId: number
+    title: string
+  }
+  to: PostCategory
+  postId: number
 }
 
 function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
@@ -215,11 +215,11 @@ function Footer({ prevPost, nextPost, to, postId }: FooterProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-Board.Header = Header;
-Board.Content = Content;
-Board.Footer = Footer;
+Board.Header = Header
+Board.Content = Content
+Board.Footer = Footer
 
-export { Board };
+export { Board }

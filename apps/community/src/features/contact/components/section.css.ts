@@ -1,13 +1,13 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { themeVars } from '@aics-client/design-system/styles'
+import { globalStyle, style } from '@vanilla-extract/css'
 
 const section = style({
   lineHeight: '1.75rem',
-});
+})
 
 globalStyle(`${section} > * + *`, {
   marginTop: '1.5rem',
-});
+})
 
 const sectionTitle = style([
   themeVars.textSize['2xl'],
@@ -18,6 +18,6 @@ const sectionTitle = style([
     paddingBottom: '0.5rem',
     fontWeight: 600,
   },
-]);
+])
 
-export { section, sectionTitle };
+export { section, sectionTitle }

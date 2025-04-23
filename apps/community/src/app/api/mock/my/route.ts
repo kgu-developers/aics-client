@@ -1,5 +1,5 @@
-import { myProfile } from './data';
+import { myProfile } from './data'
 
 export function GET() {
-  return Response.json({ data: myProfile });
+  return Response.json({ data: myProfile })
 }

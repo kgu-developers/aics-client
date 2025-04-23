@@ -1,32 +1,32 @@
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
-import { END_POINT } from '~/constants/api';
-import { authServices } from '~/utils/auth';
-import { authHttp } from '~/utils/http';
+import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
+import { END_POINT } from '~/constants/api'
+import { authServices } from '~/utils/auth'
+import { authHttp } from '~/utils/http'
 
 interface SignInData {
-  userId: string;
-  password: string;
+  userId: string
+  password: string
 }
 
 interface Tokens {
-  accessToken: string;
-  refreshToken: string;
+  accessToken: string
+  refreshToken: string
 }
 
 const useSignIn = () => {
-  const { setTokens } = authServices();
-  const navigate = useNavigate();
+  const { setTokens } = authServices()
+  const navigate = useNavigate()
 
   return useMutation({
     mutationFn: (data: SignInData) => {
-      return authHttp.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>();
+      return authHttp.post(END_POINT.SIGN_IN, { json: data }).json<Tokens>()
     },
     onSuccess: (token) => {
-      setTokens(token);
-      navigate({ to: '/main' });
+      setTokens(token)
+      navigate({ to: '/main' })
     },
-  });
-};
+  })
+}
 
-export { type Tokens, useSignIn };
+export { type Tokens, useSignIn }

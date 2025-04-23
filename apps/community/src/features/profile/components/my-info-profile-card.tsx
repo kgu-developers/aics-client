@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { MyInfoCard } from '~/components/my/my-info-card';
+import { MyInfoCard } from '~/components/my/my-info-card'
 
 interface Props {
   data: {
-    title: string;
-    value: string;
-  }[];
+    title: string
+    value: string
+  }[]
 }
 
 function MyInfoProfileCard({ data }: Props) {
@@ -20,7 +20,7 @@ function MyInfoProfileCard({ data }: Props) {
         />
       ))}
     </MyInfoCard>
-  );
+  )
 }
 
-export { MyInfoProfileCard };
+export { MyInfoProfileCard }

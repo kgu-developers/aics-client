@@ -1,5 +1,5 @@
-import { recipe } from '@vanilla-extract/recipes';
-import { themeVars } from '../../styles';
+import { recipe } from '@vanilla-extract/recipes'
+import { themeVars } from '../../styles'
 
 const buttonVariants = recipe({
   base: {
@@ -66,6 +66,6 @@ const buttonVariants = recipe({
     color: 'primary',
     size: 'md',
   },
-});
+})
 
-export { buttonVariants };
+export { buttonVariants }

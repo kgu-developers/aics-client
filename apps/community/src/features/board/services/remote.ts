@@ -1,38 +1,38 @@
-import { http } from '~/shared/utils/http';
+import { http } from '~/shared/utils/http'
 
-import { END_POINT } from '~/shared/constants/api';
+import { END_POINT } from '~/shared/constants/api'
 
-import type { Post } from '~/features/main/services/remote';
-import type { PaginationResponse } from '~/shared/types/api';
+import type { Post } from '~/features/main/services/remote'
+import type { PaginationResponse } from '~/shared/types/api'
 
 interface PostParams {
-  page: number;
-  size: number;
-  keyword?: string;
-  category: string;
+  page: number
+  size: number
+  keyword?: string
+  category: string
 }
 
 interface PostDetail {
-  postId: number;
-  category: string;
-  title: string;
-  content: string;
-  author: string;
-  views: number;
-  isPinned: false;
+  postId: number
+  category: string
+  title: string
+  content: string
+  author: string
+  views: number
+  isPinned: false
   file: {
-    logicalName: string;
-    physicalPath: string;
-  };
-  createdAt: string;
+    logicalName: string
+    physicalPath: string
+  }
+  createdAt: string
   prevPost: {
-    id: number;
-    title: string;
-  };
+    id: number
+    title: string
+  }
   nextPost: {
-    id: number;
-    title: string;
-  };
+    id: number
+    title: string
+  }
 }
 
 /**
@@ -50,11 +50,11 @@ async function getPosts({ page, size, keyword = '', category }: PostParams) {
     size: size.toString(),
     keyword: keyword,
     category: category,
-  });
+  })
 
-  const response = await http.get(`${END_POINT.POST}?${params.toString()}`);
+  const response = await http.get(`${END_POINT.POST}?${params.toString()}`)
 
-  return response as PaginationResponse<Post>;
+  return response as PaginationResponse<Post>
 }
 
 /**
@@ -64,7 +64,7 @@ async function getPosts({ page, size, keyword = '', category }: PostParams) {
  * @returns {Promise<BoardDetail>} - 게시글의 세부 정보를 반환합니다.
  */
 async function getPostDetail(id: string) {
-  return await http.get<PostDetail>(`${END_POINT.POST_DETAIL(id)}`);
+  return await http.get<PostDetail>(`${END_POINT.POST_DETAIL(id)}`)
 }
 
-export { getPosts, getPostDetail, type PostDetail };
+export { getPosts, getPostDetail, type PostDetail }

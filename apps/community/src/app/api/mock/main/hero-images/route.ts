@@ -1,5 +1,5 @@
-import { heroes } from './data';
+import { heroes } from './data'
 
 export function GET() {
-  return Response.json({ data: heroes });
+  return Response.json({ data: heroes })
 }

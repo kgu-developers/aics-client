@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-import LOGO from '~/assets/svgs/kgu-logo.svg';
-import { PATH, PATHMAP } from '~/shared/constants/path';
+import LOGO from '~/assets/svgs/kgu-logo.svg'
+import { PATH, PATHMAP } from '~/shared/constants/path'
 
-import * as styles from '~/components/shared/site-header/main-nav.css';
+import * as styles from '~/components/shared/site-header/main-nav.css'
 
 function MainNav({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
@@ -16,7 +16,7 @@ function MainNav({ isLoggedIn }: { isLoggedIn: boolean }) {
       <nav className={styles.nav}>
         {Object.values(PATHMAP).map((path) => {
           if (path.path === PATH.MY && !isLoggedIn) {
-            return null;
+            return null
           }
           return (
             <div key={path.path} className={styles.navGroup}>
@@ -41,11 +41,11 @@ function MainNav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </Link>
               )}
             </div>
-          );
+          )
         })}
       </nav>
     </div>
-  );
+  )
 }
 
-export { MainNav };
+export { MainNav }

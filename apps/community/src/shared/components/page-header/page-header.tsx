@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { usePathname } from 'next/navigation';
-import { Fragment } from 'react';
+import { usePathname } from 'next/navigation'
+import { Fragment } from 'react'
 
-import { Breadcrumb } from '@aics-client/design-system';
+import { Breadcrumb } from '@aics-client/design-system'
 
-import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path';
+import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path'
 
-import * as styles from '~/components/page-header.css';
+import * as styles from '~/components/page-header.css'
 
 interface Props {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
 function PageHeader({ title, description }: Props) {
-  const pathname = usePathname();
-  const paths = pathname.split('/').filter((path) => path !== '');
+  const pathname = usePathname()
+  const paths = pathname.split('/').filter((path) => path !== '')
 
   return (
     <div className={styles.pageHeaderWrapper}>
@@ -56,7 +56,7 @@ function PageHeader({ title, description }: Props) {
         <p className={styles.description}>{description}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export { PageHeader };
+export { PageHeader }

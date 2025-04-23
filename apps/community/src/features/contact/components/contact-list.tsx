@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries';
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
 
-import { List } from '~/features/contact/components/list';
+import { List } from '~/features/contact/components/list'
 
 function ContactList() {
-  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL())
   return (
     <>
       {data.contents.map((contact) => (
@@ -18,7 +18,7 @@ function ContactList() {
         </List>
       ))}
     </>
-  );
+  )
 }
 
-export { ContactList };
+export { ContactList }

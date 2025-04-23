@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import * as styles from '~/components/aside-navigation-menu.css';
-import type { TPathMap } from '~/shared/constants/path';
+import * as styles from '~/components/aside-navigation-menu.css'
+import type { TPathMap } from '~/shared/constants/path'
 
 interface Props {
   base: {
-    title: string;
-    path: string;
-    children?: TPathMap;
-  };
+    title: string
+    path: string
+    children?: TPathMap
+  }
 }
 
 function AsideNavigationMenu({ base }: Props) {
@@ -36,7 +36,7 @@ function AsideNavigationMenu({ base }: Props) {
         )}
       </div>
     </aside>
-  );
+  )
 }
 
-export { AsideNavigationMenu };
+export { AsideNavigationMenu }

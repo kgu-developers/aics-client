@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
-import { PATH } from '~/shared/constants/path';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
+import { PATH } from '~/shared/constants/path'
 
-import { Board } from './board';
+import { Board } from './board'
 
 function HydrateBoard({ postId }: { postId: string }) {
-  const { data } = useSuspenseQuery(BOARD_QUERY_OPTIONS.DETAIL(postId));
+  const { data } = useSuspenseQuery(BOARD_QUERY_OPTIONS.DETAIL(postId))
   return (
     <Board>
       <Board.Header
@@ -25,7 +25,7 @@ function HydrateBoard({ postId }: { postId: string }) {
         to={PATH.NOTICE}
       />
     </Board>
-  );
+  )
 }
 
-export { HydrateBoard };
+export { HydrateBoard }

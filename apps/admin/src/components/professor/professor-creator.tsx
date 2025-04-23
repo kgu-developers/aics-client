@@ -1,36 +1,36 @@
-import { Button, Form, Input, Modal, Select, message } from 'antd';
+import { Button, Form, Input, Modal, Select, message } from 'antd'
 
-import { useProfessorServicePostApiV1Professors } from '~/apis/admin/queries';
-import type { ProfessorRequest } from '~/apis/admin/requests';
-import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries';
+import { useProfessorServicePostApiV1Professors } from '~/apis/admin/queries'
+import type { ProfessorRequest } from '~/apis/admin/requests'
+import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries'
 
-import { useModal } from '~/hooks/use-modal';
-import { queryClient } from '~/utils/get-query-client';
+import { useModal } from '~/hooks/use-modal'
+import { queryClient } from '~/utils/get-query-client'
 
 function CreateProfessorForm({ onClose }: { onClose: () => void }) {
-  const [form] = Form.useForm();
-  const [messageApi, contextHolder] = message.useMessage();
-  const postProfessorMutation = useProfessorServicePostApiV1Professors();
+  const [form] = Form.useForm()
+  const [messageApi, contextHolder] = message.useMessage()
+  const postProfessorMutation = useProfessorServicePostApiV1Professors()
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [useProfessorServiceGetApiV1ProfessorsKey],
-    });
+    })
     await messageApi.open({
       type: 'success',
       content: '교수진 정보가 성공적으로 추가 되었습니다.',
       duration: 0.8,
-    });
-    form.resetFields();
-    onClose();
-  };
+    })
+    form.resetFields()
+    onClose()
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '교수진 정보 추가에 실패했습니다.',
-    });
-  };
+    })
+  }
 
   const handleSubmit = (values: ProfessorRequest) => {
     postProfessorMutation.mutate(
@@ -39,14 +39,14 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
       },
       {
         onSuccess: () => {
-          handleSuccess();
+          handleSuccess()
         },
         onError: () => {
-          handleError();
+          handleError()
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <Form
@@ -126,11 +126,11 @@ function CreateProfessorForm({ onClose }: { onClose: () => void }) {
         추가하기
       </Button>
     </Form>
-  );
+  )
 }
 
 function ProfessorCreator() {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <>
@@ -152,7 +152,7 @@ function ProfessorCreator() {
         교수 추가하기
       </Button>
     </>
-  );
+  )
 }
 
-export { ProfessorCreator };
+export { ProfessorCreator }

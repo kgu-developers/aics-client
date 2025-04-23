@@ -5,6 +5,6 @@ const width = {
   minWidth: {
     dvh: '100dvh',
   },
-} as const;
+} as const
 
-export default width;
+export default width

@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { useAtomValue } from 'jotai';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useAtomValue } from 'jotai'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-import { cn } from '@aics-client/design-system/utils';
+import { cn } from '@aics-client/design-system/utils'
 
-import { PATH } from '~/shared/constants/path';
-import { useAuth } from '~/shared/hooks/use-auth';
-import { isLoggedInAtom } from '~/shared/stores/auth';
-import { MainNav } from './main-nav';
-import { MobileNav } from './mobile-nav';
+import { PATH } from '~/shared/constants/path'
+import { useAuth } from '~/shared/hooks/use-auth'
+import { isLoggedInAtom } from '~/shared/stores/auth'
+import { MainNav } from './main-nav'
+import { MobileNav } from './mobile-nav'
 
-import * as styles from '~/components/shared/site-header/site-header.css';
+import * as styles from '~/components/shared/site-header/site-header.css'
 
 function SignInButton({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const { logout } = useAuth();
+  const { logout } = useAuth()
 
   return (
     <div className={styles.buttonContainer}>
@@ -29,18 +29,18 @@ function SignInButton({ isLoggedIn }: { isLoggedIn: boolean }) {
         </Link>
       )}
     </div>
-  );
+  )
 }
 
 function SiteHeader() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const isLoggedIn = useAtomValue(isLoggedInAtom)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 72);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const handleScroll = () => setIsScrolled(window.scrollY > 72)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <div
@@ -57,7 +57,7 @@ function SiteHeader() {
         <SignInButton isLoggedIn={isLoggedIn} />
       </header>
     </div>
-  );
+  )
 }
 
-export { SiteHeader };
+export { SiteHeader }

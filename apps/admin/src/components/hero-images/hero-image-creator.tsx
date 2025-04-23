@@ -1,51 +1,51 @@
-import { Button, Form, Input, Modal, Upload, message } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import { UploadIcon } from 'lucide-react';
+import { Button, Form, Input, Modal, Upload, message } from 'antd'
+import type { UploadChangeParam } from 'antd/es/upload'
+import { UploadIcon } from 'lucide-react'
 
 import {
   useCarouselServicePostApiV1Carousels,
   useFileServicePostApiV1FilesCarousel,
-} from '~/apis/admin/queries';
-import type { CarouselRequest } from '~/apis/admin/requests';
-import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries';
+} from '~/apis/admin/queries'
+import type { CarouselRequest } from '~/apis/admin/requests'
+import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries'
 
-import { useModal } from '~/hooks/use-modal';
-import { queryClient } from '~/utils/get-query-client';
+import { useModal } from '~/hooks/use-modal'
+import { queryClient } from '~/utils/get-query-client'
 
 function CraeteImageForm({ onClose }: { onClose: () => void }) {
-  const [form] = Form.useForm();
-  const [messageApi, contextHolder] = message.useMessage();
-  const { mutate: uploadImage } = useFileServicePostApiV1FilesCarousel();
-  const { mutate: saveImage } = useCarouselServicePostApiV1Carousels();
+  const [form] = Form.useForm()
+  const [messageApi, contextHolder] = message.useMessage()
+  const { mutate: uploadImage } = useFileServicePostApiV1FilesCarousel()
+  const { mutate: saveImage } = useCarouselServicePostApiV1Carousels()
 
   const handleSuccess = async () => {
     queryClient.invalidateQueries({
       queryKey: [useCarouselServiceGetApiV1CarouselsKey],
-    });
+    })
     await messageApi.open({
       type: 'success',
       content: '이미지가 성공적으로 추가되었습니다.',
       duration: 0.8,
-    });
-    onClose();
-  };
+    })
+    onClose()
+  }
 
   const handleFileUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  };
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+  }
 
   const handleError = () => {
     messageApi.open({
       type: 'error',
       content: '이미지 업로드에 실패했습니다.',
-    });
-    form.resetFields();
-    onClose();
-  };
+    })
+    form.resetFields()
+    onClose()
+  }
 
   const handleSubmit = (values: CarouselRequest) => {
-    const file = form.getFieldValue('file')?.[0]?.originFileObj;
+    const file = form.getFieldValue('file')?.[0]?.originFileObj
     uploadImage(
       { formData: { file } },
       {
@@ -58,22 +58,22 @@ function CraeteImageForm({ onClose }: { onClose: () => void }) {
               },
               {
                 onSuccess: () => {
-                  handleSuccess();
-                  form.resetFields();
+                  handleSuccess()
+                  form.resetFields()
                 },
                 onError: () => {
-                  handleError();
+                  handleError()
                 },
               },
-            );
+            )
           }
         },
         onError: () => {
-          handleError();
+          handleError()
         },
       },
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -99,8 +99,8 @@ function CraeteImageForm({ onClose }: { onClose: () => void }) {
         >
           <Upload
             beforeUpload={(file) => {
-              handleFileUpload(file);
-              return false;
+              handleFileUpload(file)
+              return false
             }}
             maxCount={1}
             listType="picture"
@@ -125,11 +125,11 @@ function CraeteImageForm({ onClose }: { onClose: () => void }) {
         </Button>
       </Form>
     </>
-  );
+  )
 }
 
 function HeroImageCreator() {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal()
   return (
     <>
       <Modal
@@ -150,7 +150,7 @@ function HeroImageCreator() {
         이미지 추가하기
       </Button>
     </>
-  );
+  )
 }
 
-export { HeroImageCreator };
+export { HeroImageCreator }

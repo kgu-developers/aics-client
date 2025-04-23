@@ -7,40 +7,40 @@ export type UserCreateRequest = {
   /**
    * 학번
    */
-  userId: string;
+  userId: string
   /**
    * 비밀번호
    */
-  password: string;
+  password: string
   /**
    * 이름
    */
-  name: string;
+  name: string
   /**
    * 이메일
    */
-  email: string;
+  email: string
   /**
    * 전화번호
    */
-  phone: string;
+  phone: string
   /**
    * 전공 이름
    */
-  major: 'CSE' | 'AIT' | 'SSS';
-};
+  major: 'CSE' | 'AIT' | 'SSS'
+}
 
 /**
  * 전공 이름
  */
-export type major = 'CSE' | 'AIT' | 'SSS';
+export type major = 'CSE' | 'AIT' | 'SSS'
 
 export type UserPersistResponse = {
   /**
    * 유저 id
    */
-  id: string;
-};
+  id: string
+}
 
 /**
  * 댓글 생성 request 객체 입니다.
@@ -49,30 +49,30 @@ export type CommentRequest = {
   /**
    * 게시물 아이디
    */
-  postId: number;
+  postId: number
   /**
    * 댓글 내용
    */
-  content: string;
-};
+  content: string
+}
 
 export type CommentPersistResponse = {
   /**
    * 댓글 id
    */
-  commentId: number;
-};
+  commentId: number
+}
 
 export type UserUpdateRequest = {
   /**
    * 전화번호
    */
-  phone: string;
+  phone: string
   /**
    * 이메일
    */
-  email: string;
-};
+  email: string
+}
 
 /**
  * 회원 비밀번호 수정 request 객체 입니다.
@@ -81,12 +81,12 @@ export type UserPasswordUpdateRequest = {
   /**
    * 원래 비밀번호
    */
-  originalPassword: string;
+  originalPassword: string
   /**
    * 새로운 비밀번호
    */
-  newPassword: string;
-};
+  newPassword: string
+}
 
 /**
  * 댓글 수정 request 객체 입니다.
@@ -95,614 +95,614 @@ export type CommentUpdateRequest = {
   /**
    * 댓글 내용
    */
-  content: string;
-};
+  content: string
+}
 
 export type UserDetailResponse = {
   /**
    * 이름
    */
-  name: string;
+  name: string
   /**
    * 전화번호
    */
-  phone: string;
+  phone: string
   /**
    * 이메일
    */
-  email: string;
+  email: string
   /**
    * 구분
    */
-  role: 'USER' | 'ADMIN' | 'SUPER';
+  role: 'USER' | 'ADMIN' | 'SUPER'
   /**
    * 학과
    */
-  major: 'CSE' | 'AIT' | 'SSS';
+  major: 'CSE' | 'AIT' | 'SSS'
   /**
    * 학번(교번)
    */
-  id: string;
-};
+  id: string
+}
 
 /**
  * 구분
  */
-export type role = 'USER' | 'ADMIN' | 'SUPER';
+export type role = 'USER' | 'ADMIN' | 'SUPER'
 
 export type ProfessorListResponse = {
   /**
    * 교수 리스트
    */
-  contents: Array<ProfessorResponse>;
-};
+  contents: Array<ProfessorResponse>
+}
 
 export type ProfessorResponse = {
   /**
    * 교수 id
    */
-  id: number;
+  id: number
   /**
    * 교수 이름
    */
-  name: string;
+  name: string
   /**
    * 직위
    */
-  role: string;
+  role: string
   /**
    * 연락처
    */
-  contact: string;
+  contact: string
   /**
    * 연구실 위치
    */
-  officeLoc: string;
+  officeLoc: string
   /**
    * 이메일
    */
-  email: string;
+  email: string
   /**
    * 이미지 URL
    */
-  img: string;
-};
+  img: string
+}
 
 export type PageableResponseObject = {
   /**
    * 페이지 인덱스로, 0부터 시작합니다. 별도의 값 없이 요청 시, 0으로 설정됩니다.
    */
-  page: number;
+  page: number
   /**
    * 페이지 내 최대 응답 개수입니다. 별도의 값 없이 요청 시, 10으로 설정됩니다.
    */
-  size: number;
+  size: number
   /**
    * 전체 페이지 수 입니다.
    */
-  totalPages: number;
+  totalPages: number
   /**
    * 전체 요소 개수 입니다.
    */
-  totalElements: number;
+  totalElements: number
   /**
    * 현재 응답하는 페이지가 마지막 일 시, true로 설정됩니다.
    */
-  isEnd: boolean;
-};
+  isEnd: boolean
+}
 
 export type PostSummaryPageResponse = {
   /**
    * 게시글 정보 리스트
    */
-  contents: Array<PostSummaryResponse>;
+  contents: Array<PostSummaryResponse>
   /**
    * 페이징 정보
    */
-  pageable: PageableResponseObject;
-};
+  pageable: PageableResponseObject
+}
 
 export type PostSummaryResponse = {
   /**
    * 게시글 id
    */
-  postId: number;
+  postId: number
   /**
    * 게시글 카테고리
    */
-  category: string;
+  category: string
   /**
    * 게시글 제목
    */
-  title: string;
+  title: string
   /**
    * 작성자 이름
    */
-  author: string;
+  author: string
   /**
    * 게시글 내용 앞부분 30자
    */
-  description: string;
+  description: string
   /**
    * 조회수
    */
-  views: number;
+  views: number
   /**
    * 첨부파일 여부
    */
-  hasAttachment: boolean;
+  hasAttachment: boolean
   /**
    * 상단 고정 여부
    */
-  isPinned: boolean;
+  isPinned: boolean
   /**
    * 작성일
    */
-  createdAt: string;
-};
+  createdAt: string
+}
 
 export type FilePathResponse = {
   /**
    * 파일 id
    */
-  id: number;
+  id: number
   /**
    * 파일 경로
    */
-  physicalPath: string;
-};
+  physicalPath: string
+}
 
 export type PostDetailResponse = {
   /**
    * 게시글 id
    */
-  postId: number;
+  postId: number
   /**
    * 게시글 카테고리
    */
-  category: string;
+  category: string
   /**
    * 게시글 제목
    */
-  title: string;
+  title: string
   /**
    * 내용
    */
-  content: string;
+  content: string
   /**
    * 작성자 이름
    */
-  author: string;
+  author: string
   /**
    * 조회수
    */
-  views: number;
+  views: number
   /**
    * 상단 고정 여부
    */
-  isPinned: boolean;
+  isPinned: boolean
   /**
    * 첨부 파일 정보
    */
-  file?: FilePathResponse;
+  file?: FilePathResponse
   /**
    * 작성일
    */
-  createdAt: string;
+  createdAt: string
   /**
    * 이전 게시글 정보
    */
-  prevPost?: PostTitleResponse;
+  prevPost?: PostTitleResponse
   /**
    * 다음 게시글 정보
    */
-  nextPost?: PostTitleResponse;
-};
+  nextPost?: PostTitleResponse
+}
 
 export type PostTitleResponse = {
   /**
    * 게시글 id
    */
-  postId: number;
+  postId: number
   /**
    * 게시글 제목
    */
-  title: string;
-};
+  title: string
+}
 
 export type LabDetailResponse = {
   /**
    * 연구실 id
    */
-  id: number;
+  id: number
   /**
    * 연구실 이름
    */
-  name: string;
+  name: string
   /**
    * 연구실 위치
    */
-  loc: string;
+  loc: string
   /**
    * 연구실 사이트
    */
-  site: string;
+  site: string
   /**
    * 연구실 담당교수
    */
-  advisor: string;
+  advisor: string
   /**
    * 연구실 이미지 파일
    */
-  img?: FilePathResponse;
-};
+  img?: FilePathResponse
+}
 
 export type LabListResponse = {
   /**
    * 등록된 연구실 리스트
    */
-  contents: Array<LabDetailResponse>;
-};
+  contents: Array<LabDetailResponse>
+}
 
 export type CommentListResponse = {
   /**
    * 게시글에 첨부된 파일
    */
-  contents: Array<CommentResponse>;
-};
+  contents: Array<CommentResponse>
+}
 
 export type CommentResponse = {
   /**
    * 댓글 id
    */
-  commentId: number;
+  commentId: number
   /**
    * 작성자 이름
    */
-  author: string;
+  author: string
   /**
    * 작성일
    */
-  createdAt: string;
+  createdAt: string
   /**
    * 내용
    */
-  content: string;
-};
+  content: string
+}
 
 export type ClubDetailResponse = {
   /**
    * 동아리 id
    */
-  id: number;
+  id: number
   /**
    * 동아리 이름
    */
-  name: string;
+  name: string
   /**
    * 동아리 설명
    */
-  description: string;
+  description: string
   /**
    * 동아리 사이트
    */
-  site?: string;
+  site?: string
   /**
    * 첨부 파일 정보
    */
-  file?: FilePathResponse;
-};
+  file?: FilePathResponse
+}
 
 export type ClubListResponse = {
   /**
    * 등록된 동아리 리스트
    */
-  contents: Array<ClubDetailResponse>;
-};
+  contents: Array<ClubDetailResponse>
+}
 
 export type CarouselListResponse = {
   /**
    * 캐러셀 리스트
    */
-  contents: Array<CarouselResponse>;
-};
+  contents: Array<CarouselResponse>
+}
 
 export type CarouselResponse = {
   /**
    * 캐러셀 ID
    */
-  id: number;
+  id: number
   /**
    * 캐러셀 설명
    */
-  text?: string;
+  text?: string
   /**
    * 캐러셀 이미지 링크
    */
-  link?: string;
+  link?: string
   /**
    * 첨부 파일 정보
    */
-  file?: FilePathResponse;
-};
+  file?: FilePathResponse
+}
 
 export type AboutResponse = {
   /**
    * 페이지 내용(JSON 형식)
    */
-  content: string;
-};
+  content: string
+}
 
 export type PostApiV1UsersSignupData = {
-  requestBody: UserCreateRequest;
-};
+  requestBody: UserCreateRequest
+}
 
-export type PostApiV1UsersSignupResponse = UserPersistResponse;
+export type PostApiV1UsersSignupResponse = UserPersistResponse
 
 export type PatchApiV1UsersData = {
-  requestBody: UserUpdateRequest;
-};
+  requestBody: UserUpdateRequest
+}
 
-export type PatchApiV1UsersResponse = UserUpdateRequest;
+export type PatchApiV1UsersResponse = UserUpdateRequest
 
 export type PatchApiV1UsersPasswordData = {
-  requestBody: UserPasswordUpdateRequest;
-};
+  requestBody: UserPasswordUpdateRequest
+}
 
-export type PatchApiV1UsersPasswordResponse = void;
+export type PatchApiV1UsersPasswordResponse = void
 
-export type PatchApiV1UsersDeleteResponse = void;
+export type PatchApiV1UsersDeleteResponse = void
 
-export type GetApiV1UsersMyResponse = UserDetailResponse;
+export type GetApiV1UsersMyResponse = UserDetailResponse
 
 export type GetApiV1CommentsData = {
   /**
    * 해당 게시글 ID의 댓글을 조회합니다. 쿼리 파라미터 입니다.
    */
-  postId: number;
-};
+  postId: number
+}
 
-export type GetApiV1CommentsResponse = CommentListResponse;
+export type GetApiV1CommentsResponse = CommentListResponse
 
 export type PostApiV1CommentsData = {
-  requestBody: CommentRequest;
-};
+  requestBody: CommentRequest
+}
 
-export type PostApiV1CommentsResponse = CommentPersistResponse;
+export type PostApiV1CommentsResponse = CommentPersistResponse
 
 export type PatchApiV1CommentsByCommentIdData = {
   /**
    * 댓글 ID는 URL 경로 변수 입니다.
    */
-  commentId: number;
-  requestBody: CommentUpdateRequest;
-};
+  commentId: number
+  requestBody: CommentUpdateRequest
+}
 
-export type PatchApiV1CommentsByCommentIdResponse = void;
+export type PatchApiV1CommentsByCommentIdResponse = void
 
 export type PatchApiV1CommentsByCommentIdDeleteData = {
   /**
    * 댓글 ID는 URL 경로 변수 입니다.
    */
-  commentId: number;
-};
+  commentId: number
+}
 
-export type PatchApiV1CommentsByCommentIdDeleteResponse = void;
+export type PatchApiV1CommentsByCommentIdDeleteResponse = void
 
-export type GetApiV1ProfessorsResponse = ProfessorListResponse;
+export type GetApiV1ProfessorsResponse = ProfessorListResponse
 
 export type GetApiV1PostsData = {
   /**
    * 게시글 카테고리 입니다. 미 지정 시 전체 게시글을 조회합니다.
    */
-  category?: 'NOTIFICATION' | 'NEWS';
+  category?: 'NOTIFICATION' | 'NEWS'
   /**
    * 검색 키워드 입니다. 미 입력 시 전체 게시글을 조회합니다.
    */
-  keywords?: string;
+  keywords?: string
   /**
    * 페이지 인덱스
    */
-  page: number;
+  page: number
   /**
    * 응답 개수
    */
-  size: number;
-};
+  size: number
+}
 
-export type GetApiV1PostsResponse = PostSummaryPageResponse;
+export type GetApiV1PostsResponse = PostSummaryPageResponse
 
 export type GetApiV1PostsByPostIdData = {
   /**
    * 게시글 ID는 URL 경로 변수 입니다.
    */
-  postId: number;
-};
+  postId: number
+}
 
-export type GetApiV1PostsByPostIdResponse = PostDetailResponse;
+export type GetApiV1PostsByPostIdResponse = PostDetailResponse
 
-export type GetApiV1LabsResponse = LabListResponse;
+export type GetApiV1LabsResponse = LabListResponse
 
-export type GetApiV1ClubsResponse = ClubListResponse;
+export type GetApiV1ClubsResponse = ClubListResponse
 
-export type GetApiV1CarouselsResponse = CarouselListResponse;
+export type GetApiV1CarouselsResponse = CarouselListResponse
 
 export type GetApiV1AboutsData = {
   /**
    * 카테고리 ENUM 타입 입니다.
    */
-  category: 'DEPT_INTRO' | 'DIRECTIONS';
-};
+  category: 'DEPT_INTRO' | 'DIRECTIONS'
+}
 
-export type GetApiV1AboutsResponse = AboutResponse;
+export type GetApiV1AboutsResponse = AboutResponse
 
 export type $OpenApiTs = {
   '/api/v1/users/signup': {
     post: {
-      req: PostApiV1UsersSignupData;
+      req: PostApiV1UsersSignupData
       res: {
         /**
          * Created
          */
-        201: UserPersistResponse;
-      };
-    };
-  };
+        201: UserPersistResponse
+      }
+    }
+  }
   '/api/v1/users': {
     patch: {
-      req: PatchApiV1UsersData;
+      req: PatchApiV1UsersData
       res: {
         /**
          * No Content
          */
-        204: UserUpdateRequest;
-      };
-    };
-  };
+        204: UserUpdateRequest
+      }
+    }
+  }
   '/api/v1/users/password': {
     patch: {
-      req: PatchApiV1UsersPasswordData;
+      req: PatchApiV1UsersPasswordData
       res: {
         /**
          * No Content
          */
-        204: void;
-      };
-    };
-  };
+        204: void
+      }
+    }
+  }
   '/api/v1/users/delete': {
     patch: {
       res: {
         /**
          * No Content
          */
-        204: void;
-      };
-    };
-  };
+        204: void
+      }
+    }
+  }
   '/api/v1/users/my': {
     get: {
       res: {
         /**
          * OK
          */
-        200: UserDetailResponse;
-      };
-    };
-  };
+        200: UserDetailResponse
+      }
+    }
+  }
   '/api/v1/comments': {
     get: {
-      req: GetApiV1CommentsData;
+      req: GetApiV1CommentsData
       res: {
         /**
          * OK
          */
-        200: CommentListResponse;
-      };
-    };
+        200: CommentListResponse
+      }
+    }
     post: {
-      req: PostApiV1CommentsData;
+      req: PostApiV1CommentsData
       res: {
         /**
          * Created
          */
-        201: CommentPersistResponse;
-      };
-    };
-  };
+        201: CommentPersistResponse
+      }
+    }
+  }
   '/api/v1/comments/{commentId}': {
     patch: {
-      req: PatchApiV1CommentsByCommentIdData;
+      req: PatchApiV1CommentsByCommentIdData
       res: {
         /**
          * No Content
          */
-        204: void;
-      };
-    };
-  };
+        204: void
+      }
+    }
+  }
   '/api/v1/comments/{commentId}/delete': {
     patch: {
-      req: PatchApiV1CommentsByCommentIdDeleteData;
+      req: PatchApiV1CommentsByCommentIdDeleteData
       res: {
         /**
          * No Content
          */
-        204: void;
-      };
-    };
-  };
+        204: void
+      }
+    }
+  }
   '/api/v1/professors': {
     get: {
       res: {
         /**
          * OK
          */
-        200: ProfessorListResponse;
-      };
-    };
-  };
+        200: ProfessorListResponse
+      }
+    }
+  }
   '/api/v1/posts': {
     get: {
-      req: GetApiV1PostsData;
+      req: GetApiV1PostsData
       res: {
         /**
          * OK
          */
-        200: PostSummaryPageResponse;
-      };
-    };
-  };
+        200: PostSummaryPageResponse
+      }
+    }
+  }
   '/api/v1/posts/{postId}': {
     get: {
-      req: GetApiV1PostsByPostIdData;
+      req: GetApiV1PostsByPostIdData
       res: {
         /**
          * OK
          */
-        200: PostDetailResponse;
-      };
-    };
-  };
+        200: PostDetailResponse
+      }
+    }
+  }
   '/api/v1/labs': {
     get: {
       res: {
         /**
          * OK
          */
-        200: LabListResponse;
-      };
-    };
-  };
+        200: LabListResponse
+      }
+    }
+  }
   '/api/v1/clubs': {
     get: {
       res: {
         /**
          * OK
          */
-        200: ClubListResponse;
-      };
-    };
-  };
+        200: ClubListResponse
+      }
+    }
+  }
   '/api/v1/carousels': {
     get: {
       res: {
         /**
          * OK
          */
-        200: CarouselListResponse;
-      };
-    };
-  };
+        200: CarouselListResponse
+      }
+    }
+  }
   '/api/v1/abouts': {
     get: {
-      req: GetApiV1AboutsData;
+      req: GetApiV1AboutsData
       res: {
         /**
          * OK
          */
-        200: AboutResponse;
-      };
-    };
-  };
-};
+        200: AboutResponse
+      }
+    }
+  }
+}

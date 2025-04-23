@@ -1,25 +1,25 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { getQueryClient } from '~/shared/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
-import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
 
-import { HydrateBoard } from '~/features/board/components/hydrate-board';
+import { HydrateBoard } from '~/features/board/components/hydrate-board'
 
 //** TODO: for mocking */
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 
 export default async function NoticeDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }) {
-  const postId = (await params).id;
-  const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(BOARD_QUERY_OPTIONS.DETAIL(postId));
+  const postId = (await params).id
+  const queryClient = getQueryClient()
+  void queryClient.prefetchQuery(BOARD_QUERY_OPTIONS.DETAIL(postId))
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HydrateBoard postId={postId} />
     </HydrationBoundary>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import type { Preview } from '@storybook/react';
-import React from 'react';
-import { themeClass } from '../src/styles';
+import type { Preview } from '@storybook/react'
+import React from 'react'
+import { themeClass } from '../src/styles'
 
 const preview: Preview = {
   parameters: {
@@ -18,6 +18,6 @@ const preview: Preview = {
       </div>
     ),
   ],
-};
+}
 
-export default preview;
+export default preview

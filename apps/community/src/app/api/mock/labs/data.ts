@@ -94,6 +94,6 @@ const labs = [
     site: 'https://sites.google.com/kyonggi.ac.kr/cvpr/%ED%99%88',
     professor: '안준호',
   },
-];
+]
 
-export { labs };
+export { labs }

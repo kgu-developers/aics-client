@@ -1,5 +1,5 @@
-import { screen, themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { screen, themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 const labList = style([
   screen.xl({
@@ -9,6 +9,6 @@ const labList = style([
     display: 'grid',
     gap: themeVars.spacing.md,
   },
-]);
+])
 
-export { labList };
+export { labList }

@@ -1,5 +1,5 @@
-import { clubs } from './data';
+import { clubs } from './data'
 
 export function GET() {
-  return Response.json({ data: clubs });
+  return Response.json({ data: clubs })
 }

@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { Button } from '@aics-client/design-system';
-import { MyInfoCard } from '~/components/my/my-info-card';
-import { useEditProfileMutation } from '~/features/profile/services/use-edit-profile.mutation';
+import { Button } from '@aics-client/design-system'
+import { MyInfoCard } from '~/components/my/my-info-card'
+import { useEditProfileMutation } from '~/features/profile/services/use-edit-profile.mutation'
 
 interface EditableDetail {
-  title: string;
-  value: string;
-  field: keyof FormValues;
+  title: string
+  value: string
+  field: keyof FormValues
 }
 
 interface Props {
-  data: EditableDetail[];
+  data: EditableDetail[]
 }
 
 const schema = z.object({
@@ -26,20 +26,20 @@ const schema = z.object({
       message: '전화번호는 010-1234-5678 형식이어야 합니다.',
     }),
   email: z.string().email({ message: '올바른 이메일 형식이 아닙니다.' }),
-});
+})
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.infer<typeof schema>
 
 function MyInfoEditableProfileCard({ data }: Props) {
-  const mutation = useEditProfileMutation();
+  const mutation = useEditProfileMutation()
 
   const defaultValues = data.reduce(
     (acc, { field, value }) => {
-      acc[field] = value;
-      return acc;
+      acc[field] = value
+      return acc
     },
     {} as Record<string, string>,
-  );
+  )
 
   const {
     register,
@@ -49,12 +49,12 @@ function MyInfoEditableProfileCard({ data }: Props) {
     resolver: zodResolver(schema),
     defaultValues,
     mode: 'onChange',
-  });
+  })
 
   const handleFormSubmit = (formData: FormValues) => {
-    mutation.mutate(formData);
-    alert('회원 정보가 수정되었습니다.');
-  };
+    mutation.mutate(formData)
+    alert('회원 정보가 수정되었습니다.')
+  }
 
   return (
     <MyInfoCard title="기본 정보">
@@ -73,7 +73,7 @@ function MyInfoEditableProfileCard({ data }: Props) {
         </Button>
       </form>
     </MyInfoCard>
-  );
+  )
 }
 
-export { MyInfoEditableProfileCard };
+export { MyInfoEditableProfileCard }

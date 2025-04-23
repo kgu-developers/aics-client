@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import * as style from './club-card.css';
+import Image from 'next/image'
+import Link from 'next/link'
+import * as style from './club-card.css'
 
 interface Props {
-  name: string;
-  description: string;
-  site?: string;
-  image?: string;
+  name: string
+  description: string
+  site?: string
+  image?: string
 }
 
 function ClubCard({ image, name, description, site }: Props) {
@@ -32,7 +32,7 @@ function ClubCard({ image, name, description, site }: Props) {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export { ClubCard };
+export { ClubCard }

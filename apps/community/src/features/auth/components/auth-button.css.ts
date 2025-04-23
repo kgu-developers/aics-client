@@ -1,5 +1,5 @@
-import { themeVars } from '@aics-client/design-system/styles';
-import { style } from '@vanilla-extract/css';
+import { themeVars } from '@aics-client/design-system/styles'
+import { style } from '@vanilla-extract/css'
 
 export const button = style({
   padding: themeVars.spacing.md,
@@ -17,4 +17,4 @@ export const button = style({
     color: themeVars.color.gray500,
     cursor: 'not-allowed',
   },
-});
+})

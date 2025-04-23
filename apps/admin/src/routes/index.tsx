@@ -1,35 +1,35 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { createFileRoute } from '@tanstack/react-router';
-import { Button, Card, Form, Input, Typography } from 'antd';
-import { useSignIn } from '~/hooks/use-sign-in';
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { createFileRoute } from '@tanstack/react-router'
+import { Button, Card, Form, Input, Typography } from 'antd'
+import { useSignIn } from '~/hooks/use-sign-in'
 
 export const Route = createFileRoute('/')({
   component: SignInPage,
-});
+})
 
 interface FormValues {
-  userId: string;
-  password: string;
+  userId: string
+  password: string
 }
 
 function SignInPage() {
-  const [form] = Form.useForm();
-  const signInMutation = useSignIn();
+  const [form] = Form.useForm()
+  const signInMutation = useSignIn()
 
   const onFinish = (values: FormValues) => {
     signInMutation.mutate(values, {
       onError: (error) => {
-        console.error('로그인 실패:', error);
+        console.error('로그인 실패:', error)
       },
-    });
-  };
+    })
+  }
 
   const removeSpace = (fieldName: keyof FormValues) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value.replace(/\s/g, '');
-      form.setFieldsValue({ [fieldName]: newValue });
-    };
-  };
+      const newValue = e.target.value.replace(/\s/g, '')
+      form.setFieldsValue({ [fieldName]: newValue })
+    }
+  }
 
   return (
     <div className="flex items-center justify-center w-full h-full bg-gray-100">
@@ -82,7 +82,7 @@ function SignInPage() {
         </Form>
       </Card>
     </div>
-  );
+  )
 }
 
-export default SignInPage;
+export default SignInPage

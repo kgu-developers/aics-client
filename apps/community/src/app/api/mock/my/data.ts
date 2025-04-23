@@ -5,6 +5,6 @@ const myProfile = {
   role: '학부생',
   major: '컴퓨터공학부',
   id: '201912000',
-};
+}
 
-export { myProfile };
+export { myProfile }

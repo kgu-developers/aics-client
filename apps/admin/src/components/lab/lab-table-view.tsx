@@ -1,29 +1,27 @@
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd';
-import type { FormInstance, TableProps } from 'antd';
-import type { LabDetailResponse } from '~/apis/community/requests';
+import { UploadOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd'
+import type { FormInstance, TableProps } from 'antd'
+import type { LabDetailResponse } from '~/apis/community/requests'
 
 interface LabTableViewProps {
-  form: FormInstance;
-  data: LabDetailResponse[];
+  form: FormInstance
+  data: LabDetailResponse[]
   register: {
-    isEditing: (record: LabDetailResponse) => boolean;
-    handleEdit: (
-      record: Partial<LabDetailResponse> & { id: React.Key },
-    ) => void;
-    cancel: () => void;
-  };
-  handleSave: (record: LabDetailResponse) => void;
-  handleDelete: (record: LabDetailResponse) => void;
-  handleImageUpload: (record: LabDetailResponse) => (file: File) => boolean;
+    isEditing: (record: LabDetailResponse) => boolean
+    handleEdit: (record: Partial<LabDetailResponse> & { id: React.Key }) => void
+    cancel: () => void
+  }
+  handleSave: (record: LabDetailResponse) => void
+  handleDelete: (record: LabDetailResponse) => void
+  handleImageUpload: (record: LabDetailResponse) => (file: File) => boolean
 }
 
 interface EditableCellProps {
-  editing: boolean;
-  dataIndex: string;
-  title: string;
-  record: LabDetailResponse;
-  children: React.ReactNode;
+  editing: boolean
+  dataIndex: string
+  title: string
+  record: LabDetailResponse
+  children: React.ReactNode
 }
 
 function LabTableView({
@@ -58,8 +56,8 @@ function LabTableView({
           children
         )}
       </td>
-    );
-  };
+    )
+  }
 
   const columns = [
     { title: '연구실명', dataIndex: 'name', width: '15%', editable: true },
@@ -82,7 +80,7 @@ function LabTableView({
       dataIndex: 'img',
       width: '20%',
       render: (_: unknown, record: LabDetailResponse) => {
-        const editable = register.isEditing(record);
+        const editable = register.isEditing(record)
         return (
           <div>
             {record.img?.physicalPath && (
@@ -103,7 +101,7 @@ function LabTableView({
               )}
             </Upload>
           </div>
-        );
+        )
       },
     },
     {
@@ -111,7 +109,7 @@ function LabTableView({
       dataIndex: 'operation',
       width: '10%',
       render: (_: unknown, record: LabDetailResponse) => {
-        const editable = register.isEditing(record);
+        const editable = register.isEditing(record)
         return editable ? (
           <span>
             <Button
@@ -158,14 +156,14 @@ function LabTableView({
               </Button>
             </Popconfirm>
           </span>
-        );
+        )
       },
     },
-  ];
+  ]
 
   const mergedColumns: TableProps<LabDetailResponse>['columns'] = columns.map(
     (col) => {
-      if (!col.editable) return col;
+      if (!col.editable) return col
 
       return {
         ...col,
@@ -175,9 +173,9 @@ function LabTableView({
           title: col.title,
           editing: register.isEditing(record),
         }),
-      };
+      }
     },
-  );
+  )
 
   return (
     <Form form={form} component={false}>
@@ -191,7 +189,7 @@ function LabTableView({
         className="break-keep whitespace-nowrap"
       />
     </Form>
-  );
+  )
 }
 
-export default LabTableView;
+export default LabTableView

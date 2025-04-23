@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries';
+import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
 
-import { ProfessorCard } from './professor-card';
+import { ProfessorCard } from './professor-card'
 
-import * as styles from './professor-list.css';
+import * as styles from './professor-list.css'
 
 function ProfessorList() {
-  const { data } = useSuspenseQuery(PROFESSORS_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(PROFESSORS_QUERY_OPTIONS.ALL())
   return (
     <div className={styles.professorListWrapper}>
       {data.contents.map((professor) => (
@@ -19,7 +19,7 @@ function ProfessorList() {
         />
       ))}
     </div>
-  );
+  )
 }
 
-export { ProfessorList };
+export { ProfessorList }

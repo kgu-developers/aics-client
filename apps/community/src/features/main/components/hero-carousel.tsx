@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
-import Autoplay from 'embla-carousel-autoplay';
-import useEmblaCarousel from 'embla-carousel-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useSuspenseQuery } from '@tanstack/react-query'
+import Autoplay from 'embla-carousel-autoplay'
+import useEmblaCarousel from 'embla-carousel-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import AltImage from '~/assets/images/alt.png';
-import { CarouselDots } from '~/components/carousel-dots';
-import * as styles from '~/features/main/components/hero-carousel.css';
-import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
+import AltImage from '~/assets/images/alt.png'
+import { CarouselDots } from '~/components/carousel-dots'
+import * as styles from '~/features/main/components/hero-carousel.css'
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
 
 function HeroCarousel() {
-  const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL());
+  const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL())
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
@@ -20,7 +20,7 @@ function HeroCarousel() {
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     }),
-  ]);
+  ])
 
   return (
     <section className={styles.hero}>
@@ -47,7 +47,7 @@ function HeroCarousel() {
         <CarouselDots emblaApi={emblaApi} />
       </div>
     </section>
-  );
+  )
 }
 
-export { HeroCarousel };
+export { HeroCarousel }

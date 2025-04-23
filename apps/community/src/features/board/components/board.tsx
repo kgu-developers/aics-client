@@ -1,29 +1,29 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Button } from '@aics-client/design-system';
+import { Button } from '@aics-client/design-system'
 import {
   ArrowLeft,
   Calendar,
   Download,
   Eye,
-} from '@aics-client/design-system/icons';
-import DOMPurify from 'dompurify';
+} from '@aics-client/design-system/icons'
+import DOMPurify from 'dompurify'
 
-import * as styles from '~/features/board/components/board.css';
+import * as styles from '~/features/board/components/board.css'
 
 interface HeaderProps {
-  title: string;
-  author: string;
-  views: number;
-  createdAt: string;
+  title: string
+  author: string
+  views: number
+  createdAt: string
   file?: {
-    logicalName: string;
-    physicalPath: string;
-  };
+    logicalName: string
+    physicalPath: string
+  }
 }
 
 function Board({ children }: { children: React.ReactNode }) {
-  return <article>{children}</article>;
+  return <article>{children}</article>
 }
 
 function Header({ title, author, views, createdAt, file }: HeaderProps) {
@@ -50,7 +50,7 @@ function Header({ title, author, views, createdAt, file }: HeaderProps) {
         </button>
       )}
     </div>
-  );
+  )
 }
 
 function Content({ content }: { content: string }) {
@@ -60,19 +60,19 @@ function Content({ content }: { content: string }) {
       // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />
-  );
+  )
 }
 
 interface FooterProps {
   prevPost: {
-    id: number;
-    title: string;
-  };
+    id: number
+    title: string
+  }
   nextPost: {
-    id: number;
-    title: string;
-  };
-  to: string;
+    id: number
+    title: string
+  }
+  to: string
 }
 
 function Footer({ prevPost, nextPost, to }: FooterProps) {
@@ -102,11 +102,11 @@ function Footer({ prevPost, nextPost, to }: FooterProps) {
         <Link href={to}>목록으로</Link>
       </Button>
     </div>
-  );
+  )
 }
 
-Board.Header = Header;
-Board.Content = Content;
-Board.Footer = Footer;
+Board.Header = Header
+Board.Content = Content
+Board.Footer = Footer
 
-export { Board };
+export { Board }

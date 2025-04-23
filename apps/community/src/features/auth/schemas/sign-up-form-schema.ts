@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 const signUpFormSchema = z
   .object({
@@ -23,7 +23,7 @@ const signUpFormSchema = z
   .refine((data) => data.password === data.confirm_password, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['confirm_password'],
-  });
+  })
 
 const defaultValues = {
   studentId: '',
@@ -32,6 +32,6 @@ const defaultValues = {
   name: '',
   email: '',
   phone: '',
-};
+}
 
-export { signUpFormSchema, defaultValues };
+export { signUpFormSchema, defaultValues }

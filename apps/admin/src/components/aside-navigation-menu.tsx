@@ -1,5 +1,5 @@
-import { Link } from '@tanstack/react-router';
-import { Menu, type MenuProps } from 'antd';
+import { Link } from '@tanstack/react-router'
+import { Menu, type MenuProps } from 'antd'
 import {
   Clipboard,
   Clock,
@@ -8,16 +8,16 @@ import {
   ImagesIcon,
   Speech,
   Users,
-} from 'lucide-react';
+} from 'lucide-react'
 
-import LOGO from '~/assets/logo.svg';
-import { PATH } from '~/constants/path';
-import { useRefreshTokens } from '~/hooks/use-refresh-token';
-import { useTokenExpiration } from '~/hooks/use-token-expiration';
-import { authServices } from '~/utils/auth';
-import { formatExpireTime } from '~/utils/utils';
+import LOGO from '~/assets/logo.svg'
+import { PATH } from '~/constants/path'
+import { useRefreshTokens } from '~/hooks/use-refresh-token'
+import { useTokenExpiration } from '~/hooks/use-token-expiration'
+import { authServices } from '~/utils/auth'
+import { formatExpireTime } from '~/utils/utils'
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 const items: MenuItem[] = [
   {
@@ -80,7 +80,7 @@ const items: MenuItem[] = [
     label: <Link to={PATH.HERO_IMAGES}>대표 이미지</Link>,
     icon: <ImagesIcon size={20} />,
   },
-];
+]
 
 function AsideHeader() {
   return (
@@ -91,17 +91,17 @@ function AsideHeader() {
         <p>관리자 시스템</p>
       </div>
     </div>
-  );
+  )
 }
 
 function AsideFooter() {
-  const { expireTime } = useTokenExpiration();
-  const refreshMutation = useRefreshTokens();
-  const { logout } = authServices();
+  const { expireTime } = useTokenExpiration()
+  const refreshMutation = useRefreshTokens()
+  const { logout } = authServices()
 
   const handleRefreshToken = () => {
-    refreshMutation.mutate();
-  };
+    refreshMutation.mutate()
+  }
 
   return (
     <div className="flex items-center justify-between p-2 text-sm border-r border-gray-200">
@@ -126,7 +126,7 @@ function AsideFooter() {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
 export default function AsideNavigationMenu() {
@@ -136,5 +136,5 @@ export default function AsideNavigationMenu() {
       <Menu mode="inline" items={items} className="flex-grow" />
       <AsideFooter />
     </aside>
-  );
+  )
 }

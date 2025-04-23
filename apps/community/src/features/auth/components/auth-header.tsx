@@ -1,8 +1,8 @@
-import * as styles from '~/components/(auth)/auth-header.css';
+import * as styles from '~/components/(auth)/auth-header.css'
 
 interface Props {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
 function AuthHeader({ title, description }: Props) {
@@ -11,7 +11,7 @@ function AuthHeader({ title, description }: Props) {
       <h1 className={styles.title}>{title}</h1>
       <p>{description}</p>
     </div>
-  );
+  )
 }
 
-export { AuthHeader };
+export { AuthHeader }

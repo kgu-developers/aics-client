@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { Button, Input } from '@aics-client/design-system';
-import * as styles from '~/components/my/change-password/change-password-form.css';
-import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password-mutation';
+import { Button, Input } from '@aics-client/design-system'
+import * as styles from '~/components/my/change-password/change-password-form.css'
+import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password-mutation'
 
 const changePasswordSchema = z
   .object({
@@ -31,16 +31,16 @@ const changePasswordSchema = z
   .refine((data) => data.newPassword === data.confirmNewPassword, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['confirmNewPassword'],
-  });
+  })
 
 const defaultValues = {
   originalPassword: '',
   newPassword: '',
   confirmNewPassword: '',
-};
+}
 
 const ChangePasswordForm = () => {
-  const mutation = useChangePasswordMutation();
+  const mutation = useChangePasswordMutation()
 
   const {
     register,
@@ -50,18 +50,18 @@ const ChangePasswordForm = () => {
     resolver: zodResolver(changePasswordSchema),
     mode: 'onChange',
     defaultValues,
-  });
+  })
 
   const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
     mutation.mutate(data, {
       onSuccess: () => {
-        alert('비밀번호 변경이 완료되었습니다.');
+        alert('비밀번호 변경이 완료되었습니다.')
       },
       onError: () => {
-        alert('현재 비밀번호를 다시 확인해주세요.');
+        alert('현재 비밀번호를 다시 확인해주세요.')
       },
-    });
-  };
+    })
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
@@ -96,7 +96,7 @@ const ChangePasswordForm = () => {
         비밀번호 변경
       </Button>
     </form>
-  );
-};
+  )
+}
 
-export default ChangePasswordForm;
+export default ChangePasswordForm

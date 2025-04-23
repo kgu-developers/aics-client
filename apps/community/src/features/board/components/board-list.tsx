@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons';
+import { Eye, Paperclip, Pin } from '@aics-client/design-system/icons'
 
-import { PATH } from '~/shared/constants/path';
+import { PATH } from '~/shared/constants/path'
 
-import type { Post } from '~/features/main/services/remote';
+import type { Post } from '~/features/main/services/remote'
 
-import * as styles from '~/features/board/components/board-list.css';
+import * as styles from '~/features/board/components/board-list.css'
 
 function BoardList({ data }: { data: Post[] }) {
   return (
@@ -21,7 +21,7 @@ function BoardList({ data }: { data: Post[] }) {
         <p>게시물이 존재하지 않습니다.</p>
       )}
     </>
-  );
+  )
 }
 
 function Row({ data }: { data: Post }) {
@@ -49,7 +49,7 @@ function Row({ data }: { data: Post }) {
         </div>
       </li>
     </Link>
-  );
+  )
 }
 
-export { BoardList };
+export { BoardList }

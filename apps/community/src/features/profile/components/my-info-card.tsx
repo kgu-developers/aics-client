@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { Input } from '@aics-client/design-system';
-import type { UseFormRegisterReturn } from 'react-hook-form';
-import * as styles from '~/components/my/my-info-card.css';
+import { Input } from '@aics-client/design-system'
+import type { UseFormRegisterReturn } from 'react-hook-form'
+import * as styles from '~/components/my/my-info-card.css'
 
 interface MyInfoCardProps {
-  title: string;
-  children: React.ReactNode;
+  title: string
+  children: React.ReactNode
 }
 
 interface MyInfoFieldProps {
-  title: string;
-  value: string;
+  title: string
+  value: string
 }
 
 interface MyInfoEditableFieldProps extends MyInfoFieldProps {
-  register?: UseFormRegisterReturn;
-  error?: string;
+  register?: UseFormRegisterReturn
+  error?: string
 }
 
 function MyInfoCard({ title, children }: MyInfoCardProps) {
@@ -25,7 +25,7 @@ function MyInfoCard({ title, children }: MyInfoCardProps) {
       <h2 className={styles.cardTitle}>{title}</h2>
       <div className={styles.cardContent}>{children}</div>
     </div>
-  );
+  )
 }
 
 function MyInfoField({ title, value }: MyInfoFieldProps) {
@@ -34,7 +34,7 @@ function MyInfoField({ title, value }: MyInfoFieldProps) {
       <h3 className={styles.fieldTitle}>{title}</h3>
       <p className={styles.field}>{value}</p>
     </div>
-  );
+  )
 }
 
 function MyInfoEditableField({
@@ -56,10 +56,10 @@ function MyInfoEditableField({
         />
       </div>
     </div>
-  );
+  )
 }
 
-MyInfoCard.Field = MyInfoField;
-MyInfoCard.EditableField = MyInfoEditableField;
+MyInfoCard.Field = MyInfoField
+MyInfoCard.EditableField = MyInfoEditableField
 
-export { MyInfoCard };
+export { MyInfoCard }

@@ -1,19 +1,19 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
-import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries';
+import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
 
-import { getQueryClient } from '~/shared/utils/get-query-client';
+import { getQueryClient } from '~/shared/utils/get-query-client'
 
-import { ProfessorList } from '~/components/member/professor/professor-list';
-import { PageHeader } from '~/components/page-header';
+import { ProfessorList } from '~/components/member/professor/professor-list'
+import { PageHeader } from '~/components/page-header'
 
 //** TODO: for mocking */
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 
 export default function ProfessorPage() {
-  const queryClient = getQueryClient();
+  const queryClient = getQueryClient()
 
-  void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL());
+  void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL())
 
   return (
     <section>
@@ -26,5 +26,5 @@ export default function ProfessorPage() {
         <ProfessorList />
       </HydrationBoundary>
     </section>
-  );
+  )
 }

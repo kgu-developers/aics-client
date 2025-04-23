@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
+import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
 
-import { ClubCard } from './club-card';
+import { ClubCard } from './club-card'
 
-import * as style from './club-list.css';
+import * as style from './club-list.css'
 
 function ClubList() {
-  const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL());
+  const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL())
 
   return (
     <div className={style.clubList}>
@@ -17,7 +17,7 @@ function ClubList() {
         <ClubCard key={`club-${club.name}`} {...club} />
       ))}
     </div>
-  );
+  )
 }
 
-export { ClubList };
+export { ClubList }
