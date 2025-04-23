@@ -1,13 +1,14 @@
 'use client'
 
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { useSuspenseQuery } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import Image from 'next/image'
-import Link from 'next/link'
 
-import AltImage from '~/assets/images/alt.png'
+import AltImage from '~/shared/assets/images/alt.png'
 import * as styles from '~/features/main/components/news-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
 import { CarouselDots } from '~/shared/components/carousel/carousel-dots'

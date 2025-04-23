@@ -1,5 +1,6 @@
-import { themeVars } from '@aics-client/design-system/styles'
 import { style } from '@vanilla-extract/css'
+
+import { themeVars } from '@aics-client/design-system/styles'
 
 export const card = style({
   width: themeVars.width.full,

@@ -1,5 +1,6 @@
-import { screen, themeVars } from '@aics-client/design-system/styles'
 import { style } from '@vanilla-extract/css'
+
+import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const labList = style([
   screen.xl({

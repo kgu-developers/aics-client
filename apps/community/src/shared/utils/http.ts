@@ -1,4 +1,4 @@
-import { getAccessToken } from './token'
+import { getAccessToken } from '~/shared/utils/token'
 
 interface RequestParams {
   method: string
