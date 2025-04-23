@@ -26,6 +26,8 @@ function DotButton({ children, active, ...props }: DotButtonProps) {
 function CarouselDots({
   emblaApi,
 }: { emblaApi: EmblaCarouselType | undefined }) {
+  const carouselDotsId = useId()
+
   const handleNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
@@ -38,7 +40,6 @@ function CarouselDots({
     resetOrStop()
   }, [])
 
-  const carouselDotsId = useId()
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
     emblaApi,
     handleNavButtonClick,
