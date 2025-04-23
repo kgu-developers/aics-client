@@ -1,42 +1,67 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 import { ChevronLeft, ChevronRight } from '@aics-client/design-system/icons'
 
 import * as styles from '~/features/board/components/pagination.css'
 
 interface Props {
-  totalPage: number // 총 페이지 수
-  currentPage: number // 현재 페이지
-  pageCount?: number // 보여줄 페이지 장 수
+  totalPage: number
+  currentPage: number
+  pageCount?: number
 }
 
-function Pagination({ totalPage, pageCount = 5, currentPage }: Props) {
+const usePagination = ({ totalPage, pageCount = 5, currentPage }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const initialListStart = Math.floor(currentPage / pageCount) * pageCount + 1
-  const [listStart, setListStart] = useState(initialListStart)
-
+  const listStart = Math.floor(currentPage / pageCount) * pageCount + 1
   const noPrev = listStart === 1
   const noNext = listStart + pageCount - 1 >= totalPage
 
   const handleMovePage = (pageNum: number) => {
-    const newListStart =
-      Math.ceil(pageNum / pageCount) * pageCount - (pageCount - 1)
-
-    if (newListStart !== listStart) {
-      setListStart(newListStart > 0 ? newListStart : 1)
-    }
-
     const params = new URLSearchParams(searchParams)
     params.set('page', (pageNum - 1).toString())
-
     router.push(`${pathname}?${params.toString()}`)
   }
+
+  return {
+    listStart,
+    noPrev,
+    noNext,
+    handleMovePage,
+  }
+}
+
+function PageButton({
+  pageNum,
+  isActive,
+  onClick,
+}: {
+  pageNum: number
+  isActive: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      className={`${styles.pageButton} ${isActive && styles.active}`}
+      onClick={onClick}
+    >
+      {pageNum}
+    </button>
+  )
+}
+
+function Pagination({ totalPage, pageCount = 5, currentPage }: Props) {
+  const { listStart, noPrev, noNext, handleMovePage } = usePagination({
+    totalPage,
+    pageCount,
+    currentPage,
+  })
 
   return (
     <div className={styles.controllerWrapper}>
@@ -47,21 +72,19 @@ function Pagination({ totalPage, pageCount = 5, currentPage }: Props) {
       >
         <ChevronLeft />
       </button>
+
       {[...Array(pageCount)].map((_, i) => (
         <Fragment key={`page-${listStart + i}`}>
           {listStart + i <= totalPage && (
-            <button
-              type="button"
-              className={`${styles.pageButton} ${
-                currentPage + 1 === listStart + i && styles.active
-              }`}
+            <PageButton
+              pageNum={listStart + i}
+              isActive={currentPage + 1 === listStart + i}
               onClick={() => handleMovePage(listStart + i)}
-            >
-              {listStart + i}
-            </button>
+            />
           )}
         </Fragment>
       ))}
+
       <button
         type="button"
         onClick={() => handleMovePage(listStart + pageCount)}
