@@ -5,9 +5,6 @@ import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 
-//** TODO: for mocking */
-export const dynamic = 'force-dynamic'
-
 export default function MyPage() {
   const queryClient = getQueryClient()
 
