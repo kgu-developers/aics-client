@@ -2,6 +2,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL
 
 const END_POINT = {
+  ABOUTS: `${API_BASE_URL}/abouts`,
   POST: `${API_BASE_URL}/posts`,
   POST_DETAIL: (id: string) => `${API_BASE_URL}/posts/${id}`,
   CAROUSEL: `${API_BASE_URL}/carousels`,

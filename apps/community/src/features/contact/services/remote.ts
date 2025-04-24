@@ -1,14 +1,15 @@
-import { MOCK_END_POINT } from '~/shared/constants/api'
-import type { ContentsResponse } from '~/shared/types/api'
+import { END_POINT } from '~/shared/constants/api'
+import type { ContentResponse } from '~/shared/types/api'
 import { http } from '~/shared/utils/http'
 
-interface Contact {
-  title: string
-  description: string[]
-}
-
 function getContacts() {
-  return http.get<ContentsResponse<Contact[]>>(MOCK_END_POINT.CONTACT)
+  const CATEGORY = 'DIRECTIONS'
+  const params = new URLSearchParams({
+    category: CATEGORY,
+  })
+  return http.get<ContentResponse<string>>(
+    `${END_POINT.ABOUTS}?${params.toString()}`,
+  )
 }
 
-export { type Contact, getContacts }
+export { getContacts }

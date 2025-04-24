@@ -3,11 +3,10 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 
-import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries'
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
 
-function DeptInfoSection() {
-  const { data } = useSuspenseQuery(DEPT_QUERY_OPTIONS.ALL())
-
+function ContactInfoSection() {
+  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL())
   return (
     <section>
       <div
@@ -18,4 +17,4 @@ function DeptInfoSection() {
   )
 }
 
-export { DeptInfoSection }
+export { ContactInfoSection }
