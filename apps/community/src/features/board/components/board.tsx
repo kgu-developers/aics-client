@@ -99,7 +99,7 @@ function BoardContent({ content }: { content: string }) {
 }
 
 interface PostNavigationItem {
-  id: number
+  postId: number
   title: string
 }
 
@@ -147,7 +147,7 @@ function PrevPostLink({
   }
 
   return (
-    <Link href={`${to}/${post.id}`} className={styles.prevPost}>
+    <Link href={`${to}/${post.postId}`} className={styles.prevPost}>
       <span className={styles.border}>이전</span>
       <h2>{post.title}</h2>
     </Link>
@@ -166,7 +166,7 @@ function NextPostLink({
   }
 
   return (
-    <Link href={`${to}/${post.id}`} className={styles.nextPost}>
+    <Link href={`${to}/${post.postId}`} className={styles.nextPost}>
       <span className={styles.border}>다음</span>
       <h2>{post.title}</h2>
     </Link>
