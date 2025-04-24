@@ -4,9 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { useSuspenseQuery } from '@tanstack/react-query'
-import DOMPurify from 'dompurify'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
+import DOMPurify from 'isomorphic-dompurify'
 
 import * as styles from '~/features/main/components/news-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'

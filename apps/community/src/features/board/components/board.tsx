@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 
 import { Button } from '@aics-client/design-system'
 import {

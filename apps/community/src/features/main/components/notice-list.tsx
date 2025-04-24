@@ -3,7 +3,7 @@
 import Link from 'next/link'
 
 import { useSuspenseQuery } from '@tanstack/react-query'
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 
 import * as styles from '~/features/main/components/notice-list.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
