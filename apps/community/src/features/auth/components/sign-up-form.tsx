@@ -1,80 +1,48 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, useWatch } from 'react-hook-form'
-import { z } from 'zod'
+import {
+  type FieldErrors,
+  type UseFormRegister,
+  useForm,
+} from 'react-hook-form'
+import type { z } from 'zod'
 
-import { Input } from '@aics-client/design-system'
+import { Button, Input } from '@aics-client/design-system'
 
-import { AuthButton } from '~/features/auth/components/auth-button'
 import * as styles from '~/features/auth/components/sign-up-form.css'
+import {
+  defaultValues,
+  signUpFormSchema,
+} from '~/features/auth/schemas/sign-up-form-schema'
 
-const signUpFormSchema = z
-  .object({
-    studentId: z.string().min(1, { message: '학번을 입력해주세요.' }),
-    password: z
-      .string()
-      .min(1, { message: '비밀번호를 입력해주세요.' })
-      .regex(
-        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,15}$/,
-        { message: '올바른 비밀번호 형식이 아닙니다.' },
-      ),
-    confirm_password: z
-      .string()
-      .min(1, { message: '비밀번호 확인을 입력해주세요.' }),
-    name: z.string().min(1, { message: '이름을 입력해주세요.' }),
-    email: z
-      .string()
-      .min(1, { message: '이메일을 입력해주세요.' })
-      .email({ message: '올바른 이메일 형식이 아닙니다.' }),
-    phone: z.string().min(1, { message: '연락처를 입력해주세요.' }),
-  })
-  .refine((data) => data.password === data.confirm_password, {
-    message: '비밀번호가 일치하지 않습니다.',
-    path: ['confirm_password'],
-  })
-
-const defaultValues = {
-  studentId: '',
-  password: '',
-  confirm_password: '',
-  name: '',
-  email: '',
-  phone: '',
-}
-
-function SignUpForm() {
+const useSignUpForm = () => {
   const {
     register,
     handleSubmit,
-    control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues,
   })
 
-  const [studentId, password, confirmPassword, name, email, phone] = useWatch({
-    control,
-    name: [
-      'studentId',
-      'password',
-      'confirm_password',
-      'name',
-      'email',
-      'phone',
-    ],
-  })
-
-  const isFormValid =
-    studentId && password && confirmPassword && name && email && phone
-
-  const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
-    console.log(data)
+  return {
+    register,
+    handleSubmit,
+    errors,
+    isValid,
   }
+}
 
+function SignUpFormFields({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<z.infer<typeof signUpFormSchema>>
+  errors: FieldErrors<z.infer<typeof signUpFormSchema>>
+}) {
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+    <>
       <div className={styles.formField}>
         <Input
           {...register('studentId')}
@@ -84,7 +52,6 @@ function SignUpForm() {
           message={errors.studentId?.message}
         />
       </div>
-
       <div className={styles.formField}>
         <Input
           {...register('password')}
@@ -100,7 +67,6 @@ function SignUpForm() {
           message={errors.confirm_password?.message}
         />
       </div>
-
       <div className={styles.formField}>
         <Input
           {...register('name')}
@@ -110,7 +76,6 @@ function SignUpForm() {
           message={errors.name?.message}
         />
       </div>
-
       <div className={styles.formField}>
         <Input
           {...register('email')}
@@ -120,7 +85,6 @@ function SignUpForm() {
           message={errors.email?.message}
         />
       </div>
-
       <div className={styles.formField}>
         <Input
           {...register('phone')}
@@ -130,10 +94,23 @@ function SignUpForm() {
           message={errors.phone?.message}
         />
       </div>
+    </>
+  )
+}
 
-      <AuthButton type="submit" disabled={!isFormValid}>
-        회원가입
-      </AuthButton>
+function SignUpForm() {
+  const { register, handleSubmit, errors, isValid } = useSignUpForm()
+
+  const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
+    if (isValid) {
+      console.log(data)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+      <SignUpFormFields register={register} errors={errors} />
+      <Button type="submit">회원가입</Button>
     </form>
   )
 }

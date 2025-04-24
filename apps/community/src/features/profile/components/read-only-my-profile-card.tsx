@@ -1,15 +1,9 @@
 'use client'
 
 import { MyInfoCard } from '~/features/profile/components/my-info-card'
+import type { UserDetail } from '~/features/profile/types/profile'
 
-interface Props {
-  data: {
-    title: string
-    value: string
-  }[]
-}
-
-function MyInfoProfileCard({ data }: Props) {
+function ReadOnlyMyProfileCard({ data }: { data: UserDetail[] }) {
   return (
     <MyInfoCard title="내 프로필">
       {data.map((detail) => (
@@ -23,4 +17,4 @@ function MyInfoProfileCard({ data }: Props) {
   )
 }
 
-export { MyInfoProfileCard }
+export { ReadOnlyMyProfileCard }

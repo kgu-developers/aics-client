@@ -1,22 +1,23 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import {
+  type FieldErrors,
+  type UseFormRegister,
+  useForm,
+} from 'react-hook-form'
 import type { z } from 'zod'
 
-import { Input } from '@aics-client/design-system'
+import { Button, Input } from '@aics-client/design-system'
 
-import { AuthButton } from '~/features/auth/components/auth-button'
 import * as styles from '~/features/auth/components/sign-in-form.css'
 import { useSignIn } from '~/features/auth/hooks/use-sign-in'
-import { signInFormSchema } from '~/features/auth/schemas/sign-in-form-schema'
+import {
+  defaultValues,
+  signInFormSchema,
+} from '~/features/auth/schemas/sign-in-form-schema'
 
-const defaultValues = {
-  userId: '',
-  password: '',
-}
-
-function SignInForm() {
+const useSignInForm = () => {
   const {
     register,
     handleSubmit,
@@ -26,51 +27,66 @@ function SignInForm() {
     defaultValues,
   })
 
-  const mutation = useSignIn()
-
-  const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSubmit((data) => mutation.mutate(data))
-    }
+  return {
+    register,
+    handleSubmit,
+    errors,
+    isValid,
   }
+}
 
-  const resetErrorMessage = () => {
-    if (mutation.isError) {
-      mutation.reset()
+function SignInFormFields({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<z.infer<typeof signInFormSchema>>
+  errors: FieldErrors<z.infer<typeof signInFormSchema>>
+}) {
+  return (
+    <>
+      <Input
+        {...register('userId')}
+        type="text"
+        placeholder="학번을 입력해주세요"
+        message={errors.userId?.message}
+      />
+      <Input
+        {...register('password')}
+        type="password"
+        placeholder="비밀번호를 입력해주세요"
+        message={errors.password?.message}
+      />
+    </>
+  )
+}
+
+function SignInErrorMessage({ isError }: { isError: boolean }) {
+  if (!isError) return null
+
+  return (
+    <span className={styles.errorMessage}>
+      학번 혹은 비밀번호를 확인해주세요.
+    </span>
+  )
+}
+
+function SignInForm() {
+  const { register, handleSubmit, errors, isValid } = useSignInForm()
+  const { mutate, isError } = useSignIn()
+
+  const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
+    if (isValid) {
+      mutate(data)
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => mutation.mutate(data))}
-      className={styles.formWrapper}
-    >
-      <Input
-        {...register('userId', {
-          onChange: resetErrorMessage,
-        })}
-        type="text"
-        placeholder="학번을 입력해주세요"
-        onKeyUp={handlePressEnter}
-        message={errors.userId?.message}
-      />
-      <Input
-        {...register('password', {
-          onChange: resetErrorMessage,
-        })}
-        type="password"
-        placeholder="비밀번호를 입력해주세요"
-        onKeyUp={handlePressEnter}
-        message={errors.password?.message}
-      />
-      {mutation.isError && (
-        <span className={styles.errorMessage}>
-          학번 혹은 비밀번호를 확인해주세요.
-        </span>
-      )}
-      <AuthButton type="submit" disabled={!isValid}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+      <SignInFormFields register={register} errors={errors} />
+      <Button color="black" type="submit">
         로그인
-      </AuthButton>
+      </Button>
+      <SignInErrorMessage isError={isError} />
     </form>
   )
 }

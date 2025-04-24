@@ -7,23 +7,47 @@ import type { Lab } from '~/features/lab/services/remote'
 function LabCard({ lab }: { lab: Lab }) {
   return (
     <div className={styles.cardWrapper}>
-      <Image
-        src={lab.file?.physicalPath ?? 'https://placehold.co/128'}
-        alt={`${lab.name}` || '연구실 이미지'}
-        width={100}
-        height={100}
-        className={styles.image}
+      <AvatarImage src={lab.file?.physicalPath} name={lab.name} />
+      <CardContent
+        name={lab.name}
+        advisor={lab.advisor}
+        loc={lab.loc}
+        site={lab.site}
       />
+    </div>
+  )
+}
+
+function AvatarImage({ src, name }: { src: string | undefined; name: string }) {
+  return (
+    <Image
+      src={src ?? 'https://placehold.co/128'}
+      alt={`${name}` || '연구실 이미지'}
+      width={100}
+      height={100}
+      className={styles.image}
+    />
+  )
+}
+
+function CardContent({
+  name,
+  advisor,
+  loc,
+  site,
+}: { name: string; advisor: string; loc: string; site: string }) {
+  return (
+    <>
       <div className={styles.divider} />
       <div className={styles.infoWrapper}>
-        <h2 className={styles.title}>{lab.name}</h2>
-        <p>지도교수: {lab.advisor}</p>
-        <p>연구실 위치: {lab.loc}</p>
-        <Link href={lab.site} target="_blank" className={styles.link}>
+        <h2 className={styles.title}>{name}</h2>
+        <p>지도교수: {advisor}</p>
+        <p>연구실 위치: {loc}</p>
+        <Link href={site} target="_blank" className={styles.link}>
           홈페이지
         </Link>
       </div>
-    </div>
+    </>
   )
 }
 

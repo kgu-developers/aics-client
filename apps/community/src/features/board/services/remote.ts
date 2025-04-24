@@ -24,11 +24,11 @@ interface PostDetail {
   }
   createdAt: string
   prevPost: {
-    id: number
+    postId: number
     title: string
   }
   nextPost: {
-    id: number
+    postId: number
     title: string
   }
 }

@@ -8,14 +8,37 @@ import { Breadcrumb } from '@aics-client/design-system'
 import * as styles from '~/shared/components/page-header/page-header.css'
 import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path'
 
-interface Props {
+interface PageHeaderProps {
   title: string
   description: string
 }
 
-function PageHeader({ title, description }: Props) {
+function PageHeader({ title, description }: PageHeaderProps) {
   const pathname = usePathname()
   const paths = pathname.split('/').filter((path) => path !== '')
+
+  const renderBreadcrumbs = () =>
+    paths.map((path, index) => {
+      const isLast = index === paths.length - 1
+      const href = `/${paths.slice(0, index + 1).join('/')}`
+
+      return (
+        <Fragment key={`subpath-${path}`}>
+          <Breadcrumb.Separator />
+          <Breadcrumb.Item>
+            {isLast ? (
+              <Breadcrumb.Page>
+                {PATH_TITLES[path as pathmapKey]}
+              </Breadcrumb.Page>
+            ) : (
+              <Breadcrumb.Link href={href}>
+                {PATH_TITLES[path as pathmapKey]}
+              </Breadcrumb.Link>
+            )}
+          </Breadcrumb.Item>
+        </Fragment>
+      )
+    })
 
   return (
     <div className={styles.pageHeaderWrapper}>
@@ -24,29 +47,7 @@ function PageHeader({ title, description }: Props) {
           <Breadcrumb.Item>
             <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
-          {paths.map((path, index) =>
-            index !== paths.length - 1 ? (
-              <Fragment key={`subpath-${path}`}>
-                <Breadcrumb.Separator />
-                <Breadcrumb.Item>
-                  <Breadcrumb.Link
-                    href={`/${paths.slice(0, index + 1).join('/')}`}
-                  >
-                    {PATH_TITLES[path as pathmapKey]}
-                  </Breadcrumb.Link>
-                </Breadcrumb.Item>
-              </Fragment>
-            ) : (
-              <Fragment key={`subpath-${path}`}>
-                <Breadcrumb.Separator />
-                <Breadcrumb.Item>
-                  <Breadcrumb.Page>
-                    {PATH_TITLES[path as pathmapKey]}
-                  </Breadcrumb.Page>
-                </Breadcrumb.Item>
-              </Fragment>
-            ),
-          )}
+          {renderBreadcrumbs()}
         </Breadcrumb.List>
       </Breadcrumb>
 

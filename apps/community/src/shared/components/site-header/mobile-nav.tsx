@@ -8,7 +8,11 @@ import { cn } from '@aics-client/design-system/utils'
 import * as styles from '~/shared/components/site-header/mobile-nav.css'
 import { PATH, PATHMAP } from '~/shared/constants/path'
 
-function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
+interface MobileNavProps {
+  isLoggedIn: boolean
+}
+
+function MobileNav({ isLoggedIn }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>({})
 
@@ -18,6 +22,61 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
       [key]: !prev[key],
     }))
   }
+
+  const closeDrawer = () => setIsOpen(false)
+
+  const renderNavGroups = () =>
+    Object.entries(PATHMAP).map(([key, path]) => {
+      if (path.path === PATH.MY && !isLoggedIn) {
+        return null
+      }
+
+      const hasChildren = 'children' in path
+
+      return (
+        <div key={key} className={styles.navGroup}>
+          {hasChildren ? (
+            <>
+              <button
+                type="button"
+                className={styles.navGroupTitle}
+                onClick={() => toggleGroup(key)}
+              >
+                {path.title}
+                <ChevronDown
+                  size={16}
+                  className={cn(
+                    styles.chevron,
+                    openGroups[key] && styles.chevronOpen,
+                  )}
+                />
+              </button>
+              <div
+                id={`group-${key}`}
+                className={cn(
+                  styles.navGroupLinks,
+                  openGroups[key] && styles.navGroupLinksOpen,
+                )}
+              >
+                {Object.values(path.children).map((child) => (
+                  <Link
+                    key={child.path}
+                    href={child.path}
+                    className={styles.navGroupLink}
+                  >
+                    {child.title}
+                  </Link>
+                ))}
+              </div>
+            </>
+          ) : (
+            <Link href={path.path} className={styles.navGroupTitle}>
+              {path.title}
+            </Link>
+          )}
+        </div>
+      )
+    })
 
   return (
     <>
@@ -29,10 +88,10 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
 
       <div
         className={cn(styles.overlay, isOpen && styles.overlayVisible)}
-        onClick={() => setIsOpen(false)}
+        onClick={closeDrawer}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            setIsOpen(false)
+            closeDrawer()
           }
         }}
         tabIndex={0}
@@ -42,59 +101,11 @@ function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
         <button
           type="button"
           className={styles.closeButton}
-          onClick={() => setIsOpen(false)}
+          onClick={closeDrawer}
         >
           <XIcon size={24} />
         </button>
-        <nav>
-          {Object.entries(PATHMAP).map(([key, path]) => {
-            if (path.path === PATH.MY && !isLoggedIn) {
-              return null
-            }
-            return (
-              <div key={key} className={styles.navGroup}>
-                {'children' in path ? (
-                  <>
-                    <button
-                      type="button"
-                      className={styles.navGroupTitle}
-                      onClick={() => toggleGroup(key)}
-                    >
-                      {path.title}
-                      <ChevronDown
-                        size={16}
-                        className={cn(
-                          styles.chevron,
-                          openGroups[key] && styles.chevronOpen,
-                        )}
-                      />
-                    </button>
-                    <div
-                      className={cn(
-                        styles.navGroupLinks,
-                        openGroups[key] && styles.navGroupLinksOpen,
-                      )}
-                    >
-                      {Object.values(path.children).map((child) => (
-                        <Link
-                          key={child.path}
-                          href={child.path}
-                          className={styles.navGroupLink}
-                        >
-                          {child.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <Link href={path.path} className={styles.navGroupTitle}>
-                    {path.title}
-                  </Link>
-                )}
-              </div>
-            )
-          })}
-        </nav>
+        <nav>{renderNavGroups()}</nav>
       </div>
     </>
   )

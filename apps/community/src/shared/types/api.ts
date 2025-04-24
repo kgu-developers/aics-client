@@ -1,3 +1,7 @@
+type ContentResponse<T> = {
+  content: T
+}
+
 type ContentsResponse<T> = {
   contents: T
 }
@@ -15,4 +19,4 @@ interface Pagable {
   isEnd: boolean
 }
 
-export type { ContentsResponse, PaginationResponse, Pagable }
+export type { ContentResponse, ContentsResponse, PaginationResponse, Pagable }

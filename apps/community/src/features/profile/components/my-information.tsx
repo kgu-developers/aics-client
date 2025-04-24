@@ -2,31 +2,35 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { MyInfoEditableProfileCard } from '~/features/profile/components/my-info-editable-profile-card'
-import { MyInfoProfileCard } from '~/features/profile/components/my-info-profile-card'
+import { EditableMyProfileCard } from '~/features/profile/components/editable-my-profile-card'
 import * as styles from '~/features/profile/components/my-information.css'
+import { ReadOnlyMyProfileCard } from '~/features/profile/components/read-only-my-profile-card'
 import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
+import type {
+  UserDetail,
+  UserEditableDetail,
+} from '~/features/profile/types/profile'
 
 function MyInformation() {
   const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE())
 
-  const userDetails = [
+  const userDetails: UserDetail[] = [
     { title: '이름', value: data.name },
     { title: '학번', value: data.id },
     { title: '구분', value: data.role },
     { title: '전공', value: data.major },
   ]
 
-  const userEditableDetails = [
-    { title: '전화번호', value: data.phone, field: 'phone' as const },
-    { title: '이메일', value: data.email, field: 'email' as const },
+  const editableUserDetails: UserEditableDetail[] = [
+    { title: '전화번호', value: data.phone, field: 'phone' },
+    { title: '이메일', value: data.email, field: 'email' },
   ]
 
   return (
-    <div className={styles.cardWrapper}>
-      <MyInfoProfileCard data={userDetails} />
-      <MyInfoEditableProfileCard data={userEditableDetails} />
-    </div>
+    <section className={styles.cardWrapper}>
+      <ReadOnlyMyProfileCard data={userDetails} />
+      <EditableMyProfileCard initialData={editableUserDetails} />
+    </section>
   )
 }
 
