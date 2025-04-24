@@ -2,9 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  useForm,
-  type UseFormRegister,
   type FieldErrors,
+  type UseFormRegister,
+  useForm,
 } from 'react-hook-form'
 import type { z } from 'zod'
 
