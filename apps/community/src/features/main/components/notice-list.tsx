@@ -21,24 +21,36 @@ function NoticeList() {
       </div>
       <ul className={styles.list}>
         {recentNotices.map((post) => (
-          <li key={`notice-${post.postId}`}>
-            <Link
-              href={PATH.NOTICE_DETAIL(post.postId)}
-              className={styles.post}
-            >
-              <h2 className={styles.postTitle}>{post.title}</h2>
-              <div
-                className={styles.postDescription}
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(post.description),
-                }}
-              />
-            </Link>
-          </li>
+          <NoticeListItem
+            key={post.postId}
+            postId={post.postId}
+            title={post.title}
+            description={post.description}
+          />
         ))}
       </ul>
     </section>
+  )
+}
+
+function NoticeListItem({
+  postId,
+  title,
+  description,
+}: { postId: number; title: string; description: string }) {
+  return (
+    <li key={`notice-${postId}`}>
+      <Link href={PATH.NOTICE_DETAIL(postId)} className={styles.post}>
+        <h2 className={styles.postTitle}>{title}</h2>
+        <div
+          className={styles.postDescription}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(description),
+          }}
+        />
+      </Link>
+    </li>
   )
 }
 
