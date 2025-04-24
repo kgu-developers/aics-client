@@ -2,9 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  useForm,
-  type UseFormRegister,
   type FieldErrors,
+  type UseFormRegister,
+  useForm,
 } from 'react-hook-form'
 import type { z } from 'zod'
 
@@ -83,7 +83,9 @@ function SignInForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
       <SignInFormFields register={register} errors={errors} />
-      <Button type="submit">로그인</Button>
+      <Button color="black" type="submit">
+        로그인
+      </Button>
       <SignInErrorMessage isError={isError} />
     </form>
   )
