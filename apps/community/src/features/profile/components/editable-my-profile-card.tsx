@@ -2,25 +2,16 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import type { z } from 'zod'
 
 import { Button } from '@aics-client/design-system'
 
 import { MyInfoCard } from '~/features/profile/components/my-info-card'
+import { editMyInfoSchema } from '~/features/profile/schemas/edit-my-info-schema'
 import { useEditProfile } from '~/features/profile/services/use-edit-profile.mutation'
 import type { UserEditableDetail } from '~/features/profile/types/profile'
 
-type FormValues = z.infer<typeof schema>
-
-const schema = z.object({
-  phone: z
-    .string()
-    .min(1, { message: '전화번호를 입력해주세요.' })
-    .regex(/^\d{3}-\d{4}-\d{4}$/, {
-      message: '전화번호는 010-1234-5678 형식이어야 합니다.',
-    }),
-  email: z.string().email({ message: '올바른 이메일 형식이 아닙니다.' }),
-})
+type FormValues = z.infer<typeof editMyInfoSchema>
 
 function EditableMyProfileCard({
   initialData,
@@ -40,7 +31,7 @@ function EditableMyProfileCard({
     handleSubmit,
     formState: { errors, isDirty, isSubmitted },
   } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(editMyInfoSchema),
     defaultValues,
     mode: 'onChange',
   })
