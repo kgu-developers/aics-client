@@ -9,6 +9,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 
 import * as styles from '~/features/main/components/hero-carousel.css'
 import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
+import type { Carousel } from '~/features/main/services/remote'
 import AltImage from '~/shared/assets/images/alt.png'
 import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
 
@@ -28,19 +29,7 @@ function HeroCarousel() {
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.slides}>
           {heroes.map((slide) => (
-            <Link
-              key={`hero-${slide.id}`}
-              href={slide.link}
-              className={styles.slide}
-            >
-              <Image
-                src={slide.file.physicalPath ?? AltImage}
-                alt={`slide-${slide.file.id}`}
-                width={1600}
-                height={900}
-                className={styles.image}
-              />
-            </Link>
+            <CarouselSlide key={`hero-${slide.id}`} slide={slide} />
           ))}
         </div>
       </div>
@@ -51,4 +40,18 @@ function HeroCarousel() {
   )
 }
 
-export { HeroCarousel }
+function CarouselSlide({ slide }: { slide: Carousel }) {
+  return (
+    <Link key={`hero-${slide.id}`} href={slide.link} className={styles.slide}>
+      <Image
+        src={slide.file.physicalPath ?? AltImage}
+        alt={`slide-${slide.file.id}`}
+        width={1600}
+        height={900}
+        className={styles.image}
+      />
+    </Link>
+  )
+}
+
+export default HeroCarousel
