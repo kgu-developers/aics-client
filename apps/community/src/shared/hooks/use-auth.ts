@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
 
-import type { Tokens } from '~/features/auth/hooks/use-sign-in'
+import type { Tokens } from '~/features/auth/hooks/use-sign-in.mutation'
 import {
   ACCESS_TOKEN_KEY,
   END_POINT,

@@ -1,4 +1,4 @@
-import { SignUpForm } from '~/features/auth/components/sign-up-form'
+import SignUpForm from '~/features/auth/components/sign-up-form'
 import { AuthLayout } from '~/widgets/auth/components/auth-layout'
 
 export default function SignUpPage() {

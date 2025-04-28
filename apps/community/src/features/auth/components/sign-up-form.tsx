@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   type FieldErrors,
   type UseFormRegister,
+  type UseFormSetValue,
+  type UseFormWatch,
   useForm,
 } from 'react-hook-form'
 import type { z } from 'zod'
@@ -11,15 +13,25 @@ import type { z } from 'zod'
 import { Button, Input } from '@aics-client/design-system'
 
 import * as styles from '~/features/auth/components/sign-up-form.css'
+import { useSignUp } from '~/features/auth/hooks/use-sign-up.mutation'
 import {
   defaultValues,
   signUpFormSchema,
 } from '~/features/auth/schemas/sign-up-form-schema'
+import Select from '~/shared/components/select/select'
+
+const majorOptions = [
+  { label: '컴퓨터공학전공', value: 'CSE' },
+  { label: '인공지능전공', value: 'AIT' },
+  { label: 'SW안전보안전공', value: 'SSS' },
+]
 
 const useSignUpForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors, isValid },
   } = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
@@ -29,6 +41,8 @@ const useSignUpForm = () => {
   return {
     register,
     handleSubmit,
+    setValue,
+    watch,
     errors,
     isValid,
   }
@@ -37,19 +51,23 @@ const useSignUpForm = () => {
 function SignUpFormFields({
   register,
   errors,
+  setValue,
+  watch,
 }: {
   register: UseFormRegister<z.infer<typeof signUpFormSchema>>
   errors: FieldErrors<z.infer<typeof signUpFormSchema>>
+  setValue: UseFormSetValue<z.infer<typeof signUpFormSchema>>
+  watch: UseFormWatch<z.infer<typeof signUpFormSchema>>
 }) {
   return (
     <>
       <div className={styles.formField}>
         <Input
-          {...register('studentId')}
+          {...register('userId')}
           type="text"
           label="학번"
           placeholder="학번을 입력해주세요"
-          message={errors.studentId?.message}
+          message={errors.userId?.message}
         />
       </div>
       <div className={styles.formField}>
@@ -77,6 +95,18 @@ function SignUpFormFields({
         />
       </div>
       <div className={styles.formField}>
+        <Select
+          options={majorOptions}
+          value={watch('major')}
+          onChange={(value) =>
+            setValue('major', value, { shouldValidate: true })
+          }
+          label="전공"
+          placeholder="전공을 선택해주세요"
+          message={errors.major?.message}
+        />
+      </div>
+      <div className={styles.formField}>
         <Input
           {...register('email')}
           type="text"
@@ -99,20 +129,30 @@ function SignUpFormFields({
 }
 
 function SignUpForm() {
-  const { register, handleSubmit, errors, isValid } = useSignUpForm()
+  const { register, handleSubmit, setValue, watch, errors, isValid } =
+    useSignUpForm()
+  const { mutate } = useSignUp()
 
   const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
     if (isValid) {
-      console.log(data)
+      const { confirm_password, ...submitData } = data
+      mutate(submitData)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
-      <SignUpFormFields register={register} errors={errors} />
-      <Button type="submit">회원가입</Button>
+      <SignUpFormFields
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        watch={watch}
+      />
+      <Button type="submit" color="black">
+        회원가입
+      </Button>
     </form>
   )
 }
 
-export { SignUpForm }
+export default SignUpForm
