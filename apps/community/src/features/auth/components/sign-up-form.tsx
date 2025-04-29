@@ -20,7 +20,7 @@ import {
 } from '~/features/auth/schemas/sign-up-form-schema'
 import Select from '~/shared/components/select/select'
 
-const majorOptions = [
+const MAJOR_OPTIONS = [
   { label: '컴퓨터공학전공', value: 'CSE' },
   { label: '인공지능전공', value: 'AIT' },
   { label: 'SW안전보안전공', value: 'SSS' },
@@ -96,7 +96,7 @@ function SignUpFormFields({
       </div>
       <div className={styles.formField}>
         <Select
-          options={majorOptions}
+          options={MAJOR_OPTIONS}
           value={watch('major')}
           onChange={(value) =>
             setValue('major', value, { shouldValidate: true })
