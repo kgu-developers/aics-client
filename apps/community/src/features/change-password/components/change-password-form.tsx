@@ -87,17 +87,13 @@ function ChangePasswordErrorMessage({ isError }: { isError: boolean }) {
 
 function ChangePasswordForm() {
   const { register, handleSubmit, errors, isValid } = useChangePasswordForm()
-  const mutation = useChangePasswordMutation()
+  const { mutate, isError } = useChangePasswordMutation()
 
   const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        alert('비밀번호 변경이 완료되었습니다.')
-      },
-      onError: () => {
-        alert('현재 비밀번호를 다시 확인해주세요.')
-      },
-    })
+    const { confirmNewPassword, ...patchData } = data
+    if (isValid) {
+      mutate(patchData)
+    }
   }
 
   return (
@@ -106,7 +102,7 @@ function ChangePasswordForm() {
       <Button type="submit" color="black" disabled={!isValid}>
         비밀번호 변경
       </Button>
-      <ChangePasswordErrorMessage isError={mutation.isError} />
+      <ChangePasswordErrorMessage isError={isError} />
     </form>
   )
 }
