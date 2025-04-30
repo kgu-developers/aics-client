@@ -11,7 +11,7 @@ import type { z } from 'zod'
 import { Button, Input } from '@aics-client/design-system'
 
 import * as styles from '~/features/auth/components/sign-in-form.css'
-import { useSignIn } from '~/features/auth/hooks/use-sign-in'
+import { useSignIn } from '~/features/auth/hooks/use-sign-in.mutation'
 import {
   defaultValues,
   signInFormSchema,
