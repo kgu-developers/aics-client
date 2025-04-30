@@ -5,6 +5,8 @@ import { themeVars } from '@aics-client/design-system/styles'
 const formWrapper = style({
   display: themeVars.display.grid,
   gap: themeVars.spacing.md,
+  width: themeVars.width.full,
+  maxWidth: '32rem',
 })
 
 const formField = style({

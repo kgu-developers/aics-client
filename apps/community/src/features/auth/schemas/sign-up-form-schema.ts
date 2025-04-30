@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const signUpFormSchema = z
   .object({
-    studentId: z.string().min(1, { message: '학번을 입력해주세요.' }),
+    userId: z.string().min(1, { message: '학번을 입력해주세요.' }),
     password: z
       .string()
       .min(1, { message: '비밀번호를 입력해주세요.' })
@@ -21,6 +21,7 @@ const signUpFormSchema = z
       .min(1, { message: '이메일을 입력해주세요.' })
       .email({ message: '올바른 이메일 형식이 아닙니다.' }),
     phone: z.string().min(1, { message: '연락처를 입력해주세요.' }),
+    major: z.string().min(1, { message: '전공을 선택해주세요.' }),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: '비밀번호가 일치하지 않습니다.',
@@ -28,12 +29,13 @@ const signUpFormSchema = z
   })
 
 const defaultValues = {
-  studentId: '',
+  userId: '',
   password: '',
   confirm_password: '',
   name: '',
   email: '',
   phone: '',
+  major: '',
 }
 
 export { signUpFormSchema, defaultValues }
