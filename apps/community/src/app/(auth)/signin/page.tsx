@@ -1,4 +1,4 @@
-import { SignInForm } from '~/features/auth/components/sign-in-form'
+import SignInForm from '~/features/auth/components/sign-in-form'
 import { AuthLayout } from '~/widgets/auth/components/auth-layout'
 
 export default function SignInPage() {
