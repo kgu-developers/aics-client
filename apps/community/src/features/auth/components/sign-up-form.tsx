@@ -1,24 +1,22 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  type FieldErrors,
-  type UseFormRegister,
-  type UseFormSetValue,
-  type UseFormWatch,
-  useForm,
+import { Button, Input } from '@aics-client/design-system'
+import type {
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
 } from 'react-hook-form'
 import type { z } from 'zod'
-
-import { Button, Input } from '@aics-client/design-system'
-
 import * as styles from '~/features/auth/components/sign-up-form.css'
 import { useSignUp } from '~/features/auth/hooks/use-sign-up.mutation'
 import {
   defaultValues,
   signUpFormSchema,
 } from '~/features/auth/schemas/sign-up-form-schema'
+import FormErrorMessage from '~/shared/components/form/form-error-message'
 import Select from '~/shared/components/select/select'
+import { useZodForm } from '~/shared/hooks/use-zod-form'
 
 const MAJOR_OPTIONS = [
   { label: '컴퓨터공학전공', value: 'CSE' },
@@ -26,26 +24,13 @@ const MAJOR_OPTIONS = [
   { label: 'SW안전보안전공', value: 'SSS' },
 ]
 
-const useSignUpForm = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<z.infer<typeof signUpFormSchema>>({
-    resolver: zodResolver(signUpFormSchema),
-    defaultValues,
-  })
+type SignUpFormValues = z.infer<typeof signUpFormSchema>
 
-  return {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    errors,
-    isValid,
-  }
+interface SignUpFormFieldsProps {
+  register: UseFormRegister<SignUpFormValues>
+  errors: FieldErrors<SignUpFormValues>
+  setValue: UseFormSetValue<SignUpFormValues>
+  watch: UseFormWatch<SignUpFormValues>
 }
 
 function SignUpFormFields({
@@ -53,12 +38,7 @@ function SignUpFormFields({
   errors,
   setValue,
   watch,
-}: {
-  register: UseFormRegister<z.infer<typeof signUpFormSchema>>
-  errors: FieldErrors<z.infer<typeof signUpFormSchema>>
-  setValue: UseFormSetValue<z.infer<typeof signUpFormSchema>>
-  watch: UseFormWatch<z.infer<typeof signUpFormSchema>>
-}) {
+}: SignUpFormFieldsProps) {
   return (
     <>
       <div className={styles.formField}>
@@ -129,11 +109,19 @@ function SignUpFormFields({
 }
 
 function SignUpForm() {
-  const { register, handleSubmit, setValue, watch, errors, isValid } =
-    useSignUpForm()
-  const { mutate } = useSignUp()
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors, isValid },
+  } = useZodForm({
+    schema: signUpFormSchema,
+    defaultValues,
+  })
+  const { mutate, isError } = useSignUp()
 
-  const onSubmit = (data: z.infer<typeof signUpFormSchema>) => {
+  const onSubmit = (data: SignUpFormValues) => {
     if (isValid) {
       const { confirm_password, ...submitData } = data
       mutate(submitData)
@@ -151,6 +139,7 @@ function SignUpForm() {
       <Button type="submit" color="black">
         회원가입
       </Button>
+      <FormErrorMessage isError={isError} message="회원가입에 실패했습니다." />
     </form>
   )
 }

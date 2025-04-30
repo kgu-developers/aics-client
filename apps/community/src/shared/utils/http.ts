@@ -30,15 +30,16 @@ async function request<Response>({
   }
 
   const res = await fetch(url, config)
+
   if (!res.ok) {
     throw new Error(`Status: ${res.status}`)
   }
-  const responseData = await res.json()
 
-  if (method === 'POST') {
-    return responseData
+  if (res.status === 204) {
+    return null as Response
   }
 
+  const responseData = await res.json()
   return responseData as Response
 }
 

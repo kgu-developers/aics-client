@@ -1,48 +1,30 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  type FieldErrors,
-  type UseFormRegister,
-  useForm,
-} from 'react-hook-form'
+import type { FieldErrors, UseFormRegister } from 'react-hook-form'
 import type { z } from 'zod'
 
 import { Button, Input } from '@aics-client/design-system'
 
 import * as styles from '~/features/change-password/components/change-password-form.css'
-import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password-mutation'
+import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password.mutation'
 import {
   changePasswordSchema,
   defaultValues,
 } from '~/features/change-password/schemas/change-password-form-schema'
+import FormErrorMessage from '~/shared/components/form/form-error-message'
+import { useZodForm } from '~/shared/hooks/use-zod-form'
 
-const useChangePasswordForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<z.infer<typeof changePasswordSchema>>({
-    resolver: zodResolver(changePasswordSchema),
-    mode: 'onChange',
-    defaultValues,
-  })
+type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>
 
-  return {
-    register,
-    handleSubmit,
-    errors,
-    isValid,
-  }
+interface ChangePasswordFormFieldsProps {
+  register: UseFormRegister<ChangePasswordFormValues>
+  errors: FieldErrors<ChangePasswordFormValues>
 }
 
 function ChangePasswordFormFields({
   register,
   errors,
-}: {
-  register: UseFormRegister<z.infer<typeof changePasswordSchema>>
-  errors: FieldErrors<z.infer<typeof changePasswordSchema>>
-}) {
+}: ChangePasswordFormFieldsProps) {
   return (
     <>
       <Input
@@ -75,29 +57,23 @@ function ChangePasswordFormFields({
   )
 }
 
-function ChangePasswordErrorMessage({ isError }: { isError: boolean }) {
-  if (!isError) return null
-
-  return (
-    <span className={styles.errorMessage}>
-      현재 비밀번호를 다시 확인해주세요.
-    </span>
-  )
-}
-
 function ChangePasswordForm() {
-  const { register, handleSubmit, errors, isValid } = useChangePasswordForm()
-  const mutation = useChangePasswordMutation()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useZodForm({
+    schema: changePasswordSchema,
+    defaultValues,
+    mode: 'onChange',
+  })
+  const { mutate, isError } = useChangePasswordMutation()
 
-  const onSubmit = (data: z.infer<typeof changePasswordSchema>) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        alert('비밀번호 변경이 완료되었습니다.')
-      },
-      onError: () => {
-        alert('현재 비밀번호를 다시 확인해주세요.')
-      },
-    })
+  const onSubmit = (data: ChangePasswordFormValues) => {
+    const { confirmNewPassword, ...patchData } = data
+    if (isValid) {
+      mutate(patchData)
+    }
   }
 
   return (
@@ -106,7 +82,10 @@ function ChangePasswordForm() {
       <Button type="submit" color="black" disabled={!isValid}>
         비밀번호 변경
       </Button>
-      <ChangePasswordErrorMessage isError={mutation.isError} />
+      <FormErrorMessage
+        isError={isError}
+        message="현재 비밀번호를 다시 확인해주세요."
+      />
     </form>
   )
 }

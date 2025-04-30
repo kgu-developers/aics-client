@@ -1,11 +1,6 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  type FieldErrors,
-  type UseFormRegister,
-  useForm,
-} from 'react-hook-form'
+import type { FieldErrors, UseFormRegister } from 'react-hook-form'
 import type { z } from 'zod'
 
 import { Button, Input } from '@aics-client/design-system'
@@ -16,24 +11,8 @@ import {
   defaultValues,
   signInFormSchema,
 } from '~/features/auth/schemas/sign-in-form-schema'
-
-const useSignInForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<z.infer<typeof signInFormSchema>>({
-    resolver: zodResolver(signInFormSchema),
-    defaultValues,
-  })
-
-  return {
-    register,
-    handleSubmit,
-    errors,
-    isValid,
-  }
-}
+import FormErrorMessage from '~/shared/components/form/form-error-message'
+import { useZodForm } from '~/shared/hooks/use-zod-form'
 
 function SignInFormFields({
   register,
@@ -60,24 +39,19 @@ function SignInFormFields({
   )
 }
 
-function SignInErrorMessage({ isError }: { isError: boolean }) {
-  if (!isError) return null
-
-  return (
-    <span className={styles.errorMessage}>
-      학번 혹은 비밀번호를 확인해주세요.
-    </span>
-  )
-}
-
 function SignInForm() {
-  const { register, handleSubmit, errors, isValid } = useSignInForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useZodForm({
+    schema: signInFormSchema,
+    defaultValues,
+  })
   const { mutate, isError } = useSignIn()
 
   const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
-    if (isValid) {
-      mutate(data)
-    }
+    if (isValid) mutate(data)
   }
 
   return (
@@ -86,9 +60,12 @@ function SignInForm() {
       <Button color="black" type="submit">
         로그인
       </Button>
-      <SignInErrorMessage isError={isError} />
+      <FormErrorMessage
+        isError={isError}
+        message="학번 혹은 비밀번호를 확인해주세요."
+      />
     </form>
   )
 }
 
-export { SignInForm }
+export default SignInForm

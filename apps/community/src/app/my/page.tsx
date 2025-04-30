@@ -1,5 +1,5 @@
-import { MyInformation } from '~/features/profile/components/my-information'
 import { PageHeader } from '~/shared/components/page-header/page-header'
+import { MyInformation } from '~/widgets/profile/components/my-information'
 
 export default function MyPage() {
   return (

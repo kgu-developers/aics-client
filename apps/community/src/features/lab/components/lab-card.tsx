@@ -6,7 +6,7 @@ import type { Lab } from '~/features/lab/services/remote'
 
 function LabCard({ lab }: { lab: Lab }) {
   return (
-    <div className={styles.cardWrapper}>
+    <section className={styles.cardWrapper}>
       <AvatarImage src={lab.file?.physicalPath} name={lab.name} />
       <CardContent
         name={lab.name}
@@ -14,7 +14,7 @@ function LabCard({ lab }: { lab: Lab }) {
         loc={lab.loc}
         site={lab.site}
       />
-    </div>
+    </section>
   )
 }
 
