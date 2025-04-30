@@ -16,10 +16,11 @@ export const useEditProfile = () => {
       queryClient.invalidateQueries({
         queryKey: MY_PROFILE_QUERY_KEYS.PROFILE(),
       })
+      alert('회원 정보가 수정되었습니다.')
     },
 
     onError: (e) => {
-      console.log(e)
+      alert('회원 정보 수정에 실패했습니다.')
     },
   })
 }
