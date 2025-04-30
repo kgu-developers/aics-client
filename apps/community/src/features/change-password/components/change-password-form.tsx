@@ -11,7 +11,7 @@ import type { z } from 'zod'
 import { Button, Input } from '@aics-client/design-system'
 
 import * as styles from '~/features/change-password/components/change-password-form.css'
-import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password-mutation'
+import { useChangePasswordMutation } from '~/features/change-password/hooks/use-change-password.mutation'
 import {
   changePasswordSchema,
   defaultValues,
