@@ -3,13 +3,13 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { EditableMyProfileCard } from '~/features/profile/components/editable-my-profile-card'
-import * as styles from '~/features/profile/components/my-information.css'
 import { ReadOnlyMyProfileCard } from '~/features/profile/components/read-only-my-profile-card'
 import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
 import type {
   UserDetail,
   UserEditableDetail,
 } from '~/features/profile/types/profile'
+import * as styles from '~/widgets/profile/components/my-information.css'
 
 function MyInformation() {
   const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE())
