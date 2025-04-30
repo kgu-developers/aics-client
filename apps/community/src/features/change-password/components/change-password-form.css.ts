@@ -25,10 +25,4 @@ const inputField = style({
   width: '100%',
 })
 
-const errorMessage = style({
-  color: themeVars.color.orange500,
-  fontSize: themeVars.fontSize.sm,
-  fontWeight: themeVars.fontWeight.medium,
-})
-
-export { formWrapper, newPasswordWrapper, inputField, errorMessage }
+export { formWrapper, newPasswordWrapper, inputField }
