@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic'
+
 import ChangePasswordForm from '~/features/change-password/components/change-password-form'
 import { PageHeader } from '~/shared/components/page-header/page-header'
 
-const ChangePasswordPage = () => {
+export default function ChangePasswordPage() {
   return (
     <>
       <PageHeader
@@ -12,5 +14,3 @@ const ChangePasswordPage = () => {
     </>
   )
 }
-
-export default ChangePasswordPage
