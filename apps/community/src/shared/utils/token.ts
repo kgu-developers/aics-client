@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/shared/constants/api'
 
 function getAccessToken(): string | null {
@@ -33,4 +34,26 @@ function getToken() {
   return [accessToken, refreshToken] as const
 }
 
-export { getAccessToken, getRefreshToken, removeTokens, getToken }
+function isValidateToken() {
+  const accessToken = getAccessToken()
+
+  if (!accessToken) {
+    return false
+  }
+
+  try {
+    const payload = JSON.parse(atob(accessToken.split('.')[1] ?? ''))
+    const exp = payload.exp * 1000
+    return Date.now() < exp
+  } catch (error) {
+    return false
+  }
+}
+
+export {
+  getAccessToken,
+  getRefreshToken,
+  removeTokens,
+  getToken,
+  isValidateToken,
+}
