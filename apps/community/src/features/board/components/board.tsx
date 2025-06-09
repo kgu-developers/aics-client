@@ -11,7 +11,7 @@ import {
 } from '@aics-client/design-system/icons'
 
 import * as styles from '~/features/board/components/board.css'
-import { getFileNameFromUrl } from '~/shared/utils/util'
+import { downloadFile, getFileNameFromUrl } from '~/shared/utils/util'
 
 function Board({ children }: { children: React.ReactNode }) {
   return <article>{children}</article>
@@ -81,17 +81,12 @@ function CreatedAtDisplay({ date }: { date: string }) {
 function BoardFileDownloader({
   file,
 }: { file: NonNullable<BoardHeaderProps['file']> }) {
-  const handleDownload = () => {
-    const link = document.createElement('a')
-    link.href = file.physicalPath
-    link.download = file.physicalPath
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   return (
-    <button type="button" className={styles.file} onClick={handleDownload}>
+    <button
+      type="button"
+      className={styles.file}
+      onClick={() => downloadFile(file.physicalPath)}
+    >
       <Download size={'0.875rem'} />
       <span>{getFileNameFromUrl(file.physicalPath)}</span>
     </button>

@@ -4,4 +4,13 @@ const getFileNameFromUrl = (url: string): string | undefined => {
   return parts[parts.length - 1]
 }
 
-export { getFileNameFromUrl }
+const downloadFile = (physicalPath: string) => {
+  const link = document.createElement('a')
+  link.href = physicalPath
+  link.download = physicalPath
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
+export { getFileNameFromUrl, downloadFile }
