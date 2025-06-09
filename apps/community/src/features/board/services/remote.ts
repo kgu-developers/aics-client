@@ -19,7 +19,7 @@ interface PostDetail {
   views: number
   isPinned: false
   file: {
-    logicalName: string
+    id: number
     physicalPath: string
   }
   createdAt: string
