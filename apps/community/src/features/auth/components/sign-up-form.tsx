@@ -90,7 +90,7 @@ function SignUpFormFields({
         <Input
           {...register('email')}
           type="text"
-          label="이메일"
+          label="경기대학교 이메일"
           placeholder="이메일을 입력해주세요"
           message={errors.email?.message}
         />
