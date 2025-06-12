@@ -14,12 +14,15 @@ const signUpFormSchema = z
       ),
     confirm_password: z
       .string()
-      .min(1, { message: '비밀번호 확인을 입력해주세요.' }),
+      .min(1, { message: '비밀번호가 일치하지 않습니다다.' }),
     name: z.string().min(1, { message: '이름을 입력해주세요.' }),
     email: z
       .string()
       .min(1, { message: '이메일을 입력해주세요.' })
-      .email({ message: '올바른 이메일 형식이 아닙니다.' }),
+      .email({ message: '올바른 이메일 형식이 아닙니다.' })
+      .refine((email) => email.endsWith('@kyonggi.ac.kr'), {
+        message: '경기대학교 이메일을 사용해주세요.',
+      }),
     phone: z.string().min(1, { message: '연락처를 입력해주세요.' }),
     major: z.string().min(1, { message: '전공을 선택해주세요.' }),
   })
