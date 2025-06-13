@@ -6,10 +6,8 @@ import NoticeList from '~/features/main/components/notice-list.client'
 export default async function Home() {
   return (
     <div className={styles.wrapper}>
-      <section>
-        <HeroCarousel />
-      </section>
-      <section className={styles.section2}>
+      <HeroCarousel />
+      <section className={styles.newsSection}>
         <NewsCarousel />
         <NoticeList />
       </section>
