@@ -14,6 +14,9 @@ import { SiteHeader } from '~/shared/components/site-header/site-header'
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
   description: '경기대학교 소프트웨어경영대학 AI컴퓨터공학부 공식 홈페이지',
+  icons: {
+    icon: '/icon.ico',
+  },
 }
 
 export default function RootLayout({

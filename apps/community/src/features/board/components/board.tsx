@@ -11,6 +11,7 @@ import {
 } from '@aics-client/design-system/icons'
 
 import * as styles from '~/features/board/components/board.css'
+import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section'
 import { downloadFile, getFileNameFromUrl } from '~/shared/utils/util'
 
 function Board({ children }: { children: React.ReactNode }) {
@@ -95,11 +96,9 @@ function BoardFileDownloader({
 
 function BoardContent({ content }: { content: string }) {
   return (
-    <div
-      className={styles.content}
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
-    />
+    <div className={styles.content}>
+      <TiptapContentSection content={content} />
+    </div>
   )
 }
 

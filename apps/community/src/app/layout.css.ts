@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css'
 
-import { themeVars } from '@aics-client/design-system/styles'
+import { screen, themeVars } from '@aics-client/design-system/styles'
 
 globalStyle('html, body', {
   WebkitFontSmoothing: 'antialiased',
@@ -17,15 +17,14 @@ const root = style([
   },
 ])
 
-const main = style({
-  flex: 1,
-  padding: '1rem 0.5rem 2rem 0.5rem',
-
-  '@media': {
-    'screen and (min-width: 1280px)': {
-      padding: '2rem 0 4rem 0',
-    },
+const main = style([
+  {
+    flex: 1,
+    padding: '1rem 0.5rem 2rem 0.5rem',
+    display: themeVars.display.flex,
+    flexDirection: themeVars.flexDirection.column,
   },
-})
+  screen.xl({ padding: '2rem 0 4rem 0' }),
+])
 
 export { root, main }

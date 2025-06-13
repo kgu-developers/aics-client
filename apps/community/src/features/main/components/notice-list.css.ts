@@ -26,6 +26,7 @@ const list = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   height: '100%',
+  gap: '0.75rem',
 })
 
 const post = style({
