@@ -8,7 +8,6 @@ const border = style({
 
 const content = style({
   padding: '3rem 1rem',
-  whiteSpace: 'pre-line',
 })
 
 const createdAt = style({
