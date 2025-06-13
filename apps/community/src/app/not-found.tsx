@@ -1,9 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@aics-client/design-system'
-import { useRouter } from 'next/navigation'
+
 import * as styles from '~/app/not-found.css'
 import logo from '~/shared/assets/svgs/kgu-logo.svg'
 
