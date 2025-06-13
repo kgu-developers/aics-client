@@ -20,6 +20,8 @@ const root = style([
 const main = style({
   flex: 1,
   padding: '1rem 0.5rem 2rem 0.5rem',
+  display: themeVars.display.flex,
+  flexDirection: themeVars.flexDirection.column,
 
   '@media': {
     'screen and (min-width: 1280px)': {
