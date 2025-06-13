@@ -1,26 +1,26 @@
 import { style } from '@vanilla-extract/css'
 
-import { themeVars } from '@aics-client/design-system/styles'
+import { screen, themeVars } from '@aics-client/design-system/styles'
 
-const news = style({
-  width: '60%',
-  '@media': {
-    'screen and (max-width: 1240px)': {
-      width: '100%',
-    },
+const news = style([
+  {
+    width: themeVars.width.full,
   },
-})
+  screen.xl({
+    width: '60%',
+  }),
+])
 
 const newsHeader = style({
   display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
+  justifyContent: themeVars.justifyContent.between,
+  alignItems: themeVars.alignItems.center,
   marginBottom: '1rem',
 })
 
 const title = style({
-  fontSize: '1.5rem',
-  fontWeight: 'bold',
+  fontSize: themeVars.fontSize['2xl'],
+  fontWeight: themeVars.fontWeight.bold,
   margin: 0,
 })
 
@@ -41,15 +41,15 @@ const link = style({
 const slide = style({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
+  justifyContent: themeVars.justifyContent.center,
+  alignItems: themeVars.alignItems.center,
 })
 
 const image = style({
   position: 'relative',
-  width: '100%',
+  width: themeVars.width.full,
   aspectRatio: '16 / 9',
-  borderRadius: '1rem',
+  borderRadius: themeVars.borderRadius['2xl'],
   overflow: 'hidden',
   userSelect: 'none',
   border: `1px solid ${themeVars.color.gray200}`,
@@ -66,8 +66,8 @@ const slideTitle = style({
   WebkitLineClamp: 1,
   lineClamp: 1,
   overflow: 'hidden',
-  fontSize: '1.25rem',
-  fontWeight: 600,
+  fontSize: themeVars.fontSize.xl,
+  fontWeight: themeVars.fontWeight.semibold,
   margin: 0,
   marginTop: '1rem',
   marginBottom: '0.5rem',
@@ -80,7 +80,7 @@ const slideDescription = style({
   WebkitLineClamp: 2,
   lineClamp: 2,
   overflow: 'hidden',
-  fontSize: '1rem',
+  fontSize: themeVars.fontSize.md,
   margin: 0,
   textAlign: 'center',
 })
