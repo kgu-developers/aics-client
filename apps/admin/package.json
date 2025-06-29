@@ -2,6 +2,7 @@
   "name": "@aics-client/admin",
   "version": "0.0.0",
   "type": "module",
+  "homepage": "/admin",
   "scripts": {
     "dev": "pnpm generate-routes && vite",
     "codegen": "pnpm codegen:admin && pnpm codegen:community",
