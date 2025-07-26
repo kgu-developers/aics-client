@@ -4,6 +4,8 @@ import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 import { HydratedBoard } from '~/widgets/board/components/hydrated-board'
 
+export const dynamic = 'force-dynamic'
+
 export default async function NoticeDetailPage({
   params,
 }: {

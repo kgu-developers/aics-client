@@ -5,6 +5,8 @@ import { LABS_QUERY_OPTIONS } from '~/features/lab/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 
+export const dynamic = 'force-dynamic'
+
 export default function LabPage() {
   const queryClient = getQueryClient()
 

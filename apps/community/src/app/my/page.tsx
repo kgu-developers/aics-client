@@ -1,7 +1,7 @@
-export const dynamic = 'force-dynamic'
-
 import { PageHeader } from '~/shared/components/page-header/page-header'
 import { MyInformation } from '~/widgets/profile/components/my-information'
+
+export const dynamic = 'force-dynamic'
 
 export default function MyPage() {
   return (

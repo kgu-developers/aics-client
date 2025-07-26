@@ -5,6 +5,8 @@ import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 
+export const dynamic = 'force-dynamic'
+
 export default function ContactPage() {
   const queryClient = getQueryClient()
 
