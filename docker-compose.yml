@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  aics-client:
+    build: .
+    container_name: aics-app
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      - NEXT_PUBLIC_AUTH_API_URL=${NEXT_PUBLIC_AUTH_API_URL:-http://localhost:8081}
+      - NODE_ENV=${NODE_ENV:-production}
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    networks:
+      - aics-network
+
+networks:
+  aics-network:
+    driver: bridge 

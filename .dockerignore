@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log*
+.next
+.git
+.gitignore
+README.md
+.env
+.env.local
+.env.production.local
+.env.development.local
+.nyc_output
+coverage
+.DS_Store
+*.tsbuildinfo
+apps/community/.next
+apps/admin/dist
+apps/admin/node_modules
