@@ -10,7 +10,7 @@ export const Route = createRootRoute({
 
 function App() {
   const location = useLocation()
-  const isSigninPage = location.pathname === '/'
+  const isSigninPage = location.pathname === '/admin'
 
   return (
     <ConfigProvider

@@ -5,6 +5,8 @@ import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 
+export const dynamic = 'force-dynamic'
+
 export default function ClubPage() {
   const queryClient = getQueryClient()
 

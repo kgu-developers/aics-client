@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  rewrites: async () => {
+    return [
+      {
+        source: '/admin/:path*',
+        destination: '/admin/index.html',
+      },
+    ]
+  },
+  output: 'standalone',
   transpilePackages: [
     '@aics-client/design-system',
     '@aics-client/design-system/styles',

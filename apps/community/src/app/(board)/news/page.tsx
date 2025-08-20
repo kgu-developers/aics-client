@@ -7,8 +7,10 @@ import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list'
 
-const SIZE = 10
+export const dynamic = 'force-dynamic'
+
 const CATEGORY = 'NEWS'
+const SIZE = 10
 
 export default async function NewsPage(props: {
   searchParams?: Promise<{

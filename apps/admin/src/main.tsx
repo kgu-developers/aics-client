@@ -19,6 +19,7 @@ const router = createRouter({
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
   scrollRestoration: true,
+  basepath: '/admin',
 })
 
 declare module '@tanstack/react-router' {

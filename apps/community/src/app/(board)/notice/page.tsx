@@ -7,6 +7,8 @@ import { PageHeader } from '~/shared/components/page-header/page-header'
 import { getQueryClient } from '~/shared/utils/get-query-client'
 import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list'
 
+export const dynamic = 'force-dynamic'
+
 const SIZE = 10
 const CATEGORY = 'NOTIFICATION'
 
