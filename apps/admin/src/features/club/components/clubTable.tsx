@@ -1,7 +1,7 @@
 import { Form } from 'antd'
-import type { ClubDetailResponse } from '~/features/club/services'
+import type { ClubDetailResponse } from '~/features/club/types'
 import ClubCreate from '~/features/club/components/clubCreator'
-import useEditTable from '~/hooks/use-edit-table'
+import useEditTable from '~/features/club/hooks/useEditTable'
 import ClubTableView from './clubTableView'
 import {
   useClubs,

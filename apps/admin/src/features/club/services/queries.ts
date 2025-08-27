@@ -7,4 +7,3 @@ export {
 } from '~/apis/admin/queries'
 
 export { useClubServiceGetApiV1Clubs } from '~/apis/community/queries'
-export type { ClubDetailResponse } from '~/apis/community/requests'

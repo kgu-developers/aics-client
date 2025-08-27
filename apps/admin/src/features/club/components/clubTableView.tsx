@@ -10,7 +10,7 @@ import {
   message,
 } from 'antd'
 import type { FormInstance, TableProps } from 'antd'
-import type { ClubDetailResponse } from '~/features/club/services'
+import type { ClubDetailResponse } from '~/features/club/types'
 
 const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL
 
