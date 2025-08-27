@@ -1,4 +1,4 @@
-import { useClubServiceGetApiV1Clubs } from '~/apis/community/queries'
+import { useClubServiceGetApiV1Clubs } from '~/features/club/services'
 
 export function useClubs() {
   const { data, ...rest } = useClubServiceGetApiV1Clubs()

@@ -1,9 +1,8 @@
 import { Form } from 'antd'
-import type { ClubDetailResponse } from '~/apis/community/requests'
-import ClubCreate from '~/features/club/components/club-creator'
+import type { ClubDetailResponse } from '~/features/club/services'
+import ClubCreate from '~/features/club/components/clubCreator'
 import useEditTable from '~/hooks/use-edit-table'
-import ClubTableView from './club-table-view'
-
+import ClubTableView from './clubTableView'
 import {
   useClubs,
   useClubImageUpload,
@@ -34,7 +33,7 @@ function ClubTable() {
         fileId,
       },
     })
-    return false // antd Upload 기본 업로드 막기
+    return false 
   }
 
   const handleSave = async (record: ClubDetailResponse) => {

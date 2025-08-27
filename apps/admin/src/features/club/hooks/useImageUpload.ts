@@ -1,5 +1,4 @@
-import { useFileServicePostApiV1FilesClub } from '~/apis/admin/queries'
-
+import { useFileServicePostApiV1FilesClub } from '~/features/club/services'
 export function useClubImageUpload() {
   const upload = useFileServicePostApiV1FilesClub()
   const uploadAndGetFileId = async (file: File) => {

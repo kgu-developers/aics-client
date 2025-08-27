@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { message } from 'antd'
-import { useClubServicePostApiV1Clubs } from '~/apis/admin/queries'
+import { useClubServicePostApiV1Clubs } from '~/features/club/services'
 
 const CLUB_LIST_QK = ['ClubServiceGetApiV1Clubs'] as const
 

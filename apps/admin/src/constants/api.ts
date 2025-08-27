@@ -10,7 +10,7 @@ const MOCK_END_POINT = {
   LABS: `${MOCK_BASE_URL}/labs`,
   DEPT: `${MOCK_BASE_URL}/dept`,
   PROFESSORS: `${MOCK_BASE_URL}/professors`,
-  CLUB: `${MOCK_BASE_URL}/about/club`,
+  //CLUB: `${MOCK_BASE_URL}/about/club`,
   CONTACT: `${MOCK_BASE_URL}/about/contact`,
   MY_PROFILE: `${MOCK_BASE_URL}/my`,
   BOARD: `${MOCK_BASE_URL}/board`,
