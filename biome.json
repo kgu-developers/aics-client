@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,14 +7,11 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [".next", "apps/admin/src/apis"]
+    "experimentalScannerIgnores": [".next", "apps/admin/src/apis"]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "linter": {
     "enabled": true,

@@ -11,7 +11,11 @@
     "generate-routes": "tsr generate",
     "watch-routes": "tsr watch",
     "build": "pnpm generate-routes && tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "biome lint .",
+    "lint:write": "biome lint --write .",
+    "format": "biome format .",
+    "format:write": "biome format --write ."
   },
   "dependencies": {
     "@aics-client/tiptap": "workspace:^",
