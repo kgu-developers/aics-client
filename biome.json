@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
+    "ignore": [
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/public/admin/**",
+      "**/*.gen.ts",
+      "**/*.gen.js",
+      "**/.next/**",
+      "apps/admin/src/apis/**/*"
+    ],
     "maxSize": 2097152
   },
   "formatter": {

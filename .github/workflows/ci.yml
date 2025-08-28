@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install specific biome version
+        run: pnpm add -D @biomejs/biome@1.9.4
+
       - name: create dotenv
         run: |
           touch ./apps/community/.env
