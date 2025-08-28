@@ -37,7 +37,11 @@ function NoticeListItem({
   postId,
   title,
   description,
-}: { postId: number; title: string; description: string }) {
+}: {
+  postId: number
+  title: string
+  description: string
+}) {
   return (
     <li key={`notice-${postId}`}>
       <Link href={PATH.NOTICE_DETAIL(postId)} className={styles.post}>

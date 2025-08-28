@@ -4,7 +4,11 @@ import * as styles from '~/features/member/components/professor-card.css'
 import type { Professor } from '~/features/member/services/remote'
 import AltImage from '~/shared/assets/images/alt.png'
 
-function ProfessorCard({ professor }: { professor: Professor }) {
+function ProfessorCard({
+  professor,
+}: {
+  professor: Professor
+}) {
   return (
     <section className={styles.card}>
       <AvatarImage src={professor.img} name={professor.name} />
@@ -18,7 +22,13 @@ function ProfessorCard({ professor }: { professor: Professor }) {
   )
 }
 
-function AvatarImage({ src, name }: { src: string | undefined; name: string }) {
+function AvatarImage({
+  src,
+  name,
+}: {
+  src: string | undefined
+  name: string
+}) {
   return (
     <Image
       src={src ?? AltImage}
@@ -30,7 +40,13 @@ function AvatarImage({ src, name }: { src: string | undefined; name: string }) {
   )
 }
 
-function CardContent({ name, type }: { name: string; type: string }) {
+function CardContent({
+  name,
+  type,
+}: {
+  name: string
+  type: string
+}) {
   return (
     <div className={styles.cardContent}>
       <h2 className={styles.professorName}>{name}</h2>
@@ -43,7 +59,11 @@ function CardFooter({
   contact,
   email,
   officeLoc,
-}: { contact: string; email: string; officeLoc: string }) {
+}: {
+  contact: string
+  email: string
+  officeLoc: string
+}) {
   return (
     <div className={styles.cardFooter}>
       <p className={styles.professorContact}>{contact}</p>

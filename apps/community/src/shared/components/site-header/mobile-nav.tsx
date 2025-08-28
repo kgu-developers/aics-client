@@ -14,7 +14,9 @@ interface MobileNavProps {
 
 function MobileNav({ isLoggedIn }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>({})
+  const [openGroups, setOpenGroups] = useState<{
+    [key: string]: boolean
+  }>({})
 
   const toggleGroup = (key: string) => {
     setOpenGroups((prev) => ({

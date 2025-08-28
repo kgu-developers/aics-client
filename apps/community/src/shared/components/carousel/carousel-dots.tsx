@@ -25,7 +25,9 @@ function DotButton({ children, active, ...props }: DotButtonProps) {
 
 function CarouselDots({
   emblaApi,
-}: { emblaApi: EmblaCarouselType | undefined }) {
+}: {
+  emblaApi: EmblaCarouselType | undefined
+}) {
   const carouselDotsId = useId()
 
   const handleNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {

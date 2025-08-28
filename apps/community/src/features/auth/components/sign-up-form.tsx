@@ -19,9 +19,18 @@ import Select from '~/shared/components/select/select'
 import { useZodForm } from '~/shared/hooks/use-zod-form'
 
 const MAJOR_OPTIONS = [
-  { label: '컴퓨터공학전공', value: 'CSE' },
-  { label: '인공지능전공', value: 'AIT' },
-  { label: 'SW안전보안전공', value: 'SSS' },
+  {
+    label: '컴퓨터공학전공',
+    value: 'CSE',
+  },
+  {
+    label: '인공지능전공',
+    value: 'AIT',
+  },
+  {
+    label: 'SW안전보안전공',
+    value: 'SSS',
+  },
 ]
 
 type SignUpFormValues = z.infer<typeof signUpFormSchema>
@@ -79,7 +88,9 @@ function SignUpFormFields({
           options={MAJOR_OPTIONS}
           value={watch('major')}
           onChange={(value) =>
-            setValue('major', value, { shouldValidate: true })
+            setValue('major', value, {
+              shouldValidate: true,
+            })
           }
           label="전공"
           placeholder="전공을 선택해주세요"

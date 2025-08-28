@@ -1,4 +1,3 @@
-
 export {
   useClubServicePostApiV1Clubs,
   useClubServicePatchApiV1ClubsById,

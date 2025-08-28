@@ -69,7 +69,10 @@ const useAuth = () => {
     router.push('/')
   }
 
-  return { setTokens, logout }
+  return {
+    setTokens,
+    logout,
+  }
 }
 
 export { useAuth }

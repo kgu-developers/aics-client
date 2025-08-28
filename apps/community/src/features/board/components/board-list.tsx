@@ -6,7 +6,11 @@ import * as styles from '~/features/board/components/board-list.css'
 import type { Post } from '~/features/main/services/remote'
 import { PATH } from '~/shared/constants/path'
 
-function BoardList({ data }: { data: Post[] }) {
+function BoardList({
+  data,
+}: {
+  data: Post[]
+}) {
   if (data.length === 0) {
     return <EmptyBoardList />
   }
@@ -43,7 +47,10 @@ function BoardListItem({ post }: { post: Post }) {
 function PostIdentifier({
   isPinned,
   postId,
-}: { isPinned: boolean; postId: number }) {
+}: {
+  isPinned: boolean
+  postId: number
+}) {
   return (
     <div className={styles.pin}>
       {isPinned ? <Pin fill="black" size={'1.25rem'} /> : <span>{postId}</span>}
@@ -54,7 +61,10 @@ function PostIdentifier({
 function PostTitle({
   title,
   hasAttachment,
-}: { title: string; hasAttachment: boolean }) {
+}: {
+  title: string
+  hasAttachment: boolean
+}) {
   return (
     <div className={styles.rowTitle}>
       <h2>{title}</h2>

@@ -1,14 +1,14 @@
 import { Form } from 'antd'
-import type { ClubDetailResponse } from '~/features/club/types'
 import ClubCreate from '~/features/club/components/clubCreator'
-import useEditTable from '~/features/club/hooks/useEditTable'
-import ClubTableView from './clubTableView'
 import {
-  useClubs,
   useClubImageUpload,
-  useUpdateClub,
+  useClubs,
   useDeleteClub,
+  useUpdateClub,
 } from '~/features/club/hooks'
+import useEditTable from '~/features/club/hooks/useEditTable'
+import type { ClubDetailResponse } from '~/features/club/types'
+import ClubTableView from './clubTableView'
 
 function ClubTable() {
   const [form] = Form.useForm()
@@ -21,20 +21,21 @@ function ClubTable() {
 
   const dataSource: ClubDetailResponse[] = clubs
 
-  const handleImageUpload = (record: ClubDetailResponse) => async (file: File) => {
-    const fileId = await uploadAndGetFileId(file)
-    if (!fileId) return false
-    await updateMutation.mutateAsync({
-      id: record.id,
-      requestBody: {
-        name: record.name,
-        description: record.description,
-        site: record.site,
-        fileId,
-      },
-    })
-    return false 
-  }
+  const handleImageUpload =
+    (record: ClubDetailResponse) => async (file: File) => {
+      const fileId = await uploadAndGetFileId(file)
+      if (!fileId) return false
+      await updateMutation.mutateAsync({
+        id: record.id,
+        requestBody: {
+          name: record.name,
+          description: record.description,
+          site: record.site,
+          fileId,
+        },
+      })
+      return false
+    }
 
   const handleSave = async (record: ClubDetailResponse) => {
     const rowData = await form.validateFields()

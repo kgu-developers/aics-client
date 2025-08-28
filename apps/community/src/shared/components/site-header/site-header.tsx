@@ -14,7 +14,11 @@ import { PATH } from '~/shared/constants/path'
 import { useAuth } from '~/shared/hooks/use-auth'
 import { isLoggedInAtom } from '~/shared/stores/auth'
 
-function SignInButton({ isLoggedIn }: { isLoggedIn: boolean }) {
+function SignInButton({
+  isLoggedIn,
+}: {
+  isLoggedIn: boolean
+}) {
   const { logout } = useAuth()
 
   return (

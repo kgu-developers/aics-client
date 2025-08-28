@@ -23,10 +23,26 @@ const BOARD_QUERY_OPTIONS = {
     size,
     keyword,
     category,
-  }: { page: number; size: number; keyword: string; category: string }) =>
+  }: {
+    page: number
+    size: number
+    keyword: string
+    category: string
+  }) =>
     queryOptions({
-      queryKey: BOARD_QUERY_KEYS.PAGE({ page, size, keyword, category }),
-      queryFn: () => getPosts({ page, size, keyword, category }),
+      queryKey: BOARD_QUERY_KEYS.PAGE({
+        page,
+        size,
+        keyword,
+        category,
+      }),
+      queryFn: () =>
+        getPosts({
+          page,
+          size,
+          keyword,
+          category,
+        }),
     }),
   DETAIL: (postId: string) =>
     queryOptions({

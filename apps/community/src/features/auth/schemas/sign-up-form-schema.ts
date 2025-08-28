@@ -2,29 +2,43 @@ import { z } from 'zod'
 
 const signUpFormSchema = z
   .object({
-    userId: z.string().min(1, { message: '학번을 입력해주세요.' }),
+    userId: z.string().min(1, {
+      message: '학번을 입력해주세요.',
+    }),
     password: z
       .string()
-      .min(1, { message: '비밀번호를 입력해주세요.' })
+      .min(1, {
+        message: '비밀번호를 입력해주세요.',
+      })
       .regex(
         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,15}$/,
         {
           message: '비밀번호는 8~15자 영문, 숫자, 특수문자를 포함해야 합니다.',
         },
       ),
-    confirm_password: z
-      .string()
-      .min(1, { message: '비밀번호가 일치하지 않습니다다.' }),
-    name: z.string().min(1, { message: '이름을 입력해주세요.' }),
+    confirm_password: z.string().min(1, {
+      message: '비밀번호가 일치하지 않습니다다.',
+    }),
+    name: z.string().min(1, {
+      message: '이름을 입력해주세요.',
+    }),
     email: z
       .string()
-      .min(1, { message: '이메일을 입력해주세요.' })
-      .email({ message: '올바른 이메일 형식이 아닙니다.' })
+      .min(1, {
+        message: '이메일을 입력해주세요.',
+      })
+      .email({
+        message: '올바른 이메일 형식이 아닙니다.',
+      })
       .refine((email) => email.endsWith('@kyonggi.ac.kr'), {
         message: '경기대학교 이메일을 사용해주세요.',
       }),
-    phone: z.string().min(1, { message: '연락처를 입력해주세요.' }),
-    major: z.string().min(1, { message: '전공을 선택해주세요.' }),
+    phone: z.string().min(1, {
+      message: '연락처를 입력해주세요.',
+    }),
+    major: z.string().min(1, {
+      message: '전공을 선택해주세요.',
+    }),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: '비밀번호가 일치하지 않습니다.',

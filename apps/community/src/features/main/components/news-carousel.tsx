@@ -19,7 +19,10 @@ function NewsCarousel() {
   const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS())
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, slidesToScroll: 'auto' },
+    {
+      loop: true,
+      slidesToScroll: 'auto',
+    },
     [
       Autoplay({
         delay: 5000,

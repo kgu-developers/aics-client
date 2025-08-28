@@ -1,7 +1,11 @@
 {
   "extends": "@aics-client/typescript/nextjs.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
       "~/*": ["./src/*"]
     }

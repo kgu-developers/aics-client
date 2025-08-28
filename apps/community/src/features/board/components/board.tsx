@@ -14,7 +14,11 @@ import * as styles from '~/features/board/components/board.css'
 import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section'
 import { downloadFile, getFileNameFromUrl } from '~/shared/utils/util'
 
-function Board({ children }: { children: React.ReactNode }) {
+function Board({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return <article>{children}</article>
 }
 
@@ -61,7 +65,11 @@ function BoardMetadata({
   )
 }
 
-function ViewCount({ count }: { count: number }) {
+function ViewCount({
+  count,
+}: {
+  count: number
+}) {
   return (
     <div className={styles.views}>
       <Eye size={'0.875rem'} />
@@ -70,7 +78,11 @@ function ViewCount({ count }: { count: number }) {
   )
 }
 
-function CreatedAtDisplay({ date }: { date: string }) {
+function CreatedAtDisplay({
+  date,
+}: {
+  date: string
+}) {
   return (
     <div className={styles.createdAt}>
       <Calendar size={'0.875rem'} />
@@ -81,7 +93,9 @@ function CreatedAtDisplay({ date }: { date: string }) {
 
 function BoardFileDownloader({
   file,
-}: { file: NonNullable<BoardHeaderProps['file']> }) {
+}: {
+  file: NonNullable<BoardHeaderProps['file']>
+}) {
   return (
     <button
       type="button"
@@ -94,7 +108,11 @@ function BoardFileDownloader({
   )
 }
 
-function BoardContent({ content }: { content: string }) {
+function BoardContent({
+  content,
+}: {
+  content: string
+}) {
   return (
     <div className={styles.content}>
       <TiptapContentSection content={content} />

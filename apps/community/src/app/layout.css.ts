@@ -24,7 +24,9 @@ const main = style([
     display: themeVars.display.flex,
     flexDirection: themeVars.flexDirection.column,
   },
-  screen.xl({ padding: '2rem 0 4rem 0' }),
+  screen.xl({
+    padding: '2rem 0 4rem 0',
+  }),
 ])
 
 export { root, main }

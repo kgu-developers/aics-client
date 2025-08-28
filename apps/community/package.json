@@ -4,7 +4,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "biome lint .",
+    "lint:write": "biome lint --write .",
+    "format": "biome format .",
+    "format:write": "biome format --write ."
   },
   "dependencies": {
     "@aics-client/design-system": "workspace:^",

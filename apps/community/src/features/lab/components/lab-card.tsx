@@ -18,7 +18,13 @@ function LabCard({ lab }: { lab: Lab }) {
   )
 }
 
-function AvatarImage({ src, name }: { src: string | undefined; name: string }) {
+function AvatarImage({
+  src,
+  name,
+}: {
+  src: string | undefined
+  name: string
+}) {
   return (
     <Image
       src={src ?? 'https://placehold.co/128'}
@@ -35,7 +41,12 @@ function CardContent({
   advisor,
   loc,
   site,
-}: { name: string; advisor: string; loc: string; site: string }) {
+}: {
+  name: string
+  advisor: string
+  loc: string
+  site: string
+}) {
   return (
     <>
       <div className={styles.divider} />

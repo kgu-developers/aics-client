@@ -24,32 +24,56 @@ const PATHMAP = {
     title: '소개',
     path: '/about',
     children: {
-      dept: { title: '학부 소개', path: '/dept' },
-      club: { title: '동아리 소개', path: '/club' },
-      contact: { title: '찾아오시는 길', path: '/contact' },
+      dept: {
+        title: '학부 소개',
+        path: '/dept',
+      },
+      club: {
+        title: '동아리 소개',
+        path: '/club',
+      },
+      contact: {
+        title: '찾아오시는 길',
+        path: '/contact',
+      },
     },
   },
   member: {
     title: '구성원',
     path: '/member',
     children: {
-      professor: { title: '교수진 소개', path: '/professor' },
+      professor: {
+        title: '교수진 소개',
+        path: '/professor',
+      },
     },
   },
-  lab: { title: '연구실 소개', path: '/lab' },
+  lab: {
+    title: '연구실 소개',
+    path: '/lab',
+  },
   board: {
     title: '게시판',
     path: '/board',
     children: {
-      notice: { title: '공지사항', path: '/notice' },
-      news: { title: '학부 소식', path: '/news' },
+      notice: {
+        title: '공지사항',
+        path: '/notice',
+      },
+      news: {
+        title: '학부 소식',
+        path: '/news',
+      },
     },
   },
   my: {
     title: '마이페이지',
     path: '/my',
     children: {
-      my: { title: '마이페이지', path: '/my' },
+      my: {
+        title: '마이페이지',
+        path: '/my',
+      },
       'change-password': {
         title: '비밀번호 변경',
         path: '/my/change-password',

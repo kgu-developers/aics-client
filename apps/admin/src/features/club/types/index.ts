@@ -1,5 +1,4 @@
-
 export type {
   ClubDetailResponse,
-  ClubListResponse
+  ClubListResponse,
 } from '~/apis/community/requests/types.gen'

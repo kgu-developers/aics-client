@@ -45,7 +45,9 @@ function MyInfoEditableField({
 
 function EditableMyProfileCard({
   initialData,
-}: { initialData: UserEditableDetail[] }) {
+}: {
+  initialData: UserEditableDetail[]
+}) {
   const mutation = useEditProfile()
 
   const defaultValues = initialData.reduce(

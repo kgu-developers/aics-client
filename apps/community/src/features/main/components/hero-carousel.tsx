@@ -16,13 +16,18 @@ import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
 function HeroCarousel() {
   const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL())
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({
-      delay: 9000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    }),
-  ])
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+    },
+    [
+      Autoplay({
+        delay: 9000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ],
+  )
 
   return (
     <section className={styles.hero}>
@@ -40,7 +45,11 @@ function HeroCarousel() {
   )
 }
 
-function CarouselSlide({ slide }: { slide: Carousel }) {
+function CarouselSlide({
+  slide,
+}: {
+  slide: Carousel
+}) {
   return (
     <Link key={`hero-${slide.id}`} href={slide.link} className={styles.slide}>
       <Image

@@ -19,7 +19,11 @@ async function request<Response>({
     method,
     headers: {
       'Content-Type': 'application/json',
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      ...(accessToken
+        ? {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        : {}),
       ...(options.headers || {}),
     },
     ...options,
@@ -48,34 +52,57 @@ const http = {
     url: string,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'GET', url, options })
+    return request<Response>({
+      method: 'GET',
+      url,
+      options,
+    })
   },
   post: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'POST', url, options, data })
+    return request<Response>({
+      method: 'POST',
+      url,
+      options,
+      data,
+    })
   },
   put: <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'PUT', url, options, data })
+    return request<Response>({
+      method: 'PUT',
+      url,
+      options,
+      data,
+    })
   },
   delete: <Response = unknown>(
     url: string,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'DELETE', url, options })
+    return request<Response>({
+      method: 'DELETE',
+      url,
+      options,
+    })
   },
   patch: <Request, Response = unknown>(
     url: string,
     data?: Request,
     options?: RequestInit,
   ): Promise<Response> => {
-    return request<Response>({ method: 'PATCH', url, options, data })
+    return request<Response>({
+      method: 'PATCH',
+      url,
+      options,
+      data,
+    })
   },
 }
 

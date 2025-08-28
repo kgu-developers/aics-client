@@ -13,7 +13,11 @@ const PARAMS = {
   KEYWORD: 'keyword',
 } as const
 
-function SearchBar({ placeholder }: { placeholder: string }) {
+function SearchBar({
+  placeholder,
+}: {
+  placeholder: string
+}) {
   const searchParams = useSearchParams()
   const pathName = usePathname()
   const { replace } = useRouter()

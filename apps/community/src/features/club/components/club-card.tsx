@@ -16,7 +16,10 @@ function ClubCard({ image, name, description, site }: Club) {
 function AvartarImage({
   src,
   name,
-}: { src: string | undefined; name: string }) {
+}: {
+  src: string | undefined
+  name: string
+}) {
   return (
     <Image
       className={style.cardImage}
@@ -32,7 +35,11 @@ function CardContent({
   name,
   description,
   site,
-}: { name: string; description: string; site?: string }) {
+}: {
+  name: string
+  description: string
+  site?: string
+}) {
   return (
     <div className={style.cardBodyWrapper}>
       <h2 className={style.cardTitle}>{name}</h2>

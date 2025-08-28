@@ -15,15 +15,35 @@ function MyInformation() {
   const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE())
 
   const userDetails: UserDetail[] = [
-    { title: '이름', value: data.name },
-    { title: '학번', value: data.id },
-    { title: '구분', value: data.role },
-    { title: '전공', value: data.major },
+    {
+      title: '이름',
+      value: data.name,
+    },
+    {
+      title: '학번',
+      value: data.id,
+    },
+    {
+      title: '구분',
+      value: data.role,
+    },
+    {
+      title: '전공',
+      value: data.major,
+    },
   ]
 
   const editableUserDetails: UserEditableDetail[] = [
-    { title: '전화번호', value: data.phone, field: 'phone' },
-    { title: '이메일', value: data.email, field: 'email' },
+    {
+      title: '전화번호',
+      value: data.phone,
+      field: 'phone',
+    },
+    {
+      title: '이메일',
+      value: data.email,
+      field: 'email',
+    },
   ]
 
   return (

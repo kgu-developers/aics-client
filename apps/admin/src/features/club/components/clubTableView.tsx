@@ -26,7 +26,9 @@ interface ClubTableViewProps {
   }
   handleSave: (record: ClubDetailResponse) => void | Promise<void>
   handleDelete: (record: ClubDetailResponse) => void | Promise<void>
-  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean | Promise<boolean>
+  handleImageUpload: (
+    record: ClubDetailResponse,
+  ) => (file: File) => boolean | Promise<boolean>
 }
 
 interface EditableCellProps {
