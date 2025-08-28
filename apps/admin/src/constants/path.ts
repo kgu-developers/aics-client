@@ -9,7 +9,7 @@ export const PATH = {
   PROFESSOR: '/professor',
   NEWS: '/news',
   NOTICE: '/notice',
-  CLUB: '/club',
+  //CLUB: '/club',
   EDIT_NEWS: '/news/edit/',
   EDIT_NOTICE: '/notice/edit/',
   USER: '/user',

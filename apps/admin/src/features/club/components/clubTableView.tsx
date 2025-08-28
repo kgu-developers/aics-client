@@ -1,5 +1,4 @@
 import { UploadOutlined } from '@ant-design/icons'
-
 import {
   Button,
   Form,
@@ -11,7 +10,7 @@ import {
   message,
 } from 'antd'
 import type { FormInstance, TableProps } from 'antd'
-import type { ClubDetailResponse } from '~/apis/community/requests'
+import type { ClubDetailResponse } from '~/features/club/types'
 
 const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL
 
@@ -25,9 +24,9 @@ interface ClubTableViewProps {
     ) => void
     cancel: () => void
   }
-  handleSave: (record: ClubDetailResponse) => void
-  handleDelete: (record: ClubDetailResponse) => void
-  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean
+  handleSave: (record: ClubDetailResponse) => void | Promise<void>
+  handleDelete: (record: ClubDetailResponse) => void | Promise<void>
+  handleImageUpload: (record: ClubDetailResponse) => (file: File) => boolean | Promise<boolean>
 }
 
 interface EditableCellProps {
@@ -167,14 +166,13 @@ function ClubTableView({
 
   const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
     (col) => {
-      if (!col.editable) return col
-
+      if (!('editable' in col) || !col.editable) return col
       return {
         ...col,
         onCell: (record: ClubDetailResponse) => ({
           record,
-          dataIndex: col.dataIndex,
-          title: col.title,
+          dataIndex: col.dataIndex as string,
+          title: col.title as string,
           editing: register.isEditing(record),
         }),
       }

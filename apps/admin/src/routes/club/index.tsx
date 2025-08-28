@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import ClubTable from '~/components/club/club-table'
+import ClubTable from '~/features/club/components/clubTable'
 
 export const Route = createFileRoute('/club/')({
-  component: LabPage,
+  component: ClubPage,
 })
 
-function LabPage() {
+function ClubPage() {
   return (
     <section className="py-10 px-16">
       <ClubTable />
@@ -13,4 +13,4 @@ function LabPage() {
   )
 }
 
-export default LabPage
+export default ClubPage
