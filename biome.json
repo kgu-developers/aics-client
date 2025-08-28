@@ -7,7 +7,8 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "experimentalScannerIgnores": [".next", "apps/admin/src/apis"]
+    "includes": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
+    "maxSize": 2097152
   },
   "formatter": {
     "enabled": true,
@@ -16,7 +17,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
     }
   },
   "javascript": {
