@@ -41,7 +41,7 @@ jobs:
         run: pnpm install
 
       - name: Install specific biome version
-        run: pnpm add -D @biomejs/biome@1.9.4
+        run: pnpm add -D @biomejs/biome@1.9.4 -w
 
       - name: create dotenv
         run: |
