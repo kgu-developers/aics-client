@@ -1,4 +1,4 @@
 export {
-  $ClubDetailResponse,
-  $ClubListResponse,
-} from '~/apis/community/requests/schemas.gen'
+  $AboutCreateRequest as $DeptIntroCreateRequest,
+  $AboutUpdateRequest as $DeptIntroUpdateRequest,
+} from '~/apis/admin/requests/schemas.gen'
