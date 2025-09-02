@@ -1,6 +1,3 @@
-// apps/admin/src/features/directions/hooks/useUpsertDirections.ts
-'use client'
-
 import { message } from 'antd'
 import { queryClient } from '~/utils/get-query-client'
 import { UseAboutServiceGetApiV1AboutsKeyFn } from '~/features/directions/services'
