@@ -12,7 +12,9 @@ import {
 
 import LOGO from '~/assets/logo.svg'
 import { PATH } from '~/constants/path'
-import { CLUB_ROUTE } from '~/features/club/constants'
+import { PATH_CLUB } from '~/features/club/constants'
+import { PATH_DEPT } from '~/features/dept/constants'
+import { PATH_DIRECTIONS } from '~/features/directions/constants'
 import { useRefreshTokens } from '~/hooks/use-refresh-token'
 import { useTokenExpiration } from '~/hooks/use-token-expiration'
 import { authServices } from '~/utils/auth'
@@ -35,11 +37,11 @@ const items: MenuItem[] = [
     label: '소개',
     icon: <GraduationCap size={20} />,
     children: [
-      { key: 'dept', label: <Link to={PATH.DEPT}>학부 소개</Link> },
-      { key: 'club', label: <Link to={CLUB_ROUTE}>동아리 소개</Link> },
+      { key: 'dept', label: <Link to={PATH_DEPT.DEPT}>학부 소개</Link> },
+      { key: 'club', label: <Link to={PATH_CLUB}>동아리 소개</Link> },
       {
         key: 'contact',
-        label: <Link to={PATH.DIRECTIONS}>찾아오시는 길</Link>,
+        label: <Link to={PATH_DIRECTIONS.DIRECTIONS}>찾아오시는 길</Link>,
       },
     ],
   },

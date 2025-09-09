@@ -1,46 +1,40 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { Button } from 'antd'
-import DOMPurify from 'dompurify'
 
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/apis/community/queries/suspense'
-import { PATH } from '~/constants/path'
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
+import { PATH_DIRECTIONS } from '~/features/directions/constants/path'
+import DirectionsContent from '~/features/directions/components/directionsContent'
+import { DIRECTIONS_ROUTE } from '~/features/directions/constants/path'
+import {
+  DIRECTIONS_CATEGORY,
+  DIRECTIONS_LABELS,
+  isDirectionsEmpty,
+} from '~/features/directions/constants/directions'
 
-export const Route = createFileRoute('/directions/')({
+export const Route = createFileRoute(DIRECTIONS_ROUTE)({
   component: DirectionsPage,
 })
 
-const CATEGORY = 'DIRECTIONS'
-
 function DirectionsPage() {
   const { data } = useAboutServiceGetApiV1AboutsSuspense({
-    category: CATEGORY,
+    category: DIRECTIONS_CATEGORY,
   })
 
-  const isDirectionsEmpty = data.content === '' || data.content === '<p></p>'
+  const empty = isDirectionsEmpty(data.content)
 
   return (
     <section className="flex flex-col w-full gap-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold ">찾아오시는 길</h1>
-        <Link to={PATH.EDIT_DIRECTIONS} className="self-end">
-          {isDirectionsEmpty ? (
-            <Button type="primary">작성하기</Button>
+        <h1 className="text-3xl font-bold ">{DIRECTIONS_LABELS.title}</h1>
+        <Link to={PATH_DIRECTIONS.EDIT_DIRECTIONS} className="self-end">
+          {empty ? (
+            <Button type="primary">{DIRECTIONS_LABELS.create}</Button>
           ) : (
-            <Button type="primary">수정하기</Button>
+            <Button type="primary">{DIRECTIONS_LABELS.edit}</Button>
           )}
         </Link>
       </div>
-      {isDirectionsEmpty ? (
-        <span className="border-y py-8 border-gray-200">
-          작성된 안내가 없습니다.
-        </span>
-      ) : (
-        <section
-          className="border-y py-8 border-gray-200 flex flex-col gap-4"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.content) }}
-        />
-      )}
+      <DirectionsContent content={data.content} />
     </section>
   )
 }
