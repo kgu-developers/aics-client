@@ -1,11 +1,11 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
-import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense'
+import { SearchBar } from '~/components/user/search-bar'
+import { PostList } from '~/shared/components/Post'
 
-import PostsList from '~/components/posts/posts-list'
-import { SearchBar } from '~/components/posts/search-bar'
 import { PATH } from '~/constants/path'
+import { useNewsList } from '~/shared/hooks'
 
 export const Route = createFileRoute('/news/')({
   component: NewsListPage,
@@ -15,7 +15,6 @@ export const Route = createFileRoute('/news/')({
   }),
 })
 
-const CATEGORY = 'NEWS'
 const LIST_SIZE = 10
 
 function NewsListPage() {
@@ -23,8 +22,12 @@ function NewsListPage() {
     from: '/news/',
   })
 
-  const { data: postList } = usePostServiceGetApiV1PostsSuspense({
-    category: CATEGORY,
+  const {
+    data: {
+      contents: newsContents,
+      pageable: { totalElements: newsTotal },
+    },
+  } = useNewsList({
     size: LIST_SIZE,
     keywords: keywords,
     page: currentPage,
@@ -34,13 +37,13 @@ function NewsListPage() {
     <section className="flex flex-col gap-3 px-16">
       <Suspense fallback={<div>loading...</div>}>
         <SearchBar defaultValue={keywords} />
-        {postList?.contents && (
-          <PostsList
+        {newsContents && (
+          <PostList
             title="학부소식"
             to={PATH.NEWS}
             currentPage={currentPage}
-            data={postList.contents}
-            total={postList.pageable.totalElements}
+            data={newsContents}
+            total={newsTotal}
           />
         )}
       </Suspense>
