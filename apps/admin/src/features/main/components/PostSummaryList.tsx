@@ -2,9 +2,10 @@ import { Link } from '@tanstack/react-router'
 import { Card } from 'antd'
 import { ArrowRightIcon } from 'lucide-react'
 
-import type { PostSummaryResponse } from '~/apis/community/requests'
-
 import { POST_DETAIL_PATH_MAP, type PostCategory } from '~/constants/path'
+
+import type { PostSummaryResponse } from '~/apis/community/requests'
+import { MESSAGES } from './constant/constants'
 
 interface PostListCardProps {
   title: string
@@ -12,7 +13,7 @@ interface PostListCardProps {
   posts: PostSummaryResponse[]
 }
 
-function PostListCard({ title, to, posts }: PostListCardProps) {
+function PostSummaryList({ title, to, posts }: PostListCardProps) {
   return (
     <Card
       title={title}
@@ -22,7 +23,7 @@ function PostListCard({ title, to, posts }: PostListCardProps) {
             type="button"
             className="flex gap-1 items-center text-black cursor-pointer"
           >
-            더보기
+            {MESSAGES.button.more}
             <ArrowRightIcon size={'1rem'} />
           </button>
         </Link>
@@ -49,4 +50,4 @@ function PostListCard({ title, to, posts }: PostListCardProps) {
   )
 }
 
-export { PostListCard }
+export { PostSummaryList }
