@@ -1,6 +1,6 @@
 import { Carousel } from 'antd'
-import type { CarouselResponse } from '~/apis/community/requests'
 
+import type { CarouselResponse } from '~/apis/community/requests'
 import AltImage from '~/assets/images/alt.png'
 
 interface HeroCarouselProps {
