@@ -1,6 +1,9 @@
 import { UploadOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd'
 import type { FormInstance, TableProps } from 'antd'
+
+import { MESSAGES, TABLE_COLUMNS } from '../constant/constants'
+
 import type { LabDetailResponse } from '~/apis/community/requests'
 
 interface LabTableViewProps {
@@ -24,14 +27,14 @@ interface EditableCellProps {
   children: React.ReactNode
 }
 
-function LabTableView({
+export const LabTableView = ({
   form,
   data,
   register,
   handleSave,
   handleDelete,
   handleImageUpload,
-}: LabTableViewProps) {
+}: LabTableViewProps) => {
   const EditableCell = ({
     editing,
     dataIndex,
@@ -47,7 +50,7 @@ function LabTableView({
             name={dataIndex}
             style={{ margin: 0 }}
             rules={[
-              { required: true, message: `${title}을(를) 입력해주세요!` },
+              { required: true, message: MESSAGES.validation.requiredTitle },
             ]}
           >
             <Input />
@@ -60,12 +63,22 @@ function LabTableView({
   }
 
   const columns = [
-    { title: '연구실명', dataIndex: 'name', width: '15%', editable: true },
-    { title: '위치', dataIndex: 'loc', width: '15%', editable: true },
     {
-      title: '웹사이트',
-      dataIndex: 'site',
-      width: '15%',
+      title: TABLE_COLUMNS.name.label,
+      dataIndex: TABLE_COLUMNS.name.key,
+      width: TABLE_COLUMNS.width.md,
+      editable: true,
+    },
+    {
+      title: TABLE_COLUMNS.location.key,
+      dataIndex: TABLE_COLUMNS.location.label,
+      width: TABLE_COLUMNS.width.md,
+      editable: true,
+    },
+    {
+      title: TABLE_COLUMNS.site.label,
+      dataIndex: TABLE_COLUMNS.site.key,
+      width: TABLE_COLUMNS.width.md,
       editable: true,
       render: (text: string) => (
         <a href={text} target="_blank" rel="noopener noreferrer">
@@ -73,12 +86,17 @@ function LabTableView({
         </a>
       ),
     },
-    { title: '담당교수', dataIndex: 'advisor', width: '10%', editable: true },
+    {
+      title: TABLE_COLUMNS.advisor.label,
+      dataIndex: TABLE_COLUMNS.advisor.key,
+      width: TABLE_COLUMNS.width.sm,
+      editable: true,
+    },
 
     {
-      title: '연구실 이미지',
-      dataIndex: 'img',
-      width: '20%',
+      title: TABLE_COLUMNS.image.label,
+      dataIndex: TABLE_COLUMNS.image.key,
+      width: TABLE_COLUMNS.width.lg,
       render: (_: unknown, record: LabDetailResponse) => {
         const editable = register.isEditing(record)
         return (
@@ -96,7 +114,7 @@ function LabTableView({
             >
               {editable && (
                 <Button icon={<UploadOutlined />} className="mt-2">
-                  업로드
+                  {MESSAGES.button.uploadImage}
                 </Button>
               )}
             </Upload>
@@ -105,9 +123,9 @@ function LabTableView({
       },
     },
     {
-      title: '관리',
-      dataIndex: 'operation',
-      width: '10%',
+      title: TABLE_COLUMNS.operation.label,
+      dataIndex: TABLE_COLUMNS.operation.key,
+      width: TABLE_COLUMNS.width.sm,
       render: (_: unknown, record: LabDetailResponse) => {
         const editable = register.isEditing(record)
         return editable ? (
@@ -118,10 +136,10 @@ function LabTableView({
               onClick={() => handleSave(record)}
               className="mr-4"
             >
-              저장
+              {MESSAGES.button.save}
             </Button>
             <Popconfirm
-              title="정말 취소하시겠습니까?"
+              title={MESSAGES.confirm.cancel}
               onConfirm={register.cancel}
             >
               <Button
@@ -129,7 +147,7 @@ function LabTableView({
                 variant="solid"
                 className="text-red-500 hover:cursor-pointer"
               >
-                취소
+                {MESSAGES.button.cancel}
               </Button>
             </Popconfirm>
           </span>
@@ -141,10 +159,10 @@ function LabTableView({
               disabled={register.isEditing(record)}
               onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
-              수정
+              {MESSAGES.button.update}
             </Button>
             <Popconfirm
-              title="정말 삭제하시겠습니까?"
+              title={MESSAGES.confirm.delete}
               onConfirm={() => handleDelete(record)}
             >
               <Button
@@ -152,7 +170,7 @@ function LabTableView({
                 variant="solid"
                 className="ml-4 text-red-500 hover:cursor-pointer"
               >
-                삭제
+                {MESSAGES.button.delete}
               </Button>
             </Popconfirm>
           </span>
