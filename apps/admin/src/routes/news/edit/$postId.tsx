@@ -1,6 +1,8 @@
 import { createFileRoute, useMatch } from '@tanstack/react-router'
-import { usePostServiceGetApiV1PostsByPostIdSuspense } from '~/apis/community/queries/suspense'
-import { EditPostField } from '~/components/posts/edit-post-field'
+
+import { PostForm } from '~/shared/components/Post/PostForm'
+
+import { usePostDetail } from '~/shared/hooks/Post'
 
 export const Route = createFileRoute('/news/edit/$postId')({
   component: PostEditPage,
@@ -8,9 +10,9 @@ export const Route = createFileRoute('/news/edit/$postId')({
 
 function PostEditPage() {
   const { params } = useMatch({ from: '/news/edit/$postId' })
-  const { data: post } = usePostServiceGetApiV1PostsByPostIdSuspense({
+  const { data: post } = usePostDetail({
     postId: Number(params.postId),
   })
 
-  return <EditPostField post={post} />
+  return <PostForm post={post} />
 }

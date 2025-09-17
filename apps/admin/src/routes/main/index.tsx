@@ -2,45 +2,40 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Spin } from 'antd'
 import { Suspense } from 'react'
 
-import {
-  useCarouselServiceGetApiV1CarouselsSuspense,
-  usePostServiceGetApiV1PostsSuspense,
-} from '~/apis/community/queries/suspense'
+import { PostSummaryList } from '~/features/main/components/PostSummaryList'
+import { HeroCarousel } from '~/shared/components/HeroCarousel'
 
-import { HeroCarousel } from '~/components/hero-images/hero-carousel'
-import { PostListCard } from '~/components/main/posts-list-card'
 import { PATH } from '~/constants/path'
+import { useHeroImages, useNewsList, useNoticeList } from '~/shared/hooks'
 
 export const Route = createFileRoute('/main/')({
   component: MainPage,
 })
 
 function MainPage() {
-  const { data: carouselImages } = useCarouselServiceGetApiV1CarouselsSuspense()
-  const { data: noticeList } = usePostServiceGetApiV1PostsSuspense({
-    category: 'NOTIFICATION',
-    page: 0,
-    size: 5,
-  })
-  const { data: newsList } = usePostServiceGetApiV1PostsSuspense({
-    category: 'NEWS',
-    page: 0,
-    size: 5,
-  })
+  const {
+    data: { contents: heroContents },
+  } = useHeroImages()
+  const {
+    data: { contents: noticeContents },
+  } = useNoticeList({ page: 0, size: 5 })
+  const {
+    data: { contents: newsContents },
+  } = useNewsList({ page: 0, size: 5 })
   return (
     <Suspense fallback={<Spin />}>
       <section className="flex flex-col gap-4">
-        <HeroCarousel images={carouselImages.contents} />
+        <HeroCarousel images={heroContents} />
         <div className="flex gap-4">
-          <PostListCard
+          <PostSummaryList
             title="공지사항"
             to={PATH.NOTICE}
-            posts={noticeList.contents}
+            posts={noticeContents}
           />
-          <PostListCard
+          <PostSummaryList
             title="학부소식"
             to={PATH.NEWS}
-            posts={newsList.contents}
+            posts={newsContents}
           />
         </div>
       </section>

@@ -1,7 +1,9 @@
 import { createFileRoute, useMatch } from '@tanstack/react-router'
-import { usePostServiceGetApiV1PostsByPostIdSuspense } from '~/apis/community/queries/suspense'
-import { Board } from '~/components/posts/board'
+
+import { Board } from '~/shared/components/Post/Board'
+
 import { PATH } from '~/constants/path'
+import { usePostDetail } from '~/shared/hooks/Post'
 
 export const Route = createFileRoute('/news/$postId')({
   component: PostDetailPage,
@@ -9,25 +11,34 @@ export const Route = createFileRoute('/news/$postId')({
 
 function PostDetailPage() {
   const { params } = useMatch({ from: '/news/$postId' })
-  const { data } = usePostServiceGetApiV1PostsByPostIdSuspense({
-    postId: Number(params.postId),
-  })
+  const { data } = usePostDetail({ postId: Number(params.postId) })
+  const {
+    title,
+    author,
+    views,
+    createdAt,
+    file,
+    content,
+    postId,
+    prevPost,
+    nextPost,
+  } = data
 
   return (
     <section className="px-16">
       <Board>
         <Board.Header
-          title={data.title}
-          author={data.author}
-          views={data.views}
-          createdAt={data.createdAt}
-          file={data.file}
+          title={title}
+          author={author}
+          views={views}
+          createdAt={createdAt}
+          file={file}
         />
-        <Board.Content content={data.content} />
+        <Board.Content content={content} />
         <Board.Footer
-          postId={data.postId}
-          prevPost={data.prevPost}
-          nextPost={data.nextPost}
+          postId={postId}
+          prevPost={prevPost}
+          nextPost={nextPost}
           to={PATH.NEWS}
         />
       </Board>

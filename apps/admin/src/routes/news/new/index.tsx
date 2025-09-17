@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { WriteNewPostField } from '~/components/posts/write-new-post-field'
+import { PostForm } from '~/shared/components/Post/PostForm'
 
 export const Route = createFileRoute('/news/new/')({
   component: NewPostPage,
 })
 
 function NewPostPage() {
-  return <WriteNewPostField />
+  return <PostForm />
 }

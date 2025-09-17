@@ -5,6 +5,7 @@ import {
   Clock,
   FlaskConical,
   GraduationCap,
+  House,
   ImagesIcon,
   Speech,
   Users,
@@ -23,6 +24,15 @@ import { formatExpireTime } from '~/utils/utils'
 type MenuItem = Required<MenuProps>['items'][number]
 
 const items: MenuItem[] = [
+  {
+    key: 'main',
+    label: (
+      <Link to={PATH.MAIN} search={{ page: 0, query: '' }}>
+        메인
+      </Link>
+    ),
+    icon: <House size={20} />,
+  },
   {
     key: 'user',
     label: (
@@ -80,7 +90,7 @@ const items: MenuItem[] = [
   },
   {
     key: 'carousel',
-    label: <Link to={PATH.HERO_IMAGES}>대표 이미지</Link>,
+    label: <Link to={PATH.HERO_IMAGES_MANAGER}>대표 이미지</Link>,
     icon: <ImagesIcon size={20} />,
   },
 ]
