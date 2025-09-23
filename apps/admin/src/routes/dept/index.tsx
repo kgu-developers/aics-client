@@ -3,11 +3,11 @@ import { Button } from 'antd'
 
 import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/dept/services'
 
-import DeptIntroContent from '~/features/dept/components/deptIntroContent'
+import DeptIntroContent from '~/features/dept/components/DeptIntroContent'
 import {
-  isDeptIntroEmpty,
-  DEPT_INTRO_LABELS,
   DEPT_INTRO_CATEGORY,
+  DEPT_INTRO_LABELS,
+  isDeptIntroEmpty,
 } from '~/features/dept/constants/deptIntro'
 import { DEPT_ROUTE, PATH_DEPT } from '~/features/dept/constants/path'
 export const Route = createFileRoute(DEPT_ROUTE)({

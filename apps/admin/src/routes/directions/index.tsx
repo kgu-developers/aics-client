@@ -1,15 +1,15 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { Button } from 'antd'
 
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
-import { PATH_DIRECTIONS } from '~/features/directions/constants/path'
-import DirectionsContent from '~/features/directions/components/directionsContent'
-import { DIRECTIONS_ROUTE } from '~/features/directions/constants/path'
+import DirectionsContent from '~/features/directions/components/DirectionsContent'
 import {
   DIRECTIONS_CATEGORY,
   DIRECTIONS_LABELS,
   isDirectionsEmpty,
 } from '~/features/directions/constants/directions'
+import { PATH_DIRECTIONS } from '~/features/directions/constants/path'
+import { DIRECTIONS_ROUTE } from '~/features/directions/constants/path'
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
 
 export const Route = createFileRoute(DIRECTIONS_ROUTE)({
   component: DirectionsPage,

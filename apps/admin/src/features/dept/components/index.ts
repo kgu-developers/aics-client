@@ -1,2 +1,2 @@
-export * from './deptIntroContent'
-export * from './deptIntroEditorSection'
+export * from './DeptIntroContent'
+export * from './DeptIntroEditorSection'

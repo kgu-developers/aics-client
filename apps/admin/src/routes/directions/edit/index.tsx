@@ -1,13 +1,13 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
-import DirectionsEditorSection from '~/features/directions/components/directionsEditorSection'
-import { useUpsertDirections } from '~/features/directions/hooks/useUpsertDirections'
+import DirectionsEditorSection from '~/features/directions/components/DirectionsEditorSection'
 import {
   DIRECTIONS_CATEGORY,
   DIRECTIONS_LABELS,
 } from '~/features/directions/constants/directions'
 import { EDIT_DIRECTIONS_ROUTE } from '~/features/directions/constants/path'
+import { useUpsertDirections } from '~/features/directions/hooks/useUpsertDirections'
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
 
 export const Route = createFileRoute(EDIT_DIRECTIONS_ROUTE)({
   component: DirectionsEditPage,

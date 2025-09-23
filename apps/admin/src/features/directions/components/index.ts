@@ -1,2 +1,2 @@
-export * from './directionsContent'
-export * from './directionsEditorSection'
+export * from './DirectionsContent'
+export * from './DirectionsEditorSection'
