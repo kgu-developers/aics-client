@@ -18,8 +18,7 @@ import { PATH_DEPT } from '~/features/dept/constants'
 import { PATH_DIRECTIONS } from '~/features/directions/constants'
 import { useRefreshTokens } from '~/hooks/use-refresh-token'
 import { useTokenExpiration } from '~/hooks/use-token-expiration'
-import { authServices } from '~/utils/auth'
-import { formatExpireTime } from '~/utils/utils'
+import { authServices, formatExpireTime } from '~/shared/utils'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -90,7 +89,7 @@ const items: MenuItem[] = [
   },
   {
     key: 'carousel',
-    label: <Link to={PATH.HERO_IMAGES_MANAGER}>대표 이미지</Link>,
+    label: <Link to={PATH.HERO_IMAGES_MANAGER as any}>대표 이미지</Link>,
     icon: <ImagesIcon size={20} />,
   },
 ]
@@ -142,7 +141,7 @@ function AsideFooter() {
   )
 }
 
-export default function AsideNavigationMenu() {
+export default function AsideNavBar() {
   return (
     <aside className="flex flex-col h-full select-none bg-slate-100 w-80">
       <AsideHeader />
