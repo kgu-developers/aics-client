@@ -14,7 +14,7 @@ import {
   POST_DETAIL_PATH_MAP,
   type PostCategory,
 } from '~/constants/path'
-import { useModal } from '~/hooks/use-modal'
+import { useModal } from '~/hooks/useModal'
 import { MESSAGES } from '~/shared/constant/post.constants'
 import { useDeletePost } from '~/shared/hooks/Post'
 

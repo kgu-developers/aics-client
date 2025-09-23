@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/constants/api'
 import { decodeJwt, removeTokens } from '~/shared/utils'
 
-import type { Tokens } from '~/hooks/use-sign-in'
+import type { Tokens } from '~/hooks/useSignIn'
 
 const authServices = () => {
   const navigate = useNavigate()

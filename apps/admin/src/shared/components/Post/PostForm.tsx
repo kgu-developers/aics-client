@@ -15,7 +15,7 @@ import type { ReactNode } from 'react'
 
 import { Editor } from '@aics-client/tiptap'
 
-import { useModal } from '~/hooks/use-modal'
+import { useModal } from '~/hooks/useModal'
 import {
   FALSE,
   FORM,

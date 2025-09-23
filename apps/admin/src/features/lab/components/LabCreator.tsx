@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd'
 
 import { LabForm } from './LabForm'
 
-import { useModal } from '~/hooks/use-modal'
+import { useModal } from '~/hooks/useModal'
 import { MESSAGES } from '../constant/constants'
 
 export const LabCreator = () => {

@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd'
 
 import { HeroImageForm } from './HeroImageForm'
 
-import { useModal } from '~/hooks/use-modal'
+import { useModal } from '~/hooks/useModal'
 import { MESSAGES } from '../constant/constants'
 
 export const HeroImageCreator = () => {

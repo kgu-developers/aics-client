@@ -9,7 +9,7 @@ import {
 import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries'
 import { useProfessorServiceGetApiV1ProfessorsSuspense } from '~/apis/community/queries/suspense'
 import type { ProfessorResponse } from '~/apis/community/requests'
-import useEditTable from '~/hooks/use-edit-table'
+import useEditTable from '~/hooks/useEditTable'
 import ProfessorTableView from './ProfessorTableView'
 
 function ProfessorTable() {
