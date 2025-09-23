@@ -16,8 +16,8 @@ import { PATH } from '~/constants/path'
 import { PATH_CLUB } from '~/features/club/constants'
 import { PATH_DEPT } from '~/features/dept/constants'
 import { PATH_DIRECTIONS } from '~/features/directions/constants'
-import { useRefreshTokens } from '~/hooks/use-refresh-token'
-import { useTokenExpiration } from '~/hooks/use-token-expiration'
+import { useRefreshTokens } from '~/hooks/useRefreshToken'
+import { useTokenExpiration } from '~/hooks/useTokenExpiration'
 import { authServices, formatExpireTime } from '~/shared/utils'
 
 type MenuItem = Required<MenuProps>['items'][number]
