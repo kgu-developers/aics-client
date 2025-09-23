@@ -1,9 +1,9 @@
 import DOMPurify from 'dompurify'
-import type { DeptIntroContent as DeptIntroContentType } from '~/features/dept/types'
 import {
-  isDeptIntroEmpty,
   DEPT_INTRO_MESSAGES,
+  isDeptIntroEmpty,
 } from '~/features/dept/constants/deptIntro'
+import type { DeptIntroContent as DeptIntroContentType } from '~/features/dept/types'
 
 export default function DeptIntroContent({
   content,

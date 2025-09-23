@@ -1,2 +1,2 @@
-export { default as DirectionsContent } from './DirectionsContent'
-export { default as DirectionsEditorSection } from './DirectionsEditorSection'
+export { default as DirectionsContent } from './DirectionsContentComponent'
+export { default as DirectionsEditorSection } from './DirectionsEditorSectionComponent'

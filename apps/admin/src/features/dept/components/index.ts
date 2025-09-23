@@ -1,2 +1,2 @@
-export { default as DeptIntroContent } from './DeptIntroContent'
-export { default as DeptIntroEditorSection } from './DeptIntroEditorSection'
+export { default as DeptIntroContent } from './DeptIntroContentComponent'
+export { default as DeptIntroEditorSection } from './DeptIntroEditorSectionComponent'

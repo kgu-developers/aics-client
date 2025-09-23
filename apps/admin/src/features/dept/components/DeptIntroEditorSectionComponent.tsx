@@ -1,6 +1,6 @@
 import { Editor } from '@aics-client/tiptap'
-import type { ComponentProps } from 'react'
 import { Button } from 'antd'
+import type { ComponentProps } from 'react'
 import type { DeptIntroContent as DeptIntroContentType } from '~/features/dept/types'
 
 type EditorOnChange = NonNullable<ComponentProps<typeof Editor>['onChange']>
