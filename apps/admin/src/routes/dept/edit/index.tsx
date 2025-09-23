@@ -36,7 +36,7 @@ function DeptEditPage() {
         <h1 className="text-3xl font-bold">{DEPT_INTRO_LABELS.title}</h1>
         <DeptIntroEditorSection
           value={content}
-          onChange={(newContent) => setContent(newContent)}
+          onChange={(newContent: string) => setContent(newContent)}
           onSave={handleSave}
         />
       </section>

@@ -37,7 +37,7 @@ function DirectionsEditPage() {
         <h1 className="text-3xl font-bold">{DIRECTIONS_LABELS.title}</h1>
         <DirectionsEditorSection
           value={content}
-          onChange={(newContent) => setContent(newContent)}
+          onChange={(newContent: string) => setContent(newContent)}
           onSave={handleSave}
         />
       </section>
