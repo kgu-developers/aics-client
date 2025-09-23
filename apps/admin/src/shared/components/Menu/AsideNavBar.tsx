@@ -12,12 +12,12 @@ import {
 } from 'lucide-react'
 
 import LOGO from '~/assets/logo.svg'
-import { PATH } from '~/constants/path'
 import { PATH_CLUB } from '~/features/club/constants'
 import { PATH_DEPT } from '~/features/dept/constants'
 import { PATH_DIRECTIONS } from '~/features/directions/constants'
-import { useRefreshTokens } from '~/hooks/useRefreshToken'
-import { useTokenExpiration } from '~/hooks/useTokenExpiration'
+import { PATH } from '~/shared/constants/path'
+import { useRefreshTokens } from '~/shared/hooks/useRefreshToken'
+import { useTokenExpiration } from '~/shared/hooks/useTokenExpiration'
 import { authServices, formatExpireTime } from '~/shared/utils'
 
 type MenuItem = Required<MenuProps>['items'][number]

@@ -1,7 +1,7 @@
 import { Form, Spin, message } from 'antd'
 import { Suspense } from 'react'
 
-import useEditTable from '~/hooks/useEditTable'
+import useEditTable from '~/shared/hooks/useEditTable'
 import LabTableView from './LabTableView'
 
 import {

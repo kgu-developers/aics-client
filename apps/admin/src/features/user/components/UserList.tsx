@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import type { UserDetailResponse } from '~/apis/admin/requests'
 
-import { useDeleteUsers } from '~/hooks/useDeleteUsers'
+import { useDeleteUsers } from '~/shared/hooks/useDeleteUsers'
 
 interface UserListHeaderProps {
   isDeleteMode: boolean

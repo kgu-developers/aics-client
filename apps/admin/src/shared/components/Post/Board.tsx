@@ -10,10 +10,9 @@ import {
   Trash2Icon,
 } from 'lucide-react'
 
-import { EDIT_POST_PATH_MAP, type PostCategory } from '~/constants/path'
-import { useModal } from '~/hooks/useModal'
-import { MESSAGES } from '~/shared/constant/post.constants'
-import { useDeletePost } from '~/shared/hooks/Post'
+import { EDIT_POST_PATH_MAP, type PostCategory } from '~/shared/constants/path'
+import { MESSAGES } from '~/shared/constants/post.constants'
+import { useDeletePost, useModal } from '~/shared/hooks'
 import { extractFileName } from '~/shared/utils/utils'
 
 interface HeaderProps {

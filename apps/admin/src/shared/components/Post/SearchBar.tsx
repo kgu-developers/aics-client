@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { Input } from 'antd'
 
-import { PLACEHOLDERS } from '~/shared/constant/post.constants'
+import { PLACEHOLDERS } from '~/shared/constants/post.constants'
 
 interface SearchBarProps {
   defaultValue: string

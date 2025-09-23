@@ -1,7 +1,7 @@
 import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries'
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
 
-import { MESSAGES } from '~/shared/constant/post.constants'
+import { MESSAGES } from '~/shared/constants/post.constants'
 import { queryClient } from '~/shared/utils/'
 
 interface UseDeletePostProps {

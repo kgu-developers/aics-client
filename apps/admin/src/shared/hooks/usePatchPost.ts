@@ -1,10 +1,10 @@
-import { usePostServicePostApiV1Posts } from '~/apis/admin/queries'
+import { usePostServicePatchApiV1PostsByPostId } from '~/apis/admin/queries'
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
 
-import { MESSAGES, MESSAGE_DURATION } from '~/shared/constant/post.constants'
+import { MESSAGES } from '~/shared/constants/post.constants'
 import { queryClient } from '~/shared/utils/'
 
-interface UseCreatePostProps {
+interface UsePatchPostProps {
   messageApi: {
     open: (config: {
       type: 'success' | 'error'
@@ -16,28 +16,28 @@ interface UseCreatePostProps {
   onCancel: () => void
 }
 
-export function useCreatePost({
+export function usePatchPost({
   messageApi,
   historyBack,
   onCancel,
-}: UseCreatePostProps) {
-  const mutation = usePostServicePostApiV1Posts({
-    onSuccess: async () => {
+}: UsePatchPostProps) {
+  const mutation = usePostServicePatchApiV1PostsByPostId({
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [usePostServiceGetApiV1PostsKey],
       })
-      await messageApi.open({
+      messageApi.open({
         type: 'success',
-        content: MESSAGES.success.createPost,
-        duration: MESSAGE_DURATION,
+        content: MESSAGES.success.updatePost,
+        duration: 0.7,
       })
       historyBack()
       onCancel()
     },
     onError: () => {
-      messageApi.open({ type: 'error', content: MESSAGES.error.createPost })
+      messageApi.open({ type: 'error', content: MESSAGES.error.updatePost })
     },
   })
 
-  return { createPost: mutation.mutate }
+  return { patchPost: mutation.mutate }
 }

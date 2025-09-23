@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/constants/api'
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/shared/constants/api'
 
 function getAccessToken(): string | null {
   if (typeof window === 'undefined') {

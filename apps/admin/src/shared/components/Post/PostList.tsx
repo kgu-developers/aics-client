@@ -13,10 +13,9 @@ import {
   NEW_POST_PATH_MAP,
   POST_DETAIL_PATH_MAP,
   type PostCategory,
-} from '~/constants/path'
-import { useModal } from '~/hooks/useModal'
-import { MESSAGES } from '~/shared/constant/post.constants'
-import { useDeletePost } from '~/shared/hooks/Post'
+} from '~/shared/constants/path'
+import { MESSAGES } from '~/shared/constants/post.constants'
+import { useDeletePost, useModal } from '~/shared/hooks'
 
 import type { PostSummaryResponse } from '~/apis/community/requests'
 

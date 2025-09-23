@@ -4,8 +4,8 @@ import { Suspense } from 'react'
 
 import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense'
 
-import { PATH } from '~/constants/path'
 import { PostList, SearchBar } from '~/shared/components/Post'
+import { PATH } from '~/shared/constants/path'
 
 export const Route = createFileRoute('/notice/')({
   component: NewsListPage,

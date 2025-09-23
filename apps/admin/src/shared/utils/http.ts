@@ -1,5 +1,5 @@
 import ky from 'ky'
-import { API_BASE_URL, AUTH_BASE_URL } from '~/constants/api'
+import { API_BASE_URL, AUTH_BASE_URL } from '~/shared/constants/api'
 import { getAccessToken } from './api'
 
 export const http = ky.create({

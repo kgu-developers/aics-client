@@ -3,7 +3,7 @@ import { PencilIcon } from 'lucide-react'
 
 import { HeroImageForm } from '../HeroImageForm'
 
-import { useModal } from '~/hooks/useModal'
+import { useModal } from '~/shared/hooks/useModal'
 import { MESSAGES } from '../../constant/constants'
 
 import type { CarouselResponse } from '~/apis/community/requests'

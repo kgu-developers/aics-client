@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 
 import { PostList, SearchBar } from '~/shared/components/Post'
 
-import { PATH } from '~/constants/path'
+import { PATH } from '~/shared/constants/path'
 import { useNewsList } from '~/shared/hooks'
 
 export const Route = createFileRoute('/news/')({

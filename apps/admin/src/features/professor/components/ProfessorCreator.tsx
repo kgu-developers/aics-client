@@ -4,7 +4,7 @@ import { useProfessorServicePostApiV1Professors } from '~/apis/admin/queries'
 import type { ProfessorRequest } from '~/apis/admin/requests'
 import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries'
 
-import { useModal } from '~/hooks/useModal'
+import { useModal } from '~/shared/hooks/useModal'
 import { queryClient } from '~/shared/utils'
 
 function CreateProfessorForm({ onClose }: { onClose: () => void }) {
