@@ -2,7 +2,7 @@ import { createFileRoute, useMatch } from '@tanstack/react-router'
 
 import { PostForm } from '~/shared/components/Post/PostForm'
 
-import { usePostDetail } from '~/shared/hooks/Post'
+import { usePostDetail } from '~/shared/hooks'
 
 export const Route = createFileRoute('/news/edit/$postId')({
   component: PostEditPage,

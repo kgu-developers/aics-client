@@ -1,6 +1,6 @@
 import { useFileServicePostApiV1FilesPost } from '~/apis/admin/queries'
 
-import { MESSAGES, MESSAGE_DURATION } from '../constant/post.constants'
+import { MESSAGES, MESSAGE_DURATION } from '../constants/post.constants'
 
 interface UseFileUploadProps {
   messageApi: {

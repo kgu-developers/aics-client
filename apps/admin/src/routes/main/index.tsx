@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { PostSummaryList } from '~/features/main/components/PostSummaryList'
 import { HeroCarousel } from '~/shared/components/HeroCarousel'
 
-import { PATH } from '~/constants/path'
+import { PATH } from '~/shared/constants/path'
 import { useHeroImages, useNewsList, useNoticeList } from '~/shared/hooks'
 
 export const Route = createFileRoute('/main/')({

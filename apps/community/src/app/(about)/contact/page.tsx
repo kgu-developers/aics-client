@@ -3,7 +3,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { ContactInfoSection } from '~/features/contact/components/contact-info-section'
 import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
-import { getQueryClient } from '~/shared/utils/get-query-client'
+import { getQueryClient } from '~/shared/utils/'
 
 export const dynamic = 'force-dynamic'
 

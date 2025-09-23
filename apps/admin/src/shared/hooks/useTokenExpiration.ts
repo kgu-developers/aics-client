@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getAccessToken } from '~/utils/api'
-import { authServices } from '~/utils/auth'
-import { decodeJwt } from '~/utils/jwt'
+import { getAccessToken } from '~/shared/utils/api'
+import { authServices } from '~/shared/utils/auth'
+import { decodeJwt } from '~/shared/utils/jwt'
 
 export const useTokenExpiration = () => {
   const { logout } = authServices()

@@ -2,7 +2,7 @@
 
 import { QueryClientProvider } from '@tanstack/react-query'
 
-import { getQueryClient } from '~/shared/utils/get-query-client'
+import { getQueryClient } from '~/shared/utils/'
 
 export default function Providers({
   children,

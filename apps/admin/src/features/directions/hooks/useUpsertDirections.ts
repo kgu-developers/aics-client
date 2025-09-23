@@ -1,10 +1,10 @@
 import { message } from 'antd'
-import { queryClient } from '~/utils/get-query-client'
 import { UseAboutServiceGetApiV1AboutsKeyFn } from '~/features/directions/services'
 import {
   useAboutServicePatchApiV1Abouts,
   useAboutServicePostApiV1Abouts,
 } from '~/features/directions/services'
+import { queryClient } from '~/shared/utils/'
 
 import {
   DIRECTIONS_CATEGORY,

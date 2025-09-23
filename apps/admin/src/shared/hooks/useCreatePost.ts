@@ -1,8 +1,8 @@
 import { usePostServicePostApiV1Posts } from '~/apis/admin/queries'
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
 
-import { MESSAGES, MESSAGE_DURATION } from '~/shared/constant/post.constants'
-import { queryClient } from '~/utils/get-query-client'
+import { MESSAGES, MESSAGE_DURATION } from '~/shared/constants/post.constants'
+import { queryClient } from '~/shared/utils/'
 
 interface UseCreatePostProps {
   messageApi: {

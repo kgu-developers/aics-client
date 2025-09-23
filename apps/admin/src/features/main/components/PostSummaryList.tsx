@@ -2,7 +2,10 @@ import { Link } from '@tanstack/react-router'
 import { Card } from 'antd'
 import { ArrowRightIcon } from 'lucide-react'
 
-import { POST_DETAIL_PATH_MAP, type PostCategory } from '~/constants/path'
+import {
+  POST_DETAIL_PATH_MAP,
+  type PostCategory,
+} from '~/shared/constants/path'
 
 import type { PostSummaryResponse } from '~/apis/community/requests'
 import { MESSAGES } from './constant/constants'

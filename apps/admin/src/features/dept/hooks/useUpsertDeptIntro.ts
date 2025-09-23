@@ -1,10 +1,4 @@
 import { message } from 'antd'
-import { queryClient } from '~/utils/get-query-client'
-import { UseAboutServiceGetApiV1AboutsKeyFn } from '~/features/dept/services'
-import {
-  useAboutServicePostApiV1Abouts,
-  useAboutServicePatchApiV1Abouts,
-} from '~/features/dept/services'
 import type {
   AboutCreateRequest,
   AboutUpdateRequest,
@@ -13,7 +7,13 @@ import {
   DEPT_INTRO_CATEGORY,
   DEPT_INTRO_MESSAGES,
 } from '~/features/dept/constants/deptIntro'
+import { UseAboutServiceGetApiV1AboutsKeyFn } from '~/features/dept/services'
+import {
+  useAboutServicePatchApiV1Abouts,
+  useAboutServicePostApiV1Abouts,
+} from '~/features/dept/services'
 import type { DeptIntroContent } from '~/features/dept/types'
+import { queryClient } from '~/shared/utils/'
 
 type SaveArgs = {
   currentContent: DeptIntroContent

@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
-import { END_POINT } from '~/constants/api'
-import { authServices } from '~/utils/auth'
-import { authHttp } from '~/utils/http'
+import { END_POINT } from '~/shared/constants/api'
+import { authServices } from '~/shared/utils/auth'
+import { authHttp } from '~/shared/utils/http'
 
 interface SignInData {
   userId: string

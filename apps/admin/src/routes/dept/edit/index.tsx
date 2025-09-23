@@ -1,13 +1,13 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/dept/services'
-import DeptIntroEditorSection from '~/features/dept/components/deptIntroEditorSection'
+import { DeptIntroEditorSection } from '~/features/dept/components'
+import { DEPT_EDIT_ROUTE } from '~/features/dept/constants'
 import {
   DEPT_INTRO_CATEGORY,
   DEPT_INTRO_LABELS,
 } from '~/features/dept/constants/deptIntro'
-import { DEPT_EDIT_ROUTE } from '~/features/dept/constants'
 import { useUpsertDeptIntro } from '~/features/dept/hooks/useUpsertDeptIntro'
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/dept/services'
 
 export const Route = createFileRoute(DEPT_EDIT_ROUTE)({
   component: DeptEditPage,
@@ -36,7 +36,7 @@ function DeptEditPage() {
         <h1 className="text-3xl font-bold">{DEPT_INTRO_LABELS.title}</h1>
         <DeptIntroEditorSection
           value={content}
-          onChange={(newContent) => setContent(newContent)}
+          onChange={(newContent: string) => setContent(newContent)}
           onSave={handleSave}
         />
       </section>

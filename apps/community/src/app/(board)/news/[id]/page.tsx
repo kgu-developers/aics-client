@@ -1,7 +1,7 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 
 import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
-import { getQueryClient } from '~/shared/utils/get-query-client'
+import { getQueryClient } from '~/shared/utils/'
 import { HydratedBoard } from '~/widgets/board/components/hydrated-board'
 
 export const dynamic = 'force-dynamic'

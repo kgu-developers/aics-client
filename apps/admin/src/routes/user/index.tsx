@@ -2,8 +2,7 @@ import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { Spin } from 'antd'
 import { Suspense } from 'react'
 import { useUserServiceGetApiV1Users } from '~/apis/admin/queries'
-import { SearchBar } from '~/components/user/search-bar'
-import { UserList } from '~/components/user/user-list'
+import { SearchBar, UserList } from '~/features/user/components'
 
 export const Route = createFileRoute('/user/')({
   component: UserPage,

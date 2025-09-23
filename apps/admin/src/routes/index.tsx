@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { createFileRoute } from '@tanstack/react-router'
 import { Button, Card, Form, Input, Typography } from 'antd'
-import { useSignIn } from '~/hooks/use-sign-in'
+import { useSignIn } from '~/shared/hooks/useSignIn'
 
 export const Route = createFileRoute('/')({
   component: SignInPage,

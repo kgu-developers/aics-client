@@ -15,7 +15,6 @@ import type { ReactNode } from 'react'
 
 import { Editor } from '@aics-client/tiptap'
 
-import { useModal } from '~/hooks/use-modal'
 import {
   FALSE,
   FORM,
@@ -26,9 +25,9 @@ import {
   STATUS,
   TRUE,
   UNNAMED_FILE,
-} from '~/shared/constant/post.constants'
-import { useFileUpload } from '~/shared/hooks'
-import { useCreatePost, usePatchPost } from '~/shared/hooks/Post'
+} from '~/shared/constants/post.constants'
+import { useCreatePost, useFileUpload, usePatchPost } from '~/shared/hooks'
+import { useModal } from '~/shared/hooks/useModal'
 
 import type { PostUpdateRequest } from '~/apis/admin/requests'
 import type { PostDetailResponse } from '~/apis/community/requests'

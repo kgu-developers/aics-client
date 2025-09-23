@@ -1,10 +1,9 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
-import { SearchBar } from '~/components/user/search-bar'
-import { PostList } from '~/shared/components/Post'
+import { PostList, SearchBar } from '~/shared/components/Post'
 
-import { PATH } from '~/constants/path'
+import { PATH } from '~/shared/constants/path'
 import { useNewsList } from '~/shared/hooks'
 
 export const Route = createFileRoute('/news/')({

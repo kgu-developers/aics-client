@@ -1,6 +1,6 @@
-import DOMPurify from 'dompurify';
-import { isDirectionsEmpty } from '~/features/directions/constants/directions';
-import type { DirectionsContent as DirectionsContentType } from '~/features/directions/types';
+import DOMPurify from 'dompurify'
+import { isDirectionsEmpty } from '~/features/directions/constants/directions'
+import type { DirectionsContent as DirectionsContentType } from '~/features/directions/types'
 
 export default function DirectionsContent({
   content,
@@ -10,7 +10,7 @@ export default function DirectionsContent({
       <span className="border-y py-8 border-gray-200">
         작성된 안내가 없습니다.
       </span>
-    );
+    )
   }
 
   return (
@@ -19,5 +19,5 @@ export default function DirectionsContent({
       // biome-ignore lint/security/noDangerouslySetInnerHtml: DOMPurify 적용
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content ?? '') }}
     />
-  );
+  )
 }
