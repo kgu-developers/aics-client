@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import ClubTable from '~/features/club/components/ClubTable'
+import { ClubTable } from '~/features/club/components'
+import { CLUB_ROUTE } from '~/features/club/constants'
 
-export const Route = createFileRoute('/club/')({
+export const Route = createFileRoute(CLUB_ROUTE)({
   component: ClubPage,
 })
 

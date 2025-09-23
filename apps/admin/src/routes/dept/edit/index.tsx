@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import DeptIntroEditorSection from '~/features/dept/components/DeptIntroEditorSection'
+import { DeptIntroEditorSection } from '~/features/dept/components'
 import { DEPT_EDIT_ROUTE } from '~/features/dept/constants'
 import {
   DEPT_INTRO_CATEGORY,

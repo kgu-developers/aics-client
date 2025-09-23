@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { Button } from 'antd'
 
-import DirectionsContent from '~/features/directions/components/DirectionsContent'
+import { DirectionsContent } from '~/features/directions/components'
 import {
   DIRECTIONS_CATEGORY,
   DIRECTIONS_LABELS,

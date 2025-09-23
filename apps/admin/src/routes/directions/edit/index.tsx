@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
-import DirectionsEditorSection from '~/features/directions/components/DirectionsEditorSection'
+import { DirectionsEditorSection } from '~/features/directions/components'
 import {
   DIRECTIONS_CATEGORY,
   DIRECTIONS_LABELS,

@@ -3,7 +3,7 @@ import { Button } from 'antd'
 
 import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/dept/services'
 
-import DeptIntroContent from '~/features/dept/components/DeptIntroContent'
+import { DeptIntroContent } from '~/features/dept/components'
 import {
   DEPT_INTRO_CATEGORY,
   DEPT_INTRO_LABELS,

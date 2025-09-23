@@ -1,5 +1,4 @@
 import { Form } from 'antd'
-import ClubCreate from '~/features/club/components/ClubCreator'
 import {
   useClubImageUpload,
   useClubs,
@@ -8,6 +7,7 @@ import {
 } from '~/features/club/hooks'
 import useEditTable from '~/features/club/hooks/useEditTable'
 import type { ClubDetailResponse } from '~/features/club/types'
+import ClubCreate from './ClubCreator'
 import ClubTableView from './ClubTableView'
 
 function ClubTable() {
