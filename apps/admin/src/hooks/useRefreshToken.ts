@@ -3,7 +3,7 @@ import { END_POINT } from '~/constants/api'
 import { getToken } from '~/shared/utils/api'
 import { authServices } from '~/shared/utils/auth'
 import { authHttp } from '~/shared/utils/http'
-import type { Tokens } from './use-sign-in'
+import type { Tokens } from './useSignIn'
 
 interface RefreshToken {
   refreshToken: string
