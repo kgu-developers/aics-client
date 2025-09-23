@@ -1,8 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/constants/api'
-import { removeTokens } from '~/utils/api'
-import { decodeJwt } from '~/utils/jwt'
+import { decodeJwt, removeTokens } from '~/shared/utils'
 
 import type { Tokens } from '~/hooks/use-sign-in'
 
