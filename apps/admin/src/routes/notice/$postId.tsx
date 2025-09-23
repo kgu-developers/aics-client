@@ -1,7 +1,7 @@
 import { createFileRoute, useMatch } from '@tanstack/react-router'
 import { usePostServiceGetApiV1PostsByPostIdSuspense } from '~/apis/community/queries/suspense'
-import { Board } from '~/components/posts/board'
 import { PATH } from '~/constants/path'
+import { Board } from '~/shared/components/Post'
 
 export const Route = createFileRoute('/notice/$postId')({
   component: PostDetailPage,

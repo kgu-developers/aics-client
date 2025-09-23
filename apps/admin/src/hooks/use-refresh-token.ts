@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { END_POINT } from '~/constants/api'
-import { getToken } from '~/utils/api'
-import { authServices } from '~/utils/auth'
-import { authHttp } from '~/utils/http'
+import { getToken } from '~/shared/utils/api'
+import { authServices } from '~/shared/utils/auth'
+import { authHttp } from '~/shared/utils/http'
 import type { Tokens } from './use-sign-in'
 
 interface RefreshToken {

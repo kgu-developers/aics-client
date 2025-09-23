@@ -1,6 +1,6 @@
 import { useLabServiceDeleteApiV1LabsById } from '~/apis/admin/queries'
 import { useLabServiceGetApiV1LabsKey } from '~/apis/community/queries'
-import { queryClient } from '~/utils/get-query-client'
+import { queryClient } from '~/shared/utils/'
 import { MESSAGES } from '../constant/constants'
 
 import type { MessageInstance } from 'antd/es/message/interface'

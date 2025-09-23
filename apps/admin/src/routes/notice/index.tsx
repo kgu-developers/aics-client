@@ -4,9 +4,8 @@ import { Suspense } from 'react'
 
 import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense'
 
-import PostsList from '~/components/posts/posts-list'
-import { SearchBar } from '~/components/posts/search-bar'
 import { PATH } from '~/constants/path'
+import { PostList, SearchBar } from '~/shared/components/Post'
 
 export const Route = createFileRoute('/notice/')({
   component: NewsListPage,
@@ -36,7 +35,7 @@ function NewsListPage() {
       <Suspense fallback={<Spin />}>
         <SearchBar defaultValue={keywords} />
         {postList?.contents && (
-          <PostsList
+          <PostList
             title="공지사항"
             to={PATH.NOTICE}
             currentPage={currentPage}

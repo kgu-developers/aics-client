@@ -2,7 +2,7 @@ import { usePostServicePatchApiV1PostsByPostId } from '~/apis/admin/queries'
 import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
 
 import { MESSAGES } from '~/shared/constant/post.constants'
-import { queryClient } from '~/utils/get-query-client'
+import { queryClient } from '~/shared/utils/'
 
 interface UsePatchPostProps {
   messageApi: {

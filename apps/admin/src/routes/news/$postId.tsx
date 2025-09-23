@@ -1,6 +1,6 @@
 import { createFileRoute, useMatch } from '@tanstack/react-router'
 
-import { Board } from '~/shared/components/Post/Board'
+import { Board } from '~/shared/components/Post'
 
 import { PATH } from '~/constants/path'
 import { usePostDetail } from '~/shared/hooks/Post'

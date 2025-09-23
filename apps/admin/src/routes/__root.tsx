@@ -2,7 +2,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Outlet, createRootRoute, useLocation } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { ConfigProvider } from 'antd'
-import AsideNavigationMenu from '~/components/aside-navigation-menu'
+import AsideNavBar from '~/shared/components/Menu/AsideNavBar'
 
 export const Route = createRootRoute({
   component: App,
@@ -27,7 +27,7 @@ function App() {
       }}
     >
       <main className="relative flex w-dvw h-dvh">
-        {!isSigninPage && <AsideNavigationMenu />}
+        {!isSigninPage && <AsideNavBar />}
         <div
           className={`flex flex-col overflow-auto w-full h-dvh ${!isSigninPage && 'px-48 py-12'}`}
         >

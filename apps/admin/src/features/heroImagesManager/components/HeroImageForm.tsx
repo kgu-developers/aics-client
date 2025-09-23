@@ -2,7 +2,7 @@ import { Button, Form, Input, Upload, message } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import { UploadIcon } from 'lucide-react'
 
-import { extractFileName } from '~/utils/utils'
+import { extractFileName } from '~/shared/utils/utils'
 import { LABELS, MESSAGES, PLACEHOLDERS } from '../constant/constants'
 import {
   useCreateHeroImage,

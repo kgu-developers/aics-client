@@ -3,7 +3,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { DeptInfoSection } from '~/features/dept/components/dept-info-section'
 import { DEPT_QUERY_OPTIONS } from '~/features/dept/services/queries'
 import { PageHeader } from '~/shared/components/page-header/page-header'
-import { getQueryClient } from '~/shared/utils/get-query-client'
+import { getQueryClient } from '~/shared/utils/'
 
 export const dynamic = 'force-dynamic'
 
