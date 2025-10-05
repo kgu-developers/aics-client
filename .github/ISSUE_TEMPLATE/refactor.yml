@@ -12,6 +12,7 @@ body:
       options:
         - '@aics-client/admin'
         - '@aics-client/community'
+        - '@aics-client/graduate'
         - '@aics-client/design-system'
         - '@aics-client/tiptap'
         - '@aics-client/typescript'
