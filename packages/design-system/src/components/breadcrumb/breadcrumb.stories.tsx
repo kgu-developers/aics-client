@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import Breadcrumb from './breadcrumb'
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'Components/Spacing',
+  title: 'Components/Breadcrumb',
   component: Breadcrumb,
   parameters: {
     layout: 'centered',
@@ -20,11 +20,11 @@ export const Example: Story = {
       <>
         <Breadcrumb.List>
           <Breadcrumb.Item>
-            <Breadcrumb.Link>홈</Breadcrumb.Link>
+            <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link>
+            <Breadcrumb.Link href="/">
               <Breadcrumb.Page>소개</Breadcrumb.Page>
             </Breadcrumb.Link>
           </Breadcrumb.Item>
