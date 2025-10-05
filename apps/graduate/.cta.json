@@ -1,0 +1,11 @@
+{
+  "projectName": "@aics-client/graduate",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": false,
+  "packageManager": "pnpm",
+  "git": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": []
+}
