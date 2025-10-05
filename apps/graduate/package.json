@@ -26,6 +26,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@vanilla-extract/vite-plugin": "^5.0.1",
     "@vitejs/plugin-react": "^5.0.4",
     "jsdom": "^27.0.0",
     "prettier": "^3.6.2",

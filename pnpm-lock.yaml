@@ -233,6 +233,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.0.3
         version: 19.1.2(@types/react@19.1.2)
+      '@vanilla-extract/vite-plugin':
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3)(vite@7.1.9(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3))
       '@vitejs/plugin-react':
         specifier: ^5.0.4
         version: 5.0.4(vite@7.1.9(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3))
@@ -5391,11 +5394,6 @@ packages:
     resolution: {integrity: sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  vite-node@3.1.2:
-    resolution: {integrity: sha512-/8iMryv46J3aK13iUXsei5G/A3CUlW4665THCPS+K8xAaqrVWiGB4RfXMQXCLjpK9P2eK//BczrVkn5JLAk6DA==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
-    hasBin: true
-
   vite-node@3.2.4:
     resolution: {integrity: sha512-EbKSKh+bh1E1IFxeO0pg1n4dvoOTt0UDiXMd/qn++r98+jPO1xtJilvXldeuQ8giIB5IkpjCgMleHMNEsGH6pg==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -7743,7 +7741,7 @@ snapshots:
 
   '@vanilla-extract/babel-plugin-debug-ids@1.2.0':
     dependencies:
-      '@babel/core': 7.26.10
+      '@babel/core': 7.28.4
     transitivePeerDependencies:
       - supports-color
 
@@ -7752,7 +7750,7 @@ snapshots:
       '@vanilla-extract/css': 1.17.1
       '@vanilla-extract/integration': 8.0.1
       vite: 6.3.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3)
-      vite-node: 3.1.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3)
+      vite-node: 3.2.4(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -7787,8 +7785,8 @@ snapshots:
 
   '@vanilla-extract/integration@8.0.1':
     dependencies:
-      '@babel/core': 7.26.10
-      '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.10)
+      '@babel/core': 7.28.4
+      '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.4)
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.0
       '@vanilla-extract/css': 1.17.1
       dedent: 1.5.3
@@ -11046,27 +11044,6 @@ snapshots:
   v8-compile-cache-lib@3.0.1: {}
 
   validate-npm-package-name@5.0.1: {}
-
-  vite-node@3.1.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3):
-    dependencies:
-      cac: 6.7.14
-      debug: 4.4.0
-      es-module-lexer: 1.7.0
-      pathe: 2.0.3
-      vite: 6.3.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3)
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
 
   vite-node@3.2.4(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(tsx@4.19.3):
     dependencies:
