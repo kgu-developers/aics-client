@@ -8,10 +8,12 @@ export const vars = createGlobalTheme('#app', {
     main: '#006AE4',
     mainDark: '#0054B3', // hover / 강조용
     mainLight: '#3388ED', // 밝은 톤
-    mainXLight: '#E6F0FF', // 배경 / subtle tone
-    mainBorder: '#B5D3FF', // border용 연한 블루
+    mainLightHover: '#B4D7FF', // 밝은 톤 hover
+    mainXLight: '#E6F0FF', // 밝은 톤 배경
+    mainBorder: '#B5D3FF',
 
-    sub: '#F7F8FA', // 밝은 배경
+    sub: '#F3F4F6',
+    subHover: '#E5E7EB',
     subDark: '#A0A4B0', // 비활성 텍스트
     subText: '#4B4E57', // 일반 텍스트용 진회색
     border: '#CECECE', // 구분선용
@@ -22,9 +24,6 @@ export const vars = createGlobalTheme('#app', {
     warning: '#FACC15',
   },
   font: {
-    family: {
-      primary: '"gg sans", "Pretendard", sans-serif',
-    },
     size: {
       xs: '12px',
       sm: '14px',
