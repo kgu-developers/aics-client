@@ -1,4 +1,7 @@
 const typography = {
+  fontFamily: {
+    sans: 'Nunito Sans, system-ui, sans-serif',
+  },
   fontSize: {
     xs: '0.75rem',
     sm: '0.875rem',

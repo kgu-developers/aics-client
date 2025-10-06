@@ -1,0 +1,12 @@
+{
+  "extends": "@aics-client/typescript/react.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "react" }],
+    "types": ["@tanstack/react-router"],
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
