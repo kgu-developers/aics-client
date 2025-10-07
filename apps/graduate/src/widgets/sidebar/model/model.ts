@@ -1,0 +1,28 @@
+export type MenuItem = {
+  label: string
+  to: string
+}
+
+export type MenuSection = {
+  title: string
+  items: MenuItem[]
+}
+
+export const adminMenuSections: MenuSection[] = [
+  {
+    title: '메뉴 관리',
+    items: [
+      { label: '공지사항', to: '/notices' },
+      { label: '안내 및 내규', to: '/rules' },
+      { label: '진행 일정', to: '/schedule' },
+    ],
+  },
+  {
+    title: '졸업생 관리',
+    items: [
+      { label: '대상자 전체 관리', to: '/graduates' },
+      { label: '자격증 신청 관리', to: '/cert' },
+      { label: '논문 신청 관리', to: '/thesis' },
+    ],
+  },
+]
