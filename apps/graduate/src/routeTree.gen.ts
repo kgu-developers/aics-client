@@ -9,18 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ClientLayoutRouteImport } from './routes/_clientLayout'
-import { Route as AdminLayoutRouteImport } from './routes/_adminLayout'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminThesisRouteImport } from './routes/admin/thesis'
+import { Route as AdminScheduleRouteImport } from './routes/admin/schedule'
+import { Route as AdminRulesRouteImport } from './routes/admin/rules'
+import { Route as AdminNoticesRouteImport } from './routes/admin/notices'
+import { Route as AdminGraduatesRouteImport } from './routes/admin/graduates'
+import { Route as AdminCertRouteImport } from './routes/admin/cert'
 import { Route as ClientLayoutClientRouteImport } from './routes/_clientLayout/client'
-import { Route as AdminLayoutAdminRouteImport } from './routes/_adminLayout/admin'
 
-const ClientLayoutRoute = ClientLayoutRouteImport.update({
-  id: '/_clientLayout',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminLayoutRoute = AdminLayoutRouteImport.update({
-  id: '/_adminLayout',
+const ClientLayoutRoute = ClientLayoutRouteImport.update({
+  id: '/_clientLayout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,69 +35,143 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminThesisRoute = AdminThesisRouteImport.update({
+  id: '/thesis',
+  path: '/thesis',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminScheduleRoute = AdminScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRulesRoute = AdminRulesRouteImport.update({
+  id: '/rules',
+  path: '/rules',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNoticesRoute = AdminNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGraduatesRoute = AdminGraduatesRouteImport.update({
+  id: '/graduates',
+  path: '/graduates',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCertRoute = AdminCertRouteImport.update({
+  id: '/cert',
+  path: '/cert',
+  getParentRoute: () => AdminRoute,
+} as any)
 const ClientLayoutClientRoute = ClientLayoutClientRouteImport.update({
   id: '/client',
   path: '/client',
   getParentRoute: () => ClientLayoutRoute,
 } as any)
-const AdminLayoutAdminRoute = AdminLayoutAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AdminLayoutRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminLayoutAdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/client': typeof ClientLayoutClientRoute
+  '/admin/cert': typeof AdminCertRoute
+  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/rules': typeof AdminRulesRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/admin/thesis': typeof AdminThesisRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminLayoutAdminRoute
   '/client': typeof ClientLayoutClientRoute
+  '/admin/cert': typeof AdminCertRoute
+  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/rules': typeof AdminRulesRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/admin/thesis': typeof AdminThesisRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_adminLayout': typeof AdminLayoutRouteWithChildren
   '/_clientLayout': typeof ClientLayoutRouteWithChildren
-  '/_adminLayout/admin': typeof AdminLayoutAdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/_clientLayout/client': typeof ClientLayoutClientRoute
+  '/admin/cert': typeof AdminCertRoute
+  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/rules': typeof AdminRulesRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/admin/thesis': typeof AdminThesisRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/client'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/client'
+    | '/admin/cert'
+    | '/admin/graduates'
+    | '/admin/notices'
+    | '/admin/rules'
+    | '/admin/schedule'
+    | '/admin/thesis'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/client'
+  to:
+    | '/'
+    | '/client'
+    | '/admin/cert'
+    | '/admin/graduates'
+    | '/admin/notices'
+    | '/admin/rules'
+    | '/admin/schedule'
+    | '/admin/thesis'
+    | '/admin'
   id:
     | '__root__'
     | '/'
-    | '/_adminLayout'
     | '/_clientLayout'
-    | '/_adminLayout/admin'
+    | '/admin'
     | '/_clientLayout/client'
+    | '/admin/cert'
+    | '/admin/graduates'
+    | '/admin/notices'
+    | '/admin/rules'
+    | '/admin/schedule'
+    | '/admin/thesis'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminLayoutRoute: typeof AdminLayoutRouteWithChildren
   ClientLayoutRoute: typeof ClientLayoutRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_clientLayout': {
       id: '/_clientLayout'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof ClientLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_adminLayout': {
-      id: '/_adminLayout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AdminLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -100,6 +181,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/thesis': {
+      id: '/admin/thesis'
+      path: '/thesis'
+      fullPath: '/admin/thesis'
+      preLoaderRoute: typeof AdminThesisRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/schedule': {
+      id: '/admin/schedule'
+      path: '/schedule'
+      fullPath: '/admin/schedule'
+      preLoaderRoute: typeof AdminScheduleRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/rules': {
+      id: '/admin/rules'
+      path: '/rules'
+      fullPath: '/admin/rules'
+      preLoaderRoute: typeof AdminRulesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notices': {
+      id: '/admin/notices'
+      path: '/notices'
+      fullPath: '/admin/notices'
+      preLoaderRoute: typeof AdminNoticesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/graduates': {
+      id: '/admin/graduates'
+      path: '/graduates'
+      fullPath: '/admin/graduates'
+      preLoaderRoute: typeof AdminGraduatesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/cert': {
+      id: '/admin/cert'
+      path: '/cert'
+      fullPath: '/admin/cert'
+      preLoaderRoute: typeof AdminCertRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_clientLayout/client': {
       id: '/_clientLayout/client'
       path: '/client'
@@ -107,27 +237,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientLayoutClientRouteImport
       parentRoute: typeof ClientLayoutRoute
     }
-    '/_adminLayout/admin': {
-      id: '/_adminLayout/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminLayoutAdminRouteImport
-      parentRoute: typeof AdminLayoutRoute
-    }
   }
 }
-
-interface AdminLayoutRouteChildren {
-  AdminLayoutAdminRoute: typeof AdminLayoutAdminRoute
-}
-
-const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
-  AdminLayoutAdminRoute: AdminLayoutAdminRoute,
-}
-
-const AdminLayoutRouteWithChildren = AdminLayoutRoute._addFileChildren(
-  AdminLayoutRouteChildren,
-)
 
 interface ClientLayoutRouteChildren {
   ClientLayoutClientRoute: typeof ClientLayoutClientRoute
@@ -141,10 +252,32 @@ const ClientLayoutRouteWithChildren = ClientLayoutRoute._addFileChildren(
   ClientLayoutRouteChildren,
 )
 
+interface AdminRouteChildren {
+  AdminCertRoute: typeof AdminCertRoute
+  AdminGraduatesRoute: typeof AdminGraduatesRoute
+  AdminNoticesRoute: typeof AdminNoticesRoute
+  AdminRulesRoute: typeof AdminRulesRoute
+  AdminScheduleRoute: typeof AdminScheduleRoute
+  AdminThesisRoute: typeof AdminThesisRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCertRoute: AdminCertRoute,
+  AdminGraduatesRoute: AdminGraduatesRoute,
+  AdminNoticesRoute: AdminNoticesRoute,
+  AdminRulesRoute: AdminRulesRoute,
+  AdminScheduleRoute: AdminScheduleRoute,
+  AdminThesisRoute: AdminThesisRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminLayoutRoute: AdminLayoutRouteWithChildren,
   ClientLayoutRoute: ClientLayoutRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
