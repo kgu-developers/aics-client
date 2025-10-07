@@ -13,12 +13,12 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ClientLayoutRouteImport } from './routes/_clientLayout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminThesisRouteImport } from './routes/admin/thesis'
+import { Route as AdminThesisApplicationManagementRouteImport } from './routes/admin/thesis-application-management'
 import { Route as AdminScheduleRouteImport } from './routes/admin/schedule'
-import { Route as AdminRulesRouteImport } from './routes/admin/rules'
 import { Route as AdminNoticesRouteImport } from './routes/admin/notices'
-import { Route as AdminGraduatesRouteImport } from './routes/admin/graduates'
-import { Route as AdminCertRouteImport } from './routes/admin/cert'
+import { Route as AdminGuidelinesAndRulesRouteImport } from './routes/admin/guidelines-and-rules'
+import { Route as AdminGraduatesAllRouteImport } from './routes/admin/graduates-all'
+import { Route as AdminCertificationManagementRouteImport } from './routes/admin/certification-management'
 import { Route as ClientLayoutClientRouteImport } from './routes/_clientLayout/client'
 
 const AdminRoute = AdminRouteImport.update({
@@ -40,19 +40,15 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminThesisRoute = AdminThesisRouteImport.update({
-  id: '/thesis',
-  path: '/thesis',
-  getParentRoute: () => AdminRoute,
-} as any)
+const AdminThesisApplicationManagementRoute =
+  AdminThesisApplicationManagementRouteImport.update({
+    id: '/thesis-application-management',
+    path: '/thesis-application-management',
+    getParentRoute: () => AdminRoute,
+  } as any)
 const AdminScheduleRoute = AdminScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminRulesRoute = AdminRulesRouteImport.update({
-  id: '/rules',
-  path: '/rules',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminNoticesRoute = AdminNoticesRouteImport.update({
@@ -60,16 +56,22 @@ const AdminNoticesRoute = AdminNoticesRouteImport.update({
   path: '/notices',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminGraduatesRoute = AdminGraduatesRouteImport.update({
-  id: '/graduates',
-  path: '/graduates',
+const AdminGuidelinesAndRulesRoute = AdminGuidelinesAndRulesRouteImport.update({
+  id: '/guidelines-and-rules',
+  path: '/guidelines-and-rules',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminCertRoute = AdminCertRouteImport.update({
-  id: '/cert',
-  path: '/cert',
+const AdminGraduatesAllRoute = AdminGraduatesAllRouteImport.update({
+  id: '/graduates-all',
+  path: '/graduates-all',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCertificationManagementRoute =
+  AdminCertificationManagementRouteImport.update({
+    id: '/certification-management',
+    path: '/certification-management',
+    getParentRoute: () => AdminRoute,
+  } as any)
 const ClientLayoutClientRoute = ClientLayoutClientRouteImport.update({
   id: '/client',
   path: '/client',
@@ -80,23 +82,23 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/client': typeof ClientLayoutClientRoute
-  '/admin/cert': typeof AdminCertRoute
-  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/certification-management': typeof AdminCertificationManagementRoute
+  '/admin/graduates-all': typeof AdminGraduatesAllRoute
+  '/admin/guidelines-and-rules': typeof AdminGuidelinesAndRulesRoute
   '/admin/notices': typeof AdminNoticesRoute
-  '/admin/rules': typeof AdminRulesRoute
   '/admin/schedule': typeof AdminScheduleRoute
-  '/admin/thesis': typeof AdminThesisRoute
+  '/admin/thesis-application-management': typeof AdminThesisApplicationManagementRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/client': typeof ClientLayoutClientRoute
-  '/admin/cert': typeof AdminCertRoute
-  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/certification-management': typeof AdminCertificationManagementRoute
+  '/admin/graduates-all': typeof AdminGraduatesAllRoute
+  '/admin/guidelines-and-rules': typeof AdminGuidelinesAndRulesRoute
   '/admin/notices': typeof AdminNoticesRoute
-  '/admin/rules': typeof AdminRulesRoute
   '/admin/schedule': typeof AdminScheduleRoute
-  '/admin/thesis': typeof AdminThesisRoute
+  '/admin/thesis-application-management': typeof AdminThesisApplicationManagementRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -105,12 +107,12 @@ export interface FileRoutesById {
   '/_clientLayout': typeof ClientLayoutRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/_clientLayout/client': typeof ClientLayoutClientRoute
-  '/admin/cert': typeof AdminCertRoute
-  '/admin/graduates': typeof AdminGraduatesRoute
+  '/admin/certification-management': typeof AdminCertificationManagementRoute
+  '/admin/graduates-all': typeof AdminGraduatesAllRoute
+  '/admin/guidelines-and-rules': typeof AdminGuidelinesAndRulesRoute
   '/admin/notices': typeof AdminNoticesRoute
-  '/admin/rules': typeof AdminRulesRoute
   '/admin/schedule': typeof AdminScheduleRoute
-  '/admin/thesis': typeof AdminThesisRoute
+  '/admin/thesis-application-management': typeof AdminThesisApplicationManagementRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -119,23 +121,23 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/client'
-    | '/admin/cert'
-    | '/admin/graduates'
+    | '/admin/certification-management'
+    | '/admin/graduates-all'
+    | '/admin/guidelines-and-rules'
     | '/admin/notices'
-    | '/admin/rules'
     | '/admin/schedule'
-    | '/admin/thesis'
+    | '/admin/thesis-application-management'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/client'
-    | '/admin/cert'
-    | '/admin/graduates'
+    | '/admin/certification-management'
+    | '/admin/graduates-all'
+    | '/admin/guidelines-and-rules'
     | '/admin/notices'
-    | '/admin/rules'
     | '/admin/schedule'
-    | '/admin/thesis'
+    | '/admin/thesis-application-management'
     | '/admin'
   id:
     | '__root__'
@@ -143,12 +145,12 @@ export interface FileRouteTypes {
     | '/_clientLayout'
     | '/admin'
     | '/_clientLayout/client'
-    | '/admin/cert'
-    | '/admin/graduates'
+    | '/admin/certification-management'
+    | '/admin/graduates-all'
+    | '/admin/guidelines-and-rules'
     | '/admin/notices'
-    | '/admin/rules'
     | '/admin/schedule'
-    | '/admin/thesis'
+    | '/admin/thesis-application-management'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -188,11 +190,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/thesis': {
-      id: '/admin/thesis'
-      path: '/thesis'
-      fullPath: '/admin/thesis'
-      preLoaderRoute: typeof AdminThesisRouteImport
+    '/admin/thesis-application-management': {
+      id: '/admin/thesis-application-management'
+      path: '/thesis-application-management'
+      fullPath: '/admin/thesis-application-management'
+      preLoaderRoute: typeof AdminThesisApplicationManagementRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/schedule': {
@@ -202,13 +204,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminScheduleRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/rules': {
-      id: '/admin/rules'
-      path: '/rules'
-      fullPath: '/admin/rules'
-      preLoaderRoute: typeof AdminRulesRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/notices': {
       id: '/admin/notices'
       path: '/notices'
@@ -216,18 +211,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNoticesRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/graduates': {
-      id: '/admin/graduates'
-      path: '/graduates'
-      fullPath: '/admin/graduates'
-      preLoaderRoute: typeof AdminGraduatesRouteImport
+    '/admin/guidelines-and-rules': {
+      id: '/admin/guidelines-and-rules'
+      path: '/guidelines-and-rules'
+      fullPath: '/admin/guidelines-and-rules'
+      preLoaderRoute: typeof AdminGuidelinesAndRulesRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/cert': {
-      id: '/admin/cert'
-      path: '/cert'
-      fullPath: '/admin/cert'
-      preLoaderRoute: typeof AdminCertRouteImport
+    '/admin/graduates-all': {
+      id: '/admin/graduates-all'
+      path: '/graduates-all'
+      fullPath: '/admin/graduates-all'
+      preLoaderRoute: typeof AdminGraduatesAllRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/certification-management': {
+      id: '/admin/certification-management'
+      path: '/certification-management'
+      fullPath: '/admin/certification-management'
+      preLoaderRoute: typeof AdminCertificationManagementRouteImport
       parentRoute: typeof AdminRoute
     }
     '/_clientLayout/client': {
@@ -253,22 +255,22 @@ const ClientLayoutRouteWithChildren = ClientLayoutRoute._addFileChildren(
 )
 
 interface AdminRouteChildren {
-  AdminCertRoute: typeof AdminCertRoute
-  AdminGraduatesRoute: typeof AdminGraduatesRoute
+  AdminCertificationManagementRoute: typeof AdminCertificationManagementRoute
+  AdminGraduatesAllRoute: typeof AdminGraduatesAllRoute
+  AdminGuidelinesAndRulesRoute: typeof AdminGuidelinesAndRulesRoute
   AdminNoticesRoute: typeof AdminNoticesRoute
-  AdminRulesRoute: typeof AdminRulesRoute
   AdminScheduleRoute: typeof AdminScheduleRoute
-  AdminThesisRoute: typeof AdminThesisRoute
+  AdminThesisApplicationManagementRoute: typeof AdminThesisApplicationManagementRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminCertRoute: AdminCertRoute,
-  AdminGraduatesRoute: AdminGraduatesRoute,
+  AdminCertificationManagementRoute: AdminCertificationManagementRoute,
+  AdminGraduatesAllRoute: AdminGraduatesAllRoute,
+  AdminGuidelinesAndRulesRoute: AdminGuidelinesAndRulesRoute,
   AdminNoticesRoute: AdminNoticesRoute,
-  AdminRulesRoute: AdminRulesRoute,
   AdminScheduleRoute: AdminScheduleRoute,
-  AdminThesisRoute: AdminThesisRoute,
+  AdminThesisApplicationManagementRoute: AdminThesisApplicationManagementRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
