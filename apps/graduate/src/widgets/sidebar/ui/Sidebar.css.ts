@@ -5,7 +5,7 @@ export const sidebar = style({
   width: '250px',
   height: '100vh',
   backgroundColor: vars.colors.white,
-  borderRight: `1px solid ${vars.colors.mainLight}`,
+  borderRight: `1px solid ${vars.colors.border}`,
   display: 'flex',
   flexDirection: 'column',
 })
