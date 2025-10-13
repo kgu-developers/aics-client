@@ -1,14 +1,5 @@
-export type MenuItem = {
-  label: string
-  to: string
-}
 
-export type MenuSection = {
-  title: string
-  items: MenuItem[]
-}
-
-export const adminMenuSections: MenuSection[] = [
+export const adminMenuSections = [
   {
     title: '메뉴 관리',
     items: [
@@ -25,4 +16,4 @@ export const adminMenuSections: MenuSection[] = [
       { label: '논문 신청 관리', to: '/thesis-application-management' },
     ],
   },
-]
+] as const;

@@ -1,25 +1,25 @@
 import { Link } from '@tanstack/react-router';
 import { adminMenuSections } from '../model/model';
-import * as s from './Sidebar.css';
+import * as style from './Sidebar.css';
 
-export const Sidebar = () => {
+export default function Sidebar() {
 	return (
-		<aside className={s.sidebar}>
-			<div className={s.sidebarHeader}>
-				<img src="/kguLogo.svg" alt="로고" className={s.logoImage} />
+		<aside className={style.sidebar}>
+			<div className={style.sidebarHeader}>
+				<img src="/kguLogo.svg" alt="로고" className={style.logoImage} />
 			</div>
 
-			<nav className={s.sidebarMenu}>
+			<nav className={style.sidebarMenu}>
 				{adminMenuSections.map(section => (
-					<div key={section.title} className={s.menuSection}>
-						<div className={s.sectionTitle}>{section.title}</div>
-						<div className={s.sectionItems}>
+					<div key={section.title} className={style.menuSection}>
+						<div className={style.sectionTitle}>{section.title}</div>
+						<div className={style.sectionItems}>
 							{section.items.map(item => (
-								<div key={item.to} className={s.menuItem}>
+								<div key={item.to} className={style.menuItem}>
 									<Link 
 										to={item.to}
-									 	className={s.menuLink} 
-									 	activeProps={{ className: s.active }}>
+									 	className={style.menuLink} 
+									 	activeProps={{ className: style.active }}>
 											{item.label}
 									</Link>
 								</div>
