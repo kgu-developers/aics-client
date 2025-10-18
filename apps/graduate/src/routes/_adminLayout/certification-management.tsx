@@ -1,9 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-
+import CertificationManagement from '~/features/certification-management/components/CertificationManagement'
 export const Route = createFileRoute('/_adminLayout/certification-management')({
-	component: RouteComponent,
+	component: () => <CertificationManagement />,
 });
-
-function RouteComponent() {
-	return <div>Hello "/cert"!</div>;
-}
