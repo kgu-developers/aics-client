@@ -32,7 +32,7 @@ export const title = style({
 
 export const card = style({
   overflow: 'hidden',
-  borderRadius: vars.radius.xl,
+  borderRadius: vars.radius.sm,
   border: `1px solid ${vars.colors.border}`,
   background: vars.colors.white,
   boxShadow: '0 1px 2px rgba(12, 20, 33, 0.06)',
