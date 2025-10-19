@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
-import type { Row } from '~/features/certification-management/types/row'
-export default function useCertificationTableState(rows: Row[], pageSize = 10) {
+import type { CertRow } from '~/features/certification-management/types/row'
+
+export default function useCertificationTableState(rows: CertRow[], pageSize = 10) {
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
   const [selected, setSelected] = useState<number[]>([])

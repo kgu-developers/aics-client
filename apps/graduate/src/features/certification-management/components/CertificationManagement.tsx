@@ -1,8 +1,9 @@
-import { Toolbar,Header,Pagination } from '~/shared/components';
-import { DataTable } from './index';
+import { Toolbar,Header,Pagination,DataTable } from '~/shared/components';
+import type { CertRow } from '../types/row'
 import { MOCK_ROWS } from '~/features/certification-management/mock/mockRows';
 import { useCertificationTableState } from '~/features/certification-management/hooks';
 import * as style from '~/features/certification-management/styles/certificationManagement.css';
+import { certColumns } from '~/features/constants/certColumns';
 
 export default function CertificationManagement() {
 	const st = useCertificationTableState(MOCK_ROWS, 10);
@@ -26,13 +27,15 @@ export default function CertificationManagement() {
 				/>
 
 				<div className={style.card}>
-					<DataTable
-						rows={st.pageRows}
-						allChecked={st.allChecked}
-						onToggleAll={st.toggleAll}
-						selectedIds={st.selected}
-						onToggleOne={st.toggleOne}
-					/>
+					<DataTable<CertRow>
+      					rows={st.pageRows}
+      					getRowId={(r) => r.id}
+      					columns={certColumns}
+      					allChecked={st.allChecked}
+      					onToggleAll={st.toggleAll}
+      					selectedIds={st.selected}
+      					onToggleOne={(id) => st.toggleOne(id as number)}
+    				/>
 					<Pagination page={st.page} totalPages={st.totalPages} onGoto={n => st.setPage(n)} />
 				</div>
 			</div>

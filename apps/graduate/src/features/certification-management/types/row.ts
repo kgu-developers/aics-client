@@ -1,4 +1,4 @@
-export type Row = {
+export type CertRow = {
   id: number
   no: number
   studentId: string
