@@ -1,4 +1,3 @@
-
 export const adminMenuSections = [
   {
     title: '메뉴 관리',
@@ -13,7 +12,7 @@ export const adminMenuSections = [
     items: [
       { label: '대상자 전체 관리', to: '/graduates-all' },
       { label: '자격증 신청 관리', to: '/certification-management' },
-      { label: '논문 신청 관리', to: '/thesis-application-management' },
+      { label: '논문 신청 관리', to: '/thesis-management' },
     ],
   },
 ] as const;

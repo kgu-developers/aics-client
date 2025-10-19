@@ -1,20 +1,20 @@
-import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
-import type { CertRow } from '../types/row';
-import { MOCK_ROWS } from '~/features/certification-management/mock/mockRows';
+import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
+import { thesisColumns } from '~/features/thesis-management/constants/thesisColumns';
+import type { ThesisRow } from '~/features/thesis-management/types/rows';
+import { MOCK_ROWS } from '~/features/thesis-management/mock/mockRows';
 import { useTableState } from '~/shared/hooks';
-import * as style from '~/features/certification-management/styles/certificationManagement.css';
-import { certColumns } from '~/features/certification-management/constants/certColumns';
+import * as style from '~/features/thesis-management/styles/thesisManagement.css';
 
-export default function CertificationManagement() {
-	const st = useTableState<CertRow>(MOCK_ROWS, r => r.id, {
+export default function ThesisManagement() {
+	const st = useTableState<ThesisRow>(MOCK_ROWS, r => r.id, {
 		pageSize: 10,
-		keys: ['studentId', 'name', 'status', 'approved'],
+		keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],
 	});
 
 	return (
 		<div className={style.root}>
 			<div className={style.container}>
-				<Header title="자격증 관리" />
+				<Header title="졸업 논문 관리" />
 
 				<Toolbar
 					selectedCount={st.selected.length}
@@ -29,15 +29,16 @@ export default function CertificationManagement() {
 				/>
 
 				<div className={style.card}>
-					<DataTable<CertRow>
+					<DataTable<ThesisRow>
 						rows={st.pageRows}
 						getRowId={r => r.id}
-						columns={certColumns}
+						columns={thesisColumns}
 						allChecked={st.allChecked}
 						onToggleAll={st.toggleAll}
 						selectedIds={st.selected}
 						onToggleOne={id => st.toggleOne(id as number)}
 					/>
+
 					<Pagination page={st.page} totalPages={st.totalPages} onGoto={n => st.setPage(n)} />
 				</div>
 			</div>

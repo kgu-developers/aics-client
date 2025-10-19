@@ -24,7 +24,7 @@ export const th = style({
   fontWeight: Number(vars.font.weight.medium),
 })
 
-export const thCheckbox = style({ width: '44px' })
+export const thCheckbox = style({ width: '5px' })
 
 export const row = style({
   selectors: { '&:hover': { background: vars.colors.mainLightHover } },

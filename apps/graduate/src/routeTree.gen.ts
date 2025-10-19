@@ -13,7 +13,7 @@ import { Route as ClientLayoutRouteImport } from './routes/_clientLayout'
 import { Route as AdminLayoutRouteImport } from './routes/_adminLayout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClientLayoutClientRouteImport } from './routes/_clientLayout/client'
-import { Route as AdminLayoutThesisApplicationManagementRouteImport } from './routes/_adminLayout/thesis-application-management'
+import { Route as AdminLayoutThesisManagementRouteImport } from './routes/_adminLayout/thesis-management'
 import { Route as AdminLayoutScheduleRouteImport } from './routes/_adminLayout/schedule'
 import { Route as AdminLayoutNoticesRouteImport } from './routes/_adminLayout/notices'
 import { Route as AdminLayoutGuidelinesAndRulesRouteImport } from './routes/_adminLayout/guidelines-and-rules'
@@ -39,10 +39,10 @@ const ClientLayoutClientRoute = ClientLayoutClientRouteImport.update({
   path: '/client',
   getParentRoute: () => ClientLayoutRoute,
 } as any)
-const AdminLayoutThesisApplicationManagementRoute =
-  AdminLayoutThesisApplicationManagementRouteImport.update({
-    id: '/thesis-application-management',
-    path: '/thesis-application-management',
+const AdminLayoutThesisManagementRoute =
+  AdminLayoutThesisManagementRouteImport.update({
+    id: '/thesis-management',
+    path: '/thesis-management',
     getParentRoute: () => AdminLayoutRoute,
   } as any)
 const AdminLayoutScheduleRoute = AdminLayoutScheduleRouteImport.update({
@@ -86,7 +86,7 @@ export interface FileRoutesByFullPath {
   '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
   '/notices': typeof AdminLayoutNoticesRoute
   '/schedule': typeof AdminLayoutScheduleRoute
-  '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
+  '/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/client': typeof ClientLayoutClientRoute
 }
 export interface FileRoutesByTo {
@@ -97,7 +97,7 @@ export interface FileRoutesByTo {
   '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
   '/notices': typeof AdminLayoutNoticesRoute
   '/schedule': typeof AdminLayoutScheduleRoute
-  '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
+  '/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/client': typeof ClientLayoutClientRoute
 }
 export interface FileRoutesById {
@@ -111,7 +111,7 @@ export interface FileRoutesById {
   '/_adminLayout/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
   '/_adminLayout/notices': typeof AdminLayoutNoticesRoute
   '/_adminLayout/schedule': typeof AdminLayoutScheduleRoute
-  '/_adminLayout/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
+  '/_adminLayout/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/_clientLayout/client': typeof ClientLayoutClientRoute
 }
 export interface FileRouteTypes {
@@ -124,7 +124,7 @@ export interface FileRouteTypes {
     | '/guidelines-and-rules'
     | '/notices'
     | '/schedule'
-    | '/thesis-application-management'
+    | '/thesis-management'
     | '/client'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -135,7 +135,7 @@ export interface FileRouteTypes {
     | '/guidelines-and-rules'
     | '/notices'
     | '/schedule'
-    | '/thesis-application-management'
+    | '/thesis-management'
     | '/client'
   id:
     | '__root__'
@@ -148,7 +148,7 @@ export interface FileRouteTypes {
     | '/_adminLayout/guidelines-and-rules'
     | '/_adminLayout/notices'
     | '/_adminLayout/schedule'
-    | '/_adminLayout/thesis-application-management'
+    | '/_adminLayout/thesis-management'
     | '/_clientLayout/client'
   fileRoutesById: FileRoutesById
 }
@@ -188,11 +188,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientLayoutClientRouteImport
       parentRoute: typeof ClientLayoutRoute
     }
-    '/_adminLayout/thesis-application-management': {
-      id: '/_adminLayout/thesis-application-management'
-      path: '/thesis-application-management'
-      fullPath: '/thesis-application-management'
-      preLoaderRoute: typeof AdminLayoutThesisApplicationManagementRouteImport
+    '/_adminLayout/thesis-management': {
+      id: '/_adminLayout/thesis-management'
+      path: '/thesis-management'
+      fullPath: '/thesis-management'
+      preLoaderRoute: typeof AdminLayoutThesisManagementRouteImport
       parentRoute: typeof AdminLayoutRoute
     }
     '/_adminLayout/schedule': {
@@ -247,7 +247,7 @@ interface AdminLayoutRouteChildren {
   AdminLayoutGuidelinesAndRulesRoute: typeof AdminLayoutGuidelinesAndRulesRoute
   AdminLayoutNoticesRoute: typeof AdminLayoutNoticesRoute
   AdminLayoutScheduleRoute: typeof AdminLayoutScheduleRoute
-  AdminLayoutThesisApplicationManagementRoute: typeof AdminLayoutThesisApplicationManagementRoute
+  AdminLayoutThesisManagementRoute: typeof AdminLayoutThesisManagementRoute
 }
 
 const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
@@ -258,8 +258,7 @@ const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
   AdminLayoutGuidelinesAndRulesRoute: AdminLayoutGuidelinesAndRulesRoute,
   AdminLayoutNoticesRoute: AdminLayoutNoticesRoute,
   AdminLayoutScheduleRoute: AdminLayoutScheduleRoute,
-  AdminLayoutThesisApplicationManagementRoute:
-    AdminLayoutThesisApplicationManagementRoute,
+  AdminLayoutThesisManagementRoute: AdminLayoutThesisManagementRoute,
 }
 
 const AdminLayoutRouteWithChildren = AdminLayoutRoute._addFileChildren(
