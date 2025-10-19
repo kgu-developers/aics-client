@@ -14,7 +14,7 @@ export default function CertificationManagement() {
 	return (
 		<div className={style.root}>
 			<div className={style.container}>
-				<Header title="자격증 관리" />
+				<Header title="자격증 신청 관리" />
 
 				<Toolbar
 					selectedCount={st.selected.length}
