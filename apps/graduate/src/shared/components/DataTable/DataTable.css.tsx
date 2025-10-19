@@ -41,4 +41,9 @@ export const td = style({
   textAlign: 'center',
 })
 
-export const checkbox = style({ width: 16, height: 16 })
+export const checkbox = style({ width: 18, height: 18 })
+
+export const nameLink = style({
+  textDecoration: 'none',
+  color: vars.colors.main,
+})
