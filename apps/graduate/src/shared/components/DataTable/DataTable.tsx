@@ -1,31 +1,27 @@
-import type { ReactNode } from 'react'
-import * as style from '~/shared/components/DataTable/DataTable.css'
+import React from 'react'
+import { Table } from 'antd'
+import type { ColumnsType, TableProps } from 'antd/es/table'
 
 export type Column<T> = {
   key: string
-  header: ReactNode
-  thClassName?: string
-  tdClassName?: string
-  cell: (row: T) => ReactNode
+  header: React.ReactNode
+  width?: number | string
+  align?: 'left' | 'center' | 'right'
+  ellipsis?: boolean
+  cell: (row: T) => React.ReactNode
 }
 
 type Id = string | number
 
 type Props<T> = {
-  rows: ReadonlyArray<T>                               
-  columns: ReadonlyArray<Column<T>>                    
-  
+  rows: ReadonlyArray<T>
+  columns: ReadonlyArray<Column<T>>
   getRowId: (row: T) => Id
-
-  
   allChecked?: boolean
   onToggleAll?: () => void
   selectedIds?: ReadonlyArray<Id>
   onToggleOne?: (id: Id) => void
-
-  
-  emptyText?: ReactNode
-  
+  emptyText?: React.ReactNode
   rowClassName?: (row: T, isSelected: boolean) => string | undefined
 }
 
@@ -33,76 +29,51 @@ export default function DataTable<T>({
   rows,
   columns,
   getRowId,
-  allChecked = false,
   onToggleAll,
-  selectedIds = [],
   onToggleOne,
+  selectedIds = [],
   emptyText = '표시할 데이터가 없습니다.',
   rowClassName,
 }: Props<T>) {
-  const selectable = Boolean(onToggleAll && onToggleOne)
+  const antdColumns = React.useMemo(() => {
+    return columns.map((c) => ({
+      key: c.key,
+      title: c.header,
+      dataIndex: c.key, 
+      render: (_: unknown, record: T) => c.cell(record),
+      align: c.align ?? 'center',
+      width: c.width,
+      ellipsis: c.ellipsis ?? false,
+    })) as ColumnsType<T>
+  }, [columns])
+
+  const rowSelection: TableProps<T>['rowSelection'] =
+    onToggleAll && onToggleOne
+      ? {
+          selectedRowKeys: selectedIds as React.Key[],
+          onSelect: (record) => onToggleOne(getRowId(record)),
+          onSelectAll: () => onToggleAll(),
+        }
+      : undefined
 
   return (
-    <div className={style.tableWrap}>
-      <table className={style.table}>
-        <thead>
-          <tr>
-            {selectable && (
-              <th className={`${style.th} ${style.thCheckbox}`}>
-                <input
-                  type="checkbox"
-                  aria-label="select all"
-                  checked={allChecked}
-                  onChange={onToggleAll}
-                  className={style.checkbox}
-                />
-              </th>
-            )}
-            {columns.map((c) => (
-              <th key={c.key} className={`${style.th} ${c.thClassName ?? ''}`}>
-                {c.header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {rows.length === 0 ? (
-            <tr>
-              <td className={style.td} colSpan={columns.length + (selectable ? 1 : 0)}>
-                {emptyText}
-              </td>
-            </tr>
-          ) : (
-            rows.map((row) => {
-              const id = getRowId(row)
-              const isSelected = selectedIds.includes(id)
-              const trClass = `${style.row} ${isSelected ? style.selectedRow : ''} ${rowClassName?.(row, isSelected) ?? ''}`
-
-              return (
-                <tr key={String(id)} className={trClass}>
-                  {selectable && (
-                    <td className={style.td}>
-                      <input
-                        type="checkbox"
-                        aria-label="row select"
-                        checked={isSelected}
-                        onChange={() => onToggleOne?.(id)}
-                        className={style.checkbox}
-                      />
-                    </td>
-                  )}
-                  {columns.map((c) => (
-                    <td key={c.key} className={`${style.td} ${c.tdClassName ?? ''}`}>
-                      {c.cell(row)}
-                    </td>
-                  ))}
-                </tr>
-              )
-            })
-          )}
-        </tbody>
-      </table>
-    </div>
+    <Table<T>
+      dataSource={rows as T[]}
+      columns={antdColumns}
+      rowKey={(r) => getRowId(r) as React.Key}
+      rowSelection={rowSelection}
+      pagination={false}
+      bordered
+      sticky
+      size="middle"
+      locale={{ emptyText }}
+      tableLayout="fixed"
+      scroll={{ x: 'max-content' }}
+      rowClassName={(record) => {
+        const id = getRowId(record)
+        const isSel = selectedIds.includes(id)
+        return rowClassName?.(record, isSel) ?? ''
+      }}
+    />
   )
 }

@@ -38,8 +38,14 @@ export default function CertificationManagement() {
 						selectedIds={st.selected}
 						onToggleOne={id => st.toggleOne(id as number)}
 					/>
-					<Pagination page={st.page} totalPages={st.totalPages} onGoto={n => st.setPage(n)} />
 				</div>
+				<Pagination
+            		page={st.page}
+            		pageSize={st.pageSize}
+            		totalItems={st.filtered.length}
+            		onGoto={st.setPage}
+            		onPageSizeChange={(size) => st.setPageSize(size)}
+          		/>
 			</div>
 		</div>
 	);
