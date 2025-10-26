@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 import { Table } from 'antd'
 import type { ColumnsType, TableProps } from 'antd/es/table'
 
@@ -35,17 +35,15 @@ export default function DataTable<T>({
   emptyText = '표시할 데이터가 없습니다.',
   rowClassName,
 }: Props<T>) {
-  const antdColumns = React.useMemo(() => {
-    return columns.map((c) => ({
-      key: c.key,
-      title: c.header,
-      dataIndex: c.key, 
-      render: (_: unknown, record: T) => c.cell(record),
-      align: c.align ?? 'center',
-      width: c.width,
-      ellipsis: c.ellipsis ?? false,
-    })) as ColumnsType<T>
-  }, [columns])
+  const antdColumns = columns.map((c) => ({
+    key: c.key,
+    title: c.header,
+    dataIndex: c.key,
+    render: (_: unknown, record: T) => c.cell(record),
+    align: c.align ?? 'center',
+    width: c.width,
+    ellipsis: c.ellipsis ?? false,
+  })) as ColumnsType<T>
 
   const rowSelection: TableProps<T>['rowSelection'] =
     onToggleAll && onToggleOne
@@ -53,6 +51,7 @@ export default function DataTable<T>({
           selectedRowKeys: selectedIds as React.Key[],
           onSelect: (record) => onToggleOne(getRowId(record)),
           onSelectAll: () => onToggleAll(),
+          preserveSelectedRowKeys: true,
         }
       : undefined
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Id = string | number
 
@@ -26,28 +26,20 @@ export default function useTableState<T>(
   const [pageSize, setPageSize] = useState(initialSize)
   const [selected, setSelected] = useState<Id[]>([])
 
-  const norm = useCallback(
-    (s: unknown) => {
-      const str = String(s ?? '')
-      return caseSensitive ? str : str.toLowerCase()
-    },
-    [caseSensitive],
-  )
+  const normalize = (s: unknown) => {
+    const str = String(s ?? '')
+    return caseSensitive ? str : str.toLowerCase()
+  }
+  
+  const extractValues = (row: T) => {
+    if (getSearchValues) return getSearchValues(row).map(normalize)
+    if (keys && keys.length > 0) return keys.map((k) => normalize((row as any)[k]))
+    return Object.values(row as any).map(normalize)
+  }
 
-  const extractValues = useCallback(
-    (row: T) => {
-      if (getSearchValues) return getSearchValues(row).map(norm)
-      if (keys && keys.length > 0) return keys.map((k) => norm((row as any)[k]))
-      return Object.values(row as any).map(norm)
-    },
-    [getSearchValues, keys, norm],
-  )
-
-  const filtered = useMemo(() => {
-    if (!query) return rows
-    const q = norm(query)
-    return rows.filter((r) => extractValues(r).some((v) => v.includes(q)))
-  }, [rows, query, norm, extractValues])
+  const filtered = query
+    ? rows.filter((r) => extractValues(r).some((v) => v.includes(normalize(query))))
+    : rows
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
   const pageRows = filtered.slice((page - 1) * pageSize, page * pageSize)
@@ -56,15 +48,16 @@ export default function useTableState<T>(
     if (page > totalPages) setPage(totalPages)
   }, [totalPages, page])
 
-  const pageIds = useMemo(() => pageRows.map(getRowId), [pageRows, getRowId])
+  const pageIds = pageRows.map(getRowId)
   const allChecked = pageRows.length > 0 && pageIds.every((id) => selected.includes(id))
   const partiallyChecked =
     pageRows.length > 0 && !allChecked && pageIds.some((id) => selected.includes(id))
 
-  const toggleAll = () =>
+  const toggleAll = () => {
     setSelected((prev) =>
       allChecked ? prev.filter((id) => !pageIds.includes(id)) : Array.from(new Set([...prev, ...pageIds])),
     )
+  }
 
   const toggleOne = (id: Id) =>
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
@@ -72,7 +65,6 @@ export default function useTableState<T>(
   const resetToFirstPage = () => setPage(1)
 
   return {
-
     query,
     page,
     pageSize,
