@@ -1,0 +1,1 @@
+export { default as ThesisManagement } from './thesis-management'
