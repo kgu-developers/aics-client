@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import NoticesSection from '~/features/notices/components/NoticesSection';
+import { NoticesSection } from '~/features/notices/components';
 
 export const Route = createFileRoute('/_adminLayout/notices/')({
 	component: RouteComponent,

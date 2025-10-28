@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Table, Button, Input, Tag } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 import { useNavigate } from '@tanstack/react-router';
-import * as style from './NoticesSection.css';
 import { Header } from '~/shared/components';
-import { mockData } from '../mock/notices';
+
+import * as style from './NoticesSection.css';
 import type { NoticeItem } from '../types/notices';
+import { mockData } from '../mock/notices';
 
 export default function NoticesSection() {
 	const [searchText, setSearchText] = useState('');

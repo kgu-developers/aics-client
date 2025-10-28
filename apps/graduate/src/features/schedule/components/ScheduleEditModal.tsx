@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { Button, Modal, Select, DatePicker } from 'antd';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+
 import * as style from './ScheduleEditModal.css.ts';
-import { ScheduleItem } from '../types/schedule.ts';
+import type { ScheduleItem } from '../types/schedule.ts';
 
 interface ScheduleEditModalProps {
 	scheduleData: ScheduleItem[];
@@ -81,8 +82,12 @@ export default function ScheduleEditModal({ scheduleData, setScheduleData }: Sch
 						/>
 					</div>
 					<div className={style.formField}>
-						<label className={style.label}>날짜</label>
+						<label className={style.label} htmlFor="startDate">
+							날짜
+						</label>
 						<DatePicker
+							id="startDate"
+							name="startDate"
 							value={startDate}
 							onChange={date => date && setStartDate(date)}
 							className={style.fullWidthDatePicker}
@@ -92,8 +97,12 @@ export default function ScheduleEditModal({ scheduleData, setScheduleData }: Sch
 						/>
 					</div>
 					<div className={style.lastFormField}>
-						<label className={style.label}>날짜</label>
+						<label className={style.label} htmlFor="endDate">
+							날짜
+						</label>
 						<DatePicker
+							id="endDate"
+							name="endDate"
 							value={endDate}
 							onChange={date => date && setEndDate(date)}
 							className={style.fullWidthDatePicker}

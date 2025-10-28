@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
+
 import * as style from './ScheduleDescription.css';
 import { descriptionData } from '../mock/schedule';
 

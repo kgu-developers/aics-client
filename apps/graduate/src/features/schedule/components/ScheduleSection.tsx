@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import { Table } from 'antd';
 import type { ColumnType } from 'antd/es/table';
-import ScheduleEditModal from './ScheduleEditModal';
+
 import ScheduleDescription from './ScheduleDescription';
+import ScheduleEditModal from './ScheduleEditModal';
 import { Header } from '~/shared/components';
+
 import { container } from '~/features/notices/components/NoticesSection.css';
 import { scheduleData } from '../mock/schedule';
-import { ScheduleItem } from '../types/schedule';
-import { useState } from 'react';
+import type { ScheduleItem } from '../types/schedule';
 
 export default function ScheduleSection() {
 	const [schedule, setSchedule] = useState<ScheduleItem[]>(scheduleData);

@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import NoticeDetail from '~/features/notices/components/NoticeForm';
+import { NoticeForm } from '~/features/notices/components';
 
 export const Route = createFileRoute('/_adminLayout/notices/$postId')({
 	component: RouteComponent,
@@ -7,5 +7,5 @@ export const Route = createFileRoute('/_adminLayout/notices/$postId')({
 
 function RouteComponent() {
 	const { postId } = Route.useParams();
-	return <NoticeDetail noticeId={Number(postId)} />;
+	return <NoticeForm noticeId={Number(postId)} />;
 }

@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Input, Button, Checkbox, Upload, Divider } from 'antd';
 import type { CheckboxChangeEvent, UploadProps } from 'antd';
 import { useNavigate } from '@tanstack/react-router';
+
 import * as style from './NoticeForm.css';
-import { noticeFormData } from '../mock/notices';
 import type { NoticeFormItem } from '../types/notices';
+import { noticeFormData } from '../mock/notices';
 
 const { TextArea } = Input;
 
@@ -92,16 +93,17 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
 				)}
 
 				<div className={style.formField}>
-					<label className={style.label}>
+					<label className={style.label} htmlFor="title">
 						제목 <span className={style.required}>*</span>
-						<Input
-							name="title"
-							value={title}
-							onChange={handleInputChange}
-							placeholder="제목을 입력하세요"
-							size="large"
-						/>
 					</label>
+					<Input
+						id="title"
+						name="title"
+						value={title}
+						onChange={handleInputChange}
+						placeholder="제목을 입력하세요"
+						size="large"
+					/>
 				</div>
 
 				<div className={style.formField}>
@@ -111,26 +113,27 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
 				</div>
 
 				<div className={style.formField}>
-					<label className={style.label}>
+					<label className={style.label} htmlFor="content">
 						내용 <span className={style.required}>*</span>
-						<TextArea
-							name="content"
-							value={content}
-							onChange={handleInputChange}
-							placeholder="내용을 입력하세요"
-							rows={15}
-							className={style.textarea}
-						/>
 					</label>
+					<TextArea
+						id="content"
+						name="content"
+						value={content}
+						onChange={handleInputChange}
+						placeholder="내용을 입력하세요"
+						rows={15}
+						className={style.textarea}
+					/>
 				</div>
 
 				<div className={style.uploadSection}>
-					<label className={style.label}>
+					<label className={style.label} htmlFor="upload">
 						첨부파일
-						<Upload {...uploadProps}>
-							<Button>파일 선택</Button>
-						</Upload>
 					</label>
+					<Upload {...uploadProps} id="upload" name="upload">
+						<Button>파일 선택</Button>
+					</Upload>
 				</div>
 
 				<Divider />
