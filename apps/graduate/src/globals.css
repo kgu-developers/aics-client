@@ -13,3 +13,6 @@ body {
   font-variation-settings: "wght" 400;
 }
 
+strong {
+  font-variation-settings: "wght" 700;
+}
