@@ -5,7 +5,7 @@ import { useNavigate } from '@tanstack/react-router';
 import * as style from './NoticesSection.css';
 import { Header } from '~/shared/components';
 import { mockData } from '../mock/notices';
-import { NoticeItem } from '../types/notices';
+import type { NoticeItem } from '../types/notices';
 
 export default function NoticesSection() {
 	const [searchText, setSearchText] = useState('');
@@ -38,12 +38,12 @@ export default function NoticesSection() {
 			dataIndex: 'title',
 			key: 'title',
 			render: (text: string, record) => (
-				<a
+				<span
 					onClick={() => handleRowClick(record)}
 					className={record.isPinned ? style.pinnedTitleLink : style.normalTitleLink}
 				>
 					{text}
-				</a>
+				</span>
 			),
 		},
 		{

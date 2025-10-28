@@ -4,7 +4,7 @@ import type { CheckboxChangeEvent, UploadProps } from 'antd';
 import { useNavigate } from '@tanstack/react-router';
 import * as style from './NoticeForm.css';
 import { noticeFormData } from '../mock/notices';
-import { NoticeFormItem } from '../types/notices';
+import type { NoticeFormItem } from '../types/notices';
 
 const { TextArea } = Input;
 
@@ -94,8 +94,14 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
 				<div className={style.formField}>
 					<label className={style.label}>
 						제목 <span className={style.required}>*</span>
+						<Input
+							name="title"
+							value={title}
+							onChange={handleInputChange}
+							placeholder="제목을 입력하세요"
+							size="large"
+						/>
 					</label>
-					<Input name="title" value={title} onChange={handleInputChange} placeholder="제목을 입력하세요" size="large" />
 				</div>
 
 				<div className={style.formField}>
@@ -107,22 +113,24 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
 				<div className={style.formField}>
 					<label className={style.label}>
 						내용 <span className={style.required}>*</span>
+						<TextArea
+							name="content"
+							value={content}
+							onChange={handleInputChange}
+							placeholder="내용을 입력하세요"
+							rows={15}
+							className={style.textarea}
+						/>
 					</label>
-					<TextArea
-						name="content"
-						value={content}
-						onChange={handleInputChange}
-						placeholder="내용을 입력하세요"
-						rows={15}
-						className={style.textarea}
-					/>
 				</div>
 
 				<div className={style.uploadSection}>
-					<label className={style.label}>첨부파일</label>
-					<Upload {...uploadProps}>
-						<Button>파일 선택</Button>
-					</Upload>
+					<label className={style.label}>
+						첨부파일
+						<Upload {...uploadProps}>
+							<Button>파일 선택</Button>
+						</Upload>
+					</label>
 				</div>
 
 				<Divider />
