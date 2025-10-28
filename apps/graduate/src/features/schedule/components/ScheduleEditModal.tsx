@@ -72,8 +72,11 @@ export default function ScheduleEditModal({ scheduleData, setScheduleData }: Sch
 			>
 				<div className={style.modalContent}>
 					<div className={style.formField}>
-						<label className={style.label}>변경할 일정</label>
+						<label className={style.label} htmlFor="stage">
+							변경할 일정
+						</label>
 						<Select
+							id="stage"
 							value={selectedStage}
 							onChange={handleStageChange}
 							options={stageOptions}

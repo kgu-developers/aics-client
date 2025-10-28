@@ -33,6 +33,9 @@ export const searchInput = style({
 });
 
 export const pinnedTitleLink = style({
+	border: 'none',
+	background: 'none',
+	fontSize: vars.font.size.sm,
 	color: vars.colors.error,
 	fontWeight: vars.font.weight.bold,
 	cursor: 'pointer',
@@ -43,6 +46,9 @@ export const pinnedTitleLink = style({
 });
 
 export const normalTitleLink = style({
+	border: 'none',
+	background: 'none',
+	fontSize: vars.font.size.sm,
 	color: vars.colors.main,
 	fontWeight: vars.font.weight.normal,
 	cursor: 'pointer',

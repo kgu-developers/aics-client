@@ -39,12 +39,12 @@ export default function NoticesSection() {
 			dataIndex: 'title',
 			key: 'title',
 			render: (text: string, record) => (
-				<span
+				<button
 					onClick={() => handleRowClick(record)}
 					className={record.isPinned ? style.pinnedTitleLink : style.normalTitleLink}
 				>
 					{text}
-				</span>
+				</button>
 			),
 		},
 		{
