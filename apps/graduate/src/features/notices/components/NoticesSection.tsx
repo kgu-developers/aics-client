@@ -40,6 +40,7 @@ export default function NoticesSection() {
 			key: 'title',
 			render: (text: string, record) => (
 				<button
+					type="button"
 					onClick={() => handleRowClick(record)}
 					className={record.isPinned ? style.pinnedTitleLink : style.normalTitleLink}
 				>
