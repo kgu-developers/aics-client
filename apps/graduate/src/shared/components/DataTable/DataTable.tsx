@@ -1,6 +1,6 @@
-import type React from 'react'
 import { Table } from 'antd'
 import type { ColumnsType, TableProps } from 'antd/es/table'
+import type React from 'react'
 
 export type Column<T> = {
   key: string

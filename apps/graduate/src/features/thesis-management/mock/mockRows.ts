@@ -1,10 +1,25 @@
-
 import type { ThesisRow } from '~/features/thesis-management/types/rows'
 
-const names = ['서진규', '이은신', '이어웅', '아이', '이도', '한태', '김현수', '최용환', '곽수', '최암']
+const names = [
+  '서진규',
+  '이은신',
+  '이어웅',
+  '아이',
+  '이도',
+  '한태',
+  '김현수',
+  '최용환',
+  '곽수',
+  '최암',
+]
 const advisors = ['김현기', '권호성', '이은정', '권면기', '진도훈']
 const gradTerms = ['2026-02', '2026-08', '2025-08', '2030-08']
-const statusOptions = ['중간보고서 - 제출', '중간보고서 - 미제출' , '최종보고서 - 제출', '최종보고서 - 미제출']
+const statusOptions = [
+  '중간보고서 - 제출',
+  '중간보고서 - 미제출',
+  '최종보고서 - 제출',
+  '최종보고서 - 미제출',
+]
 const approvedOptions: ThesisRow['approved'][] = ['승인', '미승인', '승인 대기']
 
 function makeStudentId(n: number): string {

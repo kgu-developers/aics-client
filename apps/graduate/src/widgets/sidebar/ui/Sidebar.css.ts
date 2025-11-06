@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css'
-import { vars } from '~/vars.css' 
+
+import { vars } from '~/vars.css'
 
 export const sidebar = style({
   width: '250px',
@@ -11,14 +12,14 @@ export const sidebar = style({
 })
 
 export const sidebarHeader = style({
-  padding: vars.spacing.lg, 
-  display: 'flex',                 
-  justifyContent: 'center',        
-  alignItems: 'center',            
+  padding: vars.spacing.lg,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 })
 
 export const logoImage = style({
-  width: '250px',                 
+  width: '250px',
   height: 'auto',
   objectFit: 'contain',
   display: 'block',
@@ -30,7 +31,7 @@ export const sidebarMenu = style({
 })
 
 export const menuSection = style({
-  marginBottom: vars.spacing.xl, 
+  marginBottom: vars.spacing.xl,
 })
 
 export const sectionTitle = style({
@@ -56,22 +57,22 @@ export const menuLink = style({
   textDecoration: 'none',
   fontSize: vars.font.size.xl,
   fontWeight: vars.font.weight.semibold,
-  
-  transition: 'color .15s ease, transform .15s ease, text-decoration-color .15s ease',
+
+  transition:
+    'color .15s ease, transform .15s ease, text-decoration-color .15s ease',
   selectors: {
     '&:hover': {
-      textDecoration: 'underline',        
-      transform: 'scale(1.02)',           
+      textDecoration: 'underline',
+      transform: 'scale(1.02)',
     },
     '&:active': {
-      color: vars.colors.mainDark,         
-      transform: 'scale(0.98)',        
+      color: vars.colors.mainDark,
+      transform: 'scale(0.98)',
     },
-    
   },
 })
 export const active = style({
   color: vars.colors.main,
   fontWeight: vars.font.weight.bold,
-  textDecoration: 'underline', 
+  textDecoration: 'underline',
 })

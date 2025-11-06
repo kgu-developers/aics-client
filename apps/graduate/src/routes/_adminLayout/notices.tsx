@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_adminLayout/notices')({
-	component: RouteComponent,
-});
+  component: RouteComponent,
+})
 
 function RouteComponent() {
-	return <div>Hello "/notices"!</div>;
+  return <div>Hello "/notices"!</div>
 }

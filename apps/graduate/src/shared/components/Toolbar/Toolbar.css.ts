@@ -1,5 +1,6 @@
-import { style,styleVariants } from '@vanilla-extract/css'
-import { vars } from '~/vars.css' 
+import { style, styleVariants } from '@vanilla-extract/css'
+
+import { vars } from '~/vars.css'
 
 export const toolbar = style({
   display: 'flex',
@@ -46,10 +47,6 @@ export const selectedStrong = styleVariants({
   inactive: [selectedStrongBase],
   active: [{ ...selectedStrongBase, color: vars.colors.main }],
 })
-
-
-
-
 
 export const searchWrap = style({
   position: 'relative',
