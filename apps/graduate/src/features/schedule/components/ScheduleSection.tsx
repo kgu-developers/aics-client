@@ -3,12 +3,13 @@ import type { ColumnType } from 'antd/es/table'
 import { useState } from 'react'
 
 import { Header } from '~/shared/components'
-import ScheduleDescription from './ScheduleDescription'
-import ScheduleEditModal from './ScheduleEditModal'
 
 import { container } from '~/features/notices/components/NoticesSection.css'
+
 import { scheduleData } from '../mock/schedule'
 import type { ScheduleItem } from '../types/schedule'
+import ScheduleDescription from './ScheduleDescription'
+import ScheduleEditModal from './ScheduleEditModal'
 
 export default function ScheduleSection() {
   const [schedule, setSchedule] = useState<ScheduleItem[]>(scheduleData)

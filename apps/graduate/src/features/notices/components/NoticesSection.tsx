@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { Button, Input, Table, Tag } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import { useState } from 'react'
+
 import { Header } from '~/shared/components'
 
 import { mockData } from '../mock/notices'
