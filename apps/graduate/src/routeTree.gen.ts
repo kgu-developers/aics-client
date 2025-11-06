@@ -16,11 +16,13 @@ import { Route as ClientLayoutClientRouteImport } from './routes/_clientLayout/c
 import { Route as AdminLayoutThesisManagementRouteImport } from './routes/_adminLayout/thesis-management'
 import { Route as AdminLayoutThesisApplicationManagementRouteImport } from './routes/_adminLayout/thesis-application-management'
 import { Route as AdminLayoutScheduleRouteImport } from './routes/_adminLayout/schedule'
-import { Route as AdminLayoutNoticesRouteImport } from './routes/_adminLayout/notices'
 import { Route as AdminLayoutGuidelinesAndRulesRouteImport } from './routes/_adminLayout/guidelines-and-rules'
 import { Route as AdminLayoutGraduatesAllRouteImport } from './routes/_adminLayout/graduates-all'
 import { Route as AdminLayoutCertificationManagementRouteImport } from './routes/_adminLayout/certification-management'
 import { Route as AdminLayoutAdminRouteImport } from './routes/_adminLayout/admin'
+import { Route as AdminLayoutNoticesIndexRouteImport } from './routes/_adminLayout/notices/index'
+import { Route as AdminLayoutNoticesCreateRouteImport } from './routes/_adminLayout/notices/create'
+import { Route as AdminLayoutNoticesPostIdRouteImport } from './routes/_adminLayout/notices/$postId'
 
 const ClientLayoutRoute = ClientLayoutRouteImport.update({
   id: '/_clientLayout',
@@ -57,11 +59,6 @@ const AdminLayoutScheduleRoute = AdminLayoutScheduleRouteImport.update({
   path: '/schedule',
   getParentRoute: () => AdminLayoutRoute,
 } as any)
-const AdminLayoutNoticesRoute = AdminLayoutNoticesRouteImport.update({
-  id: '/notices',
-  path: '/notices',
-  getParentRoute: () => AdminLayoutRoute,
-} as any)
 const AdminLayoutGuidelinesAndRulesRoute =
   AdminLayoutGuidelinesAndRulesRouteImport.update({
     id: '/guidelines-and-rules',
@@ -84,6 +81,23 @@ const AdminLayoutAdminRoute = AdminLayoutAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AdminLayoutRoute,
 } as any)
+const AdminLayoutNoticesIndexRoute = AdminLayoutNoticesIndexRouteImport.update({
+  id: '/notices/',
+  path: '/notices/',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutNoticesCreateRoute =
+  AdminLayoutNoticesCreateRouteImport.update({
+    id: '/notices/create',
+    path: '/notices/create',
+    getParentRoute: () => AdminLayoutRoute,
+  } as any)
+const AdminLayoutNoticesPostIdRoute =
+  AdminLayoutNoticesPostIdRouteImport.update({
+    id: '/notices/$postId',
+    path: '/notices/$postId',
+    getParentRoute: () => AdminLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -91,11 +105,13 @@ export interface FileRoutesByFullPath {
   '/certification-management': typeof AdminLayoutCertificationManagementRoute
   '/graduates-all': typeof AdminLayoutGraduatesAllRoute
   '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/notices': typeof AdminLayoutNoticesRoute
   '/schedule': typeof AdminLayoutScheduleRoute
   '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
   '/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/client': typeof ClientLayoutClientRoute
+  '/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
+  '/notices/create': typeof AdminLayoutNoticesCreateRoute
+  '/notices': typeof AdminLayoutNoticesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,11 +119,13 @@ export interface FileRoutesByTo {
   '/certification-management': typeof AdminLayoutCertificationManagementRoute
   '/graduates-all': typeof AdminLayoutGraduatesAllRoute
   '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/notices': typeof AdminLayoutNoticesRoute
   '/schedule': typeof AdminLayoutScheduleRoute
   '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
   '/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/client': typeof ClientLayoutClientRoute
+  '/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
+  '/notices/create': typeof AdminLayoutNoticesCreateRoute
+  '/notices': typeof AdminLayoutNoticesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,11 +136,13 @@ export interface FileRoutesById {
   '/_adminLayout/certification-management': typeof AdminLayoutCertificationManagementRoute
   '/_adminLayout/graduates-all': typeof AdminLayoutGraduatesAllRoute
   '/_adminLayout/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/_adminLayout/notices': typeof AdminLayoutNoticesRoute
   '/_adminLayout/schedule': typeof AdminLayoutScheduleRoute
   '/_adminLayout/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
   '/_adminLayout/thesis-management': typeof AdminLayoutThesisManagementRoute
   '/_clientLayout/client': typeof ClientLayoutClientRoute
+  '/_adminLayout/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
+  '/_adminLayout/notices/create': typeof AdminLayoutNoticesCreateRoute
+  '/_adminLayout/notices/': typeof AdminLayoutNoticesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,11 +152,13 @@ export interface FileRouteTypes {
     | '/certification-management'
     | '/graduates-all'
     | '/guidelines-and-rules'
-    | '/notices'
     | '/schedule'
     | '/thesis-application-management'
     | '/thesis-management'
     | '/client'
+    | '/notices/$postId'
+    | '/notices/create'
+    | '/notices'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,11 +166,13 @@ export interface FileRouteTypes {
     | '/certification-management'
     | '/graduates-all'
     | '/guidelines-and-rules'
-    | '/notices'
     | '/schedule'
     | '/thesis-application-management'
     | '/thesis-management'
     | '/client'
+    | '/notices/$postId'
+    | '/notices/create'
+    | '/notices'
   id:
     | '__root__'
     | '/'
@@ -158,11 +182,13 @@ export interface FileRouteTypes {
     | '/_adminLayout/certification-management'
     | '/_adminLayout/graduates-all'
     | '/_adminLayout/guidelines-and-rules'
-    | '/_adminLayout/notices'
     | '/_adminLayout/schedule'
     | '/_adminLayout/thesis-application-management'
     | '/_adminLayout/thesis-management'
     | '/_clientLayout/client'
+    | '/_adminLayout/notices/$postId'
+    | '/_adminLayout/notices/create'
+    | '/_adminLayout/notices/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -222,13 +248,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLayoutScheduleRouteImport
       parentRoute: typeof AdminLayoutRoute
     }
-    '/_adminLayout/notices': {
-      id: '/_adminLayout/notices'
-      path: '/notices'
-      fullPath: '/notices'
-      preLoaderRoute: typeof AdminLayoutNoticesRouteImport
-      parentRoute: typeof AdminLayoutRoute
-    }
     '/_adminLayout/guidelines-and-rules': {
       id: '/_adminLayout/guidelines-and-rules'
       path: '/guidelines-and-rules'
@@ -257,6 +276,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLayoutAdminRouteImport
       parentRoute: typeof AdminLayoutRoute
     }
+    '/_adminLayout/notices/': {
+      id: '/_adminLayout/notices/'
+      path: '/notices'
+      fullPath: '/notices'
+      preLoaderRoute: typeof AdminLayoutNoticesIndexRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/_adminLayout/notices/create': {
+      id: '/_adminLayout/notices/create'
+      path: '/notices/create'
+      fullPath: '/notices/create'
+      preLoaderRoute: typeof AdminLayoutNoticesCreateRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/_adminLayout/notices/$postId': {
+      id: '/_adminLayout/notices/$postId'
+      path: '/notices/$postId'
+      fullPath: '/notices/$postId'
+      preLoaderRoute: typeof AdminLayoutNoticesPostIdRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
   }
 }
 
@@ -265,10 +305,12 @@ interface AdminLayoutRouteChildren {
   AdminLayoutCertificationManagementRoute: typeof AdminLayoutCertificationManagementRoute
   AdminLayoutGraduatesAllRoute: typeof AdminLayoutGraduatesAllRoute
   AdminLayoutGuidelinesAndRulesRoute: typeof AdminLayoutGuidelinesAndRulesRoute
-  AdminLayoutNoticesRoute: typeof AdminLayoutNoticesRoute
   AdminLayoutScheduleRoute: typeof AdminLayoutScheduleRoute
   AdminLayoutThesisApplicationManagementRoute: typeof AdminLayoutThesisApplicationManagementRoute
   AdminLayoutThesisManagementRoute: typeof AdminLayoutThesisManagementRoute
+  AdminLayoutNoticesPostIdRoute: typeof AdminLayoutNoticesPostIdRoute
+  AdminLayoutNoticesCreateRoute: typeof AdminLayoutNoticesCreateRoute
+  AdminLayoutNoticesIndexRoute: typeof AdminLayoutNoticesIndexRoute
 }
 
 const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
@@ -277,11 +319,13 @@ const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
     AdminLayoutCertificationManagementRoute,
   AdminLayoutGraduatesAllRoute: AdminLayoutGraduatesAllRoute,
   AdminLayoutGuidelinesAndRulesRoute: AdminLayoutGuidelinesAndRulesRoute,
-  AdminLayoutNoticesRoute: AdminLayoutNoticesRoute,
   AdminLayoutScheduleRoute: AdminLayoutScheduleRoute,
   AdminLayoutThesisApplicationManagementRoute:
     AdminLayoutThesisApplicationManagementRoute,
   AdminLayoutThesisManagementRoute: AdminLayoutThesisManagementRoute,
+  AdminLayoutNoticesPostIdRoute: AdminLayoutNoticesPostIdRoute,
+  AdminLayoutNoticesCreateRoute: AdminLayoutNoticesCreateRoute,
+  AdminLayoutNoticesIndexRoute: AdminLayoutNoticesIndexRoute,
 }
 
 const AdminLayoutRouteWithChildren = AdminLayoutRoute._addFileChildren(
