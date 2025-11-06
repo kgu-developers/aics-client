@@ -22,7 +22,11 @@ export default function Pagination({
       style={{
         display: 'flex',
         justifyContent:
-          align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end',
+          align === 'left'
+            ? 'flex-start'
+            : align === 'center'
+              ? 'center'
+              : 'flex-end',
         paddingTop: 8,
       }}
     >
@@ -36,7 +40,7 @@ export default function Pagination({
         onChange={(nextPage, nextSize) => {
           if (onPageSizeChange && nextSize !== pageSize) {
             onPageSizeChange(nextSize)
-            onGoto(1) 
+            onGoto(1)
           } else {
             onGoto(nextPage)
           }

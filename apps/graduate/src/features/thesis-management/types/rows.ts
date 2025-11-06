@@ -3,8 +3,8 @@ export type ThesisRow = {
   no: number
   studentId: string
   name: string
-  advisor: string         
-  gradTerm: string        
-  status: string           
+  advisor: string
+  gradTerm: string
+  status: string
   approved: '승인' | '미승인' | '승인 대기'
-} 
+}

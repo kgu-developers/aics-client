@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_adminLayout/guidelines-and-rules')({
-	component: RouteComponent,
-});
+  component: RouteComponent,
+})
 
 function RouteComponent() {
-	return <div>Hello "/rules"!</div>;
+  return <div>Hello "/rules"!</div>
 }
