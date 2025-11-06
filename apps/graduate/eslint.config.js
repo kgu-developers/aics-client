@@ -32,6 +32,16 @@ export default defineConfig([
           groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
           pathGroups: [
             {
+              pattern: 'react',
+              group: 'builtin',
+              position: 'before',
+            },
+            {
+              pattern: 'antd',
+              group: 'builtin',
+              position: 'before',
+            },
+            {
               pattern: '~/shared/**',
               group: 'external',
               position: 'after',
