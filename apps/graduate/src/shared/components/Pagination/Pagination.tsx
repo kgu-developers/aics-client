@@ -1,13 +1,13 @@
-import { Pagination as AntPagination } from 'antd'
+import { Pagination as AntPagination } from 'antd';
 
 type Props = {
-  page: number
-  pageSize: number
-  totalItems: number
-  onGoto: (page: number) => void
-  onPageSizeChange?: (size: number) => void
-  align?: 'left' | 'center' | 'right'
-}
+  page: number;
+  pageSize: number;
+  totalItems: number;
+  onGoto: (page: number) => void;
+  onPageSizeChange?: (size: number) => void;
+  align?: 'left' | 'center' | 'right';
+};
 
 export default function Pagination({
   page,
@@ -22,7 +22,11 @@ export default function Pagination({
       style={{
         display: 'flex',
         justifyContent:
-          align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end',
+          align === 'left'
+            ? 'flex-start'
+            : align === 'center'
+              ? 'center'
+              : 'flex-end',
         paddingTop: 8,
       }}
     >
@@ -35,13 +39,13 @@ export default function Pagination({
         pageSizeOptions={['10', '20', '50', '100']}
         onChange={(nextPage, nextSize) => {
           if (onPageSizeChange && nextSize !== pageSize) {
-            onPageSizeChange(nextSize)
-            onGoto(1) 
+            onPageSizeChange(nextSize);
+            onGoto(1);
           } else {
-            onGoto(nextPage)
+            onGoto(nextPage);
           }
         }}
       />
     </div>
-  )
+  );
 }

@@ -1,1 +1,1 @@
-export { default as ThesisManagement } from './thesis-management'
+export { default as ThesisManagement } from './thesis-management';

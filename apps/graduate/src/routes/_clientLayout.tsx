@@ -1,4 +1,4 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_clientLayout')({
   beforeLoad: () => {},
@@ -7,4 +7,4 @@ export const Route = createFileRoute('/_clientLayout')({
       <Outlet />
     </div>
   ),
-})
+});
