@@ -1,87 +1,87 @@
-import { useNavigate } from '@tanstack/react-router'
-import { Button, Checkbox, Divider, Input, Upload } from 'antd'
-import type { CheckboxChangeEvent, UploadProps } from 'antd'
-import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router';
+import { Button, Checkbox, Divider, Input, Upload } from 'antd';
+import type { CheckboxChangeEvent, UploadProps } from 'antd';
+import { useState } from 'react';
 
-import { noticeFormData } from '../mock/notices'
-import type { NoticeFormItem } from '../types/notices'
-import * as style from './NoticeForm.css'
+import * as style from './NoticeForm.css';
+import { noticeFormData } from '../mock/notices';
+import type { NoticeFormItem } from '../types/notices';
 
-const { TextArea } = Input
+const { TextArea } = Input;
 
 interface NoticeDetailProps {
-  noticeId?: number
+  noticeId?: number;
 }
 
 export default function NoticeForm({ noticeId }: NoticeDetailProps) {
-  const navigate = useNavigate()
-  const isEditMode = !!noticeId
-  const data = noticeFormData
-  const { createdAt, updatedAt } = data
+  const navigate = useNavigate();
+  const isEditMode = !!noticeId;
+  const data = noticeFormData;
+  const { createdAt, updatedAt } = data;
 
   const [formState, setFormState] = useState<NoticeFormItem>({
     title: data?.title || '',
     content: data?.content || '',
     isPinned: data?.isPinned || false,
-  })
-  const { title, content, isPinned } = formState
+  });
+  const { title, content, isPinned } = formState;
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target
-    setFormState((prev) => ({
+    const { name, value } = e.target;
+    setFormState(prev => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleCheckboxChange = (e: CheckboxChangeEvent) => {
-    setFormState((prev) => ({
+    setFormState(prev => ({
       ...prev,
       isPinned: e.target.checked,
-    }))
-  }
+    }));
+  };
 
   const uploadProps: UploadProps = {
     name: 'file',
     multiple: true,
-    beforeUpload: (file) => {
-      window.alert(`${file.name} 파일이 선택되었습니다.`)
-      return false
+    beforeUpload: file => {
+      window.alert(`${file.name} 파일이 선택되었습니다.`);
+      return false;
     },
-  }
+  };
 
   const handleSave = () => {
     if (!title.trim()) {
-      window.alert('제목을 입력해주세요.')
-      return
+      window.alert('제목을 입력해주세요.');
+      return;
     }
     if (!content.trim()) {
-      window.alert('내용을 입력해주세요.')
-      return
+      window.alert('내용을 입력해주세요.');
+      return;
     }
     window.alert(
       isEditMode ? '공지사항이 수정되었습니다.' : '공지사항이 작성되었습니다.',
-    )
-    handleGoBack()
-  }
+    );
+    handleGoBack();
+  };
 
   const handleDelete = () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      window.alert('공지사항이 삭제되었습니다.')
-      handleGoBack()
+      window.alert('공지사항이 삭제되었습니다.');
+      handleGoBack();
     }
-  }
+  };
 
   const handleGoBack = () => {
-    navigate({ to: '/notices' })
-  }
+    navigate({ to: '/notices' });
+  };
 
   return (
     <div className={style.container}>
       <div className={style.backButtonWrapper}>
-        <Button onClick={handleGoBack} type="text" size="large">
+        <Button onClick={handleGoBack} type='text' size='large'>
           목록으로
         </Button>
       </div>
@@ -99,16 +99,16 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
         )}
 
         <div className={style.formField}>
-          <label className={style.label} htmlFor="title">
+          <label className={style.label} htmlFor='title'>
             제목 <span className={style.required}>*</span>
           </label>
           <Input
-            id="title"
-            name="title"
+            id='title'
+            name='title'
             value={title}
             onChange={handleInputChange}
-            placeholder="제목을 입력하세요"
-            size="large"
+            placeholder='제목을 입력하세요'
+            size='large'
           />
         </div>
 
@@ -119,25 +119,25 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
         </div>
 
         <div className={style.formField}>
-          <label className={style.label} htmlFor="content">
+          <label className={style.label} htmlFor='content'>
             내용 <span className={style.required}>*</span>
           </label>
           <TextArea
-            id="content"
-            name="content"
+            id='content'
+            name='content'
             value={content}
             onChange={handleInputChange}
-            placeholder="내용을 입력하세요"
+            placeholder='내용을 입력하세요'
             rows={15}
             className={style.textarea}
           />
         </div>
 
         <div className={style.uploadSection}>
-          <label className={style.label} htmlFor="upload">
+          <label className={style.label} htmlFor='upload'>
             첨부파일
           </label>
-          <Upload {...uploadProps} id="upload" name="upload">
+          <Upload {...uploadProps} id='upload' name='upload'>
             <Button>파일 선택</Button>
           </Upload>
         </div>
@@ -147,21 +147,21 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
         <div className={style.actionSection}>
           <div className={style.leftActions}>
             {isEditMode && (
-              <Button onClick={handleDelete} size="large">
+              <Button onClick={handleDelete} size='large'>
                 삭제
               </Button>
             )}
           </div>
           <div className={style.rightActions}>
-            <Button onClick={handleGoBack} size="large">
+            <Button onClick={handleGoBack} size='large'>
               취소
             </Button>
-            <Button type="primary" onClick={handleSave} size="large">
+            <Button type='primary' onClick={handleSave} size='large'>
               {isEditMode ? '수정' : '작성'}
             </Button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

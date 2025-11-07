@@ -1,8 +1,8 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tanstack/react-router';
 
-import { Sidebar } from '~/widgets/sidebar'
+import { Sidebar } from '~/widgets/sidebar';
 
-import { vars } from '~/vars.css'
+import { vars } from '~/vars.css';
 
 export const Route = createFileRoute('/_adminLayout')({
   component: () => (
@@ -19,4 +19,4 @@ export const Route = createFileRoute('/_adminLayout')({
       </main>
     </div>
   ),
-})
+});

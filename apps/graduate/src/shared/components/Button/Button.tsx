@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import {
   type ButtonSize,
@@ -6,13 +6,13 @@ import {
   button,
   sizes,
   variants,
-} from './Button.css'
+} from './Button.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant
-  size?: ButtonSize
-  children: ReactNode
-  fullWidth?: boolean
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  children: ReactNode;
+  fullWidth?: boolean;
 }
 
 export default function Button({
@@ -32,5 +32,5 @@ export default function Button({
     >
       {children}
     </button>
-  )
+  );
 }

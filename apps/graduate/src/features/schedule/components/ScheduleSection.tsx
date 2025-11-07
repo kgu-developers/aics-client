@@ -1,18 +1,18 @@
-import { Table } from 'antd'
-import type { ColumnType } from 'antd/es/table'
-import { useState } from 'react'
+import { Table } from 'antd';
+import type { ColumnType } from 'antd/es/table';
+import { useState } from 'react';
 
-import { Header } from '~/shared/components'
+import { Header } from '~/shared/components';
 
-import { container } from '~/features/notices/components/NoticesSection.css'
+import { container } from '~/features/notices/components/NoticesSection.css';
 
-import { scheduleData } from '../mock/schedule'
-import type { ScheduleItem } from '../types/schedule'
-import ScheduleDescription from './ScheduleDescription'
-import ScheduleEditModal from './ScheduleEditModal'
+import ScheduleDescription from './ScheduleDescription';
+import ScheduleEditModal from './ScheduleEditModal';
+import { scheduleData } from '../mock/schedule';
+import type { ScheduleItem } from '../types/schedule';
 
 export default function ScheduleSection() {
-  const [schedule, setSchedule] = useState<ScheduleItem[]>(scheduleData)
+  const [schedule, setSchedule] = useState<ScheduleItem[]>(scheduleData);
 
   const columns: ColumnType<ScheduleItem>[] = [
     {
@@ -39,11 +39,11 @@ export default function ScheduleSection() {
       key: 'status',
       width: 100,
     },
-  ]
+  ];
 
   return (
     <div className={container}>
-      <Header title="진행일정" />
+      <Header title='진행일정' />
 
       <Table
         columns={columns}
@@ -58,9 +58,9 @@ export default function ScheduleSection() {
         setScheduleData={setSchedule}
       />
 
-      <Header title="진행일정-상세" />
+      <Header title='진행일정-상세' />
 
       <ScheduleDescription />
     </div>
-  )
+  );
 }

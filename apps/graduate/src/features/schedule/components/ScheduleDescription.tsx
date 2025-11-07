@@ -1,36 +1,36 @@
-import { Button } from 'antd'
-import { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill-new'
-import 'react-quill-new/dist/quill.snow.css'
+import { Button } from 'antd';
+import { useEffect, useState } from 'react';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
-import { descriptionData } from '../mock/schedule'
-import * as style from './ScheduleDescription.css'
+import * as style from './ScheduleDescription.css';
+import { descriptionData } from '../mock/schedule';
 
 export default function ScheduleDescription() {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [tempDescription, setTempDescription] = useState<string>(
     descriptionData[0]?.description || '',
-  )
-  const [isSaved, setIsSaved] = useState<boolean>(true)
+  );
+  const [isSaved, setIsSaved] = useState<boolean>(true);
 
   useEffect(() => {
-    setTempDescription(descriptionData[selectedIndex]?.description || '')
-  }, [selectedIndex])
+    setTempDescription(descriptionData[selectedIndex]?.description || '');
+  }, [selectedIndex]);
 
   const handleSave = () => {
-    setIsSaved(true)
-    window.alert('설명이 저장되었습니다!')
-  }
+    setIsSaved(true);
+    window.alert('설명이 저장되었습니다!');
+  };
 
   const handleTabChange = (index: number) => {
     if (!isSaved) {
       const confirmChange = window.confirm(
         '저장되지 않은 변경 사항이 있습니다. 변경 사항을 저장하지 않고 이동하시겠습니까?',
-      )
-      if (!confirmChange) return
+      );
+      if (!confirmChange) return;
     }
-    setSelectedIndex(index)
-  }
+    setSelectedIndex(index);
+  };
 
   const modules = {
     toolbar: [
@@ -41,7 +41,7 @@ export default function ScheduleDescription() {
       ['link'],
       ['clean'],
     ],
-  }
+  };
 
   return (
     <div className={style.descriptionContainer}>
@@ -65,7 +65,7 @@ export default function ScheduleDescription() {
             </h3>
           </div>
           <ReactQuill
-            theme="snow"
+            theme='snow'
             value={tempDescription}
             onChange={setTempDescription}
             onFocus={() => setIsSaved(false)}
@@ -73,12 +73,12 @@ export default function ScheduleDescription() {
             className={style.quillEditor}
           />
           <div className={style.saveButtonWrapper}>
-            <Button disabled={isSaved} type="primary" onClick={handleSave}>
+            <Button disabled={isSaved} type='primary' onClick={handleSave}>
               {isSaved ? '저장됨' : '저장'}
             </Button>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }

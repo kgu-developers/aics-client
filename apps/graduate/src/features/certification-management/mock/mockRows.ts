@@ -1,4 +1,4 @@
-import type { CertRow } from '~/features/certification-management/types/row'
+import type { CertRow } from '~/features/certification-management/types/row';
 
 export const MOCK_ROWS: CertRow[] = Array.from({ length: 88 }).map((_, i) => ({
   id: i + 1,
@@ -18,4 +18,4 @@ export const MOCK_ROWS: CertRow[] = Array.from({ length: 88 }).map((_, i) => ({
   ][i % 10],
   status: i % 3 === 0 ? '제출' : '미제출',
   approved: i % 5 === 0 ? '승인' : '미승인',
-}))
+}));

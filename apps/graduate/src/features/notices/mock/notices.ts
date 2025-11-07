@@ -48,7 +48,7 @@ export const mockData = [
     isPinned: false,
     author: '관리자',
   })),
-]
+];
 export const noticeFormData = {
   title: '[필독] 2025학년도 졸업논문 일정 안내',
   content: `2025학년도 졸업논문 일정을 다음과 같이 안내드립니다.
@@ -61,4 +61,4 @@ export const noticeFormData = {
   isPinned: true,
   createdAt: '2025-10-01 14:30',
   updatedAt: '2025-10-05 09:15',
-}
+};

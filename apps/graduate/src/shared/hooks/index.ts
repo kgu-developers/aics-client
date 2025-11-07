@@ -1,1 +1,1 @@
-export { default as useTableState } from './useTableState'
+export { default as useTableState } from './useTableState';
