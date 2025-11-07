@@ -2,6 +2,8 @@ import { Button, DatePicker, Modal, Select } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
+import { modalStyles } from '~/shared/config';
+
 import * as style from './ScheduleEditModal.css.ts';
 import type { ScheduleItem } from '../types/schedule.ts';
 
@@ -15,24 +17,24 @@ export default function ScheduleEditModal({
   setScheduleData,
 }: ScheduleEditModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStage, setSelectedStage] = useState('신청접수');
+  const [selectedStage, setSelectedStage] = useState('??u????');
   const [startDate, setStartDate] = useState(dayjs('2025-10-02'));
   const [endDate, setEndDate] = useState(dayjs('2025-10-16'));
 
   const stageOptions = [
-    { value: '신청접수', label: '신청접수' },
-    { value: '제안서', label: '제안서' },
-    { value: '중간보고서', label: '중간보고서' },
-    { value: '최종보고서', label: '최종보고서' },
-    { value: '최종 통과', label: '최종 통과' },
-    { value: '기타자격', label: '기타자격' },
+    { value: '??u????', label: '??u????' },
+    { value: '?????', label: '?????' },
+    { value: '????????', label: '????????' },
+    { value: '?????????', label: '?????????' },
+    { value: '???? ???', label: '???? ???' },
+    { value: '??????', label: '??????' },
   ];
 
   const handleEdit = () => setIsModalOpen(true);
 
   const handleSubmit = () => {
     if (endDate.isBefore(startDate)) {
-      window.alert('종료일이 시작일보다 빠릅니다.');
+      window.alert('???????? ????????? ???????.');
       return;
     }
     setScheduleData(
@@ -64,23 +66,23 @@ export default function ScheduleEditModal({
     <>
       <div className={style.editButtonWrapper}>
         <Button type='default' onClick={handleEdit} size='large'>
-          수정
+          ????
         </Button>
       </div>
       <Modal
-        title='졸업논문 일정 수정'
+        title='??????? ???? ????'
         open={isModalOpen}
         onOk={handleSubmit}
         onCancel={handleCancel}
-        width={600}
-        okText='수정'
-        cancelText='닫기'
+        {...modalStyles('md')}
+        okText='????'
+        cancelText='???'
         getContainer={false}
       >
         <div className={style.modalContent}>
           <div className={style.formField}>
             <label className={style.label} htmlFor='stage'>
-              변경할 일정
+              ?????? ????
             </label>
             <Select
               id='stage'
@@ -93,7 +95,7 @@ export default function ScheduleEditModal({
           </div>
           <div className={style.formField}>
             <label className={style.label} htmlFor='startDate'>
-              날짜
+              ??��
             </label>
             <DatePicker
               id='startDate'
@@ -103,12 +105,12 @@ export default function ScheduleEditModal({
               className={style.fullWidthDatePicker}
               size='large'
               format='YYYY. MM. DD.'
-              placeholder='시작 날짜'
+              placeholder='???? ??��'
             />
           </div>
           <div className={style.lastFormField}>
             <label className={style.label} htmlFor='endDate'>
-              날짜
+              ??��
             </label>
             <DatePicker
               id='endDate'
@@ -118,7 +120,7 @@ export default function ScheduleEditModal({
               className={style.fullWidthDatePicker}
               size='large'
               format='YYYY. MM. DD.'
-              placeholder='종료 날짜'
+              placeholder='???? ??��'
             />
           </div>
         </div>

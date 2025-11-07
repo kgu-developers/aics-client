@@ -13,9 +13,11 @@ export const modeCard = style({
   height: 'auto',
   padding: vars.spacing.md,
   textAlign: 'left',
+  border: `1px solid ${vars.colors.border}`,
+  borderRadius: 8,
+  backgroundColor: vars.colors.sub,
 });
 
-// Normalize AntD Button's inner span so our content can stack
 globalStyle(`.ant-btn.${modeCard} > span`, {
   display: 'block',
   whiteSpace: 'normal',
@@ -41,4 +43,13 @@ export const cardInner = style({
   textAlign: 'left',
   width: '100%',
   gap: vars.spacing.xs,
+});
+
+export const modeCardActive = style({
+  backgroundColor: vars.colors.white,
+  borderColor: vars.colors.main,
+});
+
+export const modeCardInactive = style({
+  backgroundColor: vars.colors.sub,
 });

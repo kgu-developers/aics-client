@@ -1,11 +1,8 @@
-import { useState } from 'react';
-
 import {
   Header,
   Toolbar,
   Pagination,
   DataTable,
-  StudentAddModal,
 } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
@@ -20,7 +17,6 @@ export default function ThesisManagement() {
     keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],
   });
 
-  const [addOpen, setAddOpen] = useState(false);
 
   return (
     <div className={style.root}>
@@ -36,7 +32,7 @@ export default function ThesisManagement() {
           }}
           onApprove={() => {}}
           onDownload={() => {}}
-          onAddStudent={() => setAddOpen(true)}
+          onAddStudent={() => {}}
         />
 
         <div className={style.card}>
@@ -56,14 +52,6 @@ export default function ThesisManagement() {
           totalItems={st.filtered.length}
           onGoto={st.setPage}
           onPageSizeChange={size => st.setPageSize(size)}
-        />
-
-        <StudentAddModal
-          open={addOpen}
-          onClose={() => setAddOpen(false)}
-          onSubmit={async () => {
-            setAddOpen(false);
-          }}
         />
       </div>
     </div>

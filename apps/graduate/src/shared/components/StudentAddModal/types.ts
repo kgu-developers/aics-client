@@ -1,9 +1,12 @@
+export type CapstoneStatus = 'PASSED' | 'FAILED';
+export type ProfessorNameToId = Record<string, number>;
+
 export type SingleSubmitPayload = {
   studentNo: string;
   name: string;
   advisorId: number;
-  capstoneStatus: 'PASSED' | 'FAILED';
-  graduationMonth: string; // YYYY-MM
+  capstoneStatus: CapstoneStatus;
+  graduationMonth: string; 
   department: string;
 };
 
@@ -12,7 +15,7 @@ export type BulkUploadRow = {
   studentNo: string;
   name: string;
   advisorId: number | null;
-  capstoneStatus: 'PASSED' | 'FAILED' | null;
+  capstoneStatus: CapstoneStatus | null;
   graduationMonth: string | null;
   department: string | null;
 };

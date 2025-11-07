@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { PROFESSORS } from '~/shared/constants/professors';
 
-import type { SingleSubmitPayload } from './types';
+import type { SingleSubmitPayload } from '../types';
 
 type FormInnerValues = Omit<SingleSubmitPayload, 'graduationMonth'> & {
   graduationMonth: Dayjs;
