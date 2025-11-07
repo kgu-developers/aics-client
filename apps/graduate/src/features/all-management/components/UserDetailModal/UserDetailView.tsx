@@ -4,7 +4,7 @@ import { Container } from '~/shared/components/Container';
 
 import { getStageColumns } from '../../constants/stageColumns';
 import { stageData } from '../../mock/allManagement';
-import { Mode } from '../../types/allManagement';
+import type { Mode } from '../../types/allManagement';
 
 interface UserDetailViewProps {
   setMode: (mode: Mode) => void;

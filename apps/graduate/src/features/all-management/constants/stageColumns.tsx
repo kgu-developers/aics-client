@@ -10,12 +10,13 @@ export const getStageColumns = (setMode: (mode: Mode) => void) => [
       const mode = STAGE_NAME_TO_MODE[record.stage];
       if (mode && record.isSubmit) {
         return (
-          <a
+          <button
+            type='button'
             style={{ cursor: 'pointer', textDecoration: 'underline' }}
             onClick={() => setMode(mode)}
           >
             {record.stage}
-          </a>
+          </button>
         );
       }
       return record.stage;

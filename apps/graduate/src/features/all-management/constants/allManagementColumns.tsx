@@ -13,9 +13,13 @@ export const allManagementColumns = (
       header: '이름',
       width: 120,
       cell: r => (
-        <a style={{ cursor: 'pointer' }} onClick={() => onNameClick(r)}>
+        <button
+          type='button'
+          style={{ cursor: 'pointer' }}
+          onClick={() => onNameClick(r)}
+        >
           {r.name}
-        </a>
+        </button>
       ),
     },
     { key: 'type', header: '졸업 유형', width: 120, cell: r => r.type },
