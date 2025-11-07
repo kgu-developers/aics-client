@@ -1,29 +1,29 @@
-import type React from 'react'
-import { Table } from 'antd'
-import type { ColumnsType, TableProps } from 'antd/es/table'
+import { Table } from 'antd';
+import type { ColumnsType, TableProps } from 'antd/es/table';
+import type React from 'react';
 
 export type Column<T> = {
-  key: string
-  header: React.ReactNode
-  width?: number | string
-  align?: 'left' | 'center' | 'right'
-  ellipsis?: boolean
-  cell: (row: T) => React.ReactNode
-}
+  key: string;
+  header: React.ReactNode;
+  width?: number | string;
+  align?: 'left' | 'center' | 'right';
+  ellipsis?: boolean;
+  cell: (row: T) => React.ReactNode;
+};
 
-type Id = string | number
+type Id = string | number;
 
 type Props<T> = {
-  rows: ReadonlyArray<T>
-  columns: ReadonlyArray<Column<T>>
-  getRowId: (row: T) => Id
-  allChecked?: boolean
-  onToggleAll?: () => void
-  selectedIds?: ReadonlyArray<Id>
-  onToggleOne?: (id: Id) => void
-  emptyText?: React.ReactNode
-  rowClassName?: (row: T, isSelected: boolean) => string | undefined
-}
+  rows: ReadonlyArray<T>;
+  columns: ReadonlyArray<Column<T>>;
+  getRowId: (row: T) => Id;
+  allChecked?: boolean;
+  onToggleAll?: () => void;
+  selectedIds?: ReadonlyArray<Id>;
+  onToggleOne?: (id: Id) => void;
+  emptyText?: React.ReactNode;
+  rowClassName?: (row: T, isSelected: boolean) => string | undefined;
+};
 
 export default function DataTable<T>({
   rows,
@@ -35,7 +35,7 @@ export default function DataTable<T>({
   emptyText = '표시할 데이터가 없습니다.',
   rowClassName,
 }: Props<T>) {
-  const antdColumns = columns.map((c) => ({
+  const antdColumns = columns.map(c => ({
     key: c.key,
     title: c.header,
     dataIndex: c.key,
@@ -43,36 +43,36 @@ export default function DataTable<T>({
     align: c.align ?? 'center',
     width: c.width,
     ellipsis: c.ellipsis ?? false,
-  })) as ColumnsType<T>
+  })) as ColumnsType<T>;
 
   const rowSelection: TableProps<T>['rowSelection'] =
     onToggleAll && onToggleOne
       ? {
           selectedRowKeys: selectedIds as React.Key[],
-          onSelect: (record) => onToggleOne(getRowId(record)),
+          onSelect: record => onToggleOne(getRowId(record)),
           onSelectAll: () => onToggleAll(),
           preserveSelectedRowKeys: true,
         }
-      : undefined
+      : undefined;
 
   return (
     <Table<T>
       dataSource={rows as T[]}
       columns={antdColumns}
-      rowKey={(r) => getRowId(r) as React.Key}
+      rowKey={r => getRowId(r) as React.Key}
       rowSelection={rowSelection}
       pagination={false}
       bordered
       sticky
-      size="middle"
+      size='middle'
       locale={{ emptyText }}
-      tableLayout="fixed"
+      tableLayout='fixed'
       scroll={{ x: 'max-content' }}
-      rowClassName={(record) => {
-        const id = getRowId(record)
-        const isSel = selectedIds.includes(id)
-        return rowClassName?.(record, isSel) ?? ''
+      rowClassName={record => {
+        const id = getRowId(record);
+        const isSel = selectedIds.includes(id);
+        return rowClassName?.(record, isSel) ?? '';
       }}
     />
-  )
+  );
 }

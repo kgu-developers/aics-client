@@ -1,1 +1,1 @@
-export * from './professors'
+export * from './professors';

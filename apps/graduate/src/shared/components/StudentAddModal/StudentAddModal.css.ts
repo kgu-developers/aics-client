@@ -1,4 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css';
+
 import { vars } from '~/vars.css';
 
 export const modeSelector = style({
@@ -24,8 +25,8 @@ globalStyle(`.ant-btn.${modeCard} > span`, {
 export const modeTitle = style({
   display: 'block',
   marginBottom: vars.spacing.xs,
-   fontSize: vars.font.size['2xl'],
-  fontWeight: vars.font.weight.semibold ,
+  fontSize: vars.font.size['2xl'],
+  fontWeight: vars.font.weight.semibold,
 });
 
 export const modeDescription = style({

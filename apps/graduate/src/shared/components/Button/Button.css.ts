@@ -1,5 +1,6 @@
-import { style, styleVariants } from '@vanilla-extract/css'
-import { vars } from '../../../vars.css'
+import { style, styleVariants } from '@vanilla-extract/css';
+
+import { vars } from '../../../vars.css';
 
 const baseButton = style({
   fontWeight: vars.font.weight.medium,
@@ -22,7 +23,7 @@ const baseButton = style({
     opacity: 0.6,
     cursor: 'not-allowed',
   },
-})
+});
 
 export const variants = styleVariants({
   primary: {
@@ -78,7 +79,7 @@ export const variants = styleVariants({
       outlineColor: vars.colors.subHover,
     },
   },
-})
+});
 
 // 사이즈 스타일
 export const sizes = styleVariants({
@@ -102,9 +103,9 @@ export const sizes = styleVariants({
     height: '48px',
     minWidth: '120px',
   },
-})
+});
 
-export const button = style([baseButton])
+export const button = style([baseButton]);
 
-export type ButtonVariant = keyof typeof variants
-export type ButtonSize = keyof typeof sizes
+export type ButtonVariant = keyof typeof variants;
+export type ButtonSize = keyof typeof sizes;
