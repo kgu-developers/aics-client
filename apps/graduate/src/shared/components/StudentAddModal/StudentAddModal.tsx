@@ -1,4 +1,4 @@
-﻿import { Card, Col, Modal, Row, Typography, theme } from 'antd';
+﻿import { Card, Col, Modal, Row, Typography, theme, Divider } from 'antd';
 import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
@@ -92,6 +92,8 @@ export default function StudentAddModal({
         </Row>
       </div>
 
+      <Divider style={{ margin: '20px 0 20px' }} />
+      
       {mode === 'single' ? (
         <StudentAddSingle open={open} onSubmit={onSubmit} />
       ) : (
