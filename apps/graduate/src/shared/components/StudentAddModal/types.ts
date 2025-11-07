@@ -6,7 +6,7 @@ export type SingleSubmitPayload = {
   name: string;
   advisorId: number;
   capstoneStatus: CapstoneStatus;
-  graduationMonth: string; 
+  graduationMonth: string;
   department: string;
 };
 

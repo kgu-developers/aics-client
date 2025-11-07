@@ -1,9 +1,4 @@
-import {
-  Header,
-  Toolbar,
-  Pagination,
-  DataTable,
-} from '~/shared/components';
+import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
 import { thesisColumns } from '~/features/thesis-management/constants/thesisColumns';
@@ -16,7 +11,6 @@ export default function ThesisManagement() {
     pageSize: 10,
     keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],
   });
-
 
   return (
     <div className={style.root}>

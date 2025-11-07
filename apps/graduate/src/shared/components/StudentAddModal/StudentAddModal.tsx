@@ -39,15 +39,53 @@ export default function StudentAddModal({
       <div className={styles.modeSelector}>
         <Row gutter={12} style={{ width: '100%' }}>
           <Col span={12}>
-            <Card  size='small' onClick={() => setMode('single')} style={{ cursor: 'pointer', background: mode === 'single' ? theme.useToken().token.colorBgContainer : theme.useToken().token.colorFillQuaternary, borderColor: mode === 'single' ? theme.useToken().token.colorPrimary : theme.useToken().token.colorBorderSecondary }} bodyStyle={{ padding: 16 }}>
-              <Typography.Title level={5} style={{ margin: 0 }}>단일 추가</Typography.Title>
-              <Typography.Text type='secondary'>학생 정보를 수기로 입력해요.</Typography.Text>
+            <Card
+              size='small'
+              onClick={() => setMode('single')}
+              style={{
+                cursor: 'pointer',
+                background:
+                  mode === 'single'
+                    ? theme.useToken().token.colorBgContainer
+                    : theme.useToken().token.colorFillQuaternary,
+                borderColor:
+                  mode === 'single'
+                    ? theme.useToken().token.colorPrimary
+                    : theme.useToken().token.colorBorderSecondary,
+              }}
+              bodyStyle={{ padding: 16 }}
+            >
+              <Typography.Title level={5} style={{ margin: 0 }}>
+                단일 추가
+              </Typography.Title>
+              <Typography.Text type='secondary'>
+                학생 정보를 수기로 입력해요.
+              </Typography.Text>
             </Card>
           </Col>
           <Col span={12}>
-            <Card size='small' onClick={() => setMode('excel')} style={{ cursor: 'pointer', background: mode === 'excel' ? theme.useToken().token.colorBgContainer : theme.useToken().token.colorFillQuaternary, borderColor: mode === 'excel' ? theme.useToken().token.colorPrimary : theme.useToken().token.colorBorderSecondary}} bodyStyle={{ padding: 16 }}>
-              <Typography.Title level={5} style={{ margin: 0 }}>엑셀 업로드</Typography.Title>
-              <Typography.Text type='secondary'>엑셀 파일로 여러 명 입력해요.</Typography.Text>
+            <Card
+              size='small'
+              onClick={() => setMode('excel')}
+              style={{
+                cursor: 'pointer',
+                background:
+                  mode === 'excel'
+                    ? theme.useToken().token.colorBgContainer
+                    : theme.useToken().token.colorFillQuaternary,
+                borderColor:
+                  mode === 'excel'
+                    ? theme.useToken().token.colorPrimary
+                    : theme.useToken().token.colorBorderSecondary,
+              }}
+              bodyStyle={{ padding: 16 }}
+            >
+              <Typography.Title level={5} style={{ margin: 0 }}>
+                엑셀 업로드
+              </Typography.Title>
+              <Typography.Text type='secondary'>
+                엑셀 파일로 여러 명 입력해요.
+              </Typography.Text>
             </Card>
           </Col>
         </Row>
