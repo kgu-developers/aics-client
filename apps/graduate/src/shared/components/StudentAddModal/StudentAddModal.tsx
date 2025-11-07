@@ -35,6 +35,7 @@ export default function StudentAddModal({
       styles={modalInnerStyles}
       destroyOnClose
       afterClose={() => setMode('single')}
+      centered
     >
       <div className={styles.modeSelector}>
         <Row gutter={12} style={{ width: '100%' }}>
