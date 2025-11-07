@@ -25,7 +25,7 @@ export default function CertificationManagement() {
 					}}
 					onApprove={() => {}}
 					onDownload={() => {}}
-					onAdd={() => {}}
+					onAddStudent={() => {}}
 				/>
 
 				<div className={style.card}>
@@ -40,12 +40,12 @@ export default function CertificationManagement() {
 					/>
 				</div>
 				<Pagination
-            		page={st.page}
-            		pageSize={st.pageSize}
-            		totalItems={st.filtered.length}
-            		onGoto={st.setPage}
-            		onPageSizeChange={(size) => st.setPageSize(size)}
-          		/>
+					page={st.page}
+					pageSize={st.pageSize}
+					totalItems={st.filtered.length}
+					onGoto={st.setPage}
+					onPageSizeChange={size => st.setPageSize(size)}
+				/>
 			</div>
 		</div>
 	);

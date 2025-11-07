@@ -30,7 +30,7 @@ export const actions = style({
 })
 
 const selectedTextBase = {
-  fontSize: vars.font.size.sm,
+  fontSize: vars.font.size.md,
   color: vars.colors.subText,
 }
 export const selectedText = styleVariants({

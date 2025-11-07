@@ -14,7 +14,7 @@ export const adminMark = style({
 })
 
 export const title = style({
-  fontSize: vars.font.size['3xl'],
+  fontSize: vars.font.size.xl,
   fontWeight: vars.font.weight.bold,
   color: vars.colors.label,
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`

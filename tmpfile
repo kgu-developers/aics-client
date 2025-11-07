@@ -1,5 +1,4 @@
-import { Header, Toolbar, Pagination, DataTable, StudentAddModal } from '~/shared/components';
-import { useState } from 'react';
+import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { thesisColumns } from '~/features/thesis-management/constants/thesisColumns';
 import type { ThesisRow } from '~/features/thesis-management/types/rows';
 import { MOCK_ROWS } from '~/features/thesis-management/mock/mockRows';
@@ -12,12 +11,10 @@ export default function ThesisManagement() {
 		keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],
 	});
 
-	const [addOpen, setAddOpen] = useState(false);
-
 	return (
 		<div className={style.root}>
 			<div className={style.container}>
-				<Header title="졸업 논문 관리" />
+				<Header title="졸업 ?�문 관�? />
 
 				<Toolbar
 					selectedCount={st.selected.length}
@@ -28,7 +25,7 @@ export default function ThesisManagement() {
 					}}
 					onApprove={() => {}}
 					onDownload={() => {}}
-					onAddStudent={() => setAddOpen(true)}
+					onAdd={() => {}}
 				/>
 
 				<div className={style.card}>
@@ -49,15 +46,8 @@ export default function ThesisManagement() {
             		onGoto={st.setPage}
             		onPageSizeChange={(size) => st.setPageSize(size)}
           		/>
-
-				<StudentAddModal
-					open={addOpen}
-					onClose={() => setAddOpen(false)}
-					onSubmit={async () => {
-						setAddOpen(false);
-					}}
-				/>
 			</div>
 		</div>
 	);
 }
+

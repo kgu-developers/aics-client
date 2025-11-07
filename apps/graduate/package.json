@@ -19,7 +19,8 @@
     "antd": "^5.24.8",
     "dayjs": "^1.11.18",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@aics-client/typescript": "workspace:*",
