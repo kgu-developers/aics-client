@@ -19,6 +19,7 @@ type Props = {
     graduationMonth: string;
     department: string;
   }) => void | Promise<void>;
+  disabledApprove?: boolean;
 };
 
 export default function Toolbar({
@@ -28,6 +29,7 @@ export default function Toolbar({
   onApprove,
   onDownload,
   onAddStudent,
+  disabledApprove = false,
 }: Props) {
   const hasSelection = selectedCount > 0;
   const [addOpen, setAddOpen] = useState(false);
@@ -52,9 +54,11 @@ export default function Toolbar({
 
       <div className={style.toolbarRight}>
         <div className={style.actions}>
-          <Button size='small' htmlType='button' onClick={onApprove}>
-            승인
-          </Button>
+          {!disabledApprove && (
+            <Button size='small' htmlType='button' onClick={onApprove}>
+              승인
+            </Button>
+          )}
           <Button size='small' htmlType='button' onClick={onDownload}>
             다운로드
           </Button>
