@@ -1,5 +1,4 @@
 import { Descriptions, Modal } from 'antd';
-import { useState } from 'react';
 
 import { Header } from '~/shared/components';
 import { Container } from '~/shared/components/Container';
@@ -8,24 +7,18 @@ import UserApplicationView from './UserApplicationView';
 import UserDetailView from './UserDetailView';
 import UserFinalReportView from './UserFinalReportView';
 import UserMiddleReportView from './UserMiddleReportView';
+import {
+  UserDetailModalProvider,
+  useUserDetailModalContext,
+} from '../../contexts/UserDetailModalContext';
 import { userDetailData } from '../../mock/allManagement';
 import type { Mode } from '../../types/allManagement';
 import { MODE_SUBTITLES } from '../../types/allManagement';
-
-interface UserDetailModalProps {
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
-  // selectedId: string;
-}
 
 export default function UserDetailModal({
   isModalOpen,
   setIsModalOpen,
 }: UserDetailModalProps) {
-  const [mode, setMode] = useState<Mode>('detail');
-  const { studentId, period, name, professor, department, delay, etc } =
-    userDetailData;
-
   return (
     <Modal
       open={isModalOpen}
@@ -35,6 +28,39 @@ export default function UserDetailModal({
       footer={null}
       centered
     >
+      <UserDetailModalProvider>
+        <UserDetailModalContent />
+      </UserDetailModalProvider>
+    </Modal>
+  );
+}
+
+interface UserDetailModalProps {
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+  // selectedId: string;
+}
+
+function UserDetailModalContent() {
+  const { mode } = useUserDetailModalContext();
+  const { studentId, period, name, professor, department, delay, etc } =
+    userDetailData;
+
+  const renderViewByMode = (mode: Mode) => {
+    switch (mode) {
+      case 'detail':
+        return <UserDetailView />;
+      case 'application':
+        return <UserApplicationView />;
+      case 'middleReport':
+        return <UserMiddleReportView />;
+      case 'finalReport':
+        return <UserFinalReportView />;
+    }
+  };
+
+  return (
+    <>
       <Header title={name} subtitle={MODE_SUBTITLES[mode]} />
 
       <Container style={{ padding: '0px' }}>
@@ -49,10 +75,7 @@ export default function UserDetailModal({
         </Descriptions>
       </Container>
 
-      {mode === 'detail' && <UserDetailView setMode={setMode} />}
-      {mode === 'application' && <UserApplicationView setMode={setMode} />}
-      {mode === 'middleReport' && <UserMiddleReportView setMode={setMode} />}
-      {mode === 'finalReport' && <UserFinalReportView setMode={setMode} />}
-    </Modal>
+      {renderViewByMode(mode)}
+    </>
   );
 }
