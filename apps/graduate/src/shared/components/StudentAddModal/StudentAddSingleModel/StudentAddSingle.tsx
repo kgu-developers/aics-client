@@ -38,7 +38,7 @@ export default function StudentAddSingle({
 
   useEffect(() => {
     if (open) form.resetFields();
-  }, [open,form]);
+  }, [open, form]);
 
   return (
     <Form form={form} layout='vertical' onFinish={handleFinish}>
