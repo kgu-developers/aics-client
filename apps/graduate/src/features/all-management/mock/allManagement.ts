@@ -48,7 +48,7 @@ export const userDetailData: UserDetail = {
 export const stageData: StageData[] = [
   {
     key: '1',
-    stage: '신청접수',
+    stage: '신청서',
     period: '2025-03-17~04-05',
     date: '2025-03-27',
     isSubmit: true,

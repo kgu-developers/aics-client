@@ -28,7 +28,7 @@ export interface StageData {
 }
 
 export const STAGE_NAME_TO_MODE: Record<string, Mode> = {
-  신청접수: 'application',
+  신청서: 'application',
   중간보고서: 'middleReport',
   최종보고서: 'finalReport',
 } as const;
