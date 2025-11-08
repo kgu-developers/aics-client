@@ -3,14 +3,11 @@ import { Table } from 'antd';
 import { Container } from '~/shared/components/Container';
 
 import { getStageColumns } from '../../constants/stageColumns';
+import { useUserDetailModalContext } from '../../contexts/UserDetailModalContext';
 import { stageData } from '../../mock/allManagement';
-import type { Mode } from '../../types/allManagement';
 
-interface UserDetailViewProps {
-  setMode: (mode: Mode) => void;
-}
-
-export default function UserDetailView({ setMode }: UserDetailViewProps) {
+export default function UserDetailView() {
+  const { setMode } = useUserDetailModalContext();
   const stageColumns = getStageColumns(setMode);
 
   return (

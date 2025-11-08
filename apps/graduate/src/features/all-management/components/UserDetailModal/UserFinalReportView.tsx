@@ -2,15 +2,10 @@ import { Button } from 'antd';
 
 import { Container } from '~/shared/components/Container';
 
-import type { Mode } from '../../types/allManagement';
+import { useUserDetailModalContext } from '../../contexts/UserDetailModalContext';
 
-interface UserFinalReportViewProps {
-  setMode: (mode: Mode) => void;
-}
-
-export default function UserFinalReportView({
-  setMode,
-}: UserFinalReportViewProps) {
+export default function UserFinalReportView() {
+  const { setMode } = useUserDetailModalContext();
   return (
     <Container style={{ padding: '0px' }}>
       <Button onClick={() => setMode('detail')}>돌아가기</Button>
