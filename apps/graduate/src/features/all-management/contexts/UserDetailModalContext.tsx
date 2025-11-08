@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
-import { Mode } from '../types/allManagement';
+import type { Mode } from '../types/allManagement';
 
 interface UserDetailModalContextType {
   mode: Mode;
