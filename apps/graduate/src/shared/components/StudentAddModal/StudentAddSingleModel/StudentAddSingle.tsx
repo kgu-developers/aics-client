@@ -110,7 +110,7 @@ export default function StudentAddSingle({
 
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button type='primary' htmlType='submit'>
-          회원가입
+          입력
         </Button>
       </div>
     </Form>

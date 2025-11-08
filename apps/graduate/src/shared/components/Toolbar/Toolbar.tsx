@@ -55,15 +55,15 @@ export default function Toolbar({
       <div className={style.toolbarRight}>
         <div className={style.actions}>
           {!disabledApprove && (
-            <Button size='small' htmlType='button' onClick={onApprove}>
+            <Button size='middle' htmlType='button' onClick={onApprove}>
               승인
             </Button>
           )}
-          <Button size='small' htmlType='button' onClick={onDownload}>
+          <Button size='middle' htmlType='button' onClick={onDownload}>
             다운로드
           </Button>
           <Button
-            size='small'
+            size='middle'
             htmlType='button'
             onClick={() => {
               setAddOpen(true);
