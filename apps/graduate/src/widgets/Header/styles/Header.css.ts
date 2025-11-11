@@ -8,14 +8,21 @@ export const header = style({
   backgroundColor: vars.colors.white,
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   gap: vars.spacing.xs,
-  maxWidth: '1023px',
   padding: `0 ${vars.spacing.md}`,
+  boxShadow: '0px 7px 20px 0px rgba(0,0,0,0.25)',
+})
+
+export const headerContent = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.spacing.md,
 })
 
 export const logo = style({
-  width: '160px',
-  height: 'auto',
+  height: '36px',
+  objectFit: 'contain',
 })
 
 export const title = style({

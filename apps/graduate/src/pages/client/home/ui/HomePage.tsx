@@ -1,10 +1,16 @@
 import { Link } from '@tanstack/react-router'
-import { Button } from 'antd'
-import { ArrowRight } from 'lucide-react'
+import { Timeline } from 'antd'
+import { ArrowRight, Bell, User } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { Fragment } from 'react/jsx-runtime'
 
 import { DataTable, Section } from '~/shared/components'
+import { ROUTE } from '~/shared/constants/route'
 
+import { timelineItems } from '../mock/schedule'
+import { STATUS_TEXT, USER_STATUS } from '../model/userStatus'
 import * as styles from '../styles/HomePage.css'
+import WeekCalendar from './WeekCalendar'
 
 import { vars } from '~/vars.css'
 
@@ -16,74 +22,132 @@ export default function HomePage() {
     day: 'numeric',
   })
 
+  const userStatus = USER_STATUS.CERTIFICATION_NOT_SUBMITTED
+  const { title, description, button } = STATUS_TEXT[userStatus]
+
+  const buttons = [
+    {
+      label: '공지사항 확인하기',
+      href: ROUTE.NOTICE,
+      icon: <Bell size={20} />,
+    },
+    {
+      label: '내 상태 확인하기',
+      href: ROUTE.STATUS,
+      icon: <User size={20} />,
+    },
+  ]
+
   return (
     <>
       <Section>
-        <section className={styles.header}>
-          <p className={styles.headerDate}>{formattedDate}</p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: vars.spacing.sm,
-            }}
-          >
-            <p className={styles.headerText}>
-              아직 졸업 요건 취득 방식을 지정하지 않았어요.
-            </p>
-            <p className={styles.headerDescription}>
-              졸업 요건 취득 방식 신청 기간이에요.
-              <br />
-              요건 취득 방식을 정해 신청해주세요.
-            </p>
-          </div>
-
-          <Button size="large" type="primary" className={styles.headerButton}>
-            <p
+        <section className={styles.upperSection}>
+          <section className={styles.header}>
+            <div
               style={{
-                textAlign: 'start',
-                width: '100%',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                flexDirection: 'column',
+                gap: vars.spacing.sm,
               }}
             >
-              졸업 요건 취득 방식 지정하기
-              <ArrowRight />
-            </p>
-          </Button>
-        </section>
-        <section className={styles.homeButtonSection}>
-          <Button size="large" className={styles.homeButton}>
-            <div>
-              <p>졸업 요건 취득 방식 지정하기</p>
+              <p className={styles.headerTitle}>{title}</p>
+              <p className={styles.headerDescription}>
+                {description.split('\n').map((line) => (
+                  <Fragment key={line}>
+                    {line}
+                    <br />
+                  </Fragment>
+                ))}
+              </p>
             </div>
-          </Button>
-          <Button size="large" className={styles.homeButton}>
-            <div>
-              <p>졸업 요건 취득 방식 지정하기</p>
-            </div>
-          </Button>
-          <Button size="large" className={styles.homeButton}>
-            <div>
-              <p>졸업 요건 취득 방식 지정하기</p>
-            </div>
-          </Button>
+
+            <section className={styles.homeButtonSection}>
+              <NavigateButton
+                href={button.href}
+                icon={<ArrowRight />}
+                label={button.label}
+              />
+
+              {buttons.map((button) => (
+                <NavigateButton
+                  key={button.label}
+                  href={button.href}
+                  icon={button.icon}
+                  label={button.label}
+                />
+              ))}
+            </section>
+          </section>
+          <section className={styles.scheduleCard}>
+            <Section>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: vars.spacing.sm,
+                }}
+              >
+                <p className={styles.headerDate}>{formattedDate}</p>
+                <p className={styles.headerText}> 졸업 요건 취득 일정</p>
+              </div>
+              <WeekCalendar />
+              <Timeline
+                items={timelineItems}
+                style={{ marginTop: vars.spacing.md }}
+              />
+            </Section>
+          </section>
         </section>
       </Section>
-      <Section>
-        <Section.Header
-          subtitle="졸업 관련 공지사항을 확인해주세요."
-          action={
-            <Link to="/notices" className={styles.noticeAction}>
-              <p>더보기</p>
-            </Link>
-          }
-        >
-          공지사항
-        </Section.Header>
-        <DataTable rows={[]} columns={[]} getRowId={() => ''} />
-      </Section>
+      <div className={styles.noticeSection}>
+        <Section>
+          <Section.Header
+            subtitle="졸업 관련 공지사항을 확인해주세요."
+            action={
+              <Link to="/notices" className={styles.noticeAction}>
+                <p>더보기</p>
+              </Link>
+            }
+          >
+            공지사항
+          </Section.Header>
+          <DataTable rows={[]} columns={[]} getRowId={() => ''} />
+        </Section>
+      </div>
     </>
+  )
+}
+
+const NavigateButton = ({
+  href,
+  icon,
+  label,
+}: {
+  href: string
+  icon: ReactNode
+  label: string
+}) => {
+  return (
+    <Link to={href} style={{ textDecoration: 'none' }}>
+      <button type="button" className={styles.homeButton}>
+        {icon}
+        <p
+          style={{
+            textWrap: 'wrap',
+            fontSize: vars.font.size.lg,
+            textAlign: 'start',
+            lineHeight: '1.5',
+            fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
+          }}
+        >
+          {label.split('\n').map((line) => (
+            <Fragment key={line}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
+        </p>
+      </button>
+    </Link>
   )
 }
