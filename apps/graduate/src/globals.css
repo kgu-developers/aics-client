@@ -42,6 +42,11 @@ body {
   font-feature-settings: 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06';
   font-variation-settings: 'wght' 400;
 }
+
+p {
+  margin: 0;
+}
+
 strong {
   font-variation-settings: 'wght' 700;
 }
