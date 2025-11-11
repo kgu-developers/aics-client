@@ -1,19 +1,19 @@
-﻿import { Card, Col, Modal, Row, Typography, theme, Divider } from 'antd';
-import { useState } from 'react';
+﻿import { Card, Col, Divider, Modal, Row, Typography, theme } from 'antd'
+import { useState } from 'react'
 
-import { modalStyles } from '~/shared/config';
+import { modalStyles } from '~/shared/config'
 
-import * as styles from './StudentAddModal.css';
-import StudentAddMultiple from './StudentAddMultipleModel/StudentAddMultiple';
-import StudentAddSingle from './StudentAddSingleModel/StudentAddSingle';
-import type { SingleSubmitPayload, BulkUploadRow } from './types';
+import * as styles from './StudentAddModal.css'
+import StudentAddMultiple from './StudentAddMultipleModel/StudentAddMultiple'
+import StudentAddSingle from './StudentAddSingleModel/StudentAddSingle'
+import type { BulkUploadRow, SingleSubmitPayload } from './types'
 
 type Props = {
-  open: boolean;
-  onClose: () => void;
-  onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
-  onBulkSubmit?: (rows: BulkUploadRow[]) => void | Promise<void>;
-};
+  open: boolean
+  onClose: () => void
+  onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>
+  onBulkSubmit?: (rows: BulkUploadRow[]) => void | Promise<void>
+}
 
 export default function StudentAddModal({
   open,
@@ -21,16 +21,16 @@ export default function StudentAddModal({
   onSubmit,
   onBulkSubmit,
 }: Props) {
-  const [mode, setMode] = useState<'single' | 'excel'>('single');
+  const [mode, setMode] = useState<'single' | 'excel'>('single')
 
-  const { width, styles: modalInnerStyles } = modalStyles('md');
+  const { width, styles: modalInnerStyles } = modalStyles('md')
 
   return (
     <Modal
       open={open}
       onCancel={onClose}
       footer={null}
-      title='학생 추가'
+      title="학생 추가"
       width={width}
       styles={modalInnerStyles}
       destroyOnClose
@@ -41,7 +41,7 @@ export default function StudentAddModal({
         <Row gutter={12} style={{ width: '100%' }}>
           <Col span={12}>
             <Card
-              size='small'
+              size="small"
               onClick={() => setMode('single')}
               style={{
                 cursor: 'pointer',
@@ -59,14 +59,14 @@ export default function StudentAddModal({
               <Typography.Title level={5} style={{ margin: 0 }}>
                 단일 추가
               </Typography.Title>
-              <Typography.Text type='secondary'>
+              <Typography.Text type="secondary">
                 학생 정보를 수기로 입력해요.
               </Typography.Text>
             </Card>
           </Col>
           <Col span={12}>
             <Card
-              size='small'
+              size="small"
               onClick={() => setMode('excel')}
               style={{
                 cursor: 'pointer',
@@ -84,7 +84,7 @@ export default function StudentAddModal({
               <Typography.Title level={5} style={{ margin: 0 }}>
                 엑셀 업로드
               </Typography.Title>
-              <Typography.Text type='secondary'>
+              <Typography.Text type="secondary">
                 엑셀 파일로 여러 명 입력해요.
               </Typography.Text>
             </Card>
@@ -93,12 +93,12 @@ export default function StudentAddModal({
       </div>
 
       <Divider style={{ margin: '20px 0 20px' }} />
-      
+
       {mode === 'single' ? (
         <StudentAddSingle open={open} onSubmit={onSubmit} />
       ) : (
         <StudentAddMultiple open={open} onBulkSubmit={onBulkSubmit} />
       )}
     </Modal>
-  );
+  )
 }

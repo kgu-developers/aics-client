@@ -1,6 +1,8 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
-import { vars } from '~/vars.css'
+
 import { Header } from '~/widgets/Header'
+
+import { vars } from '~/vars.css'
 
 export const Route = createFileRoute('/_clientLayout')({
   beforeLoad: () => {},

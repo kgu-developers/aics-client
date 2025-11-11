@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css'
+
 import { vars } from '~/vars.css'
 
 export const header = style({
@@ -30,7 +31,7 @@ export const headerDescription = style({
 
 export const headerButton = style({
   width: '100%',
-  maxWidth: '360px',
+  maxWidth: '500px',
   height: '100%',
   border: 'none',
   padding: vars.spacing.md,

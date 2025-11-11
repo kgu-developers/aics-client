@@ -1,8 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import { Button } from 'antd'
-import { Section } from '~/shared/components/Section'
-import { vars } from '~/vars.css'
+import { ArrowRight } from 'lucide-react'
+
+import { DataTable, Section } from '~/shared/components'
+
 import * as styles from '../styles/HomePage.css'
+
+import { vars } from '~/vars.css'
 
 export default function HomePage() {
   const today = new Date()
@@ -39,9 +43,13 @@ export default function HomePage() {
               style={{
                 textAlign: 'start',
                 width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
             >
               졸업 요건 취득 방식 지정하기
+              <ArrowRight />
             </p>
           </Button>
         </section>
@@ -74,6 +82,7 @@ export default function HomePage() {
         >
           공지사항
         </Section.Header>
+        <DataTable rows={[]} columns={[]} getRowId={() => ''} />
       </Section>
     </>
   )
