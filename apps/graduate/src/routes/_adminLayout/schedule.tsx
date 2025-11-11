@@ -1,11 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { ScheduleSection } from '~/features/schedule/components';
+import { useAuthStore } from '~/shared/stores'
+
+import { ScheduleSection } from '~/features/schedule/components'
+
+import { SchedulePage } from '~/pages/client/schedule'
 
 export const Route = createFileRoute('/_adminLayout/schedule')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  return <ScheduleSection />;
+  const { isAdmin } = useAuthStore()
+  if (!isAdmin) {
+    return <SchedulePage />
+  }
+
+  return <ScheduleSection />
 }
