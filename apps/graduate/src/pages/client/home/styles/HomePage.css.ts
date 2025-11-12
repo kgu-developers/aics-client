@@ -41,10 +41,9 @@ export const header = style({
   flex: 2,
   display: 'flex',
   flexDirection: 'column',
+  backgroundColor: vars.colors.main,
   borderRadius: vars.radius.lg,
   gap: vars.spacing.lg,
-  justifyContent: 'space-between',
-  boxSizing: 'border-box',
 });
 
 export const headerTextWrapper = style({
