@@ -1,4 +1,4 @@
-import { ROUTE } from '~/shared/constants/route'
+import { ROUTE } from '~/shared/constants/route';
 
 export const USER_STATUS = {
   UNSET: 'unset',
@@ -9,18 +9,18 @@ export const USER_STATUS = {
   CERTIFICATION_APPLIED: 'certification_applied',
   CERTIFICATION_NOT_SUBMITTED: 'certification_not_submitted',
   CERTIFICATION_SUBMITTED: 'certification_submitted',
-} as const
+} as const;
 
-export type UserStatus = (typeof USER_STATUS)[keyof typeof USER_STATUS]
+export type UserStatus = (typeof USER_STATUS)[keyof typeof USER_STATUS];
 
 type StatusItem = {
-  title: string
-  description: string
+  title: string;
+  description: string;
   button: {
-    label: string
-    href: (typeof ROUTE)[keyof typeof ROUTE]
-  }
-}
+    label: string;
+    href: (typeof ROUTE)[keyof typeof ROUTE];
+  };
+};
 
 export const STATUS_TEXT: Record<UserStatus, StatusItem> = {
   [USER_STATUS.UNSET]: {
@@ -39,7 +39,7 @@ export const STATUS_TEXT: Record<UserStatus, StatusItem> = {
     졸업 논문 제출 일정을 확인해주세요.`,
     button: {
       label: '일정 확인하기',
-      href: ROUTE.SCHEDULE,
+      href: ROUTE.STATUS,
     },
   },
   [USER_STATUS.THESIS_NOT_SUBMITTED]: {
@@ -66,7 +66,7 @@ export const STATUS_TEXT: Record<UserStatus, StatusItem> = {
     졸업 논문 심사 일정을 확인해주세요.`,
     button: {
       label: '일정 확인하기',
-      href: ROUTE.SCHEDULE,
+      href: ROUTE.STATUS,
     },
   },
   [USER_STATUS.CERTIFICATION_APPLIED]: {
@@ -75,7 +75,7 @@ export const STATUS_TEXT: Record<UserStatus, StatusItem> = {
     자격증 증빙 문서 제출 일정을 확인해주세요.`,
     button: {
       label: '일정 확인하기',
-      href: ROUTE.SCHEDULE,
+      href: ROUTE.STATUS,
     },
   },
   [USER_STATUS.CERTIFICATION_NOT_SUBMITTED]: {
@@ -94,7 +94,7 @@ export const STATUS_TEXT: Record<UserStatus, StatusItem> = {
     자격증 증빙 문서 심사 일정을 확인해주세요.`,
     button: {
       label: '일정 확인하기',
-      href: ROUTE.SCHEDULE,
+      href: ROUTE.STATUS,
     },
   },
-} as const
+} as const;

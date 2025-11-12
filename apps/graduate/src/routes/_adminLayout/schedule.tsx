@@ -1,20 +1,17 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
-import { useAuthStore } from '~/shared/stores'
+import { ProtectedRoute } from '~/shared/components';
 
-import { ScheduleSection } from '~/features/schedule/components'
-
-import { SchedulePage } from '~/pages/client/schedule'
+import { ScheduleSection } from '~/features/schedule/components';
 
 export const Route = createFileRoute('/_adminLayout/schedule')({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  const { isAdmin } = useAuthStore()
-  if (!isAdmin) {
-    return <SchedulePage />
-  }
-
-  return <ScheduleSection />
+  return (
+    <ProtectedRoute>
+      <ScheduleSection />
+    </ProtectedRoute>
+  );
 }
