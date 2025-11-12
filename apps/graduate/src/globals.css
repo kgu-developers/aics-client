@@ -50,3 +50,7 @@ p {
 strong {
   font-variation-settings: 'wght' 700;
 }
+
+.ant-drawer-content-wrapper {
+  box-shadow: none !important;
+}
