@@ -8,4 +8,5 @@ export const ROUTE = {
   APPLY: '/apply',
   STATUS: '/status',
   SCHEDULE: '/schedule',
+  ALL: '/all',
 } as const;

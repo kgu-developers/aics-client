@@ -5,11 +5,11 @@ import { useTableState } from '~/shared/hooks';
 
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import { MOCK_ROWS } from '../mock/allManagement';
-import * as style from '../styles/allManagement.css';
+import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
 
-export default function AllManagement() {
+export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const [selectedId, setSelectedId] = useState<string>('');

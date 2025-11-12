@@ -16,9 +16,9 @@ import { Route as AfterLoginThesisRouteImport } from './routes/_afterLogin/thesi
 import { Route as AfterLoginStatusRouteImport } from './routes/_afterLogin/status'
 import { Route as AfterLoginScheduleRouteImport } from './routes/_afterLogin/schedule'
 import { Route as AfterLoginGuidelinesAndRulesRouteImport } from './routes/_afterLogin/guidelines-and-rules'
-import { Route as AfterLoginGraduatesAllRouteImport } from './routes/_afterLogin/graduates-all'
 import { Route as AfterLoginCertificationRouteImport } from './routes/_afterLogin/certification'
 import { Route as AfterLoginApplyRouteImport } from './routes/_afterLogin/apply'
+import { Route as AfterLoginAllRouteImport } from './routes/_afterLogin/all'
 import { Route as AfterLoginNoticeIndexRouteImport } from './routes/_afterLogin/notice/index'
 import { Route as AfterLoginNoticeCreateRouteImport } from './routes/_afterLogin/notice/create'
 import { Route as AfterLoginNoticePostIdRouteImport } from './routes/_afterLogin/notice/$postId'
@@ -58,11 +58,6 @@ const AfterLoginGuidelinesAndRulesRoute =
     path: '/guidelines-and-rules',
     getParentRoute: () => AfterLoginRoute,
   } as any)
-const AfterLoginGraduatesAllRoute = AfterLoginGraduatesAllRouteImport.update({
-  id: '/graduates-all',
-  path: '/graduates-all',
-  getParentRoute: () => AfterLoginRoute,
-} as any)
 const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
   id: '/certification',
   path: '/certification',
@@ -71,6 +66,11 @@ const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
 const AfterLoginApplyRoute = AfterLoginApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginAllRoute = AfterLoginAllRouteImport.update({
+  id: '/all',
+  path: '/all',
   getParentRoute: () => AfterLoginRoute,
 } as any)
 const AfterLoginNoticeIndexRoute = AfterLoginNoticeIndexRouteImport.update({
@@ -91,9 +91,9 @@ const AfterLoginNoticePostIdRoute = AfterLoginNoticePostIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
+  '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
-  '/graduates-all': typeof AfterLoginGraduatesAllRoute
   '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
   '/schedule': typeof AfterLoginScheduleRoute
   '/status': typeof AfterLoginStatusRoute
@@ -105,9 +105,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
-  '/graduates-all': typeof AfterLoginGraduatesAllRoute
   '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
   '/schedule': typeof AfterLoginScheduleRoute
   '/status': typeof AfterLoginStatusRoute
@@ -121,9 +121,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_afterLogin': typeof AfterLoginRouteWithChildren
   '/login': typeof LoginRoute
+  '/_afterLogin/all': typeof AfterLoginAllRoute
   '/_afterLogin/apply': typeof AfterLoginApplyRoute
   '/_afterLogin/certification': typeof AfterLoginCertificationRoute
-  '/_afterLogin/graduates-all': typeof AfterLoginGraduatesAllRoute
   '/_afterLogin/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
   '/_afterLogin/schedule': typeof AfterLoginScheduleRoute
   '/_afterLogin/status': typeof AfterLoginStatusRoute
@@ -137,9 +137,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/login'
+    | '/all'
     | '/apply'
     | '/certification'
-    | '/graduates-all'
     | '/guidelines-and-rules'
     | '/schedule'
     | '/status'
@@ -151,9 +151,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/all'
     | '/apply'
     | '/certification'
-    | '/graduates-all'
     | '/guidelines-and-rules'
     | '/schedule'
     | '/status'
@@ -166,9 +166,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_afterLogin'
     | '/login'
+    | '/_afterLogin/all'
     | '/_afterLogin/apply'
     | '/_afterLogin/certification'
-    | '/_afterLogin/graduates-all'
     | '/_afterLogin/guidelines-and-rules'
     | '/_afterLogin/schedule'
     | '/_afterLogin/status'
@@ -235,13 +235,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AfterLoginGuidelinesAndRulesRouteImport
       parentRoute: typeof AfterLoginRoute
     }
-    '/_afterLogin/graduates-all': {
-      id: '/_afterLogin/graduates-all'
-      path: '/graduates-all'
-      fullPath: '/graduates-all'
-      preLoaderRoute: typeof AfterLoginGraduatesAllRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
     '/_afterLogin/certification': {
       id: '/_afterLogin/certification'
       path: '/certification'
@@ -254,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/apply'
       fullPath: '/apply'
       preLoaderRoute: typeof AfterLoginApplyRouteImport
+      parentRoute: typeof AfterLoginRoute
+    }
+    '/_afterLogin/all': {
+      id: '/_afterLogin/all'
+      path: '/all'
+      fullPath: '/all'
+      preLoaderRoute: typeof AfterLoginAllRouteImport
       parentRoute: typeof AfterLoginRoute
     }
     '/_afterLogin/notice/': {
@@ -281,9 +281,9 @@ declare module '@tanstack/react-router' {
 }
 
 interface AfterLoginRouteChildren {
+  AfterLoginAllRoute: typeof AfterLoginAllRoute
   AfterLoginApplyRoute: typeof AfterLoginApplyRoute
   AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute
-  AfterLoginGraduatesAllRoute: typeof AfterLoginGraduatesAllRoute
   AfterLoginGuidelinesAndRulesRoute: typeof AfterLoginGuidelinesAndRulesRoute
   AfterLoginScheduleRoute: typeof AfterLoginScheduleRoute
   AfterLoginStatusRoute: typeof AfterLoginStatusRoute
@@ -295,9 +295,9 @@ interface AfterLoginRouteChildren {
 }
 
 const AfterLoginRouteChildren: AfterLoginRouteChildren = {
+  AfterLoginAllRoute: AfterLoginAllRoute,
   AfterLoginApplyRoute: AfterLoginApplyRoute,
   AfterLoginCertificationRoute: AfterLoginCertificationRoute,
-  AfterLoginGraduatesAllRoute: AfterLoginGraduatesAllRoute,
   AfterLoginGuidelinesAndRulesRoute: AfterLoginGuidelinesAndRulesRoute,
   AfterLoginScheduleRoute: AfterLoginScheduleRoute,
   AfterLoginStatusRoute: AfterLoginStatusRoute,

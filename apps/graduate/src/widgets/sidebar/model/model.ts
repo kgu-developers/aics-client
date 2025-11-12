@@ -12,7 +12,7 @@ export const adminMenuSections = [
   {
     title: '졸업생 관리',
     items: [
-      { label: '대상자 전체 관리', to: '/graduates-all' },
+      { label: '대상자 전체 관리', to: ROUTE.ALL },
       { label: '자격증 신청 관리', to: ROUTE.CERTIFICATION },
       { label: '졸업 논문 관리', to: ROUTE.THESIS },
     ],
