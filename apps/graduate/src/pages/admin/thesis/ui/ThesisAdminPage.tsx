@@ -1,12 +1,12 @@
 import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
-import { thesisColumns } from '~/features/thesis-management/constants/thesisColumns';
-import { MOCK_ROWS } from '~/features/thesis-management/mock/mockRows';
-import * as style from '~/features/thesis-management/styles/thesisManagement.css';
-import type { ThesisRow } from '~/features/thesis-management/types/rows';
+import { thesisColumns } from '../constants/thesisColumns';
+import { MOCK_ROWS } from '../mock/mockRows';
+import * as style from '../styles/ThesisAdminPage.css';
+import type { ThesisRow } from '../types/rows';
 
-export default function ThesisManagement() {
+export default function ThesisAdminPage() {
   const st = useTableState<ThesisRow>(MOCK_ROWS, r => r.id, {
     pageSize: 10,
     keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],

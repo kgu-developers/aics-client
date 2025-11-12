@@ -1,4 +1,4 @@
-import type { ThesisRow } from '~/features/thesis-management/types/rows';
+import type { ThesisRow } from '../types/rows';
 
 const names = [
   '서진규',
