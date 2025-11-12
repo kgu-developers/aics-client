@@ -37,6 +37,7 @@ function buildMockRows(count = 90): ThesisRow[] {
   return Array.from({ length: count }, (_, i) => {
     const n = i + 1;
     return {
+      id: n,
       no: n,
       studentId: makeStudentId(n),
       name: names[i % names.length],
