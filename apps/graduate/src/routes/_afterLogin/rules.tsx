@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { ProtectedRoute } from '~/shared/components';
 
-export const Route = createFileRoute('/_afterLogin/guidelines-and-rules')({
+export const Route = createFileRoute('/_afterLogin/rules')({
   component: RouteComponent,
 });
 

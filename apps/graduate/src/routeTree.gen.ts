@@ -15,7 +15,7 @@ import { Route as AfterLoginIndexRouteImport } from './routes/_afterLogin/index'
 import { Route as AfterLoginThesisRouteImport } from './routes/_afterLogin/thesis'
 import { Route as AfterLoginStatusRouteImport } from './routes/_afterLogin/status'
 import { Route as AfterLoginScheduleRouteImport } from './routes/_afterLogin/schedule'
-import { Route as AfterLoginGuidelinesAndRulesRouteImport } from './routes/_afterLogin/guidelines-and-rules'
+import { Route as AfterLoginRulesRouteImport } from './routes/_afterLogin/rules'
 import { Route as AfterLoginCertificationRouteImport } from './routes/_afterLogin/certification'
 import { Route as AfterLoginApplyRouteImport } from './routes/_afterLogin/apply'
 import { Route as AfterLoginAllRouteImport } from './routes/_afterLogin/all'
@@ -52,12 +52,11 @@ const AfterLoginScheduleRoute = AfterLoginScheduleRouteImport.update({
   path: '/schedule',
   getParentRoute: () => AfterLoginRoute,
 } as any)
-const AfterLoginGuidelinesAndRulesRoute =
-  AfterLoginGuidelinesAndRulesRouteImport.update({
-    id: '/guidelines-and-rules',
-    path: '/guidelines-and-rules',
-    getParentRoute: () => AfterLoginRoute,
-  } as any)
+const AfterLoginRulesRoute = AfterLoginRulesRouteImport.update({
+  id: '/rules',
+  path: '/rules',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
 const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
   id: '/certification',
   path: '/certification',
@@ -94,7 +93,7 @@ export interface FileRoutesByFullPath {
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
-  '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/rules': typeof AfterLoginRulesRoute
   '/schedule': typeof AfterLoginScheduleRoute
   '/status': typeof AfterLoginStatusRoute
   '/thesis': typeof AfterLoginThesisRoute
@@ -108,7 +107,7 @@ export interface FileRoutesByTo {
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
-  '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/rules': typeof AfterLoginRulesRoute
   '/schedule': typeof AfterLoginScheduleRoute
   '/status': typeof AfterLoginStatusRoute
   '/thesis': typeof AfterLoginThesisRoute
@@ -124,7 +123,7 @@ export interface FileRoutesById {
   '/_afterLogin/all': typeof AfterLoginAllRoute
   '/_afterLogin/apply': typeof AfterLoginApplyRoute
   '/_afterLogin/certification': typeof AfterLoginCertificationRoute
-  '/_afterLogin/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/_afterLogin/rules': typeof AfterLoginRulesRoute
   '/_afterLogin/schedule': typeof AfterLoginScheduleRoute
   '/_afterLogin/status': typeof AfterLoginStatusRoute
   '/_afterLogin/thesis': typeof AfterLoginThesisRoute
@@ -140,7 +139,7 @@ export interface FileRouteTypes {
     | '/all'
     | '/apply'
     | '/certification'
-    | '/guidelines-and-rules'
+    | '/rules'
     | '/schedule'
     | '/status'
     | '/thesis'
@@ -154,7 +153,7 @@ export interface FileRouteTypes {
     | '/all'
     | '/apply'
     | '/certification'
-    | '/guidelines-and-rules'
+    | '/rules'
     | '/schedule'
     | '/status'
     | '/thesis'
@@ -169,7 +168,7 @@ export interface FileRouteTypes {
     | '/_afterLogin/all'
     | '/_afterLogin/apply'
     | '/_afterLogin/certification'
-    | '/_afterLogin/guidelines-and-rules'
+    | '/_afterLogin/rules'
     | '/_afterLogin/schedule'
     | '/_afterLogin/status'
     | '/_afterLogin/thesis'
@@ -228,11 +227,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AfterLoginScheduleRouteImport
       parentRoute: typeof AfterLoginRoute
     }
-    '/_afterLogin/guidelines-and-rules': {
-      id: '/_afterLogin/guidelines-and-rules'
-      path: '/guidelines-and-rules'
-      fullPath: '/guidelines-and-rules'
-      preLoaderRoute: typeof AfterLoginGuidelinesAndRulesRouteImport
+    '/_afterLogin/rules': {
+      id: '/_afterLogin/rules'
+      path: '/rules'
+      fullPath: '/rules'
+      preLoaderRoute: typeof AfterLoginRulesRouteImport
       parentRoute: typeof AfterLoginRoute
     }
     '/_afterLogin/certification': {
@@ -284,7 +283,7 @@ interface AfterLoginRouteChildren {
   AfterLoginAllRoute: typeof AfterLoginAllRoute
   AfterLoginApplyRoute: typeof AfterLoginApplyRoute
   AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute
-  AfterLoginGuidelinesAndRulesRoute: typeof AfterLoginGuidelinesAndRulesRoute
+  AfterLoginRulesRoute: typeof AfterLoginRulesRoute
   AfterLoginScheduleRoute: typeof AfterLoginScheduleRoute
   AfterLoginStatusRoute: typeof AfterLoginStatusRoute
   AfterLoginThesisRoute: typeof AfterLoginThesisRoute
@@ -298,7 +297,7 @@ const AfterLoginRouteChildren: AfterLoginRouteChildren = {
   AfterLoginAllRoute: AfterLoginAllRoute,
   AfterLoginApplyRoute: AfterLoginApplyRoute,
   AfterLoginCertificationRoute: AfterLoginCertificationRoute,
-  AfterLoginGuidelinesAndRulesRoute: AfterLoginGuidelinesAndRulesRoute,
+  AfterLoginRulesRoute: AfterLoginRulesRoute,
   AfterLoginScheduleRoute: AfterLoginScheduleRoute,
   AfterLoginStatusRoute: AfterLoginStatusRoute,
   AfterLoginThesisRoute: AfterLoginThesisRoute,
