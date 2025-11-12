@@ -1,21 +1,11 @@
-import { Navigate, useNavigate } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 
 import { Button } from '~/shared/components';
 import { ROUTE } from '~/shared/constants/route';
-import { useAuthStore } from '~/shared/stores';
-
-import { HomePage } from '~/pages/client/home';
 
 export default function LoginPage() {
-  const navigate = useNavigate();
-  const { setIsLoggedIn, setIsAdmin, isAdmin, isLoggedIn } = useAuthStore();
-
-  if (isLoggedIn && isAdmin) {
-    return <Navigate to={ROUTE.HOME} />;
-  }
-  if (isLoggedIn && !isAdmin) {
-    return <HomePage />;
-  }
+  const router = useRouter();
+  const { setIsAuthenticated, setIsAdmin } = router.options.context.auth;
 
   return (
     <div
@@ -31,9 +21,11 @@ export default function LoginPage() {
           size='lg'
           type='button'
           onClick={() => {
-            setIsLoggedIn(true);
-            setIsAdmin(false);
-            navigate({ to: '/' });
+            Promise.all([setIsAuthenticated(true), setIsAdmin(false)]).then(
+              () => {
+                router.navigate({ to: ROUTE.HOME, replace: true });
+              },
+            );
           }}
         >
           Client 클라이언트
@@ -42,9 +34,11 @@ export default function LoginPage() {
           size='lg'
           type='button'
           onClick={() => {
-            setIsLoggedIn(true);
-            setIsAdmin(true);
-            navigate({ to: '/' });
+            Promise.all([setIsAuthenticated(true), setIsAdmin(true)]).then(
+              () => {
+                router.navigate({ to: ROUTE.HOME, replace: true });
+              },
+            );
           }}
         >
           Admin 관리자
