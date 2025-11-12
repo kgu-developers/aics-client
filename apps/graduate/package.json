@@ -22,6 +22,7 @@
     "antd": "^5.24.8",
     "dayjs": "^1.11.18",
     "lucide-react": "^0.503.0",
+    "motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-quill-new": "^3.6.0",
