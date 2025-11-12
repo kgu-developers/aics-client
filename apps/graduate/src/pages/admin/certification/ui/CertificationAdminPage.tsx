@@ -1,13 +1,12 @@
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
-import { certColumns } from '~/features/certification-management/constants/certColumns';
-import { MOCK_ROWS } from '~/features/certification-management/mock/mockRows';
-import * as style from '~/features/certification-management/styles/certificationManagement.css';
-
+import { certColumns } from '../constants/certColumns';
+import { MOCK_ROWS } from '../mock/mockRows';
+import * as style from '../styles/CertificationAdminPage.css';
 import type { CertRow } from '../types/row';
 
-export default function CertificationManagement() {
+export default function CertificationAdminPage() {
   const st = useTableState<CertRow>(MOCK_ROWS, r => r.id, {
     pageSize: 10,
     keys: ['studentId', 'name', 'status', 'approved'],

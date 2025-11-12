@@ -1,6 +1,6 @@
 import type { Column } from '~/shared/components/DataTable/DataTable';
 
-import type { CertRow } from '~/features/certification-management/types/row';
+import type { CertRow } from '../types/row';
 
 export const certColumns: ReadonlyArray<Column<CertRow>> = [
   { key: 'no', header: '번호', width: 56, cell: r => r.no },

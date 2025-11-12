@@ -1,4 +1,4 @@
-import type { CertRow } from '~/features/certification-management/types/row';
+import type { CertRow } from '../types/row';
 
 export const MOCK_ROWS: CertRow[] = Array.from({ length: 88 }).map((_, i) => ({
   id: i + 1,
