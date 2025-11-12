@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
-import * as styles from './Section.css'
+import * as styles from './Section.css';
 
 export default function Section({ children }: { children: ReactNode }) {
-  return <section className={styles.section}>{children}</section>
+  return <section className={styles.section}>{children}</section>;
 }
 
 function SectionHeader({
@@ -11,9 +11,9 @@ function SectionHeader({
   subtitle,
   action,
 }: {
-  children: ReactNode
-  subtitle?: string
-  action?: ReactNode
+  children: ReactNode;
+  subtitle?: string;
+  action?: ReactNode;
 }) {
   return (
     <header className={styles.sectionHeader}>
@@ -21,7 +21,7 @@ function SectionHeader({
       <div className={styles.sectionHeaderSubtitle}>{subtitle}</div>
       <div className={styles.sectionHeaderAction}>{action}</div>
     </header>
-  )
+  );
 }
 
-Section.Header = SectionHeader
+Section.Header = SectionHeader;
