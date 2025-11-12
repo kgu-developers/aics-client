@@ -1,14 +1,13 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useRouter } from '@tanstack/react-router';
 import { Avatar, Dropdown, MenuProps } from 'antd';
 import { User } from 'lucide-react';
 
-import { useAuthStore } from '~/shared/stores';
-
 import * as styles from '../styles/Header.css';
 
-export default function Header() {
-  const { setIsLoggedIn } = useAuthStore();
+import { AuthContext } from '~/routes/__root';
 
+export default function Header({ auth }: AuthContext) {
+  const router = useRouter();
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -16,7 +15,14 @@ export default function Header() {
         <a
           target='_blank'
           rel='noopener noreferrer'
-          onClick={() => setIsLoggedIn(false)}
+          onClick={() => {
+            Promise.all([
+              auth.setIsAuthenticated(false),
+              auth.setIsAdmin(false),
+            ]).then(() => {
+              router.navigate({ to: '/login' });
+            });
+          }}
         >
           로그아웃
         </a>
