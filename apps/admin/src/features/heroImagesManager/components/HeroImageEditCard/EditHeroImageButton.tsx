@@ -1,19 +1,20 @@
-import { Button, Modal } from 'antd'
-import { PencilIcon } from 'lucide-react'
+import { Button, Modal } from 'antd';
+import { PencilIcon } from 'lucide-react';
 
-import { HeroImageForm } from '../HeroImageForm'
 
-import { useModal } from '~/shared/hooks/useModal'
-import { MESSAGES } from '../../constant/constants'
+import { useModal } from '~/shared/hooks/useModal';
 
-import type { CarouselResponse } from '~/apis/community/requests'
+import { MESSAGES } from '../../constant/constants';
+import { HeroImageForm } from '../HeroImageForm';
+
+import type { CarouselResponse } from '~/apis/community/requests';
 
 interface EditHeroImageButtonProps {
-  image: CarouselResponse
+  image: CarouselResponse;
 }
 
 export const EditHeroImageButton = ({ image }: EditHeroImageButtonProps) => {
-  const { isOpen, openModal, closeModal } = useModal()
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <>
@@ -28,12 +29,12 @@ export const EditHeroImageButton = ({ image }: EditHeroImageButtonProps) => {
       </Modal>
       <Button
         icon={<PencilIcon size={'1rem'} />}
-        color="primary"
-        variant="solid"
+        color='primary'
+        variant='solid'
         onClick={openModal}
       >
         {MESSAGES.button.update}
       </Button>
     </>
-  )
-}
+  );
+};

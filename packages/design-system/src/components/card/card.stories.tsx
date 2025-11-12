@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import ListRow from '../list-row/list-row'
-import List from '../list/list'
-import Card from './card'
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Card from './card';
+import List from '../list/list';
+import ListRow from '../list-row/list-row';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -11,18 +12,18 @@ const meta: Meta<typeof Card> = {
   },
   tags: ['autodocs'],
   args: {},
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
     children: (
       <>
         <Card.Header
-          title="공지사항"
-          description="학부와 관련된 주용한 공지사항을 안내해드려요."
+          title='공지사항'
+          description='학부와 관련된 주용한 공지사항을 안내해드려요.'
         />
         <Card.Content>
           <List>
@@ -41,4 +42,4 @@ export const Example: Story = {
       </>
     ),
   },
-}
+};

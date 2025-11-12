@@ -1,0 +1,21 @@
+# Build artifacts
+dist
+**/dist/**
+build
+**/build/**
+.next
+**/.next/**
+out
+**/out/**
+storybook-static
+**/storybook-static/**
+coverage
+**/coverage/**
+
+# Public build assets
+public/admin
+**/public/admin/**
+**/public/**/assets/**
+
+# Code generation templates
+packages/design-system/turbo/generators/templates/*.hbs

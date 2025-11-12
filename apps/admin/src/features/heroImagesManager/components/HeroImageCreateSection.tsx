@@ -1,12 +1,12 @@
-import { HeroCarousel } from '~/shared/components/HeroCarousel'
-import { HeroImageCreator } from './HeroImageCreator'
+import { HeroCarousel } from '~/shared/components/HeroCarousel';
 
-import { MESSAGES } from '../constant/constants'
+import { HeroImageCreator } from './HeroImageCreator';
+import { MESSAGES } from '../constant/constants';
 
-import type { CarouselResponse } from '~/apis/community/requests'
+import type { CarouselResponse } from '~/apis/community/requests';
 
 interface HeroImageCreateSectionProps {
-  heroContents: CarouselResponse[]
+  heroContents: CarouselResponse[];
 }
 
 export const HeroImageCreateSection = ({
@@ -15,13 +15,13 @@ export const HeroImageCreateSection = ({
   return (
     <>
       <div>
-        <h1 className="text-3xl font-bold">{MESSAGES.title.updateImage}</h1>
-        <p className="text-sm text-gray-500">
+        <h1 className='text-3xl font-bold'>{MESSAGES.title.updateImage}</h1>
+        <p className='text-sm text-gray-500'>
           {MESSAGES.paragraph.updateImage}
         </p>
       </div>
       <HeroCarousel autoplay={false} images={heroContents} />
       <HeroImageCreator />
     </>
-  )
-}
+  );
+};

@@ -36,7 +36,7 @@ export const MESSAGES = {
     updateLab: '연구실 수정에 실패했습니다.',
     uploadImage: '이미지 업로드에 실패했습니다.',
   },
-} as const
+} as const;
 
 export const LABELS = {
   name: '연구실 이름',
@@ -44,11 +44,11 @@ export const LABELS = {
   location: '연구실 위치',
   homepage: '연구실 홈페이지 (kyonggi.ac.kr 도메인만 가능합니다)',
   advisor: '담당 교수',
-} as const
+} as const;
 
 export const PATTERN = {
   site: /^https?:\/\/([a-zA-Z0-9-]+\.)*kyonggi\.ac\.kr(\/.*)?$/,
-} as const
+} as const;
 
 export const TABLE_COLUMNS = {
   name: {
@@ -80,4 +80,4 @@ export const TABLE_COLUMNS = {
     md: '15%',
     lg: '20%',
   },
-}
+};

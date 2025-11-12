@@ -3,6 +3,6 @@ export {
   useClubServicePatchApiV1ClubsById,
   useClubServiceDeleteApiV1ClubsById,
   useFileServicePostApiV1FilesClub,
-} from '~/apis/admin/queries'
+} from '~/apis/admin/queries';
 
-export { useClubServiceGetApiV1Clubs } from '~/apis/community/queries'
+export { useClubServiceGetApiV1Clubs } from '~/apis/community/queries';

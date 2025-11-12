@@ -1,10 +1,10 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 const headerWrapper = style({
   textAlign: 'center',
-})
+});
 
 const title = style([
   themeVars.textSize['2xl'],
@@ -12,7 +12,7 @@ const title = style([
     fontWeight: themeVars.fontWeight.bold,
     marginBottom: themeVars.spacing.sm,
   },
-])
+]);
 
 const footerWrapper = style({
   display: themeVars.display.flex,
@@ -20,7 +20,7 @@ const footerWrapper = style({
   alignItems: 'center',
   gap: themeVars.spacing.sm,
   marginTop: themeVars.spacing.sm,
-})
+});
 
 const link = style({
   color: themeVars.color.blue600,
@@ -30,6 +30,6 @@ const link = style({
     color: themeVars.color.blue800,
     transition: 'color 0.5s',
   },
-})
+});
 
-export { headerWrapper, title, footerWrapper, link }
+export { headerWrapper, title, footerWrapper, link };

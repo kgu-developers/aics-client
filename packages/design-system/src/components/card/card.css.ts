@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const cardVariants = recipe({
   base: {
@@ -8,12 +9,12 @@ const cardVariants = recipe({
     borderRadius: themeVars.borderRadius.xl,
     padding: themeVars.spacing.md,
   },
-})
+});
 
 const cardDescriptionVariants = recipe({
   base: {
     color: themeVars.color.gray500,
   },
-})
+});
 
-export { cardVariants, cardDescriptionVariants }
+export { cardVariants, cardDescriptionVariants };

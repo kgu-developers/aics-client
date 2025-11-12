@@ -1,4 +1,4 @@
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
 
 const pretendardVariable = localFont({
   src: './pretendard-variable.woff2',
@@ -22,6 +22,6 @@ const pretendardVariable = localFont({
     'Segoe UI Symbol',
     'sans-serif',
   ],
-})
+});
 
-export { pretendardVariable }
+export { pretendardVariable };

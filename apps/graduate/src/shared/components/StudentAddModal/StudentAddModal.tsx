@@ -1,4 +1,4 @@
-﻿import { Card, Col, Modal, Row, Typography, theme, Divider } from 'antd';
+﻿import { Card, Col, Divider, Modal, Row, Typography, theme } from 'antd';
 import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
@@ -6,7 +6,7 @@ import { modalStyles } from '~/shared/config';
 import * as styles from './StudentAddModal.css';
 import StudentAddMultiple from './StudentAddMultipleModel/StudentAddMultiple';
 import StudentAddSingle from './StudentAddSingleModel/StudentAddSingle';
-import type { SingleSubmitPayload, BulkUploadRow } from './types';
+import type { BulkUploadRow, SingleSubmitPayload } from './types';
 
 type Props = {
   open: boolean;
@@ -93,7 +93,7 @@ export default function StudentAddModal({
       </div>
 
       <Divider style={{ margin: '20px 0 20px' }} />
-      
+
       {mode === 'single' ? (
         <StudentAddSingle open={open} onSubmit={onSubmit} />
       ) : (

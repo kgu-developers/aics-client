@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const badgeVariants = recipe({
   base: {
@@ -35,6 +36,6 @@ const badgeVariants = recipe({
     size: 'md',
     color: 'warning',
   },
-})
+});
 
-export { badgeVariants }
+export { badgeVariants };

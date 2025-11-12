@@ -1,5 +1,5 @@
-import { cn } from '../../utils'
-import { listVariants } from './list.css'
+import { listVariants } from './list.css';
+import { cn } from '../../utils';
 
 interface Props extends React.HTMLAttributes<HTMLUListElement> {}
 
@@ -8,5 +8,5 @@ export default function List({ className, children, ...props }: Props) {
     <ul className={cn(listVariants(), className)} {...props}>
       {children}
     </ul>
-  )
+  );
 }

@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import { ProtectedRoute } from '~/shared/components';
+
 export const Route = createFileRoute(
   '/_adminLayout/thesis-application-management',
 )({
@@ -7,5 +9,9 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  return <div>Hello "/thesis"!</div>;
+  return (
+    <ProtectedRoute>
+      <div>Hello "/thesis"!</div>
+    </ProtectedRoute>
+  );
 }

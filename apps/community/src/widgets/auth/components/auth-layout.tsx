@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import * as styles from '~/widgets/auth/components/auth-layout.css'
+import * as styles from '~/widgets/auth/components/auth-layout.css';
 
 function AuthLayout({
   title,
@@ -10,12 +10,12 @@ function AuthLayout({
   link,
   children,
 }: {
-  title: string
-  description: string
-  info: string
-  href: string
-  link: string
-  children: React.ReactNode
+  title: string;
+  description: string;
+  info: string;
+  href: string;
+  link: string;
+  children: React.ReactNode;
 }) {
   return (
     <>
@@ -31,7 +31,7 @@ function AuthLayout({
         </Link>
       </div>
     </>
-  )
+  );
 }
 
-export { AuthLayout }
+export { AuthLayout };

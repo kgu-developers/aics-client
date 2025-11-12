@@ -42,16 +42,16 @@ export const MESSAGES = {
   },
   PREV_POST_EMPTY: '이전 글이 없습니다',
   NEXT_POST_EMPTY: '다음 글이 없습니다',
-} as const
+} as const;
 
-export const UNNAMED_FILE = 'Unnamed File' as const
-export const TRUE = 'TRUE' as const
-export const FALSE = 'FALSE' as const
-export const MESSAGE_DURATION = 0.7
+export const UNNAMED_FILE = 'Unnamed File' as const;
+export const TRUE = 'TRUE' as const;
+export const FALSE = 'FALSE' as const;
+export const MESSAGE_DURATION = 0.7;
 
 export const STATUS = {
   DONE: 'done',
-}
+};
 
 export const LABELS = {
   title: '제목',
@@ -59,12 +59,12 @@ export const LABELS = {
   content: '내용',
   file: '첨부 파일',
   isPinned: '상단 고정',
-} as const
+} as const;
 
 export const PLACEHOLDERS = {
   title: '제목을 입력하세요',
   userName: '사용자명을 입력하세요',
-} as const
+} as const;
 
 export const FORM = {
   title: {
@@ -84,7 +84,7 @@ export const FORM = {
     name: 'file',
     valuePropName: 'fileList',
   },
-}
+};
 
 export const RADIO = {
   notification: {
@@ -95,4 +95,4 @@ export const RADIO = {
     value: 'NEWS',
     label: '학부소식',
   },
-}
+};

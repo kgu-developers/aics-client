@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const cardListContainer = style([
   screen.xl({
@@ -10,6 +10,6 @@ const cardListContainer = style([
     display: 'grid',
     gap: themeVars.spacing.md,
   },
-])
+]);
 
-export { cardListContainer }
+export { cardListContainer };

@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const listRowVariants = recipe({
   base: {
@@ -8,6 +9,6 @@ const listRowVariants = recipe({
     alignItems: 'center',
     padding: '8px 0',
   },
-})
+});
 
-export { listRowVariants }
+export { listRowVariants };

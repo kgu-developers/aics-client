@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Breadcrumb from './breadcrumb'
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Breadcrumb from './breadcrumb';
 
 const meta: Meta<typeof Breadcrumb> = {
   title: 'Components/Breadcrumb',
@@ -9,10 +10,10 @@ const meta: Meta<typeof Breadcrumb> = {
   },
   tags: ['autodocs'],
   args: {},
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
@@ -20,11 +21,11 @@ export const Example: Story = {
       <>
         <Breadcrumb.List>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
+            <Breadcrumb.Link href='/'>홈</Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/">
+            <Breadcrumb.Link href='/'>
               <Breadcrumb.Page>소개</Breadcrumb.Page>
             </Breadcrumb.Link>
           </Breadcrumb.Item>
@@ -36,4 +37,4 @@ export const Example: Story = {
       </>
     ),
   },
-}
+};

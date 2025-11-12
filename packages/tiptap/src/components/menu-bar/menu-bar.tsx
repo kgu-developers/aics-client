@@ -1,4 +1,4 @@
-import type { Editor } from '@tiptap/react'
+import type { Editor } from '@tiptap/react';
 import {
   AlignCenter,
   AlignLeft,
@@ -15,74 +15,74 @@ import {
   Minus,
   Pilcrow,
   Strikethrough,
-} from 'lucide-react'
-import type { ReactNode } from 'react'
+} from 'lucide-react';
+import type { ReactNode } from 'react';
 
-import { MenuButton } from './menu-button.tsx'
+import { MenuButton } from './menu-button.tsx';
 
 function MenuBarWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center justify-start py-3 w-full overflow-x-auto border-b border-gray-300">
+    <div className='flex items-center justify-start py-3 w-full overflow-x-auto border-b border-gray-300'>
       {children}
     </div>
-  )
+  );
 }
 
 function MenuButtonsWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center justify-center gap-1 px-3 border-r border-gray-300">
+    <div className='flex items-center justify-center gap-1 px-3 border-r border-gray-300'>
       {children}
     </div>
-  )
+  );
 }
 
 export default function MenuBar({ editor }: { editor: Editor }) {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const files = event.target.files
-    if (!files || files.length === 0) return
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
     try {
       for (const file of Array.from(files)) {
         if (!file.type.startsWith('image/')) {
-          alert('이미지 파일만 업로드할 수 있습니다')
-          continue
+          alert('이미지 파일만 업로드할 수 있습니다');
+          continue;
         }
 
         const base64 = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onload = () => resolve(reader.result as string)
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
           reader.onerror = () => {
-            alert('이미지 업로드 중 오류가 발생했습니다.')
-            reject(new Error('이미지 업로드 실패'))
-          }
-          reader.readAsDataURL(file)
-        })
+            alert('이미지 업로드 중 오류가 발생했습니다.');
+            reject(new Error('이미지 업로드 실패'));
+          };
+          reader.readAsDataURL(file);
+        });
 
-        editor.chain().focus().setImage({ src: base64 }).run()
+        editor.chain().focus().setImage({ src: base64 }).run();
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
     } finally {
-      event.target.value = ''
+      event.target.value = '';
     }
-  }
+  };
 
   const handleSetLink = () => {
     try {
-      const currentLink = editor.getAttributes('link').href
-      let url = window.prompt('URL을 입력하세요', currentLink)?.trim()
+      const currentLink = editor.getAttributes('link').href;
+      let url = window.prompt('URL을 입력하세요', currentLink)?.trim();
 
       if (!url) {
         if (editor.isActive('link')) {
-          editor.chain().focus().unsetLink().run()
+          editor.chain().focus().unsetLink().run();
         }
-        return
+        return;
       }
 
       if (!/^https?:\/\//i.test(url)) {
-        url = `https://${url}`
+        url = `https://${url}`;
       }
 
       editor
@@ -90,11 +90,11 @@ export default function MenuBar({ editor }: { editor: Editor }) {
         .focus()
         .extendMarkRange('link')
         .setLink({ href: url })
-        .run()
+        .run();
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }
+  };
 
   return (
     <MenuBarWrapper>
@@ -183,11 +183,11 @@ export default function MenuBar({ editor }: { editor: Editor }) {
 
       <MenuButtonsWrapper>
         <input
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           multiple
-          id="image-upload"
-          className="size-0"
+          id='image-upload'
+          className='size-0'
           onChange={handleImageUpload}
         />
         <MenuButton
@@ -202,5 +202,5 @@ export default function MenuBar({ editor }: { editor: Editor }) {
         />
       </MenuButtonsWrapper>
     </MenuBarWrapper>
-  )
+  );
 }

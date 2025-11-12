@@ -1,21 +1,22 @@
-'use client'
+'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { ClubCard } from '~/features/club/components/club-card'
-import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries'
-import ClubListContainer from '~/shared/components/card-list/card-list-container'
+import ClubListContainer from '~/shared/components/card-list/card-list-container';
+
+import { ClubCard } from '~/features/club/components/club-card';
+import { CLUB_QUERY_OPTIONS } from '~/features/club/services/queries';
 
 function ClubList() {
-  const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL())
+  const { data } = useSuspenseQuery(CLUB_QUERY_OPTIONS.ALL());
 
   return (
     <ClubListContainer>
-      {data.contents.map((club) => (
+      {data.contents.map(club => (
         <ClubCard key={`club-${club.name}`} {...club} />
       ))}
     </ClubListContainer>
-  )
+  );
 }
 
-export { ClubList }
+export { ClubList };

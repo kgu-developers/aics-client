@@ -1,12 +1,12 @@
-import { Button, Modal } from 'antd'
+import { Button, Modal } from 'antd';
 
-import { LabForm } from './LabForm'
+import { useModal } from '~/shared/hooks/useModal';
 
-import { useModal } from '~/shared/hooks/useModal'
-import { MESSAGES } from '../constant/constants'
+import { LabForm } from './LabForm';
+import { MESSAGES } from '../constant/constants';
 
 export const LabCreator = () => {
-  const { isOpen, openModal, closeModal } = useModal()
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <>
@@ -20,13 +20,13 @@ export const LabCreator = () => {
         <LabForm onClose={closeModal} />
       </Modal>
       <Button
-        type="primary"
-        variant="solid"
-        className="mb-4"
+        type='primary'
+        variant='solid'
+        className='mb-4'
         onClick={openModal}
       >
         {MESSAGES.button.createLab}
       </Button>
     </>
-  )
-}
+  );
+};

@@ -1,11 +1,11 @@
-import { cn } from '../../utils'
-import Spinner from '../spinner/spinner'
-import { buttonVariants } from './button.css'
+import { buttonVariants } from './button.css';
+import { cn } from '../../utils';
+import Spinner from '../spinner/spinner';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'primary' | 'secondary' | 'danger' | 'warning' | 'outline' | 'black'
-  size?: 'sm' | 'md' | 'lg'
-  loading?: boolean
+  color?: 'primary' | 'secondary' | 'danger' | 'warning' | 'outline' | 'black';
+  size?: 'sm' | 'md' | 'lg';
+  loading?: boolean;
 }
 
 export default function Button({
@@ -29,5 +29,5 @@ export default function Button({
       {loading && <Spinner />}
       {children}
     </button>
-  )
+  );
 }

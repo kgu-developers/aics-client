@@ -14,10 +14,9 @@
     "type-check": "pnpm exec tsc --noEmit",
     "type-check:watch": "pnpm exec tsc --noEmit --watch",
     "preview": "vite preview",
-    "lint": "biome lint .",
-    "lint:write": "biome lint --write .",
-    "format": "biome format .",
-    "format:write": "biome format --write ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@aics-client/tiptap": "workspace:^",
@@ -44,8 +43,14 @@
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.0.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.46.3",
     "vite": "^6.3.2"
   }
 }

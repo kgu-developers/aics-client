@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const formWrapper = style({
   display: 'flex',
@@ -8,7 +8,7 @@ const formWrapper = style({
   margin: '0 auto',
   gap: themeVars.spacing.xl,
   width: '60%',
-})
+});
 
 const newPasswordWrapper = style({
   display: 'grid',
@@ -19,10 +19,10 @@ const newPasswordWrapper = style({
     justifyContent: 'space-between',
     gap: themeVars.spacing.md,
   }),
-})
+});
 
 const inputField = style({
   width: '100%',
-})
+});
 
-export { formWrapper, newPasswordWrapper, inputField }
+export { formWrapper, newPasswordWrapper, inputField };

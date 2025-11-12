@@ -1,12 +1,13 @@
-import { keyframes } from '@vanilla-extract/css'
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { keyframes } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const spin = keyframes({
   to: {
     transform: 'rotate(360deg)',
   },
-})
+});
 
 const spinnerVariants = recipe({
   base: {
@@ -35,6 +36,6 @@ const spinnerVariants = recipe({
   defaultVariants: {
     size: 'md',
   },
-})
+});
 
-export { spinnerVariants }
+export { spinnerVariants };

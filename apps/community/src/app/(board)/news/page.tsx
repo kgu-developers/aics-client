@@ -1,28 +1,31 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import * as styles from '~/app/(board)/notice/page.css'
-import { SearchBar } from '~/features/board/components/search-bar'
-import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
-import { PageHeader } from '~/shared/components/page-header/page-header'
-import { getQueryClient } from '~/shared/utils/'
-import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list'
+import { PageHeader } from '~/shared/components/page-header/page-header';
+import { getQueryClient } from '~/shared/utils/';
 
-export const dynamic = 'force-dynamic'
+import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list';
 
-const CATEGORY = 'NEWS'
-const SIZE = 10
+import { SearchBar } from '~/features/board/components/search-bar';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
+
+import * as styles from '~/app/(board)/notice/page.css';
+
+export const dynamic = 'force-dynamic';
+
+const CATEGORY = 'NEWS';
+const SIZE = 10;
 
 export default async function NewsPage(props: {
   searchParams?: Promise<{
-    category?: string
-    page?: string
-    keyword?: string
-  }>
+    category?: string;
+    page?: string;
+    keyword?: string;
+  }>;
 }) {
-  const searchParams = await props.searchParams
-  const currentPage = Number(searchParams?.page) || 0
-  const keyword = searchParams?.keyword || ''
-  const queryClient = getQueryClient()
+  const searchParams = await props.searchParams;
+  const currentPage = Number(searchParams?.page) || 0;
+  const keyword = searchParams?.keyword || '';
+  const queryClient = getQueryClient();
   void queryClient.prefetchQuery(
     BOARD_QUERY_OPTIONS.ALL({
       page: currentPage,
@@ -30,17 +33,17 @@ export default async function NewsPage(props: {
       keyword: keyword,
       category: CATEGORY,
     }),
-  )
+  );
 
   return (
     <section>
       <PageHeader
-        title="학부소식"
-        description="기사, 활동 및 수상 소식 등을 소개해요."
+        title='학부소식'
+        description='기사, 활동 및 수상 소식 등을 소개해요.'
       />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <section className={styles.boardWrapper}>
-          <SearchBar placeholder="검색어를 입력하세요" />
+          <SearchBar placeholder='검색어를 입력하세요' />
           <PaginatedBoardList
             page={currentPage}
             size={SIZE}
@@ -50,5 +53,5 @@ export default async function NewsPage(props: {
         </section>
       </HydrationBoundary>
     </section>
-  )
+  );
 }

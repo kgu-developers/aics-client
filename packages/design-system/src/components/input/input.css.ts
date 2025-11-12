@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 export const inputWrapper = recipe({
   base: {
@@ -7,14 +8,14 @@ export const inputWrapper = recipe({
     flexDirection: 'column',
     gap: themeVars.spacing.xs,
   },
-})
+});
 
 export const label = recipe({
   base: {
     fontSize: themeVars.fontSize.sm,
     color: themeVars.color.gray900,
   },
-})
+});
 
 export const input = recipe({
   base: {
@@ -52,7 +53,7 @@ export const input = recipe({
   defaultVariants: {
     variant: 'primary',
   },
-})
+});
 
 export const message = recipe({
   base: {
@@ -60,4 +61,4 @@ export const message = recipe({
     color: themeVars.color.orange500,
     marginTop: themeVars.spacing.xs,
   },
-})
+});

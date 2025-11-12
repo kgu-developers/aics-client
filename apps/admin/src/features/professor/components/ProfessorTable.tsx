@@ -1,56 +1,58 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { Form, Spin, message } from 'antd'
-import { Suspense } from 'react'
+import { useQueryClient } from '@tanstack/react-query';
+import { Form, Spin, message } from 'antd';
+import { Suspense } from 'react';
+
+import useEditTable from '~/shared/hooks/useEditTable';
+
+import ProfessorTableView from './ProfessorTableView';
 
 import {
   useProfessorServiceDeleteApiV1ProfessorsById,
   useProfessorServicePatchApiV1ProfessorsById,
-} from '~/apis/admin/queries'
-import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries'
-import { useProfessorServiceGetApiV1ProfessorsSuspense } from '~/apis/community/queries/suspense'
-import type { ProfessorResponse } from '~/apis/community/requests'
-import useEditTable from '~/shared/hooks/useEditTable'
-import ProfessorTableView from './ProfessorTableView'
+} from '~/apis/admin/queries';
+import { useProfessorServiceGetApiV1ProfessorsKey } from '~/apis/community/queries';
+import { useProfessorServiceGetApiV1ProfessorsSuspense } from '~/apis/community/queries/suspense';
+import type { ProfessorResponse } from '~/apis/community/requests';
 
 function ProfessorTable() {
-  const [form] = Form.useForm()
-  const { data } = useProfessorServiceGetApiV1ProfessorsSuspense()
-  const professorList: ProfessorResponse[] = data?.contents ?? []
-  const queryClient = useQueryClient()
-  const updateMutation = useProfessorServicePatchApiV1ProfessorsById()
-  const deleteMutation = useProfessorServiceDeleteApiV1ProfessorsById()
-  const { register } = useEditTable<ProfessorResponse>(form)
-  const [messageApi, contextHolder] = message.useMessage()
+  const [form] = Form.useForm();
+  const { data } = useProfessorServiceGetApiV1ProfessorsSuspense();
+  const professorList: ProfessorResponse[] = data?.contents ?? [];
+  const queryClient = useQueryClient();
+  const updateMutation = useProfessorServicePatchApiV1ProfessorsById();
+  const deleteMutation = useProfessorServiceDeleteApiV1ProfessorsById();
+  const { register } = useEditTable<ProfessorResponse>(form);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleSave = async (record: ProfessorResponse) => {
     try {
-      const rowData = await form.validateFields()
+      const rowData = await form.validateFields();
       updateMutation.mutate(
         { id: record.id, requestBody: rowData },
         {
           onSuccess: () => {
-            register.cancel()
+            register.cancel();
             messageApi.open({
               type: 'success',
               content: '교수 정보가 성공적으로 수정되었습니다.',
-            })
+            });
             queryClient.invalidateQueries({
               queryKey: ['ProfessorServiceGetApiV1Professors'],
-            })
+            });
           },
-          onError: (e) => {
-            console.error('수정 실패:', e)
+          onError: e => {
+            console.error('수정 실패:', e);
             messageApi.open({
               type: 'error',
               content: '교수 정보 수정에 실패했습니다.',
-            })
+            });
           },
         },
-      )
+      );
     } catch (error) {
-      console.error('Validation Failed:', error)
+      console.error('Validation Failed:', error);
     }
-  }
+  };
 
   const handleDelete = (record: ProfessorResponse) => {
     deleteMutation.mutate(
@@ -60,21 +62,21 @@ function ProfessorTable() {
           messageApi.open({
             type: 'success',
             content: '교수가 성공적으로 삭제되었습니다.',
-          })
+          });
           queryClient.invalidateQueries({
             queryKey: [useProfessorServiceGetApiV1ProfessorsKey],
-          })
+          });
         },
-        onError: (e) => {
-          console.error('삭제 실패:', e)
+        onError: e => {
+          console.error('삭제 실패:', e);
           messageApi.open({
             type: 'error',
             content: '교수 삭제에 실패했습니다.',
-          })
+          });
         },
       },
-    )
-  }
+    );
+  };
 
   return (
     <Suspense fallback={<Spin />}>
@@ -88,7 +90,7 @@ function ProfessorTable() {
         handleDelete={handleDelete}
       />
     </Suspense>
-  )
+  );
 }
 
-export default ProfessorTable
+export default ProfessorTable;

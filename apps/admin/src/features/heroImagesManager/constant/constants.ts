@@ -3,7 +3,7 @@ export const PLACEHOLDERS = {
     description: '사진의 설명이 필요하시다면 입력해주세요.',
     link: '연결할 링크가 있다면 입력해주세요.',
   },
-} as const
+} as const;
 
 export const MESSAGES = {
   validation: {
@@ -33,10 +33,10 @@ export const MESSAGES = {
     deleteImage: '이미지 삭제에 실패했습니다.',
     updateImage: '이미지 수정에 실패했습니다.',
   },
-} as const
+} as const;
 
 export const LABELS = {
   image: '이미지',
   description: '설명',
   link: '링크',
-} as const
+} as const;

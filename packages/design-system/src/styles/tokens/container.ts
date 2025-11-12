@@ -6,6 +6,6 @@ const container = {
   margin: '0 auto',
   padding: '0 1rem',
   maxWidth: '1240px',
-} as const
+} as const;
 
-export default container
+export default container;

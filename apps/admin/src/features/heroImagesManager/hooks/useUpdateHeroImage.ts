@@ -1,14 +1,17 @@
-import { useCarouselServicePatchApiV1CarouselsById } from '~/apis/admin/queries'
-import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries'
-import { queryClient } from '~/shared/utils/'
-import { MESSAGES } from '../constant/constants'
+import type { MessageInstance } from 'antd/es/message/interface';
 
-import type { MessageInstance } from 'antd/es/message/interface'
+import { queryClient } from '~/shared/utils/';
+
+import { MESSAGES } from '../constant/constants';
+
+import { useCarouselServicePatchApiV1CarouselsById } from '~/apis/admin/queries';
+import { useCarouselServiceGetApiV1CarouselsKey } from '~/apis/community/queries';
+
 
 interface useUpdateHeroImageProps {
-  onClose: () => void
-  resetFields: () => void
-  open: MessageInstance['open']
+  onClose: () => void;
+  resetFields: () => void;
+  open: MessageInstance['open'];
 }
 
 export const useUpdateHeroImage = ({
@@ -20,22 +23,22 @@ export const useUpdateHeroImage = ({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [useCarouselServiceGetApiV1CarouselsKey],
-      })
+      });
       open({
         type: 'success',
         content: MESSAGES.success.updateImage,
-      })
-      onClose()
+      });
+      onClose();
     },
     onError: () => {
       open({
         type: 'error',
         content: MESSAGES.error.updateImage,
-      })
-      resetFields()
-      onClose()
+      });
+      resetFields();
+      onClose();
     },
-  })
+  });
 
-  return { updateHeroImage: mutation.mutate }
-}
+  return { updateHeroImage: mutation.mutate };
+};

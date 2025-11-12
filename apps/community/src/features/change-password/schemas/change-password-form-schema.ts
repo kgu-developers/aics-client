@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 const changePasswordSchema = z
   .object({
@@ -28,15 +28,15 @@ const changePasswordSchema = z
       message: '새 비밀번호 확인을 입력해주세요.',
     }),
   })
-  .refine((data) => data.newPassword === data.confirmNewPassword, {
+  .refine(data => data.newPassword === data.confirmNewPassword, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['confirmNewPassword'],
-  })
+  });
 
 const defaultValues = {
   originalPassword: '',
   newPassword: '',
   confirmNewPassword: '',
-}
+};
 
-export { changePasswordSchema, defaultValues }
+export { changePasswordSchema, defaultValues };

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Spacing from './spacing'
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Spacing from './spacing';
 
 const meta: Meta<typeof Spacing> = {
   title: 'Components/Spacing',
@@ -12,7 +13,7 @@ const meta: Meta<typeof Spacing> = {
     size: 'md',
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div>
         <div>Component1</div>
         <Story />
@@ -20,35 +21,35 @@ const meta: Meta<typeof Spacing> = {
       </div>
     ),
   ],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {},
-}
+};
 
 export const Small: Story = {
   args: {
     size: 'sm',
   },
-}
+};
 
 export const Medium: Story = {
   args: {
     size: 'md',
   },
-}
+};
 
 export const Large: Story = {
   args: {
     size: 'lg',
   },
-}
+};
 
 export const XLarge: Story = {
   args: {
     size: 'xl',
   },
-}
+};

@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css'
+import { style } from '@vanilla-extract/css';
 
 const notice = style({
   display: 'flex',
@@ -9,17 +9,17 @@ const notice = style({
       width: '100%',
     },
   },
-})
+});
 
 const noticeHeader = style({
   marginBottom: '1rem',
-})
+});
 
 const title = style({
   fontSize: '1.5rem',
   fontWeight: 'bold',
   margin: 0,
-})
+});
 
 const list = style({
   display: 'flex',
@@ -27,19 +27,19 @@ const list = style({
   justifyContent: 'space-between',
   height: '100%',
   gap: '0.75rem',
-})
+});
 
 const post = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
-})
+});
 
 const postTitle = style({
   margin: 0,
   fontSize: '1.25rem',
   fontWeight: 600,
-})
+});
 
 const postDescription = style({
   overflow: 'hidden',
@@ -49,6 +49,6 @@ const postDescription = style({
   WebkitBoxOrient: 'vertical',
   margin: 0,
   fontSize: '1rem',
-})
+});
 
-export { notice, noticeHeader, title, list, post, postTitle, postDescription }
+export { notice, noticeHeader, title, list, post, postTitle, postDescription };

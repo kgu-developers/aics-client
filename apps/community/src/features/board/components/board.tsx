@@ -1,36 +1,33 @@
-import Link from 'next/link'
 
-import DOMPurify from 'isomorphic-dompurify'
 
-import { Button } from '@aics-client/design-system'
+import { Button } from '@aics-client/design-system';
 import {
   ArrowLeft,
   Calendar,
   Download,
   Eye,
-} from '@aics-client/design-system/icons'
+} from '@aics-client/design-system/icons';
+import DOMPurify from 'isomorphic-dompurify';
+import Link from 'next/link';
 
-import * as styles from '~/features/board/components/board.css'
-import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section'
-import { downloadFile, getFileNameFromUrl } from '~/shared/utils/util'
+import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section';
+import { downloadFile, getFileNameFromUrl } from '~/shared/utils/util';
 
-function Board({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <article>{children}</article>
+import * as styles from '~/features/board/components/board.css';
+
+function Board({ children }: { children: React.ReactNode }) {
+  return <article>{children}</article>;
 }
 
 interface BoardHeaderProps {
-  title: string
-  author: string
-  views: number
-  createdAt: string
+  title: string;
+  author: string;
+  views: number;
+  createdAt: string;
   file?: {
-    id: number
-    physicalPath: string
-  }
+    id: number;
+    physicalPath: string;
+  };
 }
 
 function BoardHeader({
@@ -46,7 +43,7 @@ function BoardHeader({
       <BoardMetadata author={author} views={views} createdAt={createdAt} />
       {file && <BoardFileDownloader file={file} />}
     </div>
-  )
+  );
 }
 
 function BoardMetadata({
@@ -62,73 +59,61 @@ function BoardMetadata({
         <CreatedAtDisplay date={createdAt} />
       </div>
     </div>
-  )
+  );
 }
 
-function ViewCount({
-  count,
-}: {
-  count: number
-}) {
+function ViewCount({ count }: { count: number }) {
   return (
     <div className={styles.views}>
       <Eye size={'0.875rem'} />
       <span>{count}</span>
     </div>
-  )
+  );
 }
 
-function CreatedAtDisplay({
-  date,
-}: {
-  date: string
-}) {
+function CreatedAtDisplay({ date }: { date: string }) {
   return (
     <div className={styles.createdAt}>
       <Calendar size={'0.875rem'} />
       <span>{date}</span>
     </div>
-  )
+  );
 }
 
 function BoardFileDownloader({
   file,
 }: {
-  file: NonNullable<BoardHeaderProps['file']>
+  file: NonNullable<BoardHeaderProps['file']>;
 }) {
   return (
     <button
-      type="button"
+      type='button'
       className={styles.file}
       onClick={() => downloadFile(file.physicalPath)}
     >
       <Download size={'0.875rem'} />
       <span>{getFileNameFromUrl(file.physicalPath)}</span>
     </button>
-  )
+  );
 }
 
-function BoardContent({
-  content,
-}: {
-  content: string
-}) {
+function BoardContent({ content }: { content: string }) {
   return (
     <div className={styles.content}>
       <TiptapContentSection content={content} />
     </div>
-  )
+  );
 }
 
 interface PostNavigationItem {
-  postId: number
-  title: string
+  postId: number;
+  title: string;
 }
 
 interface FooterProps {
-  prevPost: PostNavigationItem
-  nextPost: PostNavigationItem
-  to: string
+  prevPost: PostNavigationItem;
+  nextPost: PostNavigationItem;
+  to: string;
 }
 
 function BoardFooter({ prevPost, nextPost, to }: FooterProps) {
@@ -137,7 +122,7 @@ function BoardFooter({ prevPost, nextPost, to }: FooterProps) {
       <PostNavigation prevPost={prevPost} nextPost={nextPost} to={to} />
       <ListButton to={to} />
     </div>
-  )
+  );
 }
 
 function PostNavigation({
@@ -145,27 +130,21 @@ function PostNavigation({
   nextPost,
   to,
 }: {
-  prevPost: PostNavigationItem
-  nextPost: PostNavigationItem
-  to: string
+  prevPost: PostNavigationItem;
+  nextPost: PostNavigationItem;
+  to: string;
 }) {
   return (
     <div className={styles.postItems}>
       <PrevPostLink post={prevPost} to={to} />
       <NextPostLink post={nextPost} to={to} />
     </div>
-  )
+  );
 }
 
-function PrevPostLink({
-  post,
-  to,
-}: {
-  post: PostNavigationItem
-  to: string
-}) {
+function PrevPostLink({ post, to }: { post: PostNavigationItem; to: string }) {
   if (!post) {
-    return <div className={styles.prevPost}>이전 글이 없습니다</div>
+    return <div className={styles.prevPost}>이전 글이 없습니다</div>;
   }
 
   return (
@@ -173,18 +152,12 @@ function PrevPostLink({
       <span className={styles.border}>이전</span>
       <h2>{post.title}</h2>
     </Link>
-  )
+  );
 }
 
-function NextPostLink({
-  post,
-  to,
-}: {
-  post: PostNavigationItem
-  to: string
-}) {
+function NextPostLink({ post, to }: { post: PostNavigationItem; to: string }) {
   if (!post) {
-    return <div className={styles.nextPost}>다음 글이 없습니다.</div>
+    return <div className={styles.nextPost}>다음 글이 없습니다.</div>;
   }
 
   return (
@@ -192,20 +165,20 @@ function NextPostLink({
       <span className={styles.border}>다음</span>
       <h2>{post.title}</h2>
     </Link>
-  )
+  );
 }
 
 function ListButton({ to }: { to: string }) {
   return (
-    <Button size="sm" color="black" className={styles.goToListButton}>
+    <Button size='sm' color='black' className={styles.goToListButton}>
       <ArrowLeft size={'1rem'} />
       <Link href={to}>목록으로</Link>
     </Button>
-  )
+  );
 }
 
-Board.Header = BoardHeader
-Board.Content = BoardContent
-Board.Footer = BoardFooter
+Board.Header = BoardHeader;
+Board.Content = BoardContent;
+Board.Footer = BoardFooter;
 
-export { Board }
+export { Board };

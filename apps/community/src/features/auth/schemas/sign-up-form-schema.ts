@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 const signUpFormSchema = z
   .object({
@@ -30,7 +30,7 @@ const signUpFormSchema = z
       .email({
         message: '올바른 이메일 형식이 아닙니다.',
       })
-      .refine((email) => email.endsWith('@kyonggi.ac.kr'), {
+      .refine(email => email.endsWith('@kyonggi.ac.kr'), {
         message: '경기대학교 이메일을 사용해주세요.',
       }),
     phone: z.string().min(1, {
@@ -40,10 +40,10 @@ const signUpFormSchema = z
       message: '전공을 선택해주세요.',
     }),
   })
-  .refine((data) => data.password === data.confirm_password, {
+  .refine(data => data.password === data.confirm_password, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['confirm_password'],
-  })
+  });
 
 const defaultValues = {
   userId: '',
@@ -53,6 +53,6 @@ const defaultValues = {
   email: '',
   phone: '',
   major: '',
-}
+};
 
-export { signUpFormSchema, defaultValues }
+export { signUpFormSchema, defaultValues };

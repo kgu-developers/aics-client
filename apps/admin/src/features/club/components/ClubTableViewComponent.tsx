@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons'
+import { UploadOutlined } from '@ant-design/icons';
 import {
   Button,
   Form,
@@ -8,35 +8,36 @@ import {
   Typography,
   Upload,
   message,
-} from 'antd'
-import type { FormInstance, TableProps } from 'antd'
-import type { ClubDetailResponse } from '~/features/club/types'
+} from 'antd';
+import type { FormInstance, TableProps } from 'antd';
 
-const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL
+import type { ClubDetailResponse } from '~/features/club/types';
+
+const IMAGE_BASE_URL = import.meta.env.VITE_PUBLIC_IMAGE_URL;
 
 interface ClubTableViewProps {
-  form: FormInstance
-  data: ClubDetailResponse[]
+  form: FormInstance;
+  data: ClubDetailResponse[];
   register: {
-    isEditing: (record: ClubDetailResponse) => boolean
+    isEditing: (record: ClubDetailResponse) => boolean;
     handleEdit: (
       record: Partial<ClubDetailResponse> & { id: React.Key },
-    ) => void
-    cancel: () => void
-  }
-  handleSave: (record: ClubDetailResponse) => void | Promise<void>
-  handleDelete: (record: ClubDetailResponse) => void | Promise<void>
+    ) => void;
+    cancel: () => void;
+  };
+  handleSave: (record: ClubDetailResponse) => void | Promise<void>;
+  handleDelete: (record: ClubDetailResponse) => void | Promise<void>;
   handleImageUpload: (
     record: ClubDetailResponse,
-  ) => (file: File) => boolean | Promise<boolean>
+  ) => (file: File) => boolean | Promise<boolean>;
 }
 
 interface EditableCellProps {
-  editing: boolean
-  dataIndex: string
-  title: string
-  record: ClubDetailResponse
-  children: React.ReactNode
+  editing: boolean;
+  dataIndex: string;
+  title: string;
+  record: ClubDetailResponse;
+  children: React.ReactNode;
 }
 
 const EditableCell = ({
@@ -61,8 +62,8 @@ const EditableCell = ({
         children
       )}
     </td>
-  )
-}
+  );
+};
 
 function ClubTableView({
   form,
@@ -72,7 +73,7 @@ function ClubTableView({
   handleDelete,
   handleImageUpload,
 }: ClubTableViewProps) {
-  const [_messageApi, contextHolder] = message.useMessage()
+  const [_messageApi, contextHolder] = message.useMessage();
 
   const columns = [
     { title: '동아리명', dataIndex: 'name', width: '15%', editable: true },
@@ -83,7 +84,7 @@ function ClubTableView({
       width: '15%',
       editable: true,
       render: (text: string) => (
-        <a href={text} target="_blank" rel="noopener noreferrer">
+        <a href={text} target='_blank' rel='noopener noreferrer'>
           {text}
         </a>
       ),
@@ -93,22 +94,22 @@ function ClubTableView({
       dataIndex: 'operation',
       width: '10%',
       render: (_: unknown, record: ClubDetailResponse) => {
-        const editable = register.isEditing(record)
+        const editable = register.isEditing(record);
         return editable ? (
           <span>
             <Typography.Link
               onClick={() => handleSave(record)}
-              className="mr-4"
+              className='mr-4'
             >
               저장
             </Typography.Link>
             <Popconfirm
-              title="정말 취소하시겠습니까?"
+              title='정말 취소하시겠습니까?'
               onConfirm={register.cancel}
             >
               <button
-                type="button"
-                className="text-red-500 hover:cursor-pointer"
+                type='button'
+                className='text-red-500 hover:cursor-pointer'
               >
                 취소
               </button>
@@ -123,18 +124,18 @@ function ClubTableView({
               수정
             </Typography.Link>
             <Popconfirm
-              title="정말 삭제하시겠습니까?"
+              title='정말 삭제하시겠습니까?'
               onConfirm={() => handleDelete(record)}
             >
               <button
-                type="button"
-                className="ml-4 text-red-500 hover:cursor-pointer"
+                type='button'
+                className='ml-4 text-red-500 hover:cursor-pointer'
               >
                 삭제
               </button>
             </Popconfirm>
           </span>
-        )
+        );
       },
     },
     {
@@ -144,7 +145,7 @@ function ClubTableView({
       render: (_: unknown, record: ClubDetailResponse) =>
         renderImageUpload(record),
     },
-  ]
+  ];
 
   const renderImageUpload = (record: ClubDetailResponse) => (
     <div>
@@ -152,23 +153,23 @@ function ClubTableView({
         <img
           src={`${IMAGE_BASE_URL}${record.file.physicalPath}`}
           alt={`${record.name} 이미지`}
-          className="w-24 h-24"
+          className='w-24 h-24'
         />
       )}
       <Upload
         showUploadList={false}
-        beforeUpload={(file) => handleImageUpload(record)(file)}
+        beforeUpload={file => handleImageUpload(record)(file)}
       >
-        <Button icon={<UploadOutlined />} className="mt-2">
+        <Button icon={<UploadOutlined />} className='mt-2'>
           업로드
         </Button>
       </Upload>
     </div>
-  )
+  );
 
   const mergedColumns: TableProps<ClubDetailResponse>['columns'] = columns.map(
-    (col) => {
-      if (!('editable' in col) || !col.editable) return col
+    col => {
+      if (!('editable' in col) || !col.editable) return col;
       return {
         ...col,
         onCell: (record: ClubDetailResponse) => ({
@@ -177,9 +178,9 @@ function ClubTableView({
           title: col.title as string,
           editing: register.isEditing(record),
         }),
-      }
+      };
     },
-  )
+  );
 
   return (
     <>
@@ -190,14 +191,14 @@ function ClubTableView({
           bordered
           dataSource={data}
           columns={mergedColumns}
-          rowClassName="editable-row"
+          rowClassName='editable-row'
           pagination={{ onChange: register.cancel }}
-          rowKey="id"
-          className="break-keep whitespace-nowrap"
+          rowKey='id'
+          className='break-keep whitespace-nowrap'
         />
       </Form>
     </>
-  )
+  );
 }
 
-export default ClubTableView
+export default ClubTableView;

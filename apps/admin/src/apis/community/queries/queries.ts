@@ -5,7 +5,9 @@ import {
   type UseQueryOptions,
   useMutation,
   useQuery,
-} from '@tanstack/react-query'
+} from '@tanstack/react-query';
+
+import * as Common from './common';
 import {
   AboutService,
   CarouselService,
@@ -15,15 +17,14 @@ import {
   PostService,
   ProfessorService,
   UserService,
-} from '../requests/services.gen'
+} from '../requests/services.gen';
 import type {
   CommentRequest,
   CommentUpdateRequest,
   UserCreateRequest,
   UserPasswordUpdateRequest,
   UserUpdateRequest,
-} from '../requests/types.gen'
-import * as Common from './common'
+} from '../requests/types.gen';
 export const useUserServiceGetApiV1UsersMy = <
   TData = Common.UserServiceGetApiV1UsersMyDefaultResponse,
   TError = unknown,
@@ -36,7 +37,7 @@ export const useUserServiceGetApiV1UsersMy = <
     queryKey: Common.UseUserServiceGetApiV1UsersMyKeyFn(queryKey),
     queryFn: () => UserService.getApiV1UsersMy() as TData,
     ...options,
-  })
+  });
 export const useCommentServiceGetApiV1Comments = <
   TData = Common.CommentServiceGetApiV1CommentsDefaultResponse,
   TError = unknown,
@@ -45,7 +46,7 @@ export const useCommentServiceGetApiV1Comments = <
   {
     postId,
   }: {
-    postId: number
+    postId: number;
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -57,7 +58,7 @@ export const useCommentServiceGetApiV1Comments = <
     ),
     queryFn: () => CommentService.getApiV1Comments({ postId }) as TData,
     ...options,
-  })
+  });
 export const useProfessorServiceGetApiV1Professors = <
   TData = Common.ProfessorServiceGetApiV1ProfessorsDefaultResponse,
   TError = unknown,
@@ -70,7 +71,7 @@ export const useProfessorServiceGetApiV1Professors = <
     queryKey: Common.UseProfessorServiceGetApiV1ProfessorsKeyFn(queryKey),
     queryFn: () => ProfessorService.getApiV1Professors() as TData,
     ...options,
-  })
+  });
 export const usePostServiceGetApiV1Posts = <
   TData = Common.PostServiceGetApiV1PostsDefaultResponse,
   TError = unknown,
@@ -82,10 +83,10 @@ export const usePostServiceGetApiV1Posts = <
     page,
     size,
   }: {
-    category?: 'NOTIFICATION' | 'NEWS'
-    keywords?: string
-    page: number
-    size: number
+    category?: 'NOTIFICATION' | 'NEWS';
+    keywords?: string;
+    page: number;
+    size: number;
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -98,7 +99,7 @@ export const usePostServiceGetApiV1Posts = <
     queryFn: () =>
       PostService.getApiV1Posts({ category, keywords, page, size }) as TData,
     ...options,
-  })
+  });
 export const usePostServiceGetApiV1PostsByPostId = <
   TData = Common.PostServiceGetApiV1PostsByPostIdDefaultResponse,
   TError = unknown,
@@ -107,7 +108,7 @@ export const usePostServiceGetApiV1PostsByPostId = <
   {
     postId,
   }: {
-    postId: number
+    postId: number;
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -119,7 +120,7 @@ export const usePostServiceGetApiV1PostsByPostId = <
     ),
     queryFn: () => PostService.getApiV1PostsByPostId({ postId }) as TData,
     ...options,
-  })
+  });
 export const useLabServiceGetApiV1Labs = <
   TData = Common.LabServiceGetApiV1LabsDefaultResponse,
   TError = unknown,
@@ -132,7 +133,7 @@ export const useLabServiceGetApiV1Labs = <
     queryKey: Common.UseLabServiceGetApiV1LabsKeyFn(queryKey),
     queryFn: () => LabService.getApiV1Labs() as TData,
     ...options,
-  })
+  });
 export const useClubServiceGetApiV1Clubs = <
   TData = Common.ClubServiceGetApiV1ClubsDefaultResponse,
   TError = unknown,
@@ -145,7 +146,7 @@ export const useClubServiceGetApiV1Clubs = <
     queryKey: Common.UseClubServiceGetApiV1ClubsKeyFn(queryKey),
     queryFn: () => ClubService.getApiV1Clubs() as TData,
     ...options,
-  })
+  });
 export const useCarouselServiceGetApiV1Carousels = <
   TData = Common.CarouselServiceGetApiV1CarouselsDefaultResponse,
   TError = unknown,
@@ -158,7 +159,7 @@ export const useCarouselServiceGetApiV1Carousels = <
     queryKey: Common.UseCarouselServiceGetApiV1CarouselsKeyFn(queryKey),
     queryFn: () => CarouselService.getApiV1Carousels() as TData,
     ...options,
-  })
+  });
 export const useAboutServiceGetApiV1Abouts = <
   TData = Common.AboutServiceGetApiV1AboutsDefaultResponse,
   TError = unknown,
@@ -167,7 +168,7 @@ export const useAboutServiceGetApiV1Abouts = <
   {
     category,
   }: {
-    category: 'DEPT_INTRO' | 'DIRECTIONS'
+    category: 'DEPT_INTRO' | 'DIRECTIONS';
   },
   queryKey?: TQueryKey,
   options?: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'>,
@@ -176,7 +177,7 @@ export const useAboutServiceGetApiV1Abouts = <
     queryKey: Common.UseAboutServiceGetApiV1AboutsKeyFn({ category }, queryKey),
     queryFn: () => AboutService.getApiV1Abouts({ category }) as TData,
     ...options,
-  })
+  });
 export const useUserServicePostApiV1UsersSignup = <
   TData = Common.UserServicePostApiV1UsersSignupMutationResult,
   TError = unknown,
@@ -187,7 +188,7 @@ export const useUserServicePostApiV1UsersSignup = <
       TData,
       TError,
       {
-        requestBody: UserCreateRequest
+        requestBody: UserCreateRequest;
       },
       TContext
     >,
@@ -198,7 +199,7 @@ export const useUserServicePostApiV1UsersSignup = <
     TData,
     TError,
     {
-      requestBody: UserCreateRequest
+      requestBody: UserCreateRequest;
     },
     TContext
   >({
@@ -207,7 +208,7 @@ export const useUserServicePostApiV1UsersSignup = <
         requestBody,
       }) as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useCommentServicePostApiV1Comments = <
   TData = Common.CommentServicePostApiV1CommentsMutationResult,
   TError = unknown,
@@ -218,7 +219,7 @@ export const useCommentServicePostApiV1Comments = <
       TData,
       TError,
       {
-        requestBody: CommentRequest
+        requestBody: CommentRequest;
       },
       TContext
     >,
@@ -229,7 +230,7 @@ export const useCommentServicePostApiV1Comments = <
     TData,
     TError,
     {
-      requestBody: CommentRequest
+      requestBody: CommentRequest;
     },
     TContext
   >({
@@ -238,7 +239,7 @@ export const useCommentServicePostApiV1Comments = <
         requestBody,
       }) as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useUserServicePatchApiV1Users = <
   TData = Common.UserServicePatchApiV1UsersMutationResult,
   TError = unknown,
@@ -249,7 +250,7 @@ export const useUserServicePatchApiV1Users = <
       TData,
       TError,
       {
-        requestBody: UserUpdateRequest
+        requestBody: UserUpdateRequest;
       },
       TContext
     >,
@@ -260,14 +261,14 @@ export const useUserServicePatchApiV1Users = <
     TData,
     TError,
     {
-      requestBody: UserUpdateRequest
+      requestBody: UserUpdateRequest;
     },
     TContext
   >({
     mutationFn: ({ requestBody }) =>
       UserService.patchApiV1Users({ requestBody }) as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useUserServicePatchApiV1UsersPassword = <
   TData = Common.UserServicePatchApiV1UsersPasswordMutationResult,
   TError = unknown,
@@ -278,7 +279,7 @@ export const useUserServicePatchApiV1UsersPassword = <
       TData,
       TError,
       {
-        requestBody: UserPasswordUpdateRequest
+        requestBody: UserPasswordUpdateRequest;
       },
       TContext
     >,
@@ -289,7 +290,7 @@ export const useUserServicePatchApiV1UsersPassword = <
     TData,
     TError,
     {
-      requestBody: UserPasswordUpdateRequest
+      requestBody: UserPasswordUpdateRequest;
     },
     TContext
   >({
@@ -298,7 +299,7 @@ export const useUserServicePatchApiV1UsersPassword = <
         requestBody,
       }) as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useUserServicePatchApiV1UsersDelete = <
   TData = Common.UserServicePatchApiV1UsersDeleteMutationResult,
   TError = unknown,
@@ -313,7 +314,7 @@ export const useUserServicePatchApiV1UsersDelete = <
     mutationFn: () =>
       UserService.patchApiV1UsersDelete() as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useCommentServicePatchApiV1CommentsByCommentId = <
   TData = Common.CommentServicePatchApiV1CommentsByCommentIdMutationResult,
   TError = unknown,
@@ -324,8 +325,8 @@ export const useCommentServicePatchApiV1CommentsByCommentId = <
       TData,
       TError,
       {
-        commentId: number
-        requestBody: CommentUpdateRequest
+        commentId: number;
+        requestBody: CommentUpdateRequest;
       },
       TContext
     >,
@@ -336,8 +337,8 @@ export const useCommentServicePatchApiV1CommentsByCommentId = <
     TData,
     TError,
     {
-      commentId: number
-      requestBody: CommentUpdateRequest
+      commentId: number;
+      requestBody: CommentUpdateRequest;
     },
     TContext
   >({
@@ -347,7 +348,7 @@ export const useCommentServicePatchApiV1CommentsByCommentId = <
         requestBody,
       }) as unknown as Promise<TData>,
     ...options,
-  })
+  });
 export const useCommentServicePatchApiV1CommentsByCommentIdDelete = <
   TData = Common.CommentServicePatchApiV1CommentsByCommentIdDeleteMutationResult,
   TError = unknown,
@@ -358,7 +359,7 @@ export const useCommentServicePatchApiV1CommentsByCommentIdDelete = <
       TData,
       TError,
       {
-        commentId: number
+        commentId: number;
       },
       TContext
     >,
@@ -369,7 +370,7 @@ export const useCommentServicePatchApiV1CommentsByCommentIdDelete = <
     TData,
     TError,
     {
-      commentId: number
+      commentId: number;
     },
     TContext
   >({
@@ -378,4 +379,4 @@ export const useCommentServicePatchApiV1CommentsByCommentIdDelete = <
         commentId,
       }) as unknown as Promise<TData>,
     ...options,
-  })
+  });

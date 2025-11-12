@@ -59,6 +59,6 @@ const typography = {
       lineHeight: '2.25rem' /* 36px */,
     },
   },
-} as const
+} as const;
 
-export default typography
+export default typography;

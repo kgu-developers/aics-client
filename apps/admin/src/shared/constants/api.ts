@@ -1,7 +1,7 @@
 /**
  * 추후 삭제 예정
  */
-const MOCK_BASE_URL = 'http://58.238.255.245:8080/api/v1'
+const MOCK_BASE_URL = 'http://58.238.255.245:8080/api/v1';
 
 const MOCK_END_POINT = {
   HEROES: `${MOCK_BASE_URL}/main/hero-images`,
@@ -15,10 +15,10 @@ const MOCK_END_POINT = {
   MY_PROFILE: `${MOCK_BASE_URL}/my`,
   BOARD: `${MOCK_BASE_URL}/board`,
   BOARD_DETAIL: (id: string) => `${MOCK_BASE_URL}/posts/${id}`,
-} as const
+} as const;
 
-const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_URL
-const AUTH_BASE_URL = import.meta.env.VITE_PUBLIC_AUTH_API_URL
+const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_URL;
+const AUTH_BASE_URL = import.meta.env.VITE_PUBLIC_AUTH_API_URL;
 
 const END_POINT = {
   POST: 'posts',
@@ -32,10 +32,10 @@ const END_POINT = {
   MY_PROFILE: 'users/my',
   EDIT_MY_PROFILE: 'users',
   CHANGE_PASSWORD: 'users/password',
-} as const
+} as const;
 
-const ACCESS_TOKEN_KEY = 'accessToken'
-const REFRESH_TOKEN_KEY = 'refreshToken'
+const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 export {
   MOCK_BASE_URL,
@@ -45,4 +45,4 @@ export {
   END_POINT,
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-}
+};

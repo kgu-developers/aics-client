@@ -1,10 +1,10 @@
-import { queryOptions } from '@tanstack/react-query'
+import { queryOptions } from '@tanstack/react-query';
 
-import { getClubs } from '~/features/club/services/remote'
+import { getClubs } from '~/features/club/services/remote';
 
 const CLUB_QUERY_KEY = {
   ALL: ['clubs'],
-} as const
+} as const;
 
 const CLUB_QUERY_OPTIONS = {
   ALL: () =>
@@ -12,6 +12,6 @@ const CLUB_QUERY_OPTIONS = {
       queryKey: CLUB_QUERY_KEY.ALL,
       queryFn: () => getClubs(),
     }),
-}
+};
 
-export { CLUB_QUERY_KEY, CLUB_QUERY_OPTIONS }
+export { CLUB_QUERY_KEY, CLUB_QUERY_OPTIONS };

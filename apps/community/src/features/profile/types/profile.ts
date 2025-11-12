@@ -1,10 +1,10 @@
 interface UserDetail {
-  title: string
-  value: string
+  title: string;
+  value: string;
 }
 
 interface UserEditableDetail extends UserDetail {
-  field: 'phone' | 'email'
+  field: 'phone' | 'email';
 }
 
-export type { UserDetail, UserEditableDetail }
+export type { UserDetail, UserEditableDetail };

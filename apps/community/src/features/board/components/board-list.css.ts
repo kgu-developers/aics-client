@@ -1,6 +1,6 @@
-import { globalStyle, style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { globalStyle, style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const boardListWrapper = style({
   display: themeVars.display.flex,
@@ -8,7 +8,7 @@ const boardListWrapper = style({
   width: themeVars.width.full,
   borderTop: '1px solid',
   borderColor: themeVars.color.gray300,
-})
+});
 
 const row = style({
   display: themeVars.display.flex,
@@ -30,17 +30,17 @@ const row = style({
   ...screen.xl({
     minHeight: '3.5rem',
   }),
-})
+});
 
 globalStyle(`${row} > * + *`, {
   textAlign: 'center',
-})
+});
 
 const pin = style({
   display: themeVars.display.flex,
   justifyContent: themeVars.justifyContent.center,
   width: '5%',
-})
+});
 
 const rowTitle = style({
   display: themeVars.display.flex,
@@ -54,7 +54,7 @@ const rowTitle = style({
     width: '60%',
     justifyContent: themeVars.justifyContent.start,
   }),
-})
+});
 
 const information = style({
   width: '0%',
@@ -70,14 +70,14 @@ const information = style({
     gap: '0.75rem',
     paddingRight: '1.5rem',
   }),
-})
+});
 
 const view = style({
   display: themeVars.display.flex,
   justifyContent: themeVars.justifyContent.center,
   alignItems: themeVars.alignItems.center,
   gap: themeVars.spacing.xs,
-})
+});
 
 const author = style({
   width: '0%',
@@ -87,6 +87,6 @@ const author = style({
     visibility: 'visible',
     width: 'auto',
   }),
-})
+});
 
-export { boardListWrapper, row, pin, rowTitle, information, view, author }
+export { boardListWrapper, row, pin, rowTitle, information, view, author };

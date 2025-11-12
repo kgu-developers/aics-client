@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const spacingVariants = recipe({
   base: {
@@ -16,6 +17,6 @@ const spacingVariants = recipe({
   defaultVariants: {
     size: 'md',
   },
-})
+});
 
-export { spacingVariants }
+export { spacingVariants };

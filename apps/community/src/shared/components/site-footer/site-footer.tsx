@@ -1,25 +1,25 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
+import { cn } from '@aics-client/design-system/utils';
+import { useAtomValue } from 'jotai';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useAtomValue } from 'jotai'
 
-import { cn } from '@aics-client/design-system/utils'
 
-import LOGO from '~/shared/assets/svgs/kgu-logo-white.svg'
-import * as styles from '~/shared/components/site-footer/site-footer.css'
-import { PATH, PATHMAP } from '~/shared/constants/path'
-import { isLoggedInAtom } from '~/shared/stores/auth'
+import LOGO from '~/shared/assets/svgs/kgu-logo-white.svg';
+import * as styles from '~/shared/components/site-footer/site-footer.css';
+import { PATH, PATHMAP } from '~/shared/constants/path';
+import { isLoggedInAtom } from '~/shared/stores/auth';
 
 function SiteFooter() {
-  const isLoggedIn = useAtomValue(isLoggedInAtom)
-  const currentYear = new Date().getFullYear()
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const currentYear = new Date().getFullYear();
 
   const renderNavLinks = () =>
-    Object.values(PATHMAP).map((path) => {
+    Object.values(PATHMAP).map(path => {
       if (path.path === PATH.MY && !isLoggedIn) {
-        return null
+        return null;
       }
 
       return (
@@ -35,7 +35,7 @@ function SiteFooter() {
           </a>
           {'children' in path && (
             <div className={styles.navGroupLinks}>
-              {Object.values(path.children).map((child) => (
+              {Object.values(path.children).map(child => (
                 <a
                   key={child.path}
                   href={`${path.path}${child.path}`}
@@ -47,14 +47,14 @@ function SiteFooter() {
             </div>
           )}
         </div>
-      )
-    })
+      );
+    });
 
   return (
     <footer className={styles.footer}>
       <div className={styles.footerNav}>
         <Link href={PATH.MAIN} className={styles.logo}>
-          <Image src={LOGO} alt="logo" width={88} />
+          <Image src={LOGO} alt='logo' width={88} />
           <span>AI컴퓨터공학부</span>
         </Link>
         <div className={styles.navLinks}>{renderNavLinks()}</div>
@@ -67,7 +67,7 @@ function SiteFooter() {
         </small>
       </div>
     </footer>
-  )
+  );
 }
 
-export { SiteFooter }
+export { SiteFooter };

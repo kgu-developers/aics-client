@@ -14,21 +14,21 @@ export const PATH = {
   EDIT_NOTICE: '/notice/edit/',
   USER: '/user',
   HERO_IMAGES_MANAGER: '/heroImagesManager',
-} as const
+} as const;
 
-export type PostCategory = '/notice' | '/news'
+export type PostCategory = '/notice' | '/news';
 
 export const NEW_POST_PATH_MAP: Record<PostCategory, string> = {
   '/notice': `${PATH.NOTICE}/new`,
   '/news': `${PATH.NEWS}/new`,
-}
+};
 
 export const POST_DETAIL_PATH_MAP: Record<PostCategory, string> = {
   '/notice': `${PATH.NOTICE}/$postId`,
   '/news': `${PATH.NEWS}/$postId`,
-}
+};
 
 export const EDIT_POST_PATH_MAP: Record<PostCategory, string> = {
   '/notice': `${PATH.EDIT_NOTICE}$postId`,
   '/news': `${PATH.EDIT_NEWS}$postId`,
-}
+};

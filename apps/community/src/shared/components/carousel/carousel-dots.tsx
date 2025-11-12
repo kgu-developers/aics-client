@@ -1,51 +1,51 @@
-import { useCallback, useId } from 'react'
+import { cn } from '@aics-client/design-system/utils';
+import type { EmblaCarouselType } from 'embla-carousel';
+import { useCallback, useId } from 'react';
 
-import type { EmblaCarouselType } from 'embla-carousel'
 
-import { cn } from '@aics-client/design-system/utils'
 
-import * as styles from '~/shared/components/carousel/carousel-dots.css'
-import { useDotButton } from '~/shared/hooks/use-dot-button'
+import * as styles from '~/shared/components/carousel/carousel-dots.css';
+import { useDotButton } from '~/shared/hooks/use-dot-button';
 
 interface DotButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  active: boolean
+  active: boolean;
 }
 
 function DotButton({ children, active, ...props }: DotButtonProps) {
   return (
     <button
-      type="button"
+      type='button'
       className={cn(styles.dot, active && styles.dotActive)}
       {...props}
     >
       {children}
     </button>
-  )
+  );
 }
 
 function CarouselDots({
   emblaApi,
 }: {
-  emblaApi: EmblaCarouselType | undefined
+  emblaApi: EmblaCarouselType | undefined;
 }) {
-  const carouselDotsId = useId()
+  const carouselDotsId = useId();
 
   const handleNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (!autoplay) return
+    const autoplay = emblaApi?.plugins()?.autoplay;
+    if (!autoplay) return;
 
     const resetOrStop =
       autoplay.options.stopOnInteraction === false
         ? autoplay.reset
-        : autoplay.stop
+        : autoplay.stop;
 
-    resetOrStop()
-  }, [])
+    resetOrStop();
+  }, []);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
     emblaApi,
     handleNavButtonClick,
-  )
+  );
 
   return (
     <div className={styles.dots}>
@@ -57,7 +57,7 @@ function CarouselDots({
         />
       ))}
     </div>
-  )
+  );
 }
 
-export { DotButton, CarouselDots }
+export { DotButton, CarouselDots };

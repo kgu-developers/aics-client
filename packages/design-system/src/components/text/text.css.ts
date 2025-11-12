@@ -1,5 +1,6 @@
-import { recipe } from '@vanilla-extract/recipes'
-import { themeVars } from '../../styles'
+import { recipe } from '@vanilla-extract/recipes';
+
+import { themeVars } from '../../styles';
 
 const textVariants = recipe({
   base: {
@@ -36,6 +37,6 @@ const textVariants = recipe({
     size: 'md',
     fontWeight: 'regular',
   },
-})
+});
 
-export { textVariants }
+export { textVariants };

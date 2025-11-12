@@ -60,5 +60,6 @@ export const vars = createGlobalTheme('#app', {
     xl: '32px',
     bottom: '10px',
     authLogo: '48px',
+    header: '72px',
   },
 });

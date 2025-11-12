@@ -42,7 +42,7 @@ export const $UserCreateRequest = {
     },
   },
   required: ['email', 'major', 'name', 'password', 'phone', 'userId'],
-} as const
+} as const;
 
 export const $UserPersistResponse = {
   type: 'object',
@@ -54,7 +54,7 @@ export const $UserPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $CommentRequest = {
   type: 'object',
@@ -73,7 +73,7 @@ export const $CommentRequest = {
     },
   },
   required: ['content', 'postId'],
-} as const
+} as const;
 
 export const $CommentPersistResponse = {
   type: 'object',
@@ -86,7 +86,7 @@ export const $CommentPersistResponse = {
     },
   },
   required: ['commentId'],
-} as const
+} as const;
 
 export const $UserUpdateRequest = {
   type: 'object',
@@ -105,7 +105,7 @@ export const $UserUpdateRequest = {
     },
   },
   required: ['email', 'phone'],
-} as const
+} as const;
 
 export const $UserPasswordUpdateRequest = {
   type: 'object',
@@ -127,7 +127,7 @@ export const $UserPasswordUpdateRequest = {
     },
   },
   required: ['newPassword', 'originalPassword'],
-} as const
+} as const;
 
 export const $CommentUpdateRequest = {
   type: 'object',
@@ -140,7 +140,7 @@ export const $CommentUpdateRequest = {
     },
   },
   required: ['content'],
-} as const
+} as const;
 
 export const $UserDetailResponse = {
   type: 'object',
@@ -179,7 +179,7 @@ export const $UserDetailResponse = {
     },
   },
   required: ['email', 'id', 'major', 'name', 'phone', 'role'],
-} as const
+} as const;
 
 export const $ProfessorListResponse = {
   type: 'object',
@@ -204,7 +204,7 @@ export const $ProfessorListResponse = {
     },
   },
   required: ['contents'],
-} as const
+} as const;
 
 export const $ProfessorResponse = {
   type: 'object',
@@ -247,7 +247,7 @@ export const $ProfessorResponse = {
     },
   },
   required: ['contact', 'email', 'id', 'img', 'name', 'officeLoc', 'role'],
-} as const
+} as const;
 
 export const $PageableResponseObject = {
   type: 'object',
@@ -285,7 +285,7 @@ export const $PageableResponseObject = {
     },
   },
   required: ['isEnd', 'page', 'size', 'totalElements', 'totalPages'],
-} as const
+} as const;
 
 export const $PostSummaryPageResponse = {
   type: 'object',
@@ -316,7 +316,7 @@ export const $PostSummaryPageResponse = {
     },
   },
   required: ['contents', 'pageable'],
-} as const
+} as const;
 
 export const $PostSummaryResponse = {
   type: 'object',
@@ -380,7 +380,7 @@ export const $PostSummaryResponse = {
     'title',
     'views',
   ],
-} as const
+} as const;
 
 export const $FilePathResponse = {
   type: 'object',
@@ -398,7 +398,7 @@ export const $FilePathResponse = {
     },
   },
   required: ['id', 'physicalPath'],
-} as const
+} as const;
 
 export const $PostDetailResponse = {
   type: 'object',
@@ -484,7 +484,7 @@ SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집�
     'title',
     'views',
   ],
-} as const
+} as const;
 
 export const $PostTitleResponse = {
   type: 'object',
@@ -502,7 +502,7 @@ export const $PostTitleResponse = {
     },
   },
   required: ['postId', 'title'],
-} as const
+} as const;
 
 export const $LabDetailResponse = {
   type: 'object',
@@ -543,7 +543,7 @@ export const $LabDetailResponse = {
     },
   },
   required: ['advisor', 'id', 'loc', 'name', 'site'],
-} as const
+} as const;
 
 export const $LabListResponse = {
   type: 'object',
@@ -570,7 +570,7 @@ export const $LabListResponse = {
     },
   },
   required: ['contents'],
-} as const
+} as const;
 
 export const $CommentListResponse = {
   type: 'object',
@@ -592,7 +592,7 @@ export const $CommentListResponse = {
     },
   },
   required: ['contents'],
-} as const
+} as const;
 
 export const $CommentResponse = {
   type: 'object',
@@ -620,7 +620,7 @@ export const $CommentResponse = {
     },
   },
   required: ['author', 'commentId', 'content', 'createdAt'],
-} as const
+} as const;
 
 export const $ClubDetailResponse = {
   type: 'object',
@@ -655,7 +655,7 @@ export const $ClubDetailResponse = {
     },
   },
   required: ['description', 'id', 'name'],
-} as const
+} as const;
 
 export const $ClubListResponse = {
   type: 'object',
@@ -677,7 +677,7 @@ export const $ClubListResponse = {
     },
   },
   required: ['contents'],
-} as const
+} as const;
 
 export const $CarouselListResponse = {
   type: 'object',
@@ -702,7 +702,7 @@ export const $CarouselListResponse = {
     },
   },
   required: ['contents'],
-} as const
+} as const;
 
 export const $CarouselResponse = {
   type: 'object',
@@ -733,7 +733,7 @@ export const $CarouselResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $AboutResponse = {
   type: 'object',
@@ -745,4 +745,4 @@ export const $AboutResponse = {
     },
   },
   required: ['content'],
-} as const
+} as const;

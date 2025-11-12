@@ -1,42 +1,42 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
-import { Button } from 'antd'
+import { Link, createFileRoute } from '@tanstack/react-router';
+import { Button } from 'antd';
 
-import { DirectionsContent } from '~/features/directions/components'
+import { DirectionsContent } from '~/features/directions/components';
 import {
   DIRECTIONS_CATEGORY,
   DIRECTIONS_LABELS,
   isDirectionsEmpty,
-} from '~/features/directions/constants/directions'
-import { PATH_DIRECTIONS } from '~/features/directions/constants/path'
-import { DIRECTIONS_ROUTE } from '~/features/directions/constants/path'
-import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services'
+} from '~/features/directions/constants/directions';
+import { PATH_DIRECTIONS } from '~/features/directions/constants/path';
+import { DIRECTIONS_ROUTE } from '~/features/directions/constants/path';
+import { useAboutServiceGetApiV1AboutsSuspense } from '~/features/directions/services';
 
 export const Route = createFileRoute(DIRECTIONS_ROUTE)({
   component: DirectionsPage,
-})
+});
 
 function DirectionsPage() {
   const { data } = useAboutServiceGetApiV1AboutsSuspense({
     category: DIRECTIONS_CATEGORY,
-  })
+  });
 
-  const empty = isDirectionsEmpty(data.content)
+  const empty = isDirectionsEmpty(data.content);
 
   return (
-    <section className="flex flex-col w-full gap-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold ">{DIRECTIONS_LABELS.title}</h1>
-        <Link to={PATH_DIRECTIONS.EDIT_DIRECTIONS} className="self-end">
+    <section className='flex flex-col w-full gap-8'>
+      <div className='flex items-center justify-between'>
+        <h1 className='text-3xl font-bold '>{DIRECTIONS_LABELS.title}</h1>
+        <Link to={PATH_DIRECTIONS.EDIT_DIRECTIONS} className='self-end'>
           {empty ? (
-            <Button type="primary">{DIRECTIONS_LABELS.create}</Button>
+            <Button type='primary'>{DIRECTIONS_LABELS.create}</Button>
           ) : (
-            <Button type="primary">{DIRECTIONS_LABELS.edit}</Button>
+            <Button type='primary'>{DIRECTIONS_LABELS.edit}</Button>
           )}
         </Link>
       </div>
       <DirectionsContent content={data.content} />
     </section>
-  )
+  );
 }
 
-export default DirectionsPage
+export default DirectionsPage;

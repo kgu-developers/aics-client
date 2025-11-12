@@ -1,10 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
-import { LabCreator, LabTable } from '~/features/lab/components'
+import { LabCreator, LabTable } from '~/features/lab/components';
 
 export const Route = createFileRoute('/lab/')({
   component: LabPage,
-})
+});
 
 function LabPage() {
   return (
@@ -12,7 +12,7 @@ function LabPage() {
       <LabCreator />
       <LabTable />
     </section>
-  )
+  );
 }
 
-export default LabPage
+export default LabPage;

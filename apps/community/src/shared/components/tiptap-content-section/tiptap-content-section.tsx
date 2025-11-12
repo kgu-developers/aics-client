@@ -1,12 +1,8 @@
-import DOMPurify from 'isomorphic-dompurify'
+import DOMPurify from 'isomorphic-dompurify';
 
-import * as styles from '~/shared/components/tiptap-content-section/tiptap-content-section.css'
+import * as styles from '~/shared/components/tiptap-content-section/tiptap-content-section.css';
 
-function TiptapContentSection({
-  content,
-}: {
-  content: string
-}) {
+function TiptapContentSection({ content }: { content: string }) {
   return (
     <section
       className={styles.information}
@@ -15,7 +11,7 @@ function TiptapContentSection({
         __html: DOMPurify.sanitize(content),
       }}
     />
-  )
+  );
 }
 
-export { TiptapContentSection }
+export { TiptapContentSection };

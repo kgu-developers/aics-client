@@ -1,13 +1,24 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { Navigate, createFileRoute } from '@tanstack/react-router';
 
-import { Button } from '~/shared/components';
+import { ROUTE } from '~/shared/constants/route';
+import { useAuthStore } from '~/shared/stores';
+
+import { HomePage } from '~/pages/client/home';
 
 export const Route = createFileRoute('/')({
   component: App,
 });
 
 function App() {
-  const navigate = useNavigate();
+  const { isAdmin, isLoggedIn } = useAuthStore();
+
+  if (isLoggedIn && isAdmin) {
+    return <Navigate to={ROUTE.HOME} />;
+  }
+
+  if (isLoggedIn && !isAdmin) {
+    return <HomePage />;
+  }
 
   return (
     <div
@@ -17,55 +28,6 @@ function App() {
         placeItems: 'center',
         height: '100vh',
       }}
-    >
-      <div style={{ display: 'flex', gap: '10px' }}>
-        <Button
-          size='lg'
-          type='button'
-          onClick={() => navigate({ to: '/client' })}
-        >
-          Client 클라이언트
-        </Button>
-        <Button
-          size='lg'
-          type='button'
-          onClick={() => navigate({ to: '/admin' })}
-        >
-          Admin
-        </Button>
-        <Button
-          size='md'
-          variant='outline'
-          type='button'
-          onClick={() => navigate({ to: '/client' })}
-        >
-          Client 클라이언트
-        </Button>
-        <Button
-          size='md'
-          variant='outlineActive'
-          type='button'
-          onClick={() => navigate({ to: '/admin' })}
-        >
-          Admin
-        </Button>
-        <Button
-          size='sm'
-          variant='sub'
-          type='button'
-          onClick={() => navigate({ to: '/client' })}
-        >
-          Client 클라이언트
-        </Button>
-        <Button
-          size='md'
-          variant='outlineActive'
-          type='button'
-          onClick={() => navigate({ to: '/admin' })}
-        >
-          Admin
-        </Button>
-      </div>
-    </div>
+    />
   );
 }
