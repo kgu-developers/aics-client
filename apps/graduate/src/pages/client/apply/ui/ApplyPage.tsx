@@ -11,7 +11,9 @@ import * as styles from '../styles/ApplyPage.css';
 import { vars } from '~/vars.css';
 
 export default function ApplyPage() {
-  const { confirm } = useSearch({ from: ROUTE.APPLY }) as { confirm: boolean };
+  const { confirm } = useSearch({ from: '/_afterLogin/apply' }) as {
+    confirm: boolean;
+  };
   const [selectedOption, setSelectedOption] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
   const step = STEP[selectedOption];

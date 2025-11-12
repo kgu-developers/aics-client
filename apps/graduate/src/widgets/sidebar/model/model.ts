@@ -14,7 +14,7 @@ export const adminMenuSections = [
     items: [
       { label: '대상자 전체 관리', to: '/graduates-all' },
       { label: '자격증 신청 관리', to: ROUTE.CERTIFICATION },
-      { label: '졸업 논문 관리', to: ROUTE.THESES },
+      { label: '졸업 논문 관리', to: ROUTE.THESIS },
     ],
   },
 ] as const;

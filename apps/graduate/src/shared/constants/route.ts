@@ -1,7 +1,7 @@
 export const ROUTE = {
   HOME: '/',
   NOTICE: '/notices',
-  THESES: '/thesis',
+  THESIS: '/thesis',
   THESIS_MIDREPORT: '/thesis?type=midreport',
   THESIS_FINALREPORT: '/thesis?type=finalreport',
   CERTIFICATION: '/certification',

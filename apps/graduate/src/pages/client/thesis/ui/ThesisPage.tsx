@@ -18,7 +18,7 @@ import * as styles from '../styles/ThesisPage.css';
 import { vars } from '~/vars.css';
 
 export default function ThesisPage() {
-  const { type } = useSearch({ from: '/thesis' }) as {
+  const { type } = useSearch({ from: '/_afterLogin/thesis' }) as {
     type: 'midreport' | 'finalreport';
   };
 
