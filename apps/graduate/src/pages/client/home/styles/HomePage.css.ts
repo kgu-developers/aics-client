@@ -4,7 +4,7 @@ import { vars } from '~/vars.css';
 
 export const mainSection = style({
   position: 'absolute',
-  top: 400,
+  top: vars.spacing.header,
   width: '100dvw',
   boxSizing: 'border-box',
   display: 'flex',
@@ -51,7 +51,9 @@ export const headerTextWrapper = style({
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
   gap: vars.spacing.sm,
+  padding: vars.spacing.md,
 });
 
 export const headerDate = style({
@@ -96,9 +98,10 @@ export const scheduleCard = style({
 
 export const homeButtonSection = style({
   width: '100%',
-  height: '100%',
+  height: '120px',
+  flexShrink: 0,
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
+  gridTemplateColumns: 'repeat(2, 1fr)',
   gap: vars.spacing.md,
 });
 

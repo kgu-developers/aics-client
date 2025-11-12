@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { Timeline } from 'antd';
-import { ArrowRight, Bell, User } from 'lucide-react';
+import { ArrowRight, Bell } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
@@ -22,7 +22,7 @@ export default function HomePage() {
     day: 'numeric',
   });
 
-  const userStatus = USER_STATUS.CERTIFICATION_NOT_SUBMITTED;
+  const userStatus = USER_STATUS.THESIS_FINALREPORT_SUBMITTED;
   const { title, description, button } = STATUS_TEXT[userStatus];
 
   const buttons = [
@@ -31,25 +31,10 @@ export default function HomePage() {
       href: ROUTE.NOTICE,
       icon: <Bell size={20} />,
     },
-    {
-      label: '내 상태 확인하기',
-      href: ROUTE.STATUS,
-      icon: <User size={20} />,
-    },
   ];
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
-      <img
-        src='/background.png'
-        alt='logo'
-        style={{
-          height: '500px',
-          objectFit: 'cover',
-          width: '100%',
-        }}
-      />
-
       <section className={styles.mainSection}>
         <section className={styles.upperSection}>
           <section className={styles.header}>
