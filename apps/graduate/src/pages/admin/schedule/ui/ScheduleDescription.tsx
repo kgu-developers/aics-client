@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
-import * as style from './ScheduleDescription.css';
 import { descriptionData } from '../mock/schedule';
+import * as style from '../styles/ScheduleDescription.css.ts';
 
 export default function ScheduleDescription() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);

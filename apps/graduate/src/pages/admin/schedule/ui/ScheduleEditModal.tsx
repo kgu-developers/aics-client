@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
 
-import * as style from './ScheduleEditModal.css.ts';
+import * as style from '../styles/ScheduleEditModal.css.ts';
 import type { ScheduleItem } from '../types/schedule.ts';
 
 interface ScheduleEditModalProps {

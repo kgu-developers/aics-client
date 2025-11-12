@@ -4,11 +4,10 @@ import { useState } from 'react';
 
 import { Header } from '~/shared/components';
 
-import { container } from '~/features/notices/components/NoticesSection.css';
-
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';
 import { scheduleData } from '../mock/schedule';
+import * as style from '../styles/ScheduleAdminPage.css.ts';
 import type { ScheduleItem } from '../types/schedule';
 
 export default function ScheduleSection() {
@@ -42,7 +41,7 @@ export default function ScheduleSection() {
   ];
 
   return (
-    <div className={container}>
+    <div className={style.container}>
       <Header title='진행일정' />
 
       <Table
