@@ -1,20 +1,20 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
-import { useAuthStore } from '~/shared/stores'
+import { useAuthStore } from '~/shared/stores';
 
-import { Header } from '~/widgets/Header'
-import { Sidebar } from '~/widgets/sidebar'
+import { Header } from '~/widgets/Header';
+import { Sidebar } from '~/widgets/sidebar';
 
-import { LoginPage } from '~/pages/login'
-import { vars } from '~/vars.css'
+import { LoginPage } from '~/pages/login';
+import { vars } from '~/vars.css';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
   component: () => {
-    const { isLoggedIn, isAdmin } = useAuthStore()
+    const { isLoggedIn, isAdmin } = useAuthStore();
 
     if (!isLoggedIn) {
       return (
@@ -29,7 +29,7 @@ export const Route = createRootRoute({
             <LoginPage />
           </main>
         </div>
-      )
+      );
     }
 
     if (isAdmin) {
@@ -46,7 +46,7 @@ export const Route = createRootRoute({
             <Outlet />
           </main>
         </div>
-      )
+      );
     }
 
     if (!isAdmin) {
@@ -64,12 +64,8 @@ export const Route = createRootRoute({
             <main
               style={{
                 position: 'absolute',
-                top: vars.spacing.header,
-                left: 0,
-                right: 0,
-                bottom: 0,
+                inset: 0,
                 overflow: 'auto',
-                padding: vars.spacing.md,
                 display: 'flex',
                 backgroundColor: vars.colors.sub,
                 flexDirection: 'column',
@@ -81,7 +77,7 @@ export const Route = createRootRoute({
           </body>
           <TanStackRouterDevtools />
         </QueryClientProvider>
-      )
+      );
     }
   },
-})
+});
