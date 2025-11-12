@@ -119,7 +119,7 @@ export default function ApplyPage() {
         </Link>
       </Drawer>
 
-      <Link to={`${ROUTE.APPLY}?confirm=true` as any} style={{ width: '100%' }}>
+      <Link to='/apply' params={{ confirm: true }} style={{ width: '100%' }}>
         <Button size='large' className={styles.button} type='primary'>
           제출하기
         </Button>
