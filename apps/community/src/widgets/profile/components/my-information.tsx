@@ -1,18 +1,19 @@
-'use client'
+'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { EditableMyProfileCard } from '~/features/profile/components/editable-my-profile-card'
-import { ReadOnlyMyProfileCard } from '~/features/profile/components/read-only-my-profile-card'
-import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries'
+import * as styles from '~/widgets/profile/components/my-information.css';
+
+import { EditableMyProfileCard } from '~/features/profile/components/editable-my-profile-card';
+import { ReadOnlyMyProfileCard } from '~/features/profile/components/read-only-my-profile-card';
+import { MY_PROFILE_QUERY_OPTIONS } from '~/features/profile/services/queries';
 import type {
   UserDetail,
   UserEditableDetail,
-} from '~/features/profile/types/profile'
-import * as styles from '~/widgets/profile/components/my-information.css'
+} from '~/features/profile/types/profile';
 
 function MyInformation() {
-  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE())
+  const { data } = useSuspenseQuery(MY_PROFILE_QUERY_OPTIONS.PROFILE());
 
   const userDetails: UserDetail[] = [
     {
@@ -31,7 +32,7 @@ function MyInformation() {
       title: '전공',
       value: data.major,
     },
-  ]
+  ];
 
   const editableUserDetails: UserEditableDetail[] = [
     {
@@ -44,14 +45,14 @@ function MyInformation() {
       value: data.email,
       field: 'email',
     },
-  ]
+  ];
 
   return (
     <section className={styles.cardWrapper}>
       <ReadOnlyMyProfileCard data={userDetails} />
       <EditableMyProfileCard initialData={editableUserDetails} />
     </section>
-  )
+  );
 }
 
-export { MyInformation }
+export { MyInformation };

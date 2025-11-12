@@ -86,6 +86,6 @@ const color = {
   green700: '#008a50',
   green800: '#007544',
   green900: '#005c36',
-} as const
+} as const;
 
-export default color
+export default color;

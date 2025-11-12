@@ -1,18 +1,19 @@
-import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries'
-import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries'
+import { MESSAGES } from '~/shared/constants/post.constants';
+import { queryClient } from '~/shared/utils/';
 
-import { MESSAGES } from '~/shared/constants/post.constants'
-import { queryClient } from '~/shared/utils/'
+import { usePostServicePatchApiV1PostsByPostIdDelete } from '~/apis/admin/queries';
+import { usePostServiceGetApiV1PostsKey } from '~/apis/community/queries';
+
 
 interface UseDeletePostProps {
   messageApi: {
     open: (config: {
-      type: 'success' | 'error'
-      content: string
-      duration?: number
-    }) => void
-  }
-  historyBack?: () => void
+      type: 'success' | 'error';
+      content: string;
+      duration?: number;
+    }) => void;
+  };
+  historyBack?: () => void;
 }
 
 export const useDeletePost = ({
@@ -25,21 +26,21 @@ export const useDeletePost = ({
         type: 'success',
         content: MESSAGES.success.deletePost,
         duration: 0.7,
-      })
+      });
 
       queryClient.invalidateQueries({
         queryKey: [usePostServiceGetApiV1PostsKey],
-      })
+      });
 
-      historyBack?.()
+      historyBack?.();
     },
     onError: () => {
       messageApi.open({
         type: 'error',
         content: MESSAGES.error.deletePost,
-      })
+      });
     },
-  })
+  });
 
-  return { deletePost: mutation.mutate }
-}
+  return { deletePost: mutation.mutate };
+};

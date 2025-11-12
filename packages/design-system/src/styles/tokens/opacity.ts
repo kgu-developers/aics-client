@@ -20,6 +20,6 @@ const opacity = {
   '90': '0.9',
   '95': '0.95',
   '100': '1',
-} as const
+} as const;
 
-export default opacity
+export default opacity;

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Button from './button'
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Button from './button';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -14,16 +15,16 @@ const meta: Meta<typeof Button> = {
     disabled: false,
     loading: false,
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
     children: 'Button',
   },
-}
+};
 
 export const Primary: Story = {
   args: {
@@ -31,7 +32,7 @@ export const Primary: Story = {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Secondary: Story = {
   args: {
@@ -39,7 +40,7 @@ export const Secondary: Story = {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Danger: Story = {
   args: {
@@ -47,7 +48,7 @@ export const Danger: Story = {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Warning: Story = {
   args: {
@@ -55,7 +56,7 @@ export const Warning: Story = {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Outline: Story = {
   args: {
@@ -63,28 +64,28 @@ export const Outline: Story = {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Small: Story = {
   args: {
     size: 'sm',
     children: 'Button',
   },
-}
+};
 
 export const Medium: Story = {
   args: {
     size: 'md',
     children: 'Button',
   },
-}
+};
 
 export const Large: Story = {
   args: {
     size: 'lg',
     children: 'Button',
   },
-}
+};
 
 export const Loading: Story = {
   args: {
@@ -93,4 +94,4 @@ export const Loading: Story = {
     children: 'Button',
     loading: true,
   },
-}
+};

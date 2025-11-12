@@ -1,1 +1,1 @@
-export { HeroCarousel } from './HeroCarousel'
+export { HeroCarousel } from './HeroCarousel';

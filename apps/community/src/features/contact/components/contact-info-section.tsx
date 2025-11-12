@@ -1,14 +1,15 @@
-'use client'
+'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries'
-import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section'
+import { TiptapContentSection } from '~/shared/components/tiptap-content-section/tiptap-content-section';
+
+import { CONTACT_QUERY_OPTIONS } from '~/features/contact/services/queries';
 
 function ContactInfoSection() {
-  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL())
+  const { data } = useSuspenseQuery(CONTACT_QUERY_OPTIONS.ALL());
 
-  return <TiptapContentSection content={data.content} />
+  return <TiptapContentSection content={data.content} />;
 }
 
-export { ContactInfoSection }
+export { ContactInfoSection };

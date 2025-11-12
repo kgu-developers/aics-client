@@ -6,17 +6,17 @@ const PATH = {
   NEWS_DETAIL: (id: number) => `${PATH.NEWS}/${id}`,
   SIGN_IN: '/signin',
   MY: '/my',
-}
+};
 
-export type pathmapKey = keyof typeof PATHMAP
-export type pathTitleKey = keyof typeof PATH_TITLES
+export type pathmapKey = keyof typeof PATHMAP;
+export type pathTitleKey = keyof typeof PATH_TITLES;
 
 export interface TPathMap {
   [key: string]: {
-    title: string
-    path: string
-    children?: TPathMap
-  }
+    title: string;
+    path: string;
+    children?: TPathMap;
+  };
 }
 
 const PATHMAP = {
@@ -80,7 +80,7 @@ const PATHMAP = {
       },
     },
   },
-} as const satisfies TPathMap
+} as const satisfies TPathMap;
 
 const PATH_TITLES = {
   about: '소개',
@@ -98,6 +98,6 @@ const PATH_TITLES = {
   news: '학부소식',
   my: '마이페이지',
   'change-password': '비밀번호 변경',
-}
+};
 
-export { PATH, PATHMAP, PATH_TITLES }
+export { PATH, PATHMAP, PATH_TITLES };

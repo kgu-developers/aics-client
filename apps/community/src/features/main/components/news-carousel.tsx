@@ -1,22 +1,23 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
-import Autoplay from 'embla-carousel-autoplay'
-import useEmblaCarousel from 'embla-carousel-react'
-import DOMPurify from 'isomorphic-dompurify'
+import { useSuspenseQuery } from '@tanstack/react-query';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
+import DOMPurify from 'isomorphic-dompurify';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import * as styles from '~/features/main/components/news-carousel.css'
-import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
-import type { Post } from '~/features/main/services/remote'
-import AltImage from '~/shared/assets/images/alt.png'
-import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
-import { PATH } from '~/shared/constants/path'
+import AltImage from '~/shared/assets/images/alt.png';
+import { CarouselDots } from '~/shared/components/carousel/carousel-dots';
+import { PATH } from '~/shared/constants/path';
+
+import * as styles from '~/features/main/components/news-carousel.css';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
+import type { Post } from '~/features/main/services/remote';
 
 function NewsCarousel() {
-  const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS())
+  const { data: recentNews } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NEWS());
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -30,7 +31,7 @@ function NewsCarousel() {
         stopOnMouseEnter: true,
       }),
     ],
-  )
+  );
 
   return (
     <section className={styles.news}>
@@ -44,13 +45,13 @@ function NewsCarousel() {
       </div>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.slides}>
-          {recentNews.map((post) => (
+          {recentNews.map(post => (
             <NewsCard key={`news-${post.postId}`} post={post} />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function NewsCard({ post }: { post: Post }) {
@@ -62,7 +63,7 @@ function NewsCard({ post }: { post: Post }) {
     >
       <div className={styles.slide}>
         <div className={styles.image}>
-          <Image src={AltImage} alt="preview-image" fill />
+          <Image src={AltImage} alt='preview-image' fill />
         </div>
         <h3 className={styles.slideTitle}>{post.title}</h3>
         <div
@@ -74,7 +75,7 @@ function NewsCard({ post }: { post: Post }) {
         />
       </div>
     </Link>
-  )
+  );
 }
 
-export default NewsCarousel
+export default NewsCarousel;

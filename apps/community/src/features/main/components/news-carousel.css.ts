@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const news = style([
   {
@@ -9,41 +9,41 @@ const news = style([
   screen.xl({
     width: '60%',
   }),
-])
+]);
 
 const newsHeader = style({
   display: 'flex',
   justifyContent: themeVars.justifyContent.between,
   alignItems: themeVars.alignItems.center,
   marginBottom: '1rem',
-})
+});
 
 const title = style({
   fontSize: themeVars.fontSize['2xl'],
   fontWeight: themeVars.fontWeight.bold,
   margin: 0,
-})
+});
 
 const viewport = style({
   overflow: 'hidden',
-})
+});
 
 const slides = style({
   display: 'flex',
   marginLeft: '-1rem',
-})
+});
 
 const link = style({
   flex: '0 0 50%',
   paddingLeft: '1rem',
-})
+});
 
 const slide = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: themeVars.justifyContent.center,
   alignItems: themeVars.alignItems.center,
-})
+});
 
 const image = style({
   position: 'relative',
@@ -53,12 +53,12 @@ const image = style({
   overflow: 'hidden',
   userSelect: 'none',
   border: `1px solid ${themeVars.color.gray200}`,
-})
+});
 
 const controls = style({
   display: 'flex',
   justifyContent: 'flex-end',
-})
+});
 
 const slideTitle = style({
   display: '-webkit-box',
@@ -72,7 +72,7 @@ const slideTitle = style({
   marginTop: '1rem',
   marginBottom: '0.5rem',
   textAlign: 'center',
-})
+});
 
 const slideDescription = style({
   display: '-webkit-box',
@@ -83,7 +83,7 @@ const slideDescription = style({
   fontSize: themeVars.fontSize.md,
   margin: 0,
   textAlign: 'center',
-})
+});
 
 export {
   news,
@@ -97,4 +97,4 @@ export {
   controls,
   slideTitle,
   slideDescription,
-}
+};

@@ -1,11 +1,12 @@
-import { createFileRoute, useSearch } from '@tanstack/react-router'
-import { Spin } from 'antd'
-import { Suspense } from 'react'
+import { createFileRoute, useSearch } from '@tanstack/react-router';
+import { Spin } from 'antd';
+import { Suspense } from 'react';
 
-import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense'
 
-import { PostList, SearchBar } from '~/shared/components/Post'
-import { PATH } from '~/shared/constants/path'
+import { PostList, SearchBar } from '~/shared/components/Post';
+import { PATH } from '~/shared/constants/path';
+
+import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense';
 
 export const Route = createFileRoute('/notice/')({
   component: NewsListPage,
@@ -13,30 +14,30 @@ export const Route = createFileRoute('/notice/')({
     page: Number(search.page) || 0,
     query: typeof search.query === 'string' ? search.query : '',
   }),
-})
+});
 
-const CATEGORY = 'NOTIFICATION'
-const LIST_SIZE = 10
+const CATEGORY = 'NOTIFICATION';
+const LIST_SIZE = 10;
 
 function NewsListPage() {
   const { page: currentPage, query: keywords } = useSearch({
     from: '/notice/',
-  })
+  });
 
   const { data: postList } = usePostServiceGetApiV1PostsSuspense({
     category: CATEGORY,
     size: LIST_SIZE,
     keywords: keywords,
     page: currentPage,
-  })
+  });
 
   return (
-    <section className="flex flex-col gap-3 px-16">
+    <section className='flex flex-col gap-3 px-16'>
       <Suspense fallback={<Spin />}>
         <SearchBar defaultValue={keywords} />
         {postList?.contents && (
           <PostList
-            title="공지사항"
+            title='공지사항'
             to={PATH.NOTICE}
             currentPage={currentPage}
             data={postList.contents}
@@ -45,5 +46,5 @@ function NewsListPage() {
         )}
       </Suspense>
     </section>
-  )
+  );
 }

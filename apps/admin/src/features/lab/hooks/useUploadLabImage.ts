@@ -1,10 +1,12 @@
-import { useFileServicePostApiV1FilesLab } from '~/apis/admin/queries'
-import { MESSAGES } from '../constant/constants'
+import type { MessageInstance } from 'antd/es/message/interface';
 
-import type { MessageInstance } from 'antd/es/message/interface'
+import { MESSAGES } from '../constant/constants';
+
+import { useFileServicePostApiV1FilesLab } from '~/apis/admin/queries';
+
 
 interface UseUploadLabImageProps {
-  open: MessageInstance['open']
+  open: MessageInstance['open'];
 }
 
 export const useUploadLabImage = ({ open }: UseUploadLabImageProps) => {
@@ -13,11 +15,11 @@ export const useUploadLabImage = ({ open }: UseUploadLabImageProps) => {
       open({
         type: 'error',
         content: MESSAGES.error.uploadImage,
-      })
+      });
     },
-  })
+  });
 
   return {
     uploadLabImage: mutation.mutateAsync,
-  }
-}
+  };
+};

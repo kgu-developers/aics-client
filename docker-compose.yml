@@ -5,7 +5,7 @@ services:
     build: .
     container_name: aics-app
     ports:
-      - "${PORT:-3000}:3000"
+      - '${PORT:-3000}:3000'
     environment:
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
       - NEXT_PUBLIC_AUTH_API_URL=${NEXT_PUBLIC_AUTH_API_URL:-http://localhost:8081}
@@ -18,4 +18,4 @@ services:
 
 networks:
   aics-network:
-    driver: bridge 
+    driver: bridge

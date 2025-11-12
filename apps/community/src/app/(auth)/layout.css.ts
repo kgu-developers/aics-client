@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 export const section = style({
   display: themeVars.display.flex,
@@ -9,4 +9,4 @@ export const section = style({
   gap: themeVars.spacing.lg,
   margin: '0 auto',
   padding: themeVars.spacing.md,
-})
+});

@@ -1,30 +1,32 @@
-import { UploadOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd'
-import type { FormInstance, TableProps } from 'antd'
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Popconfirm, Table, Upload } from 'antd';
+import type { FormInstance, TableProps } from 'antd';
 
-import { MESSAGES, TABLE_COLUMNS } from '../constant/constants'
+import { MESSAGES, TABLE_COLUMNS } from '../constant/constants';
 
-import type { LabDetailResponse } from '~/apis/community/requests'
+import type { LabDetailResponse } from '~/apis/community/requests';
 
 interface LabTableViewProps {
-  form: FormInstance
-  data: LabDetailResponse[]
+  form: FormInstance;
+  data: LabDetailResponse[];
   register: {
-    isEditing: (record: LabDetailResponse) => boolean
-    handleEdit: (record: Partial<LabDetailResponse> & { id: React.Key }) => void
-    cancel: () => void
-  }
-  handleSave: (record: LabDetailResponse) => void
-  handleDelete: (record: LabDetailResponse) => void
-  handleImageUpload: (record: LabDetailResponse) => (file: File) => boolean
+    isEditing: (record: LabDetailResponse) => boolean;
+    handleEdit: (
+      record: Partial<LabDetailResponse> & { id: React.Key },
+    ) => void;
+    cancel: () => void;
+  };
+  handleSave: (record: LabDetailResponse) => void;
+  handleDelete: (record: LabDetailResponse) => void;
+  handleImageUpload: (record: LabDetailResponse) => (file: File) => boolean;
 }
 
 interface EditableCellProps {
-  editing: boolean
-  dataIndex: string
-  title: string
-  record: LabDetailResponse
-  children: React.ReactNode
+  editing: boolean;
+  dataIndex: string;
+  title: string;
+  record: LabDetailResponse;
+  children: React.ReactNode;
 }
 
 export const LabTableView = ({
@@ -59,8 +61,8 @@ export const LabTableView = ({
           children
         )}
       </td>
-    )
-  }
+    );
+  };
 
   const columns = [
     {
@@ -81,7 +83,7 @@ export const LabTableView = ({
       width: TABLE_COLUMNS.width.md,
       editable: true,
       render: (text: string) => (
-        <a href={text} target="_blank" rel="noopener noreferrer">
+        <a href={text} target='_blank' rel='noopener noreferrer'>
           {text}
         </a>
       ),
@@ -98,28 +100,28 @@ export const LabTableView = ({
       dataIndex: TABLE_COLUMNS.image.key,
       width: TABLE_COLUMNS.width.lg,
       render: (_: unknown, record: LabDetailResponse) => {
-        const editable = register.isEditing(record)
+        const editable = register.isEditing(record);
         return (
           <div>
             {record.img?.physicalPath && (
               <img
                 src={record.img.physicalPath}
                 alt={`${record.name} 이미지`}
-                className="w-24 h-24"
+                className='w-24 h-24'
               />
             )}
             <Upload
               showUploadList={false}
-              beforeUpload={(file) => handleImageUpload(record)(file)}
+              beforeUpload={file => handleImageUpload(record)(file)}
             >
               {editable && (
-                <Button icon={<UploadOutlined />} className="mt-2">
+                <Button icon={<UploadOutlined />} className='mt-2'>
                   {MESSAGES.button.uploadImage}
                 </Button>
               )}
             </Upload>
           </div>
-        )
+        );
       },
     },
     {
@@ -127,14 +129,14 @@ export const LabTableView = ({
       dataIndex: TABLE_COLUMNS.operation.key,
       width: TABLE_COLUMNS.width.sm,
       render: (_: unknown, record: LabDetailResponse) => {
-        const editable = register.isEditing(record)
+        const editable = register.isEditing(record);
         return editable ? (
           <span>
             <Button
-              color="primary"
-              variant="solid"
+              color='primary'
+              variant='solid'
               onClick={() => handleSave(record)}
-              className="mr-4"
+              className='mr-4'
             >
               {MESSAGES.button.save}
             </Button>
@@ -143,9 +145,9 @@ export const LabTableView = ({
               onConfirm={register.cancel}
             >
               <Button
-                color="danger"
-                variant="solid"
-                className="text-red-500 hover:cursor-pointer"
+                color='danger'
+                variant='solid'
+                className='text-red-500 hover:cursor-pointer'
               >
                 {MESSAGES.button.cancel}
               </Button>
@@ -154,8 +156,8 @@ export const LabTableView = ({
         ) : (
           <span>
             <Button
-              color="primary"
-              variant="solid"
+              color='primary'
+              variant='solid'
               disabled={register.isEditing(record)}
               onClick={() => register.handleEdit({ ...record, id: record.id })}
             >
@@ -166,22 +168,22 @@ export const LabTableView = ({
               onConfirm={() => handleDelete(record)}
             >
               <Button
-                color="danger"
-                variant="solid"
-                className="ml-4 text-red-500 hover:cursor-pointer"
+                color='danger'
+                variant='solid'
+                className='ml-4 text-red-500 hover:cursor-pointer'
               >
                 {MESSAGES.button.delete}
               </Button>
             </Popconfirm>
           </span>
-        )
+        );
       },
     },
-  ]
+  ];
 
   const mergedColumns: TableProps<LabDetailResponse>['columns'] = columns.map(
-    (col) => {
-      if (!col.editable) return col
+    col => {
+      if (!col.editable) return col;
 
       return {
         ...col,
@@ -191,9 +193,9 @@ export const LabTableView = ({
           title: col.title,
           editing: register.isEditing(record),
         }),
-      }
+      };
     },
-  )
+  );
 
   return (
     <Form form={form} component={false}>
@@ -202,12 +204,12 @@ export const LabTableView = ({
         bordered
         dataSource={data}
         columns={mergedColumns}
-        rowClassName="editable-row"
+        rowClassName='editable-row'
         pagination={{ onChange: register.cancel }}
-        className="break-keep whitespace-nowrap"
+        className='break-keep whitespace-nowrap'
       />
     </Form>
-  )
-}
+  );
+};
 
-export default LabTableView
+export default LabTableView;

@@ -18,6 +18,7 @@ module.exports = defineConfig([
       '**/node_modules/**',
       '**/.tanstack/**',
       '**/.turbo/**',
+      '**/.next/**',
       '**/dist/**',
       '**/build/**',
       '**/storybook-static/**',
@@ -27,6 +28,8 @@ module.exports = defineConfig([
       '**/routeTree.gen.ts',
       '**/reportWebVitals.ts',
       'eslint.config.js',
+      '**/public/admin/**',
+      '**/public/**/assets/**',
     ],
   },
   {
@@ -90,7 +93,8 @@ module.exports = defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/no-unescaped-entities': 'off',
-      '@typescript-eslint/no-unused-expressions': 'warn',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
     },

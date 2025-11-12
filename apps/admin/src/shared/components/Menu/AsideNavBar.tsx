@@ -1,5 +1,5 @@
-import { Link } from '@tanstack/react-router'
-import { Menu, type MenuProps } from 'antd'
+import { Link } from '@tanstack/react-router';
+import { Menu, type MenuProps } from 'antd';
 import {
   Clipboard,
   Clock,
@@ -9,18 +9,20 @@ import {
   ImagesIcon,
   Speech,
   Users,
-} from 'lucide-react'
+} from 'lucide-react';
 
-import LOGO from '~/assets/logo.svg'
-import { PATH_CLUB } from '~/features/club/constants'
-import { PATH_DEPT } from '~/features/dept/constants'
-import { PATH_DIRECTIONS } from '~/features/directions/constants'
-import { PATH } from '~/shared/constants/path'
-import { useRefreshTokens } from '~/shared/hooks/useRefreshToken'
-import { useTokenExpiration } from '~/shared/hooks/useTokenExpiration'
-import { authServices, formatExpireTime } from '~/shared/utils'
+import { PATH } from '~/shared/constants/path';
+import { useRefreshTokens } from '~/shared/hooks/useRefreshToken';
+import { useTokenExpiration } from '~/shared/hooks/useTokenExpiration';
+import { authServices, formatExpireTime } from '~/shared/utils';
 
-type MenuItem = Required<MenuProps>['items'][number]
+import { PATH_CLUB } from '~/features/club/constants';
+import { PATH_DEPT } from '~/features/dept/constants';
+import { PATH_DIRECTIONS } from '~/features/directions/constants';
+
+import LOGO from '~/assets/logo.svg';
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
   {
@@ -92,61 +94,61 @@ const items: MenuItem[] = [
     label: <Link to={PATH.HERO_IMAGES_MANAGER as any}>대표 이미지</Link>,
     icon: <ImagesIcon size={20} />,
   },
-]
+];
 
 function AsideHeader() {
   return (
-    <div className="flex items-center justify-center gap-2 font-bold border-r border-gray-200 h-22">
-      <img src={LOGO} alt="logo" />
-      <div className="leading-4.5">
+    <div className='flex items-center justify-center gap-2 font-bold border-r border-gray-200 h-22'>
+      <img src={LOGO} alt='logo' />
+      <div className='leading-4.5'>
         <p>AI컴퓨터공학부</p>
         <p>관리자 시스템</p>
       </div>
     </div>
-  )
+  );
 }
 
 function AsideFooter() {
-  const { expireTime } = useTokenExpiration()
-  const refreshMutation = useRefreshTokens()
-  const { logout } = authServices()
+  const { expireTime } = useTokenExpiration();
+  const refreshMutation = useRefreshTokens();
+  const { logout } = authServices();
 
   const handleRefreshToken = () => {
-    refreshMutation.mutate()
-  }
+    refreshMutation.mutate();
+  };
 
   return (
-    <div className="flex items-center justify-between p-2 text-sm border-r border-gray-200">
-      <div className="flex p-2 gap-1.5 items-center">
+    <div className='flex items-center justify-between p-2 text-sm border-r border-gray-200'>
+      <div className='flex p-2 gap-1.5 items-center'>
         <Clock size={16} />
         <span>{formatExpireTime(expireTime)}</span>
       </div>
       <div>
         <button
-          type="button"
-          className="p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          type='button'
+          className='p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300'
           onClick={handleRefreshToken}
         >
           시간연장
         </button>
         <button
-          type="button"
-          className="p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300"
+          type='button'
+          className='p-2 transition-colors duration-150 rounded-md cursor-pointer hover:bg-gray-300'
           onClick={logout}
         >
           로그아웃
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default function AsideNavBar() {
   return (
-    <aside className="flex flex-col h-full select-none bg-slate-100 w-80">
+    <aside className='flex flex-col h-full select-none bg-slate-100 w-80'>
       <AsideHeader />
-      <Menu mode="inline" items={items} className="flex-grow" />
+      <Menu mode='inline' items={items} className='flex-grow' />
       <AsideFooter />
     </aside>
-  )
+  );
 }

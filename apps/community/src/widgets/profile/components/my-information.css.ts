@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const cardWrapper = style({
   display: 'flex',
@@ -11,6 +11,6 @@ const cardWrapper = style({
     gridTemplateColumns: '1fr 1fr',
     gap: themeVars.spacing.md,
   }),
-})
+});
 
-export { cardWrapper }
+export { cardWrapper };

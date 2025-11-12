@@ -1,7 +1,7 @@
-import { cn } from '../../utils'
-import Spacing from '../spacing/spacing'
-import Text from '../text/text'
-import { cardDescriptionVariants, cardVariants } from './card.css'
+import { cardDescriptionVariants, cardVariants } from './card.css';
+import { cn } from '../../utils';
+import Spacing from '../spacing/spacing';
+import Text from '../text/text';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -10,37 +10,37 @@ export default function Card({ className, children, ...props }: Props) {
     <div className={cn(cardVariants(), className)} {...props}>
       {children}
     </div>
-  )
+  );
 }
 
 interface HeaderProps {
-  title: string
-  description?: string
+  title: string;
+  description?: string;
 }
 
 function Header({ title, description }: HeaderProps) {
   return (
     <div>
-      <Text as="h3" fontWeight="semibold">
+      <Text as='h3' fontWeight='semibold'>
         {title}
       </Text>
       {description && (
-        <Text as="p" size="sm" className={cardDescriptionVariants()}>
+        <Text as='p' size='sm' className={cardDescriptionVariants()}>
           {description}
         </Text>
       )}
-      <Spacing size="md" />
+      <Spacing size='md' />
     </div>
-  )
+  );
 }
 
 interface ContentProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 function Content({ children }: ContentProps) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 
-Card.Header = Header
-Card.Content = Content
+Card.Header = Header;
+Card.Content = Content;

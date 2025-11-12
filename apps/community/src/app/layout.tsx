@@ -1,15 +1,15 @@
-import type { Metadata } from 'next'
+import { ThemeProvider } from '@aics-client/design-system';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Provider as JotaiProvider } from 'jotai';
+import type { Metadata } from 'next';
 
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Provider as JotaiProvider } from 'jotai'
 
-import { ThemeProvider } from '@aics-client/design-system'
+import { SiteFooter } from '~/shared/components/site-footer/site-footer';
+import { SiteHeader } from '~/shared/components/site-header/site-header';
 
-import { pretendardVariable } from '~/app/fonts/pretendard-variable'
-import * as styles from '~/app/layout.css'
-import Providers from '~/app/providers'
-import { SiteFooter } from '~/shared/components/site-footer/site-footer'
-import { SiteHeader } from '~/shared/components/site-header/site-header'
+import { pretendardVariable } from '~/app/fonts/pretendard-variable';
+import * as styles from '~/app/layout.css';
+import Providers from '~/app/providers';
 
 export const metadata: Metadata = {
   title: '경기대학교 AI컴퓨터공학부',
@@ -17,15 +17,15 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icon.ico',
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <body className={pretendardVariable.className}>
         <Providers>
           <JotaiProvider>
@@ -39,5 +39,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }

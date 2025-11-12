@@ -9,6 +9,6 @@ const spacing = {
   lg: '1.5rem',
   /** 2.0rem (32px) */
   xl: '2.0rem',
-} as const
+} as const;
 
-export default spacing
+export default spacing;

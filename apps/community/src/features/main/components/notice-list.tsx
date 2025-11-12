@@ -1,16 +1,19 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import { useSuspenseQuery } from '@tanstack/react-query';
+import DOMPurify from 'isomorphic-dompurify';
+import Link from 'next/link';
 
-import { useSuspenseQuery } from '@tanstack/react-query'
-import DOMPurify from 'isomorphic-dompurify'
 
-import * as styles from '~/features/main/components/notice-list.css'
-import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
-import { PATH } from '~/shared/constants/path'
+import { PATH } from '~/shared/constants/path';
+
+import * as styles from '~/features/main/components/notice-list.css';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
 
 function NoticeList() {
-  const { data: recentNotices } = useSuspenseQuery(MAIN_QUERY_OPTIONS.NOTICES())
+  const { data: recentNotices } = useSuspenseQuery(
+    MAIN_QUERY_OPTIONS.NOTICES(),
+  );
 
   return (
     <section className={styles.notice}>
@@ -20,7 +23,7 @@ function NoticeList() {
         </div>
       </div>
       <ul className={styles.list}>
-        {recentNotices.map((post) => (
+        {recentNotices.map(post => (
           <NoticeListItem
             key={post.postId}
             postId={post.postId}
@@ -30,7 +33,7 @@ function NoticeList() {
         ))}
       </ul>
     </section>
-  )
+  );
 }
 
 function NoticeListItem({
@@ -38,9 +41,9 @@ function NoticeListItem({
   title,
   description,
 }: {
-  postId: number
-  title: string
-  description: string
+  postId: number;
+  title: string;
+  description: string;
 }) {
   return (
     <li key={`notice-${postId}`}>
@@ -55,7 +58,7 @@ function NoticeListItem({
         />
       </Link>
     </li>
-  )
+  );
 }
 
-export default NoticeList
+export default NoticeList;

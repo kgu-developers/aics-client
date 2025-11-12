@@ -1,10 +1,9 @@
-import { createFileRoute, useSearch } from '@tanstack/react-router'
-import { Suspense } from 'react'
+import { createFileRoute, useSearch } from '@tanstack/react-router';
+import { Suspense } from 'react';
 
-import { PostList, SearchBar } from '~/shared/components/Post'
-
-import { PATH } from '~/shared/constants/path'
-import { useNewsList } from '~/shared/hooks'
+import { PostList, SearchBar } from '~/shared/components/Post';
+import { PATH } from '~/shared/constants/path';
+import { useNewsList } from '~/shared/hooks';
 
 export const Route = createFileRoute('/news/')({
   component: NewsListPage,
@@ -12,14 +11,14 @@ export const Route = createFileRoute('/news/')({
     page: Number(search.page) || 0,
     query: typeof search.query === 'string' ? search.query : '',
   }),
-})
+});
 
-const LIST_SIZE = 10
+const LIST_SIZE = 10;
 
 function NewsListPage() {
   const { page: currentPage, query: keywords } = useSearch({
     from: '/news/',
-  })
+  });
 
   const {
     data: {
@@ -30,15 +29,15 @@ function NewsListPage() {
     size: LIST_SIZE,
     keywords: keywords,
     page: currentPage,
-  })
+  });
 
   return (
-    <section className="flex flex-col gap-3 px-16">
+    <section className='flex flex-col gap-3 px-16'>
       <Suspense fallback={<div>loading...</div>}>
         <SearchBar defaultValue={keywords} />
         {newsContents && (
           <PostList
-            title="학부소식"
+            title='학부소식'
             to={PATH.NEWS}
             currentPage={currentPage}
             data={newsContents}
@@ -47,5 +46,5 @@ function NewsListPage() {
         )}
       </Suspense>
     </section>
-  )
+  );
 }

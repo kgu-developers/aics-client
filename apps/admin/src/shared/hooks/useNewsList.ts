@@ -1,9 +1,9 @@
-import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense'
+import { usePostServiceGetApiV1PostsSuspense } from '~/apis/community/queries/suspense';
 
 interface UseNewsListProps {
-  page: number
-  size: number
-  keywords?: string
+  page: number;
+  size: number;
+  keywords?: string;
 }
 
 export const useNewsList = ({ page, size, keywords }: UseNewsListProps) => {
@@ -12,9 +12,9 @@ export const useNewsList = ({ page, size, keywords }: UseNewsListProps) => {
     page: page,
     size: size,
     keywords: keywords ?? undefined,
-  })
+  });
 
   return {
     data: data,
-  }
-}
+  };
+};

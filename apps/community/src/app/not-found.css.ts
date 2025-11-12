@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { screen, themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { screen, themeVars } from '@aics-client/design-system/styles'
 
 const container = style({
   flex: 1,
@@ -10,7 +10,7 @@ const container = style({
   alignItems: themeVars.alignItems.center,
   justifySelf: 'center',
   gap: themeVars.spacing.xl,
-})
+});
 
 const logo = style([
   screen.md({
@@ -19,7 +19,7 @@ const logo = style([
   {
     width: '7rem',
   },
-])
+]);
 
 const text = style([
   screen.md({
@@ -28,6 +28,6 @@ const text = style([
   {
     fontSize: themeVars.fontSize.md,
   },
-])
+]);
 
-export { container, logo, text }
+export { container, logo, text };

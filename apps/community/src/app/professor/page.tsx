@@ -1,27 +1,28 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { ProfessorList } from '~/features/member/components/professor-list'
-import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries'
-import { PageHeader } from '~/shared/components/page-header/page-header'
-import { getQueryClient } from '~/shared/utils/'
+import { PageHeader } from '~/shared/components/page-header/page-header';
+import { getQueryClient } from '~/shared/utils/';
 
-export const dynamic = 'force-dynamic'
+import { ProfessorList } from '~/features/member/components/professor-list';
+import { PROFESSORS_QUERY_OPTIONS } from '~/features/member/services/queries';
+
+export const dynamic = 'force-dynamic';
 
 export default function ProfessorPage() {
-  const queryClient = getQueryClient()
+  const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL())
+  void queryClient.prefetchQuery(PROFESSORS_QUERY_OPTIONS.ALL());
 
   return (
     <section>
       <PageHeader
-        title="교수진 소개"
-        description="경기대학교 AI컴퓨터공학부의 교수진을 소개해요"
+        title='교수진 소개'
+        description='경기대학교 AI컴퓨터공학부의 교수진을 소개해요'
       />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ProfessorList />
       </HydrationBoundary>
     </section>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense'
+import { useLabServiceGetApiV1LabsSuspense } from '~/apis/community/queries/suspense';
 
 export const useLabs = () => {
-  const { data } = useLabServiceGetApiV1LabsSuspense()
+  const { data } = useLabServiceGetApiV1LabsSuspense();
 
-  return { data: data }
-}
+  return { data: data };
+};

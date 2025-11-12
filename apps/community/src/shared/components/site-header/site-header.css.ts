@@ -1,17 +1,17 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 const headerWrapper = style({
   position: 'sticky',
   top: 0,
   zIndex: 50,
   transition: 'padding 0.3s',
-})
+});
 
 const headerWrapperScrolled = style({
   paddingTop: '1rem',
-})
+});
 
 const header = style({
   display: 'flex',
@@ -26,18 +26,18 @@ const header = style({
       padding: '1rem 1.5rem',
     },
   },
-})
+});
 
 const headerScrolled = style({
   boxShadow: '0 0 4px rgba(0, 0, 0, 0.1)',
-})
+});
 
 const buttonContainer = style({
   width: '20%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: themeVars.alignItems.end,
-})
+});
 
 const signInButton = style({
   padding: '0.5rem 0.75rem',
@@ -49,7 +49,7 @@ const signInButton = style({
   ':hover': {
     backgroundColor: themeVars.color.gray800,
   },
-})
+});
 
 const logoutButton = style({
   visibility: 'hidden',
@@ -64,7 +64,7 @@ const logoutButton = style({
       visibility: 'visible',
     },
   },
-})
+});
 
 export {
   headerWrapper,
@@ -74,4 +74,4 @@ export {
   buttonContainer,
   signInButton,
   logoutButton,
-}
+};

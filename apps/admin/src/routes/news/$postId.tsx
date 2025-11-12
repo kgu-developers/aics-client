@@ -1,17 +1,16 @@
-import { createFileRoute, useMatch } from '@tanstack/react-router'
+import { createFileRoute, useMatch } from '@tanstack/react-router';
 
-import { Board } from '~/shared/components/Post'
-
-import { PATH } from '~/shared/constants/path'
-import { usePostDetail } from '~/shared/hooks'
+import { Board } from '~/shared/components/Post';
+import { PATH } from '~/shared/constants/path';
+import { usePostDetail } from '~/shared/hooks';
 
 export const Route = createFileRoute('/news/$postId')({
   component: PostDetailPage,
-})
+});
 
 function PostDetailPage() {
-  const { params } = useMatch({ from: '/news/$postId' })
-  const { data } = usePostDetail({ postId: Number(params.postId) })
+  const { params } = useMatch({ from: '/news/$postId' });
+  const { data } = usePostDetail({ postId: Number(params.postId) });
   const {
     title,
     author,
@@ -22,10 +21,10 @@ function PostDetailPage() {
     postId,
     prevPost,
     nextPost,
-  } = data
+  } = data;
 
   return (
-    <section className="px-16">
+    <section className='px-16'>
       <Board>
         <Board.Header
           title={title}
@@ -43,5 +42,5 @@ function PostDetailPage() {
         />
       </Board>
     </section>
-  )
+  );
 }

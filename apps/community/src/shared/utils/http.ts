@@ -1,10 +1,10 @@
-import { getAccessToken } from '~/shared/utils/token'
+import { getAccessToken } from '~/shared/utils/token';
 
 interface RequestParams {
-  method: string
-  url: string
-  options?: RequestInit
-  data?: unknown
+  method: string;
+  url: string;
+  options?: RequestInit;
+  data?: unknown;
 }
 
 async function request<Response>({
@@ -13,7 +13,7 @@ async function request<Response>({
   options = {},
   data,
 }: RequestParams): Promise<Response> {
-  const accessToken = getAccessToken()
+  const accessToken = getAccessToken();
 
   const config: RequestInit = {
     method,
@@ -27,24 +27,24 @@ async function request<Response>({
       ...(options.headers || {}),
     },
     ...options,
-  }
+  };
 
   if (data) {
-    config.body = JSON.stringify(data)
+    config.body = JSON.stringify(data);
   }
 
-  const res = await fetch(url, config)
+  const res = await fetch(url, config);
 
   if (!res.ok) {
-    throw new Error(`Status: ${res.status}`)
+    throw new Error(`Status: ${res.status}`);
   }
 
   if (res.status === 204) {
-    return null as Response
+    return null as Response;
   }
 
-  const responseData = await res.json()
-  return responseData as Response
+  const responseData = await res.json();
+  return responseData as Response;
 }
 
 const http = {
@@ -56,7 +56,7 @@ const http = {
       method: 'GET',
       url,
       options,
-    })
+    });
   },
   post: <Request, Response = unknown>(
     url: string,
@@ -68,7 +68,7 @@ const http = {
       url,
       options,
       data,
-    })
+    });
   },
   put: <Request = unknown, Response = unknown>(
     url: string,
@@ -80,7 +80,7 @@ const http = {
       url,
       options,
       data,
-    })
+    });
   },
   delete: <Response = unknown>(
     url: string,
@@ -90,7 +90,7 @@ const http = {
       method: 'DELETE',
       url,
       options,
-    })
+    });
   },
   patch: <Request, Response = unknown>(
     url: string,
@@ -102,8 +102,8 @@ const http = {
       url,
       options,
       data,
-    })
+    });
   },
-}
+};
 
-export { http }
+export { http };

@@ -1,4 +1,4 @@
 commit-msg:
   commands:
-    "lint commit message":
+    'lint commit message':
       run: pnpm dlx commitlint --edit {1}

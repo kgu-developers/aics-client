@@ -1,19 +1,20 @@
-import { Link } from '@tanstack/react-router'
-import { Card } from 'antd'
-import { ArrowRightIcon } from 'lucide-react'
+import { Link } from '@tanstack/react-router';
+import { Card } from 'antd';
+import { ArrowRightIcon } from 'lucide-react';
 
 import {
   POST_DETAIL_PATH_MAP,
   type PostCategory,
-} from '~/shared/constants/path'
+} from '~/shared/constants/path';
 
-import type { PostSummaryResponse } from '~/apis/community/requests'
-import { MESSAGES } from './constant/constants'
+import { MESSAGES } from './constant/constants';
+
+import type { PostSummaryResponse } from '~/apis/community/requests';
 
 interface PostListCardProps {
-  title: string
-  to: PostCategory
-  posts: PostSummaryResponse[]
+  title: string;
+  to: PostCategory;
+  posts: PostSummaryResponse[];
 }
 
 function PostSummaryList({ title, to, posts }: PostListCardProps) {
@@ -23,18 +24,18 @@ function PostSummaryList({ title, to, posts }: PostListCardProps) {
       extra={
         <Link to={to} search={{ page: 0, query: '' }}>
           <button
-            type="button"
-            className="flex gap-1 items-center text-black cursor-pointer"
+            type='button'
+            className='flex gap-1 items-center text-black cursor-pointer'
           >
             {MESSAGES.button.more}
             <ArrowRightIcon size={'1rem'} />
           </button>
         </Link>
       }
-      className="w-full flex flex-col"
+      className='w-full flex flex-col'
     >
       {posts?.map((post, index) => {
-        const isLast = index === posts.length - 1
+        const isLast = index === posts.length - 1;
         return (
           <div
             key={post.postId}
@@ -44,13 +45,13 @@ function PostSummaryList({ title, to, posts }: PostListCardProps) {
               to={`${POST_DETAIL_PATH_MAP[to]}`}
               params={{ postId: post?.postId.toString() }}
             >
-              <span className="text-black">{post.title}</span>
+              <span className='text-black'>{post.title}</span>
             </Link>
           </div>
-        )
+        );
       })}
     </Card>
-  )
+  );
 }
 
-export { PostSummaryList }
+export { PostSummaryList };

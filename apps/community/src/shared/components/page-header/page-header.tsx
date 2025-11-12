@@ -1,26 +1,26 @@
-'use client'
+'use client';
 
-import { usePathname } from 'next/navigation'
-import { Fragment } from 'react'
+import { Breadcrumb } from '@aics-client/design-system';
+import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
 
-import { Breadcrumb } from '@aics-client/design-system'
 
-import * as styles from '~/shared/components/page-header/page-header.css'
-import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path'
+import * as styles from '~/shared/components/page-header/page-header.css';
+import { PATH_TITLES, type pathmapKey } from '~/shared/constants/path';
 
 interface PageHeaderProps {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 function PageHeader({ title, description }: PageHeaderProps) {
-  const pathname = usePathname()
-  const paths = pathname.split('/').filter((path) => path !== '')
+  const pathname = usePathname();
+  const paths = pathname.split('/').filter(path => path !== '');
 
   const renderBreadcrumbs = () =>
     paths.map((path, index) => {
-      const isLast = index === paths.length - 1
-      const href = `/${paths.slice(0, index + 1).join('/')}`
+      const isLast = index === paths.length - 1;
+      const href = `/${paths.slice(0, index + 1).join('/')}`;
 
       return (
         <Fragment key={`subpath-${path}`}>
@@ -37,15 +37,15 @@ function PageHeader({ title, description }: PageHeaderProps) {
             )}
           </Breadcrumb.Item>
         </Fragment>
-      )
-    })
+      );
+    });
 
   return (
     <div className={styles.pageHeaderWrapper}>
       <Breadcrumb>
         <Breadcrumb.List>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/">홈</Breadcrumb.Link>
+            <Breadcrumb.Link href='/'>홈</Breadcrumb.Link>
           </Breadcrumb.Item>
           {renderBreadcrumbs()}
         </Breadcrumb.List>
@@ -56,7 +56,7 @@ function PageHeader({ title, description }: PageHeaderProps) {
         <p className={styles.description}>{description}</p>
       </div>
     </div>
-  )
+  );
 }
 
-export { PageHeader }
+export { PageHeader };

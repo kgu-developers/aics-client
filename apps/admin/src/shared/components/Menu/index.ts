@@ -1,1 +1,1 @@
-export { default as AsideNavBar } from './AsideNavBar'
+export { default as AsideNavBar } from './AsideNavBar';

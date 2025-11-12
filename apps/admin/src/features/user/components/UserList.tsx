@@ -1,16 +1,17 @@
-import { useNavigate } from '@tanstack/react-router'
-import { Button, Checkbox, List, Pagination, type PaginationProps } from 'antd'
-import { CircleUserRoundIcon, Trash2Icon } from 'lucide-react'
-import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router';
+import { Button, Checkbox, List, Pagination, type PaginationProps } from 'antd';
+import { CircleUserRoundIcon, Trash2Icon } from 'lucide-react';
+import { useState } from 'react';
 
-import type { UserDetailResponse } from '~/apis/admin/requests'
+import { useDeleteUsers } from '~/shared/hooks/useDeleteUsers';
 
-import { useDeleteUsers } from '~/shared/hooks/useDeleteUsers'
+import type { UserDetailResponse } from '~/apis/admin/requests';
+
 
 interface UserListHeaderProps {
-  isDeleteMode: boolean
-  setIsDeleteMode: (isDeleteMode: boolean) => void
-  handleDeleteUsers: () => void
+  isDeleteMode: boolean;
+  setIsDeleteMode: (isDeleteMode: boolean) => void;
+  handleDeleteUsers: () => void;
 }
 
 function UserListHeader({
@@ -19,14 +20,14 @@ function UserListHeader({
   handleDeleteUsers,
 }: UserListHeaderProps) {
   return (
-    <div className="flex justify-between items-ceneter">
-      <h1 className="text-lg font-semibold">사용자 목록</h1>
+    <div className='flex justify-between items-ceneter'>
+      <h1 className='text-lg font-semibold'>사용자 목록</h1>
       {isDeleteMode ? (
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           <Button
-            color="danger"
-            variant="solid"
-            className="flex items-center gap-1"
+            color='danger'
+            variant='solid'
+            className='flex items-center gap-1'
             onClick={handleDeleteUsers}
           >
             <Trash2Icon size={'1rem'} />
@@ -36,9 +37,9 @@ function UserListHeader({
         </div>
       ) : (
         <Button
-          color="danger"
-          variant="solid"
-          className="flex items-center gap-1"
+          color='danger'
+          variant='solid'
+          className='flex items-center gap-1'
           onClick={() => setIsDeleteMode(!isDeleteMode)}
         >
           <Trash2Icon size={'1rem'} />
@@ -46,14 +47,14 @@ function UserListHeader({
         </Button>
       )}
     </div>
-  )
+  );
 }
 
 interface UserListItemProps {
-  user: UserDetailResponse
-  isDeleteMode: boolean
-  selectedUsers: string[]
-  setSelectedUsers: (users: string[]) => void
+  user: UserDetailResponse;
+  isDeleteMode: boolean;
+  selectedUsers: string[];
+  setSelectedUsers: (users: string[]) => void;
 }
 
 function UserListItem({
@@ -64,23 +65,23 @@ function UserListItem({
 }: UserListItemProps) {
   const handleCheckboxChange = (checked: boolean) => {
     if (checked) {
-      setSelectedUsers([...selectedUsers, user.id])
+      setSelectedUsers([...selectedUsers, user.id]);
     } else {
-      setSelectedUsers(selectedUsers.filter((id) => id !== user.id))
+      setSelectedUsers(selectedUsers.filter(id => id !== user.id));
     }
-  }
+  };
 
   return (
     <List.Item>
-      <div className="flex items-center gap-4">
+      <div className='flex items-center gap-4'>
         <CircleUserRoundIcon />
         <div>
-          <div className="flex items-center font-semibold gap-1">
+          <div className='flex items-center font-semibold gap-1'>
             <p>
               {user.name} │ {user.id}
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+          <div className='flex items-center gap-2 text-xs text-gray-400'>
             <p>
               {user.major} │ {user.role} │ {user.email} │ {user.phone}
             </p>
@@ -89,32 +90,32 @@ function UserListItem({
       </div>
       {isDeleteMode && (
         <Checkbox
-          className="flex items-center justify-center"
-          onChange={(e) => handleCheckboxChange(e.target.checked)}
+          className='flex items-center justify-center'
+          onChange={e => handleCheckboxChange(e.target.checked)}
           checked={selectedUsers.includes(user.id)}
         />
       )}
     </List.Item>
-  )
+  );
 }
 
 interface UserListProps {
-  data: UserDetailResponse[]
-  currentPage: number
-  total: number
+  data: UserDetailResponse[];
+  currentPage: number;
+  total: number;
 }
 
 function UserList({ data, currentPage, total }: UserListProps) {
-  const navigate = useNavigate({ from: '/user' })
-  const [isDeleteMode, setIsDeleteMode] = useState(false)
+  const navigate = useNavigate({ from: '/user' });
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
   const { contextHolder, selectedUsers, setSelectedUsers, handleDeleteUsers } =
-    useDeleteUsers()
+    useDeleteUsers();
 
-  const handlePageChange: PaginationProps['onChange'] = (currentPage) => {
+  const handlePageChange: PaginationProps['onChange'] = currentPage => {
     navigate({
-      search: (prev) => ({ ...prev, page: currentPage - 1 }),
-    })
-  }
+      search: prev => ({ ...prev, page: currentPage - 1 }),
+    });
+  };
 
   return (
     <>
@@ -127,11 +128,11 @@ function UserList({ data, currentPage, total }: UserListProps) {
             handleDeleteUsers={handleDeleteUsers}
           />
         }
-        itemLayout="horizontal"
+        itemLayout='horizontal'
         bordered
-        size="large"
+        size='large'
         dataSource={data}
-        renderItem={(user) => (
+        renderItem={user => (
           <UserListItem
             user={user}
             isDeleteMode={isDeleteMode}
@@ -141,7 +142,7 @@ function UserList({ data, currentPage, total }: UserListProps) {
         )}
       />
       <Pagination
-        align="center"
+        align='center'
         showSizeChanger={false}
         defaultCurrent={1}
         current={currentPage + 1}
@@ -149,7 +150,7 @@ function UserList({ data, currentPage, total }: UserListProps) {
         onChange={handlePageChange}
       />
     </>
-  )
+  );
 }
 
-export { UserList }
+export { UserList };

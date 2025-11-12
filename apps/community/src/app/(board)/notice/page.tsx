@@ -1,28 +1,31 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import * as styles from '~/app/(board)/notice/page.css'
-import { SearchBar } from '~/features/board/components/search-bar'
-import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries'
-import { PageHeader } from '~/shared/components/page-header/page-header'
-import { getQueryClient } from '~/shared/utils/'
-import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list'
+import { PageHeader } from '~/shared/components/page-header/page-header';
+import { getQueryClient } from '~/shared/utils/';
 
-export const dynamic = 'force-dynamic'
+import { PaginatedBoardList } from '~/widgets/board/components/paginated-board-list';
 
-const SIZE = 10
-const CATEGORY = 'NOTIFICATION'
+import { SearchBar } from '~/features/board/components/search-bar';
+import { BOARD_QUERY_OPTIONS } from '~/features/board/services/queries';
+
+import * as styles from '~/app/(board)/notice/page.css';
+
+export const dynamic = 'force-dynamic';
+
+const SIZE = 10;
+const CATEGORY = 'NOTIFICATION';
 
 export default async function NoticePage(props: {
   searchParams?: Promise<{
-    category?: string
-    page?: string
-    keyword?: string
-  }>
+    category?: string;
+    page?: string;
+    keyword?: string;
+  }>;
 }) {
-  const searchParams = await props.searchParams
-  const currentPage = Number(searchParams?.page) || 0
-  const keyword = searchParams?.keyword || ''
-  const queryClient = getQueryClient()
+  const searchParams = await props.searchParams;
+  const currentPage = Number(searchParams?.page) || 0;
+  const keyword = searchParams?.keyword || '';
+  const queryClient = getQueryClient();
   void queryClient.prefetchQuery(
     BOARD_QUERY_OPTIONS.ALL({
       page: currentPage,
@@ -30,17 +33,17 @@ export default async function NoticePage(props: {
       keyword: keyword,
       category: CATEGORY,
     }),
-  )
+  );
 
   return (
     <section>
       <PageHeader
-        title="공지사항"
-        description="학부와 관련된 중요한 공지사항을 안내해드려요."
+        title='공지사항'
+        description='학부와 관련된 중요한 공지사항을 안내해드려요.'
       />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <section className={styles.boardWrapper}>
-          <SearchBar placeholder="검색어를 입력하세요" />
+          <SearchBar placeholder='검색어를 입력하세요' />
           <PaginatedBoardList
             page={currentPage}
             size={SIZE}
@@ -50,5 +53,5 @@ export default async function NoticePage(props: {
         </section>
       </HydrationBoundary>
     </section>
-  )
+  );
 }

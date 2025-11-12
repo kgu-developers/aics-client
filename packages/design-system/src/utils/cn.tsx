@@ -1,5 +1,5 @@
-import { clsx } from 'clsx/lite'
+import { clsx } from 'clsx/lite';
 
 export function cn(...inputs: Array<string | boolean | null | undefined>) {
-  return clsx(...inputs)
+  return clsx(...inputs);
 }

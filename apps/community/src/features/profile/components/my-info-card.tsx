@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import * as styles from '~/features/profile/components/my-info-card.css'
+import * as styles from '~/features/profile/components/my-info-card.css';
 
 interface MyInfoCardProps {
-  title: string
-  children: React.ReactNode
+  title: string;
+  children: React.ReactNode;
 }
 
 function MyInfoCard({ title, children }: MyInfoCardProps) {
@@ -13,7 +13,7 @@ function MyInfoCard({ title, children }: MyInfoCardProps) {
       <h2 className={styles.cardTitle}>{title}</h2>
       <div className={styles.cardContent}>{children}</div>
     </section>
-  )
+  );
 }
 
-export { MyInfoCard }
+export { MyInfoCard };

@@ -1,1 +1,1 @@
-export { HeroImageEditCard } from './HeroImageEditCard'
+export { HeroImageEditCard } from './HeroImageEditCard';

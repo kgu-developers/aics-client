@@ -1,4 +1,4 @@
-import { globalStyle } from '@vanilla-extract/css'
+import { globalStyle } from '@vanilla-extract/css';
 
 /*! tailwindcss preflight v3.4.15 | MIT License | https://unpkg.com/tailwindcss@3.4.15/src/css/preflight.css */
 
@@ -11,7 +11,7 @@ globalStyle('*', {
   borderWidth: '0' /*2 */,
   borderStyle: 'solid' /*2 */,
   borderColor: 'currentColor' /*2 */,
-})
+});
 
 globalStyle('::before, ::after', {
   boxSizing: 'inherit' /*1 */,
@@ -19,7 +19,7 @@ globalStyle('::before, ::after', {
   borderStyle: 'solid' /*2 */,
   borderColor: 'currentColor' /*2 */,
   // content: '""',
-})
+});
 
 /*
 1. Use a consistent sensible line-height in all browsers.
@@ -39,7 +39,7 @@ globalStyle('html, :host', {
   fontFeatureSettings: 'normal' /*5 */,
   fontVariationSettings: 'normal' /*6 */,
   WebkitTapHighlightColor: 'transparent' /*7 */,
-})
+});
 
 /*
 1. Remove the margin in all browsers.
@@ -48,7 +48,7 @@ globalStyle('html, :host', {
 globalStyle('body', {
   margin: '0' /*1 */,
   lineHeight: 'inherit' /*2 */,
-})
+});
 
 /*
 1. Add the correct height in Firefox.
@@ -59,14 +59,14 @@ globalStyle('hr', {
   height: '0' /*1 */,
   color: 'inherit' /*2 */,
   borderTopWidth: '1px' /*3 */,
-})
+});
 
 /*
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 globalStyle('abbr:where([title])', {
   textDecoration: 'underline dotted',
-})
+});
 
 /*
 Default margins are removed
@@ -74,7 +74,7 @@ Preflight removes all of the default margins from elements like headings, blockq
  */
 globalStyle('blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre', {
   margin: 0,
-})
+});
 
 /*
 Remove the default font size and weight for headings.
@@ -82,7 +82,7 @@ Remove the default font size and weight for headings.
 globalStyle('h1, h2, h3, h4, h5, h6', {
   fontSize: 'inherit',
   fontWeight: 'inherit',
-})
+});
 
 /*
 Reset links to optimize for opt-in styling instead of opt-out.
@@ -90,14 +90,14 @@ Reset links to optimize for opt-in styling instead of opt-out.
 globalStyle('a', {
   color: 'inherit',
   textDecoration: 'inherit',
-})
+});
 
 /*
 Add the correct font weight in Edge and Safari.
 */
 globalStyle('b, strong', {
   fontWeight: 'bolder',
-})
+});
 
 /*
 1. Use the user's configured `mono` font-family by default.
@@ -110,14 +110,14 @@ globalStyle('code, kbd, samp, pre', {
   fontFeatureSettings: 'normal' /*2 */,
   fontVariationSettings: 'normal' /*3 */,
   fontSize: '1em' /*4 */,
-})
+});
 
 /*
 Add the correct font size in all browsers.
 */
 globalStyle('small', {
   fontSize: '80%',
-})
+});
 
 /*
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
@@ -127,15 +127,15 @@ globalStyle('sub, sup', {
   lineHeight: '0',
   position: 'relative',
   verticalAlign: 'baseline',
-})
+});
 
 globalStyle('sub', {
   bottom: '-0.25em',
-})
+});
 
 globalStyle('sup', {
   top: '-0.5em',
-})
+});
 
 /*
 1. Remove text indentation from table contents in Chrome and Safari.
@@ -146,7 +146,7 @@ globalStyle('table', {
   textIndent: '0' /*1 */,
   borderColor: 'inherit' /*2 */,
   borderCollapse: 'collapse' /*3 */,
-})
+});
 
 /*
 1. Change the font styles in all browsers.
@@ -164,14 +164,14 @@ globalStyle('button, input, optgroup, select, textarea', {
   color: 'inherit' /*1 */,
   margin: '0' /*2 */,
   padding: '0' /*3 */,
-})
+});
 
 /*
 Remove the inheritance of text transform in Edge and Firefox.
 */
 globalStyle('button, select', {
   textTransform: 'none',
-})
+});
 
 /*
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -184,35 +184,35 @@ globalStyle(
     backgroundColor: 'transparent' /*2 */,
     backgroundImage: 'none' /*2 */,
   },
-)
+);
 
 /*
 Use the modern Firefox focus style for all focusable elements.
 */
 globalStyle(':-moz-focusring', {
   outline: 'auto',
-})
+});
 
 /*
 Remove the additional `:invalid` styles in Firefox.
 */
 globalStyle(':-moz-ui-invalid', {
   boxShadow: 'none',
-})
+});
 
 /*
 Add the correct vertical alignment in Chrome and Firefox.
 */
 globalStyle('progress', {
   verticalAlign: 'baseline',
-})
+});
 
 /*
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 globalStyle('::-webkit-inner-spin-button, ::-webkit-outer-spin-button', {
   height: 'auto',
-})
+});
 
 /*
 1. Correct the odd appearance in Chrome and Safari.
@@ -221,14 +221,14 @@ globalStyle('::-webkit-inner-spin-button, ::-webkit-outer-spin-button', {
 globalStyle('[type="search"]', {
   WebkitAppearance: 'textfield' /*1 */,
   outlineOffset: '-2px' /*2 */,
-})
+});
 
 /*
 Remove the inner padding in Chrome and Safari on macOS.
 */
 globalStyle('::-webkit-search-decoration', {
   WebkitAppearance: 'none',
-})
+});
 
 /*
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -237,14 +237,14 @@ globalStyle('::-webkit-search-decoration', {
 globalStyle('::-webkit-file-upload-button', {
   WebkitAppearance: 'button' /*1 */,
   font: 'inherit' /*2 */,
-})
+});
 
 /*
 Add the correct display in Chrome and Safari.
 */
 globalStyle('summary', {
   display: 'list-item',
-})
+});
 
 /*
 Removes the default spacing and border for appropriate elements.
@@ -252,31 +252,31 @@ Removes the default spacing and border for appropriate elements.
 globalStyle('fieldset', {
   margin: '0',
   padding: '0',
-})
+});
 
 globalStyle('legend', {
   padding: '0',
-})
+});
 
 globalStyle('ol, ul, menu', {
   listStyle: 'none',
   margin: '0',
   padding: '0',
-})
+});
 
 /*
 Reset default styling for dialogs.
 */
 globalStyle('dialog', {
   padding: '0',
-})
+});
 
 /*
 Prevent resizing textareas horizontally by default.
 */
 globalStyle('textarea', {
   resize: 'vertical',
-})
+});
 
 /*
 1. Reset the default placeholder opacity in Firefox.
@@ -285,21 +285,21 @@ globalStyle('textarea', {
 globalStyle('input::placeholder, textarea::placeholder', {
   opacity: '1' /*1 */,
   color: '#9ca3af' /*2 */,
-})
+});
 
 /*
 Set the default cursor for buttons.
 */
 globalStyle('button, [role="button"]', {
   cursor: 'pointer',
-})
+});
 
 /*
 Make sure disabled buttons don't get the pointer cursor.
 */
 globalStyle(':disabled', {
   cursor: 'default',
-})
+});
 
 /*
 1. Make replaced elements `display: block` by default.
@@ -308,7 +308,7 @@ globalStyle(':disabled', {
 globalStyle('img, svg, video, canvas, audio, iframe, embed, object', {
   display: 'block' /*1 */,
   verticalAlign: 'middle' /*2 */,
-})
+});
 
 /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio.
@@ -316,11 +316,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 globalStyle('img, video', {
   maxWidth: '100%',
   height: 'auto',
-})
+});
 
 /*
 Make elements with the HTML hidden attribute stay hidden by default.
 */
 globalStyle('[hidden]:where(:not([hidden="until-found"]))', {
   display: 'none',
-})
+});

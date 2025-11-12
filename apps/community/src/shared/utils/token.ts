@@ -1,52 +1,53 @@
-import { useRouter } from 'next/navigation'
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/shared/constants/api'
+import { useRouter } from 'next/navigation';
+
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '~/shared/constants/api';
 
 function getAccessToken(): string | null {
   if (typeof window === 'undefined') {
-    return null
+    return null;
   }
-  return localStorage.getItem(ACCESS_TOKEN_KEY)
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
 function getRefreshToken(): string | null {
   if (typeof window === 'undefined') {
-    return null
+    return null;
   }
-  return localStorage.getItem(REFRESH_TOKEN_KEY)
+  return localStorage.getItem(REFRESH_TOKEN_KEY);
 }
 
 function removeTokens() {
   if (typeof window === 'undefined') {
-    return
+    return;
   }
-  localStorage.removeItem(ACCESS_TOKEN_KEY)
-  localStorage.removeItem(REFRESH_TOKEN_KEY)
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
 function getToken() {
-  const accessToken = getAccessToken()
-  const refreshToken = getRefreshToken()
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
 
   if (!accessToken || !refreshToken) {
-    removeTokens()
+    removeTokens();
   }
 
-  return [accessToken, refreshToken] as const
+  return [accessToken, refreshToken] as const;
 }
 
 function isValidateToken() {
-  const accessToken = getAccessToken()
+  const accessToken = getAccessToken();
 
   if (!accessToken) {
-    return false
+    return false;
   }
 
   try {
-    const payload = JSON.parse(atob(accessToken.split('.')[1] ?? ''))
-    const exp = payload.exp * 1000
-    return Date.now() < exp
+    const payload = JSON.parse(atob(accessToken.split('.')[1] ?? ''));
+    const exp = payload.exp * 1000;
+    return Date.now() < exp;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -56,4 +57,4 @@ export {
   removeTokens,
   getToken,
   isValidateToken,
-}
+};

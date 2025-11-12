@@ -1,12 +1,12 @@
-import { Button, Modal } from 'antd'
+import { Button, Modal } from 'antd';
 
-import { HeroImageForm } from './HeroImageForm'
+import { useModal } from '~/shared/hooks/useModal';
 
-import { useModal } from '~/shared/hooks/useModal'
-import { MESSAGES } from '../constant/constants'
+import { HeroImageForm } from './HeroImageForm';
+import { MESSAGES } from '../constant/constants';
 
 export const HeroImageCreator = () => {
-  const { isOpen, openModal, closeModal } = useModal()
+  const { isOpen, openModal, closeModal } = useModal();
   return (
     <>
       <Modal
@@ -19,13 +19,13 @@ export const HeroImageCreator = () => {
         <HeroImageForm onClose={closeModal} />
       </Modal>
       <Button
-        type="primary"
-        variant="solid"
-        className="mb-4"
+        type='primary'
+        variant='solid'
+        className='mb-4'
         onClick={openModal}
       >
         {MESSAGES.button.uploadImage}
       </Button>
     </>
-  )
-}
+  );
+};

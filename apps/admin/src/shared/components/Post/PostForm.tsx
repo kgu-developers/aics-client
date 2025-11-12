@@ -1,4 +1,5 @@
-import { useRouter } from '@tanstack/react-router'
+import { Editor } from '@aics-client/tiptap';
+import { useRouter } from '@tanstack/react-router';
 import {
   Button,
   Checkbox,
@@ -8,12 +9,11 @@ import {
   Radio,
   Upload,
   message,
-} from 'antd'
-import type { UploadChangeParam } from 'antd/es/upload'
-import { UploadIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
+} from 'antd';
+import type { UploadChangeParam } from 'antd/es/upload';
+import { UploadIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 
-import { Editor } from '@aics-client/tiptap'
 
 import {
   FALSE,
@@ -25,60 +25,66 @@ import {
   STATUS,
   TRUE,
   UNNAMED_FILE,
-} from '~/shared/constants/post.constants'
-import { useCreatePost, useFileUpload, usePatchPost } from '~/shared/hooks'
-import { useModal } from '~/shared/hooks/useModal'
+} from '~/shared/constants/post.constants';
+import { useCreatePost, useFileUpload, usePatchPost } from '~/shared/hooks';
+import { useModal } from '~/shared/hooks/useModal';
 
-import type { PostUpdateRequest } from '~/apis/admin/requests'
-import type { PostDetailResponse } from '~/apis/community/requests'
+import type { PostUpdateRequest } from '~/apis/admin/requests';
+import type { PostDetailResponse } from '~/apis/community/requests';
 
 interface PostFormProps {
-  post?: PostDetailResponse
-  onCancel?: () => void
+  post?: PostDetailResponse;
+  onCancel?: () => void;
 }
 
 function FormItemWrapper({
   label,
   children,
-}: { label: string; children: ReactNode }) {
+}: {
+  label: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="flex flex-col gap-2">
-      <span className="text-xl font-semibold">{label}</span>
+    <div className='flex flex-col gap-2'>
+      <span className='text-xl font-semibold'>{label}</span>
       {children}
     </div>
-  )
+  );
 }
 
 function BottomButtons({
   onCancel,
   isEdit,
-}: { onCancel: () => void; isEdit: boolean }) {
-  const { isOpen, openModal, closeModal } = useModal()
-  const router = useRouter()
+}: {
+  onCancel: () => void;
+  isEdit: boolean;
+}) {
+  const { isOpen, openModal, closeModal } = useModal();
+  const router = useRouter();
 
   const modalTitle = isEdit
     ? MESSAGES.title.deletePost
-    : MESSAGES.title.cancelDeletePost
+    : MESSAGES.title.cancelDeletePost;
   const modalContent = isEdit
     ? MESSAGES.confirm.deletePost
-    : MESSAGES.confirm.cancelPost
+    : MESSAGES.confirm.cancelPost;
   const backHandler = () => {
-    if (onCancel) onCancel()
-    router.history.back()
-  }
+    if (onCancel) onCancel();
+    router.history.back();
+  };
 
   return (
-    <div className="flex items-center self-end gap-3">
+    <div className='flex items-center self-end gap-3'>
       <Modal
         open={isOpen}
         onCancel={closeModal}
         title={modalTitle}
         footer={
           <>
-            <Button color="primary" variant="solid" onClick={backHandler}>
+            <Button color='primary' variant='solid' onClick={backHandler}>
               {MESSAGES.button.cancel}
             </Button>
-            <Button color="default" variant="outlined" onClick={closeModal}>
+            <Button color='default' variant='outlined' onClick={closeModal}>
               {MESSAGES.button.continueCreate}
             </Button>
           </>
@@ -88,37 +94,37 @@ function BottomButtons({
         {modalContent}
       </Modal>
       <Button
-        color="default"
-        variant="outlined"
-        size="large"
+        color='default'
+        variant='outlined'
+        size='large'
         onClick={openModal}
       >
         {MESSAGES.button.cancel}
       </Button>
-      <Button htmlType="submit" color="primary" variant="solid" size="large">
+      <Button htmlType='submit' color='primary' variant='solid' size='large'>
         {MESSAGES.button.save}
       </Button>
     </div>
-  )
+  );
 }
 
 export function PostForm({ post, onCancel }: PostFormProps) {
-  const [messageApi, contextHolder] = message.useMessage()
-  const isEdit = !!post
-  const router = useRouter()
-  const [form] = Form.useForm()
+  const [messageApi, contextHolder] = message.useMessage();
+  const isEdit = !!post;
+  const router = useRouter();
+  const [form] = Form.useForm();
 
-  const { uploadFile } = useFileUpload({ messageApi })
+  const { uploadFile } = useFileUpload({ messageApi });
   const { createPost } = useCreatePost({
     messageApi,
     historyBack: () => router.history.back(),
     onCancel: onCancel || (() => {}),
-  })
+  });
   const { patchPost } = usePatchPost({
     messageApi,
     historyBack: () => router.history.back(),
     onCancel: onCancel || (() => {}),
-  })
+  });
 
   const initialValues = post
     ? {
@@ -144,26 +150,26 @@ export function PostForm({ post, onCancel }: PostFormProps) {
         isPinned: false,
         file: [],
         content: '',
-      }
+      };
 
   const handleFileUpload = (file: File) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-  }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = async (values: PostUpdateRequest) => {
-    const fileList = form.getFieldValue('file')
-    let fileId: number | undefined = undefined
+    const fileList = form.getFieldValue('file');
+    let fileId: number | undefined = undefined;
 
     if (fileList && fileList.length > 0) {
-      const originFileObj = fileList[0]?.originFileObj
+      const originFileObj = fileList[0]?.originFileObj;
 
       if (originFileObj instanceof File) {
         fileId = await uploadFile({ formData: { file: originFileObj } }).then(
-          (res) => res.id,
-        )
+          res => res.id,
+        );
       } else if (isEdit && post.file && post?.file?.id === originFileObj?.id) {
-        fileId = post.file.id
+        fileId = post.file.id;
       }
     }
 
@@ -177,7 +183,7 @@ export function PostForm({ post, onCancel }: PostFormProps) {
           fileId,
           content: values.content,
         },
-      })
+      });
     } else {
       createPost({
         fileId,
@@ -187,19 +193,19 @@ export function PostForm({ post, onCancel }: PostFormProps) {
           isPinned: values.isPinned ? TRUE : FALSE,
           content: values.content,
         },
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
       {contextHolder}
       <Form
         form={form}
-        layout="vertical"
+        layout='vertical'
         onFinish={handleSubmit}
         initialValues={initialValues}
-        className="flex flex-col gap-5"
+        className='flex flex-col gap-5'
       >
         <FormItemWrapper label={LABELS.title}>
           <Form.Item
@@ -208,7 +214,7 @@ export function PostForm({ post, onCancel }: PostFormProps) {
               { required: true, message: MESSAGES.validation.requiredTitle },
             ]}
           >
-            <Input placeholder={PLACEHOLDERS.title} size="large" />
+            <Input placeholder={PLACEHOLDERS.title} size='large' />
           </Form.Item>
         </FormItemWrapper>
 
@@ -246,13 +252,13 @@ export function PostForm({ post, onCancel }: PostFormProps) {
             }
           >
             <Upload
-              beforeUpload={(file) => {
-                handleFileUpload(file)
-                return false
+              beforeUpload={file => {
+                handleFileUpload(file);
+                return false;
               }}
               maxCount={1}
             >
-              <Button className="flex items-center">
+              <Button className='flex items-center'>
                 <UploadIcon size={'1rem'} />
                 {MESSAGES.button.uploadFile}
               </Button>
@@ -269,7 +275,7 @@ export function PostForm({ post, onCancel }: PostFormProps) {
           >
             <Editor
               editorContent={post ? post.content : ''}
-              onChange={(value) => form.setFieldsValue({ content: value })}
+              onChange={value => form.setFieldsValue({ content: value })}
             />
           </Form.Item>
         </FormItemWrapper>
@@ -277,5 +283,5 @@ export function PostForm({ post, onCancel }: PostFormProps) {
         <BottomButtons onCancel={onCancel || (() => {})} isEdit={isEdit} />
       </Form>
     </>
-  )
+  );
 }

@@ -14,7 +14,7 @@ export const $UserKickOutListRequest = {
     },
   },
   required: ['userIds'],
-} as const
+} as const;
 
 export const $ProfessorRequest = {
   type: 'object',
@@ -55,7 +55,7 @@ export const $ProfessorRequest = {
     },
   },
   required: ['contact', 'email', 'img', 'name', 'officeLoc', 'role'],
-} as const
+} as const;
 
 export const $ProfessorPersistResponse = {
   type: 'object',
@@ -68,7 +68,7 @@ export const $ProfessorPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $PostCreateRequest = {
   type: 'object',
@@ -104,7 +104,7 @@ SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집�
     },
   },
   required: ['content', 'isPinned', 'title'],
-} as const
+} as const;
 
 export const $PostPersistResponse = {
   type: 'object',
@@ -117,7 +117,7 @@ export const $PostPersistResponse = {
     },
   },
   required: ['postId'],
-} as const
+} as const;
 
 export const $LabCreateRequest = {
   type: 'object',
@@ -152,7 +152,7 @@ export const $LabCreateRequest = {
     },
   },
   required: ['advisor', 'loc', 'name', 'site'],
-} as const
+} as const;
 
 export const $LabPersistResponse = {
   type: 'object',
@@ -165,7 +165,7 @@ export const $LabPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $FilePathResponse = {
   type: 'object',
@@ -183,7 +183,7 @@ export const $FilePathResponse = {
     },
   },
   required: ['id', 'physicalPath'],
-} as const
+} as const;
 
 export const $ClubCreateRequest = {
   type: 'object',
@@ -211,7 +211,7 @@ export const $ClubCreateRequest = {
     },
   },
   required: ['description', 'name'],
-} as const
+} as const;
 
 export const $ClubPersistResponse = {
   type: 'object',
@@ -224,7 +224,7 @@ export const $ClubPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $CarouselRequest = {
   type: 'object',
@@ -243,7 +243,7 @@ export const $CarouselRequest = {
       example: 'https://www.kgu.ac.kr/',
     },
   },
-} as const
+} as const;
 
 export const $CarouselPersistResponse = {
   type: 'object',
@@ -256,7 +256,7 @@ export const $CarouselPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $AboutCreateRequest = {
   type: 'object',
@@ -275,7 +275,7 @@ export const $AboutCreateRequest = {
     },
   },
   required: ['category', 'content'],
-} as const
+} as const;
 
 export const $AboutPersistResponse = {
   type: 'object',
@@ -288,7 +288,7 @@ export const $AboutPersistResponse = {
     },
   },
   required: ['id'],
-} as const
+} as const;
 
 export const $PostUpdateRequest = {
   type: 'object',
@@ -330,7 +330,7 @@ SW전문인재양성사업단에서는 SW부트캠프 4기 교육생을 모집�
     },
   },
   required: ['content', 'isPinned', 'title'],
-} as const
+} as const;
 
 export const $LabUpdateRequest = {
   type: 'object',
@@ -371,7 +371,7 @@ export const $LabUpdateRequest = {
     },
   },
   required: ['advisor', 'loc', 'name', 'site'],
-} as const
+} as const;
 
 export const $ClubUpdateRequest = {
   type: 'object',
@@ -405,7 +405,7 @@ export const $ClubUpdateRequest = {
     },
   },
   required: ['description', 'name'],
-} as const
+} as const;
 
 export const $CarouselUpdateRequest = {
   type: 'object',
@@ -430,7 +430,7 @@ export const $CarouselUpdateRequest = {
       example: 1,
     },
   },
-} as const
+} as const;
 
 export const $AboutUpdateRequest = {
   type: 'object',
@@ -443,7 +443,7 @@ export const $AboutUpdateRequest = {
     },
   },
   required: ['content'],
-} as const
+} as const;
 
 export const $PageableResponseObject = {
   type: 'object',
@@ -481,7 +481,7 @@ export const $PageableResponseObject = {
     },
   },
   required: ['isEnd', 'page', 'size', 'totalElements', 'totalPages'],
-} as const
+} as const;
 
 export const $UserDetailPageResponse = {
   type: 'object',
@@ -509,7 +509,7 @@ export const $UserDetailPageResponse = {
     },
   },
   required: ['contents', 'pageable'],
-} as const
+} as const;
 
 export const $UserDetailResponse = {
   type: 'object',
@@ -548,4 +548,4 @@ export const $UserDetailResponse = {
     },
   },
   required: ['email', 'id', 'major', 'name', 'phone', 'role'],
-} as const
+} as const;

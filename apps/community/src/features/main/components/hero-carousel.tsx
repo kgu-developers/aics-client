@@ -1,20 +1,21 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
+import { useSuspenseQuery } from '@tanstack/react-query';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useSuspenseQuery } from '@tanstack/react-query'
-import Autoplay from 'embla-carousel-autoplay'
-import useEmblaCarousel from 'embla-carousel-react'
 
-import * as styles from '~/features/main/components/hero-carousel.css'
-import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries'
-import type { Carousel } from '~/features/main/services/remote'
-import AltImage from '~/shared/assets/images/alt.png'
-import { CarouselDots } from '~/shared/components/carousel/carousel-dots'
+import AltImage from '~/shared/assets/images/alt.png';
+import { CarouselDots } from '~/shared/components/carousel/carousel-dots';
+
+import * as styles from '~/features/main/components/hero-carousel.css';
+import { MAIN_QUERY_OPTIONS } from '~/features/main/services/queries';
+import type { Carousel } from '~/features/main/services/remote';
 
 function HeroCarousel() {
-  const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL())
+  const { data: heroes } = useSuspenseQuery(MAIN_QUERY_OPTIONS.CAROUSEL());
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -27,13 +28,13 @@ function HeroCarousel() {
         stopOnMouseEnter: true,
       }),
     ],
-  )
+  );
 
   return (
     <section className={styles.hero}>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.slides}>
-          {heroes.map((slide) => (
+          {heroes.map(slide => (
             <CarouselSlide key={`hero-${slide.id}`} slide={slide} />
           ))}
         </div>
@@ -42,14 +43,10 @@ function HeroCarousel() {
         <CarouselDots emblaApi={emblaApi} />
       </div>
     </section>
-  )
+  );
 }
 
-function CarouselSlide({
-  slide,
-}: {
-  slide: Carousel
-}) {
+function CarouselSlide({ slide }: { slide: Carousel }) {
   return (
     <Link key={`hero-${slide.id}`} href={slide.link} className={styles.slide}>
       <Image
@@ -60,7 +57,7 @@ function CarouselSlide({
         className={styles.image}
       />
     </Link>
-  )
+  );
 }
 
-export default HeroCarousel
+export default HeroCarousel;

@@ -1,15 +1,15 @@
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+import { QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
 
-import '@ant-design/v5-patch-for-react-19'
+import '@ant-design/v5-patch-for-react-19';
 
-import { QueryClientProvider } from '@tanstack/react-query'
-import { routeTree } from './routeTree.gen'
-import { queryClient } from './shared/utils'
+import { routeTree } from './routeTree.gen';
+import { queryClient } from './shared/utils';
 
-import './apis/admin/OpenAPIConfig'
-import './styles/globals.css'
+import './apis/admin/OpenAPIConfig';
+import './styles/globals.css';
 
 const router = createRouter({
   routeTree,
@@ -20,25 +20,25 @@ const router = createRouter({
   defaultPreloadStaleTime: 0,
   scrollRestoration: true,
   basepath: '/admin',
-})
+});
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
 
-const rootElement = document.getElementById('app')
+const rootElement = document.getElementById('app');
 
 if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement)
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
     </StrictMode>,
-  )
+  );
 } else {
-  console.error("Root element with ID 'app' not found.")
+  console.error("Root element with ID 'app' not found.");
 }

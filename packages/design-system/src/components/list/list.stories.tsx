@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import List from './list'
+import type { Meta, StoryObj } from '@storybook/react';
+
+import List from './list';
 
 const meta: Meta<typeof List> = {
   title: 'Components/List',
@@ -9,10 +10,10 @@ const meta: Meta<typeof List> = {
   },
   tags: ['autodocs'],
   args: {},
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
@@ -25,4 +26,4 @@ export const Example: Story = {
       </>
     ),
   },
-}
+};

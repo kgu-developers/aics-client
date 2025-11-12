@@ -1,46 +1,46 @@
-import Link from 'next/link'
-import { useState } from 'react'
+import { cn } from '@aics-client/design-system/utils';
+import { ChevronDown, Menu, XIcon } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
-import { ChevronDown, Menu, XIcon } from 'lucide-react'
 
-import { cn } from '@aics-client/design-system/utils'
 
-import * as styles from '~/shared/components/site-header/mobile-nav.css'
-import { PATH, PATHMAP } from '~/shared/constants/path'
+import * as styles from '~/shared/components/site-header/mobile-nav.css';
+import { PATH, PATHMAP } from '~/shared/constants/path';
 
 interface MobileNavProps {
-  isLoggedIn: boolean
+  isLoggedIn: boolean;
 }
 
 function MobileNav({ isLoggedIn }: MobileNavProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState<{
-    [key: string]: boolean
-  }>({})
+    [key: string]: boolean;
+  }>({});
 
   const toggleGroup = (key: string) => {
-    setOpenGroups((prev) => ({
+    setOpenGroups(prev => ({
       ...prev,
       [key]: !prev[key],
-    }))
-  }
+    }));
+  };
 
-  const closeDrawer = () => setIsOpen(false)
+  const closeDrawer = () => setIsOpen(false);
 
   const renderNavGroups = () =>
     Object.entries(PATHMAP).map(([key, path]) => {
       if (path.path === PATH.MY && !isLoggedIn) {
-        return null
+        return null;
       }
 
-      const hasChildren = 'children' in path
+      const hasChildren = 'children' in path;
 
       return (
         <div key={key} className={styles.navGroup}>
           {hasChildren ? (
             <>
               <button
-                type="button"
+                type='button'
                 className={styles.navGroupTitle}
                 onClick={() => toggleGroup(key)}
               >
@@ -60,7 +60,7 @@ function MobileNav({ isLoggedIn }: MobileNavProps) {
                   openGroups[key] && styles.navGroupLinksOpen,
                 )}
               >
-                {Object.values(path.children).map((child) => (
+                {Object.values(path.children).map(child => (
                   <Link
                     key={child.path}
                     href={child.path}
@@ -77,8 +77,8 @@ function MobileNav({ isLoggedIn }: MobileNavProps) {
             </Link>
           )}
         </div>
-      )
-    })
+      );
+    });
 
   return (
     <>
@@ -91,17 +91,17 @@ function MobileNav({ isLoggedIn }: MobileNavProps) {
       <div
         className={cn(styles.overlay, isOpen && styles.overlayVisible)}
         onClick={closeDrawer}
-        onKeyDown={(e) => {
+        onKeyDown={e => {
           if (e.key === 'Enter' || e.key === ' ') {
-            closeDrawer()
+            closeDrawer();
           }
         }}
         tabIndex={0}
-        role="button"
+        role='button'
       />
       <div className={cn(styles.drawer, isOpen && styles.drawerOpen)}>
         <button
-          type="button"
+          type='button'
           className={styles.closeButton}
           onClick={closeDrawer}
         >
@@ -110,7 +110,7 @@ function MobileNav({ isLoggedIn }: MobileNavProps) {
         <nav>{renderNavGroups()}</nav>
       </div>
     </>
-  )
+  );
 }
 
-export { MobileNav }
+export { MobileNav };

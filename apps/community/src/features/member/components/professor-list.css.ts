@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 const professorListWrapper = style({
   display: themeVars.display.grid,
@@ -19,6 +19,6 @@ const professorListWrapper = style({
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },
-})
+});
 
-export { professorListWrapper }
+export { professorListWrapper };

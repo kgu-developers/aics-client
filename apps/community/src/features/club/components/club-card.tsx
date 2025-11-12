@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 
-import * as style from '~/features/club/components/club-card.css'
-import type { Club } from '~/features/club/services/remote'
+import * as style from '~/features/club/components/club-card.css';
+import type { Club } from '~/features/club/services/remote';
 
 function ClubCard({ image, name, description, site }: Club) {
   return (
@@ -10,15 +10,15 @@ function ClubCard({ image, name, description, site }: Club) {
       <AvartarImage src={image} name={name} />
       <CardContent name={name} description={description} site={site} />
     </section>
-  )
+  );
 }
 
 function AvartarImage({
   src,
   name,
 }: {
-  src: string | undefined
-  name: string
+  src: string | undefined;
+  name: string;
 }) {
   return (
     <Image
@@ -28,7 +28,7 @@ function AvartarImage({
       height={255}
       alt={`${name} 동아리 사진`}
     />
-  )
+  );
 }
 
 function CardContent({
@@ -36,9 +36,9 @@ function CardContent({
   description,
   site,
 }: {
-  name: string
-  description: string
-  site?: string
+  name: string;
+  description: string;
+  site?: string;
 }) {
   return (
     <div className={style.cardBodyWrapper}>
@@ -47,13 +47,13 @@ function CardContent({
       {site && (
         <p className={style.cardLinkWrapper}>
           홈페이지 -
-          <Link href={site} target="_blank" className={style.cardHomeLink}>
+          <Link href={site} target='_blank' className={style.cardHomeLink}>
             바로가기
           </Link>
         </p>
       )}
     </div>
-  )
+  );
 }
 
-export { ClubCard }
+export { ClubCard };

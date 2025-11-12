@@ -1,5 +1,5 @@
-export { useUploadLabImage } from './useUploadLabImage'
-export { useUpdateLab } from './useUpdateLab'
-export { useDeleteLab } from './useDeleteLab'
-export { useCreateLab } from './useCreateLab'
-export { useLabs } from './useLabs'
+export { useUploadLabImage } from './useUploadLabImage';
+export { useUpdateLab } from './useUpdateLab';
+export { useDeleteLab } from './useDeleteLab';
+export { useCreateLab } from './useCreateLab';
+export { useLabs } from './useLabs';

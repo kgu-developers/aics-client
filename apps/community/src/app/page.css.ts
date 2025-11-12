@@ -1,5 +1,5 @@
-import { screen } from '@aics-client/design-system/styles'
-import { style } from '@vanilla-extract/css'
+import { screen } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
 const wrapper = style([
   {
@@ -10,7 +10,7 @@ const wrapper = style([
   screen.xl({
     gap: '4rem',
   }),
-])
+]);
 
 // const newsSection = style({
 //   display: 'flex',
@@ -34,6 +34,6 @@ const newsSection = style([
     flexDirection: 'row',
     gap: '4rem',
   }),
-])
+]);
 
-export { wrapper, newsSection }
+export { wrapper, newsSection };

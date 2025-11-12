@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 const cardWrapper = style({
   display: 'flex',
@@ -10,11 +10,11 @@ const cardWrapper = style({
   border: `1px solid ${themeVars.color.gray300}`,
   borderRadius: themeVars.borderRadius.lg,
   boxShadow: themeVars.boxShadow.md,
-})
+});
 
 const image = style({
   objectFit: 'contain',
-})
+});
 
 const divider = style({
   width: 1,
@@ -22,21 +22,21 @@ const divider = style({
   backgroundImage:
     'repeating-linear-gradient(#000, #000 1px, transparent 1px, transparent 3px)',
   opacity: 0.5,
-})
+});
 
 const infoWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   gap: themeVars.spacing.md,
-})
+});
 
 const title = style({
   marginBottom: themeVars.spacing.lg,
   fontSize: themeVars.fontSize.xl,
   fontWeight: themeVars.fontWeight.semibold,
   color: '#333D4B',
-})
+});
 
 const link = style({
   textDecoration: 'underline',
@@ -45,6 +45,6 @@ const link = style({
     color: themeVars.color.primary,
     transition: 'color 0.3s',
   },
-})
+});
 
-export { cardWrapper, image, divider, infoWrapper, title, link }
+export { cardWrapper, image, divider, infoWrapper, title, link };

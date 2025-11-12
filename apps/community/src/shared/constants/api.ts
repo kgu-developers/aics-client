@@ -1,5 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
 
 const END_POINT = {
   ABOUTS: `${API_BASE_URL}/abouts`,
@@ -15,10 +15,10 @@ const END_POINT = {
   MY_PROFILE: `${API_BASE_URL}/users/my`,
   EDIT_MY_PROFILE: `${API_BASE_URL}/users`,
   CHANGE_PASSWORD: `${API_BASE_URL}/users/password`,
-}
+};
 
-const ACCESS_TOKEN_KEY = 'accessToken'
-const REFRESH_TOKEN_KEY = 'refreshToken'
+const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 export {
   API_BASE_URL,
@@ -26,4 +26,4 @@ export {
   END_POINT,
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-}
+};

@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css'
+import { themeVars } from '@aics-client/design-system/styles';
+import { style } from '@vanilla-extract/css';
 
-import { themeVars } from '@aics-client/design-system/styles'
 
 const controllerWrapper = style({
   display: themeVars.display.flex,
@@ -9,28 +9,28 @@ const controllerWrapper = style({
   minWidth: '30%',
   gap: '0.75rem',
   userSelect: 'none',
-})
+});
 
 const buttonList = style({
   display: themeVars.display.flex,
   alignItems: themeVars.alignItems.center,
-})
+});
 
 const pageButton = style({
   width: '2rem',
   height: '2rem',
   borderRadius: themeVars.borderRadius.lg,
   textAlign: 'center',
-})
+});
 
 const active = style({
   fontWeight: themeVars.fontWeight.semibold,
   color: themeVars.color.white,
   backgroundColor: themeVars.color.black,
-})
+});
 
 const hidden = style({
   visibility: 'hidden',
-})
+});
 
-export { controllerWrapper, buttonList, pageButton, active, hidden }
+export { controllerWrapper, buttonList, pageButton, active, hidden };
