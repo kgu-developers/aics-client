@@ -1,29 +1,29 @@
-import { Link } from '@tanstack/react-router'
-import { Timeline } from 'antd'
-import { ArrowRight, Bell, User } from 'lucide-react'
-import type { ReactNode } from 'react'
-import { Fragment } from 'react/jsx-runtime'
+import { Link } from '@tanstack/react-router';
+import { Timeline } from 'antd';
+import { ArrowRight, Bell, User } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react/jsx-runtime';
 
-import { DataTable, Section } from '~/shared/components'
-import { ROUTE } from '~/shared/constants/route'
+import { DataTable, Section } from '~/shared/components';
+import { ROUTE } from '~/shared/constants/route';
 
-import { timelineItems } from '../mock/schedule'
-import { STATUS_TEXT, USER_STATUS } from '../model/userStatus'
-import * as styles from '../styles/HomePage.css'
-import WeekCalendar from './WeekCalendar'
+import WeekCalendar from './WeekCalendar';
+import { timelineItems } from '../mock/schedule';
+import { STATUS_TEXT, USER_STATUS } from '../model/userStatus';
+import * as styles from '../styles/HomePage.css';
 
-import { vars } from '~/vars.css'
+import { vars } from '~/vars.css';
 
 export default function HomePage() {
-  const today = new Date()
+  const today = new Date();
   const formattedDate = today.toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  })
+  });
 
-  const userStatus = USER_STATUS.CERTIFICATION_NOT_SUBMITTED
-  const { title, description, button } = STATUS_TEXT[userStatus]
+  const userStatus = USER_STATUS.CERTIFICATION_NOT_SUBMITTED;
+  const { title, description, button } = STATUS_TEXT[userStatus];
 
   const buttons = [
     {
@@ -36,23 +36,27 @@ export default function HomePage() {
       href: ROUTE.STATUS,
       icon: <User size={20} />,
     },
-  ]
+  ];
 
   return (
-    <>
-      <Section>
+    <div style={{ position: 'relative', width: '100%' }}>
+      <img
+        src='/background.png'
+        alt='logo'
+        style={{
+          height: '500px',
+          objectFit: 'cover',
+          width: '100%',
+        }}
+      />
+
+      <section className={styles.mainSection}>
         <section className={styles.upperSection}>
           <section className={styles.header}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: vars.spacing.sm,
-              }}
-            >
+            <div className={styles.headerTextWrapper}>
               <p className={styles.headerTitle}>{title}</p>
               <p className={styles.headerDescription}>
-                {description.split('\n').map((line) => (
+                {description.split('\n').map(line => (
                   <Fragment key={line}>
                     {line}
                     <br />
@@ -68,7 +72,7 @@ export default function HomePage() {
                 label={button.label}
               />
 
-              {buttons.map((button) => (
+              {buttons.map(button => (
                 <NavigateButton
                   key={button.label}
                   href={button.href}
@@ -98,24 +102,24 @@ export default function HomePage() {
             </Section>
           </section>
         </section>
-      </Section>
-      <div className={styles.noticeSection}>
-        <Section>
-          <Section.Header
-            subtitle="졸업 관련 공지사항을 확인해주세요."
-            action={
-              <Link to="/notices" className={styles.noticeAction}>
-                <p>더보기</p>
-              </Link>
-            }
-          >
-            공지사항
-          </Section.Header>
-          <DataTable rows={[]} columns={[]} getRowId={() => ''} />
-        </Section>
-      </div>
-    </>
-  )
+        <div className={styles.noticeSection}>
+          <Section>
+            <Section.Header
+              subtitle='졸업 관련 공지사항을 확인해주세요.'
+              action={
+                <Link to='/notices' className={styles.noticeAction}>
+                  <p>더보기</p>
+                </Link>
+              }
+            >
+              공지사항
+            </Section.Header>
+            <DataTable rows={[]} columns={[]} getRowId={() => ''} />
+          </Section>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 const NavigateButton = ({
@@ -123,13 +127,13 @@ const NavigateButton = ({
   icon,
   label,
 }: {
-  href: string
-  icon: ReactNode
-  label: string
+  href: string;
+  icon: ReactNode;
+  label: string;
 }) => {
   return (
     <Link to={href} style={{ textDecoration: 'none' }}>
-      <button type="button" className={styles.homeButton}>
+      <button type='button' className={styles.homeButton}>
         {icon}
         <p
           style={{
@@ -140,7 +144,7 @@ const NavigateButton = ({
             fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
           }}
         >
-          {label.split('\n').map((line) => (
+          {label.split('\n').map(line => (
             <Fragment key={line}>
               {line}
               <br />
@@ -149,5 +153,5 @@ const NavigateButton = ({
         </p>
       </button>
     </Link>
-  )
-}
+  );
+};

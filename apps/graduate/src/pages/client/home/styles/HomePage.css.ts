@@ -1,66 +1,98 @@
-import { style } from '@vanilla-extract/css'
+import { style } from '@vanilla-extract/css';
 
-import { vars } from '~/vars.css'
+import { vars } from '~/vars.css';
 
-export const upperSection = style({
-  width: 'inherit',
+export const mainSection = style({
+  position: 'absolute',
+  top: 400,
+  width: '100dvw',
+  boxSizing: 'border-box',
   display: 'flex',
-  gap: vars.spacing.md,
+  flexDirection: 'column',
+  zIndex: 800,
+  gap: vars.spacing.lg,
+  padding: vars.spacing.lg,
+
   '@media': {
     '(max-width: 768px)': {
       flexDirection: 'column',
     },
   },
-})
+});
 
-export const header = style({
-  width: 'inherit',
+export const upperSection = style({
+  width: '100%',
   flex: 1,
   display: 'flex',
-  flexDirection: 'column',
   backgroundColor: vars.colors.main,
   padding: vars.spacing.lg,
   borderRadius: vars.radius.lg,
   gap: vars.spacing.lg,
-})
-
-export const scheduleCard = style({
-  width: '30%',
-  minWidth: '300px',
-  backgroundColor: vars.colors.white,
-  borderRadius: vars.radius.lg,
-  padding: vars.spacing.lg,
-  paddingBottom: 0,
-  gap: vars.spacing.md,
+  boxSizing: 'border-box',
   '@media': {
     '(max-width: 768px)': {
-      width: 'inherit',
+      flexDirection: 'column',
     },
   },
-})
+});
+
+export const header = style({
+  width: '100%',
+  flex: 2,
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: vars.radius.lg,
+  gap: vars.spacing.lg,
+  justifyContent: 'space-between',
+  boxSizing: 'border-box',
+});
+
+export const headerTextWrapper = style({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: vars.spacing.sm,
+});
 
 export const headerDate = style({
   fontSize: vars.font.size.md,
   color: vars.colors.subDark,
   fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
-})
+});
 
 export const headerTitle = style({
-  fontSize: vars.font.size.xl,
+  fontSize: vars.font.size['2xl'],
   color: vars.colors.white,
   fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
-})
+});
 
 export const headerText = style({
   fontSize: vars.font.size.xl,
   fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
-})
+});
 
 export const headerDescription = style({
   fontSize: vars.font.size.md,
   color: vars.colors.mainLightHover,
   lineHeight: '1.5',
-})
+});
+
+export const scheduleCard = style({
+  flex: 1,
+  maxWidth: '380px',
+  backgroundColor: vars.colors.white,
+  borderRadius: vars.radius.lg,
+  padding: vars.spacing.lg,
+  paddingBottom: 0,
+  gap: vars.spacing.md,
+  boxSizing: 'border-box',
+  '@media': {
+    '(max-width: 768px)': {
+      width: 'inherit',
+      maxWidth: 'none',
+    },
+  },
+});
 
 export const homeButtonSection = style({
   width: '100%',
@@ -68,7 +100,7 @@ export const homeButtonSection = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: vars.spacing.md,
-})
+});
 
 export const homeButton = style({
   cursor: 'pointer',
@@ -89,7 +121,7 @@ export const homeButton = style({
     backgroundColor: vars.colors.subHover,
     color: vars.colors.subDark,
   },
-})
+});
 
 export const noticeAction = style({
   border: 'none',
@@ -102,13 +134,12 @@ export const noticeAction = style({
   ':hover': {
     color: vars.colors.subText,
   },
-})
+});
 
 export const noticeSection = style({
-  width: 'inherit',
-  height: '1000px',
+  height: '500px',
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
   padding: vars.spacing.lg,
   gap: vars.spacing.md,
-})
+});
