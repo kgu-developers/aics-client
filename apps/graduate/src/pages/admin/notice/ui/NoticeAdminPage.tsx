@@ -5,11 +5,11 @@ import { useState } from 'react';
 
 import { Header } from '~/shared/components';
 
-import * as style from './NoticesSection.css';
 import { mockData } from '../mock/notices';
+import * as style from '../styles/NoticeAdminPage.css';
 import type { NoticeItem } from '../types/notices';
 
-export default function NoticesSection() {
+export default function NoticeAdminPage() {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -70,13 +70,13 @@ export default function NoticesSection() {
 
   const handleRowClick = (record: NoticeItem) => {
     navigate({
-      to: '/notices/$postId',
+      to: '/notice/$postId',
       params: { postId: record.id.toString() },
     });
   };
 
   const handleCreateNotice = () => {
-    navigate({ to: '/notices/create' });
+    navigate({ to: '/notice/create' });
   };
 
   return (

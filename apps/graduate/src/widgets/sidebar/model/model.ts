@@ -4,7 +4,7 @@ export const adminMenuSections = [
   {
     title: '메뉴 관리',
     items: [
-      { label: '공지사항', to: '/notices' },
+      { label: '공지사항', to: ROUTE.NOTICE },
       { label: '안내 및 내규', to: '/guidelines-and-rules' },
       { label: '진행 일정', to: ROUTE.SCHEDULE },
     ],

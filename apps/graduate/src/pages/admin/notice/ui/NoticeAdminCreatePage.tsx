@@ -3,17 +3,21 @@ import { Button, Checkbox, Divider, Input, Upload } from 'antd';
 import type { CheckboxChangeEvent, UploadProps } from 'antd';
 import { useState } from 'react';
 
-import * as style from './NoticeForm.css';
+import { ROUTE } from '~/shared/constants/route';
+
 import { noticeFormData } from '../mock/notices';
+import * as style from '../styles/NoticeAdminCreatePage.css';
 import type { NoticeFormItem } from '../types/notices';
 
 const { TextArea } = Input;
 
-interface NoticeDetailProps {
+interface NoticeAdminCreatePageProps {
   noticeId?: number;
 }
 
-export default function NoticeForm({ noticeId }: NoticeDetailProps) {
+export default function NoticeAdminCreatePage({
+  noticeId,
+}: NoticeAdminCreatePageProps) {
   const navigate = useNavigate();
   const isEditMode = !!noticeId;
   const data = noticeFormData;
@@ -75,7 +79,7 @@ export default function NoticeForm({ noticeId }: NoticeDetailProps) {
   };
 
   const handleGoBack = () => {
-    navigate({ to: '/notices' });
+    navigate({ to: ROUTE.NOTICE });
   };
 
   return (

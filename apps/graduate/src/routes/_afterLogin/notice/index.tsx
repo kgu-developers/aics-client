@@ -1,14 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { NoticesSection } from '~/features/notices/components';
-
+import { NoticeAdminPage } from '~/pages/admin/notice';
 import { NoticePage } from '~/pages/client/notice';
 
-export const Route = createFileRoute('/_afterLogin/notices/')({
+export const Route = createFileRoute('/_afterLogin/notice/')({
   component: () => {
     const { auth } = Route.useRouteContext();
     if (auth.isAdmin) {
-      return <NoticesSection />;
+      return <NoticeAdminPage />;
     }
     return <NoticePage />;
   },
