@@ -9,361 +9,312 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ThesisRouteImport } from './routes/thesis'
-import { Route as StatusRouteImport } from './routes/status'
-import { Route as CertificationRouteImport } from './routes/certification'
-import { Route as ApplyRouteImport } from './routes/apply'
-import { Route as AdminLayoutRouteImport } from './routes/_adminLayout'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminLayoutThesisManagementRouteImport } from './routes/_adminLayout/thesis-management'
-import { Route as AdminLayoutThesisApplicationManagementRouteImport } from './routes/_adminLayout/thesis-application-management'
-import { Route as AdminLayoutScheduleRouteImport } from './routes/_adminLayout/schedule'
-import { Route as AdminLayoutGuidelinesAndRulesRouteImport } from './routes/_adminLayout/guidelines-and-rules'
-import { Route as AdminLayoutGraduatesAllRouteImport } from './routes/_adminLayout/graduates-all'
-import { Route as AdminLayoutCertificationManagementRouteImport } from './routes/_adminLayout/certification-management'
-import { Route as AdminLayoutNoticesIndexRouteImport } from './routes/_adminLayout/notices/index'
-import { Route as AdminLayoutNoticesCreateRouteImport } from './routes/_adminLayout/notices/create'
-import { Route as AdminLayoutNoticesPostIdRouteImport } from './routes/_adminLayout/notices/$postId'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AfterLoginRouteImport } from './routes/_afterLogin'
+import { Route as AfterLoginIndexRouteImport } from './routes/_afterLogin/index'
+import { Route as AfterLoginThesisRouteImport } from './routes/_afterLogin/thesis'
+import { Route as AfterLoginStatusRouteImport } from './routes/_afterLogin/status'
+import { Route as AfterLoginScheduleRouteImport } from './routes/_afterLogin/schedule'
+import { Route as AfterLoginGuidelinesAndRulesRouteImport } from './routes/_afterLogin/guidelines-and-rules'
+import { Route as AfterLoginGraduatesAllRouteImport } from './routes/_afterLogin/graduates-all'
+import { Route as AfterLoginCertificationRouteImport } from './routes/_afterLogin/certification'
+import { Route as AfterLoginApplyRouteImport } from './routes/_afterLogin/apply'
+import { Route as AfterLoginNoticesIndexRouteImport } from './routes/_afterLogin/notices/index'
+import { Route as AfterLoginNoticesCreateRouteImport } from './routes/_afterLogin/notices/create'
+import { Route as AfterLoginNoticesPostIdRouteImport } from './routes/_afterLogin/notices/$postId'
 
-const ThesisRoute = ThesisRouteImport.update({
-  id: '/thesis',
-  path: '/thesis',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StatusRoute = StatusRouteImport.update({
-  id: '/status',
-  path: '/status',
+const AfterLoginRoute = AfterLoginRouteImport.update({
+  id: '/_afterLogin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CertificationRoute = CertificationRouteImport.update({
-  id: '/certification',
-  path: '/certification',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApplyRoute = ApplyRouteImport.update({
-  id: '/apply',
-  path: '/apply',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLayoutRoute = AdminLayoutRouteImport.update({
-  id: '/_adminLayout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AfterLoginIndexRoute = AfterLoginIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AfterLoginRoute,
 } as any)
-const AdminLayoutThesisManagementRoute =
-  AdminLayoutThesisManagementRouteImport.update({
-    id: '/thesis-management',
-    path: '/thesis-management',
-    getParentRoute: () => AdminLayoutRoute,
-  } as any)
-const AdminLayoutThesisApplicationManagementRoute =
-  AdminLayoutThesisApplicationManagementRouteImport.update({
-    id: '/thesis-application-management',
-    path: '/thesis-application-management',
-    getParentRoute: () => AdminLayoutRoute,
-  } as any)
-const AdminLayoutScheduleRoute = AdminLayoutScheduleRouteImport.update({
+const AfterLoginThesisRoute = AfterLoginThesisRouteImport.update({
+  id: '/thesis',
+  path: '/thesis',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginStatusRoute = AfterLoginStatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginScheduleRoute = AfterLoginScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
-  getParentRoute: () => AdminLayoutRoute,
+  getParentRoute: () => AfterLoginRoute,
 } as any)
-const AdminLayoutGuidelinesAndRulesRoute =
-  AdminLayoutGuidelinesAndRulesRouteImport.update({
+const AfterLoginGuidelinesAndRulesRoute =
+  AfterLoginGuidelinesAndRulesRouteImport.update({
     id: '/guidelines-and-rules',
     path: '/guidelines-and-rules',
-    getParentRoute: () => AdminLayoutRoute,
+    getParentRoute: () => AfterLoginRoute,
   } as any)
-const AdminLayoutGraduatesAllRoute = AdminLayoutGraduatesAllRouteImport.update({
+const AfterLoginGraduatesAllRoute = AfterLoginGraduatesAllRouteImport.update({
   id: '/graduates-all',
   path: '/graduates-all',
-  getParentRoute: () => AdminLayoutRoute,
+  getParentRoute: () => AfterLoginRoute,
 } as any)
-const AdminLayoutCertificationManagementRoute =
-  AdminLayoutCertificationManagementRouteImport.update({
-    id: '/certification-management',
-    path: '/certification-management',
-    getParentRoute: () => AdminLayoutRoute,
-  } as any)
-const AdminLayoutNoticesIndexRoute = AdminLayoutNoticesIndexRouteImport.update({
+const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
+  id: '/certification',
+  path: '/certification',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginApplyRoute = AfterLoginApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginNoticesIndexRoute = AfterLoginNoticesIndexRouteImport.update({
   id: '/notices/',
   path: '/notices/',
-  getParentRoute: () => AdminLayoutRoute,
+  getParentRoute: () => AfterLoginRoute,
 } as any)
-const AdminLayoutNoticesCreateRoute =
-  AdminLayoutNoticesCreateRouteImport.update({
-    id: '/notices/create',
-    path: '/notices/create',
-    getParentRoute: () => AdminLayoutRoute,
-  } as any)
-const AdminLayoutNoticesPostIdRoute =
-  AdminLayoutNoticesPostIdRouteImport.update({
-    id: '/notices/$postId',
-    path: '/notices/$postId',
-    getParentRoute: () => AdminLayoutRoute,
-  } as any)
+const AfterLoginNoticesCreateRoute = AfterLoginNoticesCreateRouteImport.update({
+  id: '/notices/create',
+  path: '/notices/create',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
+const AfterLoginNoticesPostIdRoute = AfterLoginNoticesPostIdRouteImport.update({
+  id: '/notices/$postId',
+  path: '/notices/$postId',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/apply': typeof ApplyRoute
-  '/certification': typeof CertificationRoute
-  '/status': typeof StatusRoute
-  '/thesis': typeof ThesisRoute
-  '/certification-management': typeof AdminLayoutCertificationManagementRoute
-  '/graduates-all': typeof AdminLayoutGraduatesAllRoute
-  '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/schedule': typeof AdminLayoutScheduleRoute
-  '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
-  '/thesis-management': typeof AdminLayoutThesisManagementRoute
-  '/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
-  '/notices/create': typeof AdminLayoutNoticesCreateRoute
-  '/notices': typeof AdminLayoutNoticesIndexRoute
+  '/login': typeof LoginRoute
+  '/apply': typeof AfterLoginApplyRoute
+  '/certification': typeof AfterLoginCertificationRoute
+  '/graduates-all': typeof AfterLoginGraduatesAllRoute
+  '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/schedule': typeof AfterLoginScheduleRoute
+  '/status': typeof AfterLoginStatusRoute
+  '/thesis': typeof AfterLoginThesisRoute
+  '/': typeof AfterLoginIndexRoute
+  '/notices/$postId': typeof AfterLoginNoticesPostIdRoute
+  '/notices/create': typeof AfterLoginNoticesCreateRoute
+  '/notices': typeof AfterLoginNoticesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/apply': typeof ApplyRoute
-  '/certification': typeof CertificationRoute
-  '/status': typeof StatusRoute
-  '/thesis': typeof ThesisRoute
-  '/certification-management': typeof AdminLayoutCertificationManagementRoute
-  '/graduates-all': typeof AdminLayoutGraduatesAllRoute
-  '/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/schedule': typeof AdminLayoutScheduleRoute
-  '/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
-  '/thesis-management': typeof AdminLayoutThesisManagementRoute
-  '/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
-  '/notices/create': typeof AdminLayoutNoticesCreateRoute
-  '/notices': typeof AdminLayoutNoticesIndexRoute
+  '/login': typeof LoginRoute
+  '/apply': typeof AfterLoginApplyRoute
+  '/certification': typeof AfterLoginCertificationRoute
+  '/graduates-all': typeof AfterLoginGraduatesAllRoute
+  '/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/schedule': typeof AfterLoginScheduleRoute
+  '/status': typeof AfterLoginStatusRoute
+  '/thesis': typeof AfterLoginThesisRoute
+  '/': typeof AfterLoginIndexRoute
+  '/notices/$postId': typeof AfterLoginNoticesPostIdRoute
+  '/notices/create': typeof AfterLoginNoticesCreateRoute
+  '/notices': typeof AfterLoginNoticesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_adminLayout': typeof AdminLayoutRouteWithChildren
-  '/apply': typeof ApplyRoute
-  '/certification': typeof CertificationRoute
-  '/status': typeof StatusRoute
-  '/thesis': typeof ThesisRoute
-  '/_adminLayout/certification-management': typeof AdminLayoutCertificationManagementRoute
-  '/_adminLayout/graduates-all': typeof AdminLayoutGraduatesAllRoute
-  '/_adminLayout/guidelines-and-rules': typeof AdminLayoutGuidelinesAndRulesRoute
-  '/_adminLayout/schedule': typeof AdminLayoutScheduleRoute
-  '/_adminLayout/thesis-application-management': typeof AdminLayoutThesisApplicationManagementRoute
-  '/_adminLayout/thesis-management': typeof AdminLayoutThesisManagementRoute
-  '/_adminLayout/notices/$postId': typeof AdminLayoutNoticesPostIdRoute
-  '/_adminLayout/notices/create': typeof AdminLayoutNoticesCreateRoute
-  '/_adminLayout/notices/': typeof AdminLayoutNoticesIndexRoute
+  '/_afterLogin': typeof AfterLoginRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_afterLogin/apply': typeof AfterLoginApplyRoute
+  '/_afterLogin/certification': typeof AfterLoginCertificationRoute
+  '/_afterLogin/graduates-all': typeof AfterLoginGraduatesAllRoute
+  '/_afterLogin/guidelines-and-rules': typeof AfterLoginGuidelinesAndRulesRoute
+  '/_afterLogin/schedule': typeof AfterLoginScheduleRoute
+  '/_afterLogin/status': typeof AfterLoginStatusRoute
+  '/_afterLogin/thesis': typeof AfterLoginThesisRoute
+  '/_afterLogin/': typeof AfterLoginIndexRoute
+  '/_afterLogin/notices/$postId': typeof AfterLoginNoticesPostIdRoute
+  '/_afterLogin/notices/create': typeof AfterLoginNoticesCreateRoute
+  '/_afterLogin/notices/': typeof AfterLoginNoticesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | '/login'
     | '/apply'
     | '/certification'
-    | '/status'
-    | '/thesis'
-    | '/certification-management'
     | '/graduates-all'
     | '/guidelines-and-rules'
     | '/schedule'
-    | '/thesis-application-management'
-    | '/thesis-management'
+    | '/status'
+    | '/thesis'
+    | '/'
     | '/notices/$postId'
     | '/notices/create'
     | '/notices'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/login'
     | '/apply'
     | '/certification'
-    | '/status'
-    | '/thesis'
-    | '/certification-management'
     | '/graduates-all'
     | '/guidelines-and-rules'
     | '/schedule'
-    | '/thesis-application-management'
-    | '/thesis-management'
+    | '/status'
+    | '/thesis'
+    | '/'
     | '/notices/$postId'
     | '/notices/create'
     | '/notices'
   id:
     | '__root__'
-    | '/'
-    | '/_adminLayout'
-    | '/apply'
-    | '/certification'
-    | '/status'
-    | '/thesis'
-    | '/_adminLayout/certification-management'
-    | '/_adminLayout/graduates-all'
-    | '/_adminLayout/guidelines-and-rules'
-    | '/_adminLayout/schedule'
-    | '/_adminLayout/thesis-application-management'
-    | '/_adminLayout/thesis-management'
-    | '/_adminLayout/notices/$postId'
-    | '/_adminLayout/notices/create'
-    | '/_adminLayout/notices/'
+    | '/_afterLogin'
+    | '/login'
+    | '/_afterLogin/apply'
+    | '/_afterLogin/certification'
+    | '/_afterLogin/graduates-all'
+    | '/_afterLogin/guidelines-and-rules'
+    | '/_afterLogin/schedule'
+    | '/_afterLogin/status'
+    | '/_afterLogin/thesis'
+    | '/_afterLogin/'
+    | '/_afterLogin/notices/$postId'
+    | '/_afterLogin/notices/create'
+    | '/_afterLogin/notices/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AdminLayoutRoute: typeof AdminLayoutRouteWithChildren
-  ApplyRoute: typeof ApplyRoute
-  CertificationRoute: typeof CertificationRoute
-  StatusRoute: typeof StatusRoute
-  ThesisRoute: typeof ThesisRoute
+  AfterLoginRoute: typeof AfterLoginRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/thesis': {
-      id: '/thesis'
-      path: '/thesis'
-      fullPath: '/thesis'
-      preLoaderRoute: typeof ThesisRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/status': {
-      id: '/status'
-      path: '/status'
-      fullPath: '/status'
-      preLoaderRoute: typeof StatusRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/certification': {
-      id: '/certification'
-      path: '/certification'
-      fullPath: '/certification'
-      preLoaderRoute: typeof CertificationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/apply': {
-      id: '/apply'
-      path: '/apply'
-      fullPath: '/apply'
-      preLoaderRoute: typeof ApplyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_adminLayout': {
-      id: '/_adminLayout'
+    '/_afterLogin': {
+      id: '/_afterLogin'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AdminLayoutRouteImport
+      preLoaderRoute: typeof AfterLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_afterLogin/': {
+      id: '/_afterLogin/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AfterLoginIndexRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/thesis-management': {
-      id: '/_adminLayout/thesis-management'
-      path: '/thesis-management'
-      fullPath: '/thesis-management'
-      preLoaderRoute: typeof AdminLayoutThesisManagementRouteImport
-      parentRoute: typeof AdminLayoutRoute
+    '/_afterLogin/thesis': {
+      id: '/_afterLogin/thesis'
+      path: '/thesis'
+      fullPath: '/thesis'
+      preLoaderRoute: typeof AfterLoginThesisRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/thesis-application-management': {
-      id: '/_adminLayout/thesis-application-management'
-      path: '/thesis-application-management'
-      fullPath: '/thesis-application-management'
-      preLoaderRoute: typeof AdminLayoutThesisApplicationManagementRouteImport
-      parentRoute: typeof AdminLayoutRoute
+    '/_afterLogin/status': {
+      id: '/_afterLogin/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof AfterLoginStatusRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/schedule': {
-      id: '/_adminLayout/schedule'
+    '/_afterLogin/schedule': {
+      id: '/_afterLogin/schedule'
       path: '/schedule'
       fullPath: '/schedule'
-      preLoaderRoute: typeof AdminLayoutScheduleRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginScheduleRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/guidelines-and-rules': {
-      id: '/_adminLayout/guidelines-and-rules'
+    '/_afterLogin/guidelines-and-rules': {
+      id: '/_afterLogin/guidelines-and-rules'
       path: '/guidelines-and-rules'
       fullPath: '/guidelines-and-rules'
-      preLoaderRoute: typeof AdminLayoutGuidelinesAndRulesRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginGuidelinesAndRulesRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/graduates-all': {
-      id: '/_adminLayout/graduates-all'
+    '/_afterLogin/graduates-all': {
+      id: '/_afterLogin/graduates-all'
       path: '/graduates-all'
       fullPath: '/graduates-all'
-      preLoaderRoute: typeof AdminLayoutGraduatesAllRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginGraduatesAllRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/certification-management': {
-      id: '/_adminLayout/certification-management'
-      path: '/certification-management'
-      fullPath: '/certification-management'
-      preLoaderRoute: typeof AdminLayoutCertificationManagementRouteImport
-      parentRoute: typeof AdminLayoutRoute
+    '/_afterLogin/certification': {
+      id: '/_afterLogin/certification'
+      path: '/certification'
+      fullPath: '/certification'
+      preLoaderRoute: typeof AfterLoginCertificationRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/notices/': {
-      id: '/_adminLayout/notices/'
+    '/_afterLogin/apply': {
+      id: '/_afterLogin/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof AfterLoginApplyRouteImport
+      parentRoute: typeof AfterLoginRoute
+    }
+    '/_afterLogin/notices/': {
+      id: '/_afterLogin/notices/'
       path: '/notices'
       fullPath: '/notices'
-      preLoaderRoute: typeof AdminLayoutNoticesIndexRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginNoticesIndexRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/notices/create': {
-      id: '/_adminLayout/notices/create'
+    '/_afterLogin/notices/create': {
+      id: '/_afterLogin/notices/create'
       path: '/notices/create'
       fullPath: '/notices/create'
-      preLoaderRoute: typeof AdminLayoutNoticesCreateRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginNoticesCreateRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
-    '/_adminLayout/notices/$postId': {
-      id: '/_adminLayout/notices/$postId'
+    '/_afterLogin/notices/$postId': {
+      id: '/_afterLogin/notices/$postId'
       path: '/notices/$postId'
       fullPath: '/notices/$postId'
-      preLoaderRoute: typeof AdminLayoutNoticesPostIdRouteImport
-      parentRoute: typeof AdminLayoutRoute
+      preLoaderRoute: typeof AfterLoginNoticesPostIdRouteImport
+      parentRoute: typeof AfterLoginRoute
     }
   }
 }
 
-interface AdminLayoutRouteChildren {
-  AdminLayoutCertificationManagementRoute: typeof AdminLayoutCertificationManagementRoute
-  AdminLayoutGraduatesAllRoute: typeof AdminLayoutGraduatesAllRoute
-  AdminLayoutGuidelinesAndRulesRoute: typeof AdminLayoutGuidelinesAndRulesRoute
-  AdminLayoutScheduleRoute: typeof AdminLayoutScheduleRoute
-  AdminLayoutThesisApplicationManagementRoute: typeof AdminLayoutThesisApplicationManagementRoute
-  AdminLayoutThesisManagementRoute: typeof AdminLayoutThesisManagementRoute
-  AdminLayoutNoticesPostIdRoute: typeof AdminLayoutNoticesPostIdRoute
-  AdminLayoutNoticesCreateRoute: typeof AdminLayoutNoticesCreateRoute
-  AdminLayoutNoticesIndexRoute: typeof AdminLayoutNoticesIndexRoute
+interface AfterLoginRouteChildren {
+  AfterLoginApplyRoute: typeof AfterLoginApplyRoute
+  AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute
+  AfterLoginGraduatesAllRoute: typeof AfterLoginGraduatesAllRoute
+  AfterLoginGuidelinesAndRulesRoute: typeof AfterLoginGuidelinesAndRulesRoute
+  AfterLoginScheduleRoute: typeof AfterLoginScheduleRoute
+  AfterLoginStatusRoute: typeof AfterLoginStatusRoute
+  AfterLoginThesisRoute: typeof AfterLoginThesisRoute
+  AfterLoginIndexRoute: typeof AfterLoginIndexRoute
+  AfterLoginNoticesPostIdRoute: typeof AfterLoginNoticesPostIdRoute
+  AfterLoginNoticesCreateRoute: typeof AfterLoginNoticesCreateRoute
+  AfterLoginNoticesIndexRoute: typeof AfterLoginNoticesIndexRoute
 }
 
-const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
-  AdminLayoutCertificationManagementRoute:
-    AdminLayoutCertificationManagementRoute,
-  AdminLayoutGraduatesAllRoute: AdminLayoutGraduatesAllRoute,
-  AdminLayoutGuidelinesAndRulesRoute: AdminLayoutGuidelinesAndRulesRoute,
-  AdminLayoutScheduleRoute: AdminLayoutScheduleRoute,
-  AdminLayoutThesisApplicationManagementRoute:
-    AdminLayoutThesisApplicationManagementRoute,
-  AdminLayoutThesisManagementRoute: AdminLayoutThesisManagementRoute,
-  AdminLayoutNoticesPostIdRoute: AdminLayoutNoticesPostIdRoute,
-  AdminLayoutNoticesCreateRoute: AdminLayoutNoticesCreateRoute,
-  AdminLayoutNoticesIndexRoute: AdminLayoutNoticesIndexRoute,
+const AfterLoginRouteChildren: AfterLoginRouteChildren = {
+  AfterLoginApplyRoute: AfterLoginApplyRoute,
+  AfterLoginCertificationRoute: AfterLoginCertificationRoute,
+  AfterLoginGraduatesAllRoute: AfterLoginGraduatesAllRoute,
+  AfterLoginGuidelinesAndRulesRoute: AfterLoginGuidelinesAndRulesRoute,
+  AfterLoginScheduleRoute: AfterLoginScheduleRoute,
+  AfterLoginStatusRoute: AfterLoginStatusRoute,
+  AfterLoginThesisRoute: AfterLoginThesisRoute,
+  AfterLoginIndexRoute: AfterLoginIndexRoute,
+  AfterLoginNoticesPostIdRoute: AfterLoginNoticesPostIdRoute,
+  AfterLoginNoticesCreateRoute: AfterLoginNoticesCreateRoute,
+  AfterLoginNoticesIndexRoute: AfterLoginNoticesIndexRoute,
 }
 
-const AdminLayoutRouteWithChildren = AdminLayoutRoute._addFileChildren(
-  AdminLayoutRouteChildren,
+const AfterLoginRouteWithChildren = AfterLoginRoute._addFileChildren(
+  AfterLoginRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AdminLayoutRoute: AdminLayoutRouteWithChildren,
-  ApplyRoute: ApplyRoute,
-  CertificationRoute: CertificationRoute,
-  StatusRoute: StatusRoute,
-  ThesisRoute: ThesisRoute,
+  AfterLoginRoute: AfterLoginRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

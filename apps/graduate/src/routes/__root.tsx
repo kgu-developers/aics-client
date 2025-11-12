@@ -1,38 +1,32 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-
-import { useAuthStore } from '~/shared/stores';
 
 import { Header } from '~/widgets/Header';
 import { Sidebar } from '~/widgets/sidebar';
 
-import { LoginPage } from '~/pages/login';
 import { vars } from '~/vars.css';
 
 const queryClient = new QueryClient();
 
-export const Route = createRootRoute({
-  component: () => {
-    const { isLoggedIn, isAdmin } = useAuthStore();
+export interface AuthContext {
+  auth: {
+    isAuthenticated: boolean;
+    isAdmin: boolean;
+    setIsAuthenticated: (value: boolean) => void;
+    setIsAdmin: (value: boolean) => void;
+  };
+}
 
-    if (!isLoggedIn) {
-      return (
-        <div style={{ display: 'flex' }}>
-          <main
-            style={{
-              flex: '1 1 auto',
-              overflow: 'auto',
-              backgroundColor: vars.colors.sub,
-            }}
-          >
-            <LoginPage />
-          </main>
-        </div>
-      );
+export const Route = createRootRouteWithContext<AuthContext>()({
+  component: () => {
+    const { auth } = Route.useRouteContext();
+
+    if (!auth.isAuthenticated) {
+      return <Outlet />;
     }
 
-    if (isAdmin) {
+    if (auth.isAuthenticated && auth.isAdmin) {
       return (
         <div style={{ display: 'flex' }}>
           <Sidebar />
@@ -49,7 +43,7 @@ export const Route = createRootRoute({
       );
     }
 
-    if (!isAdmin) {
+    if (auth.isAuthenticated && !auth.isAdmin) {
       return (
         <QueryClientProvider client={queryClient}>
           <body
@@ -60,7 +54,7 @@ export const Route = createRootRoute({
               backgroundColor: vars.colors.sub,
             }}
           >
-            <Header />
+            <Header auth={auth} />
             <main
               style={{
                 position: 'absolute',

@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom/client';
 // Import the generated route tree
 import reportWebVitals from './reportWebVitals.ts';
 import { routeTree } from './routeTree.gen';
+import { useAuthStore } from './shared/stores';
 
 import './globals.css';
 
-// Create a new router instance
 const router = createRouter({
   routeTree,
-  context: {},
+  context: undefined!,
   defaultPreload: 'intent',
   scrollRestoration: true,
   defaultStructuralSharing: true,
@@ -25,13 +25,32 @@ declare module '@tanstack/react-router' {
   }
 }
 
+function App() {
+  const { isAuthenticated, isAdmin, setIsAuthenticated, setIsAdmin } =
+    useAuthStore();
+
+  return (
+    <RouterProvider
+      router={router}
+      context={{
+        auth: {
+          isAuthenticated,
+          isAdmin,
+          setIsAuthenticated,
+          setIsAdmin,
+        },
+      }}
+    />
+  );
+}
+
 // Render the app
 const rootElement = document.getElementById('app');
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <App />
     </StrictMode>,
   );
 }
