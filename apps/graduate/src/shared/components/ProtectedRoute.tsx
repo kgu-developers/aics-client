@@ -1,24 +1,24 @@
-import { Navigate } from '@tanstack/react-router'
-import type { ReactNode } from 'react'
+import { Navigate } from '@tanstack/react-router';
+import type { ReactNode } from 'react';
 
-import { ROUTE } from '../constants/route'
-import { useAuthStore } from '../stores'
+import { ROUTE } from '../constants/route';
+import { useAuthStore } from '../stores';
 
 export default function ProtectedRoute({
   children,
   isClient,
 }: {
-  children: ReactNode
-  isClient?: boolean
+  children: ReactNode;
+  isClient?: boolean;
 }) {
-  const { isAdmin } = useAuthStore()
+  const { isAdmin } = useAuthStore();
 
-  const isClientRoute = isClient && isAdmin
-  const isAdminRoute = !isClient && !isAdmin
+  const isClientRoute = isClient && isAdmin;
+  const isAdminRoute = !isClient && !isAdmin;
 
   if (isClientRoute || isAdminRoute) {
-    return <Navigate to={ROUTE.HOME} />
+    return <Navigate to={ROUTE.HOME} />;
   }
 
-  return children
+  return children;
 }

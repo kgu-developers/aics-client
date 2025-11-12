@@ -1,4 +1,4 @@
-import { createGlobalTheme } from '@vanilla-extract/css'
+import { createGlobalTheme } from '@vanilla-extract/css';
 
 export const vars = createGlobalTheme('#app', {
   colors: {
@@ -62,4 +62,4 @@ export const vars = createGlobalTheme('#app', {
     authLogo: '48px',
     header: '72px',
   },
-})
+});

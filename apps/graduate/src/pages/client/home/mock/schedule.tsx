@@ -1,6 +1,6 @@
-import { Clock } from 'lucide-react'
+import { Clock } from 'lucide-react';
 
-import { vars } from '~/vars.css'
+import { vars } from '~/vars.css';
 
 export const timelineItems = [
   {
@@ -31,4 +31,4 @@ export const timelineItems = [
       </div>
     ),
   },
-]
+];
