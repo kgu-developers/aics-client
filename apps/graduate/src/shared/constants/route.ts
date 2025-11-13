@@ -9,4 +9,5 @@ export const ROUTE = {
   STATUS: '/status',
   SCHEDULE: '/schedule',
   ALL: '/all',
+  RULES: '/rules',
 } as const;
