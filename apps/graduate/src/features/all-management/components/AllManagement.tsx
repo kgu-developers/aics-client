@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
+import { handleDownload } from '~/shared/components/StudentDownload';
 import { useTableState } from '~/shared/hooks';
 
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
@@ -37,7 +38,7 @@ export default function AllManagement() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => {}}
+          onDownload={() => handleDownload(st.selected, st.filtered)}
           onAddStudent={() => {}}
           disabledApprove={true}
         />

@@ -1,4 +1,5 @@
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
+import { handleDownload } from '~/shared/components/StudentDownload';
 import { useTableState } from '~/shared/hooks';
 
 import { certColumns } from '~/features/certification-management/constants/certColumns';
@@ -26,7 +27,7 @@ export default function CertificationManagement() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => {}}
+          onDownload={() => handleDownload(st.selected, st.filtered)}
           onAddStudent={() => {}}
         />
 
