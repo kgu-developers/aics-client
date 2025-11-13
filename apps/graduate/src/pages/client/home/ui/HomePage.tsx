@@ -92,7 +92,7 @@ export default function HomePage() {
             <Section.Header
               subtitle='졸업 관련 공지사항을 확인해주세요.'
               action={
-                <Link to='/notices' className={styles.noticeAction}>
+                <Link to={ROUTE.NOTICE} className={styles.noticeAction}>
                   <p>더보기</p>
                 </Link>
               }
