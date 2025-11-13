@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { ScheduleSection } from '~/features/schedule/components';
+import { ScheduleAdminPage } from '~/pages/admin/schedule';
 
 export const Route = createFileRoute('/_afterLogin/schedule')({
-  component: ScheduleSection,
+  component: ScheduleAdminPage,
 });
