@@ -1,12 +1,10 @@
-import downloadStudentDetailFromRows from './downloadStudentDetailFromRows';
+import downloadStudentDetailExcel from './downloadStudentDetailExcel';
 
-/**
- * 통합 다운로드 함수 - Toolbar에서 사용하는 메인 함수입니다.
- * selectedIds와 filteredRows를 받아서 전체 다운로드 프로세스를 처리합니다.
- * @param selectedIds - 선택된 학생 ID 배열
- * @param filteredRows - 필터링된 전체 row 배열
- * @param filename - 다운로드할 파일명
- */
+import {
+  stageData,
+  userDetailData,
+} from '~/pages/admin/all/mock/allManagement';
+
 export default function handleDownload(
   selectedIds: (string | number)[],
   filteredRows: Array<{ id: string | number; studentId: string; name: string }>,
@@ -24,6 +22,14 @@ export default function handleDownload(
     return;
   }
 
-  downloadStudentDetailFromRows(selectedRows, filename);
-}
+  const studentDetails = selectedRows.map(row => ({
+    userDetail: {
+      ...userDetailData,
+      studentId: row.studentId,
+      name: row.name,
+    },
+    stageData: stageData,
+  }));
 
+  downloadStudentDetailExcel(studentDetails, filename);
+}

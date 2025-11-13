@@ -5,11 +5,6 @@ import type {
   UserDetail,
 } from '~/pages/admin/all/types/allManagement';
 
-/**
- * 학생 상세 정보를 엑셀 파일로 다운로드합니다.
- * @param studentDetails - 학생 상세 정보 배열
- * @param filename - 다운로드할 파일명
- */
 export default function downloadStudentDetailExcel(
   studentDetails: Array<{
     userDetail: UserDetail;
@@ -17,10 +12,6 @@ export default function downloadStudentDetailExcel(
   }>,
   filename = '학생 상세 정보.xlsx',
 ) {
-  if (studentDetails.length === 0) {
-    alert('다운로드할 항목을 선택해주세요.');
-    return;
-  }
 
   const excelData = studentDetails.map(({ userDetail, stageData }) => {
     const application = stageData.find(s => s.stage === '신청서');
@@ -39,16 +30,22 @@ export default function downloadStudentDetailExcel(
       '캡스톤 이수': capstoneStatus,
       '신청서 일정': application?.period || '-',
       '신청서 상태': application
-        ? `${application.date} (${application.isSubmit ? '제출' : '미제출'})`
-        : '-',
+        ? application.isSubmit
+          ? '제출'
+          : '미제출'
+        : '미제출',
       '중간보고서 일정': middleReport?.period || '-',
       '중간보고서 상태': middleReport
-        ? `${middleReport.date} (${middleReport.isSubmit ? '제출' : '미제출'})`
-        : '-',
+        ? middleReport.isSubmit
+          ? '제출'
+          : '미제출'
+        : '미제출',
       '최종보고서 일정': finalReport?.period || '-',
       '최종보고서 상태': finalReport
-        ? `${finalReport.date} (${finalReport.isSubmit ? '제출' : '미제출'})`
-        : '-',
+        ? finalReport.isSubmit
+          ? '제출'
+          : '미제출'
+        : '미제출',
     };
   });
 
@@ -75,4 +72,3 @@ export default function downloadStudentDetailExcel(
 
   XLSX.writeFile(workbook, filename);
 }
-
