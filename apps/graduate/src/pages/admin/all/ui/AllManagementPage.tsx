@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
-import { handleDownload } from '~/shared/components/StudentDownload';
 import { useTableState } from '~/shared/hooks';
+import { handleDownload } from '~/shared/utils/studentDownload';
 
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import { MOCK_ROWS } from '../mock/allManagement';

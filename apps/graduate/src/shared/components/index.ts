@@ -5,5 +5,4 @@ export * from './Pagination';
 export * from './DataTable';
 export * from './StudentAddModal';
 export * from './Section';
-export * from './StudentDownload';
 export { default as ProtectedRoute } from './ProtectedRoute';

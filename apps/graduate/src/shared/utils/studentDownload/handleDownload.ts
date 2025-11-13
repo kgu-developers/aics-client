@@ -1,4 +1,4 @@
-import { downloadStudentDetailFromRows } from './downloadStudentDetailFromRows';
+import downloadStudentDetailFromRows from './downloadStudentDetailFromRows';
 
 /**
  * 통합 다운로드 함수 - Toolbar에서 사용하는 메인 함수입니다.
@@ -7,7 +7,7 @@ import { downloadStudentDetailFromRows } from './downloadStudentDetailFromRows';
  * @param filteredRows - 필터링된 전체 row 배열
  * @param filename - 다운로드할 파일명
  */
-export function handleDownload(
+export default function handleDownload(
   selectedIds: (string | number)[],
   filteredRows: Array<{ id: string | number; studentId: string; name: string }>,
   filename = '학생 상세 정보.xlsx',
@@ -26,3 +26,4 @@ export function handleDownload(
 
   downloadStudentDetailFromRows(selectedRows, filename);
 }
+

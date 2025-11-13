@@ -3,14 +3,14 @@ import * as XLSX from 'xlsx';
 import type {
   StageData,
   UserDetail,
-} from '~/features/all-management/types/allManagement';
+} from '~/pages/admin/all/types/allManagement';
 
 /**
  * 학생 상세 정보를 엑셀 파일로 다운로드합니다.
  * @param studentDetails - 학생 상세 정보 배열
  * @param filename - 다운로드할 파일명
  */
-export function downloadStudentDetailExcel(
+export default function downloadStudentDetailExcel(
   studentDetails: Array<{
     userDetail: UserDetail;
     stageData: StageData[];
@@ -75,3 +75,4 @@ export function downloadStudentDetailExcel(
 
   XLSX.writeFile(workbook, filename);
 }
+

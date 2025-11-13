@@ -1,6 +1,6 @@
 import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
-import { handleDownload } from '~/shared/components/StudentDownload';
 import { useTableState } from '~/shared/hooks';
+import { handleDownload } from '~/shared/utils/studentDownload';
 
 import { thesisColumns } from '../constants/thesisColumns';
 import { MOCK_ROWS } from '../mock/mockRows';
