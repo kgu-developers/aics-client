@@ -1,29 +1,21 @@
-import { Link, useRouter } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { Avatar, Dropdown, MenuProps } from 'antd';
 import { User } from 'lucide-react';
+
+import { useLogout } from '~/shared/hooks';
 
 import * as styles from '../styles/Header.css';
 
 import { AuthContext } from '~/routes/__root';
 
 export default function Header({ auth }: AuthContext) {
-  const router = useRouter();
+  const handleLogout = useLogout(auth);
+
   const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-        <a
-          target='_blank'
-          rel='noopener noreferrer'
-          onClick={() => {
-            Promise.all([
-              auth.setIsAuthenticated(false),
-              auth.setIsAdmin(false),
-            ]).then(() => {
-              router.navigate({ to: '/login' });
-            });
-          }}
-        >
+        <a target='_blank' rel='noopener noreferrer' onClick={handleLogout}>
           로그아웃
         </a>
       ),

@@ -1,15 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { ProtectedRoute } from '~/shared/components';
+import { RulesAdminPage } from '~/pages/admin/rules';
 
 export const Route = createFileRoute('/_afterLogin/rules')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return (
-    <ProtectedRoute>
-      <div>Hello "/rules"!</div>
-    </ProtectedRoute>
-  );
+  const { auth } = Route.useRouteContext();
+  if (!auth.isAdmin) {
+    return <>유저사이드</>;
+  }
+  return <RulesAdminPage />;
 }

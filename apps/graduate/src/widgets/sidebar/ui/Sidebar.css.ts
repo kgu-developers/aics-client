@@ -14,6 +14,7 @@ export const sidebar = style({
 export const sidebarHeader = style({
   padding: vars.spacing.lg,
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
 });
@@ -23,6 +24,12 @@ export const logoImage = style({
   height: 'auto',
   objectFit: 'contain',
   display: 'block',
+});
+
+export const logout = style({
+  cursor: 'pointer',
+  color: vars.colors.main,
+  textDecoration: 'underline',
 });
 
 export const sidebarMenu = style({
