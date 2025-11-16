@@ -4,9 +4,9 @@ import { Header } from '~/shared/components';
 import { TextEditor } from '~/shared/components/TextEditor';
 
 import { RULES_MOCK_CONTENT } from '../mock/rules';
-import * as style from '../styles/Rules.css';
+import * as style from '../styles/RulesAdminPage.css';
 
-export default function Rules() {
+export default function RulesAdminPage() {
   const [content, setContent] = useState<string>(RULES_MOCK_CONTENT);
   const [isSaved, setIsSaved] = useState<boolean>(true);
 

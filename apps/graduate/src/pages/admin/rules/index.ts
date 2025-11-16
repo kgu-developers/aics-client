@@ -1,1 +1,1 @@
-export { default as Rules } from './ui/Rules';
+export { default as RulesAdminPage } from './ui/RulesAdminPage';
