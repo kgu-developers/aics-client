@@ -1,3 +1,5 @@
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -6,6 +8,7 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals.ts';
 import { routeTree } from './routeTree.gen';
 import { useAuthStore } from './shared/stores';
+import { queryClient } from './shared/utils';
 
 import './globals.css';
 
@@ -30,17 +33,20 @@ function App() {
     useAuthStore();
 
   return (
-    <RouterProvider
-      router={router}
-      context={{
-        auth: {
-          isAuthenticated,
-          isAdmin,
-          setIsAuthenticated,
-          setIsAdmin,
-        },
-      }}
-    />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider
+        router={router}
+        context={{
+          auth: {
+            isAuthenticated,
+            isAdmin,
+            setIsAuthenticated,
+            setIsAdmin,
+          },
+        }}
+      />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
