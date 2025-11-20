@@ -59,15 +59,17 @@ export default function Toolbar({
               승인
             </Button>
           )}
-          <Button
-            size='middle'
-            htmlType='button'
-            onClick={() => {
-              onDownload?.();
-            }}
-          >
-            다운로드
-          </Button>
+          {onDownload && (
+            <Button
+              size='middle'
+              htmlType='button'
+              onClick={() => {
+                onDownload();
+              }}
+            >
+              다운로드
+            </Button>
+          )}
           <Button
             size='middle'
             htmlType='button'

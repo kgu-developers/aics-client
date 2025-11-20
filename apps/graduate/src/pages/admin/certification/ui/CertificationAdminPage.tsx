@@ -1,6 +1,5 @@
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
-import { handleDownload } from '~/shared/utils/studentDownload';
 
 import { certColumns } from '../constants/certColumns';
 import { MOCK_ROWS } from '../mock/mockRows';
@@ -26,7 +25,6 @@ export default function CertificationAdminPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => handleDownload(st.selected, st.filtered)}
           onAddStudent={() => {}}
         />
 

@@ -1,6 +1,5 @@
 import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
-import { handleDownload } from '~/shared/utils/studentDownload';
 
 import { thesisColumns } from '../constants/thesisColumns';
 import { MOCK_ROWS } from '../mock/mockRows';
@@ -26,7 +25,6 @@ export default function ThesisAdminPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => handleDownload(st.selected, st.filtered)}
           onAddStudent={() => {}}
         />
 
