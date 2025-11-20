@@ -2,13 +2,14 @@ import { useState } from 'react';
 
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
-import { handleDownload } from '~/shared/utils/studentDownload';
 
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import { MOCK_ROWS } from '../mock/allManagement';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
+
+import { handleDownload } from '~/pages/admin/all/utils';
 
 export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

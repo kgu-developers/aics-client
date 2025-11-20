@@ -4,10 +4,11 @@ import {
   stageData,
   userDetailData,
 } from '~/pages/admin/all/mock/allManagement';
+import type { AllManagementRow } from '~/pages/admin/all/types/allManagement';
 
 export default function handleDownload(
   selectedIds: (string | number)[],
-  filteredRows: Array<{ id: string | number; studentId: string; name: string }>,
+  filteredRows: AllManagementRow[],
   filename = '학생 상세 정보.xlsx',
 ) {
   if (selectedIds.length === 0) {
@@ -27,6 +28,7 @@ export default function handleDownload(
       ...userDetailData,
       studentId: row.studentId,
       name: row.name,
+      type: row.type,
     },
     stageData: stageData,
   }));
