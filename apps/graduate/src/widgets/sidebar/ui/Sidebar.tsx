@@ -1,13 +1,27 @@
 import { Link } from '@tanstack/react-router';
 
+import { useLogout } from '~/shared/hooks';
+
 import * as style from './Sidebar.css';
 import { adminMenuSections } from '../model/model';
 
-export default function Sidebar() {
+import { AuthContext } from '~/routes/__root';
+
+export default function Sidebar({ auth }: AuthContext) {
+  const handleLogout = useLogout(auth);
+
   return (
     <aside className={style.sidebar}>
       <div className={style.sidebarHeader}>
         <img src='/kguLogo.svg' alt='로고' className={style.logoImage} />
+        <a
+          className={style.logout}
+          target='_blank'
+          rel='noopener noreferrer'
+          onClick={handleLogout}
+        >
+          로그아웃
+        </a>
       </div>
 
       <nav className={style.sidebarMenu}>

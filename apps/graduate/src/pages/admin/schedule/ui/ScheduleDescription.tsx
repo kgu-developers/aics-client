@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
+
+import { TextEditor } from '~/shared/components/TextEditor';
 
 import { descriptionData } from '../mock/schedule';
 import * as style from '../styles/ScheduleDescription.css.ts';
@@ -32,17 +32,6 @@ export default function ScheduleDescription() {
     setSelectedIndex(index);
   };
 
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ color: [] }, { background: [] }],
-      ['link'],
-      ['clean'],
-    ],
-  };
-
   return (
     <div className={style.descriptionContainer}>
       <div className={style.tabButtons}>
@@ -58,26 +47,15 @@ export default function ScheduleDescription() {
       </div>
 
       {descriptionData[selectedIndex] && (
-        <div className={style.descriptionCard}>
-          <div className={style.descriptionHeader}>
-            <h3 className={style.descriptionTitle}>
-              {descriptionData[selectedIndex].title}
-            </h3>
-          </div>
-          <ReactQuill
-            theme='snow'
-            value={tempDescription}
-            onChange={setTempDescription}
-            onFocus={() => setIsSaved(false)}
-            modules={modules}
-            className={style.quillEditor}
-          />
-          <div className={style.saveButtonWrapper}>
-            <Button disabled={isSaved} type='primary' onClick={handleSave}>
-              {isSaved ? '저장됨' : '저장'}
-            </Button>
-          </div>
-        </div>
+        <TextEditor
+          title={descriptionData[selectedIndex].title}
+          value={tempDescription}
+          onChange={setTempDescription}
+          onSave={handleSave}
+          isSaved={isSaved}
+          onFocus={() => setIsSaved(false)}
+          className={style.descriptionCard}
+        />
       )}
     </div>
   );

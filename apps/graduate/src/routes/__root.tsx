@@ -29,7 +29,7 @@ export const Route = createRootRouteWithContext<AuthContext>()({
     if (auth.isAuthenticated && auth.isAdmin) {
       return (
         <div style={{ display: 'flex' }}>
-          <Sidebar />
+          <Sidebar auth={auth} />
           <main
             style={{
               flex: '1 1 auto',
