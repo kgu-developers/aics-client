@@ -10,7 +10,7 @@ export type SingleSubmitPayload = {
   department: string;
 };
 
-export type BulkUploadRow = {
+export type MultipleUploadRow = {
   key: number;
   studentNo: string;
   name: string;
@@ -27,6 +27,6 @@ export type InvalidRow = {
 };
 
 export type ParseResult = {
-  valid: BulkUploadRow[];
+  valid: MultipleUploadRow[];
   invalid: InvalidRow[];
 };

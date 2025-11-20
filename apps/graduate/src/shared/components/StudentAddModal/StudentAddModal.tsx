@@ -6,13 +6,13 @@ import { modalStyles } from '~/shared/config';
 import * as styles from './StudentAddModal.css';
 import StudentAddMultiple from './StudentAddMultipleModel/StudentAddMultiple';
 import StudentAddSingle from './StudentAddSingleModel/StudentAddSingle';
-import type { BulkUploadRow, SingleSubmitPayload } from './types';
+import type { MultipleUploadRow, SingleSubmitPayload } from './types';
 
 type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
-  onBulkSubmit?: (rows: BulkUploadRow[]) => void | Promise<void>;
+  onBulkSubmit?: (rows: MultipleUploadRow[]) => void | Promise<void>;
 };
 
 export default function StudentAddModal({

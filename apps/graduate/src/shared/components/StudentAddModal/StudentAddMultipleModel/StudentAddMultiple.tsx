@@ -1,12 +1,12 @@
 import { Button, Typography, Upload } from 'antd';
 
-import type { BulkUploadRow } from '../types';
-import BulkPreviewTable from './BulkPreviewTable';
-import { useBulkUpload } from './useBulkUpload';
+import type { MultipleUploadRow } from '../types';
+import BulkPreviewTable from './PreviewTable';
+import { useBulkUpload } from './useStudentAddMultiple';
 
 type Props = {
   open?: boolean;
-  onBulkSubmit?: (rows: BulkUploadRow[]) => void | Promise<void>;
+  onBulkSubmit?: (rows: MultipleUploadRow[]) => void | Promise<void>;
 };
 
 export default function StudentAddMultiple({

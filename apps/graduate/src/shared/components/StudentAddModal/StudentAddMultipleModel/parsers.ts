@@ -1,5 +1,5 @@
 ﻿import type {
-  BulkUploadRow,
+  MultipleUploadRow,
   InvalidRow,
   ParseResult,
   ProfessorNameToId,
@@ -53,7 +53,7 @@ export function parseCsv(
   const header = lines[0].split(',').map(h => h.trim());
   const { start, indices } = getHeaderIndices(header);
 
-  const valid: BulkUploadRow[] = [];
+  const valid: MultipleUploadRow[] = [];
   const invalid: InvalidRow[] = [];
   const seenStudentNos = new Set<string>();
 
@@ -100,13 +100,16 @@ export async function parseXlsx(
     );
     const { start, indices } = getHeaderIndices(header);
 
-    const valid: BulkUploadRow[] = [];
+    const valid: MultipleUploadRow[] = [];
     const invalid: InvalidRow[] = [];
     const seenStudentNos = new Set<string>();
 
     for (let i = start; i < rowsArr.length; i++) {
       const row = rowsArr[i] || [];
-      const getCell = (idx: number) => String((row as any)[idx] ?? '').trim();
+      const getCell = (idx: number) => {
+        const val = (row as unknown[])[idx];
+        return String(val ?? '').trim();
+      };
 
       if (Object.values(indices).every(idx => !getCell(idx))) continue;
 

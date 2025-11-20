@@ -1,4 +1,4 @@
-import type { BulkUploadRow, InvalidRow, ProfessorNameToId } from '../types';
+import type { MultipleUploadRow, InvalidRow, ProfessorNameToId } from '../types';
 import { CAPSTONE_MAP } from './constants';
 
 type ValidateOptions = {
@@ -14,7 +14,7 @@ type ValidateOptions = {
 };
 
 type ValidateResult =
-  | { valid: true; row: BulkUploadRow }
+  | { valid: true; row: MultipleUploadRow }
   | { valid: false; row: InvalidRow };
 
 export const validateStudentRow = ({
@@ -94,7 +94,7 @@ export const validateStudentRow = ({
       },
     };
   }
-  
+
   let graduationMonth: string | null = null;
   const m = grad.match(/^(\d{4})[-/.]?(\d{1,2})$/);
   if (m) {

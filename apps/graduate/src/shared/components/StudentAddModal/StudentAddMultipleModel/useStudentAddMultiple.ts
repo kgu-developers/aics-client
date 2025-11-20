@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { PROFESSORS } from '~/shared/constants/professors';
 
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
-import type { BulkUploadRow, InvalidRow } from '../types';
+import type { MultipleUploadRow, InvalidRow } from '../types';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 
 export const useBulkUpload = (open: boolean) => {
   const [fileName, setFileName] = useState('');
-  const [rows, setRows] = useState<BulkUploadRow[]>([]);
+  const [rows, setRows] = useState<MultipleUploadRow[]>([]);
   const [invalidRows, setInvalidRows] = useState<InvalidRow[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [current, setCurrent] = useState(1);
@@ -31,7 +31,7 @@ export const useBulkUpload = (open: boolean) => {
     setFileName(file.name);
     const name = file.name.toLowerCase();
 
-    let result: { valid: BulkUploadRow[]; invalid: InvalidRow[] } = {
+    let result: { valid: MultipleUploadRow[]; invalid: InvalidRow[] } = {
       valid: [],
       invalid: [],
     };
