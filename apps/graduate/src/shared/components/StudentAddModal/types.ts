@@ -19,3 +19,14 @@ export type BulkUploadRow = {
   graduationMonth: string | null;
   department: string | null;
 };
+
+export type InvalidRow = {
+  studentNo: string;
+  name: string;
+  reason: string;
+};
+
+export type ParseResult = {
+  valid: BulkUploadRow[];
+  invalid: InvalidRow[];
+};
