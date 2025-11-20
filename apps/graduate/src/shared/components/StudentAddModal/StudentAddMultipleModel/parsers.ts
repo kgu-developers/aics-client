@@ -1,17 +1,11 @@
 ﻿import type {
   BulkUploadRow,
-  CapstoneStatus,
   InvalidRow,
   ParseResult,
   ProfessorNameToId,
 } from '../types';
-
-export const CAPSTONE_MAP: Record<string, CapstoneStatus> = {
-  이수: 'PASSED',
-  미이수: 'FAILED',
-  passed: 'PASSED',
-  failed: 'FAILED',
-};
+import { HEADER_NAMES } from './constants';
+import { validateStudentRow } from './validator';
 
 export function createProfessorMap(
   professors: { id: number; name: string }[],
@@ -22,13 +16,30 @@ export function createProfessorMap(
   }, {});
 }
 
-const HEADER_NAMES = {
-  studentNo: '학번',
-  name: '이름',
-  advisor: '지도교수',
-  capstone: '캡스톤이수여부',
-  graduation: '졸업년도',
-  department: '학과',
+const getHeaderIndices = (header: string[]) => {
+  const hasHeader = header.some(h =>
+    (Object.values(HEADER_NAMES) as string[]).includes(h),
+  );
+
+  const idx = (name: string, fallback: number) =>
+    hasHeader
+      ? Math.max(
+          0,
+          header.findIndex(h => h === name),
+        )
+      : fallback;
+
+  return {
+    start: hasHeader ? 1 : 0,
+    indices: {
+      studentNo: idx(HEADER_NAMES.studentNo, 0),
+      name: idx(HEADER_NAMES.name, 1),
+      advisor: idx(HEADER_NAMES.advisor, 2),
+      capstone: idx(HEADER_NAMES.capstone, 3),
+      grad: idx(HEADER_NAMES.graduation, 4),
+      dept: idx(HEADER_NAMES.department, 5),
+    },
+  };
 };
 
 export function parseCsv(
@@ -40,129 +51,32 @@ export function parseCsv(
   if (!lines.length) return { valid: [], invalid: [] };
 
   const header = lines[0].split(',').map(h => h.trim());
-  const hasHeader = header.some(h =>
-    [
-      HEADER_NAMES.studentNo,
-      HEADER_NAMES.name,
-      HEADER_NAMES.advisor,
-      HEADER_NAMES.capstone,
-      HEADER_NAMES.graduation,
-      HEADER_NAMES.department,
-    ].includes(h),
-  );
-  const start = hasHeader ? 1 : 0;
-
-  const idx = (name: string, fallback: number) =>
-    hasHeader
-      ? Math.max(
-          0,
-          header.findIndex(h => h === name),
-        )
-      : fallback;
-
-  const iStudentNo = idx(HEADER_NAMES.studentNo, 0);
-  const iName = idx(HEADER_NAMES.name, 1);
-  const iAdvisor = idx(HEADER_NAMES.advisor, 2);
-  const iCapstone = idx(HEADER_NAMES.capstone, 3);
-  const iGrad = idx(HEADER_NAMES.graduation, 4);
-  const iDept = idx(HEADER_NAMES.department, 5);
+  const { start, indices } = getHeaderIndices(header);
 
   const valid: BulkUploadRow[] = [];
   const invalid: InvalidRow[] = [];
   const seenStudentNos = new Set<string>();
 
-  for (let li = start; li < lines.length; li++) {
-    const cols = lines[li].split(',');
+  for (let i = start; i < lines.length; i++) {
+    const cols = lines[i].split(',');
     if (cols.length < 2) continue;
 
-    const rawStudentNo = (cols[iStudentNo] || '').trim();
-    const rawName = (cols[iName] || '').trim();
-    const professorName = (cols[iAdvisor] || '').trim();
-    const capstoneText = (cols[iCapstone] || '').trim().toLowerCase();
-    const grad = (cols[iGrad] || '').trim();
-    const dept = (cols[iDept] || '').trim();
-
-    const missing: string[] = [];
-    if (!rawStudentNo) missing.push('학번');
-    if (!rawName) missing.push('이름');
-    if (!professorName) missing.push('지도교수');
-    if (!capstoneText) missing.push('캡스톤이수여부');
-    if (!grad) missing.push('졸업년도');
-    if (!dept) missing.push('학과');
-
-    if (missing.length > 0) {
-      invalid.push({
-        studentNo: rawStudentNo || '-',
-        name: rawName || '-',
-        reason: `필수값 누락 (${missing.join(', ')})`,
-      });
-      continue;
-    }
-
-    if (!/^\d{9}$/.test(rawStudentNo)) {
-      invalid.push({
-        studentNo: rawStudentNo,
-        name: rawName,
-        reason: '학번 형식 오류 (9자리 숫자 아님)',
-      });
-      continue;
-    }
-
-    if (seenStudentNos.has(rawStudentNo)) {
-      invalid.push({
-        studentNo: rawStudentNo,
-        name: rawName,
-        reason: '파일 내 학번 중복',
-      });
-      continue;
-    }
-    seenStudentNos.add(rawStudentNo);
-
-    const advisorId = professorNameToId[professorName] ?? null;
-    if (advisorId === null) {
-      invalid.push({
-        studentNo: rawStudentNo,
-        name: rawName,
-        reason: `알 수 없는 지도교수 (${professorName})`,
-      });
-      continue;
-    }
-
-    const capstoneStatus =
-      CAPSTONE_MAP[capstoneText as keyof typeof CAPSTONE_MAP] ?? null;
-    if (capstoneStatus === null) {
-      invalid.push({
-        studentNo: rawStudentNo,
-        name: rawName,
-        reason: `캡스톤 상태 오류 (${capstoneText})`,
-      });
-      continue;
-    }
-
-    let graduationMonth: string | null = null;
-    const m = grad.match(/^(\d{4})[-/.]?(\d{1,2})$/);
-    if (m) {
-      const mm = (m[2] as string).padStart(2, '0');
-      graduationMonth = `${m[1]}-${mm}`;
-    } else {
-      invalid.push({
-        studentNo: rawStudentNo,
-        name: rawName,
-        reason: `졸업년도 형식 오류 (${grad})`,
-      });
-      continue;
-    }
-
-    valid.push({
-      key: li,
-      studentNo: rawStudentNo,
-      name: rawName,
-      advisorId,
-      capstoneStatus,
-      graduationMonth,
-      department: dept,
+    const result = validateStudentRow({
+      key: i,
+      rawStudentNo: (cols[indices.studentNo] || '').trim(),
+      rawName: (cols[indices.name] || '').trim(),
+      professorName: (cols[indices.advisor] || '').trim(),
+      capstoneText: (cols[indices.capstone] || '').trim().toLowerCase(),
+      grad: (cols[indices.grad] || '').trim(),
+      dept: (cols[indices.dept] || '').trim(),
+      professorNameToId,
+      seenStudentNos,
     });
+
+    if (result.valid) valid.push(result.row);
+    else invalid.push(result.row);
   }
+
   return { valid, invalid };
 }
 
@@ -184,140 +98,34 @@ export async function parseXlsx(
     const header = (rowsArr[0] || []).map((h: unknown) =>
       String(h ?? '').trim(),
     );
-    const hasHeader = header.some((h: string) =>
-      [
-        HEADER_NAMES.studentNo,
-        HEADER_NAMES.name,
-        HEADER_NAMES.advisor,
-        HEADER_NAMES.capstone,
-        HEADER_NAMES.graduation,
-        HEADER_NAMES.department,
-      ].includes(h),
-    );
-    const start = hasHeader ? 1 : 0;
-
-    const idx = (name: string, fallback: number) =>
-      hasHeader
-        ? Math.max(
-            0,
-            header.findIndex((h: string) => h === name),
-          )
-        : fallback;
-
-    const iStudentNo = idx(HEADER_NAMES.studentNo, 0);
-    const iName = idx(HEADER_NAMES.name, 1);
-    const iAdvisor = idx(HEADER_NAMES.advisor, 2);
-    const iCapstone = idx(HEADER_NAMES.capstone, 3);
-    const iGrad = idx(HEADER_NAMES.graduation, 4);
-    const iDept = idx(HEADER_NAMES.department, 5);
+    const { start, indices } = getHeaderIndices(header);
 
     const valid: BulkUploadRow[] = [];
     const invalid: InvalidRow[] = [];
     const seenStudentNos = new Set<string>();
 
-    for (let r = start; r < rowsArr.length; r++) {
-      const row = rowsArr[r] || [];
-      const rawStudentNo = String(row[iStudentNo] ?? '').trim();
-      const rawName = String(row[iName] ?? '').trim();
-      const professorName = String(row[iAdvisor] ?? '').trim();
-      const capstoneText = String(row[iCapstone] ?? '')
-        .trim()
-        .toLowerCase();
-      const grad = String(row[iGrad] ?? '').trim();
-      const dept = String(row[iDept] ?? '').trim();
+    for (let i = start; i < rowsArr.length; i++) {
+      const row = rowsArr[i] || [];
+      const getCell = (idx: number) => String((row as any)[idx] ?? '').trim();
 
-      // 빈 행 스킵
-      if (
-        !rawStudentNo &&
-        !rawName &&
-        !professorName &&
-        !capstoneText &&
-        !grad &&
-        !dept
-      )
-        continue;
+      if (Object.values(indices).every(idx => !getCell(idx))) continue;
 
-      const missing: string[] = [];
-      if (!rawStudentNo) missing.push('학번');
-      if (!rawName) missing.push('이름');
-      if (!professorName) missing.push('지도교수');
-      if (!capstoneText) missing.push('캡스톤이수여부');
-      if (!grad) missing.push('졸업년도');
-      if (!dept) missing.push('학과');
-
-      if (missing.length > 0) {
-        invalid.push({
-          studentNo: rawStudentNo || '-',
-          name: rawName || '-',
-          reason: `필수값 누락 (${missing.join(', ')})`,
-        });
-        continue;
-      }
-
-      if (!/^\d{9}$/.test(rawStudentNo)) {
-        invalid.push({
-          studentNo: rawStudentNo,
-          name: rawName,
-          reason: '학번 형식 오류 (9자리 숫자 아님)',
-        });
-        continue;
-      }
-
-      if (seenStudentNos.has(rawStudentNo)) {
-        invalid.push({
-          studentNo: rawStudentNo,
-          name: rawName,
-          reason: '파일 내 학번 중복',
-        });
-        continue;
-      }
-      seenStudentNos.add(rawStudentNo);
-
-      const advisorId = professorNameToId[professorName] ?? null;
-      if (advisorId === null) {
-        invalid.push({
-          studentNo: rawStudentNo,
-          name: rawName,
-          reason: `알 수 없는 지도교수 (${professorName})`,
-        });
-        continue;
-      }
-
-      const capstoneStatus =
-        CAPSTONE_MAP[capstoneText as keyof typeof CAPSTONE_MAP] ?? null;
-      if (capstoneStatus === null) {
-        invalid.push({
-          studentNo: rawStudentNo,
-          name: rawName,
-          reason: `캡스톤 상태 오류 (${capstoneText})`,
-        });
-        continue;
-      }
-
-      let graduationMonth: string | null = null;
-      const m = grad.match(/^(\d{4})[-/.]?(\d{1,2})$/);
-      if (m) {
-        const mm = (m[2] as string).padStart(2, '0');
-        graduationMonth = `${m[1]}-${mm}`;
-      } else {
-        invalid.push({
-          studentNo: rawStudentNo,
-          name: rawName,
-          reason: `졸업년도 형식 오류 (${grad})`,
-        });
-        continue;
-      }
-
-      valid.push({
-        key: r,
-        studentNo: rawStudentNo,
-        name: rawName,
-        advisorId,
-        capstoneStatus,
-        graduationMonth,
-        department: dept,
+      const result = validateStudentRow({
+        key: i,
+        rawStudentNo: getCell(indices.studentNo),
+        rawName: getCell(indices.name),
+        professorName: getCell(indices.advisor),
+        capstoneText: getCell(indices.capstone).toLowerCase(),
+        grad: getCell(indices.grad),
+        dept: getCell(indices.dept),
+        professorNameToId,
+        seenStudentNos,
       });
+
+      if (result.valid) valid.push(result.row);
+      else invalid.push(result.row);
     }
+
     return { valid, invalid };
   } catch {
     return { valid: [], invalid: [] };
