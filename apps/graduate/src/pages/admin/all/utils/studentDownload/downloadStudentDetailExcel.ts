@@ -1,5 +1,9 @@
 import * as XLSX from 'xlsx';
 
+import {
+  TABLE_HEADER,
+  type SubmissionStage,
+} from '~/pages/admin/all/constants/excel';
 import type {
   StageData,
   UserDetail,
@@ -13,35 +17,29 @@ export default function downloadStudentDetailExcel(
   filename = '학생 상세 정보.xlsx',
 ) {
   const excelData = studentDetails.map(({ userDetail, stageData }) => {
-    const application = stageData.find(s => s.stage === '신청서');
-    const middleReport = stageData.find(s => s.stage === '중간보고서');
-    const finalReport = stageData.find(s => s.stage === '최종보고서');
+    const getSubmissionStatus = (
+      stageName: SubmissionStage,
+      isApplication = false,
+    ) => {
+      const stage = stageData.find(s => s.stage === stageName);
+      if (!stage) return '없음';
+      if (stage.isSubmit) return isApplication ? userDetail.type : '제출';
+      return '미제출';
+    };
 
     const capstoneStatus = userDetail.etc || '-';
 
     return {
-      학번: userDetail.studentId,
-      이름: userDetail.name,
-      지도교수: userDetail.professor,
-      졸업년도: userDetail.period,
-      소속학과: userDetail.department,
-      지연횟수: userDetail.delay,
-      캡스톤이수: capstoneStatus,
-      '신청서 상태': application
-        ? application.isSubmit
-          ? userDetail.type
-          : '미제출'
-        : '없음',
-      '중간보고서 상태': middleReport
-        ? middleReport.isSubmit
-          ? '제출'
-          : '미제출'
-        : '없음',
-      '최종보고서 상태': finalReport
-        ? finalReport.isSubmit
-          ? '제출'
-          : '미제출'
-        : '없음',
+      [TABLE_HEADER.ID]: userDetail.studentId,
+      [TABLE_HEADER.NAME]: userDetail.name,
+      [TABLE_HEADER.PROFESSOR]: userDetail.professor,
+      [TABLE_HEADER.PERIOD]: userDetail.period,
+      [TABLE_HEADER.DEPARTMENT]: userDetail.department,
+      [TABLE_HEADER.DELAY]: userDetail.delay,
+      [TABLE_HEADER.CAPSTONE]: capstoneStatus,
+      [TABLE_HEADER.APP_STATUS]: getSubmissionStatus('신청서', true),
+      [TABLE_HEADER.MID_STATUS]: getSubmissionStatus('중간보고서'),
+      [TABLE_HEADER.FINAL_STATUS]: getSubmissionStatus('최종보고서'),
     };
   });
 
@@ -50,16 +48,16 @@ export default function downloadStudentDetailExcel(
   XLSX.utils.book_append_sheet(workbook, worksheet, '학생 상세 정보');
 
   const widthMap = {
-    학번: 15,
-    이름: 12,
-    지도교수: 12,
-    졸업년도: 12,
-    소속학과: 15,
-    지연횟수: 10,
-    캡스톤이수: 15,
-    '신청서 상태': 15,
-    '중간보고서 상태': 15,
-    '최종보고서 상태': 15,
+    [TABLE_HEADER.ID]: 15,
+    [TABLE_HEADER.NAME]: 12,
+    [TABLE_HEADER.PROFESSOR]: 12,
+    [TABLE_HEADER.PERIOD]: 12,
+    [TABLE_HEADER.DEPARTMENT]: 15,
+    [TABLE_HEADER.DELAY]: 10,
+    [TABLE_HEADER.CAPSTONE]: 15,
+    [TABLE_HEADER.APP_STATUS]: 15,
+    [TABLE_HEADER.MID_STATUS]: 15,
+    [TABLE_HEADER.FINAL_STATUS]: 15,
   };
 
   const columnWidths = Object.values(widthMap).map(width => ({ wch: width }));
