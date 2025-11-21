@@ -8,6 +8,7 @@ export const thesisColumns: ReadonlyArray<Column<ThesisRow>> = [
   { key: 'name', header: '이름', width: 50, cell: r => r.name },
   { key: 'advisor', header: '지도교수', width: 50, cell: r => r.advisor },
   { key: 'gradTerm', header: '졸업 년도', width: 90, cell: r => r.gradTerm },
-  { key: 'status', header: '중간보고서', width: 140, cell: r => r.status },
-  { key: 'approved', header: '승인 여부', width: 80, cell: r => r.approved },
+  { key: 'status', header: '상태', width: 130, cell: r => r.status },
+  { key: 'submissionStatus', header: '제출 상태', width: 70, cell: r => r.submissionStatus },
+  { key: 'approved', header: '승인 여부', width: 70, cell: r => r.approved },
 ] as const;

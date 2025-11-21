@@ -6,5 +6,6 @@ export type ThesisRow = {
   advisor: string;
   gradTerm: string;
   status: string;
+  submissionStatus: '제출' | '미제출';
   approved: '승인' | '미승인' | '승인 대기';
 };
