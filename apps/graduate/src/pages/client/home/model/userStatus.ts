@@ -1,4 +1,4 @@
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 export const USER_STATUS = {
   UNSET: 'unset',

@@ -3,7 +3,7 @@ import { Button, Checkbox, Divider, Input, Upload } from 'antd';
 import type { CheckboxChangeEvent, UploadProps } from 'antd';
 import { useState } from 'react';
 
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 import { noticeFormData } from '../mock/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';

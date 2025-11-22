@@ -1,7 +1,7 @@
 import { Navigate } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 
-import { ROUTE } from '../constants/route';
+import { ROUTE } from '../constants';
 import { useAuthStore } from '../stores';
 
 export default function ProtectedRoute({
