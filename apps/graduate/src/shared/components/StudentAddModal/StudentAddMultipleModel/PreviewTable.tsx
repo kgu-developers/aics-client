@@ -1,10 +1,10 @@
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 
-import type { BulkUploadRow } from '../types';
+import type { MultipleUploadRow } from '../types';
 
 type Props = {
-  rows: BulkUploadRow[];
+  rows: MultipleUploadRow[];
   pageSize?: number;
   current: number;
   onPageChange: (page: number) => void;
@@ -12,7 +12,7 @@ type Props = {
   onSelectionChange: (keys: React.Key[]) => void;
 };
 
-type Columns = NonNullable<TableProps<BulkUploadRow>['columns']>;
+type Columns = NonNullable<TableProps<MultipleUploadRow>['columns']>;
 
 const BASE_COLUMNS: Columns = [
   { title: 'No', dataIndex: 'key', width: 60 },
@@ -31,7 +31,7 @@ export default function BulkPreviewTable({
   const columns: Columns = [
     {
       ...BASE_COLUMNS[0],
-      render: (_: unknown, __: BulkUploadRow, idx: number) =>
+      render: (_: unknown, __: MultipleUploadRow, idx: number) =>
         (current - 1) * pageSize + idx + 1,
     },
     BASE_COLUMNS[1],
@@ -44,7 +44,7 @@ export default function BulkPreviewTable({
   };
 
   return (
-    <Table<BulkUploadRow>
+    <Table<MultipleUploadRow>
       size='small'
       dataSource={rows}
       columns={columns}

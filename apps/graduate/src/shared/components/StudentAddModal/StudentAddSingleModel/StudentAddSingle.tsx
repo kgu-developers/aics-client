@@ -1,14 +1,47 @@
-import { Form, Input, Select, DatePicker, Button } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
+import type { FormItemProps } from 'antd';
 import type { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 
 import { PROFESSORS } from '~/shared/constants/professors';
 
+import { CAPSTONE_OPTIONS, SINGLE_FIELD_TEXT } from '../constants';
 import type { SingleSubmitPayload } from '../types';
 
 type FormInnerValues = Omit<SingleSubmitPayload, 'graduationMonth'> & {
   graduationMonth: Dayjs;
 };
+
+type TextFieldConfig = {
+  name: 'studentNo' | 'name' | 'department';
+  rules: FormItemProps['rules'];
+  placeholder: string;
+  label: string;
+};
+
+const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
+  {
+    name: 'studentNo',
+    rules: [
+      { required: true, message: SINGLE_FIELD_TEXT.studentNo.required },
+      { pattern: /^\d{9}$/, message: SINGLE_FIELD_TEXT.studentNo.pattern },
+    ],
+    placeholder: SINGLE_FIELD_TEXT.studentNo.placeholder,
+    label: SINGLE_FIELD_TEXT.studentNo.label,
+  },
+  {
+    name: 'name',
+    rules: [{ required: true, message: SINGLE_FIELD_TEXT.name.required }],
+    placeholder: SINGLE_FIELD_TEXT.name.placeholder,
+    label: SINGLE_FIELD_TEXT.name.label,
+  },
+  {
+    name: 'department',
+    rules: [{ required: true, message: SINGLE_FIELD_TEXT.department.required }],
+    placeholder: SINGLE_FIELD_TEXT.department.placeholder,
+    label: SINGLE_FIELD_TEXT.department.label,
+  },
+];
 
 export default function StudentAddSingle({
   onSubmit,
@@ -42,75 +75,63 @@ export default function StudentAddSingle({
 
   return (
     <Form form={form} layout='vertical' onFinish={handleFinish}>
-      <Form.Item
-        name='studentNo'
-        label='학번'
-        rules={[
-          { required: true, message: '학번을 입력하세요' },
-          { pattern: /^\d{9}$/, message: '학번은 숫자 9자리여야 합니다' },
-        ]}
-      >
-        <Input placeholder='학번을 입력해주세요' />
-      </Form.Item>
-
-      <Form.Item
-        name='name'
-        label='이름'
-        rules={[{ required: true, message: '이름을 입력하세요' }]}
-      >
-        <Input placeholder='이름을 입력해주세요' />
-      </Form.Item>
+      {TEXT_FIELD_CONFIGS.map(field => (
+        <Form.Item
+          key={field.name}
+          name={field.name}
+          label={field.label}
+          rules={field.rules}
+        >
+          <Input placeholder={field.placeholder} />
+        </Form.Item>
+      ))}
 
       <Form.Item
         name='advisorId'
-        label='지도교수 배정'
-        rules={[{ required: true, message: '지도교수를 선택하세요' }]}
+        label={SINGLE_FIELD_TEXT.advisor.label}
+        rules={[
+          { required: true, message: SINGLE_FIELD_TEXT.advisor.required },
+        ]}
       >
         <Select
           showSearch
           optionFilterProp='label'
           options={professorOptions}
-          placeholder='지도교수를 선택하세요'
+          placeholder={SINGLE_FIELD_TEXT.advisor.placeholder}
         />
       </Form.Item>
 
       <Form.Item
         name='capstoneStatus'
-        label='캡스톤이수여부'
-        rules={[{ required: true, message: '캡스톤이수여부를 선택하세요' }]}
+        label={SINGLE_FIELD_TEXT.capstone.label}
+        rules={[
+          { required: true, message: SINGLE_FIELD_TEXT.capstone.required },
+        ]}
       >
-        <Select
-          options={[
-            { label: '이수', value: 'PASSED' },
-            { label: '미이수', value: 'FAILED' },
-          ]}
-        />
+        <Select options={CAPSTONE_OPTIONS} />
       </Form.Item>
 
       <Form.Item
         name='graduationMonth'
-        label='졸업년도'
-        rules={[{ required: true, message: '졸업년도를 선택하세요' }]}
+        label={SINGLE_FIELD_TEXT.graduationMonth.label}
+        rules={[
+          {
+            required: true,
+            message: SINGLE_FIELD_TEXT.graduationMonth.required,
+          },
+        ]}
       >
         <DatePicker
           picker='month'
           format='YYYY-MM'
           style={{ width: '100%' }}
-          placeholder='YYYY-MM'
+          placeholder={SINGLE_FIELD_TEXT.graduationMonth.placeholder}
         />
-      </Form.Item>
-
-      <Form.Item
-        name='department'
-        label='학과'
-        rules={[{ required: true, message: '학과를 입력하세요' }]}
-      >
-        <Input placeholder='학과를 입력해주세요' />
       </Form.Item>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button type='primary' htmlType='submit'>
-          입력
+          {SINGLE_FIELD_TEXT.submitLabel}
         </Button>
       </div>
     </Form>
