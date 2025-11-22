@@ -3,25 +3,25 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from 'axios';
 
-import { END_POINT } from '~/shared/constants/END_POINT';
+import { END_POINT, ENV_API_URL } from '~/shared/constants';
+import { parseError, logout } from '~/shared/utils';
 import {
-  clearTokens,
   getAccessToken,
   getRefreshToken,
   setAccessToken,
   setRefreshToken,
-} from '~/shared/utils/token';
+} from '~/shared/utils';
 
-interface BaseRequestParams {
+interface BaseRequestConfig {
   request: string;
   headers?: Record<string, string>;
 }
 
-interface GetRequestParams<TParams = unknown> extends BaseRequestParams {
+interface GetRequestConfig<TParams = unknown> extends BaseRequestConfig {
   params?: TParams;
 }
 
-interface MutationRequestParams<TData = unknown> extends BaseRequestParams {
+interface MutationRequestConfig<TData = unknown> extends BaseRequestConfig {
   data?: TData;
 }
 
@@ -29,21 +29,61 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
+interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken?: string;
+}
+
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: ENV_API_URL,
 });
 
-const handleLogout = (): void => {
-  clearTokens();
-  window.location.href = '/'; // 로그인 위치 확인 필요
-};
+const refreshInstance = axios.create({
+  baseURL: ENV_API_URL,
+});
+
+let refreshTokenPromise: Promise<string> | null = null;
+
+async function refreshAccessToken(): Promise<string> {
+  if (refreshTokenPromise) {
+    return refreshTokenPromise;
+  }
+
+  refreshTokenPromise = (async () => {
+    try {
+      const refreshToken = getRefreshToken();
+
+      if (!refreshToken) {
+        throw new Error('No refresh token');
+      }
+
+      const response = await refreshInstance.post<RefreshTokenResponse>(
+        END_POINT.AUTH_REFRESH,
+        { refreshToken },
+      );
+
+      const { accessToken, refreshToken: newRefreshToken } = response.data;
+
+      setAccessToken(accessToken);
+      if (newRefreshToken) {
+        setRefreshToken(newRefreshToken);
+      }
+
+      return accessToken;
+    } catch (error) {
+      logout();
+      throw error;
+    } finally {
+      refreshTokenPromise = null;
+    }
+  })();
+
+  return refreshTokenPromise;
+}
 
 function handleAxiosError(error: unknown): never {
-  console.log(error);
-  if (axios.isAxiosError(error)) {
-    throw new Error(error.response?.data.message);
-  }
-  throw new Error('에러가 발생했습니다');
+  const errorInfo = parseError(error);
+  throw new Error(errorInfo.message);
 }
 
 instance.interceptors.request.use(
@@ -62,35 +102,23 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => response,
   async error => {
-    const originalRequest = error.config as CustomAxiosRequestConfig;
+    const originalRequest = error.config as
+      | CustomAxiosRequestConfig
+      | undefined;
+
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        const refreshToken = getRefreshToken();
+        const newAccessToken = await refreshAccessToken();
 
-        if (!refreshToken) {
-          handleLogout();
-          return Promise.reject(error);
-        }
-
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}${END_POINT.AUTH_REFRESH}`,
-          { refreshToken },
-        );
-
-        const { accessToken, refreshToken: newRefreshToken } = response.data;
-
-        setAccessToken(accessToken);
-        if (newRefreshToken) {
-          setRefreshToken(newRefreshToken);
-        }
-
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return instance(originalRequest);
       } catch (refreshError) {
-        handleLogout();
         return Promise.reject(refreshError);
       }
     }
@@ -100,7 +128,7 @@ instance.interceptors.response.use(
 );
 
 export async function get<TResponse = unknown, TParams = unknown>(
-  config: GetRequestParams<TParams>,
+  config: GetRequestConfig<TParams>,
 ): Promise<AxiosResponse<TResponse>> {
   const { request, headers, params } = config;
   try {
@@ -115,7 +143,7 @@ export async function get<TResponse = unknown, TParams = unknown>(
 }
 
 export async function post<TResponse = unknown, TData = unknown>(
-  config: MutationRequestParams<TData>,
+  config: MutationRequestConfig<TData>,
 ): Promise<AxiosResponse<TResponse>> {
   const { request, data, headers } = config;
   try {
@@ -133,7 +161,7 @@ export async function post<TResponse = unknown, TData = unknown>(
 }
 
 export async function put<TResponse = unknown, TData = unknown>(
-  config: MutationRequestParams<TData>,
+  config: MutationRequestConfig<TData>,
 ): Promise<AxiosResponse<TResponse>> {
   const { request, data, headers } = config;
   try {
@@ -151,7 +179,7 @@ export async function put<TResponse = unknown, TData = unknown>(
 }
 
 export async function del<TResponse = unknown>(
-  config: BaseRequestParams,
+  config: BaseRequestConfig,
 ): Promise<AxiosResponse<TResponse>> {
   const { request, headers } = config;
   try {
