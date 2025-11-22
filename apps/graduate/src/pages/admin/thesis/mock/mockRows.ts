@@ -15,15 +15,18 @@ const names = [
 const advisors = ['김현기', '권호성', '이은정', '권면기', '진도훈'];
 const gradTerms = ['2026-02', '2026-08', '2025-08', '2030-08'];
 const statusOptions = [
-  '중간보고서 - 제출',
-  '중간보고서 - 미제출',
-  '최종보고서 - 제출',
-  '최종보고서 - 미제출',
+  '중간보고서',
+  '최종보고서',
 ];
 const approvedOptions: ThesisRow['approved'][] = [
   '승인',
   '미승인',
   '승인 대기',
+];
+
+const submissionStatusOptions: ThesisRow['submissionStatus'][] = [
+  '제출',
+  '미제출',
 ];
 
 function makeStudentId(n: number): string {
@@ -41,6 +44,7 @@ function buildMockRows(count = 90): ThesisRow[] {
       advisor: advisors[i % advisors.length],
       gradTerm: gradTerms[i % gradTerms.length],
       status: statusOptions[i % statusOptions.length],
+      submissionStatus: submissionStatusOptions[i % submissionStatusOptions.length],
       approved: approvedOptions[i % approvedOptions.length],
     };
   });

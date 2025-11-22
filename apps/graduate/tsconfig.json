@@ -2,7 +2,7 @@
   "extends": "@aics-client/typescript/react.json",
   "compilerOptions": {
     "plugins": [{ "name": "react" }],
-    "types": ["@tanstack/react-router"],
+    "types": ["vite/client", "@tanstack/react-router"],
     "paths": {
       "~/*": ["./src/*"]
     }
