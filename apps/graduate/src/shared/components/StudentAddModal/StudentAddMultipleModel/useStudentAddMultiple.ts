@@ -17,7 +17,6 @@ export const useBulkUpload = (open: boolean) => {
 
   const pageSize = 7;
 
-  // 모달이 열릴 때 상태 초기화
   useEffect(() => {
     if (!open) return;
     setFileName('');
