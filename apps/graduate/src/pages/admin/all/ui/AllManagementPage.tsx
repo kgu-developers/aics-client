@@ -9,6 +9,8 @@ import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
 
+import { handleDownload } from '~/pages/admin/all/utils';
+
 export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -37,7 +39,7 @@ export default function AllManagementPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => {}}
+          onDownload={() => handleDownload(st.selected, st.filtered)}
           onAddStudent={() => {}}
           disabledApprove={true}
         />

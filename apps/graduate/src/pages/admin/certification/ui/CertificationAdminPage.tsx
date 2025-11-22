@@ -25,7 +25,6 @@ export default function CertificationAdminPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onDownload={() => {}}
           onAddStudent={() => {}}
         />
 
