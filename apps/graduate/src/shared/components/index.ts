@@ -3,6 +3,5 @@ export * from './Toolbar';
 export * from './Header';
 export * from './Pagination';
 export * from './DataTable';
-export * from './StudentAddModal';
 export * from './Section';
 export { default as ProtectedRoute } from './ProtectedRoute';
