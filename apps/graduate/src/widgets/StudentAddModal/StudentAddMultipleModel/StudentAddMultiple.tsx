@@ -1,17 +1,17 @@
 import { Button, Typography, Upload } from 'antd';
 
 import type { MultipleUploadRow } from '../types';
-import BulkPreviewTable from './PreviewTable';
-import { useBulkUpload } from './useStudentAddMultiple';
+import PreviewTable from './PreviewTable';
+import { useStudentAddMultiple } from './useStudentAddMultiple';
 
 type Props = {
   open?: boolean;
-  onBulkSubmit?: (rows: MultipleUploadRow[]) => void | Promise<void>;
+  onSubmitMultiple?: (rows: MultipleUploadRow[]) => void | Promise<void>;
 };
 
 export default function StudentAddMultiple({
   open = false,
-  onBulkSubmit,
+  onSubmitMultiple,
 }: Props) {
   const {
     fileName,
@@ -24,17 +24,17 @@ export default function StudentAddMultiple({
     setCurrent,
     handleFileChange,
     handleResultAlert,
-  } = useBulkUpload(open);
+  } = useStudentAddMultiple(open);
 
   const handleSelectSubmit = async () => {
     const selected = rows.filter(r => selectedRowKeys.includes(r.key));
-    await onBulkSubmit?.(selected);
+    await onSubmitMultiple?.(selected);
     handleResultAlert(selected.length);
   };
 
   const handleAllSubmit = async () => {
     if (rows.length > 0) {
-      await onBulkSubmit?.(rows);
+      await onSubmitMultiple?.(rows);
     }
     handleResultAlert(rows.length);
   };
@@ -51,7 +51,7 @@ export default function StudentAddMultiple({
       </Typography.Paragraph>
 
       <div style={{ border: '1px solid #eee', borderRadius: 8, padding: 8 }}>
-        <BulkPreviewTable
+        <PreviewTable
           rows={rows}
           pageSize={pageSize}
           current={current}

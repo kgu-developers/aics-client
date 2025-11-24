@@ -20,7 +20,7 @@ const BASE_COLUMNS: Columns = [
   { title: '이름', dataIndex: 'name' },
 ];
 
-export default function BulkPreviewTable({
+export default function PreviewTable({
   rows,
   pageSize = 7,
   current,

@@ -8,7 +8,7 @@ import type { MultipleUploadRow, InvalidRow } from '../types';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 
-export const useBulkUpload = (open: boolean) => {
+export const useStudentAddMultiple = (open: boolean) => {
   const [fileName, setFileName] = useState('');
   const [rows, setRows] = useState<MultipleUploadRow[]>([]);
   const [invalidRows, setInvalidRows] = useState<InvalidRow[]>([]);

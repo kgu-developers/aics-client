@@ -13,7 +13,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
-  onBulkSubmit?: (rows: MultipleUploadRow[]) => void | Promise<void>;
+  onSubmitMultiple?: (rows: MultipleUploadRow[]) => void | Promise<void>;
 };
 
 type ModeOption = (typeof MODE_OPTIONS)[number];
@@ -22,7 +22,7 @@ export default function StudentAddModal({
   open,
   onClose,
   onSubmit,
-  onBulkSubmit,
+  onSubmitMultiple,
 }: Props) {
   const [mode, setMode] = useState<StudentAddMode>('single');
 
@@ -59,7 +59,7 @@ export default function StudentAddModal({
       {mode === 'single' ? (
         <StudentAddSingle open={open} onSubmit={onSubmit} />
       ) : (
-        <StudentAddMultiple open={open} onBulkSubmit={onBulkSubmit} />
+        <StudentAddMultiple open={open} onSubmitMultiple={onSubmitMultiple} />
       )}
     </Modal>
   );
