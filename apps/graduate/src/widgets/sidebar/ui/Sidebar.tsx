@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { logout } from '~/shared/utils';
 
 import * as style from './Sidebar.css';
-import { adminMenuSections } from '../model/model';
+import { adminMenuSections } from '../model';
 
 export default function Sidebar() {
   return (

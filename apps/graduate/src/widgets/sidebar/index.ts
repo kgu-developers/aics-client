@@ -1,2 +1,2 @@
-export { Sidebar } from './ui';
-export { adminMenuSections } from './model';
+export { default as Sidebar } from './ui/Sidebar';
+export * from './model';
