@@ -1,5 +1,9 @@
-import type { MultipleUploadRow, InvalidRow, ProfessorNameToId } from '../types';
 import { CAPSTONE_MAP } from './constants';
+import type {
+  MultipleUploadRow,
+  InvalidRow,
+  ProfessorNameToId,
+} from '../../types';
 
 type ValidateOptions = {
   key: number;
@@ -32,8 +36,8 @@ export const validateStudentRow = ({
   if (!rawStudentNo) missing.push('학번');
   if (!rawName) missing.push('이름');
   if (!professorName) missing.push('지도교수');
-  if (!capstoneText) missing.push('캡스톤이수여부');
-  if (!grad) missing.push('졸업년도');
+  if (!capstoneText) missing.push('캡스톤 이수 여부');
+  if (!grad) missing.push('졸업 예정');
   if (!dept) missing.push('학과');
 
   if (missing.length > 0) {
@@ -53,7 +57,7 @@ export const validateStudentRow = ({
       row: {
         studentNo: rawStudentNo,
         name: rawName,
-        reason: '학번 형식 오류 (9자리 숫자 아님)',
+        reason: '학번 형식 오류 (숫자 9자리)',
       },
     };
   }
@@ -77,7 +81,7 @@ export const validateStudentRow = ({
       row: {
         studentNo: rawStudentNo,
         name: rawName,
-        reason: `알 수 없는 지도교수 (${professorName})`,
+        reason: `존재하지 않는 지도교수(${professorName})`,
       },
     };
   }
@@ -106,7 +110,7 @@ export const validateStudentRow = ({
       row: {
         studentNo: rawStudentNo,
         name: rawName,
-        reason: `졸업년도 형식 오류 (${grad})`,
+        reason: `졸업 예정일 형식 오류 (${grad})`,
       },
     };
   }

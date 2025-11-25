@@ -26,32 +26,31 @@ export const SINGLE_FIELD_TEXT = {
     label: '학번',
     placeholder: '학번을 입력해주세요',
     required: '학번을 입력하세요',
-    pattern: '학번은 숫자 9자리여야 합니다',
+    pattern: '학번은 숫자 9자리여야 합니다 .',
   },
   name: {
     label: '이름',
     placeholder: '이름을 입력해주세요',
-    required: '이름을 입력하세요',
+    required: '이름을 입력해주세요',
   },
   advisor: {
     label: '지도교수 배정',
-    placeholder: '지도교수를 선택하세요',
-    required: '지도교수를 선택하세요',
+    placeholder: '지도교수를 선택해주세요',
+    required: '지도교수를 선택해주세요',
   },
   capstone: {
-    label: '캡스톤이수여부',
-    required: '캡스톤이수여부를 선택하세요',
+    label: '캡스톤 이수 여부',
+    required: '캡스톤 이수 여부를 선택해주세요',
   },
   graduationMonth: {
     label: '졸업년도',
     placeholder: 'YYYY-MM',
-    required: '졸업년도를 선택하세요',
+    required: '졸업 예정일을 선택해주세요',
   },
   department: {
     label: '학과',
     placeholder: '학과를 입력해주세요',
-    required: '학과를 입력하세요',
+    required: '학과를 입력해주세요',
   },
   submitLabel: '입력',
 };
-

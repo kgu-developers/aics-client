@@ -1,7 +1,7 @@
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 
-import type { MultipleUploadRow } from '../types';
+import type { MultipleUploadRow } from '../../types';
 
 type Props = {
   rows: MultipleUploadRow[];

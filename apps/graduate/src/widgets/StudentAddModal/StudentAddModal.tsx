@@ -1,12 +1,12 @@
-﻿import { Card, Col, Divider, Modal, Row, Typography, theme } from 'antd';
+﻿import { Col, Divider, Modal, Row } from 'antd';
 import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
 
 import { MODE_OPTIONS, type StudentAddMode } from './constants';
+import { ModeCard } from './ModeCard';
+import { StudentAddMultiple, StudentAddSingle } from './models';
 import * as styles from './StudentAddModal.css';
-import StudentAddMultiple from './StudentAddMultipleModel/StudentAddMultiple';
-import StudentAddSingle from './StudentAddSingleModel/StudentAddSingle';
 import type { MultipleUploadRow, SingleSubmitPayload } from './types';
 
 type Props = {
@@ -15,8 +15,6 @@ type Props = {
   onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
   onSubmitMultiple?: (rows: MultipleUploadRow[]) => void | Promise<void>;
 };
-
-type ModeOption = (typeof MODE_OPTIONS)[number];
 
 export default function StudentAddModal({
   open,
@@ -62,37 +60,5 @@ export default function StudentAddModal({
         <StudentAddMultiple open={open} onSubmitMultiple={onSubmitMultiple} />
       )}
     </Modal>
-  );
-}
-
-function ModeCard({
-  option,
-  isActive,
-  onSelect,
-}: {
-  option: ModeOption;
-  isActive: boolean;
-  onSelect: () => void;
-}) {
-  const { token } = theme.useToken();
-
-  return (
-    <Card
-      size='small'
-      onClick={onSelect}
-      style={{
-        cursor: 'pointer',
-        background: isActive
-          ? token.colorBgContainer
-          : token.colorFillQuaternary,
-        borderColor: isActive ? token.colorPrimary : token.colorBorderSecondary,
-      }}
-      bodyStyle={{ padding: 16 }}
-    >
-      <Typography.Title level={5} style={{ margin: 0 }}>
-        {option.title}
-      </Typography.Title>
-      <Typography.Text type='secondary'>{option.description}</Typography.Text>
-    </Card>
   );
 }

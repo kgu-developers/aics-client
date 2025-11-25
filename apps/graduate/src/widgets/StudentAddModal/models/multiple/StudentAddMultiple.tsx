@@ -1,8 +1,8 @@
 import { Button, Typography, Upload } from 'antd';
 
-import type { MultipleUploadRow } from '../types';
 import PreviewTable from './PreviewTable';
 import { useStudentAddMultiple } from './useStudentAddMultiple';
+import type { MultipleUploadRow } from '../../types';
 
 type Props = {
   open?: boolean;

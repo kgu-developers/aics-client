@@ -1,11 +1,11 @@
-﻿import type {
+﻿import { HEADER_NAMES } from './constants';
+import { validateStudentRow } from './validator';
+import type {
   MultipleUploadRow,
   InvalidRow,
   ParseResult,
   ProfessorNameToId,
-} from '../types';
-import { HEADER_NAMES } from './constants';
-import { validateStudentRow } from './validator';
+} from '../../types';
 
 export function createProfessorMap(
   professors: { id: number; name: string }[],
