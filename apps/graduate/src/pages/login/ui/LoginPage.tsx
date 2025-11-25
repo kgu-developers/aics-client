@@ -1,7 +1,7 @@
 import { useRouter } from '@tanstack/react-router';
 
 import { Button } from '~/shared/components';
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 export default function LoginPage() {
   const router = useRouter();

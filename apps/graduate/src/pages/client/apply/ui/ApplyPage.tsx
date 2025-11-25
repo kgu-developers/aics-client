@@ -3,7 +3,7 @@ import { Button, Drawer, Steps } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { Section } from '~/shared/components';
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 import { STEP, STEP_TITLE, STEP_TYPE } from '../model/step';
 import * as styles from '../styles/ApplyPage.css';

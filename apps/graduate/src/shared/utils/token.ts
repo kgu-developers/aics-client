@@ -1,4 +1,4 @@
-import { KEYS } from '~/shared/constants/keys';
+import { KEYS } from '~/shared/constants';
 
 export const getAccessToken = (): string | null => {
   return localStorage.getItem(KEYS.ACCESS_TOKEN);

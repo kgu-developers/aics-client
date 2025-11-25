@@ -1,4 +1,4 @@
-export const ROUTE = {
+const ROUTE = {
   HOME: '/',
   NOTICE: '/notice',
   THESIS: '/thesis',
@@ -10,4 +10,7 @@ export const ROUTE = {
   SCHEDULE: '/schedule',
   ALL: '/all',
   RULES: '/rules',
+  LOGIN: '/login',
 } as const;
+
+export default ROUTE;
