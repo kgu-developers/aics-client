@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import { DataTable, Section } from '~/shared/components';
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
 import { timelineItems } from '../mock/schedule';

@@ -1,15 +1,11 @@
 import { Link } from '@tanstack/react-router';
 
-import { useLogout } from '~/shared/hooks';
+import { logout } from '~/shared/utils';
 
 import * as style from './Sidebar.css';
 import { adminMenuSections } from '../model/model';
 
-import { AuthContext } from '~/routes/__root';
-
-export default function Sidebar({ auth }: AuthContext) {
-  const handleLogout = useLogout(auth);
-
+export default function Sidebar() {
   return (
     <aside className={style.sidebar}>
       <div className={style.sidebarHeader}>
@@ -18,7 +14,7 @@ export default function Sidebar({ auth }: AuthContext) {
           className={style.logout}
           target='_blank'
           rel='noopener noreferrer'
-          onClick={handleLogout}
+          onClick={logout}
         >
           로그아웃
         </a>

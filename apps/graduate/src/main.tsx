@@ -1,32 +1,14 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Import the generated route tree
 import reportWebVitals from './reportWebVitals.ts';
-import { routeTree } from './routeTree.gen';
 import { useAuthStore } from './shared/stores';
-import { queryClient } from './shared/utils';
+import { queryClient, router } from './shared/utils';
 
 import './globals.css';
-
-const router = createRouter({
-  routeTree,
-  context: undefined!,
-  defaultPreload: 'intent',
-  scrollRestoration: true,
-  defaultStructuralSharing: true,
-  defaultPreloadStaleTime: 0,
-});
-
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
 
 function App() {
   const { isAuthenticated, isAdmin, setIsAuthenticated, setIsAdmin } =

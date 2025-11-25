@@ -11,7 +11,7 @@ import { InboxIcon } from 'lucide-react';
 import type { CSSProperties } from 'react';
 
 import { Section } from '~/shared/components';
-import { ROUTE } from '~/shared/constants/route';
+import { ROUTE } from '~/shared/constants';
 
 import * as styles from '../styles/ThesisPage.css';
 
