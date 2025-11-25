@@ -5,7 +5,7 @@ import type {
   InvalidRow,
   ParseResult,
   ProfessorNameToId,
-} from '../../types';
+} from '../types/studentAddModal';
 
 export function createProfessorMap(
   professors: { id: number; name: string }[],

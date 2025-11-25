@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { PROFESSORS } from '~/shared/constants/professors';
 
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
-import type { MultipleUploadRow, InvalidRow } from '../../types';
+import type { MultipleUploadRow, InvalidRow } from '../types/studentAddModal';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 

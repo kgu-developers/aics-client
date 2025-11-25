@@ -1,5 +1,1 @@
-export { default as StudentAddModal } from './StudentAddModal';
-export * from './ModeCard';
-export * from './constants';
-export * from './types';
-export * from './models';
+export { default as StudentAddModal } from './ui/StudentAddModal';

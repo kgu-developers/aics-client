@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 
 import { PROFESSORS } from '~/shared/constants/professors';
 
-import { CAPSTONE_OPTIONS, SINGLE_FIELD_TEXT } from '../../constants';
-import type { SingleSubmitPayload } from '../../types';
+import { CAPSTONE_OPTIONS, SINGLE_FIELD_TEXT } from '../model/constants';
+import type { SingleSubmitPayload } from '../types/studentAddModal';
 
 type FormInnerValues = Omit<SingleSubmitPayload, 'graduationMonth'> & {
   graduationMonth: Dayjs;

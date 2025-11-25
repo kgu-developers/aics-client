@@ -3,7 +3,7 @@ import type {
   MultipleUploadRow,
   InvalidRow,
   ProfessorNameToId,
-} from '../../types';
+} from '../types/studentAddModal';
 
 type ValidateOptions = {
   key: number;

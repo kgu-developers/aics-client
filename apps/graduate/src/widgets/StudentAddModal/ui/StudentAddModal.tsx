@@ -3,11 +3,15 @@ import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
 
-import { MODE_OPTIONS, type StudentAddMode } from './constants';
 import { ModeCard } from './ModeCard';
-import { StudentAddMultiple, StudentAddSingle } from './models';
-import * as styles from './StudentAddModal.css';
-import type { MultipleUploadRow, SingleSubmitPayload } from './types';
+import StudentAddMultiple from './StudentAddMultiple';
+import StudentAddSingle from './StudentAddSingle';
+import { MODE_OPTIONS, type StudentAddMode } from '../model/constants';
+import * as styles from '../styles/StudentAddModal.css';
+import type {
+  MultipleUploadRow,
+  SingleSubmitPayload,
+} from '../types/studentAddModal';
 
 type Props = {
   open: boolean;

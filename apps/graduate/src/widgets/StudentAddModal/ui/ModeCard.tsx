@@ -1,6 +1,6 @@
 import { Card, Typography, theme } from 'antd';
 
-import type { MODE_OPTIONS } from './constants';
+import type { MODE_OPTIONS } from '../model/constants';
 
 type ModeOption = (typeof MODE_OPTIONS)[number];
 
