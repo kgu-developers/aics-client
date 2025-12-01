@@ -1,5 +1,10 @@
-export const ENV_API_URL = import.meta.env.VITE_API_URL;
+export const ENV_API_URL =
+  import.meta.env.VITE_API_URL || 'https://aics-api.ummdev.com/';
 
 export const END_POINT = {
-  AUTH_REFRESH: '/auth/refresh', // 명세서 업데이트가 안돼서 확인 필요해요.
+  AUTH: {
+    LOGIN: '/api/v1/auth/login',
+    SIGNUP: '/api/v1/users/signup',
+    REFRESH: '/api/v1/auth/reissue',
+  },
 } as const;

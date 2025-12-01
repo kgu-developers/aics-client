@@ -58,7 +58,7 @@ async function refreshAccessToken(): Promise<string> {
       }
 
       const response = await refreshInstance.post<RefreshTokenResponse>(
-        END_POINT.AUTH_REFRESH,
+        END_POINT.AUTH.REFRESH,
         { refreshToken },
       );
 
