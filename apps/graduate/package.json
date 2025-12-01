@@ -27,6 +27,7 @@
     "motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.1",
     "react-quill-new": "^3.6.0",
     "xlsx": "^0.18.5",
     "zustand": "^5.0.8"
