@@ -18,7 +18,7 @@ export default function SignupForm() {
       name: '',
       email: '',
       phone: '',
-      major: '',
+      major: 'CS',
     },
   });
 
@@ -47,13 +47,9 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='password'
-          placeholder='비밀번호 (예: password1234!)'
+          placeholder='비밀번호'
           {...register('password', {
             required: '비밀번호를 입력하세요',
-            minLength: {
-              value: 8,
-              message: '비밀번호는 최소 8자 이상이어야 합니다',
-            },
           })}
           className={styles.input}
         />
@@ -64,7 +60,7 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='text'
-          placeholder='이름 (예: 박민준)'
+          placeholder='이름'
           {...register('name', {
             required: '이름을 입력하세요',
           })}
@@ -77,7 +73,7 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='email'
-          placeholder='이메일 (예: example@kyonggi.ac.kr)'
+          placeholder='이메일'
           {...register('email', {
             required: '이메일을 입력하세요',
             pattern: {
@@ -94,7 +90,7 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='tel'
-          placeholder='전화번호 (예: 010-1234-5678)'
+          placeholder='전화번호 (010-1234-5678)'
           {...register('phone', {
             required: '전화번호를 입력하세요',
             pattern: {
@@ -111,7 +107,7 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='text'
-          placeholder='전공 (예: CSE)'
+          placeholder='전공 (예: CS)'
           {...register('major', {
             required: '전공을 입력하세요',
           })}
