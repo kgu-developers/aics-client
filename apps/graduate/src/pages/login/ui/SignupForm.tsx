@@ -18,7 +18,7 @@ export default function SignupForm() {
       name: '',
       email: '',
       phone: '',
-      major: 'CS',
+      major: 'CSE',
     },
   });
 
@@ -107,7 +107,7 @@ export default function SignupForm() {
       <div className={styles.inputWrapper}>
         <input
           type='text'
-          placeholder='전공 (예: CS)'
+          placeholder='전공 (예: CSE)'
           {...register('major', {
             required: '전공을 입력하세요',
           })}
