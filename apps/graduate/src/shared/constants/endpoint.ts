@@ -9,7 +9,7 @@ export const API_ADMIN_URL =
 
 export type EndpointValue<T> = T extends string
   ? T
-  : T extends Record<string, any>
+  : T extends Record<string, unknown>
     ? {
         [K in keyof T]: EndpointValue<T[K]>;
       }[keyof T]

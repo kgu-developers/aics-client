@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 
 import { post } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
+import { setAccessToken, setRefreshToken } from '~/shared/utils';
 
 import type { LoginFormData, LoginResponse } from '../model/login';
-import { setAccessToken, setRefreshToken } from '~/shared/utils';
 
 export const submitLogin = async (data: LoginFormData) => {
   const response = await post<LoginResponse>({

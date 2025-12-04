@@ -7,7 +7,7 @@ import type { SignupFormData } from '../model/signup';
 
 const submitSignup = async (data: SignupFormData) => {
   const response = await post({
-    request: END_POINT.AUTH.SIGNUP,
+    request: END_POINT.USER.SIGNUP,
     data,
   });
   return response.data;
