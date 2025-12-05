@@ -3,6 +3,11 @@ import { useRouter } from '@tanstack/react-router';
 import { Button } from '~/shared/components';
 import { ROUTE } from '~/shared/constants';
 
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
+
+import { vars } from '~/vars.css';
+
 export default function LoginPage() {
   const router = useRouter();
   const { setIsAuthenticated, setIsAdmin } = router.options.context.auth;
@@ -11,15 +16,22 @@ export default function LoginPage() {
     <div
       style={{
         color: 'white',
-        display: 'grid',
-        placeItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: '100vh',
+        gap: vars.spacing.lg,
+        width: '100%',
       }}
     >
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <LoginForm />
+      <SignupForm />
+      <div style={{ display: 'flex', gap: vars.spacing.sm, width: '300px' }}>
         <Button
-          size='lg'
+          size='md'
           type='button'
+          style={{ flex: 1, textWrap: 'nowrap' }}
           onClick={() => {
             Promise.all([setIsAuthenticated(true), setIsAdmin(false)]).then(
               () => {
@@ -31,8 +43,9 @@ export default function LoginPage() {
           Client 클라이언트
         </Button>
         <Button
-          size='lg'
+          size='md'
           type='button'
+          style={{ flex: 1, textWrap: 'nowrap' }}
           onClick={() => {
             Promise.all([setIsAuthenticated(true), setIsAdmin(true)]).then(
               () => {
