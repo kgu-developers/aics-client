@@ -1,16 +1,23 @@
 import { Link } from '@tanstack/react-router';
-import { ArrowRight, Bell } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import { DataTable, Section } from '~/shared/components';
-import { GRADUATION_STATUS, ROUTE, STATUS_TEXT } from '~/shared/constants';
+import {
+  GRADUATION_STATUS,
+  GRADUATION_STATUS_TEXT,
+  ROUTE,
+  STATUS_TEXT,
+} from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
 import * as styles from '../styles/HomePage.css';
 
 import { vars } from '~/vars.css';
 import { ScheduleTimeLine } from '~/feature/schedule';
+import { useFetchStatusText } from '../api/fetchStatusText';
+import { BUTTONS } from '../model/button';
 
 export default function HomePage() {
   const today = new Date();
@@ -20,34 +27,44 @@ export default function HomePage() {
     day: 'numeric',
   });
 
-  const graduationStatus = GRADUATION_STATUS.SUBMITTED;
-  const { title, description, button } = STATUS_TEXT[graduationStatus];
+  const graduationStatus = GRADUATION_STATUS.OTHER;
+  const { data, isLoading } = useFetchStatusText(graduationStatus);
+  const { button } = STATUS_TEXT[graduationStatus];
 
-  const buttons = [
-    {
-      label: '공지사항 확인하기',
-      href: ROUTE.NOTICE,
-      icon: <Bell size={20} />,
-    },
-  ];
+  const renderText = () => {
+    if (isLoading || !data)
+      return (
+        <>
+          <p className={styles.headerTitle}>준비중</p>
+          <p className={styles.headerDescription}>
+            아직 졸업 요건 취득 일정이 지정되지 않았어요.
+          </p>
+        </>
+      );
+
+    return (
+      <>
+        <p className={styles.headerTitle}>
+          {GRADUATION_STATUS_TEXT[data.submissionType]}
+        </p>
+        <p className={styles.headerDescription}>
+          {data.content.split('\n').map(line => (
+            <Fragment key={line}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
+        </p>
+      </>
+    );
+  };
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
       <section className={styles.mainSection}>
         <section className={styles.upperSection}>
           <section className={styles.header}>
-            <div className={styles.headerTextWrapper}>
-              <p className={styles.headerTitle}>{title}</p>
-              <p className={styles.headerDescription}>
-                {description.split('\n').map(line => (
-                  <Fragment key={line}>
-                    {line}
-                    <br />
-                  </Fragment>
-                ))}
-              </p>
-            </div>
-
+            <div className={styles.headerTextWrapper}>{renderText()}</div>
             <section className={styles.homeButtonSection}>
               <NavigateButton
                 href={button.href}
@@ -55,7 +72,7 @@ export default function HomePage() {
                 label={button.label}
               />
 
-              {buttons.map(button => (
+              {BUTTONS.map(button => (
                 <NavigateButton
                   key={button.label}
                   href={button.href}
