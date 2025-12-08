@@ -31,5 +31,10 @@ export const END_POINT = {
   ADMIN: {},
   USER: {
     SIGNUP: '/api/v1/users/signup',
+    GRADUATION_STATUS: '/api/v1/graduation-users/my',
+    GRADUATION_TYPE: '/api/v1/graduation-users/graduation-type',
+    SCHEDULES_ALL: '/api/v1/schedules',
+    THESIS: '/api/v1/thesis',
+    CERTIFICATE: '/api/v1/certificate',
   },
 } as const;

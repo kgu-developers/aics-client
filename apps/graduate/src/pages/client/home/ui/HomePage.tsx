@@ -1,18 +1,16 @@
 import { Link } from '@tanstack/react-router';
-import { Timeline } from 'antd';
 import { ArrowRight, Bell } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import { DataTable, Section } from '~/shared/components';
-import { ROUTE } from '~/shared/constants';
+import { GRADUATION_STATUS, ROUTE, STATUS_TEXT } from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
-import { timelineItems } from '../mock/schedule';
-import { STATUS_TEXT, USER_STATUS } from '../model/userStatus';
 import * as styles from '../styles/HomePage.css';
 
 import { vars } from '~/vars.css';
+import { ScheduleTimeLine } from '~/feature/schedule';
 
 export default function HomePage() {
   const today = new Date();
@@ -22,8 +20,8 @@ export default function HomePage() {
     day: 'numeric',
   });
 
-  const userStatus = USER_STATUS.THESIS_FINALREPORT_SUBMITTED;
-  const { title, description, button } = STATUS_TEXT[userStatus];
+  const graduationStatus = GRADUATION_STATUS.SUBMITTED;
+  const { title, description, button } = STATUS_TEXT[graduationStatus];
 
   const buttons = [
     {
@@ -80,10 +78,7 @@ export default function HomePage() {
                 <p className={styles.headerText}> 졸업 요건 취득 일정</p>
               </div>
               <WeekCalendar />
-              <Timeline
-                items={timelineItems}
-                style={{ marginTop: vars.spacing.md }}
-              />
+              <ScheduleTimeLine />
             </Section>
           </section>
         </section>
