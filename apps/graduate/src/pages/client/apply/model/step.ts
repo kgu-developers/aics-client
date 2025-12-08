@@ -1,17 +1,13 @@
 import { StepsProps } from 'antd';
+import { GRADUATION_TYPE, type GraduationType } from '~/shared/constants';
 
-export const STEP_TYPE = {
-  THESIS: 0,
-  CERTIFICATION: 1,
+export const STEP_TITLE: Record<GraduationType, string> = {
+  [GRADUATION_TYPE.THESIS]: '졸업 논문 보고서 제출',
+  [GRADUATION_TYPE.CERTIFICATION]: '자격증 증빙 서류 제출',
 };
 
-export const STEP_TITLE: Record<number, string> = {
-  0: '졸업 논문 보고서 제출',
-  1: '자격증 증빙 서류 제출',
-};
-
-export const STEP: Record<number, StepsProps['items']> = {
-  0: [
+export const STEP: Record<GraduationType, StepsProps['items']> = {
+  [GRADUATION_TYPE.THESIS]: [
     {
       title: '대체 신청',
       description: '자격증 제출 혹은 졸업 논문 보고서를 통해 신청할 수 있어요',
@@ -31,7 +27,7 @@ export const STEP: Record<number, StepsProps['items']> = {
       description: '제출이 확인되면 졸업이 승인돼요.',
     },
   ],
-  1: [
+  [GRADUATION_TYPE.CERTIFICATION]: [
     {
       title: '대체 신청',
       description: '자격증 제출 혹은 졸업 논문 보고서를 통해 신청할 수 있어요',

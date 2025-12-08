@@ -9,8 +9,15 @@ export const GRADUATION_STATUS = {
   OTHER: 'OTHER',
 } as const;
 
+export const GRADUATION_TYPE = {
+  THESIS: 'THESIS',
+  CERTIFICATION: 'CERTIFICATION',
+} as const;
+
 export type GraduationStatus =
   (typeof GRADUATION_STATUS)[keyof typeof GRADUATION_STATUS];
+export type GraduationType =
+  (typeof GRADUATION_TYPE)[keyof typeof GRADUATION_TYPE];
 
 export const GRADUATION_STATUS_TEXT: Record<GraduationStatus, string> = {
   [GRADUATION_STATUS.APPROVED]: '졸업 승인',
