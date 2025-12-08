@@ -43,9 +43,6 @@ const nextConfig: NextConfig = {
     '@aics-client/design-system',
     '@aics-client/design-system/styles',
   ],
-  experimental: {
-    reactCompiler: true,
-  },
 };
 
 export default withVanillaExtract(nextConfig);
