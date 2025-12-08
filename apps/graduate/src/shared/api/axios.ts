@@ -322,6 +322,25 @@ async function post<TResponse = unknown, TData = unknown>(
   }
 }
 
+async function patch<TResponse = unknown, TData = unknown>(
+  config: MutationRequestConfig<TData>,
+): Promise<AxiosResponse<TResponse>> {
+  const instance = selectInstanceByRequest(config.request);
+  const { request, data, headers } = config;
+  try {
+    const response = await instance.patch<
+      TResponse,
+      AxiosResponse<TResponse>,
+      TData
+    >(request, data, {
+      headers,
+    });
+    return response;
+  } catch (error: unknown) {
+    handleAxiosError(error);
+  }
+}
+
 async function put<TResponse = unknown, TData = unknown>(
   config: MutationRequestConfig<TData>,
 ): Promise<AxiosResponse<TResponse>> {
@@ -359,4 +378,4 @@ async function del<TResponse = unknown>(
   }
 }
 
-export { get, post, put, del };
+export { get, post, put, del, patch };
