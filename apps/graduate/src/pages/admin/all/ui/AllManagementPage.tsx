@@ -1,18 +1,22 @@
 import { useState } from 'react';
 
+import { message } from 'antd';
+
+import { getProfessorById } from '~/shared/constants';
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
+import { useSubmitGraduationUser } from '../api/submitGraduationUser';
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import { MOCK_ROWS } from '../mock/allManagement';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
+import { handleDownload } from '../utils';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
-
-import { handleDownload } from '~/pages/admin/all/utils';
 
 export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const submitGraduationUser = useSubmitGraduationUser();
 
   // const [selectedId, setSelectedId] = useState<string>('');
   const onNameClick = () => {
@@ -40,7 +44,32 @@ export default function AllManagementPage() {
           }}
           onApprove={() => {}}
           onDownload={() => handleDownload(st.selected, st.filtered)}
-          onAddStudent={() => {}}
+          onAddStudent={async values => {
+            const professor = getProfessorById(values.advisorId);
+            if (!professor) {
+              message.error('지도교수를 찾을 수 없어요.');
+              throw new Error('Professor not found');
+            }
+
+            try {
+              await submitGraduationUser.mutateAsync({
+                studentId: values.studentNo,
+                name: values.name,
+                advisorProfessor: professor.name,
+                capstoneCompletion: values.capstoneStatus === 'PASSED',
+                department: values.department,
+                graduationDate: `${values.graduationMonth}-01`,
+              });
+              message.success('학생을 추가했어요.');
+            } catch (error) {
+              message.error(
+                error instanceof Error
+                  ? error.message
+                  : '학생 추가에 실패했어요.',
+              );
+              throw error;
+            }
+          }}
           disabledApprove={true}
         />
 

@@ -28,7 +28,9 @@ export const END_POINT = {
     LOGIN: '/api/v1/auth/login',
     REFRESH: '/api/v1/auth/reissue',
   },
-  ADMIN: {},
+  ADMIN: {
+    GRADUATION_USERS: '/api/v1/admin/graduation-users',
+  },
   USER: {
     SIGNUP: '/api/v1/users/signup',
   },

@@ -96,8 +96,12 @@ export default function Toolbar({
         open={addOpen}
         onClose={() => setAddOpen(false)}
         onSubmit={async values => {
-          await onAddStudent?.(values);
-          setAddOpen(false);
+          try {
+            await onAddStudent?.(values);
+            setAddOpen(false);
+          } catch {
+            return;
+          }
         }}
       />
     </div>
