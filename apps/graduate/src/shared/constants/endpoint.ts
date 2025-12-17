@@ -30,6 +30,7 @@ export const END_POINT = {
   },
   ADMIN: {
     GRADUATION_USERS: '/api/v1/admin/graduation-users',
+    GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
   },
   USER: {
     SIGNUP: '/api/v1/users/signup',

@@ -1,12 +1,15 @@
 import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useGraduationUserSubmit';
+
 import { certColumns } from '../constants/certColumns';
 import { MOCK_ROWS } from '../mock/mockRows';
 import * as style from '../styles/CertificationAdminPage.css';
 import type { CertRow } from '../types/row';
 
 export default function CertificationAdminPage() {
+  const { handleAddStudents } = useGraduationUserSubmit();
   const st = useTableState<CertRow>(MOCK_ROWS, r => r.id, {
     pageSize: 10,
     keys: ['studentId', 'name', 'status', 'approved'],
@@ -25,7 +28,7 @@ export default function CertificationAdminPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onAddStudent={() => {}}
+          onAddStudents={handleAddStudents}
         />
 
         <div className={style.card}>

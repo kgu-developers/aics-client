@@ -1,7 +1,9 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useState } from 'react';
 
+
 import { StudentAddModal } from '~/widgets/StudentAddModal';
+import type { GraduationUserCreateRequest } from '~/widgets/StudentAddModal/types/studentAddModal';
 
 import * as style from './Toolbar.css';
 
@@ -11,14 +13,7 @@ type Props = {
   onQueryChange: (v: string) => void;
   onApprove: () => void;
   onDownload?: () => void;
-  onAddStudent?: (values: {
-    studentNo: string;
-    name: string;
-    advisorId: number;
-    capstoneStatus: 'PASSED' | 'FAILED';
-    graduationMonth: string;
-    department: string;
-  }) => void | Promise<void>;
+  onAddStudents?: (rows: GraduationUserCreateRequest[]) => void | Promise<void>;
   disabledApprove?: boolean;
 };
 
@@ -28,7 +23,7 @@ export default function Toolbar({
   onQueryChange,
   onApprove,
   onDownload,
-  onAddStudent,
+  onAddStudents,
   disabledApprove = false,
 }: Props) {
   const hasSelection = selectedCount > 0;
@@ -86,7 +81,7 @@ export default function Toolbar({
             className={style.searchInput}
             value={query}
             onChange={e => onQueryChange(e.target.value)}
-            placeholder='Value'
+            placeholder='검색어를 입력하세요'
           />
           <img className={style.searchIcon} src='/Search.svg' alt='검색' />
         </div>
@@ -97,10 +92,26 @@ export default function Toolbar({
         onClose={() => setAddOpen(false)}
         onSubmit={async values => {
           try {
-            await onAddStudent?.(values);
+            await onAddStudents?.([values]);
             setAddOpen(false);
-          } catch {
-            return;
+          } catch (error) {
+            message.error(
+              error instanceof Error
+                ? error.message
+                : '학생 추가에 실패했습니다.',
+            );
+          }
+        }}
+        onSubmitMultiple={async rows => {
+          try {
+            await onAddStudents?.(rows);
+            setAddOpen(false);
+          } catch (error) {
+            message.error(
+              error instanceof Error
+                ? error.message
+                : '학생들 추가에 실패했습니다.',
+            );
           }
         }}
       />

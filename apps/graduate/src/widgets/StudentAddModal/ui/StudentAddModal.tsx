@@ -1,5 +1,6 @@
-﻿import { Col, Divider, Modal, Row } from 'antd';
+import { Col, Divider, Modal, Row } from 'antd';
 import { useState } from 'react';
+
 
 import { modalStyles } from '~/shared/config';
 
@@ -8,16 +9,13 @@ import StudentAddMultiple from './StudentAddMultiple';
 import StudentAddSingle from './StudentAddSingle';
 import { MODE_OPTIONS, type StudentAddMode } from '../model/constants';
 import * as styles from '../styles/StudentAddModal.css';
-import type {
-  MultipleUploadRow,
-  SingleSubmitPayload,
-} from '../types/studentAddModal';
+import type { GraduationUserCreateRequest } from '../types/studentAddModal';
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
-  onSubmitMultiple?: (rows: MultipleUploadRow[]) => void | Promise<void>;
+  onSubmit?: (payload: GraduationUserCreateRequest) => void | Promise<void>;
+  onSubmitMultiple?: (rows: GraduationUserCreateRequest[]) => void | Promise<void>;
 };
 
 export default function StudentAddModal({
@@ -35,7 +33,7 @@ export default function StudentAddModal({
       open={open}
       onCancel={onClose}
       footer={null}
-      title='학생 추가'
+      title='학생추가'
       width={width}
       styles={modalInnerStyles}
       destroyOnClose

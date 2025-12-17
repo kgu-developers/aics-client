@@ -1,12 +1,16 @@
+import type { ButtonProps } from 'antd';
 import { Button, Typography, Upload } from 'antd';
 
 import PreviewTable from './PreviewTable';
 import { useStudentAddMultiple } from '../model/useStudentAddMultiple';
-import type { MultipleUploadRow } from '../types/studentAddModal';
+import type {
+  GraduationUserCreateRequest,
+  UploadRow,
+} from '../types/studentAddModal';
 
 type Props = {
   open?: boolean;
-  onSubmitMultiple?: (rows: MultipleUploadRow[]) => void | Promise<void>;
+  onSubmitMultiple?: (rows: GraduationUserCreateRequest[]) => void | Promise<void>;
 };
 
 export default function StudentAddMultiple({
@@ -26,15 +30,25 @@ export default function StudentAddMultiple({
     handleResultAlert,
   } = useStudentAddMultiple(open);
 
-  const handleSelectSubmit = async () => {
+  const toRequests = (r: UploadRow[]): GraduationUserCreateRequest[] =>
+    r.map(row => ({
+      studentId: row.studentId,
+      name: row.name,
+      advisorProfessor: row.advisorProfessor,
+      capstoneCompletion: row.capstoneCompletion,
+      department: row.department,
+      graduationDate: row.graduationDate,
+    }));
+
+  const handleSelectSubmit: ButtonProps['onClick'] = async () => {
     const selected = rows.filter(r => selectedRowKeys.includes(r.key));
-    await onSubmitMultiple?.(selected);
+    await onSubmitMultiple?.(toRequests(selected));
     handleResultAlert(selected.length);
   };
 
-  const handleAllSubmit = async () => {
+  const handleAllSubmit: ButtonProps['onClick'] = async () => {
     if (rows.length > 0) {
-      await onSubmitMultiple?.(rows);
+      await onSubmitMultiple?.(toRequests(rows));
     }
     handleResultAlert(rows.length);
   };
@@ -72,7 +86,7 @@ export default function StudentAddMultiple({
           <Button>파일 선택</Button>
         </Upload>
         <Typography.Text type='secondary'>
-          {fileName || '선택한 파일 없음'}
+          {fileName || '\uc120\ud0dd\ub41c \ud30c\uc77c \uc5c6\uc74c'}
         </Typography.Text>
         <div style={{ flex: 1 }} />
         <Button

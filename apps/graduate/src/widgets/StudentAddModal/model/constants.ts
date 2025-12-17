@@ -1,18 +1,9 @@
-import type { CapstoneStatus } from '../types/studentAddModal';
-
-export const CAPSTONE_MAP: Record<string, CapstoneStatus> = {
-  이수: 'PASSED',
-  미이수: 'FAILED',
-  passed: 'PASSED',
-  failed: 'FAILED',
-};
-
 export const HEADER_NAMES = {
-  studentNo: '학번',
+  studentId: '학번',
   name: '이름',
-  advisor: '지도교수',
-  capstone: '캡스톤 이수 여부',
-  graduation: '졸업 예정',
+  advisorProfessor: '지도교수',
+  capstoneCompletion: '캡스톤 이수 여부',
+  graduationDate: '졸업 예정',
   department: '학과',
 } as const;
 
@@ -30,12 +21,6 @@ export const MODE_OPTIONS = [
 ] as const;
 
 export type StudentAddMode = (typeof MODE_OPTIONS)[number]['key'];
-
-export const CAPSTONE_OPTIONS: Array<{ label: string; value: CapstoneStatus }> =
-  [
-    { label: '이수', value: 'PASSED' },
-    { label: '미이수', value: 'FAILED' },
-  ];
 
 export const SINGLE_FIELD_TEXT = {
   studentNo: {

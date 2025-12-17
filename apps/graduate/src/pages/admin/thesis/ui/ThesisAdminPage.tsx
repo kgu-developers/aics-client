@@ -1,12 +1,15 @@
 import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useGraduationUserSubmit';
+
 import { thesisColumns } from '../constants/thesisColumns';
 import { MOCK_ROWS } from '../mock/mockRows';
 import * as style from '../styles/ThesisAdminPage.css';
 import type { ThesisRow } from '../types/rows';
 
 export default function ThesisAdminPage() {
+  const { handleAddStudents } = useGraduationUserSubmit();
   const st = useTableState<ThesisRow>(MOCK_ROWS, r => r.id, {
     pageSize: 10,
     keys: ['studentId', 'name', 'advisor', 'gradTerm', 'status', 'approved'],
@@ -25,7 +28,7 @@ export default function ThesisAdminPage() {
             st.resetToFirstPage();
           }}
           onApprove={() => {}}
-          onAddStudent={() => {}}
+          onAddStudents={handleAddStudents}
         />
 
         <div className={style.card}>

@@ -1,16 +1,15 @@
-
 import { useQueryClient } from '@tanstack/react-query';
-import { message } from 'antd';
 import { useState } from 'react';
 
+
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
-import { getProfessorById } from '~/shared/constants';
+
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useGraduationUserSubmit';
 
 import {
   useFetchGraduationUsers,
   type GraduationUserStatus,
 } from '../api/fetchGraduationUsers';
-import { useSubmitGraduationUser } from '../api/submitGraduationUser';
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
@@ -38,7 +37,16 @@ export default function AllManagementPage() {
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const submitGraduationUser = useSubmitGraduationUser();
+
+  const resetAndRefetch = async () => {
+    setSelectedIds([]);
+    setPage(1);
+    await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
+  };
+
+  const { handleAddStudents } = useGraduationUserSubmit({
+    onSuccess: resetAndRefetch,
+  });
 
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
@@ -57,7 +65,7 @@ export default function AllManagementPage() {
       }))
     : [];
 
-  const columns = allManagementColumns(_row => {
+  const columns = allManagementColumns(() => {
     setIsModalOpen(true);
   });
   const totalItems = data?.pageable.totalElements ?? 0;
@@ -82,12 +90,6 @@ export default function AllManagementPage() {
     );
   };
 
-  const resetAndRefetch = async () => {
-    setSelectedIds([]);
-    setPage(1);
-    await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
-  };
-
   return (
     <div className={style.root}>
       <div className={style.container}>
@@ -102,33 +104,7 @@ export default function AllManagementPage() {
           }}
           onApprove={() => {}}
           onDownload={() => handleDownload(selectedIds, rows)}
-          onAddStudent={async values => {
-            const professor = getProfessorById(values.advisorId);
-            if (!professor) {
-              message.error('지도교수를 찾을 수 없어요.');
-              throw new Error('Professor not found');
-            }
-
-            try {
-              await submitGraduationUser.mutateAsync({
-                studentId: values.studentNo,
-                name: values.name,
-                advisorProfessor: professor.name,
-                capstoneCompletion: values.capstoneStatus === 'PASSED',
-                department: values.department,
-                graduationDate: `${values.graduationMonth}-01`,
-              });
-              message.success('학생을 추가했어요.');
-              await resetAndRefetch();
-            } catch (error) {
-              message.error(
-                error instanceof Error
-                  ? error.message
-                  : '학생 추가에 실패했어요.',
-              );
-              throw error;
-            }
-          }}
+          onAddStudents={handleAddStudents}
           disabledApprove={true}
         />
 

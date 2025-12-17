@@ -1,16 +1,20 @@
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
 
+
 import { PROFESSORS } from '~/shared/constants/professors';
 
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
-import type { MultipleUploadRow, InvalidRow } from '../types/studentAddModal';
+import type {
+  InvalidRow,
+  UploadRow,
+} from '../types/studentAddModal';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 
 export const useStudentAddMultiple = (open: boolean) => {
   const [fileName, setFileName] = useState('');
-  const [rows, setRows] = useState<MultipleUploadRow[]>([]);
+  const [rows, setRows] = useState<UploadRow[]>([]);
   const [invalidRows, setInvalidRows] = useState<InvalidRow[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [current, setCurrent] = useState(1);
@@ -30,7 +34,7 @@ export const useStudentAddMultiple = (open: boolean) => {
     setFileName(file.name);
     const name = file.name.toLowerCase();
 
-    let result: { valid: MultipleUploadRow[]; invalid: InvalidRow[] } = {
+    let result: { valid: UploadRow[]; invalid: InvalidRow[] } = {
       valid: [],
       invalid: [],
     };
@@ -41,7 +45,7 @@ export const useStudentAddMultiple = (open: boolean) => {
     } else if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
       result = await parseXlsx(file, PROFESSOR_NAME_TO_ID);
     } else {
-      message.warning('CSV 또는 XLSX 파일만 업로드 가능합니다.');
+      message.warning('CSV \ub610\ub294 XLSX \ud30c\uc77c\ub9cc \uc5c5\ub85c\ub4dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.');
       setRows([]);
       setInvalidRows([]);
       return false;
@@ -56,16 +60,14 @@ export const useStudentAddMultiple = (open: boolean) => {
 
   const handleResultAlert = (addedCount: number) => {
     const invalidMsg = invalidRows
-      .map(r => `${r.name}[${r.studentNo}] : ${r.reason}`)
+      .map(r => `${r.name}[${r.studentId}] : ${r.reason}`)
       .join('\n');
 
     alert(
-      `${addedCount}명의 인원이 추가되었습니다.\n` +
-        `${
-          invalidRows.length > 0
-            ? `제외된 인원들 ${invalidRows.length}명 :\n` + invalidMsg
-            : ''
-        }`,
+      `${addedCount}\uba85\uc758 \ud559\uc0dd\uc744 \ucd94\uac00\ud588\uc2b5\ub2c8\ub2e4.\n` +
+        (invalidRows.length > 0
+          ? `\ubb34\ud6a8 \ub370\uc774\ud130 ${invalidRows.length}\uac74:\n` + invalidMsg
+          : ''),
     );
   };
 

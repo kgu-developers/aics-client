@@ -1,32 +1,31 @@
-export type CapstoneStatus = 'PASSED' | 'FAILED';
-export type ProfessorNameToId = Record<string, number>;
-
-export type SingleSubmitPayload = {
-  studentNo: string;
+export type GraduationUserCreateRequest = {
+  studentId: string;
   name: string;
-  advisorId: number;
-  capstoneStatus: CapstoneStatus;
-  graduationMonth: string;
+  advisorProfessor: string;
+  capstoneCompletion: boolean;
   department: string;
+  graduationDate: string;
 };
 
-export type MultipleUploadRow = {
-  key: number;
-  studentNo: string;
-  name: string;
-  advisorId: number | null;
-  capstoneStatus: CapstoneStatus | null;
-  graduationMonth: string | null;
-  department: string | null;
-};
+export const CAPSTONE_COMPLETION_OPTIONS = [
+  { label: '??', value: true },
+  { label: '???', value: false },
+] as const;
+
+export type CapstoneCompletionOption =
+  (typeof CAPSTONE_COMPLETION_OPTIONS)[number];
+
+export type UploadRow = GraduationUserCreateRequest & { key: number };
 
 export type InvalidRow = {
-  studentNo: string;
+  studentId: string;
   name: string;
   reason: string;
 };
 
 export type ParseResult = {
-  valid: MultipleUploadRow[];
+  valid: UploadRow[];
   invalid: InvalidRow[];
 };
+
+export type ProfessorNameToId = Record<string, number>;
