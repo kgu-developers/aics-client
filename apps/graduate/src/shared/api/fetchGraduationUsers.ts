@@ -1,5 +1,3 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-
 import { get } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
 
@@ -64,10 +62,4 @@ export const fetchGraduationUsers = async (
   return response.data;
 };
 
-export const useFetchGraduationUsers = (params: FetchGraduationUsersParams) => {
-  return useQuery<GraduationUserSummaryPageResponse>({
-    queryKey: ['graduationUsers', params],
-    queryFn: () => fetchGraduationUsers(params),
-    placeholderData: keepPreviousData,
-  });
-};
+

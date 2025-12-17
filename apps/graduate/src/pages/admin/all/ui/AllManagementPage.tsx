@@ -1,14 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
+
+import type { GraduationUserStatus } from '~/shared/api/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers';
 
-import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser.ts';
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
 
-import {
-  useFetchGraduationUsers,
-  type GraduationUserStatus,
-} from '../api/fetchGraduationUsers';
 import { allManagementColumns } from '../constants/allManagementColumns.tsx';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
