@@ -1,7 +1,7 @@
 import { Header, Toolbar, Pagination, DataTable } from '~/shared/components';
 import { useTableState } from '~/shared/hooks';
 
-import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useGraduationUserSubmit';
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
 
 import { thesisColumns } from '../constants/thesisColumns';
 import { MOCK_ROWS } from '../mock/mockRows';

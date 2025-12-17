@@ -1,10 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 
-import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useGraduationUserSubmit';
+import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser.ts';
 
 import {
   useFetchGraduationUsers,
