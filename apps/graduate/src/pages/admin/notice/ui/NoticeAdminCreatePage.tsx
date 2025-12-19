@@ -4,8 +4,9 @@ import type { CheckboxChangeEvent, UploadProps } from 'antd';
 import { useState } from 'react';
 
 import { ROUTE } from '~/shared/constants';
+import { useNoticeDetail, useToast } from '~/shared/hooks';
 
-import { noticeFormData } from '../mock/notices';
+import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 import type { NoticeFormItem } from '../types/notices';
 
@@ -20,32 +21,36 @@ export default function NoticeAdminCreatePage({
 }: NoticeAdminCreatePageProps) {
   const navigate = useNavigate();
   const isEditMode = !!noticeId;
-  const data = noticeFormData;
-  const { createdAt, updatedAt } = data;
+  const { toast, confirm } = useToast();
 
-  const [formState, setFormState] = useState<NoticeFormItem>({
-    title: data?.title || '',
-    content: data?.content || '',
-    isPinned: data?.isPinned || false,
+  const { data: notice, isPending } = useNoticeDetail(noticeId ?? 0);
+
+  const { createdAt, updatedAt } = notice ?? {};
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<NoticeFormItem>({
+    defaultValues: {
+      title: '',
+      content: '',
+      isPinned: false,
+      uploadedFiles: [],
+    },
   });
-  const { title, content, isPinned } = formState;
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleCheckboxChange = (e: CheckboxChangeEvent) => {
-    setFormState(prev => ({
-      ...prev,
-      isPinned: e.target.checked,
-    }));
-  };
+  useEffect(() => {
+    if (notice && isEditMode) {
+      reset({
+        title: notice.title ?? '',
+        content: notice.content ?? '',
+        isPinned: notice.isPinned ?? false,
+        uploadedFiles: [],
+      });
+    }
+  }, [notice, isEditMode, reset]);
 
   const uploadProps: UploadProps = {
     name: 'file',
@@ -76,6 +81,21 @@ export default function NoticeAdminCreatePage({
   const handleGoBack = () => {
     navigate({ to: ROUTE.NOTICE });
   };
+
+  if (isEditMode && isPending) {
+    return (
+      <div className={style.container}>
+        <div className={style.backButtonWrapper}>
+          <Button onClick={handleGoBack} type='text' size='large'>
+            목록으로
+          </Button>
+        </div>
+        <div className={style.formCard}>
+          <p>로딩 중...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={style.container}>
