@@ -1,16 +1,15 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Checkbox, Divider, Input, Upload } from 'antd';
-import type { CheckboxChangeEvent, UploadProps } from 'antd';
-import { useState } from 'react';
+import type { UploadProps } from 'antd';
+import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
+import { TextEditor } from '~/shared/components';
 import { ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
 import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
-import type { NoticeFormItem } from '../types/notices';
-
-const { TextArea } = Input;
 
 interface NoticeAdminCreatePageProps {
   noticeId?: number;
@@ -117,69 +116,97 @@ export default function NoticeAdminCreatePage({
           </div>
         )}
 
-        <div className={style.formField}>
-          <label className={style.label} htmlFor='title'>
-            제목 <span className={style.required}>*</span>
-          </label>
-          <Input
-            id='title'
-            name='title'
-            value={title}
-            onChange={handleInputChange}
-            placeholder='제목을 입력하세요'
-            size='large'
-          />
-        </div>
-
-        <div className={style.formField}>
-          <Checkbox checked={isPinned} onChange={handleCheckboxChange}>
-            <span className={style.checkboxLabel}>상단 고정 (공지로 표시)</span>
-          </Checkbox>
-        </div>
-
-        <div className={style.formField}>
-          <label className={style.label} htmlFor='content'>
-            내용 <span className={style.required}>*</span>
-          </label>
-          <TextArea
-            id='content'
-            name='content'
-            value={content}
-            onChange={handleInputChange}
-            placeholder='내용을 입력하세요'
-            rows={15}
-            className={style.textarea}
-          />
-        </div>
-
-        <div className={style.uploadSection}>
-          <label className={style.label} htmlFor='upload'>
-            첨부파일
-          </label>
-          <Upload {...uploadProps} id='upload' name='upload'>
-            <Button>파일 선택</Button>
-          </Upload>
-        </div>
-
-        <Divider />
-
-        <div className={style.actionSection}>
-          <div className={style.leftActions}>
-            {isEditMode && (
-              <Button onClick={handleDelete} size='large'>
-                삭제
-              </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.formField}>
+            <label className={style.label}>
+              제목 <span className={style.required}>*</span>
+            </label>
+            <Controller
+              name='title'
+              control={control}
+              rules={{ required: '제목을 입력해주세요.' }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder='제목을 입력하세요'
+                  size='large'
+                  status={errors.title ? 'error' : ''}
+                />
+              )}
+            />
+            {errors.title && (
+              <p className={style.errorMessage}>{errors.title.message}</p>
             )}
           </div>
-          <div className={style.rightActions}>
-            <Button onClick={handleGoBack} size='large'>
-              취소
-            </Button>
-            <Button type='primary' onClick={handleSave} size='large'>
-              {isEditMode ? '수정' : '작성'}
-            </Button>
+
+          <div className={style.formField}>
+            <Controller
+              name='isPinned'
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Checkbox
+                  checked={value}
+                  onChange={e => onChange(e.target.checked)}
+                >
+                  <span className={style.checkboxLabel}>
+                    상단 고정 (공지로 표시)
+                  </span>
+                </Checkbox>
+              )}
+            />
           </div>
-        </div>
+
+          <div className={style.formField}>
+            <label className={style.label}>
+              내용 <span className={style.required}>*</span>
+            </label>
+            <Controller
+              name='content'
+              control={control}
+              rules={{ required: '내용을 입력해주세요.' }}
+              render={({ field: { value, onChange } }) => (
+                <TextEditor
+                  title=''
+                  value={value || ''}
+                  onChange={onChange}
+                  onSave={() => {}}
+                  isSaved={true}
+                  className={style.textarea}
+                />
+              )}
+            />
+            {errors.content && (
+              <p className={style.errorMessage}>{errors.content.message}</p>
+            )}
+          </div>
+
+          <div className={style.formField}>
+            <label className={style.label}>첨부파일</label>
+            <Upload {...uploadProps}>
+              <Button>파일 선택</Button>
+            </Upload>
+          </div>
+
+          <Divider />
+
+          <div className={style.actionSection}>
+            <div className={style.leftActions}>
+              {isEditMode && (
+                <Button onClick={handleDelete} size='large'>
+                  삭제
+                </Button>
+              )}
+            </div>
+            <div className={style.rightActions}>
+              <Button onClick={handleGoBack} size='large'>
+                취소
+              </Button>
+              <Button type='primary' htmlType='submit' size='large'>
+                {isEditMode ? '수정' : '작성'}
+              </Button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );
