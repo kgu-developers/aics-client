@@ -3,19 +3,28 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
+import { DATE_FORMAT } from '~/shared/constants';
+import { useToast } from '~/shared/hooks';
 
+import { SUBMISSION_TYPE_OPTIONS } from '../constant/schedule.ts';
+import { useUpdateSchedule } from '../hooks';
+import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleEditModal.css.ts';
-import type { ScheduleItem } from '../types/schedule.ts';
 
 interface ScheduleEditModalProps {
   scheduleData: ScheduleItem[];
-  setScheduleData: React.Dispatch<React.SetStateAction<ScheduleItem[]>>;
+}
+
+interface ScheduleFormData {
+  submissionType: string;
+  startDate: Dayjs;
+  endDate: Dayjs;
 }
 
 export default function ScheduleEditModal({
   scheduleData,
-  setScheduleData,
 }: ScheduleEditModalProps) {
+  const { mutate: updateSchedule, isPending } = useUpdateSchedule();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStage, setSelectedStage] = useState('신청접수');
   const [startDate, setStartDate] = useState(dayjs('2025-10-02'));
@@ -41,18 +50,26 @@ export default function ScheduleEditModal({
       toast.error('선택된 일정을 찾을 수 없습니다.');
       return;
     }
-    setScheduleData(
-      scheduleData.map(item =>
-        item.stage === selectedStage
-          ? {
-              ...item,
-              startDate: startDate.format('YYYY-MM-DD'),
-              endDate: endDate.format('YYYY-MM-DD'),
-            }
-          : item,
-      ),
+
+    updateSchedule(
+      {
+        scheduleId: selectedSchedule.id,
+        data: {
+          startDate: values.startDate,
+          endDate: values.endDate,
+        },
+      },
+      {
+        onSuccess: () => {
+          toast.success('일정이 수정되었습니다.');
+          setIsModalOpen(false);
+          reset();
+        },
+        onError: () => {
+          toast.error('일정 수정에 실패했습니다.');
+        },
+      },
     );
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -76,11 +93,12 @@ export default function ScheduleEditModal({
       <Modal
         title='졸업논문 일정 수정'
         open={isModalOpen}
-        onOk={handleSubmit}
+        onOk={handleSubmit(onSubmit)}
         onCancel={handleCancel}
         {...modalStyles('md')}
         okText='수정'
         cancelText='닫기'
+        confirmLoading={isPending}
         getContainer={false}
       >
         <div className={style.modalContent}>
