@@ -51,31 +51,26 @@ export default function NoticeAdminCreatePage({
     name: 'file',
     multiple: true,
     beforeUpload: file => {
-      window.alert(`${file.name} 파일이 선택되었습니다.`);
+      toast.info(`${file.name} 파일이 선택되었습니다.`);
       return false;
     },
   };
 
-  const handleSave = () => {
-    if (!title.trim()) {
-      window.alert('제목을 입력해주세요.');
-      return;
-    }
-    if (!content.trim()) {
-      window.alert('내용을 입력해주세요.');
-      return;
-    }
-    window.alert(
+  const onSubmit = () => {
+    toast.success(
       isEditMode ? '공지사항이 수정되었습니다.' : '공지사항이 작성되었습니다.',
     );
     handleGoBack();
   };
 
   const handleDelete = () => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
-      window.alert('공지사항이 삭제되었습니다.');
-      handleGoBack();
-    }
+    confirm({
+      title: '정말 삭제하시겠습니까?',
+      onOk: () => {
+        toast.success('공지사항이 삭제되었습니다.');
+        handleGoBack();
+      },
+    });
   };
 
   const handleGoBack = () => {

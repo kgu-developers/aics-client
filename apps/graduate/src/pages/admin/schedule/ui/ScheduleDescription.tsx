@@ -18,16 +18,33 @@ export default function ScheduleDescription() {
   }, [selectedIndex]);
 
   const handleSave = () => {
-    setIsSaved(true);
-    window.alert('설명이 저장되었습니다!');
+    updateContent(
+      {
+        submissionType: selectedType,
+        data: { content: tempDescription },
+      },
+      {
+        onSuccess: () => {
+          setIsSaved(true);
+          toast.success('설명이 저장되었습니다!');
+        },
+        onError: () => {
+          toast.error('설명 저장에 실패했습니다.');
+        },
+      },
+    );
   };
 
   const handleTabChange = (index: number) => {
     if (!isSaved) {
-      const confirmChange = window.confirm(
-        '저장되지 않은 변경 사항이 있습니다. 변경 사항을 저장하지 않고 이동하시겠습니까?',
-      );
-      if (!confirmChange) return;
+      confirm({
+        title: '저장되지 않은 변경 사항이 있습니다.',
+        content: '변경 사항을 저장하지 않고 이동하시겠습니까?',
+        onOk: () => {
+          setSelectedType(type);
+        },
+      });
+      return;
     }
     setSelectedIndex(index);
   };

@@ -32,9 +32,13 @@ export default function ScheduleEditModal({
 
   const handleEdit = () => setIsModalOpen(true);
 
-  const handleSubmit = () => {
-    if (endDate.isBefore(startDate)) {
-      window.alert('종료일이 시작일보다 빠릅니다.');
+  const onSubmit = (values: ScheduleFormData) => {
+    const selectedSchedule = scheduleData.find(
+      item => item.submissionType === values.submissionType,
+    );
+
+    if (!selectedSchedule) {
+      toast.error('선택된 일정을 찾을 수 없습니다.');
       return;
     }
     setScheduleData(
