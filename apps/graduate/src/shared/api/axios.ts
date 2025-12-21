@@ -32,6 +32,10 @@ interface MutationRequestConfig<TData = unknown> extends BaseRequestConfig {
   data?: TData;
 }
 
+interface DeleteRequestConfig<TData = unknown> extends BaseRequestConfig {
+  data?: TData;
+}
+
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
@@ -264,15 +268,16 @@ function createHttpMethods(instance: AxiosInstance) {
       }
     },
 
-    async del<TResponse = unknown>(
-      config: BaseRequestConfig,
+    async del<TResponse = unknown, TData = unknown>(
+      config: DeleteRequestConfig<TData>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, headers } = config;
+      const { request, data, headers } = config;
       try {
         const response = await instance.delete<
           TResponse,
           AxiosResponse<TResponse>
         >(request, {
+          data,
           headers,
         });
         return response;
@@ -340,15 +345,16 @@ async function post<TResponse = unknown, TData = unknown>(
   }
 }
 
-async function del<TResponse = unknown>(
-  config: BaseRequestConfig,
+async function del<TResponse = unknown, TData = unknown>(
+  config: DeleteRequestConfig<TData>,
 ): Promise<AxiosResponse<TResponse>> {
   const instance = selectInstanceByRequest(config.request);
-  const { request, headers } = config;
+  const { request, data, headers } = config;
   try {
     const response = await instance.delete<TResponse, AxiosResponse<TResponse>>(
       request,
       {
+        data,
         headers,
       },
     );

@@ -1,7 +1,16 @@
-import { useQueryClient } from '@tanstack/react-query';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { message } from 'antd';
 import { useState } from 'react';
 
+import { updateGraduationUsersBatchApprove } from '~/shared/api';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import {
+  APPROVE_ALERT,
+  APPROVE_EMPTY,
+  APPROVE_FAILED,
+  APPROVE_SUCCESS,
+} from '~/shared/components/Toolbar/toolbarTexts';
 import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers';
 
 import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
@@ -25,6 +34,10 @@ export default function ThesisAdminPage() {
 
   const { handleAddStudents } = useGraduationUserSubmit({
     onSuccess: resetAndRefetch,
+  });
+
+  const approveMutation = useMutation({
+    mutationFn: updateGraduationUsersBatchApprove,
   });
 
   const { data, isLoading } = useFetchGraduationUsers({
@@ -84,6 +97,24 @@ export default function ThesisAdminPage() {
     );
   };
 
+  const handleApproveSelected = async () => {
+    if (selectedIds.length === 0) {
+      message.warning(APPROVE_EMPTY);
+      return;
+    }
+    const shouldApprove = window.confirm(APPROVE_ALERT);
+    if (!shouldApprove) return;
+    try {
+      await approveMutation.mutateAsync(selectedIds);
+      message.success(APPROVE_SUCCESS);
+      await resetAndRefetch();
+    } catch (error) {
+      message.error(
+        error instanceof Error ? error.message : APPROVE_FAILED,
+      );
+    }
+  };
+
   return (
     <div className={style.root}>
       <div className={style.container}>
@@ -97,7 +128,7 @@ export default function ThesisAdminPage() {
             setPage(1);
           }}
           onDownload={() => {}}
-          onApprove={() => {}}
+          onApprove={handleApproveSelected}
           onAddStudents={handleAddStudents}
         />
 

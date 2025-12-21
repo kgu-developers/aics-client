@@ -11,6 +11,7 @@ import { STAGE_NAME_TO_MODE } from '../types/allManagement';
 
 import { vars } from '~/vars.css';
 
+
 export const getStageColumns = (setMode: (mode: Mode) => void) => [
   {
     title: HEADER_STAGE,

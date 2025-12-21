@@ -22,7 +22,6 @@ export const TYPE_CERTIFICATE = '자격증';
 export const TYPE_UNKNOWN = '미정';
 
 export const TITLE_ALL_MANAGEMENT = '졸업 대상 전체 관리';
-export const DELETE_ALERT = '삭제 기능은 추후 연결 예정입니다.';
 export const LOADING_TEXT = '불러오는 중...';
 
 export const TYPE_LABEL: Record<GraduationType, AllManagementRow['type']> = {

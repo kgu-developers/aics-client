@@ -1,16 +1,22 @@
-import { useQueryClient } from '@tanstack/react-query';
+
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { message } from 'antd';
 import { useState } from 'react';
 
-
+import {
+  removeGraduationUser,
+  removeGraduationUsersBatch,
+} from '~/shared/api';
 import type { GraduationUserStatus } from '~/shared/api/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import { DELETE_ALERT } from '~/shared/components/Toolbar/toolbarTexts';
 import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers';
 
 import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
-  DELETE_ALERT,
   LOADING_TEXT,
   STATUS_FINAL_NOT_SUBMITTED,
   STATUS_MID_NOT_SUBMITTED,
@@ -60,6 +66,16 @@ export default function AllManagementPage() {
     onSuccess: resetAndRefetch,
   });
 
+  const removeMutation = useMutation({
+    mutationFn: async (ids: number[]) => {
+      if (ids.length === 1) {
+        await removeGraduationUser(ids[0]);
+        return { deletedIds: ids };
+      }
+      return removeGraduationUsersBatch(ids);
+    },
+  });
+
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
     size: pageSize,
@@ -81,9 +97,19 @@ export default function AllManagementPage() {
       })
     : [];
 
-  const handleDeleteSelected = () => {
+  const handleDeleteSelected = async () => {
     if (selectedIds.length === 0) return;
-    alert(DELETE_ALERT);
+    const shouldDelete = window.confirm(DELETE_ALERT);
+    if (!shouldDelete) return;
+    try {
+      await removeMutation.mutateAsync(selectedIds);
+      message.success('선택한 학생을 삭제했습니다.');
+      await resetAndRefetch();
+    } catch (error) {
+      message.error(
+        error instanceof Error ? error.message : '삭제에 실패했습니다.',
+      );
+    }
   };
 
   const columns = allManagementColumns(() => {
