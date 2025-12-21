@@ -27,6 +27,12 @@ export const label = style({
   fontSize: vars.font.size.md,
 });
 
+export const errorMessage = style({
+  color: vars.colors.error,
+  fontSize: vars.font.size.sm,
+  marginTop: vars.spacing.xs,
+});
+
 export const fullWidthSelect = style({
   width: '100%',
 });

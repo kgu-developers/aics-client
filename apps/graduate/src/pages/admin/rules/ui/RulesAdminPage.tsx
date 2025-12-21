@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Header } from '~/shared/components';
 import { TextEditor } from '~/shared/components/TextEditor';
+import { useToast } from '~/shared/hooks';
 
 import { RULES_MOCK_CONTENT } from '../mock/rules';
 import * as style from '../styles/RulesAdminPage.css';
@@ -9,10 +10,11 @@ import * as style from '../styles/RulesAdminPage.css';
 export default function RulesAdminPage() {
   const [content, setContent] = useState<string>(RULES_MOCK_CONTENT);
   const [isSaved, setIsSaved] = useState<boolean>(true);
+  const { toast } = useToast();
 
   const handleSave = () => {
     setIsSaved(true);
-    window.alert('내용이 저장되었습니다!');
+    toast.success('내용이 저장되었습니다!');
   };
 
   return (

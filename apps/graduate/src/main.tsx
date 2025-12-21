@@ -1,6 +1,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
+import { App as AntApp } from 'antd';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -16,17 +17,19 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider
-        router={router}
-        context={{
-          auth: {
-            isAuthenticated,
-            isAdmin,
-            setIsAuthenticated,
-            setIsAdmin,
-          },
-        }}
-      />
+      <AntApp>
+        <RouterProvider
+          router={router}
+          context={{
+            auth: {
+              isAuthenticated,
+              isAdmin,
+              setIsAuthenticated,
+              setIsAdmin,
+            },
+          }}
+        />
+      </AntApp>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

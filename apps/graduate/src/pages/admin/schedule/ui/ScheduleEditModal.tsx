@@ -1,65 +1,104 @@
 import { Button, DatePicker, Modal, Select } from 'antd';
+import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import { modalStyles } from '~/shared/config';
+import { DATE_FORMAT } from '~/shared/constants';
+import { useToast } from '~/shared/hooks';
 
+import { SUBMISSION_TYPE_OPTIONS } from '../constant/schedule.ts';
+import { useUpdateSchedule } from '../hooks';
+import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleEditModal.css.ts';
-import type { ScheduleItem } from '../types/schedule.ts';
 
 interface ScheduleEditModalProps {
   scheduleData: ScheduleItem[];
-  setScheduleData: React.Dispatch<React.SetStateAction<ScheduleItem[]>>;
+}
+
+interface ScheduleFormData {
+  submissionType: string;
+  startDate: Dayjs;
+  endDate: Dayjs;
 }
 
 export default function ScheduleEditModal({
   scheduleData,
-  setScheduleData,
 }: ScheduleEditModalProps) {
+  const { mutate: updateSchedule, isPending } = useUpdateSchedule();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStage, setSelectedStage] = useState('신청접수');
-  const [startDate, setStartDate] = useState(dayjs('2025-10-02'));
-  const [endDate, setEndDate] = useState(dayjs('2025-10-16'));
+  const { toast } = useToast();
+  const scheduleOptions = SUBMISSION_TYPE_OPTIONS;
 
-  const stageOptions = [
-    { value: '신청접수', label: '신청접수' },
-    { value: '제안서', label: '제안서' },
-    { value: '중간보고서', label: '중간보고서' },
-    { value: '최종보고서', label: '최종보고서' },
-    { value: '최종 통과', label: '최종 통과' },
-    { value: '기타자격', label: '기타자격' },
-  ];
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<ScheduleFormData>({
+    defaultValues: {
+      submissionType: scheduleData[0]?.submissionType || '',
+      startDate: dayjs(scheduleData[0]?.startDate),
+      endDate: dayjs(scheduleData[0]?.endDate),
+    },
+  });
 
-  const handleEdit = () => setIsModalOpen(true);
+  const handleEdit = () => {
+    const selectedSchedule = scheduleData[0];
+    setValue('submissionType', selectedSchedule.submissionType);
+    setValue('startDate', dayjs(selectedSchedule.startDate));
+    setValue('endDate', dayjs(selectedSchedule.endDate));
+    setIsModalOpen(true);
+  };
 
-  const handleSubmit = () => {
-    if (endDate.isBefore(startDate)) {
-      window.alert('종료일이 시작일보다 빠릅니다.');
+  const onSubmit = (values: ScheduleFormData) => {
+    const selectedSchedule = scheduleData.find(
+      item => item.submissionType === values.submissionType,
+    );
+
+    if (!selectedSchedule) {
+      toast.error('선택된 일정을 찾을 수 없습니다.');
       return;
     }
-    setScheduleData(
-      scheduleData.map(item =>
-        item.stage === selectedStage
-          ? {
-              ...item,
-              startDate: startDate.format('YYYY-MM-DD'),
-              endDate: endDate.format('YYYY-MM-DD'),
-            }
-          : item,
-      ),
+
+    updateSchedule(
+      {
+        scheduleId: selectedSchedule.id,
+        data: {
+          startDate: values.startDate,
+          endDate: values.endDate,
+        },
+      },
+      {
+        onSuccess: () => {
+          toast.success('일정이 수정되었습니다.');
+          setIsModalOpen(false);
+          reset();
+        },
+        onError: () => {
+          toast.error('일정 수정에 실패했습니다.');
+        },
+      },
     );
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    reset();
   };
 
-  const handleStageChange = (stage: string) => {
-    setSelectedStage(stage);
-    const found = scheduleData.find(item => item.stage === stage);
-    setStartDate(found ? dayjs(found.startDate) : dayjs());
-    setEndDate(found ? dayjs(found.endDate) : dayjs());
+  const handleScheduleChange = (submissionType: string) => {
+    const found = scheduleData.find(
+      item => item.submissionType === submissionType,
+    );
+    if (found) {
+      setValue('submissionType', found.submissionType);
+      setValue('startDate', dayjs(found.startDate));
+      setValue('endDate', dayjs(found.endDate));
+    }
   };
 
   return (
@@ -72,56 +111,102 @@ export default function ScheduleEditModal({
       <Modal
         title='졸업논문 일정 수정'
         open={isModalOpen}
-        onOk={handleSubmit}
+        onOk={handleSubmit(onSubmit)}
         onCancel={handleCancel}
         {...modalStyles('md')}
         okText='수정'
         cancelText='닫기'
+        confirmLoading={isPending}
         getContainer={false}
       >
         <div className={style.modalContent}>
           <div className={style.formField}>
-            <label className={style.label} htmlFor='stage'>
-              변경할 일정
-            </label>
-            <Select
-              id='stage'
-              value={selectedStage}
-              onChange={handleStageChange}
-              options={stageOptions}
-              className={style.fullWidthSelect}
-              size='large'
+            <label>변경할 일정</label>
+            <Controller
+              name='submissionType'
+              control={control}
+              rules={{ required: '일정을 선택하세요' }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  onChange={value => {
+                    field.onChange(value);
+                    handleScheduleChange(value);
+                  }}
+                  options={scheduleData.map(schedule => ({
+                    value: schedule.submissionType,
+                    label:
+                      scheduleOptions.find(
+                        opt => opt.value === schedule.submissionType,
+                      )?.label ?? schedule.submissionType,
+                  }))}
+                  className={style.fullWidthSelect}
+                  size='large'
+                  status={errors.submissionType ? 'error' : ''}
+                />
+              )}
             />
+            {errors.submissionType && (
+              <p className={style.errorMessage}>
+                {errors.submissionType.message}
+              </p>
+            )}
           </div>
+
           <div className={style.formField}>
-            <label className={style.label} htmlFor='startDate'>
-              날짜
-            </label>
-            <DatePicker
-              id='startDate'
+            <label>시작 날짜</label>
+            <Controller
               name='startDate'
-              value={startDate}
-              onChange={date => date && setStartDate(date)}
-              className={style.fullWidthDatePicker}
-              size='large'
-              format='YYYY. MM. DD.'
-              placeholder='시작 날짜'
+              control={control}
+              rules={{ required: '시작 날짜를 선택하세요' }}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  className={style.fullWidthDatePicker}
+                  size='large'
+                  format={DATE_FORMAT.DISPLAY_DATE}
+                  placeholder='시작 날짜'
+                  status={errors.startDate ? 'error' : ''}
+                />
+              )}
             />
+            {errors.startDate && (
+              <p className={style.errorMessage}>{errors.startDate.message}</p>
+            )}
           </div>
+
           <div className={style.lastFormField}>
-            <label className={style.label} htmlFor='endDate'>
-              날짜
-            </label>
-            <DatePicker
-              id='endDate'
+            <label>종료 날짜</label>
+            <Controller
               name='endDate'
-              value={endDate}
-              onChange={date => date && setEndDate(date)}
-              className={style.fullWidthDatePicker}
-              size='large'
-              format='YYYY. MM. DD.'
-              placeholder='종료 날짜'
+              control={control}
+              rules={{
+                required: '종료 날짜를 선택하세요',
+                validate: value => {
+                  const startDate = watch('startDate');
+                  if (!value || !startDate) {
+                    return true;
+                  }
+                  if (value.isBefore(startDate)) {
+                    return '종료일이 시작일보다 빠를 수 없습니다.';
+                  }
+                  return true;
+                },
+              }}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  className={style.fullWidthDatePicker}
+                  size='large'
+                  format={DATE_FORMAT.DISPLAY_DATE}
+                  placeholder='종료 날짜'
+                  status={errors.endDate ? 'error' : ''}
+                />
+              )}
             />
+            {errors.endDate && (
+              <p className={style.errorMessage}>{errors.endDate.message}</p>
+            )}
           </div>
         </div>
       </Modal>
