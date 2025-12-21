@@ -8,24 +8,38 @@ import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers'
 
 import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
 
-import { allManagementColumns } from '../constants/allManagementColumns.tsx';
+import { allManagementColumns } from '../constants/allManagementColumns';
+import {
+  DELETE_ALERT,
+  LOADING_TEXT,
+  STATUS_FINAL_NOT_SUBMITTED,
+  STATUS_MID_NOT_SUBMITTED,
+  STATUS_NOT_SUBMITTED,
+  STATUS_SUBMITTED,
+  STATUS_SUBMITTED_APPROVED,
+  STATUS_UNKNOWN,
+  TITLE_ALL_MANAGEMENT,
+  TYPE_LABEL,
+  TYPE_UNKNOWN,
+} from '../constants/allManagementTexts';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import { handleDownload } from '../utils';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
 
-function formatStatus(status: GraduationUserStatus) {
+function formatStatus(status?: GraduationUserStatus | null) {
+  if (!status) return STATUS_UNKNOWN;
   if (status.type === 'CERTIFICATE') {
-    if (!status.submitted) return '미제출';
-    return status.approval ? '제출-승인' : '제출';
+    if (!status.submitted) return STATUS_NOT_SUBMITTED;
+    return status.approval ? STATUS_SUBMITTED_APPROVED : STATUS_SUBMITTED;
   }
 
-  if (!status.finalThesis.submitted) return '최종보고서-미제출';
-  if (!status.midThesis.submitted) return '중간보고서-미제출';
+  if (!status.finalThesis.submitted) return STATUS_FINAL_NOT_SUBMITTED;
+  if (!status.midThesis.submitted) return STATUS_MID_NOT_SUBMITTED;
   if (status.finalThesis.approval && status.midThesis.approval) {
-    return '제출-승인';
+    return STATUS_SUBMITTED_APPROVED;
   }
-  return '제출';
+  return STATUS_SUBMITTED;
 }
 
 export default function AllManagementPage() {
@@ -42,7 +56,7 @@ export default function AllManagementPage() {
     await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
   };
 
-  const { handleAddStudents } = useGraduationUserSubmit({
+  const { handleAddStudent, handleAddStudents } = useGraduationUserSubmit({
     onSuccess: resetAndRefetch,
   });
 
@@ -53,15 +67,24 @@ export default function AllManagementPage() {
   });
 
   const rows: AllManagementRow[] = data
-    ? data.contents.map((user, idx) => ({
-        id: user.id,
-        no: (page - 1) * pageSize + idx + 1,
-        studentId: user.studentId,
-        name: user.name,
-        type: user.graduationType === 'THESIS' ? '졸업 논문' : '자격증',
-        status: formatStatus(user.status),
-      }))
+    ? data.contents.map((user, idx) => {
+        const type = TYPE_LABEL[user.graduationType] ?? TYPE_UNKNOWN;
+
+        return {
+          id: user.id,
+          no: (page - 1) * pageSize + idx + 1,
+          studentId: user.studentId,
+          name: user.name,
+          type,
+          status: formatStatus(user.status),
+        };
+      })
     : [];
+
+  const handleDeleteSelected = () => {
+    if (selectedIds.length === 0) return;
+    alert(DELETE_ALERT);
+  };
 
   const columns = allManagementColumns(() => {
     setIsModalOpen(true);
@@ -91,7 +114,7 @@ export default function AllManagementPage() {
   return (
     <div className={style.root}>
       <div className={style.container}>
-        <Header title='졸업 대상자 전체 관리' />
+        <Header title={TITLE_ALL_MANAGEMENT} />
 
         <Toolbar
           selectedCount={selectedIds.length}
@@ -101,7 +124,9 @@ export default function AllManagementPage() {
             setPage(1);
           }}
           onApprove={() => {}}
+          onDeleteSelected={handleDeleteSelected}
           onDownload={() => handleDownload(selectedIds, rows)}
+          onAddStudent={handleAddStudent}
           onAddStudents={handleAddStudents}
           disabledApprove={true}
         />
@@ -114,7 +139,7 @@ export default function AllManagementPage() {
             onToggleAll={toggleAll}
             selectedIds={selectedIds}
             onToggleOne={toggleOne}
-            emptyText={isLoading ? '불러오는 중입니다...' : undefined}
+            emptyText={isLoading ? LOADING_TEXT : undefined}
           />
         </div>
         <UserDetailModal

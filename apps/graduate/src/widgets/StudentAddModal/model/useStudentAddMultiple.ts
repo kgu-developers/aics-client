@@ -45,7 +45,7 @@ export const useStudentAddMultiple = (open: boolean) => {
     } else if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
       result = await parseXlsx(file, PROFESSOR_NAME_TO_ID);
     } else {
-      message.warning('CSV \ub610\ub294 XLSX \ud30c\uc77c\ub9cc \uc5c5\ub85c\ub4dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.');
+      message.warning('CSV 또는 XLSX 파일만 업로드할 수 있습니다.');
       setRows([]);
       setInvalidRows([]);
       return false;
@@ -64,9 +64,9 @@ export const useStudentAddMultiple = (open: boolean) => {
       .join('\n');
 
     alert(
-      `${addedCount}\uba85\uc758 \ud559\uc0dd\uc744 \ucd94\uac00\ud588\uc2b5\ub2c8\ub2e4.\n` +
+      `${addedCount}명의 학생을 추가했습니다.\n` +
         (invalidRows.length > 0
-          ? `\ubb34\ud6a8 \ub370\uc774\ud130 ${invalidRows.length}\uac74:\n` + invalidMsg
+          ? `무효 데이터 ${invalidRows.length}건:\n` + invalidMsg
           : ''),
     );
   };

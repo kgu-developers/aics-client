@@ -12,7 +12,11 @@ type Props = {
   query: string;
   onQueryChange: (v: string) => void;
   onApprove: () => void;
+  onDeleteSelected?: () => void;
   onDownload?: () => void;
+  onAddStudent?: (
+    values: GraduationUserCreateRequest,
+  ) => void | Promise<void>;
   onAddStudents?: (rows: GraduationUserCreateRequest[]) => void | Promise<void>;
   disabledApprove?: boolean;
 };
@@ -22,7 +26,9 @@ export default function Toolbar({
   query,
   onQueryChange,
   onApprove,
+  onDeleteSelected,
   onDownload,
+  onAddStudent,
   onAddStudents,
   disabledApprove = false,
 }: Props) {
@@ -52,6 +58,16 @@ export default function Toolbar({
           {!disabledApprove && (
             <Button size='middle' htmlType='button' onClick={onApprove}>
               승인
+            </Button>
+          )}
+          {onDeleteSelected && (
+            <Button
+              size='middle'
+              htmlType='button'
+              onClick={onDeleteSelected}
+              disabled={selectedCount === 0}
+            >
+              삭제
             </Button>
           )}
           {onDownload && (
@@ -92,7 +108,11 @@ export default function Toolbar({
         onClose={() => setAddOpen(false)}
         onSubmit={async values => {
           try {
-            await onAddStudents?.([values]);
+            if (onAddStudent) {
+              await onAddStudent(values);
+            } else if (onAddStudents) {
+              await onAddStudents([values]);
+            }
             setAddOpen(false);
           } catch (error) {
             message.error(
@@ -104,7 +124,13 @@ export default function Toolbar({
         }}
         onSubmitMultiple={async rows => {
           try {
-            await onAddStudents?.(rows);
+            if (onAddStudents) {
+              await onAddStudents(rows);
+            } else if (onAddStudent) {
+              for (const row of rows) {
+                await onAddStudent(row);
+              }
+            }
             setAddOpen(false);
           } catch (error) {
             message.error(

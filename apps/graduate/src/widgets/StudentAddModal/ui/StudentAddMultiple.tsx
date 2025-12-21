@@ -86,7 +86,7 @@ export default function StudentAddMultiple({
           <Button>파일 선택</Button>
         </Upload>
         <Typography.Text type='secondary'>
-          {fileName || '\uc120\ud0dd\ub41c \ud30c\uc77c \uc5c6\uc74c'}
+          {fileName || '선택된 파일 없음'}
         </Typography.Text>
         <div style={{ flex: 1 }} />
         <Button

@@ -123,7 +123,7 @@ export const validateStudentRow = ({
     };
   }
   const mm = (m[2] as string).padStart(2, '0');
-  const graduationDate = `${m[1]}-${mm}-01`;
+  const graduationDate = `${m[1]}-${mm}`;
 
   return {
     valid: true,
@@ -138,4 +138,3 @@ export const validateStudentRow = ({
     },
   };
 };
-

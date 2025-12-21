@@ -1,7 +1,9 @@
 import { get } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
 
-export type GraduationType = 'THESIS' | 'CERTIFICATE';
+export type GraduationType = '미정' | '논문' | '자격증';
+
+export type GraduationTypeFilter = 'THESIS' | 'CERTIFICATE';
 
 export type CertificateStatus = {
   type: 'CERTIFICATE';
@@ -28,7 +30,7 @@ export type GraduationUserSummary = {
   name: string;
   graduationDate: string;
   graduationType: GraduationType;
-  status: GraduationUserStatus;
+  status?: GraduationUserStatus | null;
 };
 
 export type PageableResponse = {
@@ -48,7 +50,7 @@ export type FetchGraduationUsersParams = {
   page: number;
   size: number;
   name?: string;
-  graduationType?: GraduationType;
+  graduationType?: GraduationTypeFilter;
 };
 
 export const fetchGraduationUsers = async (
@@ -61,5 +63,3 @@ export const fetchGraduationUsers = async (
 
   return response.data;
 };
-
-

@@ -1,13 +1,16 @@
 
-import { Button, DatePicker, Form, Input, Select } from 'antd';
 import type { FormItemProps } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
+import type { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 
 import { PROFESSORS } from '~/shared/constants/professors';
 
 import { SINGLE_FIELD_TEXT } from '../model/constants';
-import type { GraduationUserCreateRequest } from '../types/studentAddModal';
-
+import {
+  CAPSTONE_COMPLETION_OPTIONS,
+  type GraduationUserCreateRequest,
+} from '../types/studentAddModal';
 
 type TextFieldConfig = {
   name: 'studentId' | 'name' | 'department';
@@ -40,6 +43,10 @@ const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
   },
 ];
 
+type FormValues = Omit<GraduationUserCreateRequest, 'graduationDate'> & {
+  graduationDate: Dayjs | null;
+};
+
 export default function StudentAddSingle({
   onSubmit,
   open,
@@ -47,25 +54,21 @@ export default function StudentAddSingle({
   onSubmit?: (payload: GraduationUserCreateRequest) => void | Promise<void>;
   open?: boolean;
 }) {
-  const [form] = Form.useForm<GraduationUserCreateRequest>();
+  const [form] = Form.useForm<FormValues>();
   const professorOptions = PROFESSORS.map(p => ({
     label: p.name,
-    value: p.id,
+    value: p.name,
   }));
-  const capstoneCompletion = [
-    { label: '이수', value: true },
-    { label: '미이수', value: false },
-  ];
 
-  const handleFinish = (v: GraduationUserCreateRequest) => {
-    
+  const handleFinish = (v: FormValues) => {
+    if (!v.graduationDate) return;
     const payload: GraduationUserCreateRequest = {
       studentId: v.studentId.trim(),
       name: v.name.trim(),
       advisorProfessor: v.advisorProfessor.trim(),
-      capstoneCompletion: v.capstoneCompletion === true,
+      capstoneCompletion: v.capstoneCompletion,
       department: v.department.trim(),
-      graduationDate: v.graduationDate,
+      graduationDate: v.graduationDate.format('YYYY-MM'),
     };
     onSubmit?.(payload);
     form.resetFields();
@@ -89,7 +92,7 @@ export default function StudentAddSingle({
       ))}
 
       <Form.Item
-        name='advisorId'
+        name='advisorProfessor'
         label={SINGLE_FIELD_TEXT.advisor.label}
         rules={[
           { required: true, message: SINGLE_FIELD_TEXT.advisor.required },
@@ -104,17 +107,17 @@ export default function StudentAddSingle({
       </Form.Item>
 
       <Form.Item
-        name='capstoneStatus'
+        name='capstoneCompletion'
         label={SINGLE_FIELD_TEXT.capstone.label}
         rules={[
           { required: true, message: SINGLE_FIELD_TEXT.capstone.required },
         ]}
       >
-        <Select options={capstoneCompletion} />
+        <Select options={CAPSTONE_COMPLETION_OPTIONS} />
       </Form.Item>
 
       <Form.Item
-        name='graduationMonth'
+        name='graduationDate'
         label={SINGLE_FIELD_TEXT.graduationMonth.label}
         rules={[
           {

@@ -23,7 +23,9 @@ export default function ThesisAdminPage() {
     await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
   };
 
-  const { handleAddStudents } = useGraduationUserSubmit({ onSuccess: resetAndRefetch });
+  const { handleAddStudents } = useGraduationUserSubmit({
+    onSuccess: resetAndRefetch,
+  });
 
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
@@ -34,15 +36,16 @@ export default function ThesisAdminPage() {
 
   const rows: ThesisRow[] = data
     ? data.contents.map((user, idx) => {
-        const thesis = user.status.type === 'THESIS' ? user.status : null;
+        const thesis = user.status?.type === 'THESIS' ? user.status : null;
         const status = thesis?.finalThesis.approval
           ? '승인'
           : thesis?.finalThesis.submitted
+            ? '검토중'
+            : '미제출';
+        const submissionStatus =
+          thesis?.midThesis.submitted && thesis?.finalThesis.submitted
             ? '제출'
             : '미제출';
-        const submissionStatus = thesis?.midThesis.submitted && thesis?.finalThesis.submitted
-          ? '제출'
-          : '미제출';
         const approved = thesis?.finalThesis.approval ? '승인' : '미승인';
 
         return {
@@ -63,13 +66,22 @@ export default function ThesisAdminPage() {
 
   const toggleAll = () => {
     const pageIds = rows.map(r => r.id);
-    const allChecked = pageIds.length > 0 && pageIds.every(id => selectedIds.includes(id));
-    setSelectedIds(prev => (allChecked ? prev.filter(id => !pageIds.includes(id)) : Array.from(new Set([...prev, ...pageIds]))));
+    const allChecked =
+      pageIds.length > 0 && pageIds.every(id => selectedIds.includes(id));
+    setSelectedIds(prev =>
+      allChecked
+        ? prev.filter(id => !pageIds.includes(id))
+        : Array.from(new Set([...prev, ...pageIds])),
+    );
   };
 
   const toggleOne = (id: string | number) => {
     const numericId = Number(id);
-    setSelectedIds(prev => (prev.includes(numericId) ? prev.filter(x => x !== numericId) : [...prev, numericId]));
+    setSelectedIds(prev =>
+      prev.includes(numericId)
+        ? prev.filter(x => x !== numericId)
+        : [...prev, numericId],
+    );
   };
 
   return (
@@ -84,9 +96,9 @@ export default function ThesisAdminPage() {
             setQuery(v);
             setPage(1);
           }}
+          onDownload={() => {}}
           onApprove={() => {}}
           onAddStudents={handleAddStudents}
-          disabledApprove={true}
         />
 
         <div className={style.card}>
@@ -97,7 +109,7 @@ export default function ThesisAdminPage() {
             onToggleAll={toggleAll}
             selectedIds={selectedIds}
             onToggleOne={toggleOne}
-            emptyText={isLoading ? '불러오는 중입니다...' : undefined}
+            emptyText={isLoading ? '불러오는 중...' : undefined}
           />
         </div>
         <Pagination

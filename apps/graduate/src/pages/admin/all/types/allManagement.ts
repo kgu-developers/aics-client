@@ -3,7 +3,7 @@ export type AllManagementRow = {
   no: number;
   studentId: string;
   name: string;
-  type: '자격증' | '졸업 논문';
+  type: '자격증' | '논문' | '미정';
   status: string;
 };
 

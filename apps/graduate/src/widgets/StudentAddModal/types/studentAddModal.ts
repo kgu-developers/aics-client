@@ -8,8 +8,8 @@ export type GraduationUserCreateRequest = {
 };
 
 export const CAPSTONE_COMPLETION_OPTIONS = [
-  { label: '??', value: true },
-  { label: '???', value: false },
+  { label: '이수', value: true },
+  { label: '미이수', value: false },
 ] as const;
 
 export type CapstoneCompletionOption =
