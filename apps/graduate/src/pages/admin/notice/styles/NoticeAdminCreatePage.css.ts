@@ -52,6 +52,12 @@ export const required = style({
   color: vars.colors.error,
 });
 
+export const errorMessage = style({
+  color: vars.colors.error,
+  fontSize: vars.font.size.sm,
+  marginTop: vars.spacing.xs,
+});
+
 export const checkboxLabel = style({
   fontWeight: vars.font.weight.medium,
 });

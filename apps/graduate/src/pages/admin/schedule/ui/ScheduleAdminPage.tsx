@@ -1,24 +1,28 @@
 import { Table } from 'antd';
 import type { ColumnType } from 'antd/es/table';
-import { useState } from 'react';
 
 import { Header } from '~/shared/components';
+import { useScheduleList } from '~/shared/hooks';
 
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';
-import { scheduleData } from '../mock/schedule';
+import {
+  getScheduleStatusLabel,
+  getSubmissionTypeLabel,
+} from '../constant/schedule.ts';
+import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleAdminPage.css.ts';
-import type { ScheduleItem } from '../types/schedule';
 
 export default function ScheduleSection() {
-  const [schedule, setSchedule] = useState<ScheduleItem[]>(scheduleData);
+  const { data: schedule, isLoading } = useScheduleList();
 
   const columns: ColumnType<ScheduleItem>[] = [
     {
       title: '단계',
-      dataIndex: 'stage',
-      key: 'stage',
+      dataIndex: 'submissionType',
+      key: 'submissionType',
       width: 150,
+      render: submissionType => getSubmissionTypeLabel(submissionType),
     },
     {
       title: '시작 일정',
@@ -36,7 +40,8 @@ export default function ScheduleSection() {
       title: '상태',
       dataIndex: 'status',
       key: 'status',
-      width: 100,
+      width: 200,
+      render: status => getScheduleStatusLabel(status),
     },
   ];
 
@@ -47,15 +52,13 @@ export default function ScheduleSection() {
       <Table
         columns={columns}
         dataSource={schedule}
+        loading={isLoading}
         pagination={false}
         bordered
         style={{ marginBottom: '24px' }}
       />
 
-      <ScheduleEditModal
-        scheduleData={schedule}
-        setScheduleData={setSchedule}
-      />
+      <ScheduleEditModal scheduleData={schedule ?? []} />
 
       <Header title='진행일정-상세' />
 

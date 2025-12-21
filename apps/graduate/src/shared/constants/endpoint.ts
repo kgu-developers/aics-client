@@ -1,3 +1,5 @@
+import type { SubmissionType } from '~/shared/types';
+
 export const API_URL =
   import.meta.env.VITE_API_URL || 'https://aics-api.ummdev.com';
 
@@ -9,11 +11,15 @@ export const API_ADMIN_URL =
 
 export type EndpointValue<T> = T extends string
   ? T
-  : T extends Record<string, unknown>
-    ? {
-        [K in keyof T]: EndpointValue<T[K]>;
-      }[keyof T]
-    : never;
+  : T extends (...args: any[]) => infer R
+    ? R extends string
+      ? R
+      : never
+    : T extends Record<string, unknown>
+      ? {
+          [K in keyof T]: EndpointValue<T[K]>;
+        }[keyof T]
+      : never;
 
 export type EndpointPath = EndpointValue<typeof END_POINT>;
 
@@ -31,8 +37,27 @@ export const END_POINT = {
   ADMIN: {
     GRADUATION_USERS: '/api/v1/admin/graduation-users',
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
+    SCHEDULE_CREATE: '/api/v1/admin/schedules',
+    SCHEDULE_DELETE: (scheduleId: number) =>
+      `/api/v1/admin/schedules/${scheduleId}`,
+    SCHEDULE_UPDATE: (scheduleId: number) =>
+      `/api/v1/admin/schedules/${scheduleId}`,
+    SCHEDULE_CONTENT_UPDATE: (submissionType: SubmissionType) =>
+      `/api/v1/admin/schedules/type/${submissionType}/content`,
+    NOTICE_CREATE: '/api/v1/admin/posts',
+    NOTICE_UPDATE: (noticeId: number) => `/api/v1/admin/posts/${noticeId}`,
+    NOTICE_DELETE: (noticeId: number) => `/api/v1/admin/posts/${noticeId}`,
+    NOTICE_TOGGLE_PINNED: (noticeId: number) =>
+      `/api/v1/admin/posts/${noticeId}/pinned`,
   },
   USER: {
     SIGNUP: '/api/v1/users/signup',
+    REFRESH: '/api/v1/auth/refresh',
+    SCHEDULE_LIST: '/api/v1/schedules',
+    SCHEDULE: (scheduleId: number) => `/api/v1/schedules/${scheduleId}`,
+    SCHEDULE_CONTENT: (submissionType: SubmissionType) =>
+      `/api/v1/schedules/type/${submissionType}`,
+    NOTICE_LIST: '/api/v1/posts',
+    NOTICE: (noticeId: number) => `/api/v1/posts/${noticeId}`,
   },
 } as const;
