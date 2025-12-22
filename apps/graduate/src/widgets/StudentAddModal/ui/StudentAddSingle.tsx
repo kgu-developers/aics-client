@@ -9,6 +9,7 @@ import { PROFESSORS } from '~/shared/constants/professors';
 import { SINGLE_FIELD_TEXT } from '../model/constants';
 import {
   CAPSTONE_COMPLETION_OPTIONS,
+  type CapstoneCompletionOption,
   type GraduationUserCreateRequest,
 } from '../types/studentAddModal';
 
@@ -43,7 +44,11 @@ const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
   },
 ];
 
-type FormValues = Omit<GraduationUserCreateRequest, 'graduationDate'> & {
+type FormValues = Omit<
+  GraduationUserCreateRequest,
+  'graduationDate' | 'capstoneCompletion'
+> & {
+  capstoneCompletion: CapstoneCompletionOption['value'];
   graduationDate: Dayjs | null;
 };
 
@@ -66,7 +71,7 @@ export default function StudentAddSingle({
       studentId: v.studentId.trim(),
       name: v.name.trim(),
       advisorProfessor: v.advisorProfessor.trim(),
-      capstoneCompletion: v.capstoneCompletion,
+      capstoneCompletion: v.capstoneCompletion === 'true',
       department: v.department.trim(),
       graduationDate: v.graduationDate.format('YYYY-MM'),
     };

@@ -2,13 +2,15 @@ import type { GraduationUserCreateRequest } from '~/shared/types';
 
 export type { GraduationUserCreateRequest };
 
-export const CAPSTONE_COMPLETION_OPTIONS = [
-  { label: '이수', value: true },
-  { label: '미이수', value: false },
-] as const;
+export type CapstoneCompletionOption = {
+  label: '이수' | '미이수';
+  value: 'true' | 'false';
+};
 
-export type CapstoneCompletionOption =
-  (typeof CAPSTONE_COMPLETION_OPTIONS)[number];
+export const CAPSTONE_COMPLETION_OPTIONS: CapstoneCompletionOption[] = [
+  { label: '이수', value: 'true' },
+  { label: '미이수', value: 'false' },
+];
 
 export type UploadRow = GraduationUserCreateRequest & { key: number };
 

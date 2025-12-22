@@ -13,10 +13,8 @@ import {
   useFetchGraduationUsers,
   useUpdateGraduationUsersBatchApprove,
 } from '~/shared/hooks';
+import { downloadGraduationUsersExcel } from '~/shared/utils';
 
-import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
-
-import { handleDownload } from '../../all/utils';
 import { certColumns } from '../constants/certColumns';
 import * as style from '../styles/CertificationAdminPage.css';
 import type { CertRow } from '../types/row';
@@ -31,10 +29,6 @@ export default function CertificationAdminPage() {
     setSelectedIds([]);
     setPage(1);
   };
-
-  const { submitBatch } = useSubmitGraduationUser({
-    onSuccess: resetSelection,
-  });
 
   const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
     onSuccess: resetSelection,
@@ -107,7 +101,7 @@ export default function CertificationAdminPage() {
 
   const handleDownloadExcel = async () => {
     try {
-      await handleDownload('CERTIFICATE');
+      await downloadGraduationUsersExcel('CERTIFICATE');
     } catch (error) {
       message.error(
         error instanceof Error ? error.message : '다운로드에 실패했습니다.',
@@ -129,7 +123,6 @@ export default function CertificationAdminPage() {
           }}
           onApprove={handleApproveSelected}
           onDownload={handleDownloadExcel}
-          onAddStudents={submitBatch}
         />
 
         <div className={style.card}>

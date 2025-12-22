@@ -9,8 +9,7 @@ import {
   useFetchGraduationUsers,
   useRemoveGraduationUsers,
 } from '~/shared/hooks';
-
-import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
+import { downloadGraduationUsersExcel } from '~/shared/utils';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
@@ -27,7 +26,6 @@ import {
 } from '../constants/allManagementTexts';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
-import { handleDownload } from '../utils';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
 
 function formatStatus(status?: GraduationUserStatus | null) {
@@ -56,10 +54,6 @@ export default function AllManagementPage() {
     setSelectedIds([]);
     setPage(1);
   };
-
-  const { submitSingle, submitBatch } = useSubmitGraduationUser({
-    onSuccess: resetSelection,
-  });
 
   const { removeGraduationUsers } = useRemoveGraduationUsers({
     onSuccess: resetSelection,
@@ -102,7 +96,7 @@ export default function AllManagementPage() {
 
   const handleDownloadExcel = async () => {
     try {
-      await handleDownload();
+      await downloadGraduationUsersExcel();
     } catch (error) {
       message.error(
         error instanceof Error ? error.message : '다운로드에 실패했습니다.',
@@ -150,8 +144,6 @@ export default function AllManagementPage() {
           onApprove={() => {}}
           onDeleteSelected={handleDeleteSelected}
           onDownload={handleDownloadExcel}
-          onAddStudent={submitSingle}
-          onAddStudents={submitBatch}
           disabledApprove={true}
         />
 

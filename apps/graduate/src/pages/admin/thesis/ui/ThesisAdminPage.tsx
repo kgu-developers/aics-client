@@ -13,10 +13,8 @@ import {
   useFetchGraduationUsers,
   useUpdateGraduationUsersBatchApprove,
 } from '~/shared/hooks';
+import { downloadGraduationUsersExcel } from '~/shared/utils';
 
-import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
-
-import { handleDownload } from '../../all/utils';
 import { thesisColumns } from '../constants/thesisColumns';
 import * as style from '../styles/ThesisAdminPage.css';
 import type { ThesisRow } from '../types/rows';
@@ -31,10 +29,6 @@ export default function ThesisAdminPage() {
     setSelectedIds([]);
     setPage(1);
   };
-
-  const { submitBatch } = useSubmitGraduationUser({
-    onSuccess: resetSelection,
-  });
 
   const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
     onSuccess: resetSelection,
@@ -116,7 +110,7 @@ export default function ThesisAdminPage() {
 
   const handleDownloadExcel = async () => {
     try {
-      await handleDownload('THESIS');
+      await downloadGraduationUsersExcel('THESIS');
     } catch (error) {
       message.error(
         error instanceof Error ? error.message : '다운로드에 실패했습니다.',
@@ -138,7 +132,6 @@ export default function ThesisAdminPage() {
           }}
           onDownload={handleDownloadExcel}
           onApprove={handleApproveSelected}
-          onAddStudents={submitBatch}
         />
 
         <div className={style.card}>
