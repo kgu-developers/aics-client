@@ -1,7 +1,6 @@
 import { post } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
-
-import type { GraduationUserCreateRequest } from '../types/studentAddModal';
+import type { GraduationUserCreateRequest } from '~/shared/types';
 
 export type SubmitGraduationUserResponse = {
   id: number;

@@ -1,19 +1,16 @@
 
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 import { useState } from 'react';
 
-import {
-  removeGraduationUser,
-  removeGraduationUsersBatch,
-} from '~/shared/api';
 import type { GraduationUserStatus } from '~/shared/api/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import { DELETE_ALERT } from '~/shared/components/Toolbar/toolbarTexts';
-import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers';
-
-import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
+import {
+  useFetchGraduationUsers,
+  useRemoveGraduationUsers,
+  useSubmitGraduationUser,
+} from '~/shared/hooks';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
@@ -49,31 +46,23 @@ function formatStatus(status?: GraduationUserStatus | null) {
 }
 
 export default function AllManagementPage() {
-  const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  const resetAndRefetch = async () => {
+  const resetSelection = () => {
     setSelectedIds([]);
     setPage(1);
-    await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
   };
 
-  const { handleAddStudent, handleAddStudents } = useGraduationUserSubmit({
-    onSuccess: resetAndRefetch,
+  const { submitSingle, submitBatch } = useSubmitGraduationUser({
+    onSuccess: resetSelection,
   });
 
-  const removeMutation = useMutation({
-    mutationFn: async (ids: number[]) => {
-      if (ids.length === 1) {
-        await removeGraduationUser(ids[0]);
-        return { deletedIds: ids };
-      }
-      return removeGraduationUsersBatch(ids);
-    },
+  const { removeGraduationUsers } = useRemoveGraduationUsers({
+    onSuccess: resetSelection,
   });
 
   const { data, isLoading } = useFetchGraduationUsers({
@@ -102,9 +91,8 @@ export default function AllManagementPage() {
     const shouldDelete = window.confirm(DELETE_ALERT);
     if (!shouldDelete) return;
     try {
-      await removeMutation.mutateAsync(selectedIds);
+      await removeGraduationUsers(selectedIds);
       message.success('선택한 학생을 삭제했습니다.');
-      await resetAndRefetch();
     } catch (error) {
       message.error(
         error instanceof Error ? error.message : '삭제에 실패했습니다.',
@@ -152,8 +140,8 @@ export default function AllManagementPage() {
           onApprove={() => {}}
           onDeleteSelected={handleDeleteSelected}
           onDownload={() => handleDownload(selectedIds, rows)}
-          onAddStudent={handleAddStudent}
-          onAddStudents={handleAddStudents}
+          onAddStudent={submitSingle}
+          onAddStudents={submitBatch}
           disabledApprove={true}
         />
 

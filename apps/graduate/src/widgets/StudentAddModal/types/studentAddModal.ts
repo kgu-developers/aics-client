@@ -1,11 +1,6 @@
-export type GraduationUserCreateRequest = {
-  studentId: string;
-  name: string;
-  advisorProfessor: string;
-  capstoneCompletion: boolean;
-  department: string;
-  graduationDate: string;
-};
+import type { GraduationUserCreateRequest } from '~/shared/types';
+
+export type { GraduationUserCreateRequest };
 
 export const CAPSTONE_COMPLETION_OPTIONS = [
   { label: '이수', value: true },

@@ -1,9 +1,9 @@
 import { Button, message } from 'antd';
 import { useState } from 'react';
 
+import type { GraduationUserCreateRequest } from '~/shared/types';
 
 import { StudentAddModal } from '~/widgets/StudentAddModal';
-import type { GraduationUserCreateRequest } from '~/widgets/StudentAddModal/types/studentAddModal';
 
 import * as style from './Toolbar.css';
 

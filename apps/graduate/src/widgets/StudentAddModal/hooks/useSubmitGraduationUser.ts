@@ -1,41 +1,53 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 
-import { submitGraduationUser } from '../api/submitGraduationUser';
-import { submitGraduationUsersBatch } from '../api/submitGraduationUsersBatch';
-import type { GraduationUserCreateRequest } from '../types/studentAddModal';
+import {
+  submitGraduationUser,
+  submitGraduationUsersBatch,
+} from '~/shared/api';
+import { KEYS } from '~/shared/constants';
+import type { GraduationUserCreateRequest } from '~/shared/types';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-export const useGraduationUserSubmit = ({ onSuccess }: Options = {}) => {
-  const singleMutation = useMutation({ mutationFn: submitGraduationUser });
-  const batchMutation = useMutation({ mutationFn: submitGraduationUsersBatch });
+export function useSubmitGraduationUser({ onSuccess }: Options = {}) {
+  const queryClient = useQueryClient();
 
-  const handleAddStudent = async (values: GraduationUserCreateRequest) => {
+  const singleMutation = useMutation({
+    mutationFn: submitGraduationUser,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: [KEYS.GRADUATION_USERS] }),
+  });
+
+  const batchMutation = useMutation({
+    mutationFn: submitGraduationUsersBatch,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: [KEYS.GRADUATION_USERS] }),
+  });
+
+  const submitSingle = async (values: GraduationUserCreateRequest) => {
     await singleMutation.mutateAsync(values);
-    message.success(' 한 명의 학생이 추가되었습니다.');
+    message.success('한 명의 학생이 추가되었습니다.');
     await onSuccess?.();
   };
 
-  const handleAddStudents = async (
-    rows: GraduationUserCreateRequest[],
-  ) => {
+  const submitBatch = async (rows: GraduationUserCreateRequest[]) => {
     if (!rows.length) {
       message.warning('추가할 학생이 없습니다.');
       return;
     }
 
     await batchMutation.mutateAsync({ graduationUsers: rows });
-    message.success('총 ' +`${rows.length}` + ' 명의 학생이 추가되었습니다.');
+    message.success(`총 ${rows.length}명의 학생이 추가되었습니다.`);
     await onSuccess?.();
   };
 
   return {
-    handleAddStudent,
-    handleAddStudents,
+    submitSingle,
+    submitBatch,
     singleMutation,
     batchMutation,
   };
-};
+}

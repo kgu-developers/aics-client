@@ -1,9 +1,7 @@
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 import { useState } from 'react';
 
-import { updateGraduationUsersBatchApprove } from '~/shared/api';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   APPROVE_ALERT,
@@ -11,33 +9,33 @@ import {
   APPROVE_FAILED,
   APPROVE_SUCCESS,
 } from '~/shared/components/Toolbar/toolbarTexts';
-import { useFetchGraduationUsers } from '~/shared/hooks/useFetchGraduationUsers';
-
-import { useGraduationUserSubmit } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
+import {
+  useFetchGraduationUsers,
+  useSubmitGraduationUser,
+  useUpdateGraduationUsersBatchApprove,
+} from '~/shared/hooks';
 
 import { certColumns } from '../constants/certColumns';
 import * as style from '../styles/CertificationAdminPage.css';
 import type { CertRow } from '../types/row';
 
 export default function CertificationAdminPage() {
-  const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  const resetAndRefetch = async () => {
+  const resetSelection = () => {
     setSelectedIds([]);
     setPage(1);
-    await queryClient.invalidateQueries({ queryKey: ['graduationUsers'] });
   };
 
-  const { handleAddStudents } = useGraduationUserSubmit({
-    onSuccess: resetAndRefetch,
+  const { submitBatch } = useSubmitGraduationUser({
+    onSuccess: resetSelection,
   });
 
-  const approveMutation = useMutation({
-    mutationFn: updateGraduationUsersBatchApprove,
+  const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
+    onSuccess: resetSelection,
   });
 
   const { data, isLoading } = useFetchGraduationUsers({
@@ -96,9 +94,8 @@ export default function CertificationAdminPage() {
     const shouldApprove = window.confirm(APPROVE_ALERT);
     if (!shouldApprove) return;
     try {
-      await approveMutation.mutateAsync(selectedIds);
+      await approveGraduationUsers(selectedIds);
       message.success(APPROVE_SUCCESS);
-      await resetAndRefetch();
     } catch (error) {
       message.error(
         error instanceof Error ? error.message : APPROVE_FAILED,
@@ -120,7 +117,7 @@ export default function CertificationAdminPage() {
           }}
           onApprove={handleApproveSelected}
           onDownload={() => {}}
-          onAddStudents={handleAddStudents}
+          onAddStudents={submitBatch}
         />
 
         <div className={style.card}>
