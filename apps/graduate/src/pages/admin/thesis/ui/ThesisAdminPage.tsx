@@ -1,6 +1,6 @@
-
 import { message } from 'antd';
 import { useState } from 'react';
+
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
@@ -11,10 +11,12 @@ import {
 } from '~/shared/components/Toolbar/toolbarTexts';
 import {
   useFetchGraduationUsers,
-  useSubmitGraduationUser,
   useUpdateGraduationUsersBatchApprove,
 } from '~/shared/hooks';
 
+import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
+
+import { handleDownload } from '../../all/utils';
 import { thesisColumns } from '../constants/thesisColumns';
 import * as style from '../styles/ThesisAdminPage.css';
 import type { ThesisRow } from '../types/rows';
@@ -112,6 +114,16 @@ export default function ThesisAdminPage() {
     }
   };
 
+  const handleDownloadExcel = async () => {
+    try {
+      await handleDownload('THESIS');
+    } catch (error) {
+      message.error(
+        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
+      );
+    }
+  };
+
   return (
     <div className={style.root}>
       <div className={style.container}>
@@ -124,7 +136,7 @@ export default function ThesisAdminPage() {
             setQuery(v);
             setPage(1);
           }}
-          onDownload={() => {}}
+          onDownload={handleDownloadExcel}
           onApprove={handleApproveSelected}
           onAddStudents={submitBatch}
         />

@@ -1,5 +1,6 @@
 import axios, {
   AxiosInstance,
+  type AxiosRequestConfig,
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
@@ -26,6 +27,7 @@ interface BaseRequestConfig {
 
 interface GetRequestConfig<TParams = unknown> extends BaseRequestConfig {
   params?: TParams;
+  responseType?: AxiosRequestConfig['responseType'];
 }
 
 interface MutationRequestConfig<TData = unknown> extends BaseRequestConfig {
@@ -220,11 +222,12 @@ function createHttpMethods(instance: AxiosInstance) {
     async get<TResponse = unknown, TParams = unknown>(
       config: GetRequestConfig<TParams>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, headers, params } = config;
+      const { request, headers, params, responseType } = config;
       try {
         const response = await instance.get<TResponse>(request, {
           params,
           headers,
+          responseType,
         });
         return response;
       } catch (error: unknown) {
@@ -314,11 +317,12 @@ async function get<TResponse = unknown, TParams = unknown>(
   config: GetRequestConfig<TParams>,
 ): Promise<AxiosResponse<TResponse>> {
   const instance = selectInstanceByRequest(config.request);
-  const { request, headers, params } = config;
+  const { request, headers, params, responseType } = config;
   try {
     const response = await instance.get<TResponse>(request, {
       params,
       headers,
+      responseType,
     });
     return response;
   } catch (error: unknown) {

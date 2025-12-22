@@ -1,37 +1,34 @@
-import downloadStudentDetailExcel from './downloadStudentDetailExcel';
+import { fetchGraduationUsersExcel } from '~/shared/api';
+import type { GraduationTypeFilter } from '~/shared/api/fetchGraduationUsers';
 
-import {
-  stageData,
-  userDetailData,
-} from '~/pages/admin/all/mock/allManagement';
-import type { AllManagementRow } from '~/pages/admin/all/types/allManagement';
+const DEFAULT_FILENAME = '졸업_대상자_목록.xlsx';
 
-export default function handleDownload(
-  selectedIds: (string | number)[],
-  filteredRows: AllManagementRow[],
-  filename = '학생 상세 정보.xlsx',
+const resolveFilename = (contentDisposition?: string) => {
+  if (!contentDisposition) return null;
+  const match =
+    /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(
+      contentDisposition,
+    );
+  const rawName = match?.[1] ?? match?.[2];
+  return rawName ? decodeURIComponent(rawName) : null;
+};
+
+export default async function handleDownload(
+  graduationType?: GraduationTypeFilter,
+  filename = DEFAULT_FILENAME,
 ) {
-  if (selectedIds.length === 0) {
-    alert('1명 이상 선택하세요.');
-    return;
-  }
+  const response = await fetchGraduationUsersExcel(
+    graduationType ? { graduationType } : undefined,
+  );
+  const contentDisposition = response.headers['content-disposition'];
+  const resolvedFilename = resolveFilename(contentDisposition) ?? filename;
 
-  const selectedRows = filteredRows.filter(row => selectedIds.includes(row.id));
-
-  if (selectedRows.length === 0) {
-    alert('선택된 항목을 찾을 수 없습니다.');
-    return;
-  }
-
-  const studentDetails = selectedRows.map(row => ({
-    userDetail: {
-      ...userDetailData,
-      studentId: row.studentId,
-      name: row.name,
-      type: row.type,
-    },
-    stageData: stageData,
-  }));
-
-  downloadStudentDetailExcel(studentDetails, filename);
+  const url = window.URL.createObjectURL(response.data);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = resolvedFilename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
 }

@@ -1,7 +1,6 @@
-
-
 import { message } from 'antd';
 import { useState } from 'react';
+
 
 import type { GraduationUserStatus } from '~/shared/api/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
@@ -9,8 +8,9 @@ import { DELETE_ALERT } from '~/shared/components/Toolbar/toolbarTexts';
 import {
   useFetchGraduationUsers,
   useRemoveGraduationUsers,
-  useSubmitGraduationUser,
 } from '~/shared/hooks';
+
+import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
@@ -100,6 +100,16 @@ export default function AllManagementPage() {
     }
   };
 
+  const handleDownloadExcel = async () => {
+    try {
+      await handleDownload();
+    } catch (error) {
+      message.error(
+        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
+      );
+    }
+  };
+
   const columns = allManagementColumns(() => {
     setIsModalOpen(true);
   });
@@ -139,7 +149,7 @@ export default function AllManagementPage() {
           }}
           onApprove={() => {}}
           onDeleteSelected={handleDeleteSelected}
-          onDownload={() => handleDownload(selectedIds, rows)}
+          onDownload={handleDownloadExcel}
           onAddStudent={submitSingle}
           onAddStudents={submitBatch}
           disabledApprove={true}

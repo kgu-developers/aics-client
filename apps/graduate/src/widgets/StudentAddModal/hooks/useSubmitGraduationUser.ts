@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 
+import { KEYS } from '~/shared/constants';
+import type { GraduationUserCreateRequest } from '~/shared/types';
+
 import {
   submitGraduationUser,
   submitGraduationUsersBatch,
-} from '~/shared/api';
-import { KEYS } from '~/shared/constants';
-import type { GraduationUserCreateRequest } from '~/shared/types';
+} from '~/widgets/StudentAddModal/api';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;

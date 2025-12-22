@@ -36,6 +36,7 @@ export const END_POINT = {
   },
   ADMIN: {
     GRADUATION_USERS: '/api/v1/admin/graduation-users',
+    GRADUATION_USERS_EXCEL: '/api/v1/admin/graduation-users/excel',
     GRADUATION_USER: (graduationUserId: number) =>
       `/api/v1/admin/graduation-users/${graduationUserId}`,
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',

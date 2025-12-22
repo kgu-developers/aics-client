@@ -1,6 +1,6 @@
-
 import { message } from 'antd';
 import { useState } from 'react';
+
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
@@ -11,10 +11,12 @@ import {
 } from '~/shared/components/Toolbar/toolbarTexts';
 import {
   useFetchGraduationUsers,
-  useSubmitGraduationUser,
   useUpdateGraduationUsersBatchApprove,
 } from '~/shared/hooks';
 
+import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
+
+import { handleDownload } from '../../all/utils';
 import { certColumns } from '../constants/certColumns';
 import * as style from '../styles/CertificationAdminPage.css';
 import type { CertRow } from '../types/row';
@@ -103,6 +105,16 @@ export default function CertificationAdminPage() {
     }
   };
 
+  const handleDownloadExcel = async () => {
+    try {
+      await handleDownload('CERTIFICATE');
+    } catch (error) {
+      message.error(
+        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
+      );
+    }
+  };
+
   return (
     <div className={style.root}>
       <div className={style.container}>
@@ -116,7 +128,7 @@ export default function CertificationAdminPage() {
             setPage(1);
           }}
           onApprove={handleApproveSelected}
-          onDownload={() => {}}
+          onDownload={handleDownloadExcel}
           onAddStudents={submitBatch}
         />
 
