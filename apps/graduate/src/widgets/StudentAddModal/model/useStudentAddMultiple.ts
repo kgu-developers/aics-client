@@ -1,10 +1,11 @@
-import { message } from 'antd';
-import { useEffect, useState } from 'react';
+import { App } from 'antd';
+import { createElement, useEffect, useState } from 'react';
 
 
 import { fetchAdminUsers, fetchGraduationUsers } from '~/shared/api';
 import { PROFESSORS } from '~/shared/constants/professors';
 
+import { MULTIPLE_UPLOAD_TEXT } from './constants';
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
 import type {
   InvalidRow,
@@ -14,8 +15,8 @@ import type {
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 const USER_PAGE_SIZE = 200;
 const GRADUATION_USERS_PAGE_SIZE = 200;
-const USER_NOT_FOUND_REASON = '유저 목록에 없는 학번입니다.';
-const GRADUATION_USER_DUPLICATED_REASON = '이미 등록된 학번입니다.';
+const USER_NOT_FOUND_REASON = MULTIPLE_UPLOAD_TEXT.userNotFound;
+const GRADUATION_USER_DUPLICATED_REASON = MULTIPLE_UPLOAD_TEXT.duplicatedUser;
 
 const filterUnknownUsers = async (rows: UploadRow[]) => {
   if (rows.length === 0) return { valid: [], invalid: [] };
@@ -113,6 +114,7 @@ const fetchExistingGraduationUserIds = async (studentIds: string[]) => {
 };
 
 export const useStudentAddMultiple = (open: boolean) => {
+  const { message, modal } = App.useApp();
   const [fileName, setFileName] = useState('');
   const [rows, setRows] = useState<UploadRow[]>([]);
   const [invalidRows, setInvalidRows] = useState<InvalidRow[]>([]);
@@ -145,7 +147,7 @@ export const useStudentAddMultiple = (open: boolean) => {
     } else if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
       result = await parseXlsx(file, PROFESSOR_NAME_TO_ID);
     } else {
-      message.warning('CSV 또는 XLSX 파일만 업로드할 수 있습니다.');
+      message.warning(MULTIPLE_UPLOAD_TEXT.unsupportedFile);
       setRows([]);
       setInvalidRows([]);
       return false;
@@ -159,9 +161,7 @@ export const useStudentAddMultiple = (open: boolean) => {
       nextValid = valid;
       nextInvalid = [...nextInvalid, ...invalid];
     } catch {
-      message.warning(
-        '유저 목록 확인에 실패했습니다. 등록 시 오류가 발생할 수 있습니다.',
-      );
+      message.warning(MULTIPLE_UPLOAD_TEXT.fetchUsersFailed);
     }
 
     try {
@@ -170,9 +170,7 @@ export const useStudentAddMultiple = (open: boolean) => {
       nextValid = valid;
       nextInvalid = [...nextInvalid, ...invalid];
     } catch {
-      message.warning(
-        '중복 학번 확인에 실패했습니다. 등록 시 오류가 발생할 수 있습니다.',
-      );
+      message.warning(MULTIPLE_UPLOAD_TEXT.fetchDuplicateFailed);
     }
 
     setRows(nextValid);
@@ -187,12 +185,23 @@ export const useStudentAddMultiple = (open: boolean) => {
       .map(r => `${r.name}[${r.studentId}] : ${r.reason}`)
       .join('\n');
 
-    alert(
-      `${addedCount}명의 학생을 추가했습니다.\n` +
-        (invalidRows.length > 0
-          ? `무효 데이터 ${invalidRows.length}건:\n` + invalidMsg
-          : ''),
-    );
+    const invalidSection =
+      invalidRows.length > 0
+        ? `${MULTIPLE_UPLOAD_TEXT.resultInvalid(invalidRows.length)}:\n${invalidMsg}`
+        : '';
+    const content = [
+      MULTIPLE_UPLOAD_TEXT.resultSuccess(addedCount),
+      invalidSection,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    modal.info({
+      title: MULTIPLE_UPLOAD_TEXT.resultTitle,
+      content: content
+        .split('\n')
+        .map((line, index) => createElement('div', { key: index }, line)),
+    });
   };
 
   return {
