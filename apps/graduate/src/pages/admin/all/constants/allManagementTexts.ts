@@ -1,4 +1,4 @@
-import type { GraduationType } from '~/shared/api/fetchGraduationUsers';
+import type { GraduationType } from '~/shared/api/student/fetchGraduationUsers';
 
 import type { AllManagementRow } from '../types/allManagement';
 

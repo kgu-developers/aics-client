@@ -1,5 +1,5 @@
 import { fetchGraduationUsersExcel } from '~/shared/api';
-import type { GraduationTypeFilter } from '~/shared/api/fetchGraduationUsers';
+import type { GraduationTypeFilter } from '~/shared/api/student/fetchGraduationUsers';
 
 const DEFAULT_FILENAME = '졸업_대상자_목록.xlsx';
 

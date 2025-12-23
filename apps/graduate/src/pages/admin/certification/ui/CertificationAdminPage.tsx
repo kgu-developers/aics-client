@@ -1,10 +1,9 @@
-import { message } from 'antd';
 import { useState } from 'react';
-
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   APPROVE_ALERT,
+  APPROVE_CONFIRM_TITLE,
   APPROVE_EMPTY,
   APPROVE_FAILED,
   APPROVE_SUCCESS,
@@ -12,6 +11,7 @@ import {
 import {
   useFetchGraduationUsers,
   useUpdateGraduationUsersBatchApprove,
+  useToast,
 } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
 
@@ -24,6 +24,7 @@ export default function CertificationAdminPage() {
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const { toast, confirm } = useToast();
 
   const resetSelection = () => {
     setSelectedIds([]);
@@ -82,28 +83,34 @@ export default function CertificationAdminPage() {
     );
   };
 
-  const handleApproveSelected = async () => {
+  const handleApproveSelected = () => {
     if (selectedIds.length === 0) {
-      message.warning(APPROVE_EMPTY);
+      toast.warning(APPROVE_EMPTY);
       return;
     }
-    const shouldApprove = window.confirm(APPROVE_ALERT);
-    if (!shouldApprove) return;
-    try {
-      await approveGraduationUsers(selectedIds);
-      message.success(APPROVE_SUCCESS);
-    } catch (error) {
-      message.error(
-        error instanceof Error ? error.message : APPROVE_FAILED,
-      );
-    }
+    confirm({
+      title: APPROVE_CONFIRM_TITLE,
+      content: APPROVE_ALERT,
+      okText: '승인',
+      cancelText: '취소',
+      onOk: async () => {
+        try {
+          await approveGraduationUsers(selectedIds);
+          toast.success(APPROVE_SUCCESS);
+        } catch (error) {
+          toast.error(
+            error instanceof Error ? error.message : APPROVE_FAILED,
+          );
+        }
+      },
+    });
   };
 
   const handleDownloadExcel = async () => {
     try {
       await downloadGraduationUsersExcel('CERTIFICATE');
     } catch (error) {
-      message.error(
+      toast.error(
         error instanceof Error ? error.message : '다운로드에 실패했습니다.',
       );
     }

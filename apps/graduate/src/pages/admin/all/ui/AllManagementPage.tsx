@@ -1,13 +1,15 @@
-import { message } from 'antd';
 import { useState } from 'react';
 
-
-import type { GraduationUserStatus } from '~/shared/api/fetchGraduationUsers';
+import type { GraduationUserStatus } from '~/shared/api/student/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
-import { DELETE_ALERT } from '~/shared/components/Toolbar/toolbarTexts';
+import {
+  DELETE_ALERT,
+  DELETE_CONFIRM_TITLE,
+} from '~/shared/components/Toolbar/toolbarTexts';
 import {
   useFetchGraduationUsers,
   useRemoveGraduationUsers,
+  useToast,
 } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
 
@@ -49,6 +51,7 @@ export default function AllManagementPage() {
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const { toast, confirm } = useToast();
 
   const resetSelection = () => {
     setSelectedIds([]);
@@ -80,25 +83,31 @@ export default function AllManagementPage() {
       })
     : [];
 
-  const handleDeleteSelected = async () => {
+  const handleDeleteSelected = () => {
     if (selectedIds.length === 0) return;
-    const shouldDelete = window.confirm(DELETE_ALERT);
-    if (!shouldDelete) return;
-    try {
-      await removeGraduationUsers(selectedIds);
-      message.success('선택한 학생을 삭제했습니다.');
-    } catch (error) {
-      message.error(
-        error instanceof Error ? error.message : '삭제에 실패했습니다.',
-      );
-    }
+    confirm({
+      title: DELETE_CONFIRM_TITLE,
+      content: DELETE_ALERT,
+      okText: '삭제',
+      cancelText: '취소',
+      onOk: async () => {
+        try {
+          await removeGraduationUsers(selectedIds);
+          toast.success('선택한 학생을 삭제했습니다.');
+        } catch (error) {
+          toast.error(
+            error instanceof Error ? error.message : '삭제에 실패했습니다.',
+          );
+        }
+      },
+    });
   };
 
   const handleDownloadExcel = async () => {
     try {
       await downloadGraduationUsersExcel();
     } catch (error) {
-      message.error(
+      toast.error(
         error instanceof Error ? error.message : '다운로드에 실패했습니다.',
       );
     }
