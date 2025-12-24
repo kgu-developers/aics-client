@@ -1,58 +1,170 @@
 import { useState } from 'react';
 
-import { Toolbar, Header, Pagination, DataTable } from '~/shared/components';
-import { useTableState } from '~/shared/hooks';
+import type { GraduationUserStatus } from '~/shared/api/student/fetchGraduationUsers';
+import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import {
+  DELETE_ALERT,
+  DELETE_CONFIRM_TITLE,
+} from '~/shared/components/Toolbar/toolbarTexts';
+import {
+  useFetchGraduationUsers,
+  useRemoveGraduationUsers,
+  useToast,
+} from '~/shared/hooks';
+import { downloadGraduationUsersExcel } from '~/shared/utils';
 
-import { allManagementColumns } from '../constants/allManagementColumns.tsx';
-import { MOCK_ROWS } from '../mock/allManagement';
+import { allManagementColumns } from '../constants/allManagementColumns';
+import {
+  LOADING_TEXT,
+  STATUS_FINAL_NOT_SUBMITTED,
+  STATUS_MID_NOT_SUBMITTED,
+  STATUS_NOT_SUBMITTED,
+  STATUS_SUBMITTED,
+  STATUS_SUBMITTED_APPROVED,
+  STATUS_UNKNOWN,
+  TITLE_ALL_MANAGEMENT,
+  TYPE_LABEL,
+  TYPE_UNKNOWN,
+} from '../constants/allManagementTexts';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import UserDetailModal from './UserDetailModal/UserDetailModal';
 
-import { handleDownload } from '~/pages/admin/all/utils';
+function formatStatus(status?: GraduationUserStatus | null) {
+  if (!status) return STATUS_UNKNOWN;
+  if (status.type === 'CERTIFICATE') {
+    if (!status.submitted) return STATUS_NOT_SUBMITTED;
+    return status.approval ? STATUS_SUBMITTED_APPROVED : STATUS_SUBMITTED;
+  }
+
+  if (!status.finalThesis.submitted) return STATUS_FINAL_NOT_SUBMITTED;
+  if (!status.midThesis.submitted) return STATUS_MID_NOT_SUBMITTED;
+  if (status.finalThesis.approval && status.midThesis.approval) {
+    return STATUS_SUBMITTED_APPROVED;
+  }
+  return STATUS_SUBMITTED;
+}
 
 export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [query, setQuery] = useState('');
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const { toast, confirm } = useToast();
 
-  // const [selectedId, setSelectedId] = useState<string>('');
-  const onNameClick = () => {
-    setIsModalOpen(true);
+  const resetSelection = () => {
+    setSelectedIds([]);
+    setPage(1);
   };
 
-  const columns = allManagementColumns(onNameClick);
-
-  const st = useTableState<AllManagementRow>(MOCK_ROWS, r => r.id, {
-    pageSize: 10,
-    keys: ['studentId', 'name', 'type', 'status'],
+  const { removeGraduationUsers } = useRemoveGraduationUsers({
+    onSuccess: resetSelection,
   });
+
+  const { data, isLoading } = useFetchGraduationUsers({
+    page: page - 1,
+    size: pageSize,
+    name: query || undefined,
+  });
+
+  const rows: AllManagementRow[] = data
+    ? data.contents.map((user, idx) => {
+        const type = TYPE_LABEL[user.graduationType] ?? TYPE_UNKNOWN;
+
+        return {
+          id: user.id,
+          no: (page - 1) * pageSize + idx + 1,
+          studentId: user.studentId,
+          name: user.name,
+          type,
+          status: formatStatus(user.status),
+        };
+      })
+    : [];
+
+  const handleDeleteSelected = () => {
+    if (selectedIds.length === 0) return;
+    confirm({
+      title: DELETE_CONFIRM_TITLE,
+      content: DELETE_ALERT,
+      okText: '삭제',
+      cancelText: '취소',
+      onOk: async () => {
+        try {
+          await removeGraduationUsers(selectedIds);
+          toast.success('선택한 학생을 삭제했습니다.');
+        } catch (error) {
+          toast.error(
+            error instanceof Error ? error.message : '삭제에 실패했습니다.',
+          );
+        }
+      },
+    });
+  };
+
+  const handleDownloadExcel = async () => {
+    try {
+      await downloadGraduationUsersExcel();
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
+      );
+    }
+  };
+
+  const columns = allManagementColumns(() => {
+    setIsModalOpen(true);
+  });
+  const totalItems = data?.pageable.totalElements ?? 0;
+
+  const toggleAll = () => {
+    const pageIds = rows.map(r => r.id);
+    const allChecked =
+      pageIds.length > 0 && pageIds.every(id => selectedIds.includes(id));
+    setSelectedIds(prev =>
+      allChecked
+        ? prev.filter(id => !pageIds.includes(id))
+        : Array.from(new Set([...prev, ...pageIds])),
+    );
+  };
+
+  const toggleOne = (id: string | number) => {
+    const numericId = Number(id);
+    setSelectedIds(prev =>
+      prev.includes(numericId)
+        ? prev.filter(x => x !== numericId)
+        : [...prev, numericId],
+    );
+  };
 
   return (
     <div className={style.root}>
       <div className={style.container}>
-        <Header title='대상자 전체 관리' />
+        <Header title={TITLE_ALL_MANAGEMENT} />
 
         <Toolbar
-          selectedCount={st.selected.length}
-          query={st.query}
+          selectedCount={selectedIds.length}
+          query={query}
           onQueryChange={v => {
-            st.setQuery(v);
-            st.resetToFirstPage();
+            setQuery(v);
+            setPage(1);
           }}
           onApprove={() => {}}
-          onDownload={() => handleDownload(st.selected, st.filtered)}
-          onAddStudent={() => {}}
+          onDeleteSelected={handleDeleteSelected}
+          onDownload={handleDownloadExcel}
           disabledApprove={true}
         />
 
         <div className={style.card}>
           <DataTable<AllManagementRow>
-            rows={st.pageRows}
+            rows={rows}
             getRowId={r => r.id}
             columns={columns}
-            allChecked={st.allChecked}
-            onToggleAll={st.toggleAll}
-            selectedIds={st.selected}
-            onToggleOne={id => st.toggleOne(id as number)}
+            onToggleAll={toggleAll}
+            selectedIds={selectedIds}
+            onToggleOne={toggleOne}
+            emptyText={isLoading ? LOADING_TEXT : undefined}
           />
         </div>
         <UserDetailModal
@@ -60,11 +172,14 @@ export default function AllManagementPage() {
           setIsModalOpen={setIsModalOpen}
         />
         <Pagination
-          page={st.page}
-          pageSize={st.pageSize}
-          totalItems={st.filtered.length}
-          onGoto={st.setPage}
-          onPageSizeChange={size => st.setPageSize(size)}
+          page={page}
+          pageSize={pageSize}
+          totalItems={totalItems}
+          onGoto={setPage}
+          onPageSizeChange={size => {
+            setPageSize(size);
+            setPage(1);
+          }}
         />
       </div>
     </div>

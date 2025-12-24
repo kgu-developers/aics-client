@@ -1,32 +1,28 @@
-export type CapstoneStatus = 'PASSED' | 'FAILED';
-export type ProfessorNameToId = Record<string, number>;
+import type { GraduationUserCreateRequest } from '~/shared/types';
 
-export type SingleSubmitPayload = {
-  studentNo: string;
-  name: string;
-  advisorId: number;
-  capstoneStatus: CapstoneStatus;
-  graduationMonth: string;
-  department: string;
+export type { GraduationUserCreateRequest };
+
+export type CapstoneCompletionOption = {
+  label: '이수' | '미이수';
+  value: 'true' | 'false';
 };
 
-export type MultipleUploadRow = {
-  key: number;
-  studentNo: string;
-  name: string;
-  advisorId: number | null;
-  capstoneStatus: CapstoneStatus | null;
-  graduationMonth: string | null;
-  department: string | null;
-};
+export const CAPSTONE_COMPLETION_OPTIONS: CapstoneCompletionOption[] = [
+  { label: '이수', value: 'true' },
+  { label: '미이수', value: 'false' },
+];
+
+export type UploadRow = GraduationUserCreateRequest & { key: number };
 
 export type InvalidRow = {
-  studentNo: string;
+  studentId: string;
   name: string;
   reason: string;
 };
 
 export type ParseResult = {
-  valid: MultipleUploadRow[];
+  valid: UploadRow[];
   invalid: InvalidRow[];
 };
+
+export type ProfessorNameToId = Record<string, number>;

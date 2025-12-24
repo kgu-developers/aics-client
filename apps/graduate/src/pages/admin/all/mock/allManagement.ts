@@ -4,24 +4,17 @@ import type {
   UserDetail,
 } from '../types/allManagement';
 
+const NAMES = [
+  '홍길동'
+];
+
 export const MOCK_ROWS: AllManagementRow[] = Array.from({ length: 88 }).map(
   (_, i) => ({
     id: i + 1,
     no: i + 1,
     studentId: `${20190000 + (i % 30)}`,
-    name: [
-      '서진규',
-      '이은신',
-      '이여웅',
-      '아이',
-      '이도',
-      '한태',
-      '김현수',
-      '최용환',
-      '곽수',
-      '최압',
-    ][i % 10],
-    type: i % 2 === 0 ? '자격증' : '졸업 논문',
+    name: NAMES[i % NAMES.length],
+    type: i % 2 === 0 ? '자격증' : '논문',
     status: [
       '제출',
       '미제출',
@@ -38,7 +31,7 @@ export const MOCK_ROWS: AllManagementRow[] = Array.from({ length: 88 }).map(
 export const userDetailData: UserDetail = {
   studentId: '202211461',
   period: '2028-02',
-  name: '서진규',
+  name: '서지국',
   professor: '김교수',
   department: '컴퓨터공학과',
   delay: 0,

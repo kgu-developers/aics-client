@@ -1,18 +1,31 @@
 import type { Column } from '~/shared/components/DataTable/DataTable';
 
+import {
+  HEADER_NAME,
+  HEADER_NO,
+  HEADER_STATUS,
+  HEADER_STUDENT_ID,
+  HEADER_TYPE,
+} from './allManagementTexts';
 import type { AllManagementRow } from '../types/allManagement';
 
 import { vars } from '~/vars.css';
+
 
 export const allManagementColumns = (
   onNameClick: (row: AllManagementRow) => void,
 ): ReadonlyArray<Column<AllManagementRow>> =>
   [
-    { key: 'no', header: '번호', width: 56, cell: r => r.no },
-    { key: 'studentId', header: '학번', width: 100, cell: r => r.studentId },
+    { key: 'no', header: HEADER_NO, width: 56, cell: r => r.no },
+    {
+      key: 'studentId',
+      header: HEADER_STUDENT_ID,
+      width: 100,
+      cell: r => r.studentId,
+    },
     {
       key: 'name',
-      header: '이름',
+      header: HEADER_NAME,
       width: 120,
       cell: r => (
         <button
@@ -32,6 +45,6 @@ export const allManagementColumns = (
         </button>
       ),
     },
-    { key: 'type', header: '졸업 유형', width: 120, cell: r => r.type },
-    { key: 'status', header: '상태', width: 140, cell: r => r.status },
+    { key: 'type', header: HEADER_TYPE, width: 120, cell: r => r.type },
+    { key: 'status', header: HEADER_STATUS, width: 140, cell: r => r.status },
   ] as const;

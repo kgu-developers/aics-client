@@ -1,10 +1,10 @@
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 
-import type { MultipleUploadRow } from '../types/studentAddModal';
+import type { UploadRow } from '../types/studentAddModal';
 
 type Props = {
-  rows: MultipleUploadRow[];
+  rows: UploadRow[];
   pageSize?: number;
   current: number;
   onPageChange: (page: number) => void;
@@ -12,11 +12,11 @@ type Props = {
   onSelectionChange: (keys: React.Key[]) => void;
 };
 
-type Columns = NonNullable<TableProps<MultipleUploadRow>['columns']>;
+type Columns = NonNullable<TableProps<UploadRow>['columns']>;
 
 const BASE_COLUMNS: Columns = [
   { title: 'No', dataIndex: 'key', width: 60 },
-  { title: '학번', dataIndex: 'studentNo' },
+  { title: '학번', dataIndex: 'studentId' },
   { title: '이름', dataIndex: 'name' },
 ];
 
@@ -31,7 +31,7 @@ export default function PreviewTable({
   const columns: Columns = [
     {
       ...BASE_COLUMNS[0],
-      render: (_: unknown, __: MultipleUploadRow, idx: number) =>
+      render: (_: unknown, __: UploadRow, idx: number) =>
         (current - 1) * pageSize + idx + 1,
     },
     BASE_COLUMNS[1],
@@ -44,7 +44,7 @@ export default function PreviewTable({
   };
 
   return (
-    <Table<MultipleUploadRow>
+    <Table<UploadRow>
       size='small'
       dataSource={rows}
       columns={columns}

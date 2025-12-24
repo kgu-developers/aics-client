@@ -1,18 +1,9 @@
-import type { CapstoneStatus } from '../types/studentAddModal';
-
-export const CAPSTONE_MAP: Record<string, CapstoneStatus> = {
-  이수: 'PASSED',
-  미이수: 'FAILED',
-  passed: 'PASSED',
-  failed: 'FAILED',
-};
-
 export const HEADER_NAMES = {
-  studentNo: '학번',
+  studentId: '학번',
   name: '이름',
-  advisor: '지도교수',
-  capstone: '캡스톤 이수 여부',
-  graduation: '졸업 예정',
+  advisorProfessor: '지도교수',
+  capstoneCompletion: '캡스톤 이수 여부',
+  graduationDate: '졸업 예정',
   department: '학과',
 } as const;
 
@@ -30,12 +21,6 @@ export const MODE_OPTIONS = [
 ] as const;
 
 export type StudentAddMode = (typeof MODE_OPTIONS)[number]['key'];
-
-export const CAPSTONE_OPTIONS: Array<{ label: string; value: CapstoneStatus }> =
-  [
-    { label: '이수', value: 'PASSED' },
-    { label: '미이수', value: 'FAILED' },
-  ];
 
 export const SINGLE_FIELD_TEXT = {
   studentNo: {
@@ -70,3 +55,16 @@ export const SINGLE_FIELD_TEXT = {
   },
   submitLabel: '입력',
 };
+
+export const MULTIPLE_UPLOAD_TEXT = {
+  userNotFound: '유저 목록에 없는 학번입니다.',
+  duplicatedUser: '이미 등록된 학번입니다.',
+  unsupportedFile: 'CSV 또는 XLSX 파일만 업로드할 수 있습니다.',
+  fetchUsersFailed:
+    '유저 목록 확인에 실패했습니다. 등록 시 오류가 발생할 수 있습니다.',
+  fetchDuplicateFailed:
+    '중복 학번 확인에 실패했습니다. 등록 시 오류가 발생할 수 있습니다.',
+  resultTitle: '학생 추가 결과',
+  resultSuccess: (count: number) => `${count}명의 학생을 추가했습니다.`,
+  resultInvalid: (count: number) => `무효 데이터 ${count}건`,
+} as const;

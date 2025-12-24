@@ -1,10 +1,10 @@
-﻿import { HEADER_NAMES } from './constants';
+import { HEADER_NAMES } from './constants';
 import { validateStudentRow } from './validator';
 import type {
-  MultipleUploadRow,
   InvalidRow,
   ParseResult,
   ProfessorNameToId,
+  UploadRow,
 } from '../types/studentAddModal';
 
 export function createProfessorMap(
@@ -32,11 +32,11 @@ const getHeaderIndices = (header: string[]) => {
   return {
     start: hasHeader ? 1 : 0,
     indices: {
-      studentNo: idx(HEADER_NAMES.studentNo, 0),
+      studentId: idx(HEADER_NAMES.studentId, 0),
       name: idx(HEADER_NAMES.name, 1),
-      advisor: idx(HEADER_NAMES.advisor, 2),
-      capstone: idx(HEADER_NAMES.capstone, 3),
-      grad: idx(HEADER_NAMES.graduation, 4),
+      advisorProfessor: idx(HEADER_NAMES.advisorProfessor, 2),
+      capstone: idx(HEADER_NAMES.capstoneCompletion, 3),
+      grad: idx(HEADER_NAMES.graduationDate, 4),
       dept: idx(HEADER_NAMES.department, 5),
     },
   };
@@ -53,9 +53,9 @@ export function parseCsv(
   const header = lines[0].split(',').map(h => h.trim());
   const { start, indices } = getHeaderIndices(header);
 
-  const valid: MultipleUploadRow[] = [];
+  const valid: UploadRow[] = [];
   const invalid: InvalidRow[] = [];
-  const seenStudentNos = new Set<string>();
+  const seenStudentIds = new Set<string>();
 
   for (let i = start; i < lines.length; i++) {
     const cols = lines[i].split(',');
@@ -63,14 +63,14 @@ export function parseCsv(
 
     const result = validateStudentRow({
       key: i,
-      rawStudentNo: (cols[indices.studentNo] || '').trim(),
+      rawStudentId: (cols[indices.studentId] || '').trim(),
       rawName: (cols[indices.name] || '').trim(),
-      professorName: (cols[indices.advisor] || '').trim(),
+      professorName: (cols[indices.advisorProfessor] || '').trim(),
       capstoneText: (cols[indices.capstone] || '').trim().toLowerCase(),
       grad: (cols[indices.grad] || '').trim(),
       dept: (cols[indices.dept] || '').trim(),
       professorNameToId,
-      seenStudentNos,
+      seenStudentIds,
     });
 
     if (result.valid) valid.push(result.row);
@@ -100,9 +100,9 @@ export async function parseXlsx(
     );
     const { start, indices } = getHeaderIndices(header);
 
-    const valid: MultipleUploadRow[] = [];
+    const valid: UploadRow[] = [];
     const invalid: InvalidRow[] = [];
-    const seenStudentNos = new Set<string>();
+    const seenStudentIds = new Set<string>();
 
     for (let i = start; i < rowsArr.length; i++) {
       const row = rowsArr[i] || [];
@@ -115,14 +115,14 @@ export async function parseXlsx(
 
       const result = validateStudentRow({
         key: i,
-        rawStudentNo: getCell(indices.studentNo),
+        rawStudentId: getCell(indices.studentId),
         rawName: getCell(indices.name),
-        professorName: getCell(indices.advisor),
+        professorName: getCell(indices.advisorProfessor),
         capstoneText: getCell(indices.capstone).toLowerCase(),
         grad: getCell(indices.grad),
         dept: getCell(indices.dept),
         professorNameToId,
-        seenStudentNos,
+        seenStudentIds,
       });
 
       if (result.valid) valid.push(result.row);
