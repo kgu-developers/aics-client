@@ -8,7 +8,7 @@ export const SUBMISSION_TYPE_OPTIONS = [
   { value: 'SUBMITTED', label: '신청접수' },
   { value: 'MIDTHESIS', label: '중간보고서' },
   { value: 'FINALTHESIS', label: '최종보고서' },
-  { value: 'CERTIFICATE', label: '제안서' },
+  { value: 'CERTIFICATE', label: '자격증' },
   { value: 'APPROVED', label: '최종 통과' },
   { value: 'OTHER', label: '기타자격' },
 ] as const;
