@@ -1,8 +1,9 @@
 import { Descriptions, Modal, Spin, Table } from 'antd';
 
-import { useStudentDetail } from '~/features/studentDetail';
 import { Header } from '~/shared/components';
 import { Container } from '~/shared/components/Container';
+
+import { useStudentDetail } from '~/features/studentDetail';
 
 import type { PeriodData, StageData } from '../types/allManagement';
 import {
