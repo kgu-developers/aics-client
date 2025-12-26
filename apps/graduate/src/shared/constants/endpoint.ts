@@ -40,7 +40,8 @@ export const END_POINT = {
     GRADUATION_USER: (graduationUserId: number) =>
       `/api/v1/admin/graduation-users/${graduationUserId}`,
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
-    GRADUATION_USERS_BATCH_APPROVE: '/api/v1/admin/graduation-users/batch/approve',
+    GRADUATION_USERS_BATCH_APPROVE:
+      '/api/v1/admin/graduation-users/batch/approve',
     USERS: '/api/v1/admin/users',
     SCHEDULE_CREATE: '/api/v1/admin/schedules',
     SCHEDULE_DELETE: (scheduleId: number) =>
@@ -64,5 +65,7 @@ export const END_POINT = {
       `/api/v1/schedules/type/${submissionType}`,
     NOTICE_LIST: '/api/v1/posts',
     NOTICE: (noticeId: number) => `/api/v1/posts/${noticeId}`,
+    STUDENT_DETAIL: (studentId: number) =>
+      `/api/v1/admin/graduation-users/${studentId}`,
   },
 } as const;

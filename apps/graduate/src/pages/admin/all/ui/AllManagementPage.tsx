@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import type { GraduationUserStatus } from '~/shared/api/student/fetchGraduationUsers';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   DELETE_ALERT,
@@ -10,40 +9,21 @@ import {
   useFetchGraduationUsers,
   useRemoveGraduationUsers,
   useToast,
+  useScheduleList,
 } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
   LOADING_TEXT,
-  STATUS_FINAL_NOT_SUBMITTED,
-  STATUS_MID_NOT_SUBMITTED,
-  STATUS_NOT_SUBMITTED,
-  STATUS_SUBMITTED,
-  STATUS_SUBMITTED_APPROVED,
-  STATUS_UNKNOWN,
   TITLE_ALL_MANAGEMENT,
   TYPE_LABEL,
   TYPE_UNKNOWN,
 } from '../constants/allManagementTexts';
 import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
-import UserDetailModal from './UserDetailModal/UserDetailModal';
-
-function formatStatus(status?: GraduationUserStatus | null) {
-  if (!status) return STATUS_UNKNOWN;
-  if (status.type === 'CERTIFICATE') {
-    if (!status.submitted) return STATUS_NOT_SUBMITTED;
-    return status.approval ? STATUS_SUBMITTED_APPROVED : STATUS_SUBMITTED;
-  }
-
-  if (!status.finalThesis.submitted) return STATUS_FINAL_NOT_SUBMITTED;
-  if (!status.midThesis.submitted) return STATUS_MID_NOT_SUBMITTED;
-  if (status.finalThesis.approval && status.midThesis.approval) {
-    return STATUS_SUBMITTED_APPROVED;
-  }
-  return STATUS_SUBMITTED;
-}
+import { extractPeriodData, getStatusLabel } from '../utils';
+import UserDetailModal from './UserDetailModal.tsx';
 
 export default function AllManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,6 +32,13 @@ export default function AllManagementPage() {
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const { toast, confirm } = useToast();
+  const [selectedStudentId, setSelectedStudentId] = useState<number>();
+
+  const { data: schedules, error: scheduleError } = useScheduleList();
+
+  if (scheduleError) {
+    toast.error('스케줄 정보를 불러오는데 실패했습니다.');
+  }
 
   const resetSelection = () => {
     setSelectedIds([]);
@@ -70,15 +57,17 @@ export default function AllManagementPage() {
 
   const rows: AllManagementRow[] = data
     ? data.contents.map((user, idx) => {
-        const type = TYPE_LABEL[user.graduationType] ?? TYPE_UNKNOWN;
+        const graduationTypeLabel =
+          TYPE_LABEL[user.graduationType] ?? TYPE_UNKNOWN;
 
         return {
           id: user.id,
           no: (page - 1) * pageSize + idx + 1,
           studentId: user.studentId,
           name: user.name,
-          type,
-          status: formatStatus(user.status),
+          graduationTypeLabel,
+          graduationDate: user.graduationDate,
+          statusText: getStatusLabel(user.status),
         };
       })
     : [];
@@ -112,10 +101,18 @@ export default function AllManagementPage() {
       );
     }
   };
-
-  const columns = allManagementColumns(() => {
+  const onNameClick = (id: number) => {
+    setSelectedStudentId(id);
     setIsModalOpen(true);
-  });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedStudentId(undefined);
+  };
+
+  const columns = allManagementColumns(onNameClick);
+
   const totalItems = data?.pageable.totalElements ?? 0;
 
   const toggleAll = () => {
@@ -167,10 +164,14 @@ export default function AllManagementPage() {
             emptyText={isLoading ? LOADING_TEXT : undefined}
           />
         </div>
-        <UserDetailModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
+        {selectedStudentId && (
+          <UserDetailModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={handleCloseModal}
+            graduationUserId={selectedStudentId}
+            period={extractPeriodData(schedules)}
+          />
+        )}
         <Pagination
           page={page}
           pageSize={pageSize}

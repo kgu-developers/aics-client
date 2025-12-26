@@ -11,9 +11,8 @@ import type { AllManagementRow } from '../types/allManagement';
 
 import { vars } from '~/vars.css';
 
-
 export const allManagementColumns = (
-  onNameClick: (row: AllManagementRow) => void,
+  onNameClick: (id: number) => void,
 ): ReadonlyArray<Column<AllManagementRow>> =>
   [
     { key: 'no', header: HEADER_NO, width: 56, cell: r => r.no },
@@ -39,12 +38,22 @@ export const allManagementColumns = (
             color: vars.colors.main,
             textDecoration: 'underline',
           }}
-          onClick={() => onNameClick(r)}
+          onClick={() => onNameClick(r.id)}
         >
           {r.name}
         </button>
       ),
     },
-    { key: 'type', header: HEADER_TYPE, width: 120, cell: r => r.type },
-    { key: 'status', header: HEADER_STATUS, width: 140, cell: r => r.status },
+    {
+      key: 'type',
+      header: HEADER_TYPE,
+      width: 120,
+      cell: r => r.graduationTypeLabel,
+    },
+    {
+      key: 'status',
+      header: HEADER_STATUS,
+      width: 140,
+      cell: r => r.statusText,
+    },
   ] as const;
