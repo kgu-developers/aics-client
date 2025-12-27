@@ -14,7 +14,7 @@ export default function LoginPage() {
       <img src='/logo.png' alt='logo' className={styles.logo} />
       <div className={styles.titleWrapper}>
         <p className={styles.subTitle}>
-          경기대학교 컴퓨터공학전공 졸업 관리 시스템
+          경기대학교 컴퓨터공학전공 졸업 요건 취득 서비스
         </p>
       </div>
       <div className={styles.formWrapper}>
