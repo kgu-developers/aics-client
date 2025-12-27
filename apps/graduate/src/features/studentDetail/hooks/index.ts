@@ -1,0 +1,1 @@
+export { useStudentDetail } from './useStudentDetail';

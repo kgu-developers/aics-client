@@ -7,6 +7,7 @@ const KEYS = {
   SCHEDULE_CONTENT: 'scheduleContent',
   NOTICE: 'notice',
   NOTICE_LIST: 'noticeList',
+  STUDENT_DETAIL: 'studentDetail',
 } as const;
 
 export default KEYS;

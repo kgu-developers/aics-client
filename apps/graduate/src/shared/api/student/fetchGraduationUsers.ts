@@ -1,28 +1,10 @@
 import { get } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
+import type { StudentStatus } from '~/shared/types';
 
 export type GraduationType = '미정' | '논문' | '자격증';
 
 export type GraduationTypeFilter = 'THESIS' | 'CERTIFICATE';
-
-export type CertificateStatus = {
-  type: 'CERTIFICATE';
-  submitted: boolean;
-  approval: boolean;
-};
-
-export type ThesisStageStatus = {
-  submitted: boolean;
-  approval: boolean;
-};
-
-export type ThesisStatus = {
-  type: 'THESIS';
-  midThesis: ThesisStageStatus;
-  finalThesis: ThesisStageStatus;
-};
-
-export type GraduationUserStatus = CertificateStatus | ThesisStatus;
 
 export type GraduationUserSummary = {
   id: number;
@@ -30,7 +12,7 @@ export type GraduationUserSummary = {
   name: string;
   graduationDate: string;
   graduationType: GraduationType;
-  status?: GraduationUserStatus | null;
+  status?: StudentStatus;
 };
 
 export type PageableResponse = {
