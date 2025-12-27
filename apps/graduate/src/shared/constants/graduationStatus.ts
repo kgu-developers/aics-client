@@ -14,11 +14,16 @@ export const GRADUATION_TYPE = {
   CERTIFICATION: 'CERTIFICATION',
 } as const;
 
+export const ROLE = {
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+} as const;
+
 export type GraduationStatus =
   (typeof GRADUATION_STATUS)[keyof typeof GRADUATION_STATUS];
 export type GraduationType =
   (typeof GRADUATION_TYPE)[keyof typeof GRADUATION_TYPE];
-
+export type Role = (typeof ROLE)[keyof typeof ROLE];
 export const GRADUATION_STATUS_TEXT: Record<GraduationStatus, string> = {
   [GRADUATION_STATUS.APPROVED]: '졸업 승인',
   [GRADUATION_STATUS.CERTIFICATE]: '자격증 증빙',
