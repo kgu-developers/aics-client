@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AfterLoginRouteImport } from './routes/_afterLogin'
 import { Route as AfterLoginIndexRouteImport } from './routes/_afterLogin/index'
@@ -23,6 +24,11 @@ import { Route as AfterLoginNoticeIndexRouteImport } from './routes/_afterLogin/
 import { Route as AfterLoginNoticeCreateRouteImport } from './routes/_afterLogin/notice/create'
 import { Route as AfterLoginNoticePostIdRouteImport } from './routes/_afterLogin/notice/$postId'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -90,6 +96,7 @@ const AfterLoginNoticePostIdRoute = AfterLoginNoticePostIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
   '/certification': typeof AfterLoginCertificationRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_afterLogin': typeof AfterLoginRouteWithChildren
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/_afterLogin/all': typeof AfterLoginAllRoute
   '/_afterLogin/apply': typeof AfterLoginApplyRoute
   '/_afterLogin/certification': typeof AfterLoginCertificationRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/login'
+    | '/signup'
     | '/all'
     | '/apply'
     | '/certification'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/signup'
     | '/all'
     | '/apply'
     | '/certification'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_afterLogin'
     | '/login'
+    | '/signup'
     | '/_afterLogin/all'
     | '/_afterLogin/apply'
     | '/_afterLogin/certification'
@@ -181,10 +193,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AfterLoginRoute: typeof AfterLoginRouteWithChildren
   LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -314,6 +334,7 @@ const AfterLoginRouteWithChildren = AfterLoginRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   AfterLoginRoute: AfterLoginRouteWithChildren,
   LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

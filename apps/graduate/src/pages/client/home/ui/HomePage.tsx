@@ -12,12 +12,12 @@ import {
 } from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
-import * as styles from '../styles/HomePage.css';
-
-import { vars } from '~/vars.css';
-import { ScheduleTimeLine } from '~/feature/schedule';
 import { useFetchStatusText } from '../api/fetchStatusText';
 import { BUTTONS } from '../model/button';
+import * as styles from '../styles/HomePage.css';
+
+import { ScheduleTimeLine } from '~/feature/schedule';
+import { vars } from '~/vars.css';
 
 export default function HomePage() {
   const today = new Date();
