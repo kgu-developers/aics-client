@@ -12,7 +12,10 @@ import {
 } from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
-import { useFetchStatusText } from '../api/fetchStatusText';
+import {
+  useFetchGraduationStatus,
+  useFetchStatusText,
+} from '../api/fetchStatusText';
 import { BUTTONS } from '../model/button';
 import * as styles from '../styles/HomePage.css';
 
@@ -27,8 +30,13 @@ export default function HomePage() {
     day: 'numeric',
   });
 
-  const graduationStatus = GRADUATION_STATUS.OTHER;
+  const graduationStatus = GRADUATION_STATUS.CERTIFICATE;
   const { data, isLoading } = useFetchStatusText(graduationStatus);
+  const {
+    data: graduationStatusData,
+    isLoading: graduationStatusLoading,
+    error: graduationStatusError,
+  } = useFetchGraduationStatus();
   const { button } = STATUS_TEXT[graduationStatus];
 
   const renderText = () => {
@@ -59,12 +67,22 @@ export default function HomePage() {
     );
   };
 
+  const renderGraduationStatus = () => {
+    if (graduationStatusLoading || !graduationStatusData)
+      return <p>{graduationStatusError?.message}</p>;
+
+    return <p>{graduationStatusData.status}</p>;
+  };
+
   return (
     <div style={{ position: 'relative', width: '100%' }}>
       <section className={styles.mainSection}>
         <section className={styles.upperSection}>
           <section className={styles.header}>
-            <div className={styles.headerTextWrapper}>{renderText()}</div>
+            <div className={styles.headerTextWrapper}>
+              {renderGraduationStatus()}
+              {renderText()}
+            </div>
             <section className={styles.homeButtonSection}>
               <NavigateButton
                 href={button.href}
