@@ -23,6 +23,20 @@ import { Route as AfterLoginAllRouteImport } from './routes/_afterLogin/all'
 import { Route as AfterLoginNoticeIndexRouteImport } from './routes/_afterLogin/notice/index'
 import { Route as AfterLoginNoticeCreateRouteImport } from './routes/_afterLogin/notice/create'
 import { Route as AfterLoginNoticePostIdRouteImport } from './routes/_afterLogin/notice/$postId'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as LoginRouteImport } from './routes/login';
+import { Route as AfterLoginRouteImport } from './routes/_afterLogin';
+import { Route as AfterLoginIndexRouteImport } from './routes/_afterLogin/index';
+import { Route as AfterLoginThesisRouteImport } from './routes/_afterLogin/thesis';
+import { Route as AfterLoginStatusRouteImport } from './routes/_afterLogin/status';
+import { Route as AfterLoginScheduleRouteImport } from './routes/_afterLogin/schedule';
+import { Route as AfterLoginRulesRouteImport } from './routes/_afterLogin/rules';
+import { Route as AfterLoginCertificationRouteImport } from './routes/_afterLogin/certification';
+import { Route as AfterLoginApplyRouteImport } from './routes/_afterLogin/apply';
+import { Route as AfterLoginAllRouteImport } from './routes/_afterLogin/all';
+import { Route as AfterLoginNoticeIndexRouteImport } from './routes/_afterLogin/notice/index';
+import { Route as AfterLoginNoticeCreateRouteImport } from './routes/_afterLogin/notice/create';
+import { Route as AfterLoginNoticePostIdRouteImport } from './routes/_afterLogin/notice/$postId';
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -33,66 +47,66 @@ const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AfterLoginRoute = AfterLoginRouteImport.update({
   id: '/_afterLogin',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AfterLoginIndexRoute = AfterLoginIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginThesisRoute = AfterLoginThesisRouteImport.update({
   id: '/thesis',
   path: '/thesis',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginStatusRoute = AfterLoginStatusRouteImport.update({
   id: '/status',
   path: '/status',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginScheduleRoute = AfterLoginScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginRulesRoute = AfterLoginRulesRouteImport.update({
   id: '/rules',
   path: '/rules',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
   id: '/certification',
   path: '/certification',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginApplyRoute = AfterLoginApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginAllRoute = AfterLoginAllRouteImport.update({
   id: '/all',
   path: '/all',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginNoticeIndexRoute = AfterLoginNoticeIndexRouteImport.update({
   id: '/notice/',
   path: '/notice/',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginNoticeCreateRoute = AfterLoginNoticeCreateRouteImport.update({
   id: '/notice/create',
   path: '/notice/create',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 const AfterLoginNoticePostIdRoute = AfterLoginNoticePostIdRouteImport.update({
   id: '/notice/$postId',
   path: '/notice/$postId',
   getParentRoute: () => AfterLoginRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
@@ -140,9 +154,51 @@ export interface FileRoutesById {
   '/_afterLogin/notice/$postId': typeof AfterLoginNoticePostIdRoute
   '/_afterLogin/notice/create': typeof AfterLoginNoticeCreateRoute
   '/_afterLogin/notice/': typeof AfterLoginNoticeIndexRoute
+  '/login': typeof LoginRoute;
+  '/all': typeof AfterLoginAllRoute;
+  '/apply': typeof AfterLoginApplyRoute;
+  '/certification': typeof AfterLoginCertificationRoute;
+  '/rules': typeof AfterLoginRulesRoute;
+  '/schedule': typeof AfterLoginScheduleRoute;
+  '/status': typeof AfterLoginStatusRoute;
+  '/thesis': typeof AfterLoginThesisRoute;
+  '/': typeof AfterLoginIndexRoute;
+  '/notice/$postId': typeof AfterLoginNoticePostIdRoute;
+  '/notice/create': typeof AfterLoginNoticeCreateRoute;
+  '/notice': typeof AfterLoginNoticeIndexRoute;
+}
+export interface FileRoutesByTo {
+  '/login': typeof LoginRoute;
+  '/all': typeof AfterLoginAllRoute;
+  '/apply': typeof AfterLoginApplyRoute;
+  '/certification': typeof AfterLoginCertificationRoute;
+  '/rules': typeof AfterLoginRulesRoute;
+  '/schedule': typeof AfterLoginScheduleRoute;
+  '/status': typeof AfterLoginStatusRoute;
+  '/thesis': typeof AfterLoginThesisRoute;
+  '/': typeof AfterLoginIndexRoute;
+  '/notice/$postId': typeof AfterLoginNoticePostIdRoute;
+  '/notice/create': typeof AfterLoginNoticeCreateRoute;
+  '/notice': typeof AfterLoginNoticeIndexRoute;
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport;
+  '/_afterLogin': typeof AfterLoginRouteWithChildren;
+  '/login': typeof LoginRoute;
+  '/_afterLogin/all': typeof AfterLoginAllRoute;
+  '/_afterLogin/apply': typeof AfterLoginApplyRoute;
+  '/_afterLogin/certification': typeof AfterLoginCertificationRoute;
+  '/_afterLogin/rules': typeof AfterLoginRulesRoute;
+  '/_afterLogin/schedule': typeof AfterLoginScheduleRoute;
+  '/_afterLogin/status': typeof AfterLoginStatusRoute;
+  '/_afterLogin/thesis': typeof AfterLoginThesisRoute;
+  '/_afterLogin/': typeof AfterLoginIndexRoute;
+  '/_afterLogin/notice/$postId': typeof AfterLoginNoticePostIdRoute;
+  '/_afterLogin/notice/create': typeof AfterLoginNoticeCreateRoute;
+  '/_afterLogin/notice/': typeof AfterLoginNoticeIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/login'
     | '/signup'
@@ -156,8 +212,8 @@ export interface FileRouteTypes {
     | '/'
     | '/notice/$postId'
     | '/notice/create'
-    | '/notice'
-  fileRoutesByTo: FileRoutesByTo
+    | '/notice';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/login'
     | '/signup'
@@ -171,7 +227,7 @@ export interface FileRouteTypes {
     | '/'
     | '/notice/$postId'
     | '/notice/create'
-    | '/notice'
+    | '/notice';
   id:
     | '__root__'
     | '/_afterLogin'
@@ -187,8 +243,8 @@ export interface FileRouteTypes {
     | '/_afterLogin/'
     | '/_afterLogin/notice/$postId'
     | '/_afterLogin/notice/create'
-    | '/_afterLogin/notice/'
-  fileRoutesById: FileRoutesById
+    | '/_afterLogin/notice/';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   AfterLoginRoute: typeof AfterLoginRouteWithChildren
@@ -206,111 +262,111 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof rootRouteImport
     }
     '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/login';
+      path: '/login';
+      fullPath: '/login';
+      preLoaderRoute: typeof LoginRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_afterLogin': {
-      id: '/_afterLogin'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AfterLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/_afterLogin';
+      path: '';
+      fullPath: '';
+      preLoaderRoute: typeof AfterLoginRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_afterLogin/': {
-      id: '/_afterLogin/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AfterLoginIndexRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof AfterLoginIndexRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/thesis': {
-      id: '/_afterLogin/thesis'
-      path: '/thesis'
-      fullPath: '/thesis'
-      preLoaderRoute: typeof AfterLoginThesisRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/thesis';
+      path: '/thesis';
+      fullPath: '/thesis';
+      preLoaderRoute: typeof AfterLoginThesisRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/status': {
-      id: '/_afterLogin/status'
-      path: '/status'
-      fullPath: '/status'
-      preLoaderRoute: typeof AfterLoginStatusRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/status';
+      path: '/status';
+      fullPath: '/status';
+      preLoaderRoute: typeof AfterLoginStatusRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/schedule': {
-      id: '/_afterLogin/schedule'
-      path: '/schedule'
-      fullPath: '/schedule'
-      preLoaderRoute: typeof AfterLoginScheduleRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/schedule';
+      path: '/schedule';
+      fullPath: '/schedule';
+      preLoaderRoute: typeof AfterLoginScheduleRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/rules': {
-      id: '/_afterLogin/rules'
-      path: '/rules'
-      fullPath: '/rules'
-      preLoaderRoute: typeof AfterLoginRulesRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/rules';
+      path: '/rules';
+      fullPath: '/rules';
+      preLoaderRoute: typeof AfterLoginRulesRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/certification': {
-      id: '/_afterLogin/certification'
-      path: '/certification'
-      fullPath: '/certification'
-      preLoaderRoute: typeof AfterLoginCertificationRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/certification';
+      path: '/certification';
+      fullPath: '/certification';
+      preLoaderRoute: typeof AfterLoginCertificationRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/apply': {
-      id: '/_afterLogin/apply'
-      path: '/apply'
-      fullPath: '/apply'
-      preLoaderRoute: typeof AfterLoginApplyRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/apply';
+      path: '/apply';
+      fullPath: '/apply';
+      preLoaderRoute: typeof AfterLoginApplyRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/all': {
-      id: '/_afterLogin/all'
-      path: '/all'
-      fullPath: '/all'
-      preLoaderRoute: typeof AfterLoginAllRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/all';
+      path: '/all';
+      fullPath: '/all';
+      preLoaderRoute: typeof AfterLoginAllRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/notice/': {
-      id: '/_afterLogin/notice/'
-      path: '/notice'
-      fullPath: '/notice'
-      preLoaderRoute: typeof AfterLoginNoticeIndexRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/notice/';
+      path: '/notice';
+      fullPath: '/notice';
+      preLoaderRoute: typeof AfterLoginNoticeIndexRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/notice/create': {
-      id: '/_afterLogin/notice/create'
-      path: '/notice/create'
-      fullPath: '/notice/create'
-      preLoaderRoute: typeof AfterLoginNoticeCreateRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/notice/create';
+      path: '/notice/create';
+      fullPath: '/notice/create';
+      preLoaderRoute: typeof AfterLoginNoticeCreateRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
     '/_afterLogin/notice/$postId': {
-      id: '/_afterLogin/notice/$postId'
-      path: '/notice/$postId'
-      fullPath: '/notice/$postId'
-      preLoaderRoute: typeof AfterLoginNoticePostIdRouteImport
-      parentRoute: typeof AfterLoginRoute
-    }
+      id: '/_afterLogin/notice/$postId';
+      path: '/notice/$postId';
+      fullPath: '/notice/$postId';
+      preLoaderRoute: typeof AfterLoginNoticePostIdRouteImport;
+      parentRoute: typeof AfterLoginRoute;
+    };
   }
 }
 
 interface AfterLoginRouteChildren {
-  AfterLoginAllRoute: typeof AfterLoginAllRoute
-  AfterLoginApplyRoute: typeof AfterLoginApplyRoute
-  AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute
-  AfterLoginRulesRoute: typeof AfterLoginRulesRoute
-  AfterLoginScheduleRoute: typeof AfterLoginScheduleRoute
-  AfterLoginStatusRoute: typeof AfterLoginStatusRoute
-  AfterLoginThesisRoute: typeof AfterLoginThesisRoute
-  AfterLoginIndexRoute: typeof AfterLoginIndexRoute
-  AfterLoginNoticePostIdRoute: typeof AfterLoginNoticePostIdRoute
-  AfterLoginNoticeCreateRoute: typeof AfterLoginNoticeCreateRoute
-  AfterLoginNoticeIndexRoute: typeof AfterLoginNoticeIndexRoute
+  AfterLoginAllRoute: typeof AfterLoginAllRoute;
+  AfterLoginApplyRoute: typeof AfterLoginApplyRoute;
+  AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute;
+  AfterLoginRulesRoute: typeof AfterLoginRulesRoute;
+  AfterLoginScheduleRoute: typeof AfterLoginScheduleRoute;
+  AfterLoginStatusRoute: typeof AfterLoginStatusRoute;
+  AfterLoginThesisRoute: typeof AfterLoginThesisRoute;
+  AfterLoginIndexRoute: typeof AfterLoginIndexRoute;
+  AfterLoginNoticePostIdRoute: typeof AfterLoginNoticePostIdRoute;
+  AfterLoginNoticeCreateRoute: typeof AfterLoginNoticeCreateRoute;
+  AfterLoginNoticeIndexRoute: typeof AfterLoginNoticeIndexRoute;
 }
 
 const AfterLoginRouteChildren: AfterLoginRouteChildren = {
@@ -325,11 +381,11 @@ const AfterLoginRouteChildren: AfterLoginRouteChildren = {
   AfterLoginNoticePostIdRoute: AfterLoginNoticePostIdRoute,
   AfterLoginNoticeCreateRoute: AfterLoginNoticeCreateRoute,
   AfterLoginNoticeIndexRoute: AfterLoginNoticeIndexRoute,
-}
+};
 
 const AfterLoginRouteWithChildren = AfterLoginRoute._addFileChildren(
   AfterLoginRouteChildren,
-)
+);
 
 const rootRouteChildren: RootRouteChildren = {
   AfterLoginRoute: AfterLoginRouteWithChildren,
@@ -338,4 +394,4 @@ const rootRouteChildren: RootRouteChildren = {
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();

@@ -4,21 +4,42 @@ import type { ColumnType } from 'antd/es/table';
 import { useState } from 'react';
 
 import { Header } from '~/shared/components';
+import { useNoticeList } from '~/shared/hooks';
 
-import { mockData } from '../mock/notices';
+import type { NoticeItem } from '../model';
 import * as style from '../styles/NoticeAdminPage.css';
-import type { NoticeItem } from '../types/notices';
 
 export default function NoticeAdminPage() {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
-  const pinnedData = [...mockData].sort((a, b) => {
-    if (a.isPinned && !b.isPinned) return -1;
-    if (!a.isPinned && b.isPinned) return 1;
-    return b.id - a.id;
+  const {
+    data: noticeResponse,
+    isPending,
+    isError,
+  } = useNoticeList({
+    page: currentPage - 1,
+    size: 10,
+    keywords: searchText ? [searchText] : undefined,
+    category: 'GRADUATION',
   });
+
+  const noticeList = noticeResponse?.contents || [];
+
+  if (isError) {
+    return (
+      <div className={style.container}>
+        <Header title='공지사항' />
+        <div style={{ padding: '24px', textAlign: 'center' }}>
+          <p>공지사항을 불러오는데 실패했습니다.</p>
+          <Button type='primary' onClick={() => window.location.reload()}>
+            다시 시도
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   const columns: ColumnType<NoticeItem>[] = [
     {
@@ -30,8 +51,10 @@ export default function NoticeAdminPage() {
         if (record.isPinned) {
           return <Tag color='red'>공지</Tag>;
         }
-        const index = pinnedData.findIndex(item => item.id === record.id);
-        const pinnedCount = pinnedData.filter(item => item.isPinned).length;
+        const index = noticeList.findIndex(
+          item => item.noticeId === record.noticeId,
+        );
+        const pinnedCount = noticeList.filter(item => item.isPinned).length;
         return index - pinnedCount + 1;
       },
     },
@@ -71,7 +94,7 @@ export default function NoticeAdminPage() {
   const handleRowClick = (record: NoticeItem) => {
     navigate({
       to: '/notice/$postId',
-      params: { postId: record.id.toString() },
+      params: { postId: record.noticeId.toString() },
     });
   };
 
@@ -99,12 +122,13 @@ export default function NoticeAdminPage() {
 
       <Table
         columns={columns}
-        dataSource={pinnedData}
-        rowKey='id'
+        dataSource={noticeList}
+        rowKey='noticeId'
+        loading={isPending}
         pagination={{
           current: currentPage,
           pageSize: 10,
-          total: pinnedData.length,
+          total: noticeResponse?.pageable.totalElements || 0,
           onChange: page => setCurrentPage(page),
           showSizeChanger: false,
           showTotal: total => `총 ${total}개`,

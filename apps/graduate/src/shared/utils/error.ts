@@ -18,10 +18,14 @@ export default function parseError(error: unknown): ErrorInfo {
     const status = response?.status;
 
     if (response) {
+      const errorCode = response.data?.code;
       return {
-        message: response.data?.message ?? getDefaultMessage(status),
+        message:
+          response.data?.message ??
+          (errorCode ? ERROR_CODE_MESSAGES[errorCode] : undefined) ??
+          getDefaultMessage(status),
         statusCode: status,
-        errorCode: response.data?.code,
+        errorCode,
         isNetworkError: false,
       };
     }
@@ -43,6 +47,12 @@ export default function parseError(error: unknown): ErrorInfo {
 
   return defaultError;
 }
+
+const ERROR_CODE_MESSAGES: Record<string, string> = {
+  GRADUATION_USER_ID_DUPLICATED: '이미 등록된 학번입니다.',
+  USER_ID_NOT_FOUND: '유저 목록에 없는 학번입니다.',
+  USER_NOT_FOUND: '유저 목록에 없는 학번입니다.',
+};
 
 function getDefaultMessage(statusCode?: number): string {
   if (!statusCode) return '요청에 실패했습니다';

@@ -1,19 +1,19 @@
-import { Button, DatePicker, Form, Input, Select } from 'antd';
 import type { FormItemProps } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
 import type { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 
 import { PROFESSORS } from '~/shared/constants/professors';
 
-import { CAPSTONE_OPTIONS, SINGLE_FIELD_TEXT } from '../model/constants';
-import type { SingleSubmitPayload } from '../types/studentAddModal';
-
-type FormInnerValues = Omit<SingleSubmitPayload, 'graduationMonth'> & {
-  graduationMonth: Dayjs;
-};
+import { SINGLE_FIELD_TEXT } from '../model/constants';
+import {
+  CAPSTONE_COMPLETION_OPTIONS,
+  type CapstoneCompletionOption,
+  type GraduationUserCreateRequest,
+} from '../types/studentAddModal';
 
 type TextFieldConfig = {
-  name: 'studentNo' | 'name' | 'department';
+  name: 'studentId' | 'name' | 'department';
   rules: FormItemProps['rules'];
   placeholder: string;
   label: string;
@@ -21,7 +21,7 @@ type TextFieldConfig = {
 
 const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
   {
-    name: 'studentNo',
+    name: 'studentId',
     rules: [
       { required: true, message: SINGLE_FIELD_TEXT.studentNo.required },
       { pattern: /^\d{9}$/, message: SINGLE_FIELD_TEXT.studentNo.pattern },
@@ -43,27 +43,36 @@ const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
   },
 ];
 
+type FormValues = Omit<
+  GraduationUserCreateRequest,
+  'graduationDate' | 'capstoneCompletion'
+> & {
+  capstoneCompletion: CapstoneCompletionOption['value'];
+  graduationDate: Dayjs | null;
+};
+
 export default function StudentAddSingle({
   onSubmit,
   open,
 }: {
-  onSubmit?: (payload: SingleSubmitPayload) => void | Promise<void>;
+  onSubmit?: (payload: GraduationUserCreateRequest) => void | Promise<void>;
   open?: boolean;
 }) {
-  const [form] = Form.useForm<FormInnerValues>();
+  const [form] = Form.useForm<FormValues>();
   const professorOptions = PROFESSORS.map(p => ({
     label: p.name,
-    value: p.id,
+    value: p.name,
   }));
 
-  const handleFinish = (v: FormInnerValues) => {
-    const payload: SingleSubmitPayload = {
-      studentNo: v.studentNo.trim(),
+  const handleFinish = (v: FormValues) => {
+    if (!v.graduationDate) return;
+    const payload: GraduationUserCreateRequest = {
+      studentId: v.studentId.trim(),
       name: v.name.trim(),
-      advisorId: v.advisorId,
-      capstoneStatus: v.capstoneStatus,
-      graduationMonth: v.graduationMonth.format('YYYY-MM'),
+      advisorProfessor: v.advisorProfessor.trim(),
+      capstoneCompletion: v.capstoneCompletion === 'true',
       department: v.department.trim(),
+      graduationDate: v.graduationDate.format('YYYY-MM'),
     };
     onSubmit?.(payload);
     form.resetFields();
@@ -87,7 +96,7 @@ export default function StudentAddSingle({
       ))}
 
       <Form.Item
-        name='advisorId'
+        name='advisorProfessor'
         label={SINGLE_FIELD_TEXT.advisor.label}
         rules={[
           { required: true, message: SINGLE_FIELD_TEXT.advisor.required },
@@ -102,17 +111,17 @@ export default function StudentAddSingle({
       </Form.Item>
 
       <Form.Item
-        name='capstoneStatus'
+        name='capstoneCompletion'
         label={SINGLE_FIELD_TEXT.capstone.label}
         rules={[
           { required: true, message: SINGLE_FIELD_TEXT.capstone.required },
         ]}
       >
-        <Select options={CAPSTONE_OPTIONS} />
+        <Select options={CAPSTONE_COMPLETION_OPTIONS} />
       </Form.Item>
 
       <Form.Item
-        name='graduationMonth'
+        name='graduationDate'
         label={SINGLE_FIELD_TEXT.graduationMonth.label}
         rules={[
           {

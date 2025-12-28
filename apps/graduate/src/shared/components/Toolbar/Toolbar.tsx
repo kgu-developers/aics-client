@@ -10,15 +10,8 @@ type Props = {
   query: string;
   onQueryChange: (v: string) => void;
   onApprove: () => void;
+  onDeleteSelected?: () => void;
   onDownload?: () => void;
-  onAddStudent?: (values: {
-    studentNo: string;
-    name: string;
-    advisorId: number;
-    capstoneStatus: 'PASSED' | 'FAILED';
-    graduationMonth: string;
-    department: string;
-  }) => void | Promise<void>;
   disabledApprove?: boolean;
 };
 
@@ -27,8 +20,8 @@ export default function Toolbar({
   query,
   onQueryChange,
   onApprove,
+  onDeleteSelected,
   onDownload,
-  onAddStudent,
   disabledApprove = false,
 }: Props) {
   const hasSelection = selectedCount > 0;
@@ -59,6 +52,16 @@ export default function Toolbar({
               승인
             </Button>
           )}
+          {onDeleteSelected && (
+            <Button
+              size='middle'
+              htmlType='button'
+              onClick={onDeleteSelected}
+              disabled={selectedCount === 0}
+            >
+              삭제
+            </Button>
+          )}
           {onDownload && (
             <Button
               size='middle'
@@ -86,20 +89,13 @@ export default function Toolbar({
             className={style.searchInput}
             value={query}
             onChange={e => onQueryChange(e.target.value)}
-            placeholder='Value'
+            placeholder='검색어를 입력하세요'
           />
           <img className={style.searchIcon} src='/Search.svg' alt='검색' />
         </div>
       </div>
 
-      <StudentAddModal
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-        onSubmit={async values => {
-          await onAddStudent?.(values);
-          setAddOpen(false);
-        }}
-      />
+      <StudentAddModal open={addOpen} onClose={() => setAddOpen(false)} />
     </div>
   );
 }

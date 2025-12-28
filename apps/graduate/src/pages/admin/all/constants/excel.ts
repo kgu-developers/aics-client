@@ -13,4 +13,3 @@ export const TABLE_HEADER = {
 
 export type TableHeader = (typeof TABLE_HEADER)[keyof typeof TABLE_HEADER];
 export type SubmissionStage = '신청서' | '중간보고서' | '최종보고서';
-

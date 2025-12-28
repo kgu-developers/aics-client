@@ -1,62 +1,89 @@
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { TextEditor } from '~/shared/components/TextEditor';
+import { TextEditor } from '~/shared/components';
+import { useScheduleContent, useToast } from '~/shared/hooks';
+import type { SubmissionType } from '~/shared/types';
 
-import { descriptionData } from '../mock/schedule';
+import { SUBMISSION_TYPE_OPTIONS } from '../constant';
+import { useUpdateScheduleContent } from '../hooks';
 import * as style from '../styles/ScheduleDescription.css.ts';
 
 export default function ScheduleDescription() {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [tempDescription, setTempDescription] = useState<string>(
-    descriptionData[0]?.description || '',
-  );
+  const [selectedType, setSelectedType] = useState<SubmissionType>('SUBMITTED');
+  const [tempDescription, setTempDescription] = useState<string>('');
   const [isSaved, setIsSaved] = useState<boolean>(true);
+  const { toast, confirm } = useToast();
+
+  const { data: contentData, isLoading } = useScheduleContent(selectedType);
+  const { mutate: updateContent, isPending } = useUpdateScheduleContent();
+
+  const submissionOptions = SUBMISSION_TYPE_OPTIONS;
 
   useEffect(() => {
-    setTempDescription(descriptionData[selectedIndex]?.description || '');
-  }, [selectedIndex]);
+    if (contentData) {
+      setTempDescription(contentData.content);
+      setIsSaved(true);
+    }
+  }, [contentData, selectedType]);
 
   const handleSave = () => {
-    setIsSaved(true);
-    window.alert('설명이 저장되었습니다!');
+    updateContent(
+      {
+        submissionType: selectedType,
+        data: { content: tempDescription },
+      },
+      {
+        onSuccess: () => {
+          setIsSaved(true);
+          toast.success('설명이 저장되었습니다!');
+        },
+        onError: () => {
+          toast.error('설명 저장에 실패했습니다.');
+        },
+      },
+    );
   };
 
-  const handleTabChange = (index: number) => {
+  const handleTabChange = (type: SubmissionType) => {
     if (!isSaved) {
-      const confirmChange = window.confirm(
-        '저장되지 않은 변경 사항이 있습니다. 변경 사항을 저장하지 않고 이동하시겠습니까?',
-      );
-      if (!confirmChange) return;
+      confirm({
+        title: '저장되지 않은 변경 사항이 있습니다.',
+        content: '변경 사항을 저장하지 않고 이동하시겠습니까?',
+        onOk: () => {
+          setSelectedType(type);
+        },
+      });
+      return;
     }
-    setSelectedIndex(index);
+    setSelectedType(type);
   };
 
   return (
     <div className={style.descriptionContainer}>
       <div className={style.tabButtons}>
-        {descriptionData.map((item, index) => (
+        {submissionOptions.map(option => (
           <Button
-            key={item.id}
-            type={selectedIndex === index ? 'primary' : 'default'}
-            onClick={() => handleTabChange(index)}
+            key={option.value}
+            type={selectedType === option.value ? 'primary' : 'default'}
+            onClick={() => handleTabChange(option.value)}
           >
-            {item.title}
+            {option.label}
           </Button>
         ))}
       </div>
 
-      {descriptionData[selectedIndex] && (
-        <TextEditor
-          title={descriptionData[selectedIndex].title}
-          value={tempDescription}
-          onChange={setTempDescription}
-          onSave={handleSave}
-          isSaved={isSaved}
-          onFocus={() => setIsSaved(false)}
-          className={style.descriptionCard}
-        />
-      )}
+      <TextEditor
+        title={
+          submissionOptions.find(opt => opt.value === selectedType)?.label || ''
+        }
+        value={isLoading ? '' : tempDescription}
+        onChange={setTempDescription}
+        onSave={handleSave}
+        isSaved={isSaved && !isPending}
+        onFocus={() => setIsSaved(false)}
+        className={style.descriptionCard}
+      />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import axios, {
   AxiosInstance,
+  type AxiosRequestConfig,
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
@@ -26,9 +27,14 @@ interface BaseRequestConfig {
 
 interface GetRequestConfig<TParams = unknown> extends BaseRequestConfig {
   params?: TParams;
+  responseType?: AxiosRequestConfig['responseType'];
 }
 
 interface MutationRequestConfig<TData = unknown> extends BaseRequestConfig {
+  data?: TData;
+}
+
+interface DeleteRequestConfig<TData = unknown> extends BaseRequestConfig {
   data?: TData;
 }
 
@@ -216,11 +222,12 @@ function createHttpMethods(instance: AxiosInstance) {
     async get<TResponse = unknown, TParams = unknown>(
       config: GetRequestConfig<TParams>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, headers, params } = config;
+      const { request, headers, params, responseType } = config;
       try {
         const response = await instance.get<TResponse>(request, {
           params,
           headers,
+          responseType,
         });
         return response;
       } catch (error: unknown) {
@@ -264,15 +271,34 @@ function createHttpMethods(instance: AxiosInstance) {
       }
     },
 
-    async del<TResponse = unknown>(
-      config: BaseRequestConfig,
+    async del<TResponse = unknown, TData = unknown>(
+      config: DeleteRequestConfig<TData>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, headers } = config;
+      const { request, data, headers } = config;
       try {
         const response = await instance.delete<
           TResponse,
           AxiosResponse<TResponse>
         >(request, {
+          data,
+          headers,
+        });
+        return response;
+      } catch (error: unknown) {
+        handleAxiosError(error);
+      }
+    },
+
+    async patch<TResponse = unknown, TData = unknown>(
+      config: MutationRequestConfig<TData>,
+    ): Promise<AxiosResponse<TResponse>> {
+      const { request, data, headers } = config;
+      try {
+        const response = await instance.patch<
+          TResponse,
+          AxiosResponse<TResponse>,
+          TData
+        >(request, data, {
           headers,
         });
         return response;
@@ -291,11 +317,12 @@ async function get<TResponse = unknown, TParams = unknown>(
   config: GetRequestConfig<TParams>,
 ): Promise<AxiosResponse<TResponse>> {
   const instance = selectInstanceByRequest(config.request);
-  const { request, headers, params } = config;
+  const { request, headers, params, responseType } = config;
   try {
     const response = await instance.get<TResponse>(request, {
       params,
       headers,
+      responseType,
     });
     return response;
   } catch (error: unknown) {
@@ -322,6 +349,25 @@ async function post<TResponse = unknown, TData = unknown>(
   }
 }
 
+async function del<TResponse = unknown, TData = unknown>(
+  config: DeleteRequestConfig<TData>,
+): Promise<AxiosResponse<TResponse>> {
+  const instance = selectInstanceByRequest(config.request);
+  const { request, data, headers } = config;
+  try {
+    const response = await instance.delete<TResponse, AxiosResponse<TResponse>>(
+      request,
+      {
+        data,
+        headers,
+      },
+    );
+    return response;
+  } catch (error: unknown) {
+    handleAxiosError(error);
+  }
+}
+
 async function patch<TResponse = unknown, TData = unknown>(
   config: MutationRequestConfig<TData>,
 ): Promise<AxiosResponse<TResponse>> {
@@ -341,41 +387,4 @@ async function patch<TResponse = unknown, TData = unknown>(
   }
 }
 
-async function put<TResponse = unknown, TData = unknown>(
-  config: MutationRequestConfig<TData>,
-): Promise<AxiosResponse<TResponse>> {
-  const instance = selectInstanceByRequest(config.request);
-  const { request, data, headers } = config;
-  try {
-    const response = await instance.put<
-      TResponse,
-      AxiosResponse<TResponse>,
-      TData
-    >(request, data, {
-      headers,
-    });
-    return response;
-  } catch (error: unknown) {
-    handleAxiosError(error);
-  }
-}
-
-async function del<TResponse = unknown>(
-  config: BaseRequestConfig,
-): Promise<AxiosResponse<TResponse>> {
-  const instance = selectInstanceByRequest(config.request);
-  const { request, headers } = config;
-  try {
-    const response = await instance.delete<TResponse, AxiosResponse<TResponse>>(
-      request,
-      {
-        headers,
-      },
-    );
-    return response;
-  } catch (error: unknown) {
-    handleAxiosError(error);
-  }
-}
-
-export { get, post, put, del, patch };
+export { get, post, del, patch };
