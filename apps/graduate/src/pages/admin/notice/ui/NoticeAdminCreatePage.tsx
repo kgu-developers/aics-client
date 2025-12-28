@@ -9,6 +9,7 @@ import { TextEditor } from '~/shared/components';
 import { API_ADMIN_URL, ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
+import { useCreateNotice, useUpdateNotice, useDeleteNotice } from '../hooks';
 import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 
@@ -27,8 +28,11 @@ export default function NoticeAdminCreatePage({
   const [uploadedFileId, setUploadedFileId] = useState<number | undefined>();
 
   const { data: notice, isPending } = useNoticeDetail(noticeId ?? 0);
+  const { mutate: createNotice } = useCreateNotice();
+  const { mutate: updateNotice } = useUpdateNotice(noticeId ?? 0);
+  const { mutate: deleteNotice } = useDeleteNotice();
 
-  const { createdAt, updatedAt } = notice ?? {};
+  const { createdAt } = notice ?? {};
 
   const {
     control,
@@ -40,7 +44,7 @@ export default function NoticeAdminCreatePage({
       title: '',
       content: '',
       isPinned: false,
-      uploadedFiles: [],
+      category: 'GRADUATION',
     },
   });
 
@@ -50,7 +54,7 @@ export default function NoticeAdminCreatePage({
         title: notice.title ?? '',
         content: notice.content ?? '',
         isPinned: notice.isPinned ?? false,
-        uploadedFiles: [],
+        category: 'GRADUATION',
       });
 
       if (notice.file) {
@@ -140,11 +144,20 @@ export default function NoticeAdminCreatePage({
   };
 
   const handleDelete = () => {
+    if (!noticeId) return;
+
     confirm({
       title: '정말 삭제하시겠습니까?',
       onOk: () => {
-        toast.success('공지사항이 삭제되었습니다.');
-        handleGoBack();
+        deleteNotice(noticeId, {
+          onSuccess: () => {
+            toast.success('공지사항이 삭제되었습니다.');
+            handleGoBack();
+          },
+          onError: () => {
+            toast.error('공지사항 삭제에 실패했습니다.');
+          },
+        });
       },
     });
   };
@@ -184,7 +197,6 @@ export default function NoticeAdminCreatePage({
         {isEditMode && (
           <div className={style.metaInfo}>
             <div className={style.metaItem}>작성일: {createdAt}</div>
-            <div className={style.metaItem}>수정일: {updatedAt}</div>
           </div>
         )}
 
@@ -264,7 +276,7 @@ export default function NoticeAdminCreatePage({
           <div className={style.actionSection}>
             <div className={style.leftActions}>
               {isEditMode && (
-                <Button onClick={handleDelete} size='large'>
+                <Button onClick={handleDelete} size='large' danger>
                   삭제
                 </Button>
               )}

@@ -22,6 +22,7 @@ export default function NoticeAdminPage() {
     page: currentPage - 1,
     size: 10,
     keywords: searchText ? [searchText] : undefined,
+    category: 'GRADUATION',
   });
 
   const noticeList = noticeResponse?.contents || [];

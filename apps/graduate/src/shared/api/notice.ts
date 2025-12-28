@@ -14,7 +14,7 @@ export interface NoticeListParams {
   page?: number;
   size?: number;
   keywords?: string[];
-  category?: 'NOTIFICATION' | 'NEWS';
+  category?: 'GRADUATION';
 }
 
 export interface NoticeListResponse {
