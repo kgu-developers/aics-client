@@ -7,6 +7,7 @@ import type {
   CreateNoticeRequest,
   UpdateNoticeRequest,
   TogglePinnedRequest,
+  NoticeDetailApiResponse,
 } from '~/shared/types';
 
 export interface NoticeListParams {
@@ -26,8 +27,6 @@ export interface NoticeListResponse {
     isEnd: boolean;
   };
 }
-
-export interface NoticeDetailResponse extends NoticeApiResponse {}
 
 export async function createNotice(
   data: CreateNoticeRequest,
@@ -77,8 +76,8 @@ export async function getNoticeList(
 
 export async function getNoticeDetail(
   noticeId: number,
-): Promise<AxiosResponse<NoticeDetailResponse>> {
-  return get<NoticeDetailResponse>({
+): Promise<AxiosResponse<NoticeDetailApiResponse>> {
+  return get<NoticeDetailApiResponse>({
     request: END_POINT.USER.NOTICE(noticeId),
   });
 }
