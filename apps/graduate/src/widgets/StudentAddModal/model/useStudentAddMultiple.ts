@@ -1,16 +1,12 @@
 import { App } from 'antd';
 import { createElement, useEffect, useState } from 'react';
 
-
 import { fetchAdminUsers, fetchGraduationUsers } from '~/shared/api';
 import { PROFESSORS } from '~/shared/constants/professors';
 
 import { MULTIPLE_UPLOAD_TEXT } from './constants';
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
-import type {
-  InvalidRow,
-  UploadRow,
-} from '../types/studentAddModal';
+import type { InvalidRow, UploadRow } from '../types/studentAddModal';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 const USER_PAGE_SIZE = 200;

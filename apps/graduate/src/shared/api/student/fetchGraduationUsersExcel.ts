@@ -14,10 +14,9 @@ export type FetchGraduationUsersExcelResult = {
 
 const resolveFilename = (contentDisposition?: string) => {
   if (!contentDisposition) return null;
-  const match =
-    /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(
-      contentDisposition,
-    );
+  const match = /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(
+    contentDisposition,
+  );
   const rawName = match?.[1] ?? match?.[2];
   return rawName ? decodeURIComponent(rawName) : null;
 };

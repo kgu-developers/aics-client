@@ -1,7 +1,6 @@
 import { Col, Divider, message, Modal, Row } from 'antd';
 import { useState } from 'react';
 
-
 import { modalStyles } from '~/shared/config';
 
 import { useSubmitGraduationUser } from '~/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
