@@ -8,7 +8,7 @@ interface AuthState {
   isAdmin: boolean;
 }
 
-export const useAuthStore = create<AuthState>(set => ({
+export const useAuthStore = create<AuthState>(() => ({
   isAuthenticated: !!getAccessToken(),
   isAdmin: getRole() === ROLE.ADMIN,
 }));
