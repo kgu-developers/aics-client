@@ -12,8 +12,6 @@ export interface AuthContext {
   auth: {
     isAuthenticated: boolean;
     isAdmin: boolean;
-    setIsAuthenticated: (value: boolean) => void;
-    setIsAdmin: (value: boolean) => void;
   };
 }
 
