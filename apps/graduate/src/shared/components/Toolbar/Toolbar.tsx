@@ -1,7 +1,6 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 
-
 import { StudentAddModal } from '~/widgets/StudentAddModal';
 
 import * as style from './Toolbar.css';
@@ -96,10 +95,7 @@ export default function Toolbar({
         </div>
       </div>
 
-      <StudentAddModal
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-      />
+      <StudentAddModal open={addOpen} onClose={() => setAddOpen(false)} />
     </div>
   );
 }

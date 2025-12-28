@@ -107,9 +107,7 @@ export default function ThesisAdminPage() {
           await approveGraduationUsers(selectedIds);
           toast.success(APPROVE_SUCCESS);
         } catch (error) {
-          toast.error(
-            error instanceof Error ? error.message : APPROVE_FAILED,
-          );
+          toast.error(error instanceof Error ? error.message : APPROVE_FAILED);
         }
       },
     });

@@ -97,7 +97,9 @@ export const validateStudentRow = ({
   const capstoneKey = capstoneText.trim().toLowerCase();
   const capstoneCompletion =
     CAPSTONE_VALUE_MAP[capstoneKey] ??
-    CAPSTONE_VALUE_MAP[capstoneText.trim() as keyof typeof CAPSTONE_VALUE_MAP] ??
+    CAPSTONE_VALUE_MAP[
+      capstoneText.trim() as keyof typeof CAPSTONE_VALUE_MAP
+    ] ??
     null;
 
   if (capstoneCompletion === null) {

@@ -1,13 +1,15 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Checkbox, Divider, Input, Upload } from 'antd';
-import type { UploadProps } from 'antd';
-import { useEffect } from 'react';
+import type { UploadFile, UploadProps } from 'antd';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { uploadNoticeFile } from '~/shared/api/file';
 import { TextEditor } from '~/shared/components';
-import { ROUTE } from '~/shared/constants';
+import { API_ADMIN_URL, ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
+import { useCreateNotice, useUpdateNotice, useDeleteNotice } from '../hooks';
 import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 
@@ -22,9 +24,15 @@ export default function NoticeAdminCreatePage({
   const isEditMode = !!noticeId;
   const { toast, confirm } = useToast();
 
-  const { data: notice, isPending } = useNoticeDetail(noticeId ?? 0);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [uploadedFileId, setUploadedFileId] = useState<number | undefined>();
 
-  const { createdAt, updatedAt } = notice ?? {};
+  const { data: notice, isPending } = useNoticeDetail(noticeId ?? 0);
+  const { mutate: createNotice } = useCreateNotice();
+  const { mutate: updateNotice } = useUpdateNotice(noticeId ?? 0);
+  const { mutate: deleteNotice } = useDeleteNotice();
+
+  const { createdAt } = notice ?? {};
 
   const {
     control,
@@ -36,7 +44,7 @@ export default function NoticeAdminCreatePage({
       title: '',
       content: '',
       isPinned: false,
-      uploadedFiles: [],
+      category: 'GRADUATION',
     },
   });
 
@@ -46,33 +54,110 @@ export default function NoticeAdminCreatePage({
         title: notice.title ?? '',
         content: notice.content ?? '',
         isPinned: notice.isPinned ?? false,
-        uploadedFiles: [],
+        category: 'GRADUATION',
       });
+
+      if (notice.file) {
+        const fileName =
+          notice.file.physicalPath.split('/').pop() || '첨부파일';
+        setFileList([
+          {
+            uid: '-1',
+            name: fileName,
+            status: 'done',
+            url: `${API_ADMIN_URL}${notice.file.physicalPath}`,
+          },
+        ]);
+      }
     }
   }, [notice, isEditMode, reset]);
 
   const uploadProps: UploadProps = {
     name: 'file',
-    multiple: true,
+    fileList: fileList,
+    maxCount: 1,
     beforeUpload: file => {
       toast.info(`${file.name} 파일이 선택되었습니다.`);
       return false;
     },
+    customRequest: async ({ file, onSuccess, onError }) => {
+      try {
+        const response = await uploadNoticeFile(file as File);
+        const { id } = response.data;
+
+        setUploadedFileId(id);
+
+        toast.success(`${(file as File).name} 파일이 업로드되었습니다.`);
+        onSuccess?.(response.data);
+      } catch (error) {
+        toast.error('파일 업로드에 실패했습니다.');
+        onError?.(error as Error);
+      }
+    },
+    onChange: ({ fileList: newFileList }) => {
+      setFileList(newFileList);
+    },
+    onRemove: () => {
+      setUploadedFileId(undefined);
+    },
   };
 
-  const onSubmit = () => {
-    toast.success(
-      isEditMode ? '공지사항이 수정되었습니다.' : '공지사항이 작성되었습니다.',
-    );
-    handleGoBack();
+  const onSubmit = (data: NoticeFormItem) => {
+    if (isEditMode) {
+      updateNotice(
+        {
+          title: data.title,
+          content: data.content,
+          isPinned: data.isPinned,
+          fileId: uploadedFileId,
+        },
+        {
+          onSuccess: () => {
+            toast.success('공지사항이 수정되었습니다.');
+            handleGoBack();
+          },
+          onError: () => {
+            toast.error('공지사항 수정에 실패했습니다.');
+          },
+        },
+      );
+    } else {
+      createNotice(
+        {
+          title: data.title,
+          content: data.content,
+          isPinned: data.isPinned,
+          category: data.category,
+          fileId: uploadedFileId,
+        },
+        {
+          onSuccess: () => {
+            toast.success('공지사항이 작성되었습니다.');
+            handleGoBack();
+          },
+          onError: () => {
+            toast.error('공지사항 작성에 실패했습니다.');
+          },
+        },
+      );
+    }
   };
 
   const handleDelete = () => {
+    if (!noticeId) return;
+
     confirm({
       title: '정말 삭제하시겠습니까?',
       onOk: () => {
-        toast.success('공지사항이 삭제되었습니다.');
-        handleGoBack();
+        deleteNotice(noticeId, {
+          onSuccess: () => {
+            toast.success('공지사항이 삭제되었습니다.');
+            handleGoBack();
+          },
+          onError: () => {
+            toast.error('공지사항 삭제에 실패했습니다.');
+          },
+        });
       },
     });
   };
@@ -112,7 +197,6 @@ export default function NoticeAdminCreatePage({
         {isEditMode && (
           <div className={style.metaInfo}>
             <div className={style.metaItem}>작성일: {createdAt}</div>
-            <div className={style.metaItem}>수정일: {updatedAt}</div>
           </div>
         )}
 
@@ -192,7 +276,7 @@ export default function NoticeAdminCreatePage({
           <div className={style.actionSection}>
             <div className={style.leftActions}>
               {isEditMode && (
-                <Button onClick={handleDelete} size='large'>
+                <Button onClick={handleDelete} size='large' danger>
                   삭제
                 </Button>
               )}

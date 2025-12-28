@@ -10,7 +10,9 @@ import type {
 
 type Props = {
   open?: boolean;
-  onSubmitMultiple?: (rows: GraduationUserCreateRequest[]) => void | Promise<void>;
+  onSubmitMultiple?: (
+    rows: GraduationUserCreateRequest[],
+  ) => void | Promise<void>;
 };
 
 export default function StudentAddMultiple({

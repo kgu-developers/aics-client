@@ -7,7 +7,9 @@ type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-export function useUpdateGraduationUsersBatchApprove({ onSuccess }: Options = {}) {
+export function useUpdateGraduationUsersBatchApprove({
+  onSuccess,
+}: Options = {}) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
