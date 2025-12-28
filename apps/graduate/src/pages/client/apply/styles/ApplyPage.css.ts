@@ -42,3 +42,27 @@ export const activeOptionButton = style({
     backgroundColor: vars.colors.sub,
   },
 });
+
+export const drawer = style({
+  width: '786px',
+  margin: '0 auto',
+  boxShadow: 'none',
+  borderRadius: '16px 16px 0 0',
+  display: 'flex',
+});
+
+export const drawerTitle = style({
+  fontSize: 20,
+  marginBottom: 4,
+  fontVariationSettings: `'wght' 600`,
+});
+
+export const drawerDescription = style({
+  marginBottom: 20,
+});
+
+export const submitButton = style({
+  padding: 20,
+  borderRadius: 12,
+  width: '100%',
+});
