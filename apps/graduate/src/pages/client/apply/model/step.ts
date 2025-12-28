@@ -1,4 +1,5 @@
 import { StepsProps } from 'antd';
+
 import { GRADUATION_TYPE, type GraduationType } from '~/shared/constants';
 
 export const STEP_TITLE: Record<GraduationType, string> = {

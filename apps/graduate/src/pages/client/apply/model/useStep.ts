@@ -1,6 +1,8 @@
-import { type GraduationType } from '~/shared/constants';
-import { STEP } from './step';
 import { useEffect, useState } from 'react';
+
+import { type GraduationType } from '~/shared/constants';
+
+import { STEP } from './step';
 
 export default function useStep({
   selectedOption,

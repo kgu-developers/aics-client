@@ -4,3 +4,7 @@ export type StatusText = {
   submissionType: GraduationStatus;
   content: string;
 };
+
+export type UserStatus = {
+  status: string;
+};

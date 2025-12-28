@@ -1,7 +1,9 @@
 import { Timeline } from 'antd';
-import { vars } from '~/vars.css';
+
 import { useFetchAllSchedule } from '../api/fetchAllSchedule';
 import { Schedule } from '../model/schedule';
+
+import { vars } from '~/vars.css';
 
 export default function ScheduleTimeLine() {
   const { data, isLoading } = useFetchAllSchedule();

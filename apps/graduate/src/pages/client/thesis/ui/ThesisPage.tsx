@@ -12,7 +12,6 @@ import type { CSSProperties } from 'react';
 
 import { Section } from '~/shared/components';
 import { ROUTE } from '~/shared/constants';
-
 import * as styles from '~/shared/styles/SubmissionPage.css';
 
 export default function ThesisPage() {

@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { Section } from '~/shared/components';
 import { GRADUATION_TYPE, type GraduationType } from '~/shared/constants';
 
+import ApplyDrawer from './ApplyDrawer';
+import ApplySteps from './ApplySteps';
+import { useSubmitGraduationType } from '../api/submitGraduationType';
 import { STEP_TITLE } from '../model/step';
 import * as styles from '../styles/ApplyPage.css';
 
 import { vars } from '~/vars.css';
-import { useSubmitGraduationType } from '../api/submitGraduationType';
-import ApplyDrawer from './ApplyDrawer';
-import ApplySteps from './ApplySteps';
 
 export default function ApplyPage() {
   const { confirm } = useSearch({ from: '/_afterLogin/apply' }) as {

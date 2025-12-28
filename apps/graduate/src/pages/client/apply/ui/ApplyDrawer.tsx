@@ -1,6 +1,8 @@
-import { Button, Drawer, Steps } from 'antd';
 import { Link, useRouter } from '@tanstack/react-router';
+import { Button, Drawer, Steps } from 'antd';
+
 import { type GraduationType, ROUTE } from '~/shared/constants';
+
 import { STEP_TITLE } from '../model/step';
 import useStep from '../model/useStep';
 

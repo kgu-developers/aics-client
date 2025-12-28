@@ -1,4 +1,5 @@
 import { Bell } from 'lucide-react';
+
 import { ROUTE } from '~/shared/constants';
 
 export const BUTTONS = [

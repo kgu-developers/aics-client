@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+
 import { patch } from '~/shared/api';
 import { END_POINT, type GraduationType } from '~/shared/constants';
 
