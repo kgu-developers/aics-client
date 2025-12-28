@@ -1,3 +1,4 @@
+export * from './crypto';
 export * from './token';
 export { default as parseError } from './error';
 export { default as logout } from './logout';
