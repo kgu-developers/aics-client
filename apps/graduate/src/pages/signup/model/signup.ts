@@ -1,4 +1,4 @@
-import type { LoginFormData } from './login';
+import type { LoginFormData } from '~/pages/login/model/login';
 
 export type SignupFormData = LoginFormData & {
   name: string;

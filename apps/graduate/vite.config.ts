@@ -18,6 +18,9 @@ export default defineConfig({
       '~': resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    include: ['crypto-js'],
+  },
   test: {
     globals: true,
     environment: 'jsdom',

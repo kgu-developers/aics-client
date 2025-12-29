@@ -1,15 +1,14 @@
 import { create } from 'zustand';
 
+import { ROLE } from '../constants';
+import { getAccessToken, getRole } from '../utils';
+
 interface AuthState {
   isAuthenticated: boolean;
-  setIsAuthenticated: (isAuthenticated: boolean) => void;
   isAdmin: boolean;
-  setIsAdmin: (isAdmin: boolean) => void;
 }
 
-export const useAuthStore = create<AuthState>()(set => ({
-  isAuthenticated: false,
-  setIsAuthenticated: isAuthenticated => set({ isAuthenticated }),
-  isAdmin: false,
-  setIsAdmin: isAdmin => set({ isAdmin }),
+export const useAuthStore = create<AuthState>(() => ({
+  isAuthenticated: !!getAccessToken(),
+  isAdmin: getRole() === ROLE.ADMIN,
 }));

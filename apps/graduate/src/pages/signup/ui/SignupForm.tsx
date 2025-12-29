@@ -1,12 +1,15 @@
+import { useRouter } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '~/shared/components';
 
-import { useSubmitSignup } from '../api/submitSignup';
-import type { SignupFormData } from '../model/signup';
-import * as styles from '../styles/loginForm.css';
+import * as styles from '~/pages/login/styles/loginForm.css';
+import { useSubmitSignup } from '~/pages/signup/api/submitSignup';
+import type { SignupFormData } from '~/pages/signup/model/signup';
 
 export default function SignupForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -22,10 +25,11 @@ export default function SignupForm() {
     },
   });
 
-  const { mutate: submitSignup, isPending } = useSubmitSignup();
+  const { mutate: submitSignup, isPending } = useSubmitSignup({
+    onSuccess: () => router.navigate({ to: '/login' }),
+  });
 
   const onSubmit = (data: SignupFormData) => {
-    console.log('회원가입 데이터:', data);
     submitSignup(data);
   };
 
@@ -117,7 +121,12 @@ export default function SignupForm() {
           <p className={styles.errorMessage}>{errors.major.message}</p>
         )}
       </div>
-      <Button size='md' type='submit' disabled={isPending}>
+      <Button
+        size='md'
+        type='submit'
+        disabled={isPending}
+        className={styles.button}
+      >
         {isPending ? '회원가입 중...' : '회원가입'}
       </Button>
     </form>

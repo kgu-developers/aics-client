@@ -18,10 +18,13 @@ export default function LoginForm() {
     },
   });
 
-  const { mutate: submitLogin, isPending } = useSubmitLogin();
+  const { mutate: submitLogin, isPending } = useSubmitLogin({
+    onSuccess: () => {
+      window.location.reload();
+    },
+  });
 
   const onSubmit = (data: LoginFormData) => {
-    console.log('로그인 데이터:', data);
     submitLogin(data);
   };
 
@@ -53,7 +56,12 @@ export default function LoginForm() {
           <p className={styles.errorMessage}>{errors.password.message}</p>
         )}
       </div>
-      <Button size='md' type='submit' disabled={isPending}>
+      <Button
+        size='md'
+        type='submit'
+        disabled={isPending}
+        className={styles.button}
+      >
         {isPending ? '로그인 중...' : '로그인'}
       </Button>
     </form>

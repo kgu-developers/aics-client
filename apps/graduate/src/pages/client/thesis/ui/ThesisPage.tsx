@@ -12,10 +12,7 @@ import type { CSSProperties } from 'react';
 
 import { Section } from '~/shared/components';
 import { ROUTE } from '~/shared/constants';
-
-import * as styles from '../styles/ThesisPage.css';
-
-import { vars } from '~/vars.css';
+import * as styles from '~/shared/styles/SubmissionPage.css';
 
 export default function ThesisPage() {
   const { type } = useSearch({ from: '/_afterLogin/thesis' }) as {
@@ -54,13 +51,6 @@ export default function ThesisPage() {
     },
   ];
 
-  const panelStyle: React.CSSProperties = {
-    marginBottom: vars.spacing.md,
-    background: vars.colors.white,
-    borderRadius: vars.radius.lg,
-    border: 'none',
-  };
-
   const { Dragger } = Upload;
 
   const props: UploadProps = {
@@ -84,43 +74,24 @@ export default function ThesisPage() {
   };
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        placeItems: 'center',
-        width: '100%',
-        maxWidth: '768px',
-        margin: 'auto',
-        gap: vars.spacing.xl,
-      }}
-    >
+    <div className={styles.container}>
       <Section.Header subtitle='중간 보고서와 최종 보고서를 제출해주세요.'>
         졸업 논문 보고서 제출
       </Section.Header>
       <Collapse
         size='large'
         bordered={false}
-        items={items(panelStyle)}
+        items={items(styles.panelStyle)}
         defaultActiveKey={[type]}
         className={styles.collapse}
       />
-      <div style={{ display: 'flex', gap: vars.spacing.md, width: '100%' }}>
-        <Link
-          to={ROUTE.HOME}
-          style={{
-            width: '100%',
-          }}
-        >
+      <div className={styles.buttonContainer}>
+        <Link to={ROUTE.HOME} className={styles.buttonWrapper}>
           <Button size='large' type='primary' className={styles.button}>
             이전으로
           </Button>
         </Link>
-        <Link
-          to={ROUTE.HOME}
-          style={{
-            width: '100%',
-          }}
-        >
+        <Link to={ROUTE.HOME} className={styles.buttonWrapper}>
           <Button size='large' className={styles.button} type='primary'>
             제출하기
           </Button>

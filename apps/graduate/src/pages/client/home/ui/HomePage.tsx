@@ -1,17 +1,25 @@
 import { Link } from '@tanstack/react-router';
-import { Timeline } from 'antd';
-import { ArrowRight, Bell } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import { DataTable, Section } from '~/shared/components';
-import { ROUTE } from '~/shared/constants';
+import {
+  GRADUATION_STATUS,
+  GRADUATION_STATUS_TEXT,
+  ROUTE,
+  STATUS_TEXT,
+} from '~/shared/constants';
 
 import WeekCalendar from './WeekCalendar';
-import { timelineItems } from '../mock/schedule';
-import { STATUS_TEXT, USER_STATUS } from '../model/userStatus';
+import {
+  useFetchGraduationStatus,
+  useFetchStatusText,
+} from '../api/fetchStatusText';
+import { BUTTONS } from '../model/button';
 import * as styles from '../styles/HomePage.css';
 
+import { ScheduleTimeLine } from '~/feature/schedule';
 import { vars } from '~/vars.css';
 
 export default function HomePage() {
@@ -22,16 +30,49 @@ export default function HomePage() {
     day: 'numeric',
   });
 
-  const userStatus = USER_STATUS.THESIS_FINALREPORT_SUBMITTED;
-  const { title, description, button } = STATUS_TEXT[userStatus];
+  const graduationStatus = GRADUATION_STATUS.CERTIFICATE;
+  const { data, isLoading } = useFetchStatusText(graduationStatus);
+  const {
+    data: graduationStatusData,
+    isLoading: graduationStatusLoading,
+    error: graduationStatusError,
+  } = useFetchGraduationStatus();
+  const { button } = STATUS_TEXT[graduationStatus];
 
-  const buttons = [
-    {
-      label: '공지사항 확인하기',
-      href: ROUTE.NOTICE,
-      icon: <Bell size={20} />,
-    },
-  ];
+  const renderText = () => {
+    if (isLoading || !data)
+      return (
+        <>
+          <p className={styles.headerTitle}>준비중</p>
+          <p className={styles.headerDescription}>
+            아직 졸업 요건 취득 일정이 지정되지 않았어요.
+          </p>
+        </>
+      );
+
+    return (
+      <>
+        <p className={styles.headerTitle}>
+          {GRADUATION_STATUS_TEXT[data.submissionType]}
+        </p>
+        <p className={styles.headerDescription}>
+          {data.content.split('\n').map(line => (
+            <Fragment key={line}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
+        </p>
+      </>
+    );
+  };
+
+  const renderGraduationStatus = () => {
+    if (graduationStatusLoading || !graduationStatusData)
+      return <p>{graduationStatusError?.message}</p>;
+
+    return <p>{graduationStatusData.status}</p>;
+  };
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
@@ -39,17 +80,9 @@ export default function HomePage() {
         <section className={styles.upperSection}>
           <section className={styles.header}>
             <div className={styles.headerTextWrapper}>
-              <p className={styles.headerTitle}>{title}</p>
-              <p className={styles.headerDescription}>
-                {description.split('\n').map(line => (
-                  <Fragment key={line}>
-                    {line}
-                    <br />
-                  </Fragment>
-                ))}
-              </p>
+              {renderGraduationStatus()}
+              {renderText()}
             </div>
-
             <section className={styles.homeButtonSection}>
               <NavigateButton
                 href={button.href}
@@ -57,7 +90,7 @@ export default function HomePage() {
                 label={button.label}
               />
 
-              {buttons.map(button => (
+              {BUTTONS.map(button => (
                 <NavigateButton
                   key={button.label}
                   href={button.href}
@@ -80,10 +113,7 @@ export default function HomePage() {
                 <p className={styles.headerText}> 졸업 요건 취득 일정</p>
               </div>
               <WeekCalendar />
-              <Timeline
-                items={timelineItems}
-                style={{ marginTop: vars.spacing.md }}
-              />
+              <ScheduleTimeLine />
             </Section>
           </section>
         </section>

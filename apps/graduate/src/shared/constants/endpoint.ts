@@ -29,6 +29,8 @@ export type EndpointPath = EndpointValue<typeof END_POINT>;
  * 타입 아래 더한 Depth를 가지는 것은 불가능합니다. (ex. AUTH.LOGIN.DETAIL.USER_ID)
  * 현재 Depth 지켜서 엔드포인트 추가해주세요.
  */
+import type { GraduationStatus } from './graduationStatus';
+
 export const END_POINT = {
   AUTH: {
     LOGIN: '/api/v1/auth/login',
@@ -58,6 +60,13 @@ export const END_POINT = {
   },
   USER: {
     SIGNUP: '/api/v1/users/signup',
+    GRADUATION_STATUS: '/api/v1/graduation-users/my',
+    GRADUATION_TYPE: '/api/v1/graduation-users/graduation-type',
+    SCHEDULES_ALL: '/api/v1/schedules',
+    STATUS_TEXT: (submissionType: GraduationStatus) =>
+      `/api/v1/schedules/type/${submissionType}` as const,
+    THESIS: '/api/v1/thesis',
+    CERTIFICATE: '/api/v1/certificate',
     REFRESH: '/api/v1/auth/refresh',
     SCHEDULE_LIST: '/api/v1/schedules',
     SCHEDULE: (scheduleId: number) => `/api/v1/schedules/${scheduleId}`,

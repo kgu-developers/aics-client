@@ -1,3 +1,4 @@
+export * from './crypto';
 export * from './token';
 export * from './notice';
 export { default as parseError } from './error';

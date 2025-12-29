@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '~/vars.css';
+
 export const form = style({
   width: '300px',
   display: 'flex',
@@ -14,11 +16,13 @@ export const inputWrapper = style({
 
 export const input = style({
   boxSizing: 'border-box',
-  padding: '8px',
-  borderRadius: '4px',
+  paddingRight: vars.spacing.md,
+  paddingLeft: vars.spacing.md,
+  paddingTop: '12px',
+  paddingBottom: '12px',
+  borderRadius: vars.radius.lg,
   border: '1px solid #ccc',
   width: '100%',
-  fontSize: '14px',
 
   ':focus': {
     outline: 'none',
@@ -32,25 +36,6 @@ export const errorMessage = style({
   margin: '4px 0 0 0',
 });
 
-export const submitButton = style({
-  width: '300px',
-  padding: '8px',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  border: 'none',
-  backgroundColor: '#4A90E2',
-  color: 'white',
-  fontSize: '14px',
-  fontWeight: '500',
-  transition: 'all 0.2s ease-in-out',
-
-  ':hover': {
-    backgroundColor: '#357ABD',
-  },
-
-  ':disabled': {
-    cursor: 'not-allowed',
-    opacity: 0.6,
-    backgroundColor: '#4A90E2',
-  },
+export const button = style({
+  fontSize: vars.font.size.sm,
 });

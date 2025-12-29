@@ -12,8 +12,7 @@ import { queryClient, router } from './shared/utils';
 import './globals.css';
 
 function App() {
-  const { isAuthenticated, isAdmin, setIsAuthenticated, setIsAdmin } =
-    useAuthStore();
+  const { isAuthenticated, isAdmin } = useAuthStore();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -24,8 +23,6 @@ function App() {
             auth: {
               isAuthenticated,
               isAdmin,
-              setIsAuthenticated,
-              setIsAdmin,
             },
           }}
         />
