@@ -11,6 +11,7 @@ const ROUTE = {
   ALL: '/all',
   RULES: '/rules',
   LOGIN: '/login',
+  FILE_PREVIEW: '/file-preview',
 } as const;
 
 export default ROUTE;

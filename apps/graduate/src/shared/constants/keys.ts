@@ -9,6 +9,8 @@ const KEYS = {
   NOTICE: 'notice',
   NOTICE_LIST: 'noticeList',
   STUDENT_DETAIL: 'studentDetail',
+  STUDENT_FILE: 'studentFile',
+  APPROVAL: 'approval',
 } as const;
 
 export default KEYS;
