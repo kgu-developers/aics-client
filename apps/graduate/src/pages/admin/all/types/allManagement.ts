@@ -29,4 +29,5 @@ export interface StageData {
   createdAt: string | null;
   isSubmitted: boolean;
   isApproved: boolean;
+  fileId: number | null;
 }

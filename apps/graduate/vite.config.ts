@@ -5,7 +5,6 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import viteReact from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     TanStackRouterVite({ autoCodeSplitting: true }),
@@ -19,8 +18,14 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['crypto-js'],
+    include: ['crypto-js', 'pdfjs-dist'],
   },
+  assetsInclude: [
+    '**/*.worker.js',
+    '**/*.worker.min.js',
+    '**/*.worker.mjs',
+    '**/*.worker.min.mjs',
+  ],
   test: {
     globals: true,
     environment: 'jsdom',

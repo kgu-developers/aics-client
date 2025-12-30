@@ -43,6 +43,14 @@ const nextConfig: NextConfig = {
     '@aics-client/design-system',
     '@aics-client/design-system/styles',
   ],
+  webpack: (config) => {
+    // canvas는 jsdom의 서버 전용 네이티브 의존성이므로 클라이언트 번들에서 제외
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      canvas: false,
+    };
+    return config;
+  },
 };
 
 export default withVanillaExtract(nextConfig);

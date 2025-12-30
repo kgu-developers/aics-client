@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useSearch, useNavigate } from '@tanstack/react-router';
+import { useState, useEffect } from 'react';
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
@@ -26,6 +27,8 @@ import { extractPeriodData, getStatusLabel } from '../utils';
 import UserDetailModal from './UserDetailModal.tsx';
 
 export default function AllManagementPage() {
+  const navigate = useNavigate();
+  const searchParams = useSearch({ from: '/_afterLogin/all' });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -33,6 +36,18 @@ export default function AllManagementPage() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const { toast, confirm } = useToast();
   const [selectedStudentId, setSelectedStudentId] = useState<number>();
+
+  useEffect(() => {
+    if (searchParams?.graduationUserId) {
+      setSelectedStudentId(Number(searchParams.graduationUserId));
+      setIsModalOpen(true);
+      navigate({
+        to: '/all',
+        search: {},
+        replace: true,
+      });
+    }
+  }, [searchParams, navigate]);
 
   const { data: schedules, error: scheduleError } = useScheduleList();
 

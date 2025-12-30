@@ -27,6 +27,7 @@ export function buildStageData(
         createdAt: status.certificate.createdAt,
         isSubmitted: status.certificate.submitted,
         isApproved: status.certificate.approval,
+        fileId: status.certificate.fileId,
       },
     ];
   } else {
@@ -38,6 +39,7 @@ export function buildStageData(
         createdAt: status.midThesis.createdAt,
         isSubmitted: status.midThesis.submitted,
         isApproved: status.midThesis.approval,
+        fileId: status.midThesis.fileId,
       },
       {
         key: 'finalthesis',
@@ -46,6 +48,7 @@ export function buildStageData(
         createdAt: status.finalThesis.createdAt,
         isSubmitted: status.finalThesis.submitted,
         isApproved: status.finalThesis.approval,
+        fileId: status.finalThesis.fileId,
       },
     ];
   }

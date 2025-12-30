@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { Descriptions, Modal, Spin, Table } from 'antd';
 
 import { Header } from '~/shared/components';
@@ -27,6 +28,7 @@ export default function UserDetailModal({
   graduationUserId,
   period,
 }: UserDetailModalProps) {
+  const navigate = useNavigate();
   const {
     data: studentDetail,
     isLoading,
@@ -50,27 +52,32 @@ export default function UserDetailModal({
       dataIndex: 'stage',
       key: 'stage',
       render: (_: string, record: StageData) => {
-        if (record.isSubmitted) {
-          return (
-            <button
-              type='button'
-              style={{
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                cursor: 'pointer',
-                color: vars.colors.main,
-                textDecoration: 'underline',
-              }}
-              onClick={() => {
-                console.log('미리보기 구현');
-              }}
-            >
-              {record.stage}
-            </button>
-          );
-        }
-        return record.stage;
+        return record.isSubmitted && status ? (
+          <button
+            type='button'
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              color: vars.colors.main,
+              textDecoration: 'underline',
+            }}
+            onClick={() => {
+              navigate({
+                to: '/file-preview',
+                search: {
+                  fileId: record.fileId!,
+                  type: status.type,
+                },
+              });
+            }}
+          >
+            {record.stage}
+          </button>
+        ) : (
+          <span>{record.stage}</span>
+        );
       },
     },
     { title: '일정', dataIndex: 'period', key: 'period' },
@@ -133,17 +140,15 @@ export default function UserDetailModal({
           </Descriptions>
         </Container>
 
-        {status && (
-          <Container style={{ padding: '0px' }}>
-            <Table
-              dataSource={stageData}
-              columns={columns}
-              pagination={false}
-              bordered
-              rowKey='key'
-            />
-          </Container>
-        )}
+        <Container style={{ padding: '0px' }}>
+          <Table
+            dataSource={stageData}
+            columns={columns}
+            pagination={false}
+            bordered
+            rowKey='key'
+          />
+        </Container>
       </>
     );
   };
