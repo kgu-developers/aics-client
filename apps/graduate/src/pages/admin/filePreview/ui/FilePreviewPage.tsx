@@ -1,8 +1,8 @@
 import { useNavigate, useSearch } from '@tanstack/react-router';
-import { Button, message, Spin } from 'antd';
+import { Button, Spin } from 'antd';
 
 import { KEYS, ROUTE } from '~/shared/constants';
-import { useUpdateGraduationUsersBatchApprove } from '~/shared/hooks';
+import { useToast, useUpdateGraduationUsersBatchApprove } from '~/shared/hooks';
 import { queryClient } from '~/shared/utils';
 
 import { useStudentDetail } from '~/features/studentDetail';
@@ -16,6 +16,7 @@ import * as style from '../styles/PreviewPage.css';
 
 export default function FilePreviewPage() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { fileId, type } = useSearch({
     from: '/_afterLogin/file-preview',
   });
@@ -46,7 +47,7 @@ export default function FilePreviewPage() {
   const { approveGraduationUsers, mutation: approvalMutation } =
     useUpdateGraduationUsersBatchApprove({
       onSuccess: async () => {
-        message.success('승인이 완료되었습니다.');
+        toast.success('승인이 완료되었습니다.');
         await queryClient.invalidateQueries({
           queryKey: [KEYS.STUDENT_FILE],
         });
@@ -65,7 +66,7 @@ export default function FilePreviewPage() {
     try {
       await approveGraduationUsers([graduationUserid]);
     } catch (error) {
-      message.error('승인에 실패했습니다.');
+      toast.error('승인에 실패했습니다.');
     }
   };
 
