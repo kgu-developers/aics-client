@@ -1,13 +1,15 @@
 import type { SubmissionType } from '~/shared/types';
 
 export const API_URL =
-  import.meta.env.VITE_API_URL || 'https://aics-api.ummdev.com';
+  import.meta.env.VITE_API_URL || 'https://aics-api.kgudevelopers.monster';
 
 export const API_AUTH_URL =
-  import.meta.env.VITE_AUTH_API_URL || 'https://aics-auth.ummdev.com';
+  import.meta.env.VITE_AUTH_API_URL ||
+  'https://aics-auth.kgudevelopers.monster';
 
 export const API_ADMIN_URL =
-  import.meta.env.VITE_ADMIN_API_URL || 'https://aics-admin.ummdev.com';
+  import.meta.env.VITE_ADMIN_API_URL ||
+  'https://aics-admin.kgudevelopers.monster';
 
 export type EndpointValue<T> = T extends string
   ? T
