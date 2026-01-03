@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios';
 
-import { post, patch, del, get } from '~/shared/api';
+import { post, patch, get } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
 import type {
   NoticeApiResponse,
@@ -29,11 +29,17 @@ export interface NoticeListResponse {
 }
 
 export async function createNotice(
-  data: CreateNoticeRequest,
+  data: Omit<CreateNoticeRequest, 'fileId'>,
+  fileId?: number,
 ): Promise<AxiosResponse<NoticeApiResponse>> {
-  return post<NoticeApiResponse, CreateNoticeRequest>({
+  return post<
+    NoticeApiResponse,
+    Omit<CreateNoticeRequest, 'fileId'>,
+    { fileId: number }
+  >({
     request: END_POINT.ADMIN.NOTICE_CREATE,
     data,
+    params: fileId ? { fileId } : undefined,
   });
 }
 
@@ -50,7 +56,7 @@ export async function updateNotice(
 export async function deleteNotice(
   noticeId: number,
 ): Promise<AxiosResponse<void>> {
-  return del<void>({
+  return patch<void>({
     request: END_POINT.ADMIN.NOTICE_DELETE(noticeId),
   });
 }

@@ -56,7 +56,9 @@ export const END_POINT = {
       `/api/v1/admin/schedules/type/${submissionType}/content`,
     NOTICE_CREATE: '/api/v1/admin/posts',
     NOTICE_UPDATE: (noticeId: number) => `/api/v1/admin/posts/${noticeId}`,
-    NOTICE_DELETE: (noticeId: number) => `/api/v1/admin/posts/${noticeId}`,
+    NOTICE_DELETE: (noticeId: number) =>
+      `/api/v1/admin/posts/${noticeId}/delete`,
+    NOTICE_FILE_UPLOAD: '/api/v1/admin/files/post',
     NOTICE_TOGGLE_PINNED: (noticeId: number) =>
       `/api/v1/admin/posts/${noticeId}/pinned`,
     CERTIFICATE_FILE: (certificateId: number) =>
