@@ -30,8 +30,10 @@ interface GetRequestConfig<TParams = unknown> extends BaseRequestConfig {
   responseType?: AxiosRequestConfig['responseType'];
 }
 
-interface MutationRequestConfig<TData = unknown> extends BaseRequestConfig {
+interface MutationRequestConfig<TData = unknown, TParams = unknown>
+  extends BaseRequestConfig {
   data?: TData;
+  params?: TParams;
 }
 
 interface DeleteRequestConfig<TData = unknown> extends BaseRequestConfig {
@@ -235,10 +237,10 @@ function createHttpMethods(instance: AxiosInstance) {
       }
     },
 
-    async post<TResponse = unknown, TData = unknown>(
-      config: MutationRequestConfig<TData>,
+    async post<TResponse = unknown, TData = unknown, TParams = unknown>(
+      config: MutationRequestConfig<TData, TParams>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, data, headers } = config;
+      const { request, data, headers, params } = config;
       try {
         const response = await instance.post<
           TResponse,
@@ -246,6 +248,7 @@ function createHttpMethods(instance: AxiosInstance) {
           TData
         >(request, data, {
           headers,
+          params,
         });
         return response;
       } catch (error: unknown) {
@@ -289,10 +292,10 @@ function createHttpMethods(instance: AxiosInstance) {
       }
     },
 
-    async patch<TResponse = unknown, TData = unknown>(
-      config: MutationRequestConfig<TData>,
+    async patch<TResponse = unknown, TData = unknown, TParams = unknown>(
+      config: MutationRequestConfig<TData, TParams>,
     ): Promise<AxiosResponse<TResponse>> {
-      const { request, data, headers } = config;
+      const { request, data, headers, params } = config;
       try {
         const response = await instance.patch<
           TResponse,
@@ -300,6 +303,7 @@ function createHttpMethods(instance: AxiosInstance) {
           TData
         >(request, data, {
           headers,
+          params,
         });
         return response;
       } catch (error: unknown) {
@@ -330,11 +334,11 @@ async function get<TResponse = unknown, TParams = unknown>(
   }
 }
 
-async function post<TResponse = unknown, TData = unknown>(
-  config: MutationRequestConfig<TData>,
+async function post<TResponse = unknown, TData = unknown, TParams = unknown>(
+  config: MutationRequestConfig<TData, TParams>,
 ): Promise<AxiosResponse<TResponse>> {
   const instance = selectInstanceByRequest(config.request);
-  const { request, data, headers } = config;
+  const { request, data, headers, params } = config;
   try {
     const response = await instance.post<
       TResponse,
@@ -342,6 +346,7 @@ async function post<TResponse = unknown, TData = unknown>(
       TData
     >(request, data, {
       headers,
+      params,
     });
     return response;
   } catch (error: unknown) {
@@ -368,11 +373,11 @@ async function del<TResponse = unknown, TData = unknown>(
   }
 }
 
-async function patch<TResponse = unknown, TData = unknown>(
-  config: MutationRequestConfig<TData>,
+async function patch<TResponse = unknown, TData = unknown, TParams = unknown>(
+  config: MutationRequestConfig<TData, TParams>,
 ): Promise<AxiosResponse<TResponse>> {
   const instance = selectInstanceByRequest(config.request);
-  const { request, data, headers } = config;
+  const { request, data, headers, params } = config;
   try {
     const response = await instance.patch<
       TResponse,
@@ -380,6 +385,7 @@ async function patch<TResponse = unknown, TData = unknown>(
       TData
     >(request, data, {
       headers,
+      params,
     });
     return response;
   } catch (error: unknown) {

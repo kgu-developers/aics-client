@@ -16,9 +16,8 @@ export async function uploadNoticeFile(
   formData.append('file', file);
 
   return post<NoticeFileIdResponse>({
-    request: '/api/v1/admin/files/post',
+    request: END_POINT.ADMIN.NOTICE_FILE_UPLOAD,
     data: formData,
-    headers: { 'Content-Type': 'multipart/form-data' },
   });
 }
 

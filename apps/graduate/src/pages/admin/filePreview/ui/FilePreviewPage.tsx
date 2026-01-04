@@ -5,7 +5,6 @@ import { KEYS, ROUTE } from '~/shared/constants';
 import { useToast, useUpdateGraduationUsersBatchApprove } from '~/shared/hooks';
 import { queryClient } from '~/shared/utils';
 
-import { useStudentDetail } from '~/features/studentDetail';
 
 import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
@@ -13,6 +12,7 @@ import { getSubmissionTypeIndex } from '../../schedule/constant';
 import { useFile } from '../hooks';
 import * as style from '../styles/PreviewPage.css';
 
+import { useStudentDetail } from '~/feature/studentDetail';
 
 export default function FilePreviewPage() {
   const navigate = useNavigate();
@@ -21,12 +21,7 @@ export default function FilePreviewPage() {
     from: '/_afterLogin/file-preview',
   });
 
-  const {
-    data: fileData,
-    isPending,
-    error,
-    refetch,
-  } = useFile(fileId, type);
+  const { data: fileData, isPending, error, refetch } = useFile(fileId, type);
 
   const { data: studentDetail } = useStudentDetail(
     fileData?.graduationUserid ?? 0,

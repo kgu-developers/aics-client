@@ -8,7 +8,8 @@ export function useCreateNotice() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateNoticeRequest) => createNotice(data),
+    mutationFn: ({ fileId, ...data }: CreateNoticeRequest) =>
+      createNotice(data, fileId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [KEYS.NOTICE, 'list'] });
     },

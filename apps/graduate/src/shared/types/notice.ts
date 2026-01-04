@@ -35,6 +35,7 @@ export interface UpdateNoticeRequest {
   title: string;
   content: string;
   isPinned: boolean;
+  category: 'GRADUATION';
   fileId?: number;
 }
 

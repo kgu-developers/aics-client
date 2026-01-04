@@ -76,10 +76,6 @@ export default function NoticeAdminCreatePage({
     name: 'file',
     fileList: fileList,
     maxCount: 1,
-    beforeUpload: file => {
-      toast.info(`${file.name} 파일이 선택되었습니다.`);
-      return false;
-    },
     customRequest: async ({ file, onSuccess, onError }) => {
       try {
         const response = await uploadNoticeFile(file as File);
@@ -109,6 +105,7 @@ export default function NoticeAdminCreatePage({
           title: data.title,
           content: data.content,
           isPinned: data.isPinned,
+          category: data.category,
           fileId: uploadedFileId,
         },
         {

@@ -4,7 +4,6 @@ import { Descriptions, Modal, Spin, Table } from 'antd';
 import { Header } from '~/shared/components';
 import { Container } from '~/shared/components/Container';
 
-import { useStudentDetail } from '~/features/studentDetail';
 
 import type { PeriodData, StageData } from '../types/allManagement';
 import {
@@ -13,6 +12,7 @@ import {
   getStatusLabel,
 } from '../utils';
 
+import { useStudentDetail } from '~/feature/studentDetail';
 import { vars } from '~/vars.css';
 
 interface UserDetailModalProps {
