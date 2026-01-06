@@ -30,8 +30,10 @@ interface GetRequestConfig<TParams = unknown> extends BaseRequestConfig {
   responseType?: AxiosRequestConfig['responseType'];
 }
 
-interface MutationRequestConfig<TData = unknown, TParams = unknown>
-  extends BaseRequestConfig {
+interface MutationRequestConfig<
+  TData = unknown,
+  TParams = unknown,
+> extends BaseRequestConfig {
   data?: TData;
   params?: TParams;
 }
@@ -189,30 +191,12 @@ authInstance.interceptors.request.use(
   },
 );
 
-function getAllEndpointPaths(
-  obj: (typeof END_POINT)[keyof typeof END_POINT],
-): EndpointPath[] {
-  const paths: EndpointPath[] = [];
-  for (const key in obj) {
-    const value = obj[key as keyof typeof obj];
-    if (typeof value === 'string') {
-      paths.push(value as EndpointPath);
-    }
-  }
-  return paths;
-}
-
 function selectInstanceByRequest(request: EndpointPath): AxiosInstance {
-  const authPaths = getAllEndpointPaths(END_POINT.AUTH);
-  if (authPaths.some(path => request === path || request.startsWith(path))) {
+  if (request.startsWith('/api/v1/auth/')) {
     return authInstance;
   }
 
-  const adminPaths = getAllEndpointPaths(END_POINT.ADMIN);
-  if (
-    adminPaths.length > 0 &&
-    adminPaths.some(path => request === path || request.startsWith(path))
-  ) {
+  if (request.startsWith('/api/v1/admin/')) {
     return adminInstance;
   }
 
