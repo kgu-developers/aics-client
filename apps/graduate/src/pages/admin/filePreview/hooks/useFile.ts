@@ -8,9 +8,13 @@ import { transformThesisResponse } from '../util/transformThesisFileResponse';
 
 type FileType = 'CERTIFICATE' | 'THESIS';
 
-export function useFile(fileId: number, type: FileType) {
+export function useFile(
+  fileId: number,
+  type: FileType | undefined,
+  enabled: boolean,
+) {
   return useQuery({
-    queryKey: [KEYS.STUDENT_FILE, type.toLowerCase(), fileId],
+    queryKey: [KEYS.STUDENT_FILE, type?.toLowerCase(), fileId],
     queryFn: async () => {
       if (type === 'CERTIFICATE') {
         const response = await getCertificateFile(fileId);
@@ -20,6 +24,6 @@ export function useFile(fileId: number, type: FileType) {
         return transformThesisResponse(response.data);
       }
     },
-    enabled: !!fileId,
+    enabled: enabled,
   });
 }

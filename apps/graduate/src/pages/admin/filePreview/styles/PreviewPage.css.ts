@@ -27,18 +27,27 @@ export const filePreviewContainer = style({
   backgroundColor: vars.colors.sub,
 });
 
+export const toolbarTriggerArea = style({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: '200px',
+  zIndex: 10,
+  pointerEvents: 'auto',
+});
+
 export const toolbarWrapper = style({
   position: 'absolute',
   bottom: vars.spacing.lg,
   left: '50%',
   transform: 'translateX(-50%)',
-  zIndex: 10,
-  transition: 'opacity 0.3s ease-in-out',
+  transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
   opacity: 1,
-  pointerEvents: 'auto',
   selectors: {
     '&[data-visible="false"]': {
       opacity: 0,
+      transform: 'translateX(-50%) translateY(20px)',
       pointerEvents: 'none',
     },
   },

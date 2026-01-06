@@ -4,13 +4,13 @@ import { FilePreviewPage } from '~/pages/admin/filePreview';
 
 type PreviewSearch = {
   fileId: number;
-  type: 'THESIS' | 'CERTIFICATE';
+  graduationUserId: number;
 };
 
 export const Route = createFileRoute('/_afterLogin/file-preview')({
   validateSearch: (search: Record<string, unknown>): PreviewSearch => ({
     fileId: Number(search.fileId),
-    type: search.type as 'THESIS' | 'CERTIFICATE',
+    graduationUserId: Number(search.graduationUserId),
   }),
   component: () => {
     const { auth } = Route.useRouteContext();

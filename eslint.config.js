@@ -30,6 +30,7 @@ module.exports = defineConfig([
       'eslint.config.js',
       '**/public/admin/**',
       '**/public/**/assets/**',
+      '**/public/**/*.min.js',
     ],
   },
   {
