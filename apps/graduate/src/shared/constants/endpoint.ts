@@ -59,8 +59,6 @@ export const END_POINT = {
     NOTICE_DELETE: (noticeId: number) =>
       `/api/v1/admin/posts/${noticeId}/delete`,
     NOTICE_FILE_UPLOAD: '/api/v1/admin/files/post',
-    NOTICE_TOGGLE_PINNED: (noticeId: number) =>
-      `/api/v1/admin/posts/${noticeId}/pinned`,
     CERTIFICATE_FILE: (certificateId: number) =>
       `/api/v1/admin/certificate/${certificateId}`,
     THESIS_FILE: (thesisId: number) => `/api/v1/admin/thesis/${thesisId}`,
