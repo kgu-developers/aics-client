@@ -1,10 +1,10 @@
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { Button, Spin } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 
-import { KEYS, ROUTE } from '~/shared/constants';
+import { API_URL, KEYS, ROUTE } from '~/shared/constants';
 import { useToast, useUpdateGraduationUsersBatchApprove } from '~/shared/hooks';
 import { queryClient } from '~/shared/utils';
-
 
 import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
@@ -17,27 +17,20 @@ import { useStudentDetail } from '~/feature/studentDetail';
 export default function FilePreviewPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { fileId, type } = useSearch({
+  const { fileId, graduationUserId } = useSearch({
     from: '/_afterLogin/file-preview',
   });
+  const { data: studentDetail, isLoading: isStudentLoading } =
+    useStudentDetail(graduationUserId);
+  const {
+    data: fileData,
+    isPending: isFileLoading,
+    error,
+    refetch,
+  } = useFile(fileId, studentDetail?.status.type, !!studentDetail);
 
-  const { data: fileData, isPending, error, refetch } = useFile(fileId, type);
-
-  const { data: studentDetail } = useStudentDetail(
-    fileData?.graduationUserid ?? 0,
-  );
-
-  if (isPending || !fileData || !studentDetail) {
-    return (
-      <div className={style.container}>
-        <Spin size='large' style={{ marginTop: 100 }} />
-      </div>
-    );
-  }
-
-  const { graduationUserid, scheduleId, file, approval } = fileData;
-
-  const { name, studentId, status } = studentDetail;
+  const [isToolbarVisible, setIsToolbarVisible] = useState(true);
+  const hideTimeoutRef = useRef<number | null>(null);
 
   const { approveGraduationUsers, mutation: approvalMutation } =
     useUpdateGraduationUsersBatchApprove({
@@ -50,16 +43,66 @@ export default function FilePreviewPage() {
       },
     });
 
+  const clearHideTimeout = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  };
+
+  const setHideTimeout = (delay: number) => {
+    clearHideTimeout();
+    hideTimeoutRef.current = setTimeout(() => {
+      setIsToolbarVisible(false);
+    }, delay);
+  };
+
+  useEffect(() => {
+    setHideTimeout(3000);
+    return clearHideTimeout;
+  }, []);
+
+  const handleShowToolbar = () => {
+    setIsToolbarVisible(true);
+    clearHideTimeout();
+  };
+
+  const handleHideToolbar = () => {
+    setHideTimeout(1000);
+  };
+
+  if (isStudentLoading || isFileLoading) {
+    return (
+      <div className={style.container}>
+        <Spin size='large' style={{ marginTop: 100 }} />
+      </div>
+    );
+  }
+
+  if (!fileData || !studentDetail) {
+    return (
+      <div className={style.container}>
+        <div style={{ marginTop: 100, textAlign: 'center' }}>
+          데이터를 불러올 수 없습니다.
+        </div>
+      </div>
+    );
+  }
+
+  const { scheduleId, file, approval } = fileData;
+
+  const { name, studentId, status } = studentDetail;
+
   const handleGoBack = () => {
     navigate({
       to: ROUTE.ALL,
-      search: { graduationUserId: graduationUserid },
+      search: { graduationUserId: graduationUserId },
     });
   };
 
   const handleApprove = async () => {
     try {
-      await approveGraduationUsers([graduationUserid]);
+      await approveGraduationUsers([graduationUserId]);
     } catch (error) {
       toast.error('승인에 실패했습니다.');
     }
@@ -67,8 +110,8 @@ export default function FilePreviewPage() {
 
   const canNavigate =
     status.type === 'THESIS' &&
-    status.midThesis.submitted !== undefined &&
-    status.finalThesis.submitted !== undefined;
+    status.midThesis.submitted === true &&
+    status.finalThesis.submitted === true;
 
   const handleNextFile = () => {
     if (!canNavigate) return;
@@ -76,12 +119,18 @@ export default function FilePreviewPage() {
     if (scheduleId === getSubmissionTypeIndex('MIDTHESIS')) {
       navigate({
         to: ROUTE.FILE_PREVIEW,
-        search: { fileId: status.finalThesis.fileId!, type: status.type },
+        search: {
+          fileId: status.finalThesis.id!,
+          graduationUserId: graduationUserId,
+        },
       });
     } else if (scheduleId === getSubmissionTypeIndex('FINALTHESIS')) {
       navigate({
         to: ROUTE.FILE_PREVIEW,
-        search: { fileId: status.midThesis.fileId!, type: status.type },
+        search: {
+          fileId: status.midThesis.id!,
+          graduationUserId: graduationUserId,
+        },
       });
     }
   };
@@ -95,21 +144,27 @@ export default function FilePreviewPage() {
       </div>
       <div className={style.filePreviewContainer}>
         <FilePreviewContent
-          fileUrl={file.physicalPath}
+          fileUrl={`${API_URL}${file.physicalPath}`}
           error={error}
           onRetry={() => refetch()}
         />
 
-        <div className={style.toolbarWrapper}>
-          <FilePreviewToolbar
-            studentId={studentId}
-            name={name}
-            isApproved={approval ?? false}
-            onApprove={handleApprove}
-            onChangeFile={handleNextFile}
-            canNavigate={canNavigate}
-            isApproving={approvalMutation.isPending}
-          />
+        <div
+          className={style.toolbarTriggerArea}
+          onMouseEnter={handleShowToolbar}
+          onMouseLeave={handleHideToolbar}
+        >
+          <div className={style.toolbarWrapper} data-visible={isToolbarVisible}>
+            <FilePreviewToolbar
+              studentId={studentId}
+              name={name}
+              isApproved={approval ?? false}
+              onApprove={handleApprove}
+              onChangeFile={handleNextFile}
+              canNavigate={canNavigate}
+              isApproving={approvalMutation.isPending}
+            />
+          </div>
         </div>
       </div>
     </div>

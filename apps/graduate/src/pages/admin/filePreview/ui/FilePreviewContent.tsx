@@ -6,10 +6,7 @@ import { Button } from 'antd';
 
 import * as style from '../styles/FilePreviewContent.css';
 
-const pdfjsWorkerUrl = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).href;
+const pdfjsWorkerUrl = '/pdf.worker.min.js';
 
 interface FilePreviewContentProps {
   fileUrl?: string;

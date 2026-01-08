@@ -6,7 +6,6 @@ import type {
   NoticeApiResponse,
   CreateNoticeRequest,
   UpdateNoticeRequest,
-  TogglePinnedRequest,
   NoticeDetailApiResponse,
 } from '~/shared/types';
 
@@ -58,16 +57,6 @@ export async function deleteNotice(
 ): Promise<AxiosResponse<void>> {
   return patch<void>({
     request: END_POINT.ADMIN.NOTICE_DELETE(noticeId),
-  });
-}
-
-export async function toggleNoticePinned(
-  noticeId: number,
-  data: TogglePinnedRequest,
-): Promise<AxiosResponse<NoticeApiResponse>> {
-  return patch<NoticeApiResponse, TogglePinnedRequest>({
-    request: END_POINT.ADMIN.NOTICE_TOGGLE_PINNED(noticeId),
-    data,
   });
 }
 

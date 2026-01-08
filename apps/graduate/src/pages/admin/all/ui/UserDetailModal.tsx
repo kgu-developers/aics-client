@@ -4,7 +4,6 @@ import { Descriptions, Modal, Spin, Table } from 'antd';
 import { Header } from '~/shared/components';
 import { Container } from '~/shared/components/Container';
 
-
 import type { PeriodData, StageData } from '../types/allManagement';
 import {
   buildStageData,
@@ -52,7 +51,7 @@ export default function UserDetailModal({
       dataIndex: 'stage',
       key: 'stage',
       render: (_: string, record: StageData) => {
-        return record.isSubmitted && status ? (
+        return record.isSubmitted ? (
           <button
             type='button'
             style={{
@@ -68,7 +67,7 @@ export default function UserDetailModal({
                 to: '/file-preview',
                 search: {
                   fileId: record.fileId!,
-                  type: status.type,
+                  graduationUserId: graduationUserId,
                 },
               });
             }}

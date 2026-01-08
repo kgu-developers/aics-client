@@ -14,10 +14,10 @@ import type { StudentStatus } from '../types/allManagement';
 export function getStatusLabel(status: StudentStatus | undefined): string {
   switch (status?.type) {
     case 'CERTIFICATE':
-      if (!status.certificate.submitted) {
+      if (!status.submitted) {
         return STATUS_CERTIFICATE_NOT_SUBMITTED;
       }
-      if (!status.certificate.approval) {
+      if (!status.approval) {
         return STATUS_CERTIFICATE_SUBMITTED;
       }
       return STATUS_CERTIFICATE_APPROVED;

@@ -48,8 +48,8 @@ export default function CertificationAdminPage() {
           user.status && user.status.type === 'CERTIFICATE'
             ? user.status
             : null;
-        const status = certStatus?.certificate.submitted ? '제출' : '미제출';
-        const approved = certStatus?.certificate.approval ? '승인' : '미승인';
+        const status = certStatus?.submitted ? '제출' : '미제출';
+        const approved = certStatus?.approval ? '승인' : '미승인';
         return {
           id: user.id,
           no: (page - 1) * pageSize + idx + 1,

@@ -24,10 +24,10 @@ export function buildStageData(
         key: 'certificate',
         stage: '자격증',
         period: period.certificate ?? '-',
-        createdAt: status.certificate.createdAt,
-        isSubmitted: status.certificate.submitted,
-        isApproved: status.certificate.approval,
-        fileId: status.certificate.fileId,
+        createdAt: status.createdAt,
+        isSubmitted: status.submitted,
+        isApproved: status.approval,
+        fileId: status.id,
       },
     ];
   } else {
@@ -39,7 +39,7 @@ export function buildStageData(
         createdAt: status.midThesis.createdAt,
         isSubmitted: status.midThesis.submitted,
         isApproved: status.midThesis.approval,
-        fileId: status.midThesis.fileId,
+        fileId: status.midThesis.id,
       },
       {
         key: 'finalthesis',
@@ -48,7 +48,7 @@ export function buildStageData(
         createdAt: status.finalThesis.createdAt,
         isSubmitted: status.finalThesis.submitted,
         isApproved: status.finalThesis.approval,
-        fileId: status.finalThesis.fileId,
+        fileId: status.finalThesis.id,
       },
     ];
   }

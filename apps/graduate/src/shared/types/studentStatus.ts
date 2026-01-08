@@ -1,23 +1,21 @@
 export type CertificateStatus = {
   type: 'CERTIFICATE';
-  certificate: {
-    fileId: number | null;
-    submitted: boolean;
-    approval: boolean;
-    createdAt: string | null;
-  };
+  id: number | null;
+  submitted: boolean;
+  approval: boolean;
+  createdAt: string | null;
 };
 
 export type ThesisStatus = {
   type: 'THESIS';
   midThesis: {
-    fileId: number | null;
+    id: number | null;
     submitted: boolean;
     approval: boolean;
     createdAt: string | null;
   };
   finalThesis: {
-    fileId: number | null;
+    id: number | null;
     submitted: boolean;
     approval: boolean;
     createdAt: string | null;
