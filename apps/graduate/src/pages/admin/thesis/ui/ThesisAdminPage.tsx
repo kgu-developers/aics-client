@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import type { GraduationUserSummary } from '~/shared/api';
+import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   useApproveGraduationUsers,
   useFetchGraduationUsers,
