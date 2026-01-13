@@ -1,12 +1,12 @@
 import ROUTE from './route';
 
 export const GRADUATION_STATUS = {
-  APPROVED: 'APPROVED',
-  CERTIFICATE: 'CERTIFICATE',
-  MIDTHESIS: 'MIDTHESIS',
-  FINALTHESIS: 'FINALTHESIS',
-  SUBMITTED: 'SUBMITTED',
-  OTHER: 'OTHER',
+  GRADUATION_TYPE_NOT_SUBMITTED: 'GRADUATION_TYPE_NOT_SUBMITTED',
+  PROFESSOR_NOT_ASSIGNED: 'PROFESSOR_NOT_ASSIGNED',
+  MID_THESIS_NOT_SUBMITTED: 'MID_THESIS_NOT_SUBMITTED',
+  FINAL_THESIS_NOT_SUBMITTED: 'FINAL_THESIS_NOT_SUBMITTED',
+  CERTIFICATE_NOT_SUBMITTED: 'CERTIFICATE_NOT_SUBMITTED',
+  GRADUATION_REQUIREMENTS_MET: 'GRADUATION_REQUIREMENTS_MET',
 } as const;
 
 export const GRADUATION_TYPE = {
@@ -25,12 +25,12 @@ export type GraduationType =
   (typeof GRADUATION_TYPE)[keyof typeof GRADUATION_TYPE];
 export type Role = (typeof ROLE)[keyof typeof ROLE];
 export const GRADUATION_STATUS_TEXT: Record<GraduationStatus, string> = {
-  [GRADUATION_STATUS.APPROVED]: '졸업 승인',
-  [GRADUATION_STATUS.CERTIFICATE]: '자격증 증빙',
-  [GRADUATION_STATUS.MIDTHESIS]: '졸업 논문',
-  [GRADUATION_STATUS.FINALTHESIS]: '졸업 논문',
-  [GRADUATION_STATUS.SUBMITTED]: '졸업 논문',
-  [GRADUATION_STATUS.OTHER]: '기타',
+  [GRADUATION_STATUS.GRADUATION_TYPE_NOT_SUBMITTED]: '기타',
+  [GRADUATION_STATUS.PROFESSOR_NOT_ASSIGNED]: '지도교수 배정',
+  [GRADUATION_STATUS.MID_THESIS_NOT_SUBMITTED]: '중간 논문',
+  [GRADUATION_STATUS.FINAL_THESIS_NOT_SUBMITTED]: '최종 논문',
+  [GRADUATION_STATUS.CERTIFICATE_NOT_SUBMITTED]: '자격증 증빙',
+  [GRADUATION_STATUS.GRADUATION_REQUIREMENTS_MET]: '졸업 승인',
 };
 
 type StatusItem = {
@@ -43,7 +43,7 @@ type StatusItem = {
 };
 
 export const STATUS_TEXT: Record<GraduationStatus, StatusItem> = {
-  [GRADUATION_STATUS.OTHER]: {
+  [GRADUATION_STATUS.GRADUATION_TYPE_NOT_SUBMITTED]: {
     title: '아직 졸업 요건 취득 방식을 지정하지 않았어요.',
     description: `졸업 요건 취득 방식 신청 기간이에요.
     요건 취득 방식을 정해 신청해주세요.`,
@@ -53,7 +53,16 @@ export const STATUS_TEXT: Record<GraduationStatus, StatusItem> = {
       href: ROUTE.APPLY,
     },
   },
-  [GRADUATION_STATUS.MIDTHESIS]: {
+  [GRADUATION_STATUS.PROFESSOR_NOT_ASSIGNED]: {
+    title: '지도교수가 배정되지 않았어요.',
+    description: `지도교수 배정 신청을 진행해주세요.
+    지도교수 배정 후 졸업 논문 작성을 시작할 수 있어요.`,
+    button: {
+      label: '지도교수 배정 신청하기',
+      href: ROUTE.APPLY,
+    },
+  },
+  [GRADUATION_STATUS.MID_THESIS_NOT_SUBMITTED]: {
     title: '중간 보고서를 제출하지 않았어요.',
     description: `중간 보고서를 제출해주세요.
     중간 보고서 마감 기한은 2026년 1월 31일까지에요.`,
@@ -62,7 +71,7 @@ export const STATUS_TEXT: Record<GraduationStatus, StatusItem> = {
       href: ROUTE.THESIS_MIDREPORT,
     },
   },
-  [GRADUATION_STATUS.FINALTHESIS]: {
+  [GRADUATION_STATUS.FINAL_THESIS_NOT_SUBMITTED]: {
     title: '최종 보고서를 제출하지 않았어요.',
     description: `최종 보고서를 제출해주세요.
     최종 보고서 마감 기한은 2026년 2월 28일까지에요.`,
@@ -71,16 +80,7 @@ export const STATUS_TEXT: Record<GraduationStatus, StatusItem> = {
       href: ROUTE.THESIS_FINALREPORT,
     },
   },
-  [GRADUATION_STATUS.SUBMITTED]: {
-    title: '보고서 제출이 완료되었어요.',
-    description: `졸업 논문에 대한 문서 제출이 모두 완료되었어요.
-    졸업 논문 심사 일정을 확인해주세요.`,
-    button: {
-      label: '일정 확인하기',
-      href: ROUTE.STATUS,
-    },
-  },
-  [GRADUATION_STATUS.CERTIFICATE]: {
+  [GRADUATION_STATUS.CERTIFICATE_NOT_SUBMITTED]: {
     title: '자격증 증빙 문서를 제출하지 않았어요.',
     description: `자격증 증빙 문서를 제출해주세요.
     자격증 증빙 문서 마감 기한은 2026년 3월 31일까지에요.`,
@@ -90,7 +90,7 @@ export const STATUS_TEXT: Record<GraduationStatus, StatusItem> = {
       href: ROUTE.CERTIFICATION,
     },
   },
-  [GRADUATION_STATUS.APPROVED]: {
+  [GRADUATION_STATUS.GRADUATION_REQUIREMENTS_MET]: {
     title: '졸업 승인이 완료되었어요.',
     description: `졸업 요건이 모두 충족되었어요.
     졸업 승인 일정을 확인해주세요.`,
