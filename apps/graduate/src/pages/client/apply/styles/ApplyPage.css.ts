@@ -9,6 +9,9 @@ export const container = style({
   maxWidth: '768px',
   margin: 'auto',
   gap: vars.spacing.xl,
+  boxSizing: 'border-box',
+  paddingRight: vars.spacing.lg,
+  paddingLeft: vars.spacing.lg,
 });
 
 export const button = style({
