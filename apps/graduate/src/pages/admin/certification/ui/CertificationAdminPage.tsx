@@ -1,16 +1,10 @@
 import { useState } from 'react';
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import type { GraduationUserSummary } from '~/shared/api';
 import {
-  APPROVE_ALERT,
-  APPROVE_CONFIRM_TITLE,
-  APPROVE_EMPTY,
-  APPROVE_FAILED,
-  APPROVE_SUCCESS,
-} from '~/shared/components/Toolbar/toolbarTexts';
-import {
+  useApproveGraduationUsers,
   useFetchGraduationUsers,
-  useUpdateGraduationUsersBatchApprove,
   useToast,
 } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
@@ -24,22 +18,49 @@ export default function CertificationAdminPage() {
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const { toast, confirm } = useToast();
+  const { toast } = useToast();
 
   const resetSelection = () => {
     setSelectedIds([]);
     setPage(1);
   };
 
-  const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
-    onSuccess: resetSelection,
-  });
-
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
     size: pageSize,
     name: query || undefined,
     graduationType: 'CERTIFICATE',
+  });
+
+  const classify = (selected: GraduationUserSummary[]) => {
+    const notSubmitted: typeof selected = [];
+    const pending: typeof selected = [];
+    const alreadyApproved: typeof selected = [];
+
+    selected.forEach(user => {
+      const certStatus =
+        user.status && user.status.type === 'CERTIFICATE' ? user.status : null;
+      if (!certStatus || !certStatus.submitted) {
+        notSubmitted.push(user);
+        return;
+      }
+      if (certStatus.approval) {
+        alreadyApproved.push(user);
+        return;
+      }
+      pending.push(user);
+    });
+
+    return { notSubmitted, pending, alreadyApproved };
+  };
+
+  const { handleApproveSelected } = useApproveGraduationUsers({
+    items: data?.contents ?? [],
+    selectedIds,
+    getId: user => user.id,
+    getLabel: user => `${user.studentId} ${user.name}`,
+    classify,
+    onSuccess: resetSelection,
   });
 
   const rows: CertRow[] = data
@@ -81,27 +102,6 @@ export default function CertificationAdminPage() {
         ? prev.filter(x => x !== numericId)
         : [...prev, numericId],
     );
-  };
-
-  const handleApproveSelected = () => {
-    if (selectedIds.length === 0) {
-      toast.warning(APPROVE_EMPTY);
-      return;
-    }
-    confirm({
-      title: APPROVE_CONFIRM_TITLE,
-      content: APPROVE_ALERT,
-      okText: '승인',
-      cancelText: '취소',
-      onOk: async () => {
-        try {
-          await approveGraduationUsers(selectedIds);
-          toast.success(APPROVE_SUCCESS);
-        } catch (error) {
-          toast.error(error instanceof Error ? error.message : APPROVE_FAILED);
-        }
-      },
-    });
   };
 
   const handleDownloadExcel = async () => {
