@@ -52,9 +52,7 @@ export default function HomePage() {
 
     return (
       <>
-        <p className={styles.headerTitle}>
-          {GRADUATION_STATUS_TEXT[data.submissionType]}
-        </p>
+        <p className={styles.headerTitle}>{data.submissionType}</p>
         <p className={styles.headerDescription}>
           {data.content.split('\n').map(line => (
             <Fragment key={line}>
