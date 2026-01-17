@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import type { GraduationUserSummary } from '~/shared/api';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   useApproveGraduationUsers,
@@ -32,34 +31,23 @@ export default function CertificationAdminPage() {
     graduationType: 'CERTIFICATE',
   });
 
-  const classify = (selected: GraduationUserSummary[]) => {
-    const notSubmitted: typeof selected = [];
-    const pending: typeof selected = [];
-    const alreadyApproved: typeof selected = [];
-
-    selected.forEach(user => {
-      const certStatus =
-        user.status && user.status.type === 'CERTIFICATE' ? user.status : null;
-      if (!certStatus || !certStatus.submitted) {
-        notSubmitted.push(user);
-        return;
-      }
-      if (certStatus.approval) {
-        alreadyApproved.push(user);
-        return;
-      }
-      pending.push(user);
-    });
-
-    return { notSubmitted, pending, alreadyApproved };
-  };
-
   const { handleApproveSelected } = useApproveGraduationUsers({
     items: data?.contents ?? [],
     selectedIds,
     getId: user => user.id,
     getLabel: user => `${user.studentId} ${user.name}`,
-    classify,
+    status: {
+      isSubmitted: user => {
+        const status = user.status;
+        if (!status || status.type !== 'CERTIFICATE') return false;
+        return status.submitted;
+      },
+      isApproved: user => {
+        const status = user.status;
+        if (!status || status.type !== 'CERTIFICATE') return false;
+        return status.approval;
+      },
+    },
     onSuccess: resetSelection,
   });
 

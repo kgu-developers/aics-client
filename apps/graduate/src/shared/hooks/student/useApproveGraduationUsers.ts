@@ -21,18 +21,15 @@ import {
 import { useToast } from '../useToast';
 import { useUpdateGraduationUsersBatchApprove } from './useUpdateGraduationUsersBatchApprove';
 
-type ApprovalBuckets<T> = {
-  notSubmitted: T[];
-  pending: T[];
-  alreadyApproved: T[];
-};
-
-type Options<T> = {
+type UseApproveGraduationUsersProps<T> = {
   items: T[];
   selectedIds: number[];
   getId: (item: T) => number;
   getLabel: (item: T) => string;
-  classify: (selected: T[]) => ApprovalBuckets<T>;
+  status: {
+    isSubmitted: (item: T) => boolean;
+    isApproved: (item: T) => boolean;
+  };
   onSuccess?: () => void | Promise<void>;
 };
 
@@ -47,9 +44,9 @@ export function useApproveGraduationUsers<T>({
   selectedIds,
   getId,
   getLabel,
-  classify,
+  status,
   onSuccess,
-}: Options<T>) {
+}: UseApproveGraduationUsersProps<T>) {
   const { toast, confirm, info } = useToast();
   const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
     onSuccess,
@@ -109,7 +106,24 @@ export function useApproveGraduationUsers<T>({
     }
 
     const selected = items.filter(item => selectedIds.includes(getId(item)));
-    const { notSubmitted, pending, alreadyApproved } = classify(selected);
+    const notSubmitted: T[] = [];
+    const pending: T[] = [];
+    const alreadyApproved: T[] = [];
+
+    selected.forEach(item => {
+      const submitted = status.isSubmitted(item);
+      const approved = status.isApproved(item);
+
+      if (!submitted) {
+        notSubmitted.push(item);
+        return;
+      }
+      if (approved) {
+        alreadyApproved.push(item);
+        return;
+      }
+      pending.push(item);
+    });
 
     if (pending.length === 0) {
       info({

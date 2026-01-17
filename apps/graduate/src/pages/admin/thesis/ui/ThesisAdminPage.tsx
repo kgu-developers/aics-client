@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import type { GraduationUserSummary } from '~/shared/api';
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
   useApproveGraduationUsers,
@@ -32,47 +31,23 @@ export default function ThesisAdminPage() {
     graduationType: 'THESIS',
   });
 
-  const classify = (selected: GraduationUserSummary[]) => {
-    const notSubmitted: typeof selected = [];
-    const pending: typeof selected = [];
-    const alreadyApproved: typeof selected = [];
-
-    selected.forEach(user => {
-      const status = user.status;
-      if (!status || status.type !== 'THESIS') {
-        notSubmitted.push(user);
-        return;
-      }
-
-      const midSubmitted = status.midThesis.submitted;
-      const finalSubmitted = status.finalThesis.submitted;
-      const midApproved = status.midThesis.approval;
-      const finalApproved = status.finalThesis.approval;
-      const hasPending =
-        (midSubmitted && !midApproved) || (finalSubmitted && !finalApproved);
-
-      if (hasPending) {
-        pending.push(user);
-        return;
-      }
-
-      if (midSubmitted && finalSubmitted) {
-        alreadyApproved.push(user);
-        return;
-      }
-
-      notSubmitted.push(user);
-    });
-
-    return { notSubmitted, pending, alreadyApproved };
-  };
-
   const { handleApproveSelected } = useApproveGraduationUsers({
     items: data?.contents ?? [],
     selectedIds,
     getId: user => user.id,
     getLabel: user => `${user.studentId} ${user.name}`,
-    classify,
+    status: {
+      isSubmitted: user => {
+        const status = user.status;
+        if (!status || status.type !== 'THESIS') return false;
+        return status.midThesis.submitted && status.finalThesis.submitted;
+      },
+      isApproved: user => {
+        const status = user.status;
+        if (!status || status.type !== 'THESIS') return false;
+        return status.midThesis.approval && status.finalThesis.approval;
+      },
+    },
     onSuccess: resetSelection,
   });
 
