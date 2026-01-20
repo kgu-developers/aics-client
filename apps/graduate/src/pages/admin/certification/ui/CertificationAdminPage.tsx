@@ -2,15 +2,8 @@ import { useState } from 'react';
 
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
-  APPROVE_ALERT,
-  APPROVE_CONFIRM_TITLE,
-  APPROVE_EMPTY,
-  APPROVE_FAILED,
-  APPROVE_SUCCESS,
-} from '~/shared/components/Toolbar/toolbarTexts';
-import {
+  useApproveGraduationUsers,
   useFetchGraduationUsers,
-  useUpdateGraduationUsersBatchApprove,
   useToast,
 } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
@@ -24,22 +17,38 @@ export default function CertificationAdminPage() {
   const [pageSize, setPageSize] = useState(10);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const { toast, confirm } = useToast();
+  const { toast } = useToast();
 
   const resetSelection = () => {
     setSelectedIds([]);
     setPage(1);
   };
 
-  const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
-    onSuccess: resetSelection,
-  });
-
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
     size: pageSize,
     name: query || undefined,
     graduationType: 'CERTIFICATE',
+  });
+
+  const { handleApproveSelected } = useApproveGraduationUsers({
+    items: data?.contents ?? [],
+    selectedIds,
+    getId: user => user.id,
+    getLabel: user => `${user.studentId} ${user.name}`,
+    status: {
+      isSubmitted: user => {
+        const status = user.status;
+        if (!status || status.type !== 'CERTIFICATE') return false;
+        return status.submitted;
+      },
+      isApproved: user => {
+        const status = user.status;
+        if (!status || status.type !== 'CERTIFICATE') return false;
+        return status.approval;
+      },
+    },
+    onSuccess: resetSelection,
   });
 
   const rows: CertRow[] = data
@@ -81,27 +90,6 @@ export default function CertificationAdminPage() {
         ? prev.filter(x => x !== numericId)
         : [...prev, numericId],
     );
-  };
-
-  const handleApproveSelected = () => {
-    if (selectedIds.length === 0) {
-      toast.warning(APPROVE_EMPTY);
-      return;
-    }
-    confirm({
-      title: APPROVE_CONFIRM_TITLE,
-      content: APPROVE_ALERT,
-      okText: '승인',
-      cancelText: '취소',
-      onOk: async () => {
-        try {
-          await approveGraduationUsers(selectedIds);
-          toast.success(APPROVE_SUCCESS);
-        } catch (error) {
-          toast.error(error instanceof Error ? error.message : APPROVE_FAILED);
-        }
-      },
-    });
   };
 
   const handleDownloadExcel = async () => {

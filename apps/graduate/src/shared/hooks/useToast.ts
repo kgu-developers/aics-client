@@ -1,4 +1,6 @@
 import { App } from 'antd';
+import type { ReactNode } from 'react';
+
 
 export interface ConfirmConfig {
   title: string;
@@ -7,6 +9,12 @@ export interface ConfirmConfig {
   onCancel?: () => void;
   okText?: string;
   cancelText?: string;
+}
+
+export interface InfoConfig {
+  title: string;
+  content?: ReactNode;
+  okText?: string;
 }
 
 export function useToast() {
@@ -27,5 +35,12 @@ export function useToast() {
     });
   };
 
-  return { toast, confirm };
+  const info = (config: InfoConfig) => {
+    modal.info({
+      ...config,
+      okText: config.okText ?? '확인',
+    });
+  };
+
+  return { toast, confirm, info };
 }
