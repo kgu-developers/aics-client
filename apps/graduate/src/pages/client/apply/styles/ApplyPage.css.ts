@@ -3,47 +3,64 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '~/vars.css';
 
 export const container = style({
-  display: 'grid',
-  placeItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
   width: '100%',
-  maxWidth: '768px',
-  margin: 'auto',
+  maxWidth: '800px',
+  margin: '0 auto',
   gap: vars.spacing.xl,
+  padding: vars.spacing.xl,
+  backgroundColor: vars.colors.white,
+  borderRadius: vars.radius.xl,
+  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06)',
+  border: `1px solid ${vars.colors.subHover}`,
   boxSizing: 'border-box',
-  paddingRight: vars.spacing.lg,
-  paddingLeft: vars.spacing.lg,
 });
 
 export const button = style({
   width: '100%',
-  padding: vars.spacing.lg,
+  height: '56px',
   borderRadius: vars.radius.lg,
+  fontSize: vars.font.size.lg,
+  fontWeight: 700,
+  marginTop: vars.spacing.lg,
 });
 
 export const optionButton = style({
   width: '100%',
-  padding: vars.spacing.lg,
+  height: '100px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   borderRadius: vars.radius.lg,
   backgroundColor: vars.colors.white,
-  border: `1px solid ${vars.colors.border}`,
+  border: `1px solid ${vars.colors.subHover}`,
   color: vars.colors.subDark,
-  fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
+  transition: 'all 0.2s ease',
+  fontWeight: 500,
+  cursor: 'pointer',
   ':hover': {
     backgroundColor: vars.colors.sub,
+    transform: 'translateY(-2px)',
   },
 });
 
 export const activeOptionButton = style({
   width: '100%',
-  padding: vars.spacing.lg,
+  height: '100px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   borderRadius: vars.radius.lg,
   backgroundColor: vars.colors.mainXLight,
-  border: `1px solid ${vars.colors.main}`,
-  color: vars.colors.subText,
-  fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
-  ':hover': {
-    backgroundColor: vars.colors.sub,
-  },
+  border: `2px solid ${vars.colors.main}`,
+  color: vars.colors.main,
+  transition: 'all 0.2s ease',
+  fontWeight: 700,
+  boxShadow: '0 4px 12px rgba(0, 106, 228, 0.1)',
+  cursor: 'pointer',
 });
 
 export const drawer = style({

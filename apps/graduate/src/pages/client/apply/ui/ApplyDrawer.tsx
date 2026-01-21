@@ -48,17 +48,15 @@ export default function ApplyDrawer({
         className={styles.drawerDescription}
       />
 
-      <Link to={ROUTE.HOME}>
-        <Button
-          onClick={submitGraduationType}
-          loading={isSubmitting}
-          size='large'
-          className={styles.submitButton}
-          type='primary'
-        >
-          제출하기
-        </Button>
-      </Link>
+      <Button
+        onClick={submitGraduationType}
+        loading={isSubmitting}
+        size='large'
+        className={styles.submitButton}
+        type='primary'
+      >
+        제출하기
+      </Button>
     </Drawer>
   );
 }
