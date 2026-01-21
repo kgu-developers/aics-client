@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { Table, Tag, Spin } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FileText } from 'lucide-react';
@@ -18,6 +19,7 @@ interface NoticeDataType {
 }
 
 export default function NoticePage() {
+  const navigate = useNavigate();
   const { data, isLoading } = useNoticeList({
     category: 'GRADUATION',
     page: 0,
@@ -129,8 +131,7 @@ export default function NoticePage() {
               scroll={{ x: 'max-content' }}
               onRow={record => ({
                 onClick: () => {
-                  // TODO: 상세 페이지로 이동
-                  console.log('Notice clicked:', record.noticeId);
+                  navigate({ to: `/notice/${record.noticeId}` });
                 },
                 style: { cursor: 'pointer' },
               })}

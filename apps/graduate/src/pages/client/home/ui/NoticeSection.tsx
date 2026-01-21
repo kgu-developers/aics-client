@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { FileText } from 'lucide-react';
 
 import { DataTable, Section } from '~/shared/components';
@@ -17,6 +17,7 @@ type NoticeRow = {
 };
 
 export default function NoticeSection() {
+  const navigate = useNavigate();
   const { data, isLoading } = useNoticeList({
     category: 'GRADUATION',
     page: 0,
@@ -46,7 +47,9 @@ export default function NoticeSection() {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
+            cursor: 'pointer',
           }}
+          onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
         >
           {row.isPinned && (
             <span
@@ -74,7 +77,14 @@ export default function NoticeSection() {
       header: '작성자',
       width: '20%',
       align: 'center' as const,
-      cell: (row: NoticeRow) => row.author,
+      cell: (row: NoticeRow) => (
+        <div
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
+        >
+          {row.author}
+        </div>
+      ),
     },
     {
       key: 'createdAt',
@@ -83,11 +93,18 @@ export default function NoticeSection() {
       align: 'center' as const,
       cell: (row: NoticeRow) => {
         const dateObj = new Date(row.createdAt);
-        return dateObj.toLocaleDateString('ko-KR', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
+        return (
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
+          >
+            {dateObj.toLocaleDateString('ko-KR', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })}
+          </div>
+        );
       },
     },
   ];
