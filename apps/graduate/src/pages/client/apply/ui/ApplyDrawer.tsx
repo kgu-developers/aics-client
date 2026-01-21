@@ -1,4 +1,4 @@
-import { Link, useRouter } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 import { Button, Drawer, Steps } from 'antd';
 
 import { type GraduationType, ROUTE } from '~/shared/constants';
