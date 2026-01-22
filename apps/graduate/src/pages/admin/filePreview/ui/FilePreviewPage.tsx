@@ -37,7 +37,7 @@ export default function FilePreviewPage() {
       onSuccess: async () => {
         toast.success('승인이 완료되었습니다.');
         await queryClient.invalidateQueries({
-          queryKey: [KEYS.STUDENT_FILE],
+          queryKey: [...KEYS.STUDENT_FILE],
         });
         await refetch();
       },

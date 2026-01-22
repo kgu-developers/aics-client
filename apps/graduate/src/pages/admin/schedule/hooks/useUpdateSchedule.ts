@@ -26,9 +26,9 @@ export function useUpdateSchedule() {
       return updateSchedule(scheduleId, requestData);
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
       queryClient.invalidateQueries({
-        queryKey: [KEYS.SCHEDULE, variables.scheduleId],
+        queryKey: [...KEYS.SCHEDULE, variables.scheduleId],
       });
     },
   });

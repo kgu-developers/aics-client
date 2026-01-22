@@ -9,7 +9,7 @@ export function useDeleteSchedule() {
   return useMutation({
     mutationFn: (scheduleId: number) => deleteSchedule(scheduleId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
     },
   });
 }

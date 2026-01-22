@@ -9,7 +9,7 @@ export function useDeleteNotice() {
   return useMutation({
     mutationFn: (noticeId: number) => deleteNotice(noticeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.NOTICE, 'list'] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
     },
   });
 }

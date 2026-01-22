@@ -14,7 +14,7 @@ const fetchAllSchedule = async (): Promise<Schedule[]> => {
 
 export const useFetchAllSchedule = () => {
   return useQuery({
-    queryKey: [KEYS.SCHEDULE_ALL],
+    queryKey: [...KEYS.SCHEDULE_ALL],
     queryFn: fetchAllSchedule,
   });
 };

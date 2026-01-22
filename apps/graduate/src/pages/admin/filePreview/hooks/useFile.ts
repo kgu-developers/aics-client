@@ -14,7 +14,7 @@ export function useFile(
   enabled: boolean,
 ) {
   return useQuery({
-    queryKey: [KEYS.STUDENT_FILE, type?.toLowerCase(), fileId],
+    queryKey: [...KEYS.STUDENT_FILE, type?.toLowerCase(), fileId],
     queryFn: async () => {
       if (type === 'CERTIFICATE') {
         const response = await getCertificateFile(fileId);

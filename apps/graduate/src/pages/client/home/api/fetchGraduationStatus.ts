@@ -14,7 +14,7 @@ const fetchGraduationStatus = async (): Promise<UserStatus> => {
 
 export const useFetchGraduationStatus = () => {
   return useQuery({
-    queryKey: [KEYS.GRADUATION_STATUS],
+    queryKey: [...KEYS.GRADUATION_STATUS],
     queryFn: () => fetchGraduationStatus(),
   });
 };
