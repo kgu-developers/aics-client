@@ -2,7 +2,7 @@ import { CertificateFileResponse } from '~/shared/types';
 
 import { FileItem } from '../model/filePreview';
 
-export function transformCertificateResponse(
+export default function transformCertificateResponse(
   data: CertificateFileResponse,
 ): FileItem {
   return {

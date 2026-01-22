@@ -2,7 +2,9 @@ import { ThesisFileResponse } from '~/shared/types';
 
 import { FileItem } from '../model/filePreview';
 
-export function transformThesisResponse(data: ThesisFileResponse): FileItem {
+export default function transformThesisResponse(
+  data: ThesisFileResponse,
+): FileItem {
   return {
     ...data,
     graduationUserid: data.id,

@@ -1,6 +1,6 @@
 import type { Column } from '~/shared/components/DataTable/DataTable';
 
-import type { ThesisRow } from '../types/rows';
+import type { ThesisRow } from '../types/row';
 
 export const thesisColumns: ReadonlyArray<Column<ThesisRow>> = [
   { key: 'no', header: '번호', width: 30, cell: r => r.no },

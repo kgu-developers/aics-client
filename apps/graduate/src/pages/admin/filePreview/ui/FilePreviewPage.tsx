@@ -8,7 +8,7 @@ import { queryClient } from '~/shared/utils';
 
 import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
-import { getSubmissionTypeIndex } from '../../schedule/constant';
+import { getSubmissionTypeIndex } from '../../schedule/constants';
 import { useFile } from '../hooks';
 import * as style from '../styles/PreviewPage.css';
 

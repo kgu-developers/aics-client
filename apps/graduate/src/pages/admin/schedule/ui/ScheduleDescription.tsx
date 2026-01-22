@@ -5,7 +5,7 @@ import { TextEditor } from '~/shared/components';
 import { useScheduleContent, useToast } from '~/shared/hooks';
 import type { SubmissionType } from '~/shared/types';
 
-import { SUBMISSION_TYPE_OPTIONS } from '../constant';
+import { SUBMISSION_TYPE_OPTIONS } from '../constants';
 import { useUpdateScheduleContent } from '../hooks';
 import * as style from '../styles/ScheduleDescription.css.ts';
 

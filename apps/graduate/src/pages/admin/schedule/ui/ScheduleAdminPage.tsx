@@ -6,10 +6,7 @@ import { useScheduleList } from '~/shared/hooks';
 
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';
-import {
-  getScheduleStatusLabel,
-  getSubmissionTypeLabel,
-} from '../constant/schedule.ts';
+import { getScheduleStatusLabel, getSubmissionTypeLabel } from '../constants';
 import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleAdminPage.css.ts';
 

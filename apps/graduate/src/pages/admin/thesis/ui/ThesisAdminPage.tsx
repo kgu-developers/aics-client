@@ -9,7 +9,7 @@ import {
 import * as style from '~/shared/styles/adminPage.css';
 
 import { thesisColumns } from '../constants/thesisColumns';
-import type { ThesisRow } from '../types/rows';
+import type { ThesisRow } from '../types/row';
 
 export default function ThesisAdminPage() {
   const {
