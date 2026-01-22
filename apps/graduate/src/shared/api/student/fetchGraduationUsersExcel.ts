@@ -1,10 +1,8 @@
 import { get } from '~/shared/api';
-import { END_POINT } from '~/shared/constants';
-
-import type { GraduationTypeFilter } from './fetchGraduationUsers';
+import { END_POINT, GraduationType } from '~/shared/constants';
 
 export type FetchGraduationUsersExcelParams = {
-  graduationType?: GraduationTypeFilter;
+  graduationType?: GraduationType;
 };
 
 export type FetchGraduationUsersExcelResult = {

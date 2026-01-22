@@ -2,14 +2,14 @@ import { get } from '~/shared/api';
 import { END_POINT, GraduationType } from '~/shared/constants';
 import type { StudentStatus } from '~/shared/types';
 
-type Graduation = '미정' | '논문' | '자격증';
+export type GraduationLabelType = '미정' | '논문' | '자격증';
 
 export type GraduationUserSummary = {
   id: number;
   studentId: string;
   name: string;
   graduationDate: string;
-  graduationType: Graduation;
+  graduationType: GraduationLabelType;
   status?: StudentStatus;
 };
 

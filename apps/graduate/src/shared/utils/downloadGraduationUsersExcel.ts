@@ -1,10 +1,11 @@
 import { fetchGraduationUsersExcel } from '~/shared/api';
-import type { GraduationTypeFilter } from '~/shared/api/student/fetchGraduationUsers';
+
+import { GraduationType } from '../constants';
 
 const DEFAULT_FILENAME = '졸업_대상자_목록.xlsx';
 
 export default async function downloadGraduationUsersExcel(
-  graduationType?: GraduationTypeFilter,
+  graduationType?: GraduationType,
   fallbackFilename = DEFAULT_FILENAME,
 ) {
   const { blob, filename } = await fetchGraduationUsersExcel(
