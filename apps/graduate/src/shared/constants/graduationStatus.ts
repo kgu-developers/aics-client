@@ -11,7 +11,7 @@ export const GRADUATION_STATUS = {
 
 export const GRADUATION_TYPE = {
   THESIS: 'THESIS',
-  CERTIFICATION: 'CERTIFICATION',
+  CERTIFICATION: 'CERTIFICATE',
 } as const;
 
 export const ROLE = {

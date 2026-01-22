@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import type { GraduationTypeFilter } from '~/shared/api/student/fetchGraduationUsers';
+import { GraduationType } from '~/shared/constants';
 import { useToast } from '~/shared/hooks';
 import { downloadGraduationUsersExcel } from '~/shared/utils';
 
-export function useAdminDownload(graduationType?: GraduationTypeFilter) {
+export function useAdminDownload(graduationType?: GraduationType) {
   const { toast } = useToast();
 
   const handleDownload = useCallback(async () => {
