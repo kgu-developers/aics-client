@@ -1,4 +1,4 @@
-import { GRADUATION_STATUS } from '~/shared/constants';
+import { SCHEDULE } from '~/shared/constants';
 import { SubmissionType } from '~/shared/types';
 
 import type { PeriodData } from '../types/allManagement';
@@ -16,8 +16,8 @@ export function extractPeriodData(
   };
 
   return {
-    certificate: findPeriod(GRADUATION_STATUS.CERTIFICATE),
-    midThesis: findPeriod(GRADUATION_STATUS.MIDTHESIS),
-    finalThesis: findPeriod(GRADUATION_STATUS.FINALTHESIS),
+    certificate: findPeriod(SCHEDULE.CERTIFICATE),
+    midThesis: findPeriod(SCHEDULE.MIDTHESIS),
+    finalThesis: findPeriod(SCHEDULE.FINALTHESIS),
   };
 }
