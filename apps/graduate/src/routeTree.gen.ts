@@ -19,6 +19,7 @@ import { Route as AfterLoginScheduleRouteImport } from './routes/_afterLogin/sch
 import { Route as AfterLoginRulesRouteImport } from './routes/_afterLogin/rules'
 import { Route as AfterLoginFilePreviewRouteImport } from './routes/_afterLogin/file-preview'
 import { Route as AfterLoginCertificationRouteImport } from './routes/_afterLogin/certification'
+import { Route as AfterLoginApplyConfirmRouteImport } from './routes/_afterLogin/apply-confirm'
 import { Route as AfterLoginApplyRouteImport } from './routes/_afterLogin/apply'
 import { Route as AfterLoginAllRouteImport } from './routes/_afterLogin/all'
 import { Route as AfterLoginNoticeIndexRouteImport } from './routes/_afterLogin/notice/index'
@@ -74,6 +75,11 @@ const AfterLoginCertificationRoute = AfterLoginCertificationRouteImport.update({
   path: '/certification',
   getParentRoute: () => AfterLoginRoute,
 } as any)
+const AfterLoginApplyConfirmRoute = AfterLoginApplyConfirmRouteImport.update({
+  id: '/apply-confirm',
+  path: '/apply-confirm',
+  getParentRoute: () => AfterLoginRoute,
+} as any)
 const AfterLoginApplyRoute = AfterLoginApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
+  '/apply-confirm': typeof AfterLoginApplyConfirmRoute
   '/certification': typeof AfterLoginCertificationRoute
   '/file-preview': typeof AfterLoginFilePreviewRoute
   '/rules': typeof AfterLoginRulesRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/all': typeof AfterLoginAllRoute
   '/apply': typeof AfterLoginApplyRoute
+  '/apply-confirm': typeof AfterLoginApplyConfirmRoute
   '/certification': typeof AfterLoginCertificationRoute
   '/file-preview': typeof AfterLoginFilePreviewRoute
   '/rules': typeof AfterLoginRulesRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_afterLogin/all': typeof AfterLoginAllRoute
   '/_afterLogin/apply': typeof AfterLoginApplyRoute
+  '/_afterLogin/apply-confirm': typeof AfterLoginApplyConfirmRoute
   '/_afterLogin/certification': typeof AfterLoginCertificationRoute
   '/_afterLogin/file-preview': typeof AfterLoginFilePreviewRoute
   '/_afterLogin/rules': typeof AfterLoginRulesRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/all'
     | '/apply'
+    | '/apply-confirm'
     | '/certification'
     | '/file-preview'
     | '/rules'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/all'
     | '/apply'
+    | '/apply-confirm'
     | '/certification'
     | '/file-preview'
     | '/rules'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_afterLogin/all'
     | '/_afterLogin/apply'
+    | '/_afterLogin/apply-confirm'
     | '/_afterLogin/certification'
     | '/_afterLogin/file-preview'
     | '/_afterLogin/rules'
@@ -280,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AfterLoginCertificationRouteImport
       parentRoute: typeof AfterLoginRoute
     }
+    '/_afterLogin/apply-confirm': {
+      id: '/_afterLogin/apply-confirm'
+      path: '/apply-confirm'
+      fullPath: '/apply-confirm'
+      preLoaderRoute: typeof AfterLoginApplyConfirmRouteImport
+      parentRoute: typeof AfterLoginRoute
+    }
     '/_afterLogin/apply': {
       id: '/_afterLogin/apply'
       path: '/apply'
@@ -321,6 +340,7 @@ declare module '@tanstack/react-router' {
 interface AfterLoginRouteChildren {
   AfterLoginAllRoute: typeof AfterLoginAllRoute
   AfterLoginApplyRoute: typeof AfterLoginApplyRoute
+  AfterLoginApplyConfirmRoute: typeof AfterLoginApplyConfirmRoute
   AfterLoginCertificationRoute: typeof AfterLoginCertificationRoute
   AfterLoginFilePreviewRoute: typeof AfterLoginFilePreviewRoute
   AfterLoginRulesRoute: typeof AfterLoginRulesRoute
@@ -336,6 +356,7 @@ interface AfterLoginRouteChildren {
 const AfterLoginRouteChildren: AfterLoginRouteChildren = {
   AfterLoginAllRoute: AfterLoginAllRoute,
   AfterLoginApplyRoute: AfterLoginApplyRoute,
+  AfterLoginApplyConfirmRoute: AfterLoginApplyConfirmRoute,
   AfterLoginCertificationRoute: AfterLoginCertificationRoute,
   AfterLoginFilePreviewRoute: AfterLoginFilePreviewRoute,
   AfterLoginRulesRoute: AfterLoginRulesRoute,

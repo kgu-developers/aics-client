@@ -1,4 +1,4 @@
-import { Link, useRouter } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 import { Button, Drawer, Steps } from 'antd';
 
 import { type GraduationType, ROUTE } from '~/shared/constants';
@@ -48,17 +48,15 @@ export default function ApplyDrawer({
         className={styles.drawerDescription}
       />
 
-      <Link to={ROUTE.HOME}>
-        <Button
-          onClick={submitGraduationType}
-          loading={isSubmitting}
-          size='large'
-          className={styles.submitButton}
-          type='primary'
-        >
-          제출하기
-        </Button>
-      </Link>
+      <Button
+        onClick={submitGraduationType}
+        loading={isSubmitting}
+        size='large'
+        className={styles.submitButton}
+        type='primary'
+      >
+        제출하기
+      </Button>
     </Drawer>
   );
 }

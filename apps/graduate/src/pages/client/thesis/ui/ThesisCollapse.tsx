@@ -1,0 +1,39 @@
+import { Collapse, CollapseProps } from 'antd';
+import type { CSSProperties } from 'react';
+
+import * as styles from '~/shared/styles/SubmissionPage.css';
+
+import { ThesisFileUploadDragger } from './ThesisFileUploadDragger';
+
+interface ThesisCollapseProps {
+  activeKey: 'midreport' | 'finalreport';
+}
+
+export const ThesisCollapse = ({ activeKey }: ThesisCollapseProps) => {
+  const items: (
+    panelStyle: CSSProperties,
+  ) => CollapseProps['items'] = panelStyle => [
+    {
+      key: 'midreport',
+      label: '중간 보고서 제출',
+      children: <ThesisFileUploadDragger />,
+      style: panelStyle,
+    },
+    {
+      key: 'finalreport',
+      label: '최종 보고서 제출',
+      children: <ThesisFileUploadDragger />,
+      style: panelStyle,
+    },
+  ];
+
+  return (
+    <Collapse
+      size='large'
+      bordered={false}
+      items={items(styles.panelStyle)}
+      defaultActiveKey={[activeKey]}
+      className={styles.collapse}
+    />
+  );
+};

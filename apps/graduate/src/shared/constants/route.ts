@@ -12,6 +12,7 @@ const ROUTE = {
   RULES: '/rules',
   LOGIN: '/login',
   FILE_PREVIEW: '/file-preview',
+  APPLY_CONFIRM: '/apply-confirm',
 } as const;
 
 export default ROUTE;

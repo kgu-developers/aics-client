@@ -67,6 +67,7 @@ export const END_POINT = {
     SIGNUP: '/api/v1/users/signup',
     GRADUATION_STATUS: '/api/v1/graduation-users/my',
     GRADUATION_TYPE: '/api/v1/graduation-users/graduation-type',
+    CONFIRM_EMAIL: '/api/v1/graduation-users/email',
     SCHEDULES_ALL: '/api/v1/schedules',
     STATUS_TEXT: (submissionType: GraduationStatus) =>
       `/api/v1/schedules/type/${submissionType}` as const,

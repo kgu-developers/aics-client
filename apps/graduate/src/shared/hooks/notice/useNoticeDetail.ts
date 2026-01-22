@@ -6,7 +6,7 @@ import { transformNoticeDetailResponse } from '~/shared/utils';
 
 export function useNoticeDetail(noticeId: number) {
   return useQuery({
-    queryKey: [KEYS.NOTICE, noticeId],
+    queryKey: [KEYS.NOTICE, 'detail', noticeId],
     queryFn: async () => {
       const response = await getNoticeDetail(noticeId);
       return transformNoticeDetailResponse(response.data);

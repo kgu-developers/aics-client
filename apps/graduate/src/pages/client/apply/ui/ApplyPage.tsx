@@ -1,9 +1,12 @@
-import { Link, useSearch } from '@tanstack/react-router';
+import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { Button } from 'antd';
 import { useState } from 'react';
 
-import { Section } from '~/shared/components';
-import { GRADUATION_TYPE, type GraduationType } from '~/shared/constants';
+import {
+  GRADUATION_TYPE,
+  ROUTE,
+  type GraduationType,
+} from '~/shared/constants';
 
 import ApplyDrawer from './ApplyDrawer';
 import ApplySteps from './ApplySteps';
@@ -14,6 +17,7 @@ import * as styles from '../styles/ApplyPage.css';
 import { vars } from '~/vars.css';
 
 export default function ApplyPage() {
+  const navigate = useNavigate();
   const { confirm } = useSearch({ from: '/_afterLogin/apply' }) as {
     confirm: boolean;
   };
@@ -23,43 +27,69 @@ export default function ApplyPage() {
   const { mutate: submitGraduationType, isPending: isSubmitting } =
     useSubmitGraduationType();
 
+  const handleSubmit = () => {
+    submitGraduationType(selectedOption, {
+      onSuccess: () => {
+        navigate({ to: ROUTE.APPLY_CONFIRM });
+      },
+    });
+  };
+
   return (
     <div className={styles.container}>
-      <Section.Header
-        subtitle={`${STEP_TITLE[selectedOption]} 절차는 다음과 같이 진행돼요.`}
-      >
-        졸업 요건 취득 방식 신청
-      </Section.Header>
+      <header style={{ width: '100%', marginBottom: vars.spacing.md }}>
+        <h1
+          style={{
+            fontSize: vars.font.size['2xl'],
+            fontWeight: 700,
+            color: vars.colors.black,
+            marginBottom: vars.spacing.xs,
+          }}
+        >
+          졸업 요건 취득 방식 신청
+        </h1>
+        <p style={{ fontSize: vars.font.size.md, color: vars.colors.subDark }}>
+          {STEP_TITLE[selectedOption]} 절차는 다음과 같이 진행돼요.
+        </p>
+      </header>
 
       <ApplySteps selectedOption={selectedOption} confirm={confirm} />
 
-      <div style={{ display: 'flex', gap: vars.spacing.md, width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: vars.spacing.md,
+          width: '100%',
+          marginTop: vars.spacing.lg,
+        }}
+      >
         {Object.values(GRADUATION_TYPE).map(type => (
-          <Button
+          <button
             key={type}
-            size='large'
-            variant='text'
             className={
               selectedOption === type
                 ? styles.activeOptionButton
                 : styles.optionButton
             }
-            type='primary'
             onClick={() => setSelectedOption(type)}
           >
             {STEP_TITLE[type]}
-          </Button>
+          </button>
         ))}
       </div>
 
       <ApplyDrawer
         confirm={confirm}
         selectedOption={selectedOption}
-        submitGraduationType={() => submitGraduationType(selectedOption)}
+        submitGraduationType={handleSubmit}
         isSubmitting={isSubmitting}
       />
 
-      <Link to={'/apply?confirm=true' as any} style={{ width: '100%' }}>
+      <Link
+        to={ROUTE.APPLY}
+        search={{ confirm: true }}
+        style={{ width: '100%' }}
+      >
         <Button size='large' className={styles.button} type='primary'>
           제출하기
         </Button>

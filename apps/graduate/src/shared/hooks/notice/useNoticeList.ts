@@ -19,3 +19,5 @@ export function useNoticeList(params?: NoticeListParams) {
     },
   });
 }
+
+export { useNoticeDetail } from './useNoticeDetail';

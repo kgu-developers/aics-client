@@ -9,6 +9,9 @@ export const container = style({
   maxWidth: '768px',
   margin: 'auto',
   gap: vars.spacing.xl,
+  paddingRight: vars.spacing.lg,
+  paddingLeft: vars.spacing.lg,
+  boxSizing: 'border-box',
 });
 
 export const collapse = style({

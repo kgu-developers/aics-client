@@ -12,4 +12,5 @@ export const container = style({
   backgroundColor: vars.colors.white,
   padding: vars.spacing.xl,
   borderRadius: vars.radius.lg,
+  boxSizing: 'border-box',
 });

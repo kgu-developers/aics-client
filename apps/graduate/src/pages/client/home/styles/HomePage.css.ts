@@ -32,6 +32,7 @@ export const upperSection = style({
   '@media': {
     '(max-width: 768px)': {
       flexDirection: 'column',
+      height: 'fit-content',
     },
   },
 });
@@ -44,6 +45,11 @@ export const header = style({
   backgroundColor: vars.colors.main,
   borderRadius: vars.radius.lg,
   gap: vars.spacing.lg,
+  '@media': {
+    '(max-width: 768px)': {
+      height: 'fit-content',
+    },
+  },
 });
 
 export const headerTextWrapper = style({
@@ -102,6 +108,11 @@ export const homeButtonSection = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: vars.spacing.md,
+  '@media': {
+    '(max-width: 768px)': {
+      height: 'fit-content',
+    },
+  },
 });
 
 export const homeButton = style({
