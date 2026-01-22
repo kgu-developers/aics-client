@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react';
 import * as styles from '~/shared/styles/SubmissionPage.css';
 
 import { ThesisFileUploadDragger } from './ThesisFileUploadDragger';
+import { SCHEDULE } from '~/shared/constants/';
 
 interface ThesisCollapseProps {
   activeKey: 'midreport' | 'finalreport';
@@ -16,13 +17,13 @@ export const ThesisCollapse = ({ activeKey }: ThesisCollapseProps) => {
     {
       key: 'midreport',
       label: '중간 보고서 제출',
-      children: <ThesisFileUploadDragger />,
+      children: <ThesisFileUploadDragger type={SCHEDULE.MIDTHESIS} />,
       style: panelStyle,
     },
     {
       key: 'finalreport',
       label: '최종 보고서 제출',
-      children: <ThesisFileUploadDragger />,
+      children: <ThesisFileUploadDragger type={SCHEDULE.FINALTHESIS} />,
       style: panelStyle,
     },
   ];

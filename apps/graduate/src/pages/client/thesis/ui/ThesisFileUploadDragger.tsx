@@ -5,7 +5,13 @@ import { useSubmitThesis } from '../api/submitThesis';
 
 const { Dragger } = Upload;
 
-export const ThesisFileUploadDragger = () => {
+interface ThesisFileUploadDraggerProps {
+  type: 'MIDTHESIS' | 'FINALTHESIS';
+}
+
+export const ThesisFileUploadDragger = ({
+  type,
+}: ThesisFileUploadDraggerProps) => {
   const { mutateAsync: submitThesis } = useSubmitThesis();
 
   const customUploadRequest: UploadProps['customRequest'] = async options => {
@@ -14,6 +20,10 @@ export const ThesisFileUploadDragger = () => {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append(
+        'request',
+        new Blob([JSON.stringify({ type })], { type: 'application/json' }),
+      );
 
       const response = await submitThesis(formData);
 
@@ -29,7 +39,7 @@ export const ThesisFileUploadDragger = () => {
 
   const uploadProps: UploadProps = {
     name: 'file',
-    multiple: true,
+    multiple: false,
     customRequest: customUploadRequest,
     onChange(info) {
       const { status } = info.file;
