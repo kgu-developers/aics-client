@@ -1,7 +1,6 @@
 import { App } from 'antd';
 import type { ReactNode } from 'react';
 
-
 export interface ConfirmConfig {
   title: string;
   content?: string;

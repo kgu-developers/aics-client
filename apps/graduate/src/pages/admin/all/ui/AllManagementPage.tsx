@@ -15,7 +15,6 @@ import {
   useToast,
   useScheduleList,
 } from '~/shared/hooks';
-
 import * as style from '~/shared/styles/adminPage.css';
 
 import { allManagementColumns } from '../constants/allManagementColumns';

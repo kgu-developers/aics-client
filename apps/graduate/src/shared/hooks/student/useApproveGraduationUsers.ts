@@ -62,9 +62,7 @@ export function useApproveGraduationUsers<T>({
         : [APPROVE_RESULT_NONE];
     const notApprovedLines =
       notApprovedDetails.length > 0
-        ? notApprovedDetails.map(
-            item => `- ${item.label} (${item.reason})`,
-          )
+        ? notApprovedDetails.map(item => `- ${item.label} (${item.reason})`)
         : [APPROVE_RESULT_NONE];
 
     return [

@@ -6,7 +6,6 @@ import {
   useApproveGraduationUsers,
   useFetchGraduationUsers,
 } from '~/shared/hooks';
-
 import * as style from '~/shared/styles/adminPage.css';
 
 import { certColumns } from '../constants/certColumns';
