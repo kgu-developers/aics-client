@@ -6,7 +6,6 @@ import { useScheduleList } from '~/shared/hooks';
 
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';
-import { getScheduleStatusLabel, getSubmissionTypeLabel } from '../constants';
 import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleAdminPage.css.ts';
 
@@ -19,7 +18,6 @@ export default function ScheduleSection() {
       dataIndex: 'submissionType',
       key: 'submissionType',
       width: 150,
-      render: submissionType => getSubmissionTypeLabel(submissionType),
     },
     {
       title: '시작 일정',
@@ -38,7 +36,6 @@ export default function ScheduleSection() {
       dataIndex: 'status',
       key: 'status',
       width: 200,
-      render: status => getScheduleStatusLabel(status),
     },
   ];
 

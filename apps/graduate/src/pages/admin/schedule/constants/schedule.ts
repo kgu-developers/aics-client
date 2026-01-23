@@ -1,8 +1,4 @@
-import type {
-  ScheduleStatus,
-  SubmissionType,
-  SubmissionTypeLabel,
-} from '~/shared/types';
+import type { SubmissionType, SubmissionTypeLabel } from '~/shared/types';
 
 export const SUBMISSION_TYPE_OPTIONS = [
   { value: 'SUBMITTED', label: '신청접수' },
@@ -31,13 +27,4 @@ export function getSubmissionTypeLabel(
 ): SubmissionTypeLabel {
   const option = SUBMISSION_TYPE_OPTIONS.find(option => option.value === type);
   return option?.label ?? '기타자격';
-}
-
-export function getScheduleStatusLabel(status: ScheduleStatus): string {
-  const labels: Record<ScheduleStatus, string> = {
-    IN_PROGRESS: '진행중',
-    PENDING: '대기',
-    CLOSED: '마감',
-  };
-  return labels[status];
 }

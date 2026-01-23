@@ -135,10 +135,7 @@ export default function ScheduleEditModal({
                   }}
                   options={scheduleData.map(schedule => ({
                     value: schedule.submissionType,
-                    label:
-                      scheduleOptions.find(
-                        opt => opt.value === schedule.submissionType,
-                      )?.label ?? schedule.submissionType,
+                    label: schedule.submissionType,
                   }))}
                   className={style.fullWidthSelect}
                   size='large'
