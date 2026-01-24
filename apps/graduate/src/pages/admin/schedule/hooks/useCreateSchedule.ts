@@ -10,7 +10,7 @@ export function useCreateSchedule() {
   return useMutation({
     mutationFn: (data: CreateScheduleRequest) => createSchedule(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
     },
   });
 }

@@ -8,7 +8,7 @@ import { queryClient } from '~/shared/utils';
 
 import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
-import { getSubmissionTypeIndex } from '../../schedule/constant';
+import { getSubmissionTypeIndex } from '../../schedule/constants';
 import { useFile } from '../hooks';
 import * as style from '../styles/PreviewPage.css';
 
@@ -37,7 +37,7 @@ export default function FilePreviewPage() {
       onSuccess: async () => {
         toast.success('승인이 완료되었습니다.');
         await queryClient.invalidateQueries({
-          queryKey: [KEYS.STUDENT_FILE],
+          queryKey: [...KEYS.STUDENT_FILE],
         });
         await refetch();
       },

@@ -11,7 +11,7 @@ export function useCreateNotice() {
     mutationFn: ({ fileId, ...data }: CreateNoticeRequest) =>
       createNotice(data, fileId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.NOTICE, 'list'] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
     },
   });
 }

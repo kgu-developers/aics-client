@@ -20,7 +20,7 @@ export function useRemoveGraduationUsers({ onSuccess }: Options = {}) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [KEYS.GRADUATION_USERS],
+        queryKey: [...KEYS.GRADUATION_USERS],
       });
       await onSuccess?.();
     },

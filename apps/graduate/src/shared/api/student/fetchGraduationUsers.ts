@@ -1,17 +1,15 @@
 import { get } from '~/shared/api';
-import { END_POINT } from '~/shared/constants';
+import { END_POINT, GraduationType } from '~/shared/constants';
 import type { StudentStatus } from '~/shared/types';
 
-export type GraduationType = '미정' | '논문' | '자격증';
-
-export type GraduationTypeFilter = 'THESIS' | 'CERTIFICATE';
+export type GraduationLabelType = '미정' | '논문' | '자격증';
 
 export type GraduationUserSummary = {
   id: number;
   studentId: string;
   name: string;
   graduationDate: string;
-  graduationType: GraduationType;
+  graduationType: GraduationLabelType;
   status?: StudentStatus;
 };
 
@@ -32,7 +30,7 @@ export type FetchGraduationUsersParams = {
   page: number;
   size: number;
   name?: string;
-  graduationType?: GraduationTypeFilter;
+  graduationType?: GraduationType;
 };
 
 export const fetchGraduationUsers = async (

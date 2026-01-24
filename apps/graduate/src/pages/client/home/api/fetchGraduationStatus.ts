@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { get } from '~/shared/api';
-import { END_POINT, QUERY_KEYS } from '~/shared/constants';
+import { END_POINT, KEYS } from '~/shared/constants';
 
 import type { UserStatus } from '../model/status';
 
@@ -14,7 +14,7 @@ const fetchGraduationStatus = async (): Promise<UserStatus> => {
 
 export const useFetchGraduationStatus = () => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GRADUATION_STATUS],
+    queryKey: [...KEYS.GRADUATION_STATUS],
     queryFn: () => fetchGraduationStatus(),
   });
 };

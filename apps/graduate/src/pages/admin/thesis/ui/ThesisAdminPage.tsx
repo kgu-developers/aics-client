@@ -1,54 +1,32 @@
-import { useState } from 'react';
-
 import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
 import {
+  useAdminDownload,
+  useAdminPagination,
+  useAdminSelection,
   useApproveGraduationUsers,
   useFetchGraduationUsers,
-  useToast,
 } from '~/shared/hooks';
-import { downloadGraduationUsersExcel } from '~/shared/utils';
+import * as style from '~/shared/styles/adminPage.css';
 
 import { thesisColumns } from '../constants/thesisColumns';
-import * as style from '../styles/ThesisAdminPage.css';
-import type { ThesisRow } from '../types/rows';
+import type { ThesisRow } from '../types/row';
 
 export default function ThesisAdminPage() {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [query, setQuery] = useState('');
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const { toast } = useToast();
-
-  const resetSelection = () => {
-    setSelectedIds([]);
-    setPage(1);
-  };
+  const {
+    page,
+    setPage,
+    pageSize,
+    query,
+    handleQueryChange,
+    handlePageSizeChange,
+    resetToFirstPage,
+  } = useAdminPagination();
 
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
     size: pageSize,
     name: query || undefined,
     graduationType: 'THESIS',
-  });
-
-  const { handleApproveSelected } = useApproveGraduationUsers({
-    items: data?.contents ?? [],
-    selectedIds,
-    getId: user => user.id,
-    getLabel: user => `${user.studentId} ${user.name}`,
-    status: {
-      isSubmitted: user => {
-        const status = user.status;
-        if (!status || status.type !== 'THESIS') return false;
-        return status.midThesis.submitted && status.finalThesis.submitted;
-      },
-      isApproved: user => {
-        const status = user.status;
-        if (!status || status.type !== 'THESIS') return false;
-        return status.midThesis.approval && status.finalThesis.approval;
-      },
-    },
-    onSuccess: resetSelection,
   });
 
   const rows: ThesisRow[] = data
@@ -79,37 +57,37 @@ export default function ThesisAdminPage() {
       })
     : [];
 
+  const { selectedIds, toggleAll, toggleOne, resetSelection } =
+    useAdminSelection(rows);
+
+  const { handleDownload } = useAdminDownload('THESIS');
+
+  const handleResetSelection = () => {
+    resetSelection();
+    resetToFirstPage();
+  };
+
+  const { handleApproveSelected } = useApproveGraduationUsers({
+    items: data?.contents ?? [],
+    selectedIds,
+    getId: user => user.id,
+    getLabel: user => `${user.studentId} ${user.name}`,
+    status: {
+      isSubmitted: user => {
+        const status = user.status;
+        if (!status || status.type !== 'THESIS') return false;
+        return status.midThesis.submitted && status.finalThesis.submitted;
+      },
+      isApproved: user => {
+        const status = user.status;
+        if (!status || status.type !== 'THESIS') return false;
+        return status.midThesis.approval && status.finalThesis.approval;
+      },
+    },
+    onSuccess: handleResetSelection,
+  });
+
   const totalItems = data?.pageable.totalElements ?? 0;
-
-  const toggleAll = () => {
-    const pageIds = rows.map(r => r.id);
-    const allChecked =
-      pageIds.length > 0 && pageIds.every(id => selectedIds.includes(id));
-    setSelectedIds(prev =>
-      allChecked
-        ? prev.filter(id => !pageIds.includes(id))
-        : Array.from(new Set([...prev, ...pageIds])),
-    );
-  };
-
-  const toggleOne = (id: string | number) => {
-    const numericId = Number(id);
-    setSelectedIds(prev =>
-      prev.includes(numericId)
-        ? prev.filter(x => x !== numericId)
-        : [...prev, numericId],
-    );
-  };
-
-  const handleDownloadExcel = async () => {
-    try {
-      await downloadGraduationUsersExcel('THESIS');
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
-      );
-    }
-  };
 
   return (
     <div className={style.root}>
@@ -119,11 +97,8 @@ export default function ThesisAdminPage() {
         <Toolbar
           selectedCount={selectedIds.length}
           query={query}
-          onQueryChange={v => {
-            setQuery(v);
-            setPage(1);
-          }}
-          onDownload={handleDownloadExcel}
+          onQueryChange={handleQueryChange}
+          onDownload={handleDownload}
           onApprove={handleApproveSelected}
         />
 
@@ -143,10 +118,7 @@ export default function ThesisAdminPage() {
           pageSize={pageSize}
           totalItems={totalItems}
           onGoto={setPage}
-          onPageSizeChange={size => {
-            setPageSize(size);
-            setPage(1);
-          }}
+          onPageSizeChange={handlePageSizeChange}
         />
       </div>
     </div>

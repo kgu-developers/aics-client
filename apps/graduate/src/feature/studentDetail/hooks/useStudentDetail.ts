@@ -6,7 +6,7 @@ import { getStudentDetail } from '../api';
 
 export function useStudentDetail(studentId: number) {
   return useQuery({
-    queryKey: [KEYS.STUDENT_DETAIL, studentId],
+    queryKey: [...KEYS.STUDENT_DETAIL, studentId],
     queryFn: async () => {
       const response = await getStudentDetail(studentId);
       return response.data;

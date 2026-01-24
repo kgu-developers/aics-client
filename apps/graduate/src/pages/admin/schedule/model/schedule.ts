@@ -1,8 +1,8 @@
-import type { ScheduleStatus, SubmissionType } from '~/shared/types';
+import type { ScheduleStatus, SubmissionTypeLabel } from '~/shared/types';
 
 export type ScheduleItem = {
   id: number;
-  submissionType: SubmissionType;
+  submissionType: SubmissionTypeLabel;
   startDate: string;
   endDate: string;
   status: ScheduleStatus;

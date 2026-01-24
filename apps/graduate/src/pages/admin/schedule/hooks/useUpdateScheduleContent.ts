@@ -18,7 +18,7 @@ export function useUpdateScheduleContent() {
       updateScheduleContent(submissionType, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: [KEYS.SCHEDULE_CONTENT, variables.submissionType],
+        queryKey: [...KEYS.SCHEDULE_CONTENT, variables.submissionType],
       });
     },
   });

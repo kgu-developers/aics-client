@@ -7,12 +7,15 @@ import {
   DELETE_CONFIRM_TITLE,
 } from '~/shared/components/Toolbar/toolbarTexts';
 import {
+  useAdminDownload,
+  useAdminPagination,
+  useAdminSelection,
   useFetchGraduationUsers,
   useRemoveGraduationUsers,
   useToast,
   useScheduleList,
 } from '~/shared/hooks';
-import { downloadGraduationUsersExcel } from '~/shared/utils';
+import * as style from '~/shared/styles/adminPage.css';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import {
@@ -21,7 +24,6 @@ import {
   TYPE_LABEL,
   TYPE_UNKNOWN,
 } from '../constants/allManagementTexts';
-import * as style from '../styles/AllManagementPage.css.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import { extractPeriodData, getStatusLabel } from '../utils';
 import UserDetailModal from './UserDetailModal.tsx';
@@ -30,12 +32,18 @@ export default function AllManagementPage() {
   const navigate = useNavigate();
   const searchParams = useSearch({ from: '/_afterLogin/all' });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [query, setQuery] = useState('');
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const { toast, confirm } = useToast();
   const [selectedStudentId, setSelectedStudentId] = useState<number>();
+  const { toast, confirm } = useToast();
+
+  const {
+    page,
+    setPage,
+    pageSize,
+    query,
+    handleQueryChange,
+    handlePageSizeChange,
+    resetToFirstPage,
+  } = useAdminPagination();
 
   useEffect(() => {
     if (searchParams?.graduationUserId) {
@@ -54,15 +62,6 @@ export default function AllManagementPage() {
   if (scheduleError) {
     toast.error('스케줄 정보를 불러오는데 실패했습니다.');
   }
-
-  const resetSelection = () => {
-    setSelectedIds([]);
-    setPage(1);
-  };
-
-  const { removeGraduationUsers } = useRemoveGraduationUsers({
-    onSuccess: resetSelection,
-  });
 
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
@@ -87,6 +86,20 @@ export default function AllManagementPage() {
       })
     : [];
 
+  const { selectedIds, toggleAll, toggleOne, resetSelection } =
+    useAdminSelection(rows);
+
+  const { handleDownload } = useAdminDownload();
+
+  const handleResetSelection = () => {
+    resetSelection();
+    resetToFirstPage();
+  };
+
+  const { removeGraduationUsers } = useRemoveGraduationUsers({
+    onSuccess: handleResetSelection,
+  });
+
   const handleDeleteSelected = () => {
     if (selectedIds.length === 0) return;
     confirm({
@@ -107,15 +120,6 @@ export default function AllManagementPage() {
     });
   };
 
-  const handleDownloadExcel = async () => {
-    try {
-      await downloadGraduationUsersExcel();
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : '다운로드에 실패했습니다.',
-      );
-    }
-  };
   const onNameClick = (id: number) => {
     setSelectedStudentId(id);
     setIsModalOpen(true);
@@ -130,26 +134,6 @@ export default function AllManagementPage() {
 
   const totalItems = data?.pageable.totalElements ?? 0;
 
-  const toggleAll = () => {
-    const pageIds = rows.map(r => r.id);
-    const allChecked =
-      pageIds.length > 0 && pageIds.every(id => selectedIds.includes(id));
-    setSelectedIds(prev =>
-      allChecked
-        ? prev.filter(id => !pageIds.includes(id))
-        : Array.from(new Set([...prev, ...pageIds])),
-    );
-  };
-
-  const toggleOne = (id: string | number) => {
-    const numericId = Number(id);
-    setSelectedIds(prev =>
-      prev.includes(numericId)
-        ? prev.filter(x => x !== numericId)
-        : [...prev, numericId],
-    );
-  };
-
   return (
     <div className={style.root}>
       <div className={style.container}>
@@ -158,13 +142,10 @@ export default function AllManagementPage() {
         <Toolbar
           selectedCount={selectedIds.length}
           query={query}
-          onQueryChange={v => {
-            setQuery(v);
-            setPage(1);
-          }}
+          onQueryChange={handleQueryChange}
           onApprove={() => {}}
           onDeleteSelected={handleDeleteSelected}
-          onDownload={handleDownloadExcel}
+          onDownload={handleDownload}
           disabledApprove={true}
         />
 
@@ -192,10 +173,7 @@ export default function AllManagementPage() {
           pageSize={pageSize}
           totalItems={totalItems}
           onGoto={setPage}
-          onPageSizeChange={size => {
-            setPageSize(size);
-            setPage(1);
-          }}
+          onPageSizeChange={handlePageSizeChange}
         />
       </div>
     </div>

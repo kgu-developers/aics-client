@@ -9,7 +9,6 @@ const ROUTE = {
   STATUS: '/status',
   SCHEDULE: '/schedule',
   ALL: '/all',
-  RULES: '/rules',
   LOGIN: '/login',
   FILE_PREVIEW: '/file-preview',
   APPLY_CONFIRM: '/apply-confirm',

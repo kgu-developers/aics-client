@@ -1,4 +1,4 @@
-import type { GraduationType } from '~/shared/api/student/fetchGraduationUsers';
+import { GraduationLabelType } from '~/shared/api';
 
 import type { AllManagementRow } from '../types/allManagement';
 
@@ -32,7 +32,7 @@ export const TITLE_ALL_MANAGEMENT = '졸업 대상 전체 관리';
 export const LOADING_TEXT = '불러오는 중...';
 
 export const TYPE_LABEL: Record<
-  GraduationType,
+  GraduationLabelType,
   AllManagementRow['graduationTypeLabel']
 > = {
   미정: TYPE_UNKNOWN,

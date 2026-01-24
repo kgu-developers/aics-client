@@ -16,7 +16,7 @@ export function useUpdateGraduationUsersBatchApprove({
     mutationFn: updateGraduationUsersBatchApprove,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [KEYS.GRADUATION_USERS],
+        queryKey: [...KEYS.GRADUATION_USERS],
       });
       await onSuccess?.();
     },

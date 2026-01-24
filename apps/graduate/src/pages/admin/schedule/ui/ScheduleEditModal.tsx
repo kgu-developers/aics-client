@@ -8,7 +8,6 @@ import { modalStyles } from '~/shared/config';
 import { DATE_FORMAT } from '~/shared/constants';
 import { useToast } from '~/shared/hooks';
 
-import { SUBMISSION_TYPE_OPTIONS } from '../constant/schedule.ts';
 import { useUpdateSchedule } from '../hooks';
 import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleEditModal.css.ts';
@@ -29,7 +28,6 @@ export default function ScheduleEditModal({
   const { mutate: updateSchedule, isPending } = useUpdateSchedule();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { toast } = useToast();
-  const scheduleOptions = SUBMISSION_TYPE_OPTIONS;
 
   const {
     control,
@@ -135,10 +133,7 @@ export default function ScheduleEditModal({
                   }}
                   options={scheduleData.map(schedule => ({
                     value: schedule.submissionType,
-                    label:
-                      scheduleOptions.find(
-                        opt => opt.value === schedule.submissionType,
-                      )?.label ?? schedule.submissionType,
+                    label: schedule.submissionType,
                   }))}
                   className={style.fullWidthSelect}
                   size='large'

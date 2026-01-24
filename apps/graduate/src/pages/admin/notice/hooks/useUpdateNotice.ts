@@ -10,8 +10,8 @@ export function useUpdateNotice(noticeId: number) {
   return useMutation({
     mutationFn: (data: UpdateNoticeRequest) => updateNotice(noticeId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KEYS.NOTICE, 'list'] });
-      queryClient.invalidateQueries({ queryKey: [KEYS.NOTICE, noticeId] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
+      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, noticeId] });
     },
   });
 }

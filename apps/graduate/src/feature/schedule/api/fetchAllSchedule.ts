@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { get } from '~/shared/api';
-import { END_POINT, QUERY_KEYS } from '~/shared/constants';
+import { END_POINT, KEYS } from '~/shared/constants';
 
 import type { Schedule } from '../model/schedule';
 
@@ -14,7 +14,7 @@ const fetchAllSchedule = async (): Promise<Schedule[]> => {
 
 export const useFetchAllSchedule = () => {
   return useQuery({
-    queryKey: [QUERY_KEYS.SCHEDULE_ALL],
+    queryKey: [...KEYS.SCHEDULE_ALL],
     queryFn: fetchAllSchedule,
   });
 };

@@ -3,3 +3,4 @@ export * from './schedule';
 export * from './notice';
 export * from './student';
 export * from './useToast';
+export * from './admin-table';

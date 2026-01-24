@@ -19,13 +19,13 @@ export function useSubmitGraduationUser({ onSuccess }: Options = {}) {
   const singleMutation = useMutation({
     mutationFn: submitGraduationUser,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [KEYS.GRADUATION_USERS] }),
+      queryClient.invalidateQueries({ queryKey: [...KEYS.GRADUATION_USERS] }),
   });
 
   const batchMutation = useMutation({
     mutationFn: submitGraduationUsersBatch,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [KEYS.GRADUATION_USERS] }),
+      queryClient.invalidateQueries({ queryKey: [...KEYS.GRADUATION_USERS] }),
   });
 
   const submitSingle = async (values: GraduationUserCreateRequest) => {
