@@ -8,7 +8,7 @@ import type {
   UpdateScheduleRequest,
 } from '~/shared/types';
 
-import type { ScheduleItem } from '~/pages/admin/schedule/model';
+import type { ScheduleItem } from '~/admin/pages/schedule/model';
 
 export interface ScheduleListResponse {
   contents: ScheduleItem[];

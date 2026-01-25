@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { AllManagementPage } from '~/pages/admin/all';
+import { AllManagementPage } from '~/admin/pages/all';
 
 type AllSearchParams = {
   graduationUserId?: number;

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { ROLE } from '../constants';
+import { USER_ROLE } from '../types/graduation';
 import { getAccessToken, getRole } from '../utils';
 
 interface AuthState {
@@ -10,5 +10,5 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>(() => ({
   isAuthenticated: !!getAccessToken(),
-  isAdmin: getRole() === ROLE.ADMIN,
+  isAdmin: getRole() === USER_ROLE.ADMIN,
 }));

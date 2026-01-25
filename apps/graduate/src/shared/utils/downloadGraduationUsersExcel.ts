@@ -1,6 +1,6 @@
-import { fetchGraduationUsersExcel } from '~/shared/api';
-
 import { GraduationType } from '../constants';
+
+import { fetchGraduationUsersExcel } from '~/admin/shared/api';
 
 const DEFAULT_FILENAME = '졸업_대상자_목록.xlsx';
 

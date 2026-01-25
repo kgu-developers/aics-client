@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { ThesisAdminPage } from '~/pages/admin/thesis';
-import { ThesisPage } from '~/pages/client/thesis';
+import { ThesisAdminPage } from '~/admin/pages/thesis';
+import { ThesisPage } from '~/client/pages/thesis';
 
 export const Route = createFileRoute('/_afterLogin/thesis')({
   component: () => {

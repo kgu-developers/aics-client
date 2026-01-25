@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { CertificationAdminPage } from '~/pages/admin/certification';
-import { CertificationPage } from '~/pages/client/certification';
+import { CertificationAdminPage } from '~/admin/pages/certification';
+import { CertificationPage } from '~/client/pages/certification';
 
 export const Route = createFileRoute('/_afterLogin/certification')({
   component: () => {

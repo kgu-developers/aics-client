@@ -3,7 +3,7 @@ import type {
   NoticeDetailApiResponse,
 } from '~/shared/types';
 
-import type { NoticeDetailItem, NoticeItem } from '~/pages/admin/notice/model';
+import type { NoticeDetailItem, NoticeItem } from '~/admin/pages/notice/model';
 
 export function transformNoticeResponse(data: NoticeApiResponse): NoticeItem {
   return {

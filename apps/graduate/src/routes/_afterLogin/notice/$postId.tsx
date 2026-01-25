@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { NoticeAdminCreatePage } from '~/pages/admin/notice';
-import { NoticeDetailPage } from '~/pages/client/notice';
+import { NoticeAdminCreatePage } from '~/admin/pages/notice';
+import { NoticeDetailPage } from '~/client/pages/notice';
 
 export const Route = createFileRoute('/_afterLogin/notice/$postId')({
   component: RouteComponent,

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 
-import { StudentAddModal } from '~/widgets/StudentAddModal';
+import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
 
 import * as style from './Toolbar.css';
 

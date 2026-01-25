@@ -1,4 +1,5 @@
-import { STORAGE_KEYS, type Role } from '~/shared/constants';
+import { STORAGE_KEYS } from '~/shared/constants';
+import { type UserRole } from '~/shared/types/graduation';
 
 import { decrypt, encrypt } from './crypto';
 
@@ -14,10 +15,10 @@ export const getRefreshToken = (): string | null => {
   return decrypt(refreshToken);
 };
 
-export const getRole = (): Role | null => {
+export const getRole = (): UserRole | null => {
   const role = localStorage.getItem(STORAGE_KEYS.ROLE);
   if (!role) return null;
-  return decrypt(role) as Role;
+  return decrypt(role) as UserRole;
 };
 
 export const setAccessToken = (token: string): void => {
@@ -28,7 +29,7 @@ export const setRefreshToken = (token: string): void => {
   localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, encrypt(token));
 };
 
-export const setRole = (role: Role): void => {
+export const setRole = (role: UserRole): void => {
   localStorage.setItem(STORAGE_KEYS.ROLE, encrypt(role));
 };
 

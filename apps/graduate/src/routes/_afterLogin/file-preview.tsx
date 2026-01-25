@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { FilePreviewPage } from '~/pages/admin/filePreview';
+import { FilePreviewPage } from '~/admin/pages/filePreview';
 
 type PreviewSearch = {
   fileId: number;

@@ -3,9 +3,8 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 import { useAuthStore } from '~/shared/stores';
 
-import { Header } from '~/widgets/Header';
-import { Sidebar } from '~/widgets/sidebar';
-
+import { Sidebar } from '~/admin/widgets/sidebar';
+import { Header as ClientHeader } from '~/client/widgets/Header';
 import { vars } from '~/vars.css';
 
 export interface AuthContext {
@@ -49,7 +48,7 @@ export const Route = createRootRouteWithContext<AuthContext>()({
               minWidth: '100dvw',
             }}
           >
-            <Header />
+            <ClientHeader />
             <main
               style={{
                 position: 'absolute',
