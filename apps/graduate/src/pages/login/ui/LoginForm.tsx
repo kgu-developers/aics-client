@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '~/shared/components';
@@ -7,6 +8,8 @@ import type { LoginFormData } from '../model/login';
 import * as styles from '../styles/loginForm.css';
 
 export default function LoginForm() {
+  const [loginError, setLoginError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -18,13 +21,23 @@ export default function LoginForm() {
     },
   });
 
+  useEffect(() => {
+    if (errors.userId || errors.password) {
+      setLoginError(null);
+    }
+  }, [errors.userId, errors.password]);
+
   const { mutate: submitLogin, isPending } = useSubmitLogin({
     onSuccess: () => {
       window.location.reload();
     },
+    onError: errorCode => {
+      setLoginError(errorCode);
+    },
   });
 
   const onSubmit = (data: LoginFormData) => {
+    setLoginError(null);
     submitLogin(data);
   };
 
@@ -56,6 +69,7 @@ export default function LoginForm() {
           <p className={styles.errorMessage}>{errors.password.message}</p>
         )}
       </div>
+      {loginError && <p className={styles.errorMessage}>{loginError}</p>}
       <Button
         size='md'
         type='submit'

@@ -19,7 +19,7 @@ export const useSubmitLogin = ({
   onError,
 }: {
   onSuccess?: () => void;
-  onError?: () => void;
+  onError?: (errorCode: string) => void;
 }) => {
   return useMutation({
     mutationFn: submitLogin,
@@ -29,8 +29,10 @@ export const useSubmitLogin = ({
       setRole(response.role);
       onSuccess?.();
     },
-    onError: () => {
-      onError?.();
+    onError: (error: unknown) => {
+      const errorMessage =
+        error instanceof Error ? error.message : '로그인에 실패했습니다';
+      onError?.(errorMessage);
     },
   });
 };

@@ -52,6 +52,7 @@ const ERROR_CODE_MESSAGES: Record<string, string> = {
   GRADUATION_USER_ID_DUPLICATED: '이미 등록된 학번입니다.',
   USER_ID_NOT_FOUND: '유저 목록에 없는 학번입니다.',
   USER_NOT_FOUND: '유저 목록에 없는 학번입니다.',
+  INVALID_PASSWORD: '비밀번호가 올바르지 않습니다.',
 };
 
 function getDefaultMessage(statusCode?: number): string {
