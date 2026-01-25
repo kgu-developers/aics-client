@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { deleteNotice } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
+
+import { deleteNotice } from '~/admin/shared/api';
 
 export function useDeleteNotice() {
   const queryClient = useQueryClient();

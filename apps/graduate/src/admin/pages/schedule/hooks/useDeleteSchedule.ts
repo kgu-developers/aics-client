@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { deleteSchedule } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
+
+import { deleteSchedule } from '~/admin/shared/api';
 
 export function useDeleteSchedule() {
   const queryClient = useQueryClient();

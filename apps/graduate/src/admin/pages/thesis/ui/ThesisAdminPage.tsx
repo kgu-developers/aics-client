@@ -1,9 +1,10 @@
-import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import { Header, Pagination } from '~/shared/components';
 
 import { thesisColumns } from '../constants/thesisColumns';
 import type { ThesisRow } from '../types/row';
 
 import { type GraduationUserSummary } from '~/admin/shared/api';
+import { DataTable, Toolbar } from '~/admin/shared/components';
 import {
   useAdminDownload,
   useAdminPagination,

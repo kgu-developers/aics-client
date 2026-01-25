@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getNoticeDetail } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import { transformNoticeDetailResponse } from '~/shared/utils';
+
+import { getNoticeDetail } from '~/admin/shared/api';
 
 export function useNoticeDetail(noticeId: number) {
   return useQuery({

@@ -2,7 +2,6 @@ import { useNavigate } from '@tanstack/react-router';
 import { Descriptions, Modal, Spin, Table } from 'antd';
 
 import { Header } from '~/shared/components';
-import { Container } from '~/shared/components/Container';
 
 import type { PeriodData, StageData } from '../types/allManagement';
 import {
@@ -12,6 +11,7 @@ import {
 } from '../utils';
 
 import { useStudentDetail } from '~/admin/features/studentDetail';
+import { Container } from '~/admin/shared/components/Container';
 import { vars } from '~/vars.css';
 
 interface UserDetailModalProps {

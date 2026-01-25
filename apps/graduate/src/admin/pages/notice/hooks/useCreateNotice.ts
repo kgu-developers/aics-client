@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createNotice } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import type { CreateNoticeRequest } from '~/shared/types';
+
+import { createNotice } from '~/admin/shared/api';
 
 export function useCreateNotice() {
   const queryClient = useQueryClient();

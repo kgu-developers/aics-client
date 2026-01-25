@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createSchedule } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import { CreateScheduleRequest } from '~/shared/types';
+
+import { createSchedule } from '~/admin/shared/api';
 
 export function useCreateSchedule() {
   const queryClient = useQueryClient();

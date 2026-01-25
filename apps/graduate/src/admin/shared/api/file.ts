@@ -1,8 +1,12 @@
 import { AxiosResponse } from 'axios';
 
-import { get, post } from './axios';
-import { END_POINT } from '../constants';
-import { CertificateFileResponse, ThesisFileResponse } from '../types';
+import { get, post } from '~/shared/api/axios';
+import { END_POINT } from '~/shared/constants';
+
+import {
+  CertificateFileResponse,
+  ThesisFileResponse,
+} from '~/admin/shared/types/file';
 
 export interface NoticeFileIdResponse {
   id: number;

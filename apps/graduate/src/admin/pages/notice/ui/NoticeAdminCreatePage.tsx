@@ -4,14 +4,15 @@ import type { UploadFile, UploadProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { uploadNoticeFile } from '~/shared/api/file';
-import { TextEditor } from '~/shared/components';
 import { API_ADMIN_URL, ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
 import { useCreateNotice, useUpdateNotice, useDeleteNotice } from '../hooks';
 import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
+
+import { uploadNoticeFile } from '~/admin/shared/api/file';
+import { TextEditor } from '~/admin/shared/components';
 
 interface NoticeAdminCreatePageProps {
   noticeId?: number;

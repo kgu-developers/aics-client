@@ -1,6 +1,6 @@
-import { CertificateFileResponse } from '~/shared/types';
-
 import { FileItem } from '../model/filePreview';
+
+import { CertificateFileResponse } from '~/admin/shared/types/file';
 
 export default function transformCertificateResponse(
   data: CertificateFileResponse,

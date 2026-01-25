@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getCertificateFile, getThesisFile } from '~/shared/api/file';
 import { KEYS } from '~/shared/constants';
 
 import {
   transformCertificateResponse,
   transformThesisResponse,
 } from '../utils';
+
+import { getCertificateFile, getThesisFile } from '~/admin/shared/api/file';
 
 type FileType = 'CERTIFICATE' | 'THESIS';
 

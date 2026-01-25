@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getNoticeList, type NoticeListParams } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import { transformNoticeResponse } from '~/shared/utils';
+
+import { getNoticeList, type NoticeListParams } from '~/admin/shared/api';
 
 export function useNoticeList(params?: NoticeListParams) {
   return useQuery({

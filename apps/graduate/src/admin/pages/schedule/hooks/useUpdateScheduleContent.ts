@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { updateScheduleContent } from '~/shared/api';
-import type { UpdateScheduleContentRequest } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import type { SubmissionType } from '~/shared/types';
+
+import {
+  updateScheduleContent,
+  UpdateScheduleContentRequest,
+} from '~/admin/shared/api';
 
 interface UseUpdateScheduleContentParams {
   submissionType: SubmissionType;

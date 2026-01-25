@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { updateNotice } from '~/shared/api';
 import { KEYS } from '~/shared/constants';
 import type { UpdateNoticeRequest } from '~/shared/types';
+
+import { updateNotice } from '~/admin/shared/api';
 
 export function useUpdateNotice(noticeId: number) {
   const queryClient = useQueryClient();

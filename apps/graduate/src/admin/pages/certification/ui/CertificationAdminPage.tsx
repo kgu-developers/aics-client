@@ -1,8 +1,9 @@
-import { DataTable, Header, Pagination, Toolbar } from '~/shared/components';
+import { Header, Pagination } from '~/shared/components';
 
 import { certColumns } from '../constants/certColumns';
 import type { CertRow } from '../types/row';
 
+import { DataTable, Toolbar } from '~/admin/shared/components';
 import {
   useAdminDownload,
   useAdminPagination,
@@ -97,7 +98,7 @@ export default function CertificationAdminPage() {
         <div className={style.card}>
           <DataTable<CertRow>
             rows={rows}
-            getRowId={r => r.id}
+            getRowId={(r: CertRow) => r.id}
             columns={certColumns}
             onToggleAll={toggleAll}
             selectedIds={selectedIds}

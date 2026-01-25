@@ -1,5 +1,9 @@
 import { createElement } from 'react';
 
+import { useToast } from '~/shared/hooks';
+
+import { useUpdateGraduationUsersBatchApprove } from './useUpdateGraduationUsersBatchApprove';
+
 import {
   APPROVE_ALERT,
   APPROVE_CONFIRM_TITLE,
@@ -16,10 +20,7 @@ import {
   APPROVE_RESULT_NOT_APPROVED,
   APPROVE_RESULT_TITLE,
   APPROVE_SUCCESS,
-} from '~/shared/components/Toolbar/toolbarTexts';
-import { useToast } from '~/shared/hooks';
-
-import { useUpdateGraduationUsersBatchApprove } from './useUpdateGraduationUsersBatchApprove';
+} from '~/admin/shared/components/Toolbar/toolbarTexts';
 
 type UseApproveGraduationUsersProps<T> = {
   items: T[];

@@ -1,5 +1,3 @@
-import type { Column } from '~/shared/components/DataTable/DataTable';
-
 import {
   HEADER_NAME,
   HEADER_NO,
@@ -9,6 +7,7 @@ import {
 } from './allManagementTexts';
 import type { AllManagementRow } from '../types/allManagement';
 
+import type { Column } from '~/admin/shared/components/DataTable/DataTable';
 import { vars } from '~/vars.css';
 
 export const allManagementColumns = (

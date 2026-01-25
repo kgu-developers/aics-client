@@ -1,13 +1,14 @@
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { TextEditor } from '~/shared/components';
 import { useScheduleContent, useToast } from '~/shared/hooks';
 import type { SubmissionType } from '~/shared/types';
 
 import { SUBMISSION_TYPE_OPTIONS } from '../constants';
 import { useUpdateScheduleContent } from '../hooks';
 import * as style from '../styles/ScheduleDescription.css.ts';
+
+import { TextEditor } from '~/admin/shared/components';
 
 export default function ScheduleDescription() {
   const [selectedType, setSelectedType] = useState<SubmissionType>('SUBMITTED');
