@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '~/shared/components';
@@ -20,6 +20,12 @@ export default function LoginForm() {
       password: '',
     },
   });
+
+  useEffect(() => {
+    if (errors.userId || errors.password) {
+      setLoginError(null);
+    }
+  }, [errors.userId, errors.password]);
 
   const { mutate: submitLogin, isPending } = useSubmitLogin({
     onSuccess: () => {
