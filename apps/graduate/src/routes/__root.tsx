@@ -31,7 +31,6 @@ export const Route = createRootRouteWithContext<AuthContext>()({
             style={{
               flex: '1 1 auto',
               overflow: 'auto',
-              backgroundColor: vars.colors.sub,
             }}
           >
             <Outlet />
@@ -48,7 +47,6 @@ export const Route = createRootRouteWithContext<AuthContext>()({
               position: 'relative',
               minHeight: '100dvh',
               minWidth: '100dvw',
-              backgroundColor: vars.colors.sub,
             }}
           >
             <Header />
@@ -59,7 +57,6 @@ export const Route = createRootRouteWithContext<AuthContext>()({
                 overflowX: 'hidden',
                 overflowY: 'auto',
                 display: 'flex',
-                backgroundColor: vars.colors.sub,
                 flexDirection: 'column',
                 paddingTop: vars.spacing.header,
                 boxSizing: 'border-box',

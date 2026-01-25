@@ -11,7 +11,6 @@ export const mainSection = style({
   gap: vars.spacing.xl,
   padding: vars.spacing.lg,
   paddingBottom: 0,
-  backgroundColor: '#F8F9FB',
   overflowY: 'auto',
   overflowX: 'hidden',
 
@@ -122,10 +121,10 @@ export const homeButtonSection = style({
 });
 
 export const homeButton = style({
+  border: '1px solid rgba(102, 126, 234, 0.08)',
   cursor: 'pointer',
   width: '100%',
   height: '76px',
-  border: 'none',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
@@ -264,6 +263,7 @@ export const headerText = style({
 });
 
 export const noticeSection = style({
+  border: '1px solid rgba(102, 126, 234, 0.08)',
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
   padding: vars.spacing.lg,
