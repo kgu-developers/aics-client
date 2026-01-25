@@ -12,8 +12,8 @@ import { getSubmissionTypeIndex } from '../../schedule/constants';
 import { useFile } from '../hooks';
 import * as style from '../styles/PreviewPage.css';
 
+import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import { useStudentDetail } from '~/admin/features/studentDetail';
-import { useUpdateGraduationUsersBatchApprove } from '~/admin/shared/hooks';
 
 export default function FilePreviewPage() {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export default function FilePreviewPage() {
   const hideTimeoutRef = useRef<number | null>(null);
 
   const { approveGraduationUsers, mutation: approvalMutation } =
-    useUpdateGraduationUsersBatchApprove({
+    useGraduationBatchApproval({
       onSuccess: async () => {
         toast.success('승인이 완료되었습니다.');
         await queryClient.invalidateQueries({

@@ -1,7 +1,7 @@
 import { get } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
 
-import type { PageableResponse } from './fetchGraduationUsers';
+import type { PageableResponse } from '~/admin/entities/graduation-users/api/fetchGraduationUsers';
 
 export type AdminUser = {
   id: string;

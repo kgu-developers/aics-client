@@ -2,26 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KEYS } from '~/shared/constants';
 
-import {
-  removeGraduationUser,
-  removeGraduationUsersBatch,
-} from '~/admin/shared/api';
+import { updateGraduationBatchApproval } from '../api';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-export function useRemoveGraduationUsers({ onSuccess }: Options = {}) {
+export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async (ids: number[]) => {
-      if (ids.length === 1) {
-        await removeGraduationUser(ids[0]);
-        return { deletedIds: ids };
-      }
-      return removeGraduationUsersBatch(ids);
-    },
+    mutationFn: updateGraduationBatchApproval,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [...KEYS.GRADUATION_USERS],
@@ -31,7 +22,7 @@ export function useRemoveGraduationUsers({ onSuccess }: Options = {}) {
   });
 
   return {
-    removeGraduationUsers: mutation.mutateAsync,
+    approveGraduationUsers: mutation.mutateAsync,
     mutation,
   };
 }

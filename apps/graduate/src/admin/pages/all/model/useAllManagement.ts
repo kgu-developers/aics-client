@@ -8,16 +8,13 @@ import { TYPE_LABEL, TYPE_UNKNOWN } from '../constants/allManagementTexts';
 import { AllManagementRow } from '../types/allManagement';
 import { getStatusLabel } from '../utils';
 
+import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model/useFetchGraduationUsers';
+import { useRemoveGraduationUsers } from '~/admin/entities/graduation-users/model/useRemoveGraduationUsers';
 import {
   DELETE_ALERT,
   DELETE_CONFIRM_TITLE,
 } from '~/admin/shared/components/Toolbar/toolbarTexts';
-import {
-  useAdminDownload,
-  useAdminSelection,
-  useFetchGraduationUsers,
-  useRemoveGraduationUsers,
-} from '~/admin/shared/hooks';
+import { useAdminDownload, useAdminSelection } from '~/admin/shared/hooks';
 import { useAdminPagination } from '~/admin/shared/hooks/admin-table/useAdminPagination';
 
 export const useAllManagement = () => {

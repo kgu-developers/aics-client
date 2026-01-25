@@ -1,6 +1,6 @@
 import type { AllManagementRow } from '../types/allManagement';
 
-import { GraduationLabelType } from '~/admin/shared/api';
+import { type GraduationLabelType } from '~/admin/entities/graduation-users/api';
 
 export const STATUS_UNKNOWN = '미정';
 

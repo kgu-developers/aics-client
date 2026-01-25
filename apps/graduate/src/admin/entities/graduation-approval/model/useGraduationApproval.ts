@@ -2,7 +2,7 @@ import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
 
-import { useUpdateGraduationUsersBatchApprove } from './useUpdateGraduationUsersBatchApprove';
+import { useGraduationBatchApproval } from './useGraduationBatchApproval';
 
 import {
   APPROVE_ALERT,
@@ -40,7 +40,7 @@ type NotApprovedDetail = {
   reason: string;
 };
 
-export function useApproveGraduationUsers<T>({
+export function useGraduationApproval<T>({
   items,
   selectedIds,
   getId,
@@ -49,7 +49,7 @@ export function useApproveGraduationUsers<T>({
   onSuccess,
 }: UseApproveGraduationUsersProps<T>) {
   const { toast, confirm, info } = useToast();
-  const { approveGraduationUsers } = useUpdateGraduationUsersBatchApprove({
+  const { approveGraduationUsers } = useGraduationBatchApproval({
     onSuccess,
   });
 

@@ -3,14 +3,14 @@ import { Header, Pagination } from '~/shared/components';
 import { thesisColumns } from '../constants/thesisColumns';
 import type { ThesisRow } from '../types/row';
 
-import { type GraduationUserSummary } from '~/admin/shared/api';
+import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
+import { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
+import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
 import { DataTable, Toolbar } from '~/admin/shared/components';
 import {
   useAdminDownload,
   useAdminPagination,
   useAdminSelection,
-  useApproveGraduationUsers,
-  useFetchGraduationUsers,
 } from '~/admin/shared/hooks';
 import * as style from '~/admin/shared/styles/adminPage.css';
 
@@ -70,7 +70,7 @@ export default function ThesisAdminPage() {
     resetToFirstPage();
   };
 
-  const { handleApproveSelected } = useApproveGraduationUsers({
+  const { handleApproveSelected } = useGraduationApproval({
     items: data?.contents ?? [],
     selectedIds,
     getId: (user: GraduationUserSummary) => user.id,

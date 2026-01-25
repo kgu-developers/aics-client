@@ -3,13 +3,13 @@ import { Header, Pagination } from '~/shared/components';
 import { certColumns } from '../constants/certColumns';
 import type { CertRow } from '../types/row';
 
+import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
+import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
 import { DataTable, Toolbar } from '~/admin/shared/components';
 import {
   useAdminDownload,
   useAdminPagination,
   useAdminSelection,
-  useApproveGraduationUsers,
-  useFetchGraduationUsers,
 } from '~/admin/shared/hooks';
 import * as style from '~/admin/shared/styles/adminPage.css';
 
@@ -60,7 +60,7 @@ export default function CertificationAdminPage() {
     resetToFirstPage();
   };
 
-  const { handleApproveSelected } = useApproveGraduationUsers({
+  const { handleApproveSelected } = useGraduationApproval({
     items: data?.contents ?? [],
     selectedIds,
     getId: user => user.id,

@@ -1,18 +1,18 @@
 import { patch } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
 
-type UpdateGraduationUsersBatchApproveRequest = {
+type UpdateGraduationBatchApprovalRequest = {
   ids: number[];
 };
 
-type UpdateGraduationUsersBatchApproveResponse = {
+type UpdateGraduationBatchApprovalResponse = {
   approvedIds: number[];
 };
 
-export const updateGraduationUsersBatchApprove = async (ids: number[]) => {
+export const updateGraduationBatchApproval = async (ids: number[]) => {
   const response = await patch<
-    UpdateGraduationUsersBatchApproveResponse,
-    UpdateGraduationUsersBatchApproveRequest
+    UpdateGraduationBatchApprovalResponse,
+    UpdateGraduationBatchApprovalRequest
   >({
     request: END_POINT.ADMIN.GRADUATION_USERS_BATCH_APPROVE,
     data: { ids },

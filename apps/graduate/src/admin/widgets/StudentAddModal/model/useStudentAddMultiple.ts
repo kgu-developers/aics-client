@@ -7,7 +7,8 @@ import { MULTIPLE_UPLOAD_TEXT } from './constants';
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
 import type { InvalidRow, UploadRow } from '../types/studentAddModal';
 
-import { fetchAdminUsers, fetchGraduationUsers } from '~/admin/shared/api';
+import { fetchGraduationUsers } from '~/admin/entities/graduation-users/api';
+import { fetchAdminUsers } from '~/admin/shared/api';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 const USER_PAGE_SIZE = 200;
