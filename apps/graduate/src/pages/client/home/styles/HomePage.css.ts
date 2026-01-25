@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 
 import { vars } from '~/vars.css';
 
@@ -36,103 +36,208 @@ export const upperSection = style({
 export const header = style({
   width: '100%',
   height: 'fit-content',
-  display: 'flex',
-  flexDirection: 'column',
-  background: `linear-gradient(135deg, ${vars.colors.main} 0%, #3B82F6 100%)`,
-  borderRadius: '24px',
-  padding: vars.spacing.xl,
+  background: `linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)`,
+  borderRadius: vars.radius.lg,
   color: vars.colors.white,
-  boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.25)',
   position: 'relative',
   overflow: 'hidden',
   boxSizing: 'border-box',
+
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background:
+      'radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
+    pointerEvents: 'none',
+  },
+});
+
+export const carouselSlide = style({
+  padding: `${vars.spacing.xl} ${vars.spacing.xl} 48px`,
+  minHeight: '200px',
+  display: 'flex',
+  alignItems: 'center',
+  boxSizing: 'border-box',
+  position: 'relative',
+
+  '@media': {
+    '(max-width: 768px)': {
+      padding: `${vars.spacing.lg} ${vars.spacing.lg} 40px`,
+      minHeight: '180px',
+    },
+  },
 });
 
 export const headerTextWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.spacing.md,
-  marginBottom: vars.spacing.xl,
+  gap: vars.spacing.sm,
   zIndex: 1,
+  width: '100%',
+  position: 'relative',
 });
 
 export const headerTitle = style({
   fontSize: '28px',
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
-  lineHeight: '1.3',
-  letterSpacing: '-0.5px',
+  lineHeight: '1.2',
+  letterSpacing: '-0.8px',
+  margin: 0,
+  color: vars.colors.white,
+  textShadow: '0 2px 20px rgba(0, 0, 0, 0.2)',
+
+  '@media': {
+    '(max-width: 768px)': {
+      fontSize: '22px',
+      letterSpacing: '-0.6px',
+    },
+  },
 });
 
 export const headerDescription = style({
-  fontSize: vars.font.size.md,
-  color: 'rgba(255, 255, 255, 0.9)',
-  lineHeight: '1.6',
+  fontSize: '15px',
+  color: 'rgba(255, 255, 255, 0.95)',
+  lineHeight: '1.7',
   fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
+  textShadow: '0 1px 10px rgba(0, 0, 0, 0.15)',
+  marginTop: vars.spacing.xs,
+
+  '@media': {
+    '(max-width: 768px)': {
+      fontSize: '14px',
+    },
+  },
 });
 
 export const homeButtonSection = style({
-  display: 'flex',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
   gap: vars.spacing.sm,
   width: '100%',
   zIndex: 1,
-
-  '@media': {
-    '(min-width: 480px)': {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-    },
-  },
 });
 
 export const homeButton = style({
   cursor: 'pointer',
   width: '100%',
-  aspectRatio: '1/1',
+  height: '76px',
   border: 'none',
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: '20px',
-  backgroundColor: 'rgba(255, 255, 255, 0.15)',
-  backdropFilter: 'blur(8px)',
-  color: vars.colors.white,
+  borderRadius: vars.radius.lg,
+  backgroundColor: vars.colors.white,
+  color: '#667eea',
   padding: vars.spacing.md,
-  gap: vars.spacing.xs,
-  transition: 'all 0.2s ease-in-out',
+  gap: vars.spacing.md,
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  position: 'relative',
+  overflow: 'hidden',
+
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background:
+      'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent)',
+    transition: 'left 0.5s ease',
+  },
 
   ':hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    transform: 'translateY(-2px)',
+    backgroundColor: '#f7f9ff',
+    transform: 'translateY(-3px)',
+    color: '#5568d3',
   },
 
   ':active': {
-    transform: 'scale(0.96)',
+    transform: 'translateY(-1px) scale(0.98)',
+  },
+
+  '@media': {
+    '(max-width: 768px)': {
+      height: '68px',
+    },
   },
 });
 
 export const homeButtonIcon = style({
-  fontSize: '24px',
-  marginBottom: vars.spacing.xs,
+  fontSize: '20px',
+  flexShrink: 0,
+  transition: 'transform 0.3s ease',
+  alignItems: 'center',
+  justifyContent: 'center',
+  display: 'flex',
 });
 
 export const homeButtonLabel = style({
-  fontSize: '13px',
-  textAlign: 'center',
+  fontSize: '14px',
+  textAlign: 'left',
   wordBreak: 'keep-all',
   fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
+  lineHeight: '1.3',
+  letterSpacing: '-0.2px',
+});
+
+export const statusBadge = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '6px',
+  fontSize: '12px',
+  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  color: 'rgba(255, 255, 255, 0.95)',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  backdropFilter: 'blur(10px)',
+  padding: '6px 12px',
+  borderRadius: vars.radius.md,
+  marginBottom: vars.spacing.md,
+  border: '1px solid rgba(255, 255, 255, 0.25)',
+  width: 'fit-content',
+  letterSpacing: '0.3px',
+  textTransform: 'uppercase',
+});
+
+export const pinnedBadge = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '6px',
+  fontSize: '13px',
+  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  color: vars.colors.white,
+  backgroundColor: 'rgba(255, 255, 255, 0.25)',
+  backdropFilter: 'blur(10px)',
+  padding: '7px 14px',
+  borderRadius: vars.radius.lg,
+  marginBottom: vars.spacing.md,
+  border: '1px solid rgba(255, 255, 255, 0.3)',
+  width: 'fit-content',
+  letterSpacing: '0.2px',
+  transition: 'all 0.2s ease',
+
+  ':hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.35)',
+    transform: 'translateY(-1px)',
+  },
 });
 
 export const scheduleCard = style({
   flex: 1,
   backgroundColor: vars.colors.white,
-  borderRadius: '24px',
-  padding: vars.spacing.xl,
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+  borderRadius: vars.radius.lg,
+  padding: vars.spacing.lg,
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.lg,
-  boxSizing: 'border-box', // Ensure padding doesn't increase width
-  overflow: 'hidden', // Prevent internal elements from overflowing
+  boxSizing: 'border-box',
+  overflow: 'hidden',
+  border: '1px solid rgba(102, 126, 234, 0.08)',
 });
 
 export const scheduleHeader = style({
@@ -151,22 +256,22 @@ export const headerDate = style({
 });
 
 export const headerText = style({
-  fontSize: vars.font.size.lg,
-  color: '#1A1C1E',
+  margin: 0,
+  fontSize: '18px',
+  color: '#1F2937',
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  letterSpacing: '-0.3px',
 });
 
 export const noticeSection = style({
   backgroundColor: vars.colors.white,
-  borderRadius: '24px',
-  padding: vars.spacing.xl,
+  borderRadius: vars.radius.lg,
+  padding: vars.spacing.lg,
   marginBottom: vars.spacing.xl,
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.spacing.lg,
+  gap: vars.spacing.md,
   boxSizing: 'border-box',
-  overflow: 'hidden',
 
   '@media': {
     '(max-width: 768px)': {
@@ -185,41 +290,59 @@ export const noticeItem = style({
   display: 'flex',
   flexDirection: 'column',
   padding: vars.spacing.md,
-  borderRadius: '16px',
-  backgroundColor: '#F1F4F9',
+  borderRadius: vars.radius.lg,
+  backgroundColor: '#f8f9ff',
   gap: vars.spacing.xs,
-  transition: 'transform 0.2s ease',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   cursor: 'pointer',
+  border: '1px solid rgba(102, 126, 234, 0.1)',
+  position: 'relative',
+  overflow: 'hidden',
+
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: '3px',
+    backgroundColor: '#667eea',
+    transform: 'scaleY(0)',
+    transition: 'transform 0.3s ease',
+  },
 
   ':hover': {
-    transform: 'translateX(4px)',
-    backgroundColor: '#E9EEF6',
+    transform: 'translateX(6px)',
+    backgroundColor: '#f0f3ff',
+    borderColor: 'rgba(102, 126, 234, 0.2)',
   },
 });
 
 export const noticeTop = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.spacing.xs,
+  gap: vars.spacing.sm,
 });
 
 export const noticeBadge = style({
-  backgroundColor: vars.colors.main,
+  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   color: vars.colors.white,
-  padding: '2px 8px',
-  borderRadius: '6px',
+  padding: '3px 10px',
+  borderRadius: vars.radius.md,
   fontSize: '11px',
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  letterSpacing: '0.3px',
 });
 
 export const noticeTitle = style({
-  fontSize: vars.font.size.md,
-  color: '#1A1C1E',
-  fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
+  fontSize: '15px',
+  color: '#1F2937',
+  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
   flex: 1,
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  letterSpacing: '-0.2px',
 });
 
 export const noticeBottom = style({
@@ -234,16 +357,18 @@ export const noticeAction = style({
   border: 'none',
   background: 'none',
   fontSize: vars.font.size.sm,
-  color: vars.colors.main,
+  color: '#667eea',
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
   cursor: 'pointer',
   textDecoration: 'none',
   display: 'flex',
   alignItems: 'center',
   gap: '4px',
+  transition: 'all 0.2s ease',
 
   ':hover': {
-    opacity: 0.8,
+    color: '#5568d3',
+    transform: 'translateX(2px)',
   },
 });
 
@@ -272,7 +397,7 @@ export const calendarDayLabel = style({
 export const calendarDateCircle = style({
   width: '36px',
   height: '36px',
-  borderRadius: '12px', // More modern rounded square/circle hybrid
+  borderRadius: vars.radius.lg,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -284,7 +409,6 @@ export const calendarDateCircle = style({
 export const calendarDateToday = style({
   color: vars.colors.white,
   backgroundColor: vars.colors.main,
-  boxShadow: '0 4px 10px rgba(59, 130, 246, 0.3)',
 });
 
 export const calendarDateNormal = style({
@@ -293,4 +417,47 @@ export const calendarDateNormal = style({
   ':hover': {
     backgroundColor: '#F1F4F9',
   },
+});
+
+// Carousel dots 스타일 커스터마이징
+globalStyle(`${header} .slick-dots`, {
+  bottom: '20px',
+  display: 'flex !important',
+  justifyContent: 'center',
+  gap: '6px',
+});
+
+globalStyle(`${header} .slick-dots li`, {
+  margin: '0',
+  width: 'auto',
+});
+
+globalStyle(`${header} .slick-dots li button`, {
+  width: '6px',
+  height: '6px',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+});
+
+globalStyle(`${header} .slick-dots li button:hover`, {
+  backgroundColor: 'rgba(255, 255, 255, 0.6)',
+  transform: 'scale(1.2)',
+});
+
+globalStyle(`${header} .slick-dots li.slick-active button`, {
+  width: '32px',
+  borderRadius: '3px',
+  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+});
+
+// Button hover shimmer effect
+globalStyle(`${homeButton}:hover::before`, {
+  left: '100%',
+});
+
+// Notice item hover effect
+globalStyle(`${noticeItem}:hover::before`, {
+  transform: 'scaleY(1)',
 });

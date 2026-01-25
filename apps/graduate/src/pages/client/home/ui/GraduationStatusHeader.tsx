@@ -1,80 +1,97 @@
-import { ArrowRight } from 'lucide-react';
+import { useNavigate } from '@tanstack/react-router';
+import { Carousel } from 'antd';
+import { Sparkles, Pin } from 'lucide-react';
 import { Fragment } from 'react/jsx-runtime';
 
-import { NavigateButton } from './NavigateButton';
-import { BUTTONS } from '../model/button';
-import * as styles from '../styles/HomePage.css';
+import { useNoticeList } from '~/shared/hooks/notice/useNoticeList';
 
-interface ButtonData {
-  href: string;
-  label: string;
-}
+import * as styles from '../styles/HomePage.css';
 
 interface GraduationStatusHeaderProps {
   title?: string;
   description?: string;
-  button?: ButtonData;
 }
 
 export default function GraduationStatusHeader({
   title,
   description,
-  button,
 }: GraduationStatusHeaderProps) {
-  if (!button) return null;
+  const navigate = useNavigate();
+  const { data } = useNoticeList({
+    category: 'GRADUATION',
+    page: 0,
+    size: 3,
+  });
 
-  const StatusTextDisplay = () => {
+  const pinnedNotices = data?.contents.filter(notice => notice.isPinned) ?? [];
+
+  const StatusSlide = () => {
     if (!title || !description) {
       return (
-        <div className={styles.headerTextWrapper}>
-          <h1 className={styles.headerTitle}>준비중</h1>
-          <p className={styles.headerDescription}>
-            아직 졸업 요건 취득 일정이 지정되지 않았어요.
-          </p>
+        <div className={styles.carouselSlide}>
+          <div className={styles.headerTextWrapper}>
+            <div className={styles.statusBadge}>
+              <Sparkles size={14} />
+              <span>준비 중</span>
+            </div>
+            <h1 className={styles.headerTitle}>졸업 일정 준비중</h1>
+            <p className={styles.headerDescription}>
+              아직 졸업 요건 취득 일정이 지정되지 않았어요.
+            </p>
+          </div>
         </div>
       );
     }
 
     return (
-      <div className={styles.headerTextWrapper}>
-        <h1 className={styles.headerTitle}>{title}</h1>
-        <p className={styles.headerDescription}>
-          {description.split('\n').map(line => (
-            <Fragment key={line}>
-              {line}
-              <br />
-            </Fragment>
-          ))}
-        </p>
+      <div className={styles.carouselSlide}>
+        <div className={styles.headerTextWrapper}>
+          <div className={styles.statusBadge}>
+            <Sparkles size={14} />
+            <span>내 상태</span>
+          </div>
+          <h1 className={styles.headerTitle}>{title}</h1>
+          <p className={styles.headerDescription}>
+            {description.split('\n').map(line => (
+              <Fragment key={line}>
+                {line}
+                <br />
+              </Fragment>
+            ))}
+          </p>
+        </div>
       </div>
     );
   };
 
   return (
     <section className={styles.header}>
-      <StatusTextDisplay />
-      <NavigationButtons button={button} />
+      <Carousel
+        autoplay
+        autoplaySpeed={5000}
+        dotPosition='bottom'
+        dots
+        effect='fade'
+      >
+        <StatusSlide />
+        {pinnedNotices.map(notice => (
+          <div
+            key={notice.noticeId}
+            className={styles.carouselSlide}
+            onClick={() => navigate({ to: `/notice/${notice.noticeId}` })}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className={styles.headerTextWrapper}>
+              <div className={styles.pinnedBadge}>
+                <Pin size={14} fill='white' />
+                <span>고정 공지</span>
+              </div>
+              <h1 className={styles.headerTitle}>{notice.title}</h1>
+              <p className={styles.headerDescription}>{notice.description}</p>
+            </div>
+          </div>
+        ))}
+      </Carousel>
     </section>
   );
 }
-
-const NavigationButtons = ({ button }: { button: ButtonData }) => {
-  return (
-    <section className={styles.homeButtonSection}>
-      <NavigateButton
-        href={button.href}
-        icon={<ArrowRight size={24} />}
-        label={button.label}
-      />
-
-      {BUTTONS.map(btn => (
-        <NavigateButton
-          key={btn.label}
-          href={btn.href}
-          icon={btn.icon}
-          label={btn.label}
-        />
-      ))}
-    </section>
-  );
-};
