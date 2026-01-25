@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 
 import { vars } from '~/vars.css';
 
@@ -26,6 +26,10 @@ export const quillEditor = style({
   marginBottom: vars.spacing.md,
   backgroundColor: 'white',
   borderRadius: vars.radius.sm,
+});
+
+globalStyle(`${quillEditor} .ql-editor`, {
+  minHeight: '200px',
 });
 
 export const saveButtonWrapper = style({
