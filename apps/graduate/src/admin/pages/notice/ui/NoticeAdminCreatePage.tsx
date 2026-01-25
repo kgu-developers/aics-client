@@ -7,11 +7,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { API_ADMIN_URL, ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
+import { submitNoticeFile } from '../api/submitNoticeFile';
 import { useCreateNotice, useUpdateNotice, useDeleteNotice } from '../hooks';
 import type { NoticeFormItem } from '../model/notices';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 
-import { uploadNoticeFile } from '~/admin/shared/api/file';
 import { TextEditor } from '~/admin/shared/components';
 
 interface NoticeAdminCreatePageProps {
@@ -79,7 +79,7 @@ export default function NoticeAdminCreatePage({
     maxCount: 1,
     customRequest: async ({ file, onSuccess, onError }) => {
       try {
-        const response = await uploadNoticeFile(file as File);
+        const response = await submitNoticeFile(file as File);
         const { id } = response.data;
 
         setUploadedFileId(id);

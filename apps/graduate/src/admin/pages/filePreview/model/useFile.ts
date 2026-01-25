@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { KEYS } from '~/shared/constants';
 
+import { fetchCertificateFile, fetchThesisFile } from '../api';
 import {
   transformCertificateResponse,
   transformThesisResponse,
 } from '../utils';
-
-import { getCertificateFile, getThesisFile } from '~/admin/shared/api/file';
 
 type FileType = 'CERTIFICATE' | 'THESIS';
 
@@ -20,10 +19,10 @@ export function useFile(
     queryKey: [...KEYS.STUDENT_FILE, type?.toLowerCase(), fileId],
     queryFn: async () => {
       if (type === 'CERTIFICATE') {
-        const response = await getCertificateFile(fileId);
+        const response = await fetchCertificateFile(fileId);
         return transformCertificateResponse(response.data);
       } else {
-        const response = await getThesisFile(fileId);
+        const response = await fetchThesisFile(fileId);
         return transformThesisResponse(response.data);
       }
     },

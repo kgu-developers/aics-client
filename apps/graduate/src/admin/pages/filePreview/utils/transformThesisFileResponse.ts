@@ -1,4 +1,4 @@
-import { FileItem } from '../model/filePreview';
+import { type FileItem } from '../model/file';
 
 import { ThesisFileResponse } from '~/admin/shared/types/file';
 

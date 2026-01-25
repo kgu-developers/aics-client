@@ -9,7 +9,7 @@ import { queryClient } from '~/shared/utils';
 import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
 import { getSubmissionTypeIndex } from '../../schedule/constants';
-import { useFile } from '../hooks';
+import { useFile } from '../model';
 import * as style from '../styles/PreviewPage.css';
 
 import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
