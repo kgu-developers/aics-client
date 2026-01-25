@@ -1,7 +1,7 @@
 import { Carousel } from 'antd';
 
 import { CAROUSEL_CONFIG, PAGINATION } from '~/shared/constants';
-import { useNoticeList } from '~/shared/hooks/notice/useNoticeList';
+import { useNoticeList } from '~/shared/hooks';
 
 import PinnedNoticeSlide from './PinnedNoticeSlide';
 import StatusSlide from './StatusSlide';

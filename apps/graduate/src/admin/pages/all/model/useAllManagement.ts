@@ -1,13 +1,14 @@
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 
-import { useScheduleList, useToast } from '~/shared/hooks';
+import { useToast } from '~/shared/hooks';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import { TYPE_LABEL, TYPE_UNKNOWN } from '../constants/allManagementTexts';
 import { AllManagementRow } from '../types/allManagement';
 import { getStatusLabel } from '../utils';
 
+import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model/useFetchGraduationUsers';
 import { useRemoveGraduationUsers } from '~/admin/entities/graduation-users/model/useRemoveGraduationUsers';
 import {

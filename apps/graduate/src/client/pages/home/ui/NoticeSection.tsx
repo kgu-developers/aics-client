@@ -3,7 +3,7 @@ import { ChevronRight, FileText } from 'lucide-react';
 
 import { EmptyState } from '~/shared/components';
 import { ROUTE, PAGINATION, EMPTY_MESSAGES } from '~/shared/constants';
-import { useNoticeList } from '~/shared/hooks/notice/useNoticeList';
+import { useNoticeList } from '~/shared/hooks';
 
 import * as styles from '../styles/HomePage.css';
 

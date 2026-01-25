@@ -5,10 +5,10 @@ import { PROFESSORS } from '~/shared/constants/professors';
 
 import { MULTIPLE_UPLOAD_TEXT } from './constants';
 import { createProfessorMap, parseCsv, parseXlsx } from './parsers';
+import { fetchAdminUsers } from '../api';
 import type { InvalidRow, UploadRow } from '../types/studentAddModal';
 
 import { fetchGraduationUsers } from '~/admin/entities/graduation-users/api';
-import { fetchAdminUsers } from '~/admin/shared/api';
 
 const PROFESSOR_NAME_TO_ID = createProfessorMap(PROFESSORS);
 const USER_PAGE_SIZE = 200;

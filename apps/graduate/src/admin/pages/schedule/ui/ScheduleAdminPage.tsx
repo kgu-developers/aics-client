@@ -2,14 +2,15 @@ import { Table } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 
 import { Header } from '~/shared/components';
-import { useScheduleList } from '~/shared/hooks';
 
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';
 import type { ScheduleItem } from '../model';
 import * as style from '../styles/ScheduleAdminPage.css.ts';
 
-export default function ScheduleSection() {
+import { useScheduleList } from '~/admin/entities/admin-schedule/model';
+
+export default function ScheduleAdminPage() {
   const { data: schedule, isLoading } = useScheduleList();
 
   const columns: ColumnType<ScheduleItem>[] = [

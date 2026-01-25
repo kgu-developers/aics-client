@@ -8,8 +8,7 @@ import { modalStyles } from '~/shared/config';
 import { DATE_FORMAT } from '~/shared/constants';
 import { useToast } from '~/shared/hooks';
 
-import { useUpdateSchedule } from '../hooks';
-import type { ScheduleItem } from '../model';
+import { type ScheduleItem, useUpdateSchedule } from '../model';
 import * as style from '../styles/ScheduleEditModal.css.ts';
 
 interface ScheduleEditModalProps {

@@ -1,11 +1,11 @@
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { useScheduleContent, useToast } from '~/shared/hooks';
+import { useToast } from '~/shared/hooks';
 import type { SubmissionType } from '~/shared/types';
 
 import { SUBMISSION_TYPE_OPTIONS } from '../constants';
-import { useUpdateScheduleContent } from '../hooks';
+import { useUpdateScheduleContent, useScheduleContent } from '../model';
 import * as style from '../styles/ScheduleDescription.css.ts';
 
 import { TextEditor } from '~/admin/shared/components';

@@ -2,9 +2,9 @@ import { useNavigate } from '@tanstack/react-router';
 import { Button, Divider, Tag } from 'antd';
 import { ArrowLeft, FileText, Download } from 'lucide-react';
 
-import { useNoticeDetail } from '~/shared/hooks/notice/useNoticeList';
-import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/constants';
 import { LoadingState, ErrorState } from '~/shared/components';
+import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/constants';
+import { useNoticeDetail } from '~/shared/hooks';
 
 import * as styles from '../styles/NoticeDetailPage.css.ts';
 

@@ -5,7 +5,7 @@ import { FileText } from 'lucide-react';
 
 import { LoadingState } from '~/shared/components';
 import { LOADING_MESSAGES, PAGINATION } from '~/shared/constants';
-import { useNoticeList } from '~/shared/hooks/notice/useNoticeList';
+import { useNoticeList } from '~/shared/hooks';
 
 import * as styles from '../styles/NoticePage.css';
 

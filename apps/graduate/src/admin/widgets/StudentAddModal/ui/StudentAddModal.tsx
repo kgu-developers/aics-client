@@ -3,12 +3,11 @@ import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
 
-import { useSubmitGraduationUser } from '~/admin/widgets/StudentAddModal/hooks/useSubmitGraduationUser';
-
 import { ModeCard } from './ModeCard';
 import StudentAddMultiple from './StudentAddMultiple';
 import StudentAddSingle from './StudentAddSingle';
 import { MODE_OPTIONS, type StudentAddMode } from '../model/constants';
+import { useSubmitGraduationUser } from '../model/useSubmitGraduationUser';
 import * as styles from '../styles/StudentAddModal.css';
 
 type Props = {
