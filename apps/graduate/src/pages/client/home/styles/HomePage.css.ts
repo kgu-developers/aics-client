@@ -11,6 +11,7 @@ export const mainSection = style({
   gap: vars.spacing.xl,
   padding: vars.spacing.lg,
   paddingBottom: 0,
+  backgroundColor: vars.colors.sub,
   overflowY: 'auto',
   overflowX: 'hidden',
 
@@ -35,12 +36,13 @@ export const upperSection = style({
 export const header = style({
   width: '100%',
   height: 'fit-content',
-  background: `linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)`,
+  background: `linear-gradient(135deg, ${vars.colors.main} 0%, #0054B3 100%)`,
   borderRadius: vars.radius.lg,
   color: vars.colors.white,
   position: 'relative',
   overflow: 'hidden',
   boxSizing: 'border-box',
+  border: `1px solid ${vars.colors.mainBorder}`,
 
   '::before': {
     content: '""',
@@ -50,14 +52,14 @@ export const header = style({
     right: 0,
     bottom: 0,
     background:
-      'radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
+      'linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%)',
     pointerEvents: 'none',
   },
 });
 
 export const carouselSlide = style({
-  padding: `${vars.spacing.xl} ${vars.spacing.xl} 48px`,
-  minHeight: '200px',
+  padding: `${vars.spacing.lg} ${vars.spacing.xl} 48px`,
+  minHeight: '180px',
   display: 'flex',
   alignItems: 'center',
   boxSizing: 'border-box',
@@ -65,8 +67,8 @@ export const carouselSlide = style({
 
   '@media': {
     '(max-width: 768px)': {
-      padding: `${vars.spacing.lg} ${vars.spacing.lg} 40px`,
-      minHeight: '180px',
+      padding: `${vars.spacing.md} ${vars.spacing.lg} 40px`,
+      minHeight: '160px',
     },
   },
 });
@@ -81,33 +83,31 @@ export const headerTextWrapper = style({
 });
 
 export const headerTitle = style({
-  fontSize: '28px',
+  fontSize: '26px',
   fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
-  lineHeight: '1.2',
-  letterSpacing: '-0.8px',
+  lineHeight: '1.3',
+  letterSpacing: '-0.5px',
   margin: 0,
   color: vars.colors.white,
-  textShadow: '0 2px 20px rgba(0, 0, 0, 0.2)',
 
   '@media': {
     '(max-width: 768px)': {
-      fontSize: '22px',
-      letterSpacing: '-0.6px',
+      fontSize: '20px',
+      letterSpacing: '-0.3px',
     },
   },
 });
 
 export const headerDescription = style({
-  fontSize: '15px',
-  color: 'rgba(255, 255, 255, 0.95)',
-  lineHeight: '1.7',
-  fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
-  textShadow: '0 1px 10px rgba(0, 0, 0, 0.15)',
+  fontSize: '14px',
+  color: 'rgba(255, 255, 255, 0.9)',
+  lineHeight: '1.6',
+  fontVariationSettings: `'wght' ${vars.font.weight.normal}`,
   marginTop: vars.spacing.xs,
 
   '@media': {
     '(max-width: 768px)': {
-      fontSize: '14px',
+      fontSize: '13px',
     },
   },
 });
@@ -121,7 +121,7 @@ export const homeButtonSection = style({
 });
 
 export const homeButton = style({
-  border: '1px solid rgba(102, 126, 234, 0.08)',
+  border: `1px solid ${vars.colors.border}`,
   cursor: 'pointer',
   width: '100%',
   height: '76px',
@@ -131,33 +131,19 @@ export const homeButton = style({
   justifyContent: 'center',
   borderRadius: vars.radius.lg,
   backgroundColor: vars.colors.white,
-  color: '#667eea',
+  color: vars.colors.main,
   padding: vars.spacing.md,
   gap: vars.spacing.md,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  position: 'relative',
-  overflow: 'hidden',
-
-  '::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: '-100%',
-    width: '100%',
-    height: '100%',
-    background:
-      'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent)',
-    transition: 'left 0.5s ease',
-  },
+  transition: 'all 0.2s ease',
 
   ':hover': {
-    backgroundColor: '#f7f9ff',
-    transform: 'translateY(-3px)',
-    color: '#5568d3',
+    backgroundColor: vars.colors.mainXLight,
+    borderColor: vars.colors.mainBorder,
+    color: vars.colors.mainDark,
   },
 
   ':active': {
-    transform: 'translateY(-1px) scale(0.98)',
+    transform: 'scale(0.98)',
   },
 
   '@media': {
@@ -189,17 +175,17 @@ export const statusBadge = style({
   display: 'inline-flex',
   alignItems: 'center',
   gap: '6px',
-  fontSize: '12px',
-  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
-  color: 'rgba(255, 255, 255, 0.95)',
-  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  fontSize: '11px',
+  fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
+  color: vars.colors.white,
+  backgroundColor: 'rgba(255, 255, 255, 0.15)',
   backdropFilter: 'blur(10px)',
-  padding: '6px 12px',
-  borderRadius: vars.radius.md,
-  marginBottom: vars.spacing.md,
-  border: '1px solid rgba(255, 255, 255, 0.25)',
+  padding: '5px 10px',
+  borderRadius: vars.radius.sm,
+  marginBottom: vars.spacing.sm,
+  border: '1px solid rgba(255, 255, 255, 0.2)',
   width: 'fit-content',
-  letterSpacing: '0.3px',
+  letterSpacing: '0.5px',
   textTransform: 'uppercase',
 });
 
@@ -207,22 +193,21 @@ export const pinnedBadge = style({
   display: 'inline-flex',
   alignItems: 'center',
   gap: '6px',
-  fontSize: '13px',
-  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  fontSize: '11px',
+  fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
   color: vars.colors.white,
-  backgroundColor: 'rgba(255, 255, 255, 0.25)',
+  backgroundColor: 'rgba(255, 255, 255, 0.15)',
   backdropFilter: 'blur(10px)',
-  padding: '7px 14px',
-  borderRadius: vars.radius.lg,
-  marginBottom: vars.spacing.md,
-  border: '1px solid rgba(255, 255, 255, 0.3)',
+  padding: '5px 12px',
+  borderRadius: vars.radius.sm,
+  marginBottom: vars.spacing.sm,
+  border: '1px solid rgba(255, 255, 255, 0.2)',
   width: 'fit-content',
-  letterSpacing: '0.2px',
+  letterSpacing: '0.3px',
   transition: 'all 0.2s ease',
 
   ':hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.35)',
-    transform: 'translateY(-1px)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
   },
 });
 
@@ -236,7 +221,7 @@ export const scheduleCard = style({
   gap: vars.spacing.lg,
   boxSizing: 'border-box',
   overflow: 'hidden',
-  border: '1px solid rgba(102, 126, 234, 0.08)',
+  border: `1px solid ${vars.colors.border}`,
 });
 
 export const scheduleHeader = style({
@@ -263,7 +248,7 @@ export const headerText = style({
 });
 
 export const noticeSection = style({
-  border: '1px solid rgba(102, 126, 234, 0.08)',
+  border: `1px solid ${vars.colors.border}`,
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
   padding: vars.spacing.lg,
@@ -291,11 +276,11 @@ export const noticeItem = style({
   flexDirection: 'column',
   padding: vars.spacing.md,
   borderRadius: vars.radius.lg,
-  backgroundColor: '#f8f9ff',
+  backgroundColor: vars.colors.sub,
   gap: vars.spacing.xs,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transition: 'all 0.2s ease',
   cursor: 'pointer',
-  border: '1px solid rgba(102, 126, 234, 0.1)',
+  border: `1px solid ${vars.colors.border}`,
   position: 'relative',
   overflow: 'hidden',
 
@@ -306,15 +291,15 @@ export const noticeItem = style({
     top: 0,
     bottom: 0,
     width: '3px',
-    backgroundColor: '#667eea',
+    backgroundColor: vars.colors.main,
     transform: 'scaleY(0)',
-    transition: 'transform 0.3s ease',
+    transition: 'transform 0.2s ease',
   },
 
   ':hover': {
-    transform: 'translateX(6px)',
-    backgroundColor: '#f0f3ff',
-    borderColor: 'rgba(102, 126, 234, 0.2)',
+    transform: 'translateX(4px)',
+    backgroundColor: vars.colors.mainXLight,
+    borderColor: vars.colors.mainBorder,
   },
 });
 
@@ -325,12 +310,12 @@ export const noticeTop = style({
 });
 
 export const noticeBadge = style({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  background: vars.colors.main,
   color: vars.colors.white,
   padding: '3px 10px',
-  borderRadius: vars.radius.md,
+  borderRadius: vars.radius.sm,
   fontSize: '11px',
-  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
   letterSpacing: '0.3px',
 });
 
@@ -357,8 +342,8 @@ export const noticeAction = style({
   border: 'none',
   background: 'none',
   fontSize: vars.font.size.sm,
-  color: '#667eea',
-  fontVariationSettings: `'wght' ${vars.font.weight.bold}`,
+  color: vars.colors.main,
+  fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
   cursor: 'pointer',
   textDecoration: 'none',
   display: 'flex',
@@ -367,7 +352,7 @@ export const noticeAction = style({
   transition: 'all 0.2s ease',
 
   ':hover': {
-    color: '#5568d3',
+    color: vars.colors.mainDark,
     transform: 'translateX(2px)',
   },
 });
@@ -452,10 +437,6 @@ globalStyle(`${header} .slick-dots li.slick-active button`, {
   backgroundColor: 'rgba(255, 255, 255, 0.95)',
 });
 
-// Button hover shimmer effect
-globalStyle(`${homeButton}:hover::before`, {
-  left: '100%',
-});
 
 // Notice item hover effect
 globalStyle(`${noticeItem}:hover::before`, {
