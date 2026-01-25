@@ -1,17 +1,8 @@
 import { Header, Pagination } from '~/shared/components';
 
-import { certColumns } from '../constants/certColumns';
-import type { CertRow } from '../types/row';
-
-import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
-import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
-import { DataTable, Toolbar } from '~/admin/shared/components';
-import {
-  useAdminDownload,
-  useAdminPagination,
-  useAdminSelection,
-} from '~/admin/shared/hooks';
 import * as style from '~/admin/shared/styles/adminPage.css';
+import { Table } from '~/admin/widgets/Table';
+import { useAdminPagination } from '~/admin/widgets/Table/model';
 
 export default function CertificationAdminPage() {
   const {
@@ -21,95 +12,23 @@ export default function CertificationAdminPage() {
     query,
     handleQueryChange,
     handlePageSizeChange,
-    resetToFirstPage,
   } = useAdminPagination();
-
-  const { data, isLoading } = useFetchGraduationUsers({
-    page: page - 1,
-    size: pageSize,
-    name: query || undefined,
-    graduationType: 'CERTIFICATE',
-  });
-
-  const rows: CertRow[] = data
-    ? data.contents.map((user, idx) => {
-        const certStatus =
-          user.status && user.status.type === 'CERTIFICATE'
-            ? user.status
-            : null;
-        const status = certStatus?.submitted ? '제출' : '미제출';
-        const approved = certStatus?.approval ? '승인' : '미승인';
-        return {
-          id: user.id,
-          no: (page - 1) * pageSize + idx + 1,
-          studentId: user.studentId,
-          name: user.name,
-          status,
-          approved,
-        };
-      })
-    : [];
-
-  const { selectedIds, toggleAll, toggleOne, resetSelection } =
-    useAdminSelection(rows);
-
-  const { handleDownload } = useAdminDownload('CERTIFICATE');
-
-  const handleResetSelection = () => {
-    resetSelection();
-    resetToFirstPage();
-  };
-
-  const { handleApproveSelected } = useGraduationApproval({
-    items: data?.contents ?? [],
-    selectedIds,
-    getId: user => user.id,
-    getLabel: user => `${user.studentId} ${user.name}`,
-    status: {
-      isSubmitted: user => {
-        const status = user.status;
-        if (!status || status.type !== 'CERTIFICATE') return false;
-        return status.submitted;
-      },
-      isApproved: user => {
-        const status = user.status;
-        if (!status || status.type !== 'CERTIFICATE') return false;
-        return status.approval;
-      },
-    },
-    onSuccess: handleResetSelection,
-  });
-
-  const totalItems = data?.pageable.totalElements ?? 0;
 
   return (
     <div className={style.root}>
       <div className={style.container}>
         <Header title='자격증 관리' />
-
-        <Toolbar
-          selectedCount={selectedIds.length}
+        <Table
+          page={page}
+          pageSize={pageSize}
           query={query}
+          graduationType='CERTIFICATE'
           onQueryChange={handleQueryChange}
-          onApprove={handleApproveSelected}
-          onDownload={handleDownload}
         />
-
-        <div className={style.card}>
-          <DataTable<CertRow>
-            rows={rows}
-            getRowId={(r: CertRow) => r.id}
-            columns={certColumns}
-            onToggleAll={toggleAll}
-            selectedIds={selectedIds}
-            onToggleOne={toggleOne}
-            emptyText={isLoading ? '불러오는 중...' : undefined}
-          />
-        </div>
         <Pagination
           page={page}
           pageSize={pageSize}
-          totalItems={totalItems}
+          totalItems={0}
           onGoto={setPage}
           onPageSizeChange={handlePageSizeChange}
         />

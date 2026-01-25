@@ -14,8 +14,11 @@ import {
   DELETE_ALERT,
   DELETE_CONFIRM_TITLE,
 } from '~/admin/shared/components/Toolbar/toolbarTexts';
-import { useAdminDownload, useAdminSelection } from '~/admin/shared/hooks';
-import { useAdminPagination } from '~/admin/shared/hooks/admin-table/useAdminPagination';
+import {
+  useAdminDownload,
+  useAdminPagination,
+  useAdminSelection,
+} from '~/admin/widgets/Table/model';
 
 export const useAllManagement = () => {
   const navigate = useNavigate();
