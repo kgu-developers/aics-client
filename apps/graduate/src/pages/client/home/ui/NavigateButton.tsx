@@ -14,25 +14,17 @@ interface NavigateButtonProps {
 
 export const NavigateButton = ({ href, icon, label }: NavigateButtonProps) => {
   return (
-    <Link to={href} style={{ textDecoration: 'none' }}>
+    <Link to={href} style={{ textDecoration: 'none', width: '100%' }}>
       <button type='button' className={styles.homeButton}>
-        {icon}
-        <p
-          style={{
-            textWrap: 'wrap',
-            fontSize: vars.font.size.lg,
-            textAlign: 'start',
-            lineHeight: '1.5',
-            fontVariationSettings: `'wght' ${vars.font.weight.medium}`,
-          }}
-        >
+        <div className={styles.homeButtonIcon}>{icon}</div>
+        <span className={styles.homeButtonLabel}>
           {label.split('\n').map(line => (
             <Fragment key={line}>
               {line}
               <br />
             </Fragment>
           ))}
-        </p>
+        </span>
       </button>
     </Link>
   );

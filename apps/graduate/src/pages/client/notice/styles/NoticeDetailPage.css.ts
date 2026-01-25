@@ -4,22 +4,17 @@ import { vars } from '~/vars.css';
 
 export const mainSection = style({
   position: 'absolute',
-  top: vars.spacing.header,
   width: '100dvw',
+  height: `calc(100dvh - ${vars.spacing.header})`,
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   zIndex: 800,
   padding: vars.spacing.lg,
-  minHeight: `calc(100dvh - ${vars.spacing.header})`,
+  paddingBottom: 0,
   backgroundColor: vars.colors.sub,
   gap: vars.spacing.md,
-
-  '@media': {
-    '(max-width: 768px)': {
-      padding: vars.spacing.md,
-    },
-  },
+  overflowY: 'auto',
 });
 
 export const loadingContainer = style({
@@ -29,6 +24,7 @@ export const loadingContainer = style({
   minHeight: '400px',
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
+  marginBottom: vars.spacing.xl,
 });
 
 export const errorContainer = style({
@@ -40,6 +36,7 @@ export const errorContainer = style({
   minHeight: '400px',
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
+  marginBottom: vars.spacing.xl,
 });
 
 export const backButtonWrapper = style({
@@ -64,11 +61,15 @@ export const noticeContainer = style({
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.lg,
   padding: vars.spacing.xl,
+  paddingBottom: vars.spacing.xl,
+  marginBottom: vars.spacing.xl,
   boxSizing: 'border-box',
 
   '@media': {
     '(max-width: 768px)': {
       padding: vars.spacing.lg,
+      paddingBottom: vars.spacing.lg,
+      marginBottom: vars.spacing.lg,
     },
   },
 });

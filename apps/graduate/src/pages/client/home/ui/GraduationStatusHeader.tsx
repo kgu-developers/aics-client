@@ -26,18 +26,18 @@ export default function GraduationStatusHeader({
   const StatusTextDisplay = () => {
     if (!title || !description) {
       return (
-        <>
-          <p className={styles.headerTitle}>준비중</p>
+        <div className={styles.headerTextWrapper}>
+          <h1 className={styles.headerTitle}>준비중</h1>
           <p className={styles.headerDescription}>
             아직 졸업 요건 취득 일정이 지정되지 않았어요.
           </p>
-        </>
+        </div>
       );
     }
 
     return (
-      <>
-        <p className={styles.headerTitle}>{title}</p>
+      <div className={styles.headerTextWrapper}>
+        <h1 className={styles.headerTitle}>{title}</h1>
         <p className={styles.headerDescription}>
           {description.split('\n').map(line => (
             <Fragment key={line}>
@@ -46,15 +46,13 @@ export default function GraduationStatusHeader({
             </Fragment>
           ))}
         </p>
-      </>
+      </div>
     );
   };
 
   return (
     <section className={styles.header}>
-      <div className={styles.headerTextWrapper}>
-        <StatusTextDisplay />
-      </div>
+      <StatusTextDisplay />
       <NavigationButtons button={button} />
     </section>
   );
@@ -65,7 +63,7 @@ const NavigationButtons = ({ button }: { button: ButtonData }) => {
     <section className={styles.homeButtonSection}>
       <NavigateButton
         href={button.href}
-        icon={<ArrowRight />}
+        icon={<ArrowRight size={24} />}
         label={button.label}
       />
 

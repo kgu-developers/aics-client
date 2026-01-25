@@ -8,7 +8,7 @@ export const header = style({
   left: 0,
   right: 0,
   zIndex: 1000,
-  width: 'inherit',
+  width: '100%',
   height: vars.spacing.header,
   background: 'rgba(255, 255, 255, 0.4)',
   backdropFilter: 'blur(10px)',
@@ -17,6 +17,7 @@ export const header = style({
   justifyContent: 'space-between',
   gap: vars.spacing.xs,
   padding: `0 ${vars.spacing.md}`,
+  boxSizing: 'border-box',
   boxShadow: '0px 4px 10px 0px rgba(0,0,0,0.01)',
   color: vars.colors.black,
 });

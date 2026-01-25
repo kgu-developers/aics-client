@@ -15,20 +15,20 @@ export default function TodayScheduleSection({
 }: TodayScheduleSectionProps) {
   return (
     <section className={styles.scheduleCard}>
-      <Section>
+      <div className={styles.scheduleHeader}>
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: vars.spacing.sm,
+            gap: '4px',
           }}
         >
           <p className={styles.headerDate}>{date}</p>
-          <p className={styles.headerText}> 졸업 요건 취득 일정</p>
+          <h2 className={styles.headerText}>졸업 요건 취득 일정</h2>
         </div>
-        <WeekCalendar />
-        <ScheduleTimeLine />
-      </Section>
+      </div>
+      <WeekCalendar />
+      <ScheduleTimeLine />
     </section>
   );
 }

@@ -1,20 +1,11 @@
 import { Link, useNavigate } from '@tanstack/react-router';
-import { FileText } from 'lucide-react';
+import { ChevronRight, FileText } from 'lucide-react';
 
-import { DataTable, Section } from '~/shared/components';
+import { Section } from '~/shared/components';
 import { ROUTE } from '~/shared/constants';
 import { useNoticeList } from '~/shared/hooks/notice/useNoticeList';
 
 import * as styles from '../styles/HomePage.css';
-
-type NoticeRow = {
-  noticeId: number;
-  title: string;
-  author: string;
-  createdAt: string;
-  hasAttachment: boolean;
-  isPinned: boolean;
-};
 
 export default function NoticeSection() {
   const navigate = useNavigate();
@@ -24,123 +15,82 @@ export default function NoticeSection() {
     size: 5,
   });
 
-  const noticeRows: NoticeRow[] =
-    data?.contents.map(notice => ({
-      noticeId: notice.noticeId,
-      title: notice.title,
-      author: notice.author,
-      createdAt: notice.createdAt,
-      hasAttachment: notice.hasAttachment,
-      isPinned: notice.isPinned,
-    })) ?? [];
-
-  const columns = [
-    {
-      key: 'title',
-      header: '제목',
-      width: '50%',
-      align: 'left' as const,
-      ellipsis: true,
-      cell: (row: NoticeRow) => (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            cursor: 'pointer',
-          }}
-          onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
-        >
-          {row.isPinned && (
-            <span
-              style={{
-                backgroundColor: '#006AE4',
-                color: 'white',
-                padding: '2px 8px',
-                borderRadius: '4px',
-                fontSize: '12px',
-                fontWeight: 600,
-              }}
-            >
-              공지
-            </span>
-          )}
-          <span>{row.title}</span>
-          {row.hasAttachment && (
-            <FileText size={14} style={{ color: '#A0A4B0', flexShrink: 0 }} />
-          )}
-        </div>
-      ),
-    },
-    {
-      key: 'author',
-      header: '작성자',
-      width: '20%',
-      align: 'center' as const,
-      cell: (row: NoticeRow) => (
-        <div
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
-        >
-          {row.author}
-        </div>
-      ),
-    },
-    {
-      key: 'createdAt',
-      header: '작성일',
-      width: '30%',
-      align: 'center' as const,
-      cell: (row: NoticeRow) => {
-        const dateObj = new Date(row.createdAt);
-        return (
-          <div
-            style={{ cursor: 'pointer' }}
-            onClick={() => navigate({ to: `/notice/${row.noticeId}` })}
-          >
-            {dateObj.toLocaleDateString('ko-KR', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            })}
-          </div>
-        );
-      },
-    },
-  ];
+  const notices = data?.contents ?? [];
 
   return (
     <div className={styles.noticeSection}>
-      <Section>
-        <Section.Header
-          subtitle='졸업 관련 공지사항을 확인해주세요.'
-          action={
-            <Link to={ROUTE.NOTICE} className={styles.noticeAction}>
-              <p>더보기</p>
-            </Link>
-          }
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '8px',
+        }}
+      >
+        <div>
+          <h2 className={styles.headerText}>공지사항</h2>
+          <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '4px' }}>
+            졸업 관련 공지사항을 확인해주세요.
+          </p>
+        </div>
+        <Link to={ROUTE.NOTICE} className={styles.noticeAction}>
+          <span>더보기</span>
+          <ChevronRight size={16} />
+        </Link>
+      </div>
+
+      {isLoading ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '150px',
+            color: '#9CA3AF',
+          }}
         >
-          공지사항
-        </Section.Header>
-        {isLoading ? (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '200px',
-            }}
-          >
-            로딩 중...
-          </div>
-        ) : (
-          <DataTable
-            rows={noticeRows}
-            columns={columns}
-            getRowId={row => row.noticeId}
-          />
-        )}
-      </Section>
+          로딩 중...
+        </div>
+      ) : (
+        <div className={styles.noticeList}>
+          {notices.map(notice => (
+            <div
+              key={notice.noticeId}
+              className={styles.noticeItem}
+              onClick={() => navigate({ to: `/notice/${notice.noticeId}` })}
+            >
+              <div className={styles.noticeTop}>
+                {notice.isPinned && <span className={styles.noticeBadge}>공지</span>}
+                <span className={styles.noticeTitle}>{notice.title}</span>
+                {notice.hasAttachment && (
+                  <FileText size={14} style={{ color: '#A0A4B0', flexShrink: 0 }} />
+                )}
+              </div>
+              <div className={styles.noticeBottom}>
+                <span>{notice.author}</span>
+                <span>
+                  {new Date(notice.createdAt).toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                  })}
+                </span>
+              </div>
+            </div>
+          ))}
+          {notices.length === 0 && (
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '40px 0',
+                color: '#9CA3AF',
+              }}
+            >
+              등록된 공지사항이 없습니다.
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

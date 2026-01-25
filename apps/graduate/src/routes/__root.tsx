@@ -56,11 +56,13 @@ export const Route = createRootRouteWithContext<AuthContext>()({
               style={{
                 position: 'absolute',
                 inset: 0,
-                overflow: 'auto',
+                overflowX: 'hidden',
+                overflowY: 'auto',
                 display: 'flex',
                 backgroundColor: vars.colors.sub,
                 flexDirection: 'column',
-                gap: vars.spacing.md,
+                paddingTop: vars.spacing.header,
+                boxSizing: 'border-box',
               }}
             >
               <Outlet />

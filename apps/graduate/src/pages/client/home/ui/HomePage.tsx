@@ -11,14 +11,12 @@ export default function HomePage() {
   const homePageData = useHomePageData();
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
-      <section className={styles.mainSection}>
-        <section className={styles.upperSection}>
-          <GraduationStatusHeader {...homePageData} />
-          <TodayScheduleSection date={formattedDate} />
-        </section>
-        <NoticeSection />
+    <div className={styles.mainSection}>
+      <section className={styles.upperSection}>
+        <GraduationStatusHeader {...homePageData} />
+        <TodayScheduleSection date={formattedDate} />
       </section>
+      <NoticeSection />
     </div>
   );
 }

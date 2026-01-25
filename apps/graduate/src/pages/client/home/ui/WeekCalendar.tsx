@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { vars } from '~/vars.css';
+import * as styles from '../styles/HomePage.css';
 
 export default function WeekOnlyCalendar() {
   const today = dayjs();
@@ -11,39 +11,15 @@ export default function WeekOnlyCalendar() {
   );
 
   return (
-    <div
-      style={{
-        width: '100%',
-        maxWidth: 360,
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
-      }}
-    >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(7, 1fr)',
-          columnGap: 8,
-          fontSize: 12,
-          fontWeight: 500,
-          color: vars.colors.subDark,
-          textAlign: 'center',
-        }}
-      >
+    <div className={styles.calendarWrapper}>
+      <div className={styles.calendarGrid}>
         {dayLabels.map(label => (
-          <span key={label}>{label}</span>
+          <span key={label} className={styles.calendarDayLabel}>
+            {label}
+          </span>
         ))}
       </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(7, 1fr)',
-          columnGap: 8,
-          textAlign: 'center',
-        }}
-      >
+      <div className={styles.calendarGrid}>
         {currentWeekDays.map(date => {
           const isToday = date.isSame(today, 'day');
           return (
@@ -56,18 +32,9 @@ export default function WeekOnlyCalendar() {
               }}
             >
               <div
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  fontSize: 18,
-                  fontWeight: 600,
-                  color: isToday ? '#FFFFFF' : '#202124',
-                  backgroundColor: isToday ? vars.colors.main : 'transparent',
-                }}
+                className={`${styles.calendarDateCircle} ${
+                  isToday ? styles.calendarDateToday : styles.calendarDateNormal
+                }`}
               >
                 {date.format('D')}
               </div>
