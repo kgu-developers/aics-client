@@ -2,17 +2,48 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
 import { App as AntApp } from 'antd';
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { submitReissue } from './client/pages/auth/login/api/submitReissue';
 import reportWebVitals from './reportWebVitals.ts';
 import { useAuthStore } from './shared/stores';
-import { queryClient, router } from './shared/utils';
+import {
+  getRefreshToken,
+  logout,
+  queryClient,
+  router,
+  setAccessToken,
+  setRefreshToken,
+  setRole,
+} from './shared/utils';
 
 import './globals.css';
 
 function App() {
-  const { isAuthenticated, isAdmin } = useAuthStore();
+  const { isAuthenticated, isAdmin, updateAuth } = useAuthStore();
+
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const refreshToken = getRefreshToken();
+
+      if (refreshToken) {
+        try {
+          const response = await submitReissue(refreshToken);
+          setAccessToken(response.accessToken);
+          setRefreshToken(response.refreshToken);
+          setRole(response.role);
+          updateAuth();
+          console.log('updateAuth');
+        } catch {
+          logout();
+          router.navigate({ to: '/login' });
+        }
+      }
+    };
+
+    initializeAuth();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

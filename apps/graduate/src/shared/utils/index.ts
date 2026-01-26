@@ -1,6 +1,7 @@
 export * from './crypto';
 export * from './token';
 export * from './notice';
+export * from './routeGuards';
 export { default as parseError } from './error';
 export { default as logout } from './logout';
 export { default as queryClient } from './queryClient';

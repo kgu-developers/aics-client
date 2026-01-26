@@ -7,7 +7,7 @@ type PreviewSearch = {
   graduationUserId: number;
 };
 
-export const Route = createFileRoute('/_afterLogin/file-preview')({
+export const Route = createFileRoute('/file-preview')({
   validateSearch: (search: Record<string, unknown>): PreviewSearch => ({
     fileId: Number(search.fileId),
     graduationUserId: Number(search.graduationUserId),

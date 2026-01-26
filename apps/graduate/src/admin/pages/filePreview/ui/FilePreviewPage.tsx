@@ -20,7 +20,7 @@ export default function FilePreviewPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { fileId, graduationUserId } = useSearch({
-    from: '/_afterLogin/file-preview',
+    from: '/file-preview',
   });
   const { data: studentDetail, isLoading: isStudentLoading } =
     useStudentDetail(graduationUserId);

@@ -2,14 +2,13 @@ import { useSearch } from '@tanstack/react-router';
 
 import { Section } from '~/shared/ui';
 
-
 import { ThesisCollapse } from './ThesisCollapse';
 
 import { SubmissionButtons } from '~/client/pages/certification/ui/SubmissionButtons';
 import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 export default function ThesisPage() {
-  const { type } = useSearch({ from: '/_afterLogin/thesis' }) as {
+  const { type } = useSearch({ from: '/thesis' }) as {
     type: 'midreport' | 'finalreport';
   };
 

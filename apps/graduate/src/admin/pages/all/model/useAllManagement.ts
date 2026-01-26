@@ -23,7 +23,7 @@ import {
 
 export const useAllManagement = () => {
   const navigate = useNavigate();
-  const searchParams = useSearch({ from: '/_afterLogin/all' });
+  const searchParams = useSearch({ from: '/all' });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudentId, setSelectedStudentId] = useState<number>();
   const { toast, confirm } = useToast();

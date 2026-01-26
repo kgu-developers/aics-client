@@ -6,7 +6,7 @@ type AllSearchParams = {
   graduationUserId?: number;
 };
 
-export const Route = createFileRoute('/_afterLogin/all')({
+export const Route = createFileRoute('/all')({
   component: AllManagementPage,
   validateSearch: (search: Record<string, unknown>): AllSearchParams => {
     return {

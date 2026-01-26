@@ -18,7 +18,7 @@ import { vars } from '~/vars.css';
 
 export default function ApplyPage() {
   const navigate = useNavigate();
-  const { confirm } = useSearch({ from: '/_afterLogin/apply' }) as {
+  const { confirm } = useSearch({ from: '/apply' }) as {
     confirm: boolean;
   };
   const [selectedOption, setSelectedOption] = useState<GraduationType>(

@@ -3,7 +3,7 @@ import { lazy } from 'react';
 
 const HomePage = lazy(() => import('~/client/pages/home'));
 
-export const Route = createFileRoute('/_afterLogin/')({
+export const Route = createFileRoute('/')({
   beforeLoad: ({ context }) => {
     if (context.auth.isAdmin) {
       throw redirect({ to: '/all' });
