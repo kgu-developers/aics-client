@@ -4,8 +4,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { modalStyles } from '~/shared/config';
-import { DATE_FORMAT } from '~/shared/constants';
+import { modalStyles, DATE_FORMAT } from '~/shared/config';
 import { useToast } from '~/shared/hooks';
 
 import { type ScheduleItem, useUpdateSchedule } from '../model';

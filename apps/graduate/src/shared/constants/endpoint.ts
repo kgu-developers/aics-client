@@ -1,5 +1,3 @@
-import type { SubmissionType } from '~/shared/types';
-
 export const API_URL =
   import.meta.env.VITE_API_URL || 'https://aics-api.kgudevelopers.monster';
 
@@ -32,6 +30,8 @@ export type EndpointPath = EndpointValue<typeof END_POINT>;
  * 현재 Depth 지켜서 엔드포인트 추가해주세요.
  */
 import type { WorkflowStage } from '~/shared/types/graduation';
+
+import { SubmissionType } from '../types';
 
 export const END_POINT = {
   AUTH: {

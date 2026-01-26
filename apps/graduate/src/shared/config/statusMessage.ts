@@ -1,28 +1,4 @@
 /**
- * 캐러셀 설정
- */
-export const CAROUSEL_CONFIG = {
-  /** 자동 재생 속도 (밀리초) */
-  AUTOPLAY_SPEED: 5000,
-  /** 페이드 효과 지속 시간 (밀리초) */
-  FADE_DURATION: 300,
-} as const;
-
-/**
- * 페이지네이션 기본 설정
- */
-export const PAGINATION = {
-  /** 고정 공지사항 표시 개수 */
-  PINNED_NOTICE_SIZE: 3,
-  /** 공지사항 목록 기본 페이지 크기 */
-  NOTICE_LIST_SIZE: 10,
-  /** 일정 목록 기본 페이지 크기 */
-  SCHEDULE_LIST_SIZE: 5,
-  /** 최근 공지사항 표시 개수 */
-  RECENT_NOTICE_SIZE: 5,
-} as const;
-
-/**
  * 로딩 메시지
  */
 export const LOADING_MESSAGES = {
@@ -57,16 +33,4 @@ export const EMPTY_MESSAGES = {
   NOTICE: '등록된 공지사항이 없습니다',
   SEARCH_RESULT: '검색 결과가 없습니다',
   NO_DATA: '데이터가 없습니다',
-} as const;
-
-/**
- * 캘린더 설정
- */
-export const CALENDAR_CONFIG = {
-  /** 데스크톱 캘린더 높이 */
-  DESKTOP_HEIGHT: 600,
-  /** 모바일 캘린더 높이 */
-  MOBILE_HEIGHT: 500,
-  /** 최소 행 높이 */
-  MIN_ROW_HEIGHT: 60,
 } as const;

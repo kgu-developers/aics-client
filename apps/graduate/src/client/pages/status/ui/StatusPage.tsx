@@ -9,7 +9,7 @@ import {
   SCHEDULE_COLOR_PALETTE,
   LOADING_MESSAGES,
   EMPTY_MESSAGES,
-} from '~/shared/constants';
+} from '~/shared/config';
 
 import * as styles from '../styles/StatusPage.css';
 

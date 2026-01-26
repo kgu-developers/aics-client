@@ -2,9 +2,10 @@ import { Collapse, CollapseProps } from 'antd';
 import type { CSSProperties } from 'react';
 
 import { SCHEDULE } from '~/shared/constants/';
-import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 import { ThesisFileUploadDragger } from './ThesisFileUploadDragger';
+
+import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 interface ThesisCollapseProps {
   activeKey: 'midreport' | 'finalreport';

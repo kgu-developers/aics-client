@@ -1,6 +1,6 @@
 import { Carousel } from 'antd';
 
-import { CAROUSEL_CONFIG, PAGINATION } from '~/shared/constants';
+import { CAROUSEL_CONFIG, PAGINATION } from '~/shared/config';
 import { useNoticeList } from '~/shared/hooks';
 
 import PinnedNoticeSlide from './PinnedNoticeSlide';

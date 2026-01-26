@@ -3,7 +3,7 @@ import { Button, Divider, Tag } from 'antd';
 import { ArrowLeft, FileText, Download } from 'lucide-react';
 
 import { LoadingState, ErrorState } from '~/shared/components';
-import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/constants';
+import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/config';
 import { useNoticeDetail } from '~/shared/hooks';
 
 import * as styles from '../styles/NoticeDetailPage.css.ts';

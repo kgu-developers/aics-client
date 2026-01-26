@@ -4,7 +4,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { FileText } from 'lucide-react';
 
 import { LoadingState } from '~/shared/components';
-import { LOADING_MESSAGES, PAGINATION } from '~/shared/constants';
+import { PAGINATION, LOADING_MESSAGES } from '~/shared/config';
 import { useNoticeList } from '~/shared/hooks';
 
 import * as styles from '../styles/NoticePage.css';

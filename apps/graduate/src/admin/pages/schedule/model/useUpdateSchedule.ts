@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Dayjs } from 'dayjs';
 
-import { KEYS, DATE_FORMAT } from '~/shared/constants';
+import { DATE_FORMAT } from '~/shared/config';
+import { KEYS } from '~/shared/constants';
 import { UpdateScheduleRequest } from '~/shared/types';
 
 import { updateSchedule } from '../api';

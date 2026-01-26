@@ -1,10 +1,10 @@
-import { GraduationType } from '../constants';
+import { GraduationType } from '~/shared/constants';
 
 import { fetchGraduationUsersExcel } from '~/admin/entities/graduation-users/api';
 
 const DEFAULT_FILENAME = '졸업_대상자_목록.xlsx';
 
-export default async function downloadGraduationUsersExcel(
+export async function excelDownload(
   graduationType?: GraduationType,
   fallbackFilename = DEFAULT_FILENAME,
 ) {
