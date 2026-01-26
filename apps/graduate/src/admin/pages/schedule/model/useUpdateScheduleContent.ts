@@ -6,7 +6,7 @@ import type { SubmissionType } from '~/shared/types';
 import {
   updateScheduleContent,
   UpdateScheduleContentRequest,
-} from '~/admin/shared/api';
+} from '../api/updateScheduleContent';
 
 interface UseUpdateScheduleContentParams {
   submissionType: SubmissionType;

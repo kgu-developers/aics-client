@@ -4,7 +4,7 @@ import type { Dayjs } from 'dayjs';
 import { KEYS, DATE_FORMAT } from '~/shared/constants';
 import { UpdateScheduleRequest } from '~/shared/types';
 
-import { updateSchedule } from '~/admin/shared/api';
+import { updateSchedule } from '../api';
 
 interface UseUpdateScheduleParams {
   scheduleId: number;
