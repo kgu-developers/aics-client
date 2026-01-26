@@ -41,23 +41,25 @@ export default function ScheduleAdminPage() {
   ];
 
   return (
-    <div className={style.container}>
-      <Header title='진행일정' />
+    <div className={style.root}>
+      <div className={style.container}>
+        <Header title='진행일정' />
 
-      <Table
-        columns={columns}
-        dataSource={schedule}
-        loading={isLoading}
-        pagination={false}
-        bordered
-        style={{ marginBottom: '24px' }}
-      />
+        <Table
+          columns={columns}
+          dataSource={schedule}
+          loading={isLoading}
+          pagination={false}
+          bordered
+          style={{ marginBottom: '24px' }}
+        />
 
-      <ScheduleEditModal scheduleData={schedule ?? []} />
+        <ScheduleEditModal scheduleData={schedule ?? []} />
 
-      <Header title='진행일정-상세' />
+        <Header title='진행일정-상세' />
 
-      <ScheduleDescription />
+        <ScheduleDescription />
+      </div>
     </div>
   );
 }
