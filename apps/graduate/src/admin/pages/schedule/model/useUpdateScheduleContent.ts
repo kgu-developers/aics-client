@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { scheduleKeys } from '~/shared/queries/schedule';
 import type { SubmissionType } from '~/shared/types';
 
 import {
@@ -21,7 +21,7 @@ export function useUpdateScheduleContent() {
       updateScheduleContent(submissionType, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: [...KEYS.SCHEDULE_CONTENT, variables.submissionType],
+        queryKey: scheduleKeys.content(variables.submissionType),
       });
     },
   });

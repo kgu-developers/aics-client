@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { AxiosResponse } from 'axios';
 
 import { get } from '~/shared/api';
-import { KEYS } from '~/shared/constants';
 import { END_POINT } from '~/shared/constants';
+import { noticeKeys } from '~/shared/queries/notice';
 import type { NoticeDetailApiResponse } from '~/shared/types';
 import { transformNoticeDetailResponse } from '~/shared/utils';
 
@@ -17,7 +17,7 @@ export async function fetchNoticeDetail(
 
 export function useNoticeDetail(noticeId: number) {
   return useQuery({
-    queryKey: [...KEYS.NOTICE, 'detail', noticeId],
+    queryKey: noticeKeys.detail(noticeId),
     queryFn: async () => {
       const response = await fetchNoticeDetail(noticeId);
       return transformNoticeDetailResponse(response.data);

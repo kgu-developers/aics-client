@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { noticeKeys } from '~/shared/queries/notice';
 
 import { removeNotice } from '../api';
 
@@ -10,7 +10,7 @@ export function useRemoveNotice() {
   return useMutation({
     mutationFn: (noticeId: number) => removeNotice(noticeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
+      queryClient.invalidateQueries({ queryKey: noticeKeys.lists() });
     },
   });
 }

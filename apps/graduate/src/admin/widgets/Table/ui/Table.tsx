@@ -3,8 +3,8 @@ import { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
 import { certColumns } from '~/admin/pages/certification/constants/certColumns';
 import { thesisColumns } from '~/admin/pages/thesis/constants/thesisColumns';
-import { DataTable, Toolbar } from '~/admin/shared/ui';
 import * as style from '~/admin/shared/styles/adminPage.css';
+import { DataTable, Toolbar } from '~/admin/shared/ui';
 import {
   useAdminSelection,
   useAdminDownload,

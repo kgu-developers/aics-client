@@ -2,8 +2,9 @@ import { useNavigate, useSearch } from '@tanstack/react-router';
 import { Button, Spin } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
-import { API_URL, KEYS, ROUTE } from '~/shared/constants';
+import { API_URL, ROUTE } from '~/shared/constants';
 import { useToast } from '~/shared/hooks';
+import { studentKeys } from '~/shared/queries';
 import { queryClient } from '~/shared/utils';
 
 import FilePreviewContent from './FilePreviewContent';
@@ -38,7 +39,7 @@ export default function FilePreviewPage() {
       onSuccess: async () => {
         toast.success('승인이 완료되었습니다.');
         await queryClient.invalidateQueries({
-          queryKey: [...KEYS.STUDENT_FILE],
+          queryKey: [...studentKeys.files()],
         });
         await refetch();
       },

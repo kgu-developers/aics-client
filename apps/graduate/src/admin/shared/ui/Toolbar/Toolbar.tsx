@@ -1,9 +1,10 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 
+import * as style from './Toolbar.css';
+
 import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
 
-import * as style from './Toolbar.css';
 
 type Props = {
   selectedCount: number;

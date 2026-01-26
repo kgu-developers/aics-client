@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { scheduleKeys } from '~/shared/queries/schedule';
 import { CreateScheduleRequest } from '~/shared/types';
 
 import { submitSchedule } from '../api';
@@ -11,7 +11,7 @@ export function useCreateSchedule() {
   return useMutation({
     mutationFn: (data: CreateScheduleRequest) => submitSchedule(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: scheduleKeys.lists() });
     },
   });
 }

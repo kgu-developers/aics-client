@@ -3,8 +3,8 @@ import { Button, Input, Table, Tag } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 import { useState } from 'react';
 
-import { Header } from '~/shared/ui';
 import { useNoticeList } from '~/shared/hooks';
+import { Header } from '~/shared/ui';
 
 import type { NoticeItem } from '../model';
 import * as style from '../styles/NoticeAdminPage.css';

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { studentKeys } from '~/shared/queries/student';
 
 import { fetchCertificateFile, fetchThesisFile } from '../api';
 import {
@@ -16,7 +16,7 @@ export function useFile(
   enabled: boolean,
 ) {
   return useQuery({
-    queryKey: [...KEYS.STUDENT_FILE, type?.toLowerCase(), fileId],
+    queryKey: studentKeys.file(type?.toLowerCase() as 'certificate' | 'thesis', fileId),
     queryFn: async () => {
       if (type === 'CERTIFICATE') {
         const response = await fetchCertificateFile(fileId);

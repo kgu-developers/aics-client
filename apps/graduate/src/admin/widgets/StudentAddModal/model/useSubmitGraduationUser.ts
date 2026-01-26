@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 
-import { KEYS } from '~/shared/constants';
+import { graduationUsersKeys } from '~/shared/queries';
 import type { GraduationUserCreateRequest } from '~/shared/types';
 
 import {
@@ -19,13 +19,13 @@ export function useSubmitGraduationUser({ onSuccess }: Options = {}) {
   const singleMutation = useMutation({
     mutationFn: submitGraduationUser,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [...KEYS.GRADUATION_USERS] }),
+      queryClient.invalidateQueries({ queryKey: graduationUsersKeys.all }),
   });
 
   const batchMutation = useMutation({
     mutationFn: submitGraduationUsersBatch,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [...KEYS.GRADUATION_USERS] }),
+      queryClient.invalidateQueries({ queryKey: graduationUsersKeys.all }),
   });
 
   const submitSingle = async (values: GraduationUserCreateRequest) => {

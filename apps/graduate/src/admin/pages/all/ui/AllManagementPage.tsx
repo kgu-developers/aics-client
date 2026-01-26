@@ -9,8 +9,8 @@ import { extractPeriodData } from '../utils';
 import UserDetailModal from './UserDetailModal.tsx';
 import { useAllManagement } from '../model/useAllManagement.ts';
 
-import { DataTable, Toolbar } from '~/admin/shared/ui/index.ts';
 import * as style from '~/admin/shared/styles/adminPage.css';
+import { DataTable, Toolbar } from '~/admin/shared/ui/index.ts';
 
 export default function AllManagementPage() {
   const {

@@ -4,12 +4,12 @@ import { useState, useMemo } from 'react';
 import { Calendar, dayjsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { LoadingState, EmptyState } from '~/shared/ui';
 import {
   SCHEDULE_COLOR_PALETTE,
   LOADING_MESSAGES,
   EMPTY_MESSAGES,
 } from '~/shared/config';
+import { LoadingState, EmptyState } from '~/shared/ui';
 
 import * as styles from '../styles/StatusPage.css';
 

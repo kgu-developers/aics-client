@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { studentKeys } from '~/shared/queries/student';
 
 import { getStudentDetail } from '../api';
 
 export function useStudentDetail(studentId: number) {
   return useQuery({
-    queryKey: [...KEYS.STUDENT_DETAIL, studentId],
+    queryKey: studentKeys.detail(studentId),
     queryFn: async () => {
       const response = await getStudentDetail(studentId);
       return response.data;

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Dayjs } from 'dayjs';
 
 import { DATE_FORMAT } from '~/shared/config';
-import { KEYS } from '~/shared/constants';
+import { scheduleKeys } from '~/shared/queries/schedule';
 import { UpdateScheduleRequest } from '~/shared/types';
 
 import { updateSchedule } from '../api';
@@ -28,9 +28,9 @@ export function useUpdateSchedule() {
       return updateSchedule(scheduleId, requestData);
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: scheduleKeys.lists() });
       queryClient.invalidateQueries({
-        queryKey: [...KEYS.SCHEDULE, variables.scheduleId],
+        queryKey: scheduleKeys.detail(variables.scheduleId),
       });
     },
   });

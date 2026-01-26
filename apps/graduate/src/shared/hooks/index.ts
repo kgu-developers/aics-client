@@ -1,3 +1,3 @@
 export * from './useToast';
 export { useNoticeDetail } from './useNoticeDetail';
-export { useNoticeList } from './useNoticeList';
+export { useNoticeList, type NoticeListParams } from './useNoticeList';

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { noticeKeys } from '~/shared/queries/notice';
 import type { UpdateNoticeRequest } from '~/shared/types';
 
 import { updateNotice } from '../api';
@@ -11,8 +11,8 @@ export function useUpdateNotice(noticeId: number) {
   return useMutation({
     mutationFn: (data: UpdateNoticeRequest) => updateNotice(noticeId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
-      queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, noticeId] });
+      queryClient.invalidateQueries({ queryKey: noticeKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: noticeKeys.detail(noticeId) });
     },
   });
 }

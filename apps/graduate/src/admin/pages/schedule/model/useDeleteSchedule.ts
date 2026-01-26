@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { scheduleKeys } from '~/shared/queries/schedule';
 
 import { removeSchedule } from '../api';
 
@@ -10,7 +10,7 @@ export function useDeleteSchedule() {
   return useMutation({
     mutationFn: (scheduleId: number) => removeSchedule(scheduleId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [...KEYS.SCHEDULE_LIST] });
+      queryClient.invalidateQueries({ queryKey: scheduleKeys.lists() });
     },
   });
 }

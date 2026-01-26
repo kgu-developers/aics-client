@@ -2,17 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import type { AxiosResponse } from 'axios';
 
 import { get } from '~/shared/api';
-import { KEYS } from '~/shared/constants';
 import { END_POINT } from '~/shared/constants';
+import { noticeKeys, type NoticeListParams } from '~/shared/queries/notice';
 import type { NoticeApiResponse } from '~/shared/types';
 import { transformNoticeResponse } from '~/shared/utils';
 
-export interface NoticeListParams {
-  page?: number;
-  size?: number;
-  keywords?: string[];
-  category?: 'GRADUATION';
-}
+export type { NoticeListParams };
 
 export interface NoticeListResponse {
   contents: NoticeApiResponse[];
@@ -36,7 +31,7 @@ export async function fetchNoticeList(
 
 export function useNoticeList(params?: NoticeListParams) {
   return useQuery({
-    queryKey: [...KEYS.NOTICE, 'list', params],
+    queryKey: noticeKeys.list(params),
     queryFn: async () => {
       const response = await fetchNoticeList(params);
       const transformedContents = response.data.contents.map(

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { graduationUsersKeys } from '~/shared/queries';
 
 import {
   removeGraduationUser,
@@ -24,7 +24,7 @@ export function useRemoveGraduationUsers({ onSuccess }: Options = {}) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [...KEYS.GRADUATION_USERS],
+        queryKey: graduationUsersKeys.all,
       });
       await onSuccess?.();
     },

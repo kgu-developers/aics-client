@@ -1,8 +1,10 @@
 import { Section } from '~/shared/ui';
-import * as styles from '~/client/shared/styles/SubmissionPage.css';
+
 
 import { CertificationCollapse } from './CertificationCollapse';
 import { SubmissionButtons } from './SubmissionButtons';
+
+import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 export default function CertificationPage() {
   return (

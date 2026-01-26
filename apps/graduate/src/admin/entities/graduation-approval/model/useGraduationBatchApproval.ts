@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KEYS } from '~/shared/constants';
+import { graduationUsersKeys } from '~/shared/queries';
 
 import { updateGraduationBatchApproval } from '../api';
 
@@ -15,7 +15,7 @@ export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
     mutationFn: updateGraduationBatchApproval,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [...KEYS.GRADUATION_USERS],
+        queryKey: graduationUsersKeys.all,
       });
       await onSuccess?.();
     },
