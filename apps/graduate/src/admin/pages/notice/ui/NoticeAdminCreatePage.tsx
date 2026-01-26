@@ -8,8 +8,12 @@ import { API_ADMIN_URL, ROUTE } from '~/shared/constants';
 import { useNoticeDetail, useToast } from '~/shared/hooks';
 
 import { submitNoticeFile } from '../api/submitNoticeFile';
-import { useCreateNotice, useUpdateNotice, useDeleteNotice } from '../hooks';
-import type { NoticeFormItem } from '../model/notices';
+import {
+  type NoticeFormItem,
+  useCreateNotice,
+  useUpdateNotice,
+  useRemoveNotice,
+} from '../model';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 
 import { TextEditor } from '~/admin/shared/components';
@@ -31,7 +35,7 @@ export default function NoticeAdminCreatePage({
   const { data: notice, isPending } = useNoticeDetail(noticeId ?? 0);
   const { mutate: createNotice } = useCreateNotice();
   const { mutate: updateNotice } = useUpdateNotice(noticeId ?? 0);
-  const { mutate: deleteNotice } = useDeleteNotice();
+  const { mutate: removeNotice } = useRemoveNotice();
 
   const { createdAt } = notice ?? {};
 
@@ -147,7 +151,7 @@ export default function NoticeAdminCreatePage({
     confirm({
       title: '정말 삭제하시겠습니까?',
       onOk: () => {
-        deleteNotice(noticeId, {
+        removeNotice(noticeId, {
           onSuccess: () => {
             toast.success('공지사항이 삭제되었습니다.');
             handleGoBack();

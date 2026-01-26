@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { KEYS } from '~/shared/constants';
 import type { CreateNoticeRequest } from '~/shared/types';
 
-import { createNotice } from '~/admin/shared/api';
+import { createNotice } from '../api';
 
 export function useCreateNotice() {
   const queryClient = useQueryClient();

@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KEYS } from '~/shared/constants';
 
-import { deleteNotice } from '~/admin/shared/api';
+import { removeNotice } from '../api';
 
-export function useDeleteNotice() {
+export function useRemoveNotice() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (noticeId: number) => deleteNotice(noticeId),
+    mutationFn: (noticeId: number) => removeNotice(noticeId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [...KEYS.NOTICE, 'list'] });
     },
