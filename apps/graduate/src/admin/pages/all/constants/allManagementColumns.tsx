@@ -7,7 +7,7 @@ import {
 } from './allManagementTexts';
 import type { AllManagementRow } from '../types/allManagement';
 
-import type { Column } from '~/admin/shared/components/DataTable/DataTable';
+import type { Column } from '~/admin/shared/ui/DataTable/DataTable';
 import { vars } from '~/vars.css';
 
 export const allManagementColumns = (

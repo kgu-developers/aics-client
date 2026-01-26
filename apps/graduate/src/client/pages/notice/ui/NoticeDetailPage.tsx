@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { Button, Divider, Tag } from 'antd';
 import { ArrowLeft, FileText, Download } from 'lucide-react';
 
-import { LoadingState, ErrorState } from '~/shared/components';
+import { LoadingState, ErrorState } from '~/shared/ui/index.ts';
 import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/config';
 import { useNoticeDetail } from '~/shared/hooks';
 

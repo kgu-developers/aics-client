@@ -20,7 +20,7 @@ import {
   APPROVE_RESULT_NOT_APPROVED,
   APPROVE_RESULT_TITLE,
   APPROVE_SUCCESS,
-} from '~/admin/shared/components/Toolbar/toolbarTexts';
+} from '~/admin/shared/ui/Toolbar/toolbarTexts';
 
 type UseApproveGraduationUsersProps<T> = {
   items: T[];

@@ -3,7 +3,7 @@ import { Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FileText } from 'lucide-react';
 
-import { LoadingState } from '~/shared/components';
+import { LoadingState } from '~/shared/ui';
 import { PAGINATION, LOADING_MESSAGES } from '~/shared/config';
 import { useNoticeList } from '~/shared/hooks';
 

@@ -16,7 +16,7 @@ import {
 } from '../model';
 import * as style from '../styles/NoticeAdminCreatePage.css';
 
-import { TextEditor } from '~/admin/shared/components';
+import { TextEditor } from '~/admin/shared/ui';
 
 interface NoticeAdminCreatePageProps {
   noticeId?: number;

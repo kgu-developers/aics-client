@@ -1,6 +1,6 @@
 import { useRouter } from '@tanstack/react-router';
 
-import { Button } from '~/shared/components';
+import { Button } from '~/shared/ui';
 
 import LoginForm from './LoginForm';
 // import SignupForm from './SignupForm';

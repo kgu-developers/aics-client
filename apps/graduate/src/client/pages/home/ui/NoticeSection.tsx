@@ -1,7 +1,7 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { ChevronRight, FileText } from 'lucide-react';
 
-import { EmptyState } from '~/shared/components';
+import { EmptyState } from '~/shared/ui';
 import { PAGINATION, EMPTY_MESSAGES } from '~/shared/config';
 import { ROUTE } from '~/shared/constants';
 import { useNoticeList } from '~/shared/hooks';

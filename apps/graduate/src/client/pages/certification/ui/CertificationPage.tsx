@@ -1,4 +1,4 @@
-import { Section } from '~/shared/components';
+import { Section } from '~/shared/ui';
 import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 import { CertificationCollapse } from './CertificationCollapse';

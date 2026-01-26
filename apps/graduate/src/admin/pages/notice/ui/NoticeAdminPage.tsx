@@ -3,7 +3,7 @@ import { Button, Input, Table, Tag } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 import { useState } from 'react';
 
-import { Header } from '~/shared/components';
+import { Header } from '~/shared/ui';
 import { useNoticeList } from '~/shared/hooks';
 
 import type { NoticeItem } from '../model';

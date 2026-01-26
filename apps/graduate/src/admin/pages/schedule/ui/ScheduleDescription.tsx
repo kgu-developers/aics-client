@@ -8,7 +8,7 @@ import { SUBMISSION_TYPE_OPTIONS } from '../constants';
 import { useUpdateScheduleContent, useScheduleContent } from '../model';
 import * as style from '../styles/ScheduleDescription.css.ts';
 
-import { TextEditor } from '~/admin/shared/components';
+import { TextEditor } from '~/admin/shared/ui/index.ts';
 
 export default function ScheduleDescription() {
   const [selectedType, setSelectedType] = useState<SubmissionType>('SUBMITTED');

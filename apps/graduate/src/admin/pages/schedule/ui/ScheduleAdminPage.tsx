@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 
-import { Header } from '~/shared/components';
+import { Header } from '~/shared/ui/index.ts';
 
 import ScheduleDescription from './ScheduleDescription';
 import ScheduleEditModal from './ScheduleEditModal';

@@ -14,7 +14,7 @@ import { useRemoveGraduationUsers } from '~/admin/entities/graduation-users/mode
 import {
   DELETE_ALERT,
   DELETE_CONFIRM_TITLE,
-} from '~/admin/shared/components/Toolbar/toolbarTexts';
+} from '~/admin/shared/ui/Toolbar/toolbarTexts';
 import {
   useAdminDownload,
   useAdminPagination,

@@ -1,7 +1,7 @@
 import { useRouter } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 
-import { Button } from '~/shared/components';
+import { Button } from '~/shared/ui';
 
 import * as styles from '~/client/pages/auth/login/styles/loginForm.css';
 import { useSubmitSignup } from '~/client/pages/auth/signup/api/submitSignup';

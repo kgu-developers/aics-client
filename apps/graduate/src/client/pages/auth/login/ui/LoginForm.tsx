@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button } from '~/shared/components';
+import { Button } from '~/shared/ui';
 
 import { useSubmitLogin } from '../api/submitLogin';
 import type { LoginFormData } from '../model/login';

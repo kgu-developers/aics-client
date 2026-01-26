@@ -1,4 +1,4 @@
-import { Header, Pagination } from '~/shared/components';
+import { Header, Pagination } from '~/shared/ui';
 
 import * as style from '~/admin/shared/styles/adminPage.css';
 import { Table } from '~/admin/widgets/Table';
