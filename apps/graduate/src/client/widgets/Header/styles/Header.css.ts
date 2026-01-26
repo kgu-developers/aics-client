@@ -29,7 +29,7 @@ export const headerContent = style({
 });
 
 export const logo = style({
-  height: '36px',
+  height: '28px',
   objectFit: 'contain',
 });
 

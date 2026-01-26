@@ -40,10 +40,11 @@ export default function ApplyPage() {
       <header style={{ width: '100%', marginBottom: vars.spacing.md }}>
         <h1
           style={{
-            fontSize: vars.font.size['2xl'],
-            fontWeight: 700,
+            fontSize: vars.font.size['xl'],
+            fontVariationSettings: `'wght' ${vars.font.weight.semibold}`,
             color: vars.colors.black,
             marginBottom: vars.spacing.xs,
+            marginTop: 0,
           }}
         >
           졸업 요건 취득 방식 신청

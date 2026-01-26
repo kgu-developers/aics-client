@@ -24,9 +24,7 @@ export default function Header() {
         <Link to='/'>
           <img src='/logo.png' alt='logo' className={styles.logo} />
         </Link>
-        <span className={styles.title}>
-          컴퓨터공학전공 졸업 요건 취득 서비스
-        </span>
+        <span className={styles.title}>졸업 요건 취득 서비스</span>
       </div>
       <Dropdown menu={{ items }} placement='bottomRight'>
         <Avatar size={32} icon={<User />} style={{ cursor: 'pointer' }} />

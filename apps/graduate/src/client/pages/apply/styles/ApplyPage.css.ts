@@ -12,8 +12,6 @@ export const container = style({
   padding: vars.spacing.xl,
   backgroundColor: vars.colors.white,
   borderRadius: vars.radius.xl,
-  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06)',
-  border: `1px solid ${vars.colors.subHover}`,
   boxSizing: 'border-box',
 });
 
@@ -23,12 +21,11 @@ export const button = style({
   borderRadius: vars.radius.lg,
   fontSize: vars.font.size.lg,
   fontWeight: 700,
-  marginTop: vars.spacing.lg,
 });
 
 export const optionButton = style({
   width: '100%',
-  height: '100px',
+  height: 'fit-content',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -37,6 +34,8 @@ export const optionButton = style({
   backgroundColor: vars.colors.white,
   border: `1px solid ${vars.colors.subHover}`,
   color: vars.colors.subDark,
+  paddingTop: vars.spacing.md,
+  paddingBottom: vars.spacing.md,
   transition: 'all 0.2s ease',
   fontWeight: 500,
   cursor: 'pointer',
@@ -48,14 +47,16 @@ export const optionButton = style({
 
 export const activeOptionButton = style({
   width: '100%',
-  height: '100px',
+  height: 'fit-content',
+  paddingTop: vars.spacing.md,
+  paddingBottom: vars.spacing.md,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: vars.radius.lg,
   backgroundColor: vars.colors.mainXLight,
-  border: `2px solid ${vars.colors.main}`,
+  border: `1px solid ${vars.colors.main}`,
   color: vars.colors.main,
   transition: 'all 0.2s ease',
   fontWeight: 700,
