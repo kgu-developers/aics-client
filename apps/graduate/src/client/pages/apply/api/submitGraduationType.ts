@@ -2,6 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import { patch } from '~/shared/api';
 import { END_POINT, type GraduationType } from '~/shared/constants';
+import { userKeys } from '~/shared/queries';
+import { queryClient } from '~/shared/utils';
 
 const submitGraduationType = async (graduationType: GraduationType) => {
   const response = await patch({
@@ -14,5 +16,8 @@ const submitGraduationType = async (graduationType: GraduationType) => {
 export const useSubmitGraduationType = () => {
   return useMutation({
     mutationFn: submitGraduationType,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userKeys.graduationStatus() });
+    },
   });
 };

@@ -2,6 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import { post } from '~/shared/api';
 import { END_POINT } from '~/shared/constants';
+import { studentKeys, userKeys } from '~/shared/queries';
+import { queryClient } from '~/shared/utils';
 
 const submitCertificate = async (data: FormData) => {
   const response = await post({
@@ -14,5 +16,9 @@ const submitCertificate = async (data: FormData) => {
 export const useSubmitCertificate = () => {
   return useMutation({
     mutationFn: submitCertificate,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: studentKeys.files() });
+      queryClient.invalidateQueries({ queryKey: userKeys.graduationStatus() });
+    },
   });
 };
