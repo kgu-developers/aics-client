@@ -32,9 +32,17 @@ export default function PinnedNoticeSlide({ notice }: PinnedNoticeSlideProps) {
           <Pin size={14} fill='white' />
           <span>고정 공지</span>
         </div>
-        <h1 className={styles.headerTitle}>{notice.title}</h1>
-        <p className={styles.headerDescription}>{notice.description}</p>
+        <h1 className={styles.headerTitle}>{stripHtmlTags(notice.title)}</h1>
+        <p className={styles.headerDescription}>
+          {stripHtmlTags(notice.description)}
+        </p>
       </div>
     </div>
   );
 }
+
+const stripHtmlTags = (html: string): string => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+};
