@@ -1,12 +1,11 @@
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import {
+  Outlet,
+  createRootRouteWithContext,
+  redirect,
+} from '@tanstack/react-router';
 
-import { useAuthStore } from '~/shared/stores';
-
-import { Header } from '~/widgets/Header';
-import { Sidebar } from '~/widgets/sidebar';
-
-import { vars } from '~/vars.css';
+import AdminLayout from '~/shared/layouts/AdminLayout';
+import ClientLayout from '~/shared/layouts/ClientLayout';
 
 export interface AuthContext {
   auth: {
@@ -16,59 +15,27 @@ export interface AuthContext {
 }
 
 export const Route = createRootRouteWithContext<AuthContext>()({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated && location.pathname !== '/login') {
+      throw redirect({
+        to: '/login',
+      });
+    }
+  },
+
   component: () => {
-    const { isAuthenticated, isAdmin } = useAuthStore();
+    const { isAuthenticated, isAdmin } = Route.useRouteContext().auth;
 
     if (!isAuthenticated) {
       return <Outlet />;
     }
 
-    if (isAuthenticated && isAdmin) {
-      return (
-        <div style={{ display: 'flex' }}>
-          <Sidebar />
-          <main
-            style={{
-              flex: '1 1 auto',
-              overflow: 'auto',
-              backgroundColor: vars.colors.sub,
-            }}
-          >
-            <Outlet />
-          </main>
-        </div>
-      );
+    if (isAdmin) {
+      return <AdminLayout />;
     }
 
-    if (isAuthenticated && !isAdmin) {
-      return (
-        <>
-          <div
-            style={{
-              position: 'relative',
-              minHeight: '100dvh',
-              minWidth: '100dvw',
-              backgroundColor: vars.colors.sub,
-            }}
-          >
-            <Header />
-            <main
-              style={{
-                position: 'absolute',
-                inset: 0,
-                overflow: 'auto',
-                display: 'flex',
-                backgroundColor: vars.colors.sub,
-                flexDirection: 'column',
-                gap: vars.spacing.md,
-              }}
-            >
-              <Outlet />
-            </main>
-          </div>
-          <TanStackRouterDevtools />
-        </>
-      );
+    if (!isAdmin) {
+      return <ClientLayout />;
     }
   },
 });

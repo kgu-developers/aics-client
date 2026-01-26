@@ -1,8 +1,0 @@
-export * from './Button';
-export * from './Toolbar';
-export * from './Header';
-export * from './Pagination';
-export * from './DataTable';
-export * from './Section';
-export * from './TextEditor';
-export { default as ProtectedRoute } from './ProtectedRoute';
