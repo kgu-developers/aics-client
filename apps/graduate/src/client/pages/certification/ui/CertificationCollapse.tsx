@@ -1,9 +1,9 @@
 import { Collapse, CollapseProps } from 'antd';
 import type { CSSProperties } from 'react';
 
-import * as styles from '~/client/shared/styles/SubmissionPage.css';
-
 import { FileUploadDragger } from './FileUploadDragger';
+
+import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 export const CertificationCollapse = () => {
   const items: (
@@ -20,7 +20,7 @@ export const CertificationCollapse = () => {
   return (
     <Collapse
       size='large'
-      bordered={false}
+      bordered={true}
       items={items(styles.panelStyle)}
       defaultActiveKey={['certification']}
       className={styles.collapse}

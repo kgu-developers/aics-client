@@ -32,7 +32,7 @@ export const ThesisCollapse = ({ activeKey }: ThesisCollapseProps) => {
   return (
     <Collapse
       size='large'
-      bordered={false}
+      bordered={true}
       items={items(styles.panelStyle)}
       defaultActiveKey={[activeKey]}
       className={styles.collapse}
