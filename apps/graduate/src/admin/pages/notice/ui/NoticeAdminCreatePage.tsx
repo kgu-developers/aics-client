@@ -184,115 +184,117 @@ export default function NoticeAdminCreatePage({
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.backButtonWrapper}>
-        <Button onClick={handleGoBack} type='text' size='large'>
-          목록으로
-        </Button>
-      </div>
+    <div className={style.root}>
+      <div className={style.container}>
+        <div className={style.backButtonWrapper}>
+          <Button onClick={handleGoBack} type='text' size='large'>
+            목록으로
+          </Button>
+        </div>
 
-      <div className={style.formCard}>
-        <h1 className={style.formTitle}>
-          {isEditMode ? '공지사항 수정' : '공지사항 작성'}
-        </h1>
+        <div className={style.formCard}>
+          <h1 className={style.formTitle}>
+            {isEditMode ? '공지사항 수정' : '공지사항 작성'}
+          </h1>
 
-        {isEditMode && (
-          <div className={style.metaInfo}>
-            <div className={style.metaItem}>작성일: {createdAt}</div>
-          </div>
-        )}
+          {isEditMode && (
+            <div className={style.metaInfo}>
+              <div className={style.metaItem}>작성일: {createdAt}</div>
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={style.formField}>
-            <label className={style.label}>
-              제목 <span className={style.required}>*</span>
-            </label>
-            <Controller
-              name='title'
-              control={control}
-              rules={{ required: '제목을 입력해주세요.' }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  placeholder='제목을 입력하세요'
-                  size='large'
-                  status={errors.title ? 'error' : ''}
-                />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.formField}>
+              <label className={style.label}>
+                제목 <span className={style.required}>*</span>
+              </label>
+              <Controller
+                name='title'
+                control={control}
+                rules={{ required: '제목을 입력해주세요.' }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder='제목을 입력하세요'
+                    size='large'
+                    status={errors.title ? 'error' : ''}
+                  />
+                )}
+              />
+              {errors.title && (
+                <p className={style.errorMessage}>{errors.title.message}</p>
               )}
-            />
-            {errors.title && (
-              <p className={style.errorMessage}>{errors.title.message}</p>
-            )}
-          </div>
+            </div>
 
-          <div className={style.formField}>
-            <Controller
-              name='isPinned'
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <Checkbox
-                  checked={value}
-                  onChange={e => onChange(e.target.checked)}
-                >
-                  <span className={style.checkboxLabel}>
-                    상단 고정 (공지로 표시)
-                  </span>
-                </Checkbox>
+            <div className={style.formField}>
+              <Controller
+                name='isPinned'
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <Checkbox
+                    checked={value}
+                    onChange={e => onChange(e.target.checked)}
+                  >
+                    <span className={style.checkboxLabel}>
+                      상단 고정 (공지로 표시)
+                    </span>
+                  </Checkbox>
+                )}
+              />
+            </div>
+
+            <div className={style.formField}>
+              <label className={style.label}>
+                내용 <span className={style.required}>*</span>
+              </label>
+              <Controller
+                name='content'
+                control={control}
+                rules={{ required: '내용을 입력해주세요.' }}
+                render={({ field: { value, onChange } }) => (
+                  <TextEditor
+                    title=''
+                    value={value || ''}
+                    onChange={onChange}
+                    onSave={() => {}}
+                    isSaved={true}
+                    className={style.textarea}
+                  />
+                )}
+              />
+              {errors.content && (
+                <p className={style.errorMessage}>{errors.content.message}</p>
               )}
-            />
-          </div>
+            </div>
 
-          <div className={style.formField}>
-            <label className={style.label}>
-              내용 <span className={style.required}>*</span>
-            </label>
-            <Controller
-              name='content'
-              control={control}
-              rules={{ required: '내용을 입력해주세요.' }}
-              render={({ field: { value, onChange } }) => (
-                <TextEditor
-                  title=''
-                  value={value || ''}
-                  onChange={onChange}
-                  onSave={() => {}}
-                  isSaved={true}
-                  className={style.textarea}
-                />
-              )}
-            />
-            {errors.content && (
-              <p className={style.errorMessage}>{errors.content.message}</p>
-            )}
-          </div>
+            <div className={style.formField}>
+              <label className={style.label}>첨부파일</label>
+              <Upload {...uploadProps}>
+                <Button>파일 선택</Button>
+              </Upload>
+            </div>
 
-          <div className={style.formField}>
-            <label className={style.label}>첨부파일</label>
-            <Upload {...uploadProps}>
-              <Button>파일 선택</Button>
-            </Upload>
-          </div>
+            <Divider />
 
-          <Divider />
-
-          <div className={style.actionSection}>
-            <div className={style.leftActions}>
-              {isEditMode && (
-                <Button onClick={handleDelete} size='large' danger>
-                  삭제
+            <div className={style.actionSection}>
+              <div className={style.leftActions}>
+                {isEditMode && (
+                  <Button onClick={handleDelete} size='large' danger>
+                    삭제
+                  </Button>
+                )}
+              </div>
+              <div className={style.rightActions}>
+                <Button onClick={handleGoBack} size='large'>
+                  취소
                 </Button>
-              )}
+                <Button type='primary' htmlType='submit' size='large'>
+                  {isEditMode ? '수정' : '작성'}
+                </Button>
+              </div>
             </div>
-            <div className={style.rightActions}>
-              <Button onClick={handleGoBack} size='large'>
-                취소
-              </Button>
-              <Button type='primary' htmlType='submit' size='large'>
-                {isEditMode ? '수정' : '작성'}
-              </Button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import FilePreviewContent from './FilePreviewContent';
 import FilePreviewToolbar from './FilePreviewToolbar';
 import { getSubmissionTypeIndex } from '../../schedule/constants';
 import { useFile } from '../model';
-import * as style from '../styles/PreviewPage.css';
+import * as style from '../styles/FilePreviewPage.css';
 
 import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import { useStudentDetail } from '~/admin/features/studentDetail';
@@ -138,34 +138,39 @@ export default function FilePreviewPage() {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.backButtonWrapper}>
-        <Button onClick={handleGoBack} type='text' size='large'>
-          뒤로가기
-        </Button>
-      </div>
-      <div className={style.filePreviewContainer}>
-        <FilePreviewContent
-          fileUrl={`${API_URL}${file.physicalPath}`}
-          error={error}
-          onRetry={() => refetch()}
-        />
+    <div className={style.root}>
+      <div className={style.container}>
+        <div className={style.backButtonWrapper}>
+          <Button onClick={handleGoBack} type='text' size='large'>
+            뒤로가기
+          </Button>
+        </div>
+        <div className={style.filePreviewContainer}>
+          <FilePreviewContent
+            fileUrl={`${API_URL}${file.physicalPath}`}
+            error={error}
+            onRetry={() => refetch()}
+          />
 
-        <div
-          className={style.toolbarTriggerArea}
-          onMouseEnter={handleShowToolbar}
-          onMouseLeave={handleHideToolbar}
-        >
-          <div className={style.toolbarWrapper} data-visible={isToolbarVisible}>
-            <FilePreviewToolbar
-              studentId={studentId}
-              name={name}
-              isApproved={approval ?? false}
-              onApprove={handleApprove}
-              onChangeFile={handleNextFile}
-              canNavigate={canNavigate}
-              isApproving={approvalMutation.isPending}
-            />
+          <div
+            className={style.toolbarTriggerArea}
+            onMouseEnter={handleShowToolbar}
+            onMouseLeave={handleHideToolbar}
+          >
+            <div
+              className={style.toolbarWrapper}
+              data-visible={isToolbarVisible}
+            >
+              <FilePreviewToolbar
+                studentId={studentId}
+                name={name}
+                isApproved={approval ?? false}
+                onApprove={handleApprove}
+                onChangeFile={handleNextFile}
+                canNavigate={canNavigate}
+                isApproving={approvalMutation.isPending}
+              />
+            </div>
           </div>
         </div>
       </div>

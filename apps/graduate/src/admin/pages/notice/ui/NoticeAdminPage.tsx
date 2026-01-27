@@ -103,38 +103,40 @@ export default function NoticeAdminPage() {
   };
 
   return (
-    <div className={style.container}>
-      <Header title='공지사항' />
+    <div className={style.root}>
+      <div className={style.container}>
+        <Header title='공지사항' />
 
-      <div className={style.searchSection}>
-        <Input
-          placeholder='제목으로 검색'
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-          className={style.searchInput}
-          size='large'
-          allowClear
+        <div className={style.searchSection}>
+          <Input
+            placeholder='제목으로 검색'
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+            className={style.searchInput}
+            size='large'
+            allowClear
+          />
+          <Button type='primary' onClick={handleCreateNotice} size='large'>
+            공지 작성
+          </Button>
+        </div>
+
+        <Table
+          columns={columns}
+          dataSource={noticeList}
+          rowKey='noticeId'
+          loading={isPending}
+          pagination={{
+            current: currentPage,
+            pageSize: 10,
+            total: noticeResponse?.pageable.totalElements || 0,
+            onChange: page => setCurrentPage(page),
+            showSizeChanger: false,
+            showTotal: total => `총 ${total}개`,
+          }}
+          bordered
         />
-        <Button type='primary' onClick={handleCreateNotice} size='large'>
-          공지 작성
-        </Button>
       </div>
-
-      <Table
-        columns={columns}
-        dataSource={noticeList}
-        rowKey='noticeId'
-        loading={isPending}
-        pagination={{
-          current: currentPage,
-          pageSize: 10,
-          total: noticeResponse?.pageable.totalElements || 0,
-          onChange: page => setCurrentPage(page),
-          showSizeChanger: false,
-          showTotal: total => `총 ${total}개`,
-        }}
-        bordered
-      />
     </div>
   );
 }

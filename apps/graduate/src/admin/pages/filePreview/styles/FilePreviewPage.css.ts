@@ -3,13 +3,11 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '~/vars.css';
 
 export const root = style({
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100vh',
-  width: '100vw',
-  overflow: 'hidden',
+  minHeight: '100dvh',
   backgroundColor: vars.colors.sub,
+  padding: vars.spacing.lg,
 });
+
 export const container = style({
   padding: vars.spacing.xl,
   maxWidth: '1200px',
