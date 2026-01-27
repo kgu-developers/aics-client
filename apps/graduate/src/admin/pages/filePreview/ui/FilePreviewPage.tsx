@@ -41,6 +41,9 @@ export default function FilePreviewPage() {
         await queryClient.invalidateQueries({
           queryKey: [...studentKeys.files()],
         });
+        await queryClient.invalidateQueries({
+          queryKey: [...studentKeys.details()],
+        });
         await refetch();
       },
     });
