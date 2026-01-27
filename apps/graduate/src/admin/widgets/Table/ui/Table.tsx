@@ -38,22 +38,19 @@ export default function Table({
     graduationType === 'THESIS' && data
       ? data.contents.map((user: GraduationUserSummary, idx: number) => {
           const thesis = user.status?.type === 'THESIS' ? user.status : null;
+          const isFinalStage = Boolean(thesis?.midThesis.submitted);
+          const isSubmitted = isFinalStage
+            ? thesis?.finalThesis.submitted
+            : thesis?.midThesis.submitted;
           return {
             id: user.id,
             no: (page - 1) * pageSize + idx + 1,
             studentId: user.studentId,
             name: user.name,
-            advisor: '-',
+            advisor: user.advisorProfessor,
             gradTerm: user.graduationDate,
-            status: thesis?.finalThesis.approval
-              ? '승인'
-              : thesis?.finalThesis.submitted
-                ? '검토중'
-                : '미제출',
-            submissionStatus:
-              thesis?.midThesis.submitted && thesis?.finalThesis.submitted
-                ? '제출'
-                : '미제출',
+            status: isFinalStage ? '최종보고서' : '중간보고서',
+            submissionStatus: isSubmitted ? '제출' : '미제출',
             approved: thesis?.finalThesis.approval ? '승인' : '미승인',
           };
         })
