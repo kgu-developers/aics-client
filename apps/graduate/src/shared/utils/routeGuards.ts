@@ -18,6 +18,7 @@ export async function fetchUserStatus(): Promise<WorkflowStage> {
     });
     return response.data.status;
   } catch {
+    alert('졸업 상태를 불러올 수 없습니다.');
     throw new Error('졸업 상태를 불러올 수 없습니다.');
   }
 }
@@ -56,7 +57,13 @@ export async function fetchScheduleForStage(
  */
 export function isWithinSchedule(startDate: string, endDate: string): boolean {
   const now = dayjs();
-  return now.isBetween(dayjs(startDate), dayjs(endDate), null, '[]');
+
+  if (!now.isBetween(dayjs(startDate), dayjs(endDate), null, '[]')) {
+    alert(`${startDate} ~ ${endDate} 일정 기간이 아닙니다.`);
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -77,6 +84,7 @@ export async function canAccessCertificationPage(): Promise<boolean> {
   const status = await fetchUserStatus();
 
   if (status !== WORKFLOW_STAGE.CERTIFICATE_PENDING) {
+    alert('자격증 제출 단계가 아닙니다.');
     return false;
   }
 
@@ -85,6 +93,7 @@ export async function canAccessCertificationPage(): Promise<boolean> {
   );
 
   if (!schedule) {
+    alert('사용자 일정을 불러올 수 없습니다.');
     return false;
   }
 
@@ -103,7 +112,10 @@ export async function canAccessThesisPage(): Promise<boolean> {
     const schedule = await fetchScheduleForStage(
       WORKFLOW_STAGE.MID_THESIS_PENDING,
     );
-    if (!schedule) return false;
+    if (!schedule) {
+      alert('사용자 일정을 불러올 수 없습니다.');
+      return false;
+    }
     return isWithinSchedule(schedule.startDate, schedule.endDate);
   }
 
@@ -111,7 +123,10 @@ export async function canAccessThesisPage(): Promise<boolean> {
     const schedule = await fetchScheduleForStage(
       WORKFLOW_STAGE.FINAL_THESIS_PENDING,
     );
-    if (!schedule) return false;
+    if (!schedule) {
+      alert('사용자 일정을 불러올 수 없습니다.');
+      return false;
+    }
     return isWithinSchedule(schedule.startDate, schedule.endDate);
   }
 
@@ -164,8 +179,13 @@ export async function checkPageAccess(
         break;
     }
 
+    if (!canAccess) {
+      alert(reason);
+    }
+
     return { canAccess, reason };
   } catch {
+    alert('접근 권한을 확인할 수 없습니다.');
     return {
       canAccess: false,
       reason: '접근 권한을 확인할 수 없습니다.',
