@@ -8,9 +8,7 @@ import { ApplyPage } from '~/client/pages/apply';
 export const Route = createFileRoute('/apply')({
   beforeLoad: async ({ context }) => {
     if (context.auth.isAdmin) {
-      throw redirect({
-        to: '/all',
-      });
+      return;
     }
 
     const { canAccess, reason } = await checkPageAccess('apply');

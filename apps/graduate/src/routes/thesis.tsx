@@ -9,9 +9,7 @@ import { ThesisPage } from '~/client/pages/thesis';
 export const Route = createFileRoute('/thesis')({
   beforeLoad: async ({ context }) => {
     if (context.auth.isAdmin) {
-      throw redirect({
-        to: '/all',
-      });
+      return;
     }
 
     const { canAccess, reason } = await checkPageAccess('thesis');

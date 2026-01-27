@@ -9,9 +9,7 @@ import { CertificationPage } from '~/client/pages/certification';
 export const Route = createFileRoute('/certification')({
   beforeLoad: async ({ context }) => {
     if (context.auth.isAdmin) {
-      throw redirect({
-        to: '/all',
-      });
+      return;
     }
 
     const { canAccess, reason } = await checkPageAccess('certification');
