@@ -16,7 +16,11 @@ export interface AuthContext {
 
 export const Route = createRootRouteWithContext<AuthContext>()({
   beforeLoad: ({ context, location }) => {
-    if (!context.auth.isAuthenticated && location.pathname !== '/login') {
+    if (location.pathname === '/login' || location.pathname === '/signup') {
+      return;
+    }
+
+    if (!context.auth.isAuthenticated) {
       throw redirect({
         to: '/login',
       });
