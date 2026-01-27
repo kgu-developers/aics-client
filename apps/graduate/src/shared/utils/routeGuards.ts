@@ -72,7 +72,7 @@ export function isWithinSchedule(startDate: string, endDate: string): boolean {
  */
 export async function canAccessApplyPage(): Promise<boolean> {
   const status = await fetchUserStatus();
-  return status === WORKFLOW_STAGE.TYPE_NOT_SELECTED;
+  return status === WORKFLOW_STAGE.TYPE_NOT_SELECTED || status === null;
 }
 
 /**
@@ -88,16 +88,18 @@ export async function canAccessCertificationPage(): Promise<boolean> {
     return false;
   }
 
-  const schedule = await fetchScheduleForStage(
-    WORKFLOW_STAGE.CERTIFICATE_PENDING,
-  );
+  return true;
 
-  if (!schedule) {
-    alert('사용자 일정을 불러올 수 없습니다.');
-    return false;
-  }
+  // const schedule = await fetchScheduleForStage(
+  //   WORKFLOW_STAGE.CERTIFICATE_PENDING,
+  // );
 
-  return isWithinSchedule(schedule.startDate, schedule.endDate);
+  // if (!schedule) {
+  //   alert('사용자 일정을 불러올 수 없습니다.');
+  //   return false;
+  // }
+
+  // return isWithinSchedule(schedule.startDate, schedule.endDate);
 }
 
 /**
@@ -109,25 +111,27 @@ export async function canAccessThesisPage(): Promise<boolean> {
   const status = await fetchUserStatus();
 
   if (status === WORKFLOW_STAGE.MID_THESIS_PENDING) {
-    const schedule = await fetchScheduleForStage(
-      WORKFLOW_STAGE.MID_THESIS_PENDING,
-    );
-    if (!schedule) {
-      alert('사용자 일정을 불러올 수 없습니다.');
-      return false;
-    }
-    return isWithinSchedule(schedule.startDate, schedule.endDate);
+    // const schedule = await fetchScheduleForStage(
+    //   WORKFLOW_STAGE.MID_THESIS_PENDING,
+    // );
+    // if (!schedule) {
+    //   alert('사용자 일정을 불러올 수 없습니다.');
+    //   return false;
+    // }
+    // return isWithinSchedule(schedule.startDate, schedule.endDate);
+    return true;
   }
 
   if (status === WORKFLOW_STAGE.FINAL_THESIS_PENDING) {
-    const schedule = await fetchScheduleForStage(
-      WORKFLOW_STAGE.FINAL_THESIS_PENDING,
-    );
-    if (!schedule) {
-      alert('사용자 일정을 불러올 수 없습니다.');
-      return false;
-    }
-    return isWithinSchedule(schedule.startDate, schedule.endDate);
+    // const schedule = await fetchScheduleForStage(
+    //   WORKFLOW_STAGE.FINAL_THESIS_PENDING,
+    // );
+    // if (!schedule) {
+    //   alert('사용자 일정을 불러올 수 없습니다.');
+    //   return false;
+    // }
+    // return isWithinSchedule(schedule.startDate, schedule.endDate);
+    return true;
   }
 
   return false;
