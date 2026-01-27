@@ -10,6 +10,7 @@ export type GraduationUserSummary = {
   name: string;
   graduationDate: string;
   graduationType: GraduationLabelType;
+  advisorProfessor: string;
   status?: SubmissionStatus;
 };
 

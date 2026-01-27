@@ -7,5 +7,5 @@ export type ThesisRow = {
   gradTerm: string;
   status: string;
   submissionStatus: '제출' | '미제출';
-  approved: '승인' | '미승인' | '승인 대기';
+  approved: '승인' | '미승인';
 };
