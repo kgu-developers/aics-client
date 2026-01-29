@@ -27,10 +27,25 @@ export const FileUploadDragger = () => {
     }
   };
 
+  const beforeUpload: UploadProps['beforeUpload'] = file => {
+    const isPdf =
+      file.type === 'application/pdf' ||
+      file.name.toLowerCase().endsWith('.pdf');
+    if (!isPdf) {
+      alert(
+        `${file.name}은(는) PDF 파일이 아닙니다. PDF 파일만 업로드할 수 있습니다.`,
+      );
+      return false;
+    }
+    return true;
+  };
+
   const uploadProps: UploadProps = {
     name: 'file',
+    accept: '.pdf',
     multiple: true,
     customRequest: customUploadRequest,
+    beforeUpload,
     onChange(info) {
       const { status } = info.file;
       if (status !== 'uploading') {
