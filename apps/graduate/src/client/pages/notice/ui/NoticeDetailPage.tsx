@@ -3,6 +3,7 @@ import { Button, Divider, Tag } from 'antd';
 import { ArrowLeft, FileText, Download } from 'lucide-react';
 
 import { LOADING_MESSAGES, ERROR_MESSAGES } from '~/shared/config';
+import { API_URL } from '~/shared/constants';
 import { useNoticeDetail } from '~/shared/hooks';
 import { LoadingState, ErrorState } from '~/shared/ui/index.ts';
 
@@ -22,7 +23,7 @@ export default function NoticeDetailPage({ noticeId }: NoticeDetailPageProps) {
 
   const handleDownload = () => {
     if (notice?.file?.physicalPath) {
-      window.open(notice.file.physicalPath, '_blank');
+      window.open(`${API_URL}${notice.file.physicalPath}`, '_blank');
     }
   };
 
