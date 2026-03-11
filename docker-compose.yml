@@ -1,21 +1,20 @@
-version: '3.8'
-
 services:
   aics-client:
-    build: .
-    container_name: aics-app
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: aics-client:latest
+    container_name: aics-client
     ports:
-      - '${PORT:-3000}:3000'
-    environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
-      - NEXT_PUBLIC_AUTH_API_URL=${NEXT_PUBLIC_AUTH_API_URL:-http://localhost:8081}
-      - NODE_ENV=${NODE_ENV:-production}
-    env_file:
-      - .env.production
+      - "3000:3000"
     restart: unless-stopped
-    networks:
-      - aics-network
 
-networks:
-  aics-network:
-    driver: bridge
+  aics-graduate:
+    build:
+      context: .
+      dockerfile: apps/graduate/Dockerfile
+    image: aics-graduate:latest
+    container_name: aics-graduate
+    ports:
+      - "8080:80"
+    restart: unless-stopped
