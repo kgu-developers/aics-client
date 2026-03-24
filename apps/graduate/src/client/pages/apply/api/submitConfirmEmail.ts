@@ -16,6 +16,7 @@ const submitConfirmEmail = async (email: string) => {
 export const useSubmitConfirmEmail = () => {
   return useMutation({
     mutationFn: submitConfirmEmail,
+    meta: { suppressErrorToast: true },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: userKeys.graduationStatus() });
     },

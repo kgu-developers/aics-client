@@ -1,9 +1,9 @@
 import { useNavigate } from '@tanstack/react-router';
-import { message } from 'antd';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
 
 import { ROUTE } from '~/shared/constants';
+import { notifyError, notifySuccess, notifyWarning } from '~/shared/utils';
 
 import { useSubmitConfirmEmail } from '../api/submitConfirmEmail';
 import * as styles from '../styles/ApplyConfirmPage.css';
@@ -16,22 +16,25 @@ export default function ApplyConfirmPage() {
 
   const handleComplete = () => {
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      message.error('올바른 이메일 형식을 입력해주세요.');
+      notifyWarning('올바른 이메일 형식을 입력해주세요.');
       return;
     }
 
     if (email) {
       submitConfirmEmail(email, {
         onSuccess: () => {
-          message.success(`${email}로 알림 설정을 완료했습니다.`);
+          notifySuccess(`${email}로 알림 설정을 완료했습니다.`);
           navigate({ to: ROUTE.HOME });
         },
-        onError: () => {
-          message.error('이메일 등록에 실패했습니다. 다시 시도해주세요.');
+        onError: error => {
+          notifyError(
+            error,
+            '이메일 등록에 실패했습니다. 다시 시도해주세요.',
+          );
         },
       });
     } else {
-      message.success('신청이 완료되었습니다.');
+      notifySuccess('신청이 완료되었습니다.');
       navigate({ to: ROUTE.HOME });
     }
   };

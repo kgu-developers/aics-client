@@ -18,12 +18,14 @@ export function useSubmitGraduationUser({ onSuccess }: Options = {}) {
 
   const singleMutation = useMutation({
     mutationFn: submitGraduationUser,
+    meta: { suppressErrorToast: true },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: graduationUsersKeys.all }),
   });
 
   const batchMutation = useMutation({
     mutationFn: submitGraduationUsersBatch,
+    meta: { suppressErrorToast: true },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: graduationUsersKeys.all }),
   });

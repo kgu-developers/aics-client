@@ -27,5 +27,6 @@ export function useFile(
       }
     },
     enabled: enabled,
+    meta: { suppressErrorToast: true },
   });
 }

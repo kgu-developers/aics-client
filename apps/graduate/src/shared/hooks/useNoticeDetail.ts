@@ -23,5 +23,6 @@ export function useNoticeDetail(noticeId: number) {
       return transformNoticeDetailResponse(response.data);
     },
     enabled: !!noticeId,
+    meta: { suppressErrorToast: true },
   });
 }

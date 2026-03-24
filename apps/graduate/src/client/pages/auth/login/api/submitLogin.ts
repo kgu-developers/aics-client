@@ -23,6 +23,7 @@ export const useSubmitLogin = ({
 }) => {
   return useMutation({
     mutationFn: submitLogin,
+    meta: { suppressErrorToast: true },
     onSuccess: response => {
       setAccessToken(response.accessToken);
       setRefreshToken(response.refreshToken);

@@ -1,6 +1,8 @@
 import { App } from 'antd';
 import type { ReactNode } from 'react';
 
+import parseError from '../utils/error';
+
 export interface ConfirmConfig {
   title: string;
   content?: string;
@@ -24,6 +26,11 @@ export function useToast() {
     error: message.error,
     warning: message.warning,
     info: message.info,
+    /** API/알 수 없는 오류를 사용자용 문구로 토스트 */
+    fromError: (error: unknown, fallbackMessage?: string) => {
+      const text = fallbackMessage ?? parseError(error).message;
+      message.error({ content: text, duration: 4 });
+    },
   };
 
   const confirm = (config: ConfirmConfig) => {

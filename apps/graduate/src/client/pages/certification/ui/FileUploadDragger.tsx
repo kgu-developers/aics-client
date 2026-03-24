@@ -1,5 +1,7 @@
-import { message, Upload, UploadProps } from 'antd';
+import { Upload, UploadProps } from 'antd';
 import { InboxIcon } from 'lucide-react';
+
+import { notifyError, notifySuccess, notifyWarning } from '~/shared/utils';
 
 import { useSubmitCertificate } from '../api/submitCertificate';
 
@@ -18,12 +20,15 @@ export const FileUploadDragger = () => {
       const response = await submitCertificate(formData);
 
       onSuccess?.(response);
-      message.success(
+      notifySuccess(
         `${(file as File).name} 파일이 성공적으로 업로드되었습니다.`,
       );
     } catch (error) {
       onError?.(error as Error);
-      message.error(`${(file as File).name} 파일 업로드에 실패했습니다.`);
+      notifyError(
+        error,
+        `${(file as File).name} 파일 업로드에 실패했습니다.`,
+      );
     }
   };
 
@@ -32,7 +37,7 @@ export const FileUploadDragger = () => {
       file.type === 'application/pdf' ||
       file.name.toLowerCase().endsWith('.pdf');
     if (!isPdf) {
-      alert(
+      notifyWarning(
         `${file.name}은(는) PDF 파일이 아닙니다. PDF 파일만 업로드할 수 있습니다.`,
       );
       return false;

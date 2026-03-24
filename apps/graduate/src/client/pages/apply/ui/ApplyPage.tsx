@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearch } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { Button } from 'antd';
 import { useState } from 'react';
 
@@ -18,9 +18,7 @@ import { vars } from '~/vars.css';
 
 export default function ApplyPage() {
   const navigate = useNavigate();
-  const { confirm } = useSearch({ from: '/apply' }) as {
-    confirm: boolean;
-  };
+  const { confirm } = useSearch({ from: '/apply' });
   const [selectedOption, setSelectedOption] = useState<GraduationType>(
     GRADUATION_TYPE.THESIS,
   );
@@ -33,6 +31,10 @@ export default function ApplyPage() {
         navigate({ to: ROUTE.APPLY_CONFIRM });
       },
     });
+  };
+
+  const openConfirmDrawer = () => {
+    navigate({ to: ROUTE.APPLY, search: { confirm: true } });
   };
 
   return (
@@ -86,15 +88,15 @@ export default function ApplyPage() {
         isSubmitting={isSubmitting}
       />
 
-      <Link
-        to={ROUTE.APPLY}
-        search={{ confirm: true }}
+      <Button
+        size='large'
+        className={styles.button}
+        type='primary'
+        onClick={openConfirmDrawer}
         style={{ width: '100%' }}
       >
-        <Button size='large' className={styles.button} type='primary'>
-          제출하기
-        </Button>
-      </Link>
+        제출하기
+      </Button>
     </div>
   );
 }

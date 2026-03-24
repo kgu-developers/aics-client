@@ -8,9 +8,7 @@ import { SubmissionButtons } from '~/client/pages/certification/ui/SubmissionBut
 import * as styles from '~/client/shared/styles/SubmissionPage.css';
 
 export default function ThesisPage() {
-  const { type } = useSearch({ from: '/thesis' }) as {
-    type: 'midreport' | 'finalreport';
-  };
+  const { type } = useSearch({ from: '/thesis' });
 
   return (
     <div className={styles.container}>

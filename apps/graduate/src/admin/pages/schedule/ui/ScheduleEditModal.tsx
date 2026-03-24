@@ -74,9 +74,6 @@ export default function ScheduleEditModal({
           setIsModalOpen(false);
           reset();
         },
-        onError: () => {
-          toast.error('일정 수정에 실패했습니다.');
-        },
       },
     );
   };
