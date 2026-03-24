@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 
 import { useToast } from '~/shared/hooks';
 
+
 import { allManagementColumns } from '../constants/allManagementColumns';
 import { TYPE_LABEL, TYPE_UNKNOWN } from '../constants/allManagementTexts';
 import { AllManagementRow } from '../types/allManagement';
-import { getStatusLabel } from '../utils';
 
 import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model/useFetchGraduationUsers';
@@ -15,6 +15,7 @@ import {
   DELETE_ALERT,
   DELETE_CONFIRM_TITLE,
 } from '~/admin/shared/ui/Toolbar/toolbarTexts';
+import { getStatusLabel } from '~/admin/shared/utils';
 import {
   useAdminDownload,
   useAdminPagination,

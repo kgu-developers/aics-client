@@ -1,8 +1,8 @@
 import type {
+  PeriodData,
   StageData,
   StudentStatus,
-  PeriodData,
-} from '../types/allManagement';
+} from '~/admin/shared/types/studentDetail';
 
 export function formatSubmissionStatus(
   createdAt: string | null,
@@ -30,26 +30,26 @@ export function buildStageData(
         fileId: status.id,
       },
     ];
-  } else {
-    return [
-      {
-        key: 'midthesis',
-        stage: '중간보고서',
-        period: period.midThesis ?? '-',
-        createdAt: status.midThesis.createdAt,
-        isSubmitted: status.midThesis.submitted,
-        isApproved: status.midThesis.approval,
-        fileId: status.midThesis.id,
-      },
-      {
-        key: 'finalthesis',
-        stage: '최종보고서',
-        period: period.finalThesis ?? '-',
-        createdAt: status.finalThesis.createdAt,
-        isSubmitted: status.finalThesis.submitted,
-        isApproved: status.finalThesis.approval,
-        fileId: status.finalThesis.id,
-      },
-    ];
   }
+
+  return [
+    {
+      key: 'midthesis',
+      stage: '중간보고서',
+      period: period.midThesis ?? '-',
+      createdAt: status.midThesis.createdAt,
+      isSubmitted: status.midThesis.submitted,
+      isApproved: status.midThesis.approval,
+      fileId: status.midThesis.id,
+    },
+    {
+      key: 'finalthesis',
+      stage: '최종보고서',
+      period: period.finalThesis ?? '-',
+      createdAt: status.finalThesis.createdAt,
+      isSubmitted: status.finalThesis.submitted,
+      isApproved: status.finalThesis.approval,
+      fileId: status.finalThesis.id,
+    },
+  ];
 }

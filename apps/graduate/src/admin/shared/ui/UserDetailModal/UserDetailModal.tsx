@@ -4,16 +4,13 @@ import { Descriptions, Modal, Spin, Table } from 'antd';
 import { Header } from '~/shared/ui';
 
 import { useStudentDetail } from '~/admin/features/studentDetail';
-import type {
-  PeriodData,
-  StageData,
-} from '~/admin/pages/all/types/allManagement';
+import type { PeriodData, StageData } from '~/admin/shared/types/studentDetail';
+import { Container } from '~/admin/shared/ui/Container';
 import {
   buildStageData,
   formatSubmissionStatus,
   getStatusLabel,
-} from '~/admin/pages/all/utils';
-import { Container } from '~/admin/shared/ui/Container';
+} from '~/admin/shared/utils';
 import { vars } from '~/vars.css';
 
 interface UserDetailModalProps {

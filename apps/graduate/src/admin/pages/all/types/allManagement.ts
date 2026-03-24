@@ -4,7 +4,14 @@ import type {
   ThesisSubmission,
 } from '~/shared/types/graduation';
 
-export type { CertificateSubmission as CertificateStatus, SubmissionStatus as StudentStatus, ThesisSubmission as ThesisStatus };
+import type { PeriodData, StageData } from '~/admin/shared/types/studentDetail';
+
+export type {
+  CertificateSubmission as CertificateStatus,
+  SubmissionStatus as StudentStatus,
+  ThesisSubmission as ThesisStatus,
+};
+export type { PeriodData, StageData };
 
 export type AllManagementRow = {
   id: number;
@@ -15,19 +22,3 @@ export type AllManagementRow = {
   graduationTypeLabel: string;
   statusText: string;
 };
-
-export type PeriodData = {
-  certificate?: string;
-  midThesis?: string;
-  finalThesis?: string;
-};
-
-export interface StageData {
-  key: string;
-  stage: string;
-  period: string;
-  createdAt: string | null;
-  isSubmitted: boolean;
-  isApproved: boolean;
-  fileId: number | null;
-}

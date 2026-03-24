@@ -4,7 +4,6 @@ import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
 import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
-import { extractPeriodData } from '~/admin/pages/all/utils';
 import { certColumns } from '~/admin/pages/certification/constants/certificationColumns';
 import type { CertRow } from '~/admin/pages/certification/types/row';
 import { thesisColumns } from '~/admin/pages/thesis/constants/thesisColumns';
@@ -12,6 +11,7 @@ import type { ThesisRow } from '~/admin/pages/thesis/types/row';
 import * as style from '~/admin/shared/styles/adminPage.css';
 import { DataTable, Toolbar, UserDetailModal } from '~/admin/shared/ui';
 import type { Column } from '~/admin/shared/ui/DataTable/DataTable';
+import { extractPeriodData } from '~/admin/shared/utils';
 import {
   useAdminDownload,
   useAdminSelection,

@@ -1,12 +1,12 @@
 import { Header, Pagination } from '~/shared/ui/index.ts';
 
+
 import {
   LOADING_TEXT,
   TITLE_ALL_MANAGEMENT,
 } from '../constants/allManagementTexts';
 import { useAllManagement } from '../model/useAllManagement.ts';
 import type { AllManagementRow } from '../types/allManagement';
-import { extractPeriodData } from '../utils';
 
 import * as style from '~/admin/shared/styles/adminPage.css';
 import {
@@ -14,6 +14,7 @@ import {
   Toolbar,
   UserDetailModal,
 } from '~/admin/shared/ui/index.ts';
+import { extractPeriodData } from '~/admin/shared/utils';
 
 export default function AllManagementPage() {
   const {

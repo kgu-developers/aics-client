@@ -1,10 +1,8 @@
-import { SCHEDULE } from '~/shared/constants';
-import { SubmissionTypeLabel } from '~/shared/types';
-
-import { getSubmissionTypeLabel } from '../../schedule/constants';
-import type { PeriodData } from '../types/allManagement';
+import { getSubmissionTypeLabel, SCHEDULE } from '~/shared/constants';
+import type { SubmissionTypeLabel } from '~/shared/types';
 
 import type { ScheduleItem } from '~/admin/pages/schedule/model';
+import type { PeriodData } from '~/admin/shared/types/studentDetail';
 
 export function extractPeriodData(
   schedules: ScheduleItem[] | undefined,
