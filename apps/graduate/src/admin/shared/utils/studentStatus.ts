@@ -2,16 +2,16 @@ import type { StudentStatus } from '~/admin/shared/types/studentDetail';
 
 const STATUS_UNKNOWN = '미정';
 
-const STATUS_CERTIFICATE_NOT_SUBMITTED = '자격증 미제출';
-const STATUS_CERTIFICATE_SUBMITTED = '자격증 제출';
-const STATUS_CERTIFICATE_APPROVED = '자격증 승인';
+const STATUS_CERTIFICATE_NOT_SUBMITTED = '자격증-미제출';
+const STATUS_CERTIFICATE_SUBMITTED = '자격증-제출';
+const STATUS_CERTIFICATE_APPROVED = '자격증-승인';
 
-const STATUS_MID_REPORT_NOT_SUBMITTED = '중간보고서 미제출';
-const STATUS_MID_REPORT_SUBMITTED = '중간보고서 제출';
+const STATUS_MID_REPORT_NOT_SUBMITTED = '중간보고서-미제출';
+const STATUS_MID_REPORT_SUBMITTED = '중간보고서-제출';
 
-const STATUS_FINAL_REPORT_NOT_SUBMITTED = '최종보고서 미제출';
-const STATUS_FINAL_REPORT_SUBMITTED = '최종보고서 제출';
-const STATUS_FINAL_REPORT_APPROVED = '최종보고서 승인';
+const STATUS_FINAL_REPORT_NOT_SUBMITTED = '최종보고서-미제출';
+const STATUS_FINAL_REPORT_SUBMITTED = '최종보고서-제출';
+const STATUS_FINAL_REPORT_APPROVED = '최종보고서-승인';
 
 export function getStatusLabel(status: StudentStatus | undefined): string {
   switch (status?.type) {
