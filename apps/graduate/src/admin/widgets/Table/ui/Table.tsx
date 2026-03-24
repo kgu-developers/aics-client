@@ -1,16 +1,24 @@
+import { useState } from 'react';
+
+import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
-import { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
+import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
-import { certColumns } from '~/admin/pages/certification/constants/certColumns';
+import { extractPeriodData } from '~/admin/pages/all/utils';
+import { certColumns } from '~/admin/pages/certification/constants/certificationColumns';
+import type { CertRow } from '~/admin/pages/certification/types/row';
 import { thesisColumns } from '~/admin/pages/thesis/constants/thesisColumns';
+import type { ThesisRow } from '~/admin/pages/thesis/types/row';
 import * as style from '~/admin/shared/styles/adminPage.css';
-import { DataTable, Toolbar } from '~/admin/shared/ui';
+import { DataTable, Toolbar, UserDetailModal } from '~/admin/shared/ui';
+import type { Column } from '~/admin/shared/ui/DataTable/DataTable';
 import {
-  useAdminSelection,
   useAdminDownload,
+  useAdminSelection,
 } from '~/admin/widgets/Table/model';
 
 type GraduationType = 'THESIS' | 'CERTIFICATE';
+type AdminTableRow = CertRow | ThesisRow;
 
 interface TableProps {
   page: number;
@@ -27,6 +35,11 @@ export default function Table({
   graduationType,
   onQueryChange,
 }: TableProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState<number>();
+
+  const { data: schedules } = useScheduleList();
+
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
     size: pageSize,
@@ -34,7 +47,7 @@ export default function Table({
     graduationType,
   });
 
-  const rows =
+  const rows: AdminTableRow[] =
     graduationType === 'THESIS' && data
       ? data.contents.map((user: GraduationUserSummary, idx: number) => {
           const thesis = user.status?.type === 'THESIS' ? user.status : null;
@@ -100,7 +113,20 @@ export default function Table({
     onSuccess: resetSelection,
   });
 
-  const columns = graduationType === 'THESIS' ? thesisColumns : certColumns;
+  const handleOpenModal = (id: number) => {
+    setSelectedStudentId(id);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedStudentId(undefined);
+  };
+
+  const columns: Column<AdminTableRow>[] =
+    graduationType === 'THESIS'
+      ? (thesisColumns(handleOpenModal) as Column<AdminTableRow>[])
+      : (certColumns(handleOpenModal) as Column<AdminTableRow>[]);
 
   return (
     <>
@@ -112,16 +138,24 @@ export default function Table({
         onDownload={handleDownload}
       />
       <div className={style.card}>
-        <DataTable
+        <DataTable<AdminTableRow>
           rows={rows}
-          getRowId={(r: any) => r.id}
-          columns={columns as any}
+          getRowId={r => r.id}
+          columns={columns}
           onToggleAll={toggleAll}
           selectedIds={selectedIds}
           onToggleOne={toggleOne}
           emptyText={isLoading ? '불러오는 중...' : undefined}
         />
       </div>
+      {selectedStudentId && (
+        <UserDetailModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={handleCloseModal}
+          graduationUserId={selectedStudentId}
+          period={extractPeriodData(schedules)}
+        />
+      )}
     </>
   );
 }

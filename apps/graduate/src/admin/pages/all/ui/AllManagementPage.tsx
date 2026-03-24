@@ -4,13 +4,16 @@ import {
   LOADING_TEXT,
   TITLE_ALL_MANAGEMENT,
 } from '../constants/allManagementTexts';
+import { useAllManagement } from '../model/useAllManagement.ts';
 import type { AllManagementRow } from '../types/allManagement';
 import { extractPeriodData } from '../utils';
-import UserDetailModal from './UserDetailModal.tsx';
-import { useAllManagement } from '../model/useAllManagement.ts';
 
 import * as style from '~/admin/shared/styles/adminPage.css';
-import { DataTable, Toolbar } from '~/admin/shared/ui/index.ts';
+import {
+  DataTable,
+  Toolbar,
+  UserDetailModal,
+} from '~/admin/shared/ui/index.ts';
 
 export default function AllManagementPage() {
   const {

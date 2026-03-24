@@ -12,7 +12,7 @@ import { vars } from '~/vars.css';
 
 export const allManagementColumns = (
   onNameClick: (id: number) => void,
-): ReadonlyArray<Column<AllManagementRow>> =>
+): Column<AllManagementRow>[] =>
   [
     { key: 'no', header: HEADER_NO, width: 56, cell: r => r.no },
     {
@@ -55,4 +55,4 @@ export const allManagementColumns = (
       width: 140,
       cell: r => r.statusText,
     },
-  ] as const;
+  ];

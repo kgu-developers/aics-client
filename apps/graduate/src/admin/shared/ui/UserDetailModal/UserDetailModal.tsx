@@ -3,14 +3,16 @@ import { Descriptions, Modal, Spin, Table } from 'antd';
 
 import { Header } from '~/shared/ui';
 
-import type { PeriodData, StageData } from '../types/allManagement';
+import { useStudentDetail } from '~/admin/features/studentDetail';
+import type {
+  PeriodData,
+  StageData,
+} from '~/admin/pages/all/types/allManagement';
 import {
   buildStageData,
   formatSubmissionStatus,
   getStatusLabel,
-} from '../utils';
-
-import { useStudentDetail } from '~/admin/features/studentDetail';
+} from '~/admin/pages/all/utils';
 import { Container } from '~/admin/shared/ui/Container';
 import { vars } from '~/vars.css';
 
@@ -54,6 +56,7 @@ export default function UserDetailModal({
         return record.isSubmitted ? (
           <button
             type='button'
+            aria-label={`${record.stage} 파일 상세 보기`}
             style={{
               background: 'none',
               border: 'none',
