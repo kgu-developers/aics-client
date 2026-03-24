@@ -6,7 +6,7 @@ services:
     image: aics-client:latest
     container_name: aics-client
     ports:
-      - "3000:3000"
+      - '3000:3000'
     restart: unless-stopped
 
   aics-graduate:
@@ -16,5 +16,5 @@ services:
     image: aics-graduate:latest
     container_name: aics-graduate
     ports:
-      - "8080:80"
+      - '3001:3001'
     restart: unless-stopped
