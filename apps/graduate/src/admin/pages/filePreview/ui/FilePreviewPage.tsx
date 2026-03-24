@@ -108,8 +108,8 @@ export default function FilePreviewPage() {
   const handleApprove = async () => {
     try {
       await approveGraduationUsers([graduationUserId]);
-    } catch (error) {
-      toast.error('승인에 실패했습니다.');
+    } catch {
+      /* 실패 시 MutationCache 전역 토스트 */
     }
   };
 

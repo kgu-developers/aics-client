@@ -10,7 +10,6 @@ import {
   APPROVE_OK_TEXT,
   APPROVE_CANCEL_TEXT,
   APPROVE_EMPTY,
-  APPROVE_FAILED,
   APPROVE_NOTHING,
   APPROVE_REASON_ALREADY_APPROVED,
   APPROVE_REASON_FAILED,
@@ -166,8 +165,8 @@ export function useGraduationApproval<T>({
           } else {
             toast.warning(APPROVE_NOTHING);
           }
-        } catch (error) {
-          toast.error(error instanceof Error ? error.message : APPROVE_FAILED);
+        } catch {
+          /* 실패 시 MutationCache 전역 토스트로 안내 */
         }
       },
     });

@@ -50,11 +50,7 @@ export const useAllManagement = () => {
     }
   }, [searchParams, navigate]);
 
-  const { data: schedules, error: scheduleError } = useScheduleList();
-
-  if (scheduleError) {
-    toast.error('스케줄 정보를 불러오는데 실패했습니다.');
-  }
+  const { data: schedules } = useScheduleList();
 
   const { data, isLoading } = useFetchGraduationUsers({
     page: page - 1,
@@ -104,10 +100,8 @@ export const useAllManagement = () => {
         try {
           await removeGraduationUsers(selectedIds);
           toast.success('선택한 학생을 삭제했습니다.');
-        } catch (error) {
-          toast.error(
-            error instanceof Error ? error.message : '삭제에 실패했습니다.',
-          );
+        } catch {
+          /* 실패 시 MutationCache 전역 토스트 */
         }
       },
     });

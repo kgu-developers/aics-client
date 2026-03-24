@@ -1,7 +1,8 @@
-import { Col, Divider, message, Modal, Row } from 'antd';
+import { Col, Divider, Modal, Row } from 'antd';
 import { useState } from 'react';
 
 import { modalStyles } from '~/shared/config';
+import { notifyError } from '~/shared/utils';
 
 import { ModeCard } from './ModeCard';
 import StudentAddMultiple from './StudentAddMultiple';
@@ -28,9 +29,7 @@ export default function StudentAddModal({ open, onClose }: Props) {
       await submitSingle(payload);
       onClose();
     } catch (error) {
-      message.error(
-        error instanceof Error ? error.message : '학생 추가에 실패했습니다.',
-      );
+      notifyError(error, '학생 추가에 실패했습니다.');
     }
   };
 
@@ -41,9 +40,7 @@ export default function StudentAddModal({ open, onClose }: Props) {
       await submitBatch(rows);
       onClose();
     } catch (error) {
-      message.error(
-        error instanceof Error ? error.message : '학생들 추가에 실패했습니다.',
-      );
+      notifyError(error, '학생들 추가에 실패했습니다.');
     }
   };
 

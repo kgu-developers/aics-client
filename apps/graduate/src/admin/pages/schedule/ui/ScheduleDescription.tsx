@@ -39,9 +39,6 @@ export default function ScheduleDescription() {
           setIsSaved(true);
           toast.success('설명이 저장되었습니다!');
         },
-        onError: () => {
-          toast.error('설명 저장에 실패했습니다.');
-        },
       },
     );
   };

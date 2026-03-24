@@ -17,5 +17,7 @@ export const useFetchGraduationStatus = () => {
   return useQuery({
     queryKey: userKeys.graduationStatus(),
     queryFn: () => fetchGraduationStatus(),
+    retry: false,
+    meta: { suppressErrorToast: true },
   });
 };

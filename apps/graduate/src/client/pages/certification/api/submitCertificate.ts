@@ -16,6 +16,7 @@ const submitCertificate = async (data: FormData) => {
 export const useSubmitCertificate = () => {
   return useMutation({
     mutationFn: submitCertificate,
+    meta: { suppressErrorToast: true },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: studentKeys.files() });
       queryClient.invalidateQueries({ queryKey: userKeys.graduationStatus() });
