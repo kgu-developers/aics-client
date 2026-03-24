@@ -8,6 +8,8 @@ services:
     ports:
       - '3000:3000'
     restart: unless-stopped
+    networks:
+      - aics-network
 
   aics-graduate:
     build:
@@ -18,3 +20,9 @@ services:
     ports:
       - '3001:3001'
     restart: unless-stopped
+    networks:
+      - aics-network
+
+networks:
+  aics-network:
+    driver: bridge
