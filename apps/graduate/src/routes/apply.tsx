@@ -1,11 +1,17 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { message } from 'antd';
 
-import { checkPageAccess } from '~/shared/utils';
+import { checkPageAccess, notifyWarning } from '~/shared/utils';
 
 import { ApplyPage } from '~/client/pages/apply';
 
+type ApplySearch = {
+  confirm: boolean;
+};
+
 export const Route = createFileRoute('/apply')({
+  validateSearch: (search: Record<string, unknown>): ApplySearch => ({
+    confirm: search.confirm === true || search.confirm === 'true',
+  }),
   beforeLoad: async ({ context }) => {
     if (context.auth.isAdmin) {
       return;
@@ -14,7 +20,7 @@ export const Route = createFileRoute('/apply')({
     const { canAccess, reason } = await checkPageAccess('apply');
     if (!canAccess) {
       if (reason) {
-        message.warning(reason);
+        notifyWarning(reason);
       }
       throw redirect({
         to: '/',

@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 
-import { END_POINT } from '~/shared/constants';
+import { END_POINT, SCHEDULE } from '~/shared/constants';
+import type { SubmissionType } from '~/shared/types';
 import { WORKFLOW_STAGE, type WorkflowStage } from '~/shared/types/graduation';
 
 import { get } from '../api';
@@ -9,30 +10,26 @@ import { get } from '../api';
 dayjs.extend(isBetween);
 
 /**
- * 졸업 상태 조회
+ * 졸업 상태 조회. 미등록·네트워크 오류 등으로 조회에 실패하면 null.
  */
-export async function fetchUserStatus(): Promise<WorkflowStage> {
+export async function fetchUserStatus(): Promise<WorkflowStage | null> {
   try {
     const response = await get<{ status: WorkflowStage }>({
       request: END_POINT.USER.GRADUATION_STATUS,
     });
     return response.data.status;
   } catch {
-    alert('졸업 상태를 불러올 수 없습니다.');
-    throw new Error('졸업 상태를 불러올 수 없습니다.');
+    return null;
   }
 }
 
-/**
- * 특정 단계의 일정 조회
- */
-export async function fetchScheduleForStage(
-  stage: WorkflowStage,
+async function fetchScheduleBySubmissionType(
+  submissionType: SubmissionType,
 ): Promise<{ startDate: string; endDate: string } | null> {
   try {
     const response = await get<{
       contents: Array<{
-        submissionType: WorkflowStage;
+        submissionType: SubmissionType;
         startDate: string;
         endDate: string;
       }>;
@@ -41,7 +38,7 @@ export async function fetchScheduleForStage(
     });
 
     const schedule = response.data.contents.find(
-      s => s.submissionType === stage,
+      s => s.submissionType === submissionType,
     );
 
     return schedule
@@ -53,88 +50,15 @@ export async function fetchScheduleForStage(
 }
 
 /**
- * 현재 시간이 일정 기간 내에 있는지 확인
+ * 현재 시각이 일정 구간 안에 있는지 (양끝 포함)
  */
 export function isWithinSchedule(startDate: string, endDate: string): boolean {
   const now = dayjs();
-
-  if (!now.isBetween(dayjs(startDate), dayjs(endDate), null, '[]')) {
-    alert(`${startDate} ~ ${endDate} 일정 기간이 아닙니다.`);
-    return false;
-  }
-
-  return true;
+  return now.isBetween(dayjs(startDate), dayjs(endDate), null, '[]');
 }
 
-/**
- * Apply 페이지 접근 가능 여부 확인
- * - 졸업 방식 미선택 상태일 때만 접근 가능
- */
-export async function canAccessApplyPage(): Promise<boolean> {
-  const status = await fetchUserStatus();
-  return status === WORKFLOW_STAGE.TYPE_NOT_SELECTED || status === null;
-}
-
-/**
- * Certification 페이지 접근 가능 여부 확인
- * - 자격증 제출 대기 상태일 때만 접근 가능
- * - 자격증 제출 일정 기간 내에만 접근 가능
- */
-export async function canAccessCertificationPage(): Promise<boolean> {
-  const status = await fetchUserStatus();
-
-  if (status !== WORKFLOW_STAGE.CERTIFICATE_PENDING) {
-    alert('자격증 제출 단계가 아닙니다.');
-    return false;
-  }
-
-  return true;
-
-  // const schedule = await fetchScheduleForStage(
-  //   WORKFLOW_STAGE.CERTIFICATE_PENDING,
-  // );
-
-  // if (!schedule) {
-  //   alert('사용자 일정을 불러올 수 없습니다.');
-  //   return false;
-  // }
-
-  // return isWithinSchedule(schedule.startDate, schedule.endDate);
-}
-
-/**
- * Thesis 페이지 접근 가능 여부 확인
- * - 중간/최종 논문 제출 대기 상태일 때만 접근 가능
- * - 해당 논문 제출 일정 기간 내에만 접근 가능
- */
-export async function canAccessThesisPage(): Promise<boolean> {
-  const status = await fetchUserStatus();
-
-  if (status === WORKFLOW_STAGE.MID_THESIS_PENDING) {
-    // const schedule = await fetchScheduleForStage(
-    //   WORKFLOW_STAGE.MID_THESIS_PENDING,
-    // );
-    // if (!schedule) {
-    //   alert('사용자 일정을 불러올 수 없습니다.');
-    //   return false;
-    // }
-    // return isWithinSchedule(schedule.startDate, schedule.endDate);
-    return true;
-  }
-
-  if (status === WORKFLOW_STAGE.FINAL_THESIS_PENDING) {
-    // const schedule = await fetchScheduleForStage(
-    //   WORKFLOW_STAGE.FINAL_THESIS_PENDING,
-    // );
-    // if (!schedule) {
-    //   alert('사용자 일정을 불러올 수 없습니다.');
-    //   return false;
-    // }
-    // return isWithinSchedule(schedule.startDate, schedule.endDate);
-    return true;
-  }
-
-  return false;
+function formatScheduleRange(startDate: string, endDate: string): string {
+  return `${startDate} ~ ${endDate}`;
 }
 
 /**
@@ -144,52 +68,115 @@ export async function checkPageAccess(
   page: 'apply' | 'certification' | 'thesis',
 ): Promise<{ canAccess: boolean; reason?: string }> {
   try {
-    let canAccess = false;
-    let reason = '';
+    const status = await fetchUserStatus();
+
+    if (status === null) {
+      return {
+        canAccess: false,
+        reason:
+          '졸업 대상자로 등록되지 않았거나 졸업 정보를 불러올 수 없습니다. 담당자에게 문의해 주세요.',
+      };
+    }
 
     switch (page) {
-      case 'apply':
-        canAccess = await canAccessApplyPage();
-        if (!canAccess) {
-          reason = '졸업 방식 선택 단계가 아닙니다.';
-        }
-        break;
+      case 'apply': {
+        const eligibleForApply =
+          status === WORKFLOW_STAGE.TYPE_NOT_SELECTED ||
+          status === WORKFLOW_STAGE.PROFESSOR_NOT_ASSIGNED;
 
-      case 'certification':
-        canAccess = await canAccessCertificationPage();
-        if (!canAccess) {
-          const status = await fetchUserStatus();
-          if (status !== WORKFLOW_STAGE.CERTIFICATE_PENDING) {
-            reason = '자격증 제출 단계가 아닙니다.';
-          } else {
-            reason = '자격증 제출 기간이 아닙니다.';
-          }
+        if (!eligibleForApply) {
+          return {
+            canAccess: false,
+            reason: '졸업 방식 선택 단계가 아닙니다.',
+          };
         }
-        break;
 
-      case 'thesis':
-        canAccess = await canAccessThesisPage();
-        if (!canAccess) {
-          const status = await fetchUserStatus();
-          if (
-            status !== WORKFLOW_STAGE.MID_THESIS_PENDING &&
-            status !== WORKFLOW_STAGE.FINAL_THESIS_PENDING
-          ) {
-            reason = '논문 제출 단계가 아닙니다.';
-          } else {
-            reason = '논문 제출 기간이 아닙니다.';
-          }
+        const schedule = await fetchScheduleBySubmissionType(
+          SCHEDULE.SUBMITTED,
+        );
+
+        if (!schedule) {
+          return {
+            canAccess: false,
+            reason: '졸업 요건 취득 방식 신청 일정을 불러올 수 없습니다.',
+          };
         }
-        break;
+
+        if (!isWithinSchedule(schedule.startDate, schedule.endDate)) {
+          return {
+            canAccess: false,
+            reason: `졸업 요건 취득 방식 신청 기간이 아닙니다. (${formatScheduleRange(schedule.startDate, schedule.endDate)})`,
+          };
+        }
+
+        return { canAccess: true };
+      }
+
+      case 'certification': {
+        if (status !== WORKFLOW_STAGE.CERTIFICATE_PENDING) {
+          return {
+            canAccess: false,
+            reason: '자격증 제출 단계가 아닙니다.',
+          };
+        }
+
+        const schedule = await fetchScheduleBySubmissionType(
+          SCHEDULE.CERTIFICATE,
+        );
+
+        if (!schedule) {
+          return {
+            canAccess: false,
+            reason: '자격증 제출 일정을 불러올 수 없습니다.',
+          };
+        }
+
+        if (!isWithinSchedule(schedule.startDate, schedule.endDate)) {
+          return {
+            canAccess: false,
+            reason: `자격증 제출 기간이 아닙니다. (${formatScheduleRange(schedule.startDate, schedule.endDate)})`,
+          };
+        }
+
+        return { canAccess: true };
+      }
+
+      case 'thesis': {
+        let submissionType: SubmissionType | null = null;
+
+        if (status === WORKFLOW_STAGE.MID_THESIS_PENDING) {
+          submissionType = SCHEDULE.MIDTHESIS;
+        } else if (status === WORKFLOW_STAGE.FINAL_THESIS_PENDING) {
+          submissionType = SCHEDULE.FINALTHESIS;
+        }
+
+        if (!submissionType) {
+          return {
+            canAccess: false,
+            reason: '논문 제출 단계가 아닙니다.',
+          };
+        }
+
+        const schedule = await fetchScheduleBySubmissionType(submissionType);
+
+        if (!schedule) {
+          return {
+            canAccess: false,
+            reason: '논문 제출 일정을 불러올 수 없습니다.',
+          };
+        }
+
+        if (!isWithinSchedule(schedule.startDate, schedule.endDate)) {
+          return {
+            canAccess: false,
+            reason: `논문 제출 기간이 아닙니다. (${formatScheduleRange(schedule.startDate, schedule.endDate)})`,
+          };
+        }
+
+        return { canAccess: true };
+      }
     }
-
-    if (!canAccess) {
-      alert(reason);
-    }
-
-    return { canAccess, reason };
   } catch {
-    alert('접근 권한을 확인할 수 없습니다.');
     return {
       canAccess: false,
       reason: '접근 권한을 확인할 수 없습니다.',

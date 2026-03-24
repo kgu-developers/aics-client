@@ -16,6 +16,7 @@ const submitThesis = async (data: FormData) => {
 export const useSubmitThesis = () => {
   return useMutation({
     mutationFn: submitThesis,
+    meta: { suppressErrorToast: true },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: studentKeys.files() });
       queryClient.invalidateQueries({ queryKey: userKeys.graduationStatus() });
