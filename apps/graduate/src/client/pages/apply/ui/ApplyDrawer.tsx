@@ -22,7 +22,7 @@ export default function ApplyDrawer({
 }: ApplyDrawerProps) {
   const router = useRouter();
   const handleCancel = () => {
-    router.navigate({ to: ROUTE.APPLY, params: { confirm: false } });
+    router.navigate({ to: ROUTE.APPLY, search: { confirm: false } });
   };
 
   const { index, step } = useStep({ selectedOption, confirm });
