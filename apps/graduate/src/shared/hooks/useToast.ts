@@ -5,17 +5,19 @@ import parseError from '../utils/error';
 
 export interface ConfirmConfig {
   title: string;
-  content?: string;
+  content?: ReactNode;
   onOk: () => void | Promise<void>;
   onCancel?: () => void;
   okText?: string;
   cancelText?: string;
+  centered?: boolean;
 }
 
 export interface InfoConfig {
   title: string;
   content?: ReactNode;
   okText?: string;
+  centered?: boolean;
 }
 
 export function useToast() {
@@ -38,6 +40,7 @@ export function useToast() {
       ...config,
       okText: config.okText ?? '확인',
       cancelText: config.cancelText ?? '취소',
+      centered: config.centered ?? false,
     });
   };
 
@@ -45,6 +48,7 @@ export function useToast() {
     modal.info({
       ...config,
       okText: config.okText ?? '확인',
+      centered: config.centered ?? false,
     });
   };
 

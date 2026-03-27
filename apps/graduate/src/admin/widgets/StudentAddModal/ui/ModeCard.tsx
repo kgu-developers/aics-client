@@ -24,7 +24,7 @@ export function ModeCard({ option, isActive, onSelect }: Props) {
           : token.colorFillQuaternary,
         borderColor: isActive ? token.colorPrimary : token.colorBorderSecondary,
       }}
-      bodyStyle={{ padding: 16 }}
+      styles={{ body: { padding: 16 } }}
     >
       <Typography.Title level={5} style={{ margin: 0 }}>
         {option.title}

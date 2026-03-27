@@ -2,15 +2,16 @@ import { Button } from 'antd';
 import { useState } from 'react';
 
 import * as style from './Toolbar.css';
+import { REJECT_BUTTON_TEXT } from './toolbarTexts';
 
 import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
-
 
 type Props = {
   selectedCount: number;
   query: string;
   onQueryChange: (v: string) => void;
   onApprove: () => void;
+  onReject?: () => void;
   onDeleteSelected?: () => void;
   onDownload?: () => void;
   disabledApprove?: boolean;
@@ -21,6 +22,7 @@ export default function Toolbar({
   query,
   onQueryChange,
   onApprove,
+  onReject,
   onDeleteSelected,
   onDownload,
   disabledApprove = false,
@@ -51,6 +53,11 @@ export default function Toolbar({
           {!disabledApprove && (
             <Button size='middle' htmlType='button' onClick={onApprove}>
               승인
+            </Button>
+          )}
+          {!disabledApprove && onReject && (
+            <Button size='middle' htmlType='button' onClick={onReject}>
+              {REJECT_BUTTON_TEXT}
             </Button>
           )}
           {onDeleteSelected && (

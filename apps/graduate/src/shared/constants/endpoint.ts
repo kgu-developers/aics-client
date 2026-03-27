@@ -46,6 +46,8 @@ export const END_POINT = {
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
     GRADUATION_USERS_BATCH_APPROVE:
       '/api/v1/admin/graduation-users/batch/approve',
+    GRADUATION_USERS_BATCH_REJECT:
+      '/api/v1/admin/graduation-users/batch/disapprove',
     USERS: '/api/v1/admin/users',
     SCHEDULE_CREATE: '/api/v1/admin/schedules',
     SCHEDULE_DELETE: (scheduleId: number) =>

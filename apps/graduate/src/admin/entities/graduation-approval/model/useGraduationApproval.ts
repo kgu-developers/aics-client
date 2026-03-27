@@ -126,6 +126,7 @@ export function useGraduationApproval<T>({
     if (pending.length === 0) {
       info({
         title: APPROVE_RESULT_TITLE,
+        centered: true,
         content: buildResultContent(
           [],
           buildNotApprovedDetails(notSubmitted, alreadyApproved),
@@ -139,6 +140,7 @@ export function useGraduationApproval<T>({
       content: APPROVE_ALERT,
       okText: APPROVE_OK_TEXT,
       cancelText: APPROVE_CANCEL_TEXT,
+      centered: true,
       onOk: async () => {
         try {
           const result = await approveGraduationUsers(
@@ -154,6 +156,7 @@ export function useGraduationApproval<T>({
 
           info({
             title: APPROVE_RESULT_TITLE,
+            centered: true,
             content: buildResultContent(
               approved,
               buildNotApprovedDetails(notSubmitted, alreadyApproved, failed),

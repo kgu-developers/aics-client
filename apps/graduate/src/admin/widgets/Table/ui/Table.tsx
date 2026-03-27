@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import { useScheduleList } from '~/admin/entities/admin-schedule/model';
-import { useGraduationApproval } from '~/admin/entities/graduation-approval/model';
+import {
+  useGraduationApproval,
+  useGraduationRejection,
+} from '~/admin/entities/graduation-approval/model';
 import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
 import { certColumns } from '~/admin/pages/certification/constants/certificationColumns';
@@ -87,29 +90,40 @@ export default function Table({
 
   const { handleDownload } = useAdminDownload(graduationType);
 
+  const approvalStatus =
+    graduationType === 'THESIS'
+      ? {
+          isSubmitted: (u: GraduationUserSummary) =>
+            u.status?.type === 'THESIS' &&
+            u.status.midThesis.submitted &&
+            u.status.finalThesis.submitted,
+          isApproved: (u: GraduationUserSummary) =>
+            u.status?.type === 'THESIS' &&
+            u.status.midThesis.approval &&
+            u.status.finalThesis.approval,
+        }
+      : {
+          isSubmitted: (u: GraduationUserSummary) =>
+            u.status?.type === 'CERTIFICATE' && u.status.submitted,
+          isApproved: (u: GraduationUserSummary) =>
+            u.status?.type === 'CERTIFICATE' && u.status.approval,
+        };
+
   const { handleApproveSelected } = useGraduationApproval({
     items: data?.contents ?? [],
     selectedIds,
     getId: (u: GraduationUserSummary) => u.id,
     getLabel: (u: GraduationUserSummary) => `${u.studentId} ${u.name}`,
-    status:
-      graduationType === 'THESIS'
-        ? {
-            isSubmitted: u =>
-              u.status?.type === 'THESIS' &&
-              u.status.midThesis.submitted &&
-              u.status.finalThesis.submitted,
-            isApproved: u =>
-              u.status?.type === 'THESIS' &&
-              u.status.midThesis.approval &&
-              u.status.finalThesis.approval,
-          }
-        : {
-            isSubmitted: u =>
-              u.status?.type === 'CERTIFICATE' && u.status.submitted,
-            isApproved: u =>
-              u.status?.type === 'CERTIFICATE' && u.status.approval,
-          },
+    status: approvalStatus,
+    onSuccess: resetSelection,
+  });
+
+  const { handleRejectSelected } = useGraduationRejection({
+    items: data?.contents ?? [],
+    selectedIds,
+    getId: (u: GraduationUserSummary) => u.id,
+    getLabel: (u: GraduationUserSummary) => `${u.studentId} ${u.name}`,
+    status: approvalStatus,
     onSuccess: resetSelection,
   });
 
@@ -135,6 +149,7 @@ export default function Table({
         query={query}
         onQueryChange={onQueryChange}
         onApprove={handleApproveSelected}
+        onReject={handleRejectSelected}
         onDownload={handleDownload}
       />
       <div className={style.card}>
