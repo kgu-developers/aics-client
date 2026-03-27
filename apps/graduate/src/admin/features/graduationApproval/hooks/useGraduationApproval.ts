@@ -1,16 +1,16 @@
-import { createElement } from 'react';
+﻿import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
 
-import { useGraduationBatchApproval } from './useGraduationBatchApproval';
 
+import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import {
   APPROVE_ALERT,
-  APPROVE_CONFIRM_TITLE,
-  APPROVE_OK_TEXT,
   APPROVE_CANCEL_TEXT,
+  APPROVE_CONFIRM_TITLE,
   APPROVE_EMPTY,
   APPROVE_NOTHING,
+  APPROVE_OK_TEXT,
   APPROVE_REASON_ALREADY_APPROVED,
   APPROVE_REASON_FAILED,
   APPROVE_REASON_NOT_SUBMITTED,
@@ -34,7 +34,6 @@ type UseApproveGraduationUsersProps<T> = {
 };
 
 type NotApprovedDetail = {
-  id: number;
   label: string;
   reason: string;
 };
@@ -58,11 +57,11 @@ export function useGraduationApproval<T>({
   ) => {
     const approvedLines =
       approvedUsers.length > 0
-        ? approvedUsers.map(user => `- ${getLabel(user)}`)
+        ? approvedUsers.map(user => '- ' + getLabel(user))
         : [APPROVE_RESULT_NONE];
     const notApprovedLines =
       notApprovedDetails.length > 0
-        ? notApprovedDetails.map(item => `- ${item.label} (${item.reason})`)
+        ? notApprovedDetails.map(item => '- ' + item.label + ' (' + item.reason + ')')
         : [APPROVE_RESULT_NONE];
 
     return [
@@ -81,17 +80,14 @@ export function useGraduationApproval<T>({
     failed: T[] = [],
   ) => [
     ...notSubmitted.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_NOT_SUBMITTED,
     })),
     ...alreadyApproved.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_ALREADY_APPROVED,
     })),
     ...failed.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_FAILED,
     })),
@@ -169,7 +165,7 @@ export function useGraduationApproval<T>({
             toast.warning(APPROVE_NOTHING);
           }
         } catch {
-          /* 실패 시 MutationCache 전역 토스트로 안내 */
+          /* 실패 안내는 MutationCache 전역 토스트 사용 */
         }
       },
     });
@@ -177,3 +173,6 @@ export function useGraduationApproval<T>({
 
   return { handleApproveSelected };
 }
+
+
+

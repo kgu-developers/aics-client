@@ -1,12 +1,12 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 
 import { useScheduleList } from '~/admin/entities/admin-schedule/model';
+import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
+import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
 import {
   useGraduationApproval,
   useGraduationDisapproval,
-} from '~/admin/entities/graduation-approval/model';
-import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
-import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
+} from '~/admin/features/graduationApproval';
 import { certColumns } from '~/admin/pages/certification/constants/certificationColumns';
 import type { CertRow } from '~/admin/pages/certification/types/row';
 import { thesisColumns } from '~/admin/pages/thesis/constants/thesisColumns';
@@ -187,3 +187,6 @@ export default function Table({
     </>
   );
 }
+
+
+

@@ -1,26 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createElement } from 'react';
+﻿import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
-import { graduationUsersKeys, studentKeys } from '~/shared/queries';
 
-import { updateGraduationBatchDisapproval } from '~/admin/entities/graduation-approval/api';
+
+import { useGraduationBatchDisapproval } from '~/admin/entities/graduation-approval/model';
 import {
-  REJECT_ALERT,
-  REJECT_CANCEL_TEXT,
-  REJECT_CONFIRM_TITLE,
-  REJECT_EMPTY,
-  REJECT_FAILED,
-  REJECT_NOTHING,
-  REJECT_OK_TEXT,
-  REJECT_REASON_FAILED,
-  REJECT_REASON_NOT_APPROVED,
-  REJECT_REASON_NOT_SUBMITTED,
-  REJECT_RESULT_NONE,
-  REJECT_RESULT_NOT_REJECTED,
-  REJECT_RESULT_REJECTED,
-  REJECT_RESULT_TITLE,
-  REJECT_SUCCESS,
+  DISAPPROVE_ALERT,
+  DISAPPROVE_CANCEL_TEXT,
+  DISAPPROVE_CONFIRM_TITLE,
+  DISAPPROVE_EMPTY,
+  DISAPPROVE_FAILED,
+  DISAPPROVE_NOTHING,
+  DISAPPROVE_OK_TEXT,
+  DISAPPROVE_REASON_FAILED,
+  DISAPPROVE_REASON_NOT_APPROVED,
+  DISAPPROVE_REASON_NOT_SUBMITTED,
+  DISAPPROVE_RESULT_DISAPPROVED,
+  DISAPPROVE_RESULT_NONE,
+  DISAPPROVE_RESULT_NOT_DISAPPROVED,
+  DISAPPROVE_RESULT_TITLE,
+  DISAPPROVE_SUCCESS,
 } from '~/admin/shared/ui/Toolbar/toolbarTexts';
 
 type UseDisapproveGraduationUsersProps<T> = {
@@ -36,13 +35,8 @@ type UseDisapproveGraduationUsersProps<T> = {
 };
 
 type NotDisapprovedDetail = {
-  id: number;
   label: string;
   reason: string;
-};
-
-type DisapproveParams = {
-  ids: number[];
 };
 
 export function useGraduationDisapproval<T>({
@@ -54,19 +48,8 @@ export function useGraduationDisapproval<T>({
   onSuccess,
 }: UseDisapproveGraduationUsersProps<T>) {
   const { toast, confirm, info } = useToast();
-  const queryClient = useQueryClient();
-  const disapproveMutation = useMutation({
-    mutationFn: ({ ids }: DisapproveParams) =>
-      updateGraduationBatchDisapproval(ids),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: graduationUsersKeys.all,
-      });
-      await queryClient.invalidateQueries({
-        queryKey: studentKeys.details(),
-      });
-      await onSuccess?.();
-    },
+  const { disapproveGraduationUsers } = useGraduationBatchDisapproval({
+    onSuccess,
   });
 
   const buildResultContent = (
@@ -75,18 +58,18 @@ export function useGraduationDisapproval<T>({
   ) => {
     const disapprovedLines =
       disapprovedUsers.length > 0
-        ? disapprovedUsers.map(user => `- ${getLabel(user)}`)
-        : [REJECT_RESULT_NONE];
+        ? disapprovedUsers.map(user => '- ' + getLabel(user))
+        : [DISAPPROVE_RESULT_NONE];
 
     const notDisapprovedLines =
       notDisapprovedDetails.length > 0
-        ? notDisapprovedDetails.map(item => `- ${item.label} (${item.reason})`)
-        : [REJECT_RESULT_NONE];
+        ? notDisapprovedDetails.map(item => '- ' + item.label + ' (' + item.reason + ')')
+        : [DISAPPROVE_RESULT_NONE];
 
     return [
-      REJECT_RESULT_REJECTED,
+      DISAPPROVE_RESULT_DISAPPROVED,
       ...disapprovedLines,
-      REJECT_RESULT_NOT_REJECTED,
+      DISAPPROVE_RESULT_NOT_DISAPPROVED,
       ...notDisapprovedLines,
     ]
       .filter(Boolean)
@@ -99,25 +82,22 @@ export function useGraduationDisapproval<T>({
     failed: T[] = [],
   ) => [
     ...notSubmitted.map(user => ({
-      id: getId(user),
       label: getLabel(user),
-      reason: REJECT_REASON_NOT_SUBMITTED,
+      reason: DISAPPROVE_REASON_NOT_SUBMITTED,
     })),
     ...notApproved.map(user => ({
-      id: getId(user),
       label: getLabel(user),
-      reason: REJECT_REASON_NOT_APPROVED,
+      reason: DISAPPROVE_REASON_NOT_APPROVED,
     })),
     ...failed.map(user => ({
-      id: getId(user),
       label: getLabel(user),
-      reason: REJECT_REASON_FAILED,
+      reason: DISAPPROVE_REASON_FAILED,
     })),
   ];
 
   const handleDisapproveSelected = () => {
     if (selectedIds.length === 0) {
-      toast.warning(REJECT_EMPTY);
+      toast.warning(DISAPPROVE_EMPTY);
       return;
     }
 
@@ -145,7 +125,7 @@ export function useGraduationDisapproval<T>({
 
     if (pending.length === 0) {
       info({
-        title: REJECT_RESULT_TITLE,
+        title: DISAPPROVE_RESULT_TITLE,
         centered: true,
         content: buildResultContent(
           [],
@@ -156,16 +136,16 @@ export function useGraduationDisapproval<T>({
     }
 
     confirm({
-      title: REJECT_CONFIRM_TITLE,
-      content: REJECT_ALERT,
-      okText: REJECT_OK_TEXT,
-      cancelText: REJECT_CANCEL_TEXT,
+      title: DISAPPROVE_CONFIRM_TITLE,
+      content: DISAPPROVE_ALERT,
+      okText: DISAPPROVE_OK_TEXT,
+      cancelText: DISAPPROVE_CANCEL_TEXT,
       centered: true,
       onOk: async () => {
         try {
-          const result = await disapproveMutation.mutateAsync({
-            ids: pending.map(item => getId(item)),
-          });
+          const result = await disapproveGraduationUsers(
+            pending.map(item => getId(item)),
+          );
           const disapprovedIdSet = new Set(result.disapprovedIds);
           const disapproved = pending.filter(item =>
             disapprovedIdSet.has(getId(item)),
@@ -175,7 +155,7 @@ export function useGraduationDisapproval<T>({
           );
 
           info({
-            title: REJECT_RESULT_TITLE,
+            title: DISAPPROVE_RESULT_TITLE,
             centered: true,
             content: buildResultContent(
               disapproved,
@@ -184,12 +164,14 @@ export function useGraduationDisapproval<T>({
           });
 
           if (disapproved.length > 0) {
-            toast.success(REJECT_SUCCESS);
+            toast.success(DISAPPROVE_SUCCESS);
           } else {
-            toast.warning(REJECT_NOTHING);
+            toast.warning(DISAPPROVE_NOTHING);
           }
         } catch (error) {
-          toast.error(error instanceof Error ? error.message : REJECT_FAILED);
+          toast.error(
+            error instanceof Error ? error.message : DISAPPROVE_FAILED,
+          );
         }
       },
     });
@@ -197,3 +179,6 @@ export function useGraduationDisapproval<T>({
 
   return { handleDisapproveSelected };
 }
+
+
+

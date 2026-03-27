@@ -1,26 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { graduationUsersKeys, studentKeys } from '~/shared/queries';
 
-import { updateGraduationBatchApproval } from '../api';
+import { updateGraduationBatchDisapproval } from '../api';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-type UpdateGraduationBatchApprovalResult = Awaited<
-  ReturnType<typeof updateGraduationBatchApproval>
+type UpdateGraduationBatchDisapprovalResult = Awaited<
+  ReturnType<typeof updateGraduationBatchDisapproval>
 >;
 
-export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
+export function useGraduationBatchDisapproval({ onSuccess }: Options = {}) {
   const queryClient = useQueryClient();
-
   const mutation = useMutation<
-    UpdateGraduationBatchApprovalResult,
+    UpdateGraduationBatchDisapprovalResult,
     Error,
     number[]
   >({
-    mutationFn: updateGraduationBatchApproval,
+    mutationFn: updateGraduationBatchDisapproval,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: graduationUsersKeys.all,
@@ -31,9 +30,9 @@ export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
       await onSuccess?.();
     },
   });
-
   return {
-    approveGraduationUsers: mutation.mutateAsync,
+    disapproveGraduationUsers: mutation.mutateAsync,
     mutation,
   };
 }
+
