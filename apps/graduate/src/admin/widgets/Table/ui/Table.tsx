@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import {
   useGraduationApproval,
-  useGraduationRejection,
+  useGraduationDisapproval,
 } from '~/admin/entities/graduation-approval/model';
 import type { GraduationUserSummary } from '~/admin/entities/graduation-users/api';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model';
@@ -14,7 +14,11 @@ import type { ThesisRow } from '~/admin/pages/thesis/types/row';
 import * as style from '~/admin/shared/styles/adminPage.css';
 import { DataTable, Toolbar, UserDetailModal } from '~/admin/shared/ui';
 import type { Column } from '~/admin/shared/ui/DataTable/DataTable';
-import { extractPeriodData } from '~/admin/shared/utils';
+import {
+  extractPeriodData,
+  getCurrentThesisStageState,
+  getThesisDisapprovalStageState,
+} from '~/admin/shared/utils';
 import {
   useAdminDownload,
   useAdminSelection,
@@ -54,10 +58,9 @@ export default function Table({
     graduationType === 'THESIS' && data
       ? data.contents.map((user: GraduationUserSummary, idx: number) => {
           const thesis = user.status?.type === 'THESIS' ? user.status : null;
-          const isFinalStage = Boolean(thesis?.midThesis.submitted);
-          const isSubmitted = isFinalStage
-            ? thesis?.finalThesis.submitted
-            : thesis?.midThesis.submitted;
+          const currentStage = thesis
+            ? getCurrentThesisStageState(thesis)
+            : null;
           return {
             id: user.id,
             no: (page - 1) * pageSize + idx + 1,
@@ -65,9 +68,9 @@ export default function Table({
             name: user.name,
             advisor: user.advisorProfessor,
             gradTerm: user.graduationDate,
-            status: isFinalStage ? '최종보고서' : '중간보고서',
-            submissionStatus: isSubmitted ? '제출' : '미제출',
-            approved: thesis?.finalThesis.approval ? '승인' : '미승인',
+            status: currentStage?.stage ?? '중간보고서',
+            submissionStatus: currentStage?.submissionStatus ?? '미제출',
+            approved: currentStage?.approvalStatus ?? '미승인',
           };
         })
       : graduationType === 'CERTIFICATE' && data
@@ -95,12 +98,10 @@ export default function Table({
       ? {
           isSubmitted: (u: GraduationUserSummary) =>
             u.status?.type === 'THESIS' &&
-            u.status.midThesis.submitted &&
-            u.status.finalThesis.submitted,
+            getCurrentThesisStageState(u.status).isSubmitted,
           isApproved: (u: GraduationUserSummary) =>
             u.status?.type === 'THESIS' &&
-            u.status.midThesis.approval &&
-            u.status.finalThesis.approval,
+            getCurrentThesisStageState(u.status).isApproved,
         }
       : {
           isSubmitted: (u: GraduationUserSummary) =>
@@ -108,6 +109,18 @@ export default function Table({
           isApproved: (u: GraduationUserSummary) =>
             u.status?.type === 'CERTIFICATE' && u.status.approval,
         };
+
+  const disapprovalStatus =
+    graduationType === 'THESIS'
+      ? {
+          isSubmitted: (u: GraduationUserSummary) =>
+            u.status?.type === 'THESIS' &&
+            getThesisDisapprovalStageState(u.status).isSubmitted,
+          isApproved: (u: GraduationUserSummary) =>
+            u.status?.type === 'THESIS' &&
+            getThesisDisapprovalStageState(u.status).isApproved,
+        }
+      : approvalStatus;
 
   const { handleApproveSelected } = useGraduationApproval({
     items: data?.contents ?? [],
@@ -118,12 +131,12 @@ export default function Table({
     onSuccess: resetSelection,
   });
 
-  const { handleRejectSelected } = useGraduationRejection({
+  const { handleDisapproveSelected } = useGraduationDisapproval({
     items: data?.contents ?? [],
     selectedIds,
     getId: (u: GraduationUserSummary) => u.id,
     getLabel: (u: GraduationUserSummary) => `${u.studentId} ${u.name}`,
-    status: approvalStatus,
+    status: disapprovalStatus,
     onSuccess: resetSelection,
   });
 
@@ -149,7 +162,7 @@ export default function Table({
         query={query}
         onQueryChange={onQueryChange}
         onApprove={handleApproveSelected}
-        onReject={handleRejectSelected}
+        onReject={handleDisapproveSelected}
         onDownload={handleDownload}
       />
       <div className={style.card}>

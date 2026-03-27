@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
-import { graduationUsersKeys } from '~/shared/queries';
+import { graduationUsersKeys, studentKeys } from '~/shared/queries';
 
-import { updateGraduationBatchRejection } from '~/admin/entities/graduation-approval/api';
+import { updateGraduationBatchDisapproval } from '~/admin/entities/graduation-approval/api';
 import {
   REJECT_ALERT,
   REJECT_CANCEL_TEXT,
@@ -23,7 +23,7 @@ import {
   REJECT_SUCCESS,
 } from '~/admin/shared/ui/Toolbar/toolbarTexts';
 
-type UseRejectGraduationUsersProps<T> = {
+type UseDisapproveGraduationUsersProps<T> = {
   items: T[];
   selectedIds: number[];
   getId: (item: T) => number;
@@ -35,61 +35,65 @@ type UseRejectGraduationUsersProps<T> = {
   onSuccess?: () => void | Promise<void>;
 };
 
-type NotRejectedDetail = {
+type NotDisapprovedDetail = {
   id: number;
   label: string;
   reason: string;
 };
 
-type RejectParams = {
+type DisapproveParams = {
   ids: number[];
 };
 
-export function useGraduationRejection<T>({
+export function useGraduationDisapproval<T>({
   items,
   selectedIds,
   getId,
   getLabel,
   status,
   onSuccess,
-}: UseRejectGraduationUsersProps<T>) {
+}: UseDisapproveGraduationUsersProps<T>) {
   const { toast, confirm, info } = useToast();
   const queryClient = useQueryClient();
-  const rejectMutation = useMutation({
-    mutationFn: ({ ids }: RejectParams) => updateGraduationBatchRejection(ids),
+  const disapproveMutation = useMutation({
+    mutationFn: ({ ids }: DisapproveParams) =>
+      updateGraduationBatchDisapproval(ids),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: graduationUsersKeys.all,
+      });
+      await queryClient.invalidateQueries({
+        queryKey: studentKeys.details(),
       });
       await onSuccess?.();
     },
   });
 
   const buildResultContent = (
-    rejectedUsers: T[],
-    notRejectedDetails: NotRejectedDetail[],
+    disapprovedUsers: T[],
+    notDisapprovedDetails: NotDisapprovedDetail[],
   ) => {
-    const rejectedLines =
-      rejectedUsers.length > 0
-        ? rejectedUsers.map(user => `- ${getLabel(user)}`)
+    const disapprovedLines =
+      disapprovedUsers.length > 0
+        ? disapprovedUsers.map(user => `- ${getLabel(user)}`)
         : [REJECT_RESULT_NONE];
 
-    const notRejectedLines =
-      notRejectedDetails.length > 0
-        ? notRejectedDetails.map(item => `- ${item.label} (${item.reason})`)
+    const notDisapprovedLines =
+      notDisapprovedDetails.length > 0
+        ? notDisapprovedDetails.map(item => `- ${item.label} (${item.reason})`)
         : [REJECT_RESULT_NONE];
 
     return [
       REJECT_RESULT_REJECTED,
-      ...rejectedLines,
+      ...disapprovedLines,
       REJECT_RESULT_NOT_REJECTED,
-      ...notRejectedLines,
+      ...notDisapprovedLines,
     ]
       .filter(Boolean)
       .map((line, index) => createElement('div', { key: index }, line));
   };
 
-  const buildNotRejectedDetails = (
+  const buildNotDisapprovedDetails = (
     notSubmitted: T[],
     notApproved: T[],
     failed: T[] = [],
@@ -111,7 +115,7 @@ export function useGraduationRejection<T>({
     })),
   ];
 
-  const handleRejectSelected = () => {
+  const handleDisapproveSelected = () => {
     if (selectedIds.length === 0) {
       toast.warning(REJECT_EMPTY);
       return;
@@ -145,7 +149,7 @@ export function useGraduationRejection<T>({
         centered: true,
         content: buildResultContent(
           [],
-          buildNotRejectedDetails(notSubmitted, notApproved),
+          buildNotDisapprovedDetails(notSubmitted, notApproved),
         ),
       });
       return;
@@ -159,27 +163,27 @@ export function useGraduationRejection<T>({
       centered: true,
       onOk: async () => {
         try {
-          const result = await rejectMutation.mutateAsync({
+          const result = await disapproveMutation.mutateAsync({
             ids: pending.map(item => getId(item)),
           });
-          const rejectedIdSet = new Set(result.rejectedIds);
-          const rejected = pending.filter(item =>
-            rejectedIdSet.has(getId(item)),
+          const disapprovedIdSet = new Set(result.disapprovedIds);
+          const disapproved = pending.filter(item =>
+            disapprovedIdSet.has(getId(item)),
           );
           const failed = pending.filter(
-            item => !rejectedIdSet.has(getId(item)),
+            item => !disapprovedIdSet.has(getId(item)),
           );
 
           info({
             title: REJECT_RESULT_TITLE,
             centered: true,
             content: buildResultContent(
-              rejected,
-              buildNotRejectedDetails(notSubmitted, notApproved, failed),
+              disapproved,
+              buildNotDisapprovedDetails(notSubmitted, notApproved, failed),
             ),
           });
 
-          if (rejected.length > 0) {
+          if (disapproved.length > 0) {
             toast.success(REJECT_SUCCESS);
           } else {
             toast.warning(REJECT_NOTHING);
@@ -191,5 +195,5 @@ export function useGraduationRejection<T>({
     });
   };
 
-  return { handleRejectSelected };
+  return { handleDisapproveSelected };
 }

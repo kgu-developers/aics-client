@@ -1,2 +1,2 @@
 export * from './updateGraduationBatchApproval';
-export * from './updateGraduationBatchRejection';
+export * from './updateGraduationBatchDisapproval';
