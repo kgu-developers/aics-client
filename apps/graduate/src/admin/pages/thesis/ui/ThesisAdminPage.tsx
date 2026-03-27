@@ -1,8 +1,8 @@
-import { Header, Pagination } from '~/shared/ui';
+﻿import { Header, Pagination } from '~/shared/ui';
 
 import * as style from '~/admin/shared/styles/adminPage.css';
-import { Table } from '~/admin/widgets/Table';
-import { useAdminPagination } from '~/admin/widgets/Table/model';
+import { GraduationManagementTable } from '~/admin/widgets/GraduationManagementTable';
+import { useAdminPagination } from '~/admin/widgets/GraduationManagementTable/model';
 
 export default function ThesisAdminPage() {
   const {
@@ -18,7 +18,7 @@ export default function ThesisAdminPage() {
     <div className={style.root}>
       <div className={style.container}>
         <Header title='졸업 논문 관리' />
-        <Table
+        <GraduationManagementTable
           page={page}
           pageSize={pageSize}
           query={query}

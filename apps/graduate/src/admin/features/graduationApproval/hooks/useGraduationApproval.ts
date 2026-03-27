@@ -19,7 +19,7 @@ import {
   APPROVE_RESULT_NOT_APPROVED,
   APPROVE_RESULT_TITLE,
   APPROVE_SUCCESS,
-} from '~/admin/shared/ui/Toolbar/toolbarTexts';
+} from '~/admin/shared/constants/actionTexts';
 
 type UseApproveGraduationUsersProps<T> = {
   items: T[];

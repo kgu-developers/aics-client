@@ -2,7 +2,7 @@
 
 import * as style from './Toolbar.css';
 
-import { DISAPPROVE_BUTTON_TEXT } from './toolbarTexts';
+import { DISAPPROVE_BUTTON_TEXT } from '~/admin/shared/constants/actionTexts';
 
 type Props = {
   selectedCount: number;

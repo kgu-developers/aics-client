@@ -20,7 +20,7 @@ import {
   DISAPPROVE_RESULT_NOT_DISAPPROVED,
   DISAPPROVE_RESULT_TITLE,
   DISAPPROVE_SUCCESS,
-} from '~/admin/shared/ui/Toolbar/toolbarTexts';
+} from '~/admin/shared/constants/actionTexts';
 
 type UseDisapproveGraduationUsersProps<T> = {
   items: T[];
