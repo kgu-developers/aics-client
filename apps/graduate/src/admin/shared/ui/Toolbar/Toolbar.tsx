@@ -1,20 +1,18 @@
-import { Button } from 'antd';
-import { useState } from 'react';
+﻿import { Button } from 'antd';
 
 import * as style from './Toolbar.css';
-import { REJECT_BUTTON_TEXT } from './toolbarTexts';
 
-import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
+import { DISAPPROVE_BUTTON_TEXT } from './toolbarTexts';
 
 type Props = {
   selectedCount: number;
   query: string;
   onQueryChange: (v: string) => void;
-  onApprove: () => void;
-  onReject?: () => void;
+  onApprove?: () => void;
+  onDisapprove?: () => void;
   onDeleteSelected?: () => void;
   onDownload?: () => void;
-  disabledApprove?: boolean;
+  onAddStudent?: () => void;
 };
 
 export default function Toolbar({
@@ -22,13 +20,12 @@ export default function Toolbar({
   query,
   onQueryChange,
   onApprove,
-  onReject,
+  onDisapprove,
   onDeleteSelected,
   onDownload,
-  disabledApprove = false,
+  onAddStudent,
 }: Props) {
   const hasSelection = selectedCount > 0;
-  const [addOpen, setAddOpen] = useState(false);
 
   return (
     <div className={style.toolbar}>
@@ -50,14 +47,14 @@ export default function Toolbar({
 
       <div className={style.toolbarRight}>
         <div className={style.actions}>
-          {!disabledApprove && (
+          {onApprove && (
             <Button size='middle' htmlType='button' onClick={onApprove}>
               승인
             </Button>
           )}
-          {!disabledApprove && onReject && (
-            <Button size='middle' htmlType='button' onClick={onReject}>
-              {REJECT_BUTTON_TEXT}
+          {onDisapprove && (
+            <Button size='middle' htmlType='button' onClick={onDisapprove}>
+              {DISAPPROVE_BUTTON_TEXT}
             </Button>
           )}
           {onDeleteSelected && (
@@ -71,25 +68,15 @@ export default function Toolbar({
             </Button>
           )}
           {onDownload && (
-            <Button
-              size='middle'
-              htmlType='button'
-              onClick={() => {
-                onDownload();
-              }}
-            >
+            <Button size='middle' htmlType='button' onClick={onDownload}>
               다운로드
             </Button>
           )}
-          <Button
-            size='middle'
-            htmlType='button'
-            onClick={() => {
-              setAddOpen(true);
-            }}
-          >
-            학생추가
-          </Button>
+          {onAddStudent && (
+            <Button size='middle' htmlType='button' onClick={onAddStudent}>
+              학생추가
+            </Button>
+          )}
         </div>
 
         <div className={style.searchWrap}>
@@ -102,8 +89,7 @@ export default function Toolbar({
           <img className={style.searchIcon} src='/Search.svg' alt='검색' />
         </div>
       </div>
-
-      <StudentAddModal open={addOpen} onClose={() => setAddOpen(false)} />
     </div>
   );
 }
+

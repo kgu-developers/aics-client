@@ -162,7 +162,7 @@ export default function Table({
         query={query}
         onQueryChange={onQueryChange}
         onApprove={handleApproveSelected}
-        onReject={handleDisapproveSelected}
+        onDisapprove={handleDisapproveSelected}
         onDownload={handleDownload}
       />
       <div className={style.card}>
