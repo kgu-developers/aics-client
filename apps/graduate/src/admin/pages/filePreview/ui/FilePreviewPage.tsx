@@ -92,7 +92,7 @@ export default function FilePreviewPage() {
     return (
       <div className={style.container}>
         <div style={{ marginTop: 100, textAlign: 'center' }}>
-          ???? ??? ? ????.
+          데이터를 불러올 수 없습니다.
         </div>
       </div>
     );
@@ -156,7 +156,7 @@ export default function FilePreviewPage() {
       <div className={style.container}>
         <div className={style.backButtonWrapper}>
           <Button onClick={handleGoBack} type='text' size='large'>
-            ????
+            뒤로가기
           </Button>
         </div>
         <div className={style.filePreviewContainer}>
