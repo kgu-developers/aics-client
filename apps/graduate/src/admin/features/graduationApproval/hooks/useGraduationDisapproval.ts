@@ -1,7 +1,6 @@
-﻿import { createElement } from 'react';
+import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
-
 
 import { useGraduationBatchDisapproval } from '~/admin/entities/graduation-approval/model';
 import {
@@ -27,6 +26,7 @@ type UseDisapproveGraduationUsersProps<T> = {
   selectedIds: number[];
   getId: (item: T) => number;
   getLabel: (item: T) => string;
+  getSubmissionId: (item: T) => number | null;
   status: {
     isSubmitted: (item: T) => boolean;
     isApproved: (item: T) => boolean;
@@ -44,6 +44,7 @@ export function useGraduationDisapproval<T>({
   selectedIds,
   getId,
   getLabel,
+  getSubmissionId,
   status,
   onSuccess,
 }: UseDisapproveGraduationUsersProps<T>) {
@@ -60,10 +61,11 @@ export function useGraduationDisapproval<T>({
       disapprovedUsers.length > 0
         ? disapprovedUsers.map(user => '- ' + getLabel(user))
         : [DISAPPROVE_RESULT_NONE];
-
     const notDisapprovedLines =
       notDisapprovedDetails.length > 0
-        ? notDisapprovedDetails.map(item => '- ' + item.label + ' (' + item.reason + ')')
+        ? notDisapprovedDetails.map(
+            item => '- ' + item.label + ' (' + item.reason + ')',
+          )
         : [DISAPPROVE_RESULT_NONE];
 
     return [
@@ -105,6 +107,7 @@ export function useGraduationDisapproval<T>({
     const notSubmitted: T[] = [];
     const notApproved: T[] = [];
     const pending: T[] = [];
+    const invalidTargets: T[] = [];
 
     selected.forEach(item => {
       const submitted = status.isSubmitted(item);
@@ -114,9 +117,12 @@ export function useGraduationDisapproval<T>({
         notSubmitted.push(item);
         return;
       }
-
       if (!approved) {
         notApproved.push(item);
+        return;
+      }
+      if (getSubmissionId(item) == null) {
+        invalidTargets.push(item);
         return;
       }
 
@@ -129,7 +135,11 @@ export function useGraduationDisapproval<T>({
         centered: true,
         content: buildResultContent(
           [],
-          buildNotDisapprovedDetails(notSubmitted, notApproved),
+          buildNotDisapprovedDetails(
+            notSubmitted,
+            notApproved,
+            invalidTargets,
+          ),
         ),
       });
       return;
@@ -143,9 +153,19 @@ export function useGraduationDisapproval<T>({
       centered: true,
       onOk: async () => {
         try {
-          const result = await disapproveGraduationUsers(
-            pending.map(item => getId(item)),
-          );
+          const disapprovalTargets = pending.flatMap(item => {
+            const submissionId = getSubmissionId(item);
+            return submissionId == null
+              ? []
+              : [
+                  {
+                    graduationUserId: getId(item),
+                    submissionId,
+                  },
+                ];
+          });
+
+          const result = await disapproveGraduationUsers(disapprovalTargets);
           const disapprovedIdSet = new Set(result.disapprovedIds);
           const disapproved = pending.filter(item =>
             disapprovedIdSet.has(getId(item)),
@@ -159,12 +179,18 @@ export function useGraduationDisapproval<T>({
             centered: true,
             content: buildResultContent(
               disapproved,
-              buildNotDisapprovedDetails(notSubmitted, notApproved, failed),
+              buildNotDisapprovedDetails(
+                notSubmitted,
+                notApproved,
+                [...invalidTargets, ...failed],
+              ),
             ),
           });
 
-          if (disapproved.length > 0) {
+          if (result.successCount > 0) {
             toast.success(DISAPPROVE_SUCCESS);
+          } else if (result.failureCount > 0) {
+            toast.error(DISAPPROVE_FAILED);
           } else {
             toast.warning(DISAPPROVE_NOTHING);
           }
@@ -179,6 +205,3 @@ export function useGraduationDisapproval<T>({
 
   return { handleDisapproveSelected };
 }
-
-
-

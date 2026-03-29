@@ -23,7 +23,6 @@ import {
   useAdminDownload,
   useAdminSelection,
 } from '~/admin/widgets/GraduationManagementTable/model';
-import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
 
 type GraduationType = 'THESIS' | 'CERTIFICATE';
 type AdminTableRow = CertRow | ThesisRow;
@@ -43,7 +42,6 @@ export default function GraduationManagementTable({
   graduationType,
   onQueryChange,
 }: GraduationManagementTableProps) {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudentId, setSelectedStudentId] = useState<number>();
 
@@ -109,12 +107,16 @@ export default function GraduationManagementTable({
             Boolean(getThesisCurrentStage(u)?.isSubmitted),
           isApproved: (u: GraduationUserSummary) =>
             Boolean(getThesisCurrentStage(u)?.isApproved),
+          getSubmissionId: (u: GraduationUserSummary) =>
+            getThesisCurrentStage(u)?.submissionId ?? null,
         }
       : {
           isSubmitted: (u: GraduationUserSummary) =>
             u.status?.type === 'CERTIFICATE' && u.status.submitted,
           isApproved: (u: GraduationUserSummary) =>
             u.status?.type === 'CERTIFICATE' && u.status.approval,
+          getSubmissionId: (u: GraduationUserSummary) =>
+            u.status?.type === 'CERTIFICATE' ? u.status.id : null,
         };
 
   const disapprovalStatus =
@@ -124,6 +126,8 @@ export default function GraduationManagementTable({
             Boolean(getThesisDisapprovalStage(u)?.isSubmitted),
           isApproved: (u: GraduationUserSummary) =>
             Boolean(getThesisDisapprovalStage(u)?.isApproved),
+          getSubmissionId: (u: GraduationUserSummary) =>
+            getThesisDisapprovalStage(u)?.submissionId ?? null,
         }
       : approvalStatus;
 
@@ -132,6 +136,7 @@ export default function GraduationManagementTable({
     selectedIds,
     getId: (u: GraduationUserSummary) => u.id,
     getLabel: (u: GraduationUserSummary) => `${u.studentId} ${u.name}`,
+    getSubmissionId: approvalStatus.getSubmissionId,
     status: approvalStatus,
     onSuccess: resetSelection,
   });
@@ -141,6 +146,7 @@ export default function GraduationManagementTable({
     selectedIds,
     getId: (u: GraduationUserSummary) => u.id,
     getLabel: (u: GraduationUserSummary) => `${u.studentId} ${u.name}`,
+    getSubmissionId: disapprovalStatus.getSubmissionId,
     status: disapprovalStatus,
     onSuccess: resetSelection,
   });
@@ -169,7 +175,6 @@ export default function GraduationManagementTable({
         onApprove={handleApproveSelected}
         onDisapprove={handleDisapproveSelected}
         onDownload={handleDownload}
-        onAddStudent={() => setIsAddModalOpen(true)}
       />
       <div className={style.card}>
         <DataTable<AdminTableRow>
@@ -190,10 +195,6 @@ export default function GraduationManagementTable({
           period={extractPeriodData(schedules)}
         />
       )}
-      <StudentAddModal
-        open={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-      />
     </>
   );
 }

@@ -1,3 +1,7 @@
+import type { WorkflowStage } from '~/shared/types/graduation';
+
+import { SubmissionType } from '../types';
+
 export const API_URL =
   import.meta.env.VITE_API_URL || 'https://aics-api.kgudevelopers.monster';
 
@@ -9,30 +13,8 @@ export const API_ADMIN_URL =
   import.meta.env.VITE_ADMIN_API_URL ||
   'https://aics-admin.kgudevelopers.monster';
 
-export type EndpointValue<T> = T extends string
-  ? T
-  : T extends (...args: any[]) => infer R
-    ? R extends string
-      ? R
-      : never
-    : T extends Record<string, unknown>
-      ? {
-          [K in keyof T]: EndpointValue<T[K]>;
-        }[keyof T]
-      : never;
-
-export type EndpointPath = EndpointValue<typeof END_POINT>;
-
-/**
- * AUTH, ADMIN, USER 세 가지 타입의 엔드포인트를 정의합니다.
- * 이떄 타입의 구분은 인스턴스(baseURL)에 따라 결정됩니다.
- * 타입 아래 더한 Depth를 가지는 것은 불가능합니다. (ex. AUTH.LOGIN.DETAIL.USER_ID)
- * 현재 Depth 지켜서 엔드포인트 추가해주세요.
- */
-import type { WorkflowStage } from '~/shared/types/graduation';
-
-import { SubmissionType } from '../types';
-
+// Request path typing is used by the shared axios wrapper to select base URLs.
+// Keep this object shallow and extend the current depth instead of nesting deeper.
 export const END_POINT = {
   AUTH: {
     LOGIN: '/api/v1/auth/login',
@@ -44,10 +26,16 @@ export const END_POINT = {
     GRADUATION_USER: (graduationUserId: number) =>
       `/api/v1/admin/graduation-users/${graduationUserId}`,
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
-    GRADUATION_USERS_BATCH_APPROVE:
-      '/api/v1/admin/graduation-users/batch/approve',
-    GRADUATION_USERS_BATCH_DISAPPROVE:
-      '/api/v1/admin/graduation-users/batch/disapprove',
+    GRADUATION_USER_APPROVE: (
+      graduationUserId: number,
+      submissionId: number,
+    ) =>
+      `/api/v1/admin/graduation-users/approve/${graduationUserId}/${submissionId}`,
+    GRADUATION_USER_DISAPPROVE: (
+      graduationUserId: number,
+      submissionId: number,
+    ) =>
+      `/api/v1/admin/graduation-users/disapprove/${graduationUserId}/${submissionId}`,
     USERS: '/api/v1/admin/users',
     SCHEDULE_CREATE: '/api/v1/admin/schedules',
     SCHEDULE_DELETE: (scheduleId: number) =>
@@ -86,3 +74,17 @@ export const END_POINT = {
       `/api/v1/admin/graduation-users/${studentId}`,
   },
 } as const;
+
+type EndpointValue<T> = T extends string
+  ? T
+  : T extends (...args: never[]) => infer R
+    ? R extends string
+      ? R
+      : never
+    : T extends Record<string, unknown>
+      ? {
+          [K in keyof T]: EndpointValue<T[K]>;
+        }[keyof T]
+      : never;
+
+export type EndpointPath = EndpointValue<typeof END_POINT>;

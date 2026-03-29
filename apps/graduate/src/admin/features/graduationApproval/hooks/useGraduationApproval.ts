@@ -1,7 +1,6 @@
-﻿import { createElement } from 'react';
+import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
-
 
 import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import {
@@ -9,6 +8,7 @@ import {
   APPROVE_CANCEL_TEXT,
   APPROVE_CONFIRM_TITLE,
   APPROVE_EMPTY,
+  APPROVE_FAILED,
   APPROVE_NOTHING,
   APPROVE_OK_TEXT,
   APPROVE_REASON_ALREADY_APPROVED,
@@ -26,6 +26,7 @@ type UseApproveGraduationUsersProps<T> = {
   selectedIds: number[];
   getId: (item: T) => number;
   getLabel: (item: T) => string;
+  getSubmissionId: (item: T) => number | null;
   status: {
     isSubmitted: (item: T) => boolean;
     isApproved: (item: T) => boolean;
@@ -43,6 +44,7 @@ export function useGraduationApproval<T>({
   selectedIds,
   getId,
   getLabel,
+  getSubmissionId,
   status,
   onSuccess,
 }: UseApproveGraduationUsersProps<T>) {
@@ -61,7 +63,9 @@ export function useGraduationApproval<T>({
         : [APPROVE_RESULT_NONE];
     const notApprovedLines =
       notApprovedDetails.length > 0
-        ? notApprovedDetails.map(item => '- ' + item.label + ' (' + item.reason + ')')
+        ? notApprovedDetails.map(
+            item => '- ' + item.label + ' (' + item.reason + ')',
+          )
         : [APPROVE_RESULT_NONE];
 
     return [
@@ -103,6 +107,7 @@ export function useGraduationApproval<T>({
     const notSubmitted: T[] = [];
     const pending: T[] = [];
     const alreadyApproved: T[] = [];
+    const invalidTargets: T[] = [];
 
     selected.forEach(item => {
       const submitted = status.isSubmitted(item);
@@ -116,6 +121,10 @@ export function useGraduationApproval<T>({
         alreadyApproved.push(item);
         return;
       }
+      if (getSubmissionId(item) == null) {
+        invalidTargets.push(item);
+        return;
+      }
       pending.push(item);
     });
 
@@ -125,7 +134,11 @@ export function useGraduationApproval<T>({
         centered: true,
         content: buildResultContent(
           [],
-          buildNotApprovedDetails(notSubmitted, alreadyApproved),
+          buildNotApprovedDetails(
+            notSubmitted,
+            alreadyApproved,
+            invalidTargets,
+          ),
         ),
       });
       return;
@@ -139,9 +152,19 @@ export function useGraduationApproval<T>({
       centered: true,
       onOk: async () => {
         try {
-          const result = await approveGraduationUsers(
-            pending.map(item => getId(item)),
-          );
+          const approvalTargets = pending.flatMap(item => {
+            const submissionId = getSubmissionId(item);
+            return submissionId == null
+              ? []
+              : [
+                  {
+                    graduationUserId: getId(item),
+                    submissionId,
+                  },
+                ];
+          });
+
+          const result = await approveGraduationUsers(approvalTargets);
           const approvedIdSet = new Set(result.approvedIds);
           const approved = pending.filter(item =>
             approvedIdSet.has(getId(item)),
@@ -155,17 +178,23 @@ export function useGraduationApproval<T>({
             centered: true,
             content: buildResultContent(
               approved,
-              buildNotApprovedDetails(notSubmitted, alreadyApproved, failed),
+              buildNotApprovedDetails(
+                notSubmitted,
+                alreadyApproved,
+                [...invalidTargets, ...failed],
+              ),
             ),
           });
 
-          if (approved.length > 0) {
+          if (result.successCount > 0) {
             toast.success(APPROVE_SUCCESS);
+          } else if (result.failureCount > 0) {
+            toast.error(APPROVE_FAILED);
           } else {
             toast.warning(APPROVE_NOTHING);
           }
         } catch {
-          /* 실패 안내는 MutationCache 전역 토스트 사용 */
+          /* ?ㅽ뙣 ?덈궡??MutationCache ?꾩뿭 ?좎뒪???ъ슜 */
         }
       },
     });
@@ -173,6 +202,3 @@ export function useGraduationApproval<T>({
 
   return { handleApproveSelected };
 }
-
-
-

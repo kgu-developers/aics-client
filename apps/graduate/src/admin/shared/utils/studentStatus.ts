@@ -24,6 +24,7 @@ export type ThesisStageState = {
   stage: ThesisStageLabel;
   submissionStatus: SubmissionLabel;
   approvalStatus: ApprovalLabel;
+  submissionId: number | null;
   isSubmitted: boolean;
   isApproved: boolean;
 };
@@ -32,27 +33,23 @@ export function getCurrentThesisStageState(
   status: ThesisStatus,
 ): ThesisStageState {
   if (!status.midThesis.approval) {
-    const isSubmitted = status.midThesis.submitted;
-    const isApproved = status.midThesis.approval;
-
     return {
       stage: '중간보고서',
-      submissionStatus: isSubmitted ? '제출' : '미제출',
-      approvalStatus: isApproved ? '승인' : '미승인',
-      isSubmitted,
-      isApproved,
+      submissionStatus: status.midThesis.submitted ? '제출' : '미제출',
+      approvalStatus: status.midThesis.approval ? '승인' : '미승인',
+      submissionId: status.midThesis.id,
+      isSubmitted: status.midThesis.submitted,
+      isApproved: status.midThesis.approval,
     };
   }
 
-  const isSubmitted = status.finalThesis.submitted;
-  const isApproved = status.finalThesis.approval;
-
   return {
     stage: '최종보고서',
-    submissionStatus: isSubmitted ? '제출' : '미제출',
-    approvalStatus: isApproved ? '승인' : '미승인',
-    isSubmitted,
-    isApproved,
+    submissionStatus: status.finalThesis.submitted ? '제출' : '미제출',
+    approvalStatus: status.finalThesis.approval ? '승인' : '미승인',
+    submissionId: status.finalThesis.id,
+    isSubmitted: status.finalThesis.submitted,
+    isApproved: status.finalThesis.approval,
   };
 }
 
@@ -64,6 +61,7 @@ export function getThesisDisapprovalStageState(
       stage: '최종보고서',
       submissionStatus: '제출',
       approvalStatus: '승인',
+      submissionId: status.finalThesis.id,
       isSubmitted: true,
       isApproved: true,
     };
@@ -74,6 +72,7 @@ export function getThesisDisapprovalStageState(
       stage: '중간보고서',
       submissionStatus: '제출',
       approvalStatus: '승인',
+      submissionId: status.midThesis.id,
       isSubmitted: true,
       isApproved: true,
     };
@@ -84,6 +83,7 @@ export function getThesisDisapprovalStageState(
       stage: '최종보고서',
       submissionStatus: '제출',
       approvalStatus: '미승인',
+      submissionId: status.finalThesis.id,
       isSubmitted: true,
       isApproved: false,
     };
@@ -94,6 +94,7 @@ export function getThesisDisapprovalStageState(
       stage: '중간보고서',
       submissionStatus: '제출',
       approvalStatus: '미승인',
+      submissionId: status.midThesis.id,
       isSubmitted: true,
       isApproved: false,
     };
@@ -103,6 +104,7 @@ export function getThesisDisapprovalStageState(
     stage: '중간보고서',
     submissionStatus: '미제출',
     approvalStatus: '미승인',
+    submissionId: status.midThesis.id,
     isSubmitted: false,
     isApproved: false,
   };
@@ -126,14 +128,12 @@ export function getStatusLabel(status: StudentStatus | undefined): string {
       if (!status.midThesis.approval) {
         return STATUS_MID_REPORT_SUBMITTED;
       }
-
       if (!status.finalThesis.submitted) {
         return STATUS_FINAL_REPORT_NOT_SUBMITTED;
       }
       if (!status.finalThesis.approval) {
         return STATUS_FINAL_REPORT_SUBMITTED;
       }
-
       return STATUS_FINAL_REPORT_APPROVED;
 
     default:

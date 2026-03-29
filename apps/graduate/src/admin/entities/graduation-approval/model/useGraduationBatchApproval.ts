@@ -2,15 +2,20 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { graduationUsersKeys, studentKeys } from '~/shared/queries';
 
-import { updateGraduationBatchApproval } from '../api';
+import {
+  type UpdateGraduationApprovalParams,
+  updateGraduationApproval,
+} from '../api';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-type UpdateGraduationBatchApprovalResult = Awaited<
-  ReturnType<typeof updateGraduationBatchApproval>
->;
+type UpdateGraduationBatchApprovalResult = {
+  approvedIds: number[];
+  successCount: number;
+  failureCount: number;
+};
 
 export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
   const queryClient = useQueryClient();
@@ -18,10 +23,26 @@ export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
   const mutation = useMutation<
     UpdateGraduationBatchApprovalResult,
     Error,
-    number[]
+    UpdateGraduationApprovalParams[]
   >({
-    mutationFn: updateGraduationBatchApproval,
-    onSuccess: async () => {
+    mutationFn: async targets => {
+      const settled = await Promise.allSettled(
+        targets.map(target => updateGraduationApproval(target)),
+      );
+      const approvedIds = settled.flatMap((result, index) =>
+        result.status === 'fulfilled' ? [targets[index].graduationUserId] : [],
+      );
+
+      return {
+        approvedIds,
+        successCount: approvedIds.length,
+        failureCount: targets.length - approvedIds.length,
+      };
+    },
+    onSuccess: async result => {
+      if (result.successCount === 0) {
+        return;
+      }
       await queryClient.invalidateQueries({
         queryKey: graduationUsersKeys.all,
       });

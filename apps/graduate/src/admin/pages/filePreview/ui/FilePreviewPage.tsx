@@ -15,6 +15,10 @@ import * as style from '../styles/FilePreviewPage.css';
 
 import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import { useStudentDetail } from '~/admin/features/studentDetail';
+import {
+  APPROVE_FAILED,
+  APPROVE_SUCCESS,
+} from '~/admin/shared/constants/actionTexts';
 
 export default function FilePreviewPage() {
   const navigate = useNavigate();
@@ -37,7 +41,7 @@ export default function FilePreviewPage() {
   const { approveGraduationUsers, mutation: approvalMutation } =
     useGraduationBatchApproval({
       onSuccess: async () => {
-        toast.success('승인이 완료되었습니다.');
+        toast.success(APPROVE_SUCCESS);
         await queryClient.invalidateQueries({
           queryKey: [...studentKeys.files()],
         });
@@ -49,7 +53,7 @@ export default function FilePreviewPage() {
     });
 
   const clearHideTimeout = () => {
-    if (hideTimeoutRef.current) {
+    if (hideTimeoutRef.current !== null) {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
@@ -95,21 +99,25 @@ export default function FilePreviewPage() {
   }
 
   const { scheduleId, file, approval } = fileData;
-
   const { name, studentId, status } = studentDetail;
 
   const handleGoBack = () => {
     navigate({
       to: ROUTE.ALL,
-      search: { graduationUserId: graduationUserId },
+      search: { graduationUserId },
     });
   };
 
   const handleApprove = async () => {
-    try {
-      await approveGraduationUsers([graduationUserId]);
-    } catch {
-      /* 실패 시 MutationCache 전역 토스트 */
+    const result = await approveGraduationUsers([
+      {
+        graduationUserId,
+        submissionId: fileId,
+      },
+    ]);
+
+    if (result.successCount === 0) {
+      toast.error(APPROVE_FAILED);
     }
   };
 
@@ -126,15 +134,18 @@ export default function FilePreviewPage() {
         to: ROUTE.FILE_PREVIEW,
         search: {
           fileId: status.finalThesis.id!,
-          graduationUserId: graduationUserId,
+          graduationUserId,
         },
       });
-    } else if (scheduleId === getSubmissionTypeIndex('FINALTHESIS')) {
+      return;
+    }
+
+    if (scheduleId === getSubmissionTypeIndex('FINALTHESIS')) {
       navigate({
         to: ROUTE.FILE_PREVIEW,
         search: {
           fileId: status.midThesis.id!,
-          graduationUserId: graduationUserId,
+          graduationUserId,
         },
       });
     }
