@@ -13,11 +13,16 @@ import { getSubmissionTypeIndex } from '../../schedule/constants';
 import { useFile } from '../model';
 import * as style from '../styles/FilePreviewPage.css';
 
-import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
+import {
+  useGraduationBatchApproval,
+  useGraduationBatchDisapproval,
+} from '~/admin/entities/graduation-approval/model';
 import { useStudentDetail } from '~/admin/features/studentDetail';
 import {
   APPROVE_FAILED,
   APPROVE_SUCCESS,
+  DISAPPROVE_FAILED,
+  DISAPPROVE_SUCCESS,
 } from '~/admin/shared/constants/actionTexts';
 
 export default function FilePreviewPage() {
@@ -51,6 +56,23 @@ export default function FilePreviewPage() {
         await refetch();
       },
     });
+
+  const { disapproveGraduationUsers, mutation: disapprovalMutation } =
+    useGraduationBatchDisapproval({
+      onSuccess: async () => {
+        toast.success(DISAPPROVE_SUCCESS);
+        await refetch();
+      },
+    });
+
+  const handleCancelApprove = async () => {
+    const result = await disapproveGraduationUsers([
+      { graduationUserId, submissionId: fileId },
+    ]);
+    if (result.successCount === 0) {
+      toast.error(DISAPPROVE_FAILED);
+    }
+  };
 
   const clearHideTimeout = () => {
     if (hideTimeoutRef.current !== null) {
@@ -180,9 +202,11 @@ export default function FilePreviewPage() {
                 name={name}
                 isApproved={approval ?? false}
                 onApprove={handleApprove}
+                onCancelApprove={handleCancelApprove}
                 onChangeFile={handleNextFile}
                 canNavigate={canNavigate}
                 isApproving={approvalMutation.isPending}
+                isCancellingApprove={disapprovalMutation.isPending}
               />
             </div>
           </div>

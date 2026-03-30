@@ -7,9 +7,11 @@ interface FilePreviewToolbarProps {
   name: string;
   isApproved: boolean;
   onApprove: () => void;
+  onCancelApprove: () => void;
   onChangeFile: () => void;
   canNavigate: boolean;
   isApproving: boolean;
+  isCancellingApprove: boolean;
 }
 
 export default function FilePreviewToolbar({
@@ -17,23 +19,38 @@ export default function FilePreviewToolbar({
   name,
   isApproved,
   onApprove,
+  onCancelApprove,
   onChangeFile,
   canNavigate,
   isApproving,
+  isCancellingApprove,
 }: FilePreviewToolbarProps) {
   return (
     <div className={style.toolbar}>
       <span className={style.infoItem}>학번: {studentId}</span>
       <span className={style.infoItem}>이름: {name}</span>
-      <Button
-        type='primary'
-        onClick={onApprove}
-        disabled={isApproved || isApproving}
-        loading={isApproving}
-        className={style.button}
-      >
-        {isApproved ? '승인됨' : '승인'}
-      </Button>
+      {isApproved ? (
+        <Button
+          type='primary'
+          danger
+          onClick={onCancelApprove}
+          disabled={isCancellingApprove}
+          loading={isCancellingApprove}
+          className={style.button}
+        >
+          승인 취소
+        </Button>
+      ) : (
+        <Button
+          type='primary'
+          onClick={onApprove}
+          disabled={isApproving}
+          loading={isApproving}
+          className={style.button}
+        >
+          승인
+        </Button>
+      )}
       <Button
         onClick={onChangeFile}
         disabled={!canNavigate}
