@@ -52,7 +52,7 @@ export default function StudentAddModal({ open, onClose }: Props) {
       title='학생추가'
       width={width}
       styles={modalInnerStyles}
-      destroyOnClose
+      destroyOnHidden
       afterClose={() => setMode('single')}
       centered
     >

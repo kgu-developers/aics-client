@@ -14,12 +14,12 @@ export type Column<T> = {
 type Id = string | number;
 
 type Props<T> = {
-  rows: ReadonlyArray<T>;
-  columns: ReadonlyArray<Column<T>>;
+  rows: T[];
+  columns: Column<T>[];
   getRowId: (row: T) => Id;
   allChecked?: boolean;
   onToggleAll?: () => void;
-  selectedIds?: ReadonlyArray<Id>;
+  selectedIds?: Id[];
   onToggleOne?: (id: Id) => void;
   emptyText?: React.ReactNode;
   rowClassName?: (row: T, isSelected: boolean) => string | undefined;

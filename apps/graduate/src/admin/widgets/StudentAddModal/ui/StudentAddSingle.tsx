@@ -19,7 +19,7 @@ type TextFieldConfig = {
   label: string;
 };
 
-const TEXT_FIELD_CONFIGS: ReadonlyArray<TextFieldConfig> = [
+const TEXT_FIELD_CONFIGS: TextFieldConfig[] = [
   {
     name: 'studentId',
     rules: [

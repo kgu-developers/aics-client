@@ -1,12 +1,11 @@
-import { useNavigate, useSearch } from '@tanstack/react-router';
-import { useState, useEffect } from 'react';
+﻿import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
 
 import { useToast } from '~/shared/hooks';
 
 import { allManagementColumns } from '../constants/allManagementColumns';
 import { TYPE_LABEL, TYPE_UNKNOWN } from '../constants/allManagementTexts';
-import { AllManagementRow } from '../types/allManagement';
-import { getStatusLabel } from '../utils';
+import type { AllManagementRow } from '../types/allManagement';
 
 import { useScheduleList } from '~/admin/entities/admin-schedule/model';
 import { useFetchGraduationUsers } from '~/admin/entities/graduation-users/model/useFetchGraduationUsers';
@@ -14,12 +13,13 @@ import { useRemoveGraduationUsers } from '~/admin/entities/graduation-users/mode
 import {
   DELETE_ALERT,
   DELETE_CONFIRM_TITLE,
-} from '~/admin/shared/ui/Toolbar/toolbarTexts';
+} from '~/admin/shared/constants/actionTexts';
+import { getStatusLabel } from '~/admin/shared/utils';
 import {
   useAdminDownload,
   useAdminPagination,
   useAdminSelection,
-} from '~/admin/widgets/Table/model';
+} from '~/admin/widgets/GraduationManagementTable/model';
 
 export const useAllManagement = () => {
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ export const useAllManagement = () => {
           await removeGraduationUsers(selectedIds);
           toast.success('선택한 학생을 삭제했습니다.');
         } catch {
-          /* 실패 시 MutationCache 전역 토스트 */
+          /* 실패 안내는 MutationCache 전역 토스트 사용 */
         }
       },
     });

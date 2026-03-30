@@ -1,18 +1,22 @@
-import { Header, Pagination } from '~/shared/ui/index.ts';
+﻿import { useState } from 'react';
+
+import { Header, Pagination } from '~/shared/ui';
 
 import {
   LOADING_TEXT,
   TITLE_ALL_MANAGEMENT,
 } from '../constants/allManagementTexts';
+import { useAllManagement } from '../model/useAllManagement';
 import type { AllManagementRow } from '../types/allManagement';
-import { extractPeriodData } from '../utils';
-import UserDetailModal from './UserDetailModal.tsx';
-import { useAllManagement } from '../model/useAllManagement.ts';
 
 import * as style from '~/admin/shared/styles/adminPage.css';
-import { DataTable, Toolbar } from '~/admin/shared/ui/index.ts';
+import { DataTable, Toolbar, UserDetailModal } from '~/admin/shared/ui';
+import { extractPeriodData } from '~/admin/shared/utils';
+import { StudentAddModal } from '~/admin/widgets/StudentAddModal';
 
 export default function AllManagementPage() {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
   const {
     page,
     pageSize,
@@ -44,10 +48,9 @@ export default function AllManagementPage() {
           selectedCount={selectedIds.length}
           query={query}
           onQueryChange={handleQueryChange}
-          onApprove={() => {}}
           onDeleteSelected={handleDeleteSelected}
           onDownload={handleDownload}
-          disabledApprove={true}
+          onAddStudent={() => setIsAddModalOpen(true)}
         />
 
         <div className={style.card}>
@@ -69,6 +72,10 @@ export default function AllManagementPage() {
             period={extractPeriodData(schedules)}
           />
         )}
+        <StudentAddModal
+          open={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+        />
         <Pagination
           page={page}
           pageSize={pageSize}

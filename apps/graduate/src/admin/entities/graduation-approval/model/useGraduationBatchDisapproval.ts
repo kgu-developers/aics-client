@@ -3,40 +3,42 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { graduationUsersKeys, studentKeys } from '~/shared/queries';
 
 import {
-  type UpdateGraduationApprovalParams,
-  updateGraduationApproval,
+  type UpdateGraduationDisapprovalParams,
+  updateGraduationDisapproval,
 } from '../api';
 
 type Options = {
   onSuccess?: () => void | Promise<void>;
 };
 
-type UpdateGraduationBatchApprovalResult = {
-  approvedIds: number[];
+type UpdateGraduationBatchDisapprovalResult = {
+  disapprovedIds: number[];
   successCount: number;
   failureCount: number;
 };
 
-export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
+export function useGraduationBatchDisapproval({ onSuccess }: Options = {}) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<
-    UpdateGraduationBatchApprovalResult,
+    UpdateGraduationBatchDisapprovalResult,
     Error,
-    UpdateGraduationApprovalParams[]
+    UpdateGraduationDisapprovalParams[]
   >({
     mutationFn: async targets => {
       const settled = await Promise.allSettled(
-        targets.map(target => updateGraduationApproval(target)),
+        targets.map(target => updateGraduationDisapproval(target)),
       );
-      const approvedIds = settled.flatMap((result, index) =>
-        result.status === 'fulfilled' ? [targets[index].graduationUserId] : [],
+      const disapprovedIds = settled.flatMap((result, index) =>
+        result.status === 'fulfilled'
+          ? [targets[index].graduationUserId]
+          : [],
       );
 
       return {
-        approvedIds,
-        successCount: approvedIds.length,
-        failureCount: targets.length - approvedIds.length,
+        disapprovedIds,
+        successCount: disapprovedIds.length,
+        failureCount: targets.length - disapprovedIds.length,
       };
     },
     onSuccess: async result => {
@@ -54,7 +56,7 @@ export function useGraduationBatchApproval({ onSuccess }: Options = {}) {
   });
 
   return {
-    approveGraduationUsers: mutation.mutateAsync,
+    disapproveGraduationUsers: mutation.mutateAsync,
     mutation,
   };
 }

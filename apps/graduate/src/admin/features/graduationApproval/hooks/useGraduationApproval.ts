@@ -2,15 +2,15 @@ import { createElement } from 'react';
 
 import { useToast } from '~/shared/hooks';
 
-import { useGraduationBatchApproval } from './useGraduationBatchApproval';
-
+import { useGraduationBatchApproval } from '~/admin/entities/graduation-approval/model';
 import {
   APPROVE_ALERT,
-  APPROVE_CONFIRM_TITLE,
-  APPROVE_OK_TEXT,
   APPROVE_CANCEL_TEXT,
+  APPROVE_CONFIRM_TITLE,
   APPROVE_EMPTY,
+  APPROVE_FAILED,
   APPROVE_NOTHING,
+  APPROVE_OK_TEXT,
   APPROVE_REASON_ALREADY_APPROVED,
   APPROVE_REASON_FAILED,
   APPROVE_REASON_NOT_SUBMITTED,
@@ -19,13 +19,14 @@ import {
   APPROVE_RESULT_NOT_APPROVED,
   APPROVE_RESULT_TITLE,
   APPROVE_SUCCESS,
-} from '~/admin/shared/ui/Toolbar/toolbarTexts';
+} from '~/admin/shared/constants/actionTexts';
 
 type UseApproveGraduationUsersProps<T> = {
   items: T[];
   selectedIds: number[];
   getId: (item: T) => number;
   getLabel: (item: T) => string;
+  getSubmissionId: (item: T) => number | null;
   status: {
     isSubmitted: (item: T) => boolean;
     isApproved: (item: T) => boolean;
@@ -34,7 +35,6 @@ type UseApproveGraduationUsersProps<T> = {
 };
 
 type NotApprovedDetail = {
-  id: number;
   label: string;
   reason: string;
 };
@@ -44,6 +44,7 @@ export function useGraduationApproval<T>({
   selectedIds,
   getId,
   getLabel,
+  getSubmissionId,
   status,
   onSuccess,
 }: UseApproveGraduationUsersProps<T>) {
@@ -81,17 +82,14 @@ export function useGraduationApproval<T>({
     failed: T[] = [],
   ) => [
     ...notSubmitted.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_NOT_SUBMITTED,
     })),
     ...alreadyApproved.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_ALREADY_APPROVED,
     })),
     ...failed.map(user => ({
-      id: getId(user),
       label: getLabel(user),
       reason: APPROVE_REASON_FAILED,
     })),
@@ -107,6 +105,7 @@ export function useGraduationApproval<T>({
     const notSubmitted: T[] = [];
     const pending: T[] = [];
     const alreadyApproved: T[] = [];
+    const invalidTargets: T[] = [];
 
     selected.forEach(item => {
       const submitted = status.isSubmitted(item);
@@ -120,15 +119,24 @@ export function useGraduationApproval<T>({
         alreadyApproved.push(item);
         return;
       }
+      if (getSubmissionId(item) == null) {
+        invalidTargets.push(item);
+        return;
+      }
       pending.push(item);
     });
 
     if (pending.length === 0) {
       info({
         title: APPROVE_RESULT_TITLE,
+        centered: true,
         content: buildResultContent(
           [],
-          buildNotApprovedDetails(notSubmitted, alreadyApproved),
+          buildNotApprovedDetails(
+            notSubmitted,
+            alreadyApproved,
+            invalidTargets,
+          ),
         ),
       });
       return;
@@ -139,11 +147,22 @@ export function useGraduationApproval<T>({
       content: APPROVE_ALERT,
       okText: APPROVE_OK_TEXT,
       cancelText: APPROVE_CANCEL_TEXT,
+      centered: true,
       onOk: async () => {
         try {
-          const result = await approveGraduationUsers(
-            pending.map(item => getId(item)),
-          );
+          const approvalTargets = pending.flatMap(item => {
+            const submissionId = getSubmissionId(item);
+            return submissionId == null
+              ? []
+              : [
+                  {
+                    graduationUserId: getId(item),
+                    submissionId,
+                  },
+                ];
+          });
+
+          const result = await approveGraduationUsers(approvalTargets);
           const approvedIdSet = new Set(result.approvedIds);
           const approved = pending.filter(item =>
             approvedIdSet.has(getId(item)),
@@ -154,19 +173,27 @@ export function useGraduationApproval<T>({
 
           info({
             title: APPROVE_RESULT_TITLE,
+            centered: true,
             content: buildResultContent(
               approved,
-              buildNotApprovedDetails(notSubmitted, alreadyApproved, failed),
+              buildNotApprovedDetails(
+                notSubmitted,
+                alreadyApproved,
+                [...invalidTargets, ...failed],
+              ),
             ),
           });
 
-          if (approved.length > 0) {
+          if (result.successCount > 0) {
             toast.success(APPROVE_SUCCESS);
+          } else if (result.failureCount > 0) {
+            toast.error(APPROVE_FAILED);
           } else {
             toast.warning(APPROVE_NOTHING);
           }
         } catch {
           /* 실패 시 MutationCache 전역 토스트로 안내 */
+          return;
         }
       },
     });

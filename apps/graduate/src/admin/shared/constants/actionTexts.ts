@@ -1,0 +1,35 @@
+﻿export const DELETE_ALERT = '선택한 학생을 삭제할까요?';
+export const DELETE_CONFIRM_TITLE = '학생 삭제';
+
+export const APPROVE_ALERT = '선택한 학생을 승인할까요?';
+export const APPROVE_CONFIRM_TITLE = '학생 승인';
+export const APPROVE_OK_TEXT = '승인';
+export const APPROVE_CANCEL_TEXT = '취소';
+export const APPROVE_EMPTY = '승인할 대상을 선택하세요.';
+export const APPROVE_SUCCESS = '선택한 학생을 승인했습니다.';
+export const APPROVE_FAILED = '승인에 실패했습니다.';
+export const APPROVE_NOTHING = '승인할 제출이 없습니다.';
+export const APPROVE_RESULT_TITLE = '승인 결과';
+export const APPROVE_RESULT_APPROVED = '승인된 대상';
+export const APPROVE_RESULT_NOT_APPROVED = '미승인 대상';
+export const APPROVE_RESULT_NONE = '없음';
+export const APPROVE_REASON_NOT_SUBMITTED = '미제출';
+export const APPROVE_REASON_ALREADY_APPROVED = '이미 승인';
+export const APPROVE_REASON_FAILED = '승인 실패';
+
+export const DISAPPROVE_BUTTON_TEXT = '승인 취소';
+export const DISAPPROVE_ALERT = '선택한 학생의 승인을 취소할까요?';
+export const DISAPPROVE_CONFIRM_TITLE = '승인 취소';
+export const DISAPPROVE_OK_TEXT = '승인 취소';
+export const DISAPPROVE_CANCEL_TEXT = '취소';
+export const DISAPPROVE_EMPTY = '승인 취소할 대상을 선택하세요.';
+export const DISAPPROVE_SUCCESS = '선택한 학생의 승인을 취소했습니다.';
+export const DISAPPROVE_FAILED = '승인 취소에 실패했습니다.';
+export const DISAPPROVE_NOTHING = '승인 취소할 제출이 없습니다.';
+export const DISAPPROVE_RESULT_TITLE = '승인 취소 결과';
+export const DISAPPROVE_RESULT_DISAPPROVED = '승인 취소 된 대상';
+export const DISAPPROVE_RESULT_NOT_DISAPPROVED = '승인 취소 실패한 대상';
+export const DISAPPROVE_RESULT_NONE = '없음';
+export const DISAPPROVE_REASON_NOT_SUBMITTED = '미제출';
+export const DISAPPROVE_REASON_NOT_APPROVED = '미승인 상태';
+export const DISAPPROVE_REASON_FAILED = '승인 취소 실패';
