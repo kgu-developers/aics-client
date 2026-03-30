@@ -13,7 +13,7 @@ import {
 } from '../types/studentAddModal';
 
 type TextFieldConfig = {
-  name: 'studentId' | 'name' | 'department';
+  name: 'studentId' | 'name' | 'department' | 'phone';
   rules: FormItemProps['rules'];
   placeholder: string;
   label: string;
@@ -41,6 +41,12 @@ const TEXT_FIELD_CONFIGS: TextFieldConfig[] = [
     placeholder: SINGLE_FIELD_TEXT.department.placeholder,
     label: SINGLE_FIELD_TEXT.department.label,
   },
+  {
+    name: 'phone',
+    rules: [{ required: true, message: SINGLE_FIELD_TEXT.phone.required }],
+    placeholder: SINGLE_FIELD_TEXT.phone.placeholder,
+    label: SINGLE_FIELD_TEXT.phone.label,
+  },
 ];
 
 type FormValues = Omit<
@@ -49,6 +55,7 @@ type FormValues = Omit<
 > & {
   capstoneCompletion: CapstoneCompletionOption['value'];
   graduationDate: Dayjs | null;
+  phone: string;
 };
 
 export default function StudentAddSingle({
@@ -73,6 +80,7 @@ export default function StudentAddSingle({
       capstoneCompletion: v.capstoneCompletion === 'true',
       department: v.department.trim(),
       graduationDate: v.graduationDate.format('YYYY-MM'),
+      phone: v.phone.trim(),
     };
     onSubmit?.(payload);
     form.resetFields();

@@ -12,6 +12,7 @@ type ValidateOptions = {
   capstoneText: string;
   grad: string;
   dept: string;
+  phone: string;
   professorNameToId: ProfessorNameToId;
   seenStudentIds: Set<string>;
 };
@@ -37,6 +38,7 @@ export const validateStudentRow = ({
   capstoneText,
   grad,
   dept,
+  phone,
   professorNameToId,
   seenStudentIds,
 }: ValidateOptions): ValidateResult => {
@@ -47,6 +49,7 @@ export const validateStudentRow = ({
   if (!capstoneText) missing.push('capstoneCompletion');
   if (!grad) missing.push('graduationDate');
   if (!dept) missing.push('department');
+  if (!phone) missing.push('phone');
 
   if (missing.length > 0) {
     return {
@@ -137,6 +140,7 @@ export const validateStudentRow = ({
       capstoneCompletion,
       department: dept,
       graduationDate,
+      phone,
     },
   };
 };
