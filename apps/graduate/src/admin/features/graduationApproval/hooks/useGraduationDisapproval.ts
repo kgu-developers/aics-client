@@ -59,13 +59,11 @@ export function useGraduationDisapproval<T>({
   ) => {
     const disapprovedLines =
       disapprovedUsers.length > 0
-        ? disapprovedUsers.map(user => '- ' + getLabel(user))
+        ? disapprovedUsers.map(user => `- ${getLabel(user)}`)
         : [DISAPPROVE_RESULT_NONE];
     const notDisapprovedLines =
       notDisapprovedDetails.length > 0
-        ? notDisapprovedDetails.map(
-            item => '- ' + item.label + ' (' + item.reason + ')',
-          )
+        ? notDisapprovedDetails.map(item => `- ${item.label} (${item.reason})`)
         : [DISAPPROVE_RESULT_NONE];
 
     return [
@@ -194,10 +192,8 @@ export function useGraduationDisapproval<T>({
           } else {
             toast.warning(DISAPPROVE_NOTHING);
           }
-        } catch (error) {
-          toast.error(
-            error instanceof Error ? error.message : DISAPPROVE_FAILED,
-          );
+        } catch {
+          /* 실패 시 MutationCache 전역 토스트로 안내 */
         }
       },
     });

@@ -59,13 +59,11 @@ export function useGraduationApproval<T>({
   ) => {
     const approvedLines =
       approvedUsers.length > 0
-        ? approvedUsers.map(user => '- ' + getLabel(user))
+        ? approvedUsers.map(user => `- ${getLabel(user)}`)
         : [APPROVE_RESULT_NONE];
     const notApprovedLines =
       notApprovedDetails.length > 0
-        ? notApprovedDetails.map(
-            item => '- ' + item.label + ' (' + item.reason + ')',
-          )
+        ? notApprovedDetails.map(item => `- ${item.label} (${item.reason})`)
         : [APPROVE_RESULT_NONE];
 
     return [
@@ -194,7 +192,8 @@ export function useGraduationApproval<T>({
             toast.warning(APPROVE_NOTHING);
           }
         } catch {
-          /* ?ㅽ뙣 ?덈궡??MutationCache ?꾩뿭 ?좎뒪???ъ슜 */
+          /* 실패 시 MutationCache 전역 토스트로 안내 */
+          return;
         }
       },
     });
