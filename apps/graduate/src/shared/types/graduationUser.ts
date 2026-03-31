@@ -5,4 +5,5 @@ export type GraduationUserCreateRequest = {
   capstoneCompletion: boolean;
   department: string;
   graduationDate: string;
+  phone: string;
 };

@@ -8,5 +8,6 @@ export interface StudentDetailApiResponse {
   advisor: string;
   major: string;
   capstoneCompletion: boolean;
+  phone: string;
   status: SubmissionStatus;
 }

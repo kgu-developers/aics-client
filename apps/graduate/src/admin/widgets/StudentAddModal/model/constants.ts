@@ -5,6 +5,7 @@ export const HEADER_NAMES = {
   capstoneCompletion: '캡스톤 이수 여부',
   graduationDate: '졸업 예정',
   department: '학과',
+  phone: '연락처',
 } as const;
 
 export const MODE_OPTIONS = [
@@ -52,6 +53,11 @@ export const SINGLE_FIELD_TEXT = {
     label: '학과',
     placeholder: '학과를 입력해주세요',
     required: '학과를 입력해주세요',
+  },
+  phone: {
+    label: '연락처',
+    placeholder: '연락처를 입력해주세요',
+    required: '연락처를 입력해주세요',
   },
   submitLabel: '입력',
 };

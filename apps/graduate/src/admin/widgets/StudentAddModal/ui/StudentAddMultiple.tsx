@@ -40,6 +40,7 @@ export default function StudentAddMultiple({
       capstoneCompletion: row.capstoneCompletion,
       department: row.department,
       graduationDate: row.graduationDate,
+      phone: row.phone,
     }));
 
   const handleSelectSubmit: ButtonProps['onClick'] = async () => {

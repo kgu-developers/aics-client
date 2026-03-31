@@ -39,6 +39,7 @@ export default function UserDetailModal({
     advisor,
     major,
     capstoneCompletion,
+    phone,
     status,
   } = studentDetail ?? {};
 
@@ -133,9 +134,10 @@ export default function UserDetailModal({
             <Descriptions.Item label='기타자격'>
               {capstoneCompletion ? '캡스톤 이수' : '캡스톤 미이수'}
             </Descriptions.Item>
-            <Descriptions.Item label='상태' span={2}>
+            <Descriptions.Item label='상태'>
               {getStatusLabel(status)}
             </Descriptions.Item>
+            <Descriptions.Item label='연락처'>{phone}</Descriptions.Item>
           </Descriptions>
         </Container>
 

@@ -38,6 +38,7 @@ const getHeaderIndices = (header: string[]) => {
       capstone: idx(HEADER_NAMES.capstoneCompletion, 3),
       grad: idx(HEADER_NAMES.graduationDate, 4),
       dept: idx(HEADER_NAMES.department, 5),
+      phone: idx(HEADER_NAMES.phone, 6),
     },
   };
 };
@@ -69,6 +70,7 @@ export function parseCsv(
       capstoneText: (cols[indices.capstone] || '').trim().toLowerCase(),
       grad: (cols[indices.grad] || '').trim(),
       dept: (cols[indices.dept] || '').trim(),
+      phone: (cols[indices.phone] || '').trim(),
       professorNameToId,
       seenStudentIds,
     });
@@ -121,6 +123,7 @@ export async function parseXlsx(
         capstoneText: getCell(indices.capstone).toLowerCase(),
         grad: getCell(indices.grad),
         dept: getCell(indices.dept),
+        phone: getCell(indices.phone),
         professorNameToId,
         seenStudentIds,
       });
