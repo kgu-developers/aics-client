@@ -2,16 +2,9 @@ import type { WorkflowStage } from '~/shared/types/graduation';
 
 import { SubmissionType } from '../types';
 
-export const API_URL =
-  import.meta.env.VITE_API_URL || 'https://aics-api.kgudevelopers.monster';
-
-export const API_AUTH_URL =
-  import.meta.env.VITE_AUTH_API_URL ||
-  'https://aics-auth.kgudevelopers.monster';
-
-export const API_ADMIN_URL =
-  import.meta.env.VITE_ADMIN_API_URL ||
-  'https://aics-admin.kgudevelopers.monster';
+export const API_URL = import.meta.env.VITE_API_URL;
+export const API_ADMIN_URL = import.meta.env.VITE_ADMIN_API_URL;
+export const API_AUTH_URL = import.meta.env.VITE_AUTH_API_URL;
 
 // Request path typing is used by the shared axios wrapper to select base URLs.
 // Keep this object shallow and extend the current depth instead of nesting deeper.
@@ -26,10 +19,7 @@ export const END_POINT = {
     GRADUATION_USER: (graduationUserId: number) =>
       `/api/v1/admin/graduation-users/${graduationUserId}`,
     GRADUATION_USERS_BATCH: '/api/v1/admin/graduation-users/batch',
-    GRADUATION_USER_APPROVE: (
-      graduationUserId: number,
-      submissionId: number,
-    ) =>
+    GRADUATION_USER_APPROVE: (graduationUserId: number, submissionId: number) =>
       `/api/v1/admin/graduation-users/approve/${graduationUserId}/${submissionId}`,
     GRADUATION_USER_DISAPPROVE: (
       graduationUserId: number,
