@@ -1,0 +1,158 @@
+networks:
+  aics-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: aics-postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./volumes/aics-postgres:/var/lib/postgresql/18/docker
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aics-network
+
+  redis:
+    image: redis:8-alpine
+    container_name: aics-redis
+    restart: unless-stopped
+    command: ['redis-server', '--requirepass', '${REDIS_PASSWORD}']
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    env_file:
+      - .env
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - ./volumes/aics-redis:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', '-a', '${REDIS_PASSWORD}', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aics-network
+
+  aics-api:
+    image: kgudevelopers/aics-api:prod
+    container_name: aics-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: aics-postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_ISSUER: kgudevelopers@gmail.com
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      REDIS_HOST: aics-redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      FILE_SECRET_KEY: ${FILE_SECRET_KEY}
+    expose:
+      - '8080'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - aics-data:/app/cloud
+    networks:
+      - aics-network
+
+  aics-admin:
+    image: kgudevelopers/aics-admin:prod
+    container_name: aics-admin
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: aics-postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_ISSUER: kgudevelopers@gmail.com
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      REDIS_HOST: aics-redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      FILE_SECRET_KEY: ${FILE_SECRET_KEY}
+    expose:
+      - '8081'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - aics-data:/app/cloud
+    networks:
+      - aics-network
+
+  aics-auth:
+    image: kgudevelopers/aics-auth:prod
+    container_name: aics-auth
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: aics-postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_ISSUER: kgudevelopers@gmail.com
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      REDIS_HOST: aics-redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      FILE_SECRET_KEY: ${FILE_SECRET_KEY}
+    expose:
+      - '8082'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - aics-data:/app/cloud
+    networks:
+      - aics-network
+
+  aics-client-graduate:
+    image: kgudevelopers/aics-client-graduate:latest
+    container_name: aics-client-graduate
+    restart: unless-stopped
+    ports:
+      - 80:80
+    depends_on:
+      - aics-api
+      - aics-admin
+      - aics-auth
+    networks:
+      - aics-network
+
+volumes:
+  aics-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/aics-data
