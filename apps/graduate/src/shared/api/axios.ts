@@ -51,23 +51,14 @@ interface RefreshTokenResponse {
   refreshToken?: string;
 }
 
-/**
- * https://aics-api.ummdev.com/
- * 에 전송하는 사용자 API baseURL이 적용된 Instance입니다 */
 const userInstance = axios.create({
   baseURL: API_URL,
 });
 
-/**
- * https://aics-admin.ummdev.com/
- * 에 전송하는 관리자 API baseURL이 적용된 Instance입니다 */
 const adminInstance = axios.create({
   baseURL: API_ADMIN_URL,
 });
 
-/**
- * https://aics-auth.ummdev.com/
- * 에 전송하는 인증 API baseURL이 적용된 Instance입니다 */
 const authInstance = axios.create({
   baseURL: API_AUTH_URL,
 });
